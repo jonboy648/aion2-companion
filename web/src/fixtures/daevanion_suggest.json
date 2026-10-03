@@ -1,0 +1,64 @@
+{
+ "path": [
+  5167,
+  5168,
+  27560,
+  5059,
+  27558,
+  4860,
+  4876,
+  4965
+ ],
+ "spent": 12,
+ "gain_pct": 2.3622867379355927,
+ "nodes": [
+  {
+   "id": 5167,
+   "board": "Triniel",
+   "name": "Max HP",
+   "cost": 1
+  },
+  {
+   "id": 5168,
+   "board": "Triniel",
+   "name": "Skill Level Up - Flame Explosion",
+   "cost": 3
+  },
+  {
+   "id": 27560,
+   "board": "Vaizel",
+   "name": "Critical Hit",
+   "cost": 1
+  },
+  {
+   "id": 5059,
+   "board": "Vaizel",
+   "name": "Attack",
+   "cost": 1
+  },
+  {
+   "id": 27558,
+   "board": "Vaizel",
+   "name": "Skill Level Up - Hellfire",
+   "cost": 3
+  },
+  {
+   "id": 4860,
+   "board": "Nezekan",
+   "name": "Attack",
+   "cost": 1
+  },
+  {
+   "id": 4876,
+   "board": "Nezekan",
+   "name": "Attack",
+   "cost": 1
+  },
+  {
+   "id": 4965,
+   "board": "Zikel",
+   "name": "Attack",
+   "cost": 1
+  }
+ ]
+}

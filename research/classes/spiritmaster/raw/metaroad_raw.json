@@ -1,0 +1,1874 @@
+[
+ {
+  "name": "Basic Attack",
+  "tags": "",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Fire Spirit: Basic Attack",
+  "tags": "Active · Magic · Fire · Attack · ",
+  "variants": 8,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "4m"
+  }
+ },
+ {
+  "name": "Water Spirit: Basic Attack",
+  "tags": "Active · Magic · Water · Attack · ",
+  "variants": 9,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Wind Spirit: Basic Attack",
+  "tags": "Active · Magic · Wind · Attack · ",
+  "variants": 9,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Earth Spirit: Basic Attack",
+  "tags": "Active · Magic · Earth · Attack · ",
+  "variants": 8,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Ancient Spirit: Basic Attack",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 2,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Earth Chain [Frugal]",
+  "tags": "",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Earth Chain [Disseminate](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Summons Earth Chains beneath the target to deal — Earth damage.\nThe target also takes — Earth Damage over Time every 1s for — and has their Move Speed reduced by —%.",
+  "values": [
+   "—",
+   "—"
+  ],
+  "specs": [
+   "Deals damage to up to — enemies around the target"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Earth Chain [Debuff](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Summons Earth Chains beneath the target to deal — Earth damage.\nThe target also takes — Earth Damage over Time every 1s for — and has their Move Speed reduced by —%.",
+  "values": [
+   "—",
+   "—"
+  ],
+  "specs": [
+   "Additional Attack Speed reduction of Lethargy 10%"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Earth Chain [Frugal][Disseminate](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Summons Earth Chains beneath the target to deal — Earth damage.\nThe target also takes — Earth Damage over Time every 1s for — and has their Move Speed reduced by —%.",
+  "values": [
+   "—",
+   "—"
+  ],
+  "specs": [
+   "-20% MP consumed, deals damage to up to — enemies around the target"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Earth Chain [Disseminate][Debuff](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Summons Earth Chains beneath the target to deal — Earth damage.\nThe target also takes — Earth Damage over Time every 1s for — and has their Move Speed reduced by —%.",
+  "values": [
+   "—",
+   "—"
+  ],
+  "specs": [
+   "Deals damage to up to — enemies around the target, -10% Additional Attack Speed of Lethargy"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Earth Chain [Debuff][Frugal](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Summons Earth Chains beneath the target to deal — Earth damage.\nThe target also takes — Earth Damage over Time every 1s for — and has their Move Speed reduced by —%.",
+  "values": [
+   "—",
+   "—"
+  ],
+  "specs": [
+   "-10% Additional Attack Speed of Lethargy, -20% MP consumed"
+  ],
+  "stats": {
+   "MP": "consumed"
+  }
+ },
+ {
+  "name": "Lethargy",
+  "tags": "",
+  "variants": 1,
+  "description": "Disturbs the air around the target, dealing — Wind damage, and reducing Attack Speed by —% for —.",
+  "values": [
+   "—"
+  ],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Lethargy [Frugal]",
+  "tags": "",
+  "variants": 1,
+  "description": "Disturbs the air around the target, dealing — Wind damage, and reducing Attack Speed by —% for —.",
+  "values": [
+   "—"
+  ],
+  "specs": [
+   "-20% MP consumed"
+  ],
+  "stats": {
+   "MP": "consumed"
+  }
+ },
+ {
+  "name": "Lethargy [Disseminate](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Disturbs the air around the target, dealing — Wind damage, and reducing Attack Speed by —% for —.",
+  "values": [
+   "—"
+  ],
+  "specs": [
+   "Deals damage to up to — enemies around the target"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Lethargy [Debuff](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Disturbs the air around the target, dealing — Wind damage, and reducing Attack Speed by —% for —.",
+  "values": [
+   "—"
+  ],
+  "specs": [
+   "-10% Additional Attack Speed"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Lethargy [Frugal][Disseminate](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Disturbs the air around the target, dealing — Wind damage, and reducing Attack Speed by —% for —.",
+  "values": [
+   "—"
+  ],
+  "specs": [
+   "-20% MP consumed, deals damage to up to — enemies around the target"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Lethargy [Disseminate][Debuff](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Disturbs the air around the target, dealing — Wind damage, and reducing Attack Speed by —% for —.",
+  "values": [
+   "—"
+  ],
+  "specs": [
+   "Deals damage to up to — enemies around the target, -10% Additional Attack Speed"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Lethargy [Debuff][Frugal](DNT)",
+  "tags": "",
+  "variants": 1,
+  "description": "Disturbs the air around the target, dealing — Wind damage, and reducing Attack Speed by —% for —.",
+  "values": [
+   "—"
+  ],
+  "specs": [
+   "-10% Additional Attack Speed, -20% MP consumed"
+  ],
+  "stats": {
+   "MP": "consumed"
+  }
+ },
+ {
+  "name": "Magic Backflow",
+  "tags": "System · Magic · Attack · ",
+  "variants": 1,
+  "description": "Selects a target within 20m and deals — damage every 1s for 10s, removing up to — buffs.\n\nDeals extra damage based on the number of buffs removed.\n1 Removed: 72% ATK + 412 Damage\n2 Removed: 86.4% ATK + 495 Damage\n3 Removed: 108% ATK + 618 Damage",
+  "values": [
+   "—",
+   "72% ATK + 412",
+   "86.4% ATK + 495",
+   "108% ATK + 618"
+  ],
+  "specs": [],
+  "stats": {
+   "Range": "50m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Magic Backflow [Frugal]",
+  "tags": "",
+  "variants": 1,
+  "description": "Countercurrents mana within the body to remove up to — buffs and deals damage according to the number of removed buffs.\nAlso deals — Damage over Time every 1s for 10s.\n\n1 Removed: — Damage\n2 Removed: — Damage\n3 Removed: — Damage",
+  "values": [
+   "—",
+   "—",
+   "—",
+   "—",
+   "—"
+  ],
+  "specs": [
+   "-20% MP consumed"
+  ],
+  "stats": {
+   "MP": "consumed"
+  }
+ },
+ {
+  "name": "Magic Backflow [Agony]",
+  "tags": "",
+  "variants": 1,
+  "description": "Countercurrents mana within the body to remove up to — buffs and deals damage according to the number of removed buffs.\nAlso deals — Damage over Time every 1s for 10s.\n\n1 Removed: — Damage\n2 Removed: — Damage\n3 Removed: — Damage",
+  "values": [
+   "—",
+   "—",
+   "—",
+   "—",
+   "—"
+  ],
+  "specs": [
+   "+—% MP consumed"
+  ],
+  "stats": {
+   "MP": "consumed"
+  }
+ },
+ {
+  "name": "Magic Backflow [Enhance]",
+  "tags": "",
+  "variants": 1,
+  "description": "Countercurrents mana within the body to remove up to — buffs and deals damage according to the number of removed buffs.\nAlso deals — Damage over Time every 1s for 10s.\n\n1 Removed: — Damage\n2 Removed: — Damage\n3 Removed: — Damage",
+  "values": [
+   "—",
+   "—",
+   "—",
+   "—",
+   "—"
+  ],
+  "specs": [
+   "Removes 1 additional buff"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Magic Backflow [Frugal][Agony]",
+  "tags": "",
+  "variants": 1,
+  "description": "Countercurrents mana within the body to remove up to — buffs and deals damage according to the number of removed buffs.\nAlso deals — Damage over Time every 1s for 10s.\n\n1 Removed: — Damage\n2 Removed: — Damage\n3 Removed: — Damage",
+  "values": [
+   "—",
+   "—",
+   "—",
+   "—",
+   "—"
+  ],
+  "specs": [
+   "-20% MP consumed, increases enemy MP consumed during skill effect—%"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Magic Backflow [Agony][Enhance]",
+  "tags": "",
+  "variants": 1,
+  "description": "Countercurrents mana within the body to remove up to — buffs and deals damage according to the number of removed buffs.\nAlso deals — Damage over Time every 1s for 10s.\n\n1 Removed: — Damage\n2 Removed: — Damage\n3 Removed: — Damage",
+  "values": [
+   "—",
+   "—",
+   "—",
+   "—",
+   "—"
+  ],
+  "specs": [
+   "+—% enemy MP consumed during skill effect, removes 1 additional buff"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Magic Backflow [Enhance][Frugal]",
+  "tags": "",
+  "variants": 1,
+  "description": "Countercurrents mana within the body to remove up to — buffs and deals damage according to the number of removed buffs.\nAlso deals — Damage over Time every 1s for 10s.\n\n1 Removed: — Damage\n2 Removed: — Damage\n3 Removed: — Damage",
+  "values": [
+   "—",
+   "—",
+   "—",
+   "—",
+   "—"
+  ],
+  "specs": [
+   "Removes 1 additional buff, -20% MP consumed"
+  ],
+  "stats": {
+   "MP": "consumed"
+  }
+ },
+ {
+  "name": "Spirit Protection",
+  "tags": "Active · Magic · Buff · ",
+  "variants": 2,
+  "description": "Receives Spirit Protection, increasing the same Element Tolerance as the summoned Spirit by 10% for 3s, and resists 1 Skill Attack.\nCan only be used while a Spirit is summoned.",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb",
+   "Cooldown": "20s"
+  }
+ },
+ {
+  "name": "Spirit Protection [Liberate]",
+  "tags": "",
+  "variants": 1,
+  "description": "Receives Spirit Protection, increasing the same Element Tolerance as the summoned Spirit by 10% for 3s, and resists 1 Skill Attack.\nCan only be used while a Spirit is summoned.",
+  "values": [],
+  "specs": [
+   "Removes \"Root\" Status"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Protection [Mobile]",
+  "tags": "",
+  "variants": 1,
+  "description": "Receives Spirit Protection, increasing the same Element Tolerance as the summoned Spirit by 10% for 3s, and resists 1 Skill Attack.\nCan only be used while a Spirit is summoned.",
+  "values": [],
+  "specs": [
+   "+30% Move Speed for the duration"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Protection [Repel]",
+  "tags": "",
+  "variants": 1,
+  "description": "Receives Spirit Protection, increasing the same Element Tolerance as the summoned Spirit by 10% for 3s, and resists 1 Skill Attack.\nCan only be used while a Spirit is summoned.",
+  "values": [],
+  "specs": [
+   "Pushes enemies back 5m when using skill"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Protection [Liberate][Mobile]",
+  "tags": "",
+  "variants": 1,
+  "description": "Receives Spirit Protection, increasing the same Element Tolerance as the summoned Spirit by 10% for 3s, and resists 1 Skill Attack.\nCan only be used while a Spirit is summoned.",
+  "values": [],
+  "specs": [
+   "+30% Move Speed for the duration when \"Root\" is removed"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Protection [Mobile][Repel]",
+  "tags": "",
+  "variants": 1,
+  "description": "Receives Spirit Protection, increasing the same Element Tolerance as the summoned Spirit by 10% for 3s, and resists 1 Skill Attack.\nCan only be used while a Spirit is summoned.",
+  "values": [],
+  "specs": [
+   "Move Speed increase during skill effect30%, Using the skill Pushes Back nearby targets by 5m"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Protection [Repel][Liberate]",
+  "tags": "",
+  "variants": 1,
+  "description": "Receives Spirit Protection, increasing the same Element Tolerance as the summoned Spirit by 10% for 3s, and resists 1 Skill Attack.\nCan only be used while a Spirit is summoned.",
+  "values": [],
+  "specs": [
+   "Using skill Pushes Back nearby targets by 5m, Removes Rooted state"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Momentum",
+  "tags": "Active · Magic · Buff · ",
+  "variants": 1,
+  "description": "Apply —% Combat Speed, —% Spell Action Speed, — Magic Attack Bonus effects to the caster and spirit summons for 15s.",
+  "values": [
+   "—%",
+   "—%",
+   "—",
+   "15s"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb",
+   "Cooldown": "90s"
+  }
+ },
+ {
+  "name": "Spirit Momentum [Frugal]",
+  "tags": "",
+  "variants": 1,
+  "description": "Apply —% Combat Speed, —% Spell Action Speed, — Magic Attack Bonus effects to the caster and spirit summons for 15s.",
+  "values": [
+   "—%",
+   "—%",
+   "—",
+   "15s"
+  ],
+  "specs": [
+   "-—% MP consumed during skill effect"
+  ],
+  "stats": {
+   "MP": "consumed during skill effect"
+  }
+ },
+ {
+  "name": "Spirit Momentum [Assault]",
+  "tags": "",
+  "variants": 1,
+  "description": "Apply —% Combat Speed, —% Spell Action Speed, — Magic Attack Bonus effects to the caster and spirit summons for 15s.",
+  "values": [
+   "—%",
+   "—%",
+   "—",
+   "15s"
+  ],
+  "specs": [
+   "Damage Boost during skill effect —%"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Momentum [Critical]",
+  "tags": "",
+  "variants": 1,
+  "description": "Apply —% Combat Speed, —% Spell Action Speed, — Magic Attack Bonus effects to the caster and spirit summons for 15s.",
+  "values": [
+   "—%",
+   "—%",
+   "—",
+   "15s"
+  ],
+  "specs": [
+   "+—% Critical Hit for the duration"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Momentum [Frugal][Assault]",
+  "tags": "",
+  "variants": 1,
+  "description": "Apply —% Combat Speed, —% Spell Action Speed, — Magic Attack Bonus effects to the caster and spirit summons for 15s.",
+  "values": [
+   "—%",
+   "—%",
+   "—",
+   "15s"
+  ],
+  "specs": [
+   "-—% MP consumed during skill effect, —% Damage Boost during skill effect"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Momentum [Assault][Critical]",
+  "tags": "",
+  "variants": 1,
+  "description": "Apply —% Combat Speed, —% Spell Action Speed, — Magic Attack Bonus effects to the caster and spirit summons for 15s.",
+  "values": [
+   "—%",
+   "—%",
+   "—",
+   "15s"
+  ],
+  "specs": [
+   "Damage Boost during skill effect —%, Critical Hit increase during skill effect —"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Spirit Momentum [Critical][Frugal]",
+  "tags": "",
+  "variants": 1,
+  "description": "Apply —% Combat Speed, —% Spell Action Speed, — Magic Attack Bonus effects to the caster and spirit summons for 15s.",
+  "values": [
+   "—%",
+   "—%",
+   "—",
+   "15s"
+  ],
+  "specs": [
+   "+—% Critical Hit, -—% MP consumed during skill effect"
+  ],
+  "stats": {
+   "MP": "consumed during skill effect"
+  }
+ },
+ {
+  "name": "Elemental Replenishment",
+  "tags": "Active · Magic · Heal · ",
+  "variants": 2,
+  "description": "Consumes own HP to restore 111-129 HP to the summoned spirit.",
+  "values": [
+   "111-129"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb",
+   "Cooldown": "30s"
+  }
+ },
+ {
+  "name": "Continuous Impact",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "Deals damage to a Stagger target.",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "140%",
+   "Flat": "79",
+   "Hits": "",
+   "Range": "20m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Extract Vitality",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "Deals 67.5% ATK + 81 per hit (2 hits) damage to the target and\nrestores summoned Spirit's HP by 111-129.",
+  "values": [
+   "67.5% ATK + 81 per hit (2 hits)",
+   "111-129"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "67.5%",
+   "Flat": "81",
+   "Hits": "",
+   "Range": "20m",
+   "Weapon": "Orb",
+   "Cooldown": "20s"
+  }
+ },
+ {
+  "name": "Soul Decimation",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 5,
+  "description": "Deals 41.25% ATK + 101 damage to a Stagger target.",
+  "values": [
+   "41.25% ATK + 101"
+  ],
+  "specs": [
+   "Absorb HP proportional to damage—%",
+   "Divine Power Recharge amount increase 2 times",
+   "Spell Action Speed increase",
+   "-1s All Skills Cooldown"
+  ],
+  "stats": {
+   "Attack ratio": "41.25%",
+   "Flat": "101",
+   "Range": "20m",
+   "Weapon": "Orb",
+   "Cooldown": "0.5s"
+  }
+ },
+ {
+  "name": "Spiritmaster Weapon Equip",
+  "tags": "Passive · ",
+  "variants": 1,
+  "description": "Allows equipping Spiritmaster weapons.\n\n[Applicable weapons]\nOrb, Spellbook",
+  "values": [
+   "[Applicable weapons]"
+  ],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Elemental Immunity",
+  "tags": "Passive · ",
+  "variants": 1,
+  "description": "Grants all Elemental Tolerance —% effect.",
+  "values": [
+   "—%"
+  ],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "PvP Attack Increase",
+  "tags": "",
+  "variants": 1,
+  "description": "Increases PvP Attack by 5.",
+  "values": [
+   "5"
+  ],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "PvP Critical Hit Resist Increase",
+  "tags": "",
+  "variants": 1,
+  "description": "Increases PvP Critical Hit Resist by 15.",
+  "values": [
+   "15"
+  ],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "PvP Accuracy Increase",
+  "tags": "",
+  "variants": 1,
+  "description": "Increases PvP Accuracy by 15.",
+  "values": [
+   "15"
+  ],
+  "specs": [],
+  "stats": {}
+ },
+ {
+  "name": "Dodge",
+  "tags": "Active · ",
+  "variants": 1,
+  "description": "Evade by moving quickly in the desired direction.",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Cooldown": "0.5s"
+  }
+ },
+ {
+  "name": "Fire Spirit: Flame Explosion",
+  "tags": "Active · Magic · Fire · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "4m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Water Spirit: Water Bomb",
+  "tags": "Active · Magic · Water · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Wind Spirit: Malicious Whirlwind",
+  "tags": "Active · Magic · Wind · Attack · Debuff · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Earth Spirit: Headbutt",
+  "tags": "Active · Magic · Earth · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "4m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Ancient Spirit: Destruction",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Fire Spirit: Summon Meteor",
+  "tags": "Active · Magic · Fire · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "4m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Water Spirit: Glacier Harpoon",
+  "tags": "Active · Magic · Water · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Wind Spirit: Storm",
+  "tags": "Active · Magic · Wind · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Earth Spirit: Colossal Stalk",
+  "tags": "Active · Magic · Earth · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "10m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Ancient Spirit: Magnetic Storm",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Return: All Spirits",
+  "tags": "Active · Magic · ",
+  "variants": 1,
+  "description": "Returns all summoned Spirits to the Spirit Realm.\nClick the Returm icon to return the Spirits.",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Cold Shock",
+  "tags": "Active · Magic · Water · Attack · ",
+  "variants": 26,
+  "description": "Deals 51.5% ATK + 54 Water damage to a target within 20m and restores 100 MP.",
+  "values": [
+   "51.5% ATK + 54"
+  ],
+  "specs": [
+   "+20% MP restored",
+   "Absorbs —% HP",
+   "+50% Multi-Hit on hit",
+   "$Lb6+2% Attack on landing [Earth Tremor] (Up to 5 stacks)"
+  ],
+  "stats": {
+   "Attack ratio": "51.5%",
+   "Flat": "54"
+  }
+ },
+ {
+  "name": "Vacuum Explosion",
+  "tags": "Active · Magic · Wind · Attack · ",
+  "variants": 26,
+  "description": "Deals 57.75% ATK + 57 Wind damage to a target within 20m and restores 100 MP.",
+  "values": [
+   "57.75% ATK + 57"
+  ],
+  "specs": [
+   "+20% MP restored",
+   "Absorbs —% HP",
+   "+50% Multi-Hit on hit",
+   "+2% Attack on landing [Earth Tremor] (Up to 5 stacks)",
+   "—% chance to remove 1 buff on landing [Earth Tremor]"
+  ],
+  "stats": {
+   "Attack ratio": "57.75%",
+   "Flat": "57",
+   "Range": "20m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Earth Tremor",
+  "tags": "Active · Magic · Earth · Attack · ",
+  "variants": 26,
+  "description": "Deals 68.25% ATK + 63 Earth damage to a target within 20m and restores 150 MP.",
+  "values": [
+   "68.25% ATK + 63"
+  ],
+  "specs": [
+   "+20% MP restored",
+   "Absorbs —% HP",
+   "+50% Multi-Hit chance on hit",
+   "+2% Attack on landing [Earth Tremor] (Up to 5 stacks)",
+   "—% chance to remove 1 buff on landing [Earth Tremor]"
+  ],
+  "stats": {
+   "Attack ratio": "68.25%",
+   "Flat": "63",
+   "Range": "20m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Combustion",
+  "tags": "Active · Magic · Fire · Attack · ",
+  "variants": 26,
+  "description": "Selects a target within 20m and deals 67.25% ATK + 63 Fire damage to up to 4 enemies within 4m of the target.\n\n3 Stagger Gauge Damage",
+  "values": [
+   "67.25% ATK + 63"
+  ],
+  "specs": [
+   "-20% MP consumed",
+   "Deals up to 12% more damage when less targets are hit",
+   "+100 Skill Accuracy",
+   "$Lb9$Lba+20% Skill Speed"
+  ],
+  "stats": {
+   "Attack ratio": "67.25%",
+   "Flat": "63"
+  }
+ },
+ {
+  "name": "Ashy Call",
+  "tags": "Active · Magic · Fire · Attack · ",
+  "variants": 12,
+  "description": "Selects a target within 20m and deals 105% ATK + 84 Fire damage to up to 4 enemies within 4m of the target.",
+  "values": [
+   "105% ATK + 84"
+  ],
+  "specs": [
+   "Adds [Ashy Call] Chain Skill",
+   "-20% MP consumed",
+   "Deals up to 12% more damage when less targets are hit",
+   "+100 Skill Accuracy",
+   "+20% Skill Speed"
+  ],
+  "stats": {
+   "Attack ratio": "105%",
+   "Flat": "84",
+   "Range": "20m",
+   "Weapon": "Orb",
+   "MP": "120"
+  }
+ },
+ {
+  "name": "Siphon",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 6,
+  "description": "Deals 206% ATK + 1180 damage and 300 MP damage to a target within 20m. Absorbs —% HP and restores 300 MP.",
+  "values": [
+   "206% ATK + 1180"
+  ],
+  "specs": [
+   "+20% Skill Speed",
+   "+5% HP absorbed",
+   "30% of Max HP as Protective Shield for 30s on use",
+   "$Lbd$LbeStun for 3s on hit"
+  ],
+  "stats": {
+   "Attack ratio": "206%",
+   "Flat": "1180"
+  }
+ },
+ {
+  "name": "Soul's Cry",
+  "tags": "Active · Magic · Debuff · ",
+  "variants": 26,
+  "description": "Deals 100% ATK + 246 damage to a target within 20m, with a 70% chance to inflict Fear for 5s.\n100% chance to inflict Fear on NPC targets. \n\n15 Stagger Gauge Damage",
+  "values": [
+   "100% ATK + 246"
+  ],
+  "specs": [
+   "+50% Multi-Hit on hit",
+   "Inflicts Root for 5s",
+   "Changes to mobile skill",
+   "$Lc0$Lc1-10s cooldown"
+  ],
+  "stats": {
+   "Attack ratio": "100%",
+   "Flat": "246"
+  }
+ },
+ {
+  "name": "Cry of Terror",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 6,
+  "description": "Selects a target within 20m and deals 150% ATK + 859 damage to up to 4 enemies within 4m of the target, with a 50% chance to inflict Fear for 5s.\n100% chance to inflict Fear on NPC targets.",
+  "values": [
+   "150% ATK + 859"
+  ],
+  "specs": [
+   "Root for 5s on hit",
+   "Up to +20% damage when more targets hit",
+   "+2s Fear duration",
+   "$Lc4$Lc5+20% Fear Chance"
+  ],
+  "stats": {
+   "Attack ratio": "150%",
+   "Flat": "859"
+  }
+ },
+ {
+  "name": "Summon: Fire Spirit",
+  "tags": "Active · Magic · Fire · Spawn · ",
+  "variants": 27,
+  "description": "Summons a Fire Spirit.\nThe Fire Spirit rushes towards a target within 20m and uses a skill that deals 120% ATK + 68 damage to up to 4 enemies within 5m.\nThe Fire Spirit fights alongside the caster using basic attacks, with a 15% chance to use its skill each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Fire Spirit's Attack and Defense by 2%.\n\n7 Stagger Gauge Damage\nSpirit Skill Cooldown: 3s",
+  "values": [
+   "120% ATK + 68"
+  ],
+  "specs": [
+   "-50% MP Cost",
+   "+20% Fire Spirit Critical Hit damage",
+   "10% chance to activate skill when Fire Spirit lands attack"
+  ],
+  "stats": {
+   "Attack ratio": "120%",
+   "Flat": "68"
+  }
+ },
+ {
+  "name": "Fire Spirit: Leaping Slam",
+  "tags": "Active · Magic · Fire · Attack · ",
+  "variants": 8,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "25m",
+   "Cooldown": "3s"
+  }
+ },
+ {
+  "name": "Use Spirit Summon Skill",
+  "tags": "System · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "50m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Summon: Water Spirit",
+  "tags": "Active · Magic · Water · Spawn · ",
+  "variants": 27,
+  "description": "Summons a Water Spirit.\nThe Water Spirit uses a skill that deals 145% ATK + 143 Water damage to a target within 20m.\nThe Water Spirit fights alongside the caster using basic attacks, with a 15% chance to use its skill and restoring 20 of the Spiritmaster's MP each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Water Spirit's Attack and Critical Hit by 2%.\n\n7 Stagger Gauge Damage\nSpirit Skill Cooldown: 3s",
+  "values": [
+   "145% ATK + 143"
+  ],
+  "specs": [
+   "-50% MP Cost",
+   "+10% Water Spirit Attack",
+   "10% chance to activate skill when Water Spirit lands attack"
+  ],
+  "stats": {
+   "Attack ratio": "145%",
+   "Flat": "143"
+  }
+ },
+ {
+  "name": "Water Spirit: Discharge Chill",
+  "tags": "Active · Magic · Water · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [
+   "Summons a Water Spirit.\nThe Water Spirit uses a skill that deals <chat_combat>145% ATK + 143</> Water damage to a target within 20m.\nHas a 10% chance to use its skill and restores 20 of the Spiritmaster's MP each time an attack lands.\nStagger Gauge Damage 7\nEach skill level increases the Water Spirit's Attack and Critical Hit by 2%."
+  ],
+  "stats": {
+   "Attack ratio": "145%",
+   "Flat": "143",
+   "Range": "25m",
+   "Cooldown": "3s"
+  }
+ },
+ {
+  "name": "Water Spirit: Enhanced Discharge Chill",
+  "tags": "Active · Magic · Water · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Cooldown": "3s"
+  }
+ },
+ {
+  "name": "Summon: Wind Spirit",
+  "tags": "Active · Magic · Wind · Spawn · ",
+  "variants": 27,
+  "description": "Summons a Wind Spirit.\nThe Wind Spirit selects a target within 20m and uses a skill that deals 111% ATK + 273 per hit (4 hits) Wind damage to up to 4 enemies within 5m of the target and restores 134-147 HP to the Spiritmaster.\nThe Wind Spirit fights alongside the caster using basic attacks, with a 10% chance to use its skill and restores 1.5% of the Spiritmaster's HP each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Wind Spirit's Accuracy and Critical Hit by 2%.\n\n7 Stagger Gauge Damage\nSpirit Skill Cooldown: 3s",
+  "values": [
+   "111% ATK + 273 per hit (4 hits)",
+   "134-147"
+  ],
+  "specs": [
+   "-50% MP Cost",
+   "+—% Wind Spirit Critical Hit",
+   "$Lcd$Lce10% chance to activate skill when Wind Spirit lands attack"
+  ],
+  "stats": {
+   "Attack ratio": "111%",
+   "Flat": "273",
+   "Hits": ""
+  }
+ },
+ {
+  "name": "Wind Spirit: Falling Wind",
+  "tags": "Active · Magic · Wind · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "25m",
+   "Cooldown": "3s"
+  }
+ },
+ {
+  "name": "Wind Spirit: Enhanced Falling Wind",
+  "tags": "Active · Magic · Wind · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Cooldown": "3s"
+  }
+ },
+ {
+  "name": "Summon: Earth Spirit",
+  "tags": "Active · Magic · Earth · Spawn · ",
+  "variants": 27,
+  "description": "Summons an Earth Spirit.\nThe Earth Spirit uses a skill that deals 135% ATK + 247 Earth damage to a target within 20m and increases Enmity by —. Has a 30% chance to inflict Taunt for 2s if the target is a player.\nThe Earth Spirit fights alongside the caster using basic attacks, with a 10% chance to use its skill and increasing Enmity each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Earth Spirit's Defense and HP by 2%.\n\n7 Stagger Gauge Damage\nSpirit Skill Cooldown: 3s",
+  "values": [
+   "135% ATK + 247",
+   "—"
+  ],
+  "specs": [
+   "-50% MP Cost",
+   "+20% PvE Damage Tolerance and +10 PvP Damage Tolerance to Earth Spirit",
+   "$Ld210% chance to activate skill when Earth Spirit lands attack"
+  ],
+  "stats": {
+   "Attack ratio": "135%",
+   "Flat": "247"
+  }
+ },
+ {
+  "name": "Earth Spirit: Tackle",
+  "tags": "Active · Magic · Earth · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "25m",
+   "Cooldown": "3s"
+  }
+ },
+ {
+  "name": "Earth Spirit: Enhanced Tackle",
+  "tags": "Active · Magic · Earth · Attack · ",
+  "variants": 4,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Cooldown": "3s"
+  }
+ },
+ {
+  "name": "Jointstrike: Curse",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 26,
+  "description": "Selects a target within 20m and deals 75% ATK + 74 damage to up to 4 enemies within 4m of the target, and inflicts Curse.\n\nCurse: Deals — Damage over Time every 1s and reduces damage dealt to the Spiritmaster by 10% for 5s.\n\nThe Spirit joins for a coordinated assault.\nFire: 101% ATK + 99 AoE damage\nWater: 121% ATK + 119 per hit (5 hits) damage\nEarth: 93% ATK + 92 per hit (2 hits) damage and reduces Status Effect Resist by —%\nWind: 30% ATK + 29 per hit (5 hits) AoE damage and — Damage over Time\nAncient: 172.5% ATK + 170 AoE damage\n\n10 Stagger Gauge Damage",
+  "values": [
+   "75% ATK + 74",
+   "—",
+   "101% ATK + 99",
+   "121% ATK + 119 per hit (5 hits)",
+   "93% ATK + 92 per hit (2 hits)",
+   "30% ATK + 29 per hit (5 hits)",
+   "—",
+   "172.5% ATK + 170"
+  ],
+  "specs": [
+   "+2s Curse duration",
+   "+50% Multi-Hit on hit"
+  ],
+  "stats": {
+   "Attack ratio": "75%",
+   "Flat": "74"
+  }
+ },
+ {
+  "name": "Jointstrike: Corrode",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 6,
+  "description": "Selects a target within 20m and deals 75% ATK + 429 damage to up to 4 enemies within 4m of the target, inflicting Corrode for 20s.\n\nCorrode: Increases damage taken from the Spirit by 10% and deals — Damage over Time every 1s\n\nThe Spirit joins for a coordinated assault.\nFire: 95% ATK + 544 AoE damage and Knockdown\nWater: 114% ATK + 653 damage and Slow\nEarth: 103% ATK + 590 damage and Seal\nWind: 85.5% ATK + 489 AoE damage and Stun\nAncient: 161.5% ATK + 925 per hit (2 hits) AoE damage and Knockdown\n\n10 Stagger Gauge Damage",
+  "values": [
+   "75% ATK + 429",
+   "—",
+   "95% ATK + 544",
+   "114% ATK + 653",
+   "103% ATK + 590",
+   "85.5% ATK + 489",
+   "161.5% ATK + 925 per hit (2 hits)"
+  ],
+  "specs": [
+   "+15% extra damage taken from Spirit during Corrode",
+   "-20% Combat Speed on hit for 10s"
+  ],
+  "stats": {
+   "Attack ratio": "75%",
+   "Flat": "429"
+  }
+ },
+ {
+  "name": "Fire Spirit: Rage Burst",
+  "tags": "Active · Magic · Fire · Attack · Debuff · ",
+  "variants": 4,
+  "description": "Selects a target within 4m and deals 95% ATK + 544 damage to up to 4 enemies within 5m of the target, inflicting Knockdown.",
+  "values": [
+   "95% ATK + 544"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "95%",
+   "Flat": "544",
+   "Range": "4m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Water Spirit: Ice Chain",
+  "tags": "Active · Magic · Water · Attack · Debuff · ",
+  "variants": 4,
+  "description": "Deals 114% ATK + 653 damage to a target within 20m and reduces Move Speed by —%.",
+  "values": [
+   "114% ATK + 653"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "114%",
+   "Flat": "653",
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Earth Spirit: Taunt",
+  "tags": "Active · Magic · Earth · Attack · Debuff · ",
+  "variants": 4,
+  "description": "Taunts a target within 4m for 0.59s, and increases Enmity dealt by the Earth Spirit by 50% for 10s.",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "4m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Wind Spirit: Gale",
+  "tags": "Active · Magic · Wind · Attack · Debuff · ",
+  "variants": 4,
+  "description": "Selects a target within 20m and deals 85.5% ATK + 489 damage to up to 4 enemies within 4m of the target, inflicting Stun.",
+  "values": [
+   "85.5% ATK + 489"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "85.5%",
+   "Flat": "489",
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Ancient Spirit: Break",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 1,
+  "description": "Selects a target within 20m and deals 161.5% ATK + 925 per hit (2 hits) damage to up to 4 enemies within 5m of the target, inflicting Knockdown.",
+  "values": [
+   "161.5% ATK + 925 per hit (2 hits)"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "161.5%",
+   "Flat": "925",
+   "Hits": "",
+   "Range": "20m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Command: Proxy",
+  "tags": "Active · Magic · Buff · ",
+  "variants": 6,
+  "description": "Increases the Spirit's PvE Damage Tolerance by 20% and PvP Damage Tolerance by 10% for 4s, and redirects damage taken each time the Spiritmaster is attacked, sharing 50% to the Spiritmaster and 50% to the Spirit.\nThis effect is applied to the summoned Spirit with the highest HP. If HP is equal, it will be applied to the closer target. Damage is only shared if the Spirit is within 25m.\n\nUnaffected by cooldown increase effects.",
+  "values": [
+   "50%",
+   "50%"
+  ],
+  "specs": [
+   "+2s Command: Proxy duration",
+   "+10% PVP Damage Tolerance increase and +5% PvP Damage Tolerance increase to Spirit",
+   "x1.5 [Spirit Protection] effect during Command: Proxy",
+   "$LddRestores 3% of Spirit's HP every 1s for Command: Proxy duration"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Enhance: Spirit's Benediction",
+  "tags": "Active · Magic · Buff · ",
+  "variants": 6,
+  "description": "Increases PvE Damage Boost by 20%, PvP Damage Boost by 10%, PvE Damage Tolerance by 20%, PvP Damage Tolerance by 10%, and restores — HP every 1s for 10s to the caster and Spirit.\n\nUnaffected by cooldown increase effects.",
+  "values": [
+   "—"
+  ],
+  "specs": [
+   "Restores 10% of Max HP on cast",
+   "x1.5 [Spirit Strike] Damage Boost effect",
+   "x1.5 activation chance and amount healed from [Spirit Communion]",
+   "$Ldf+25% PvE Damage Boost and Damage Tolerance, +12.5% PvP Damage Boost and Damage Tolerance for caster and Spirit"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Defiance",
+  "tags": "Active · Buff · ",
+  "variants": 26,
+  "description": "Removes Stun, Knockdown, Airborne, Grab, Frost, and Fear from the caster and grants Tenacity for 5s.\nTenacity: Grants Status Effect Immunity\n\nUnaffected by cooldown reduction effects.",
+  "values": [],
+  "specs": [
+   "Adds [Curse of Despair] Chain Skill",
+   "Restores 1000 Stamina on using [Defiance]",
+   "Restores 20% HP on using [Defiance]",
+   "+2s Tenacity duration"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Curse of Despair",
+  "tags": "Active · Magic · Debuff · ",
+  "variants": 1,
+  "description": "Deals 125% ATK + 521 damage to a target within 20m with a 75% chance to inflict Fear and Root for 5s.\n100% chance to inflict Fear and Root on NPC targets.",
+  "values": [
+   "125% ATK + 521"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "125%",
+   "Flat": "521",
+   "Range": "10m",
+   "Weapon": "Orb",
+   "Cooldown": "120s"
+  }
+ },
+ {
+  "name": "Cursed Cloud",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 6,
+  "description": "Selects a target within 20m and deals 105% ATK + 601 damage to up to 4 enemies within 4m, and deals — Damage over Time every 1s for 10s.\n\n20 Stagger Gauge Damage",
+  "values": [
+   "105% ATK + 601",
+   "—"
+  ],
+  "specs": [
+   "-1000 enemy Max Stamina during Damage over Time",
+   "-20% Max HP of PC targets during Damage over Time",
+   "+10s Damage over Time duration",
+   "$Le3-30% Status Effect Resist during Damage over Time"
+  ],
+  "stats": {
+   "Attack ratio": "105%",
+   "Flat": "601"
+  }
+ },
+ {
+  "name": "Seize Magic",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 7,
+  "description": "Selects a target within 20m and deals 180% ATK + 1031 damage to up to 4 enemies within 4m of the target, removing up to 2 buffs.\n\nDeals 64.8–86.4% ATK + 371–495 extra damage based on the number of buffs removed.\n\n20 Stagger Gauge Damage",
+  "values": [
+   "180% ATK + 1031",
+   "64.8–86.4% ATK + 371–495"
+  ],
+  "specs": [
+   "Removes up to 3 buffs",
+   "Inflicts Seal for 5s when removing 3 or more buffs",
+   "Removes up to 5 buffs",
+   "$Le5-30s cooldown"
+  ],
+  "stats": {
+   "Attack ratio": "180%",
+   "Flat": "1031"
+  }
+ },
+ {
+  "name": "Jointstrike: Destructive Attack",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 6,
+  "description": "Deals 100% ATK + 573 per hit (5 hits) damage to a target within 20m.\n\nThe Spirit joins you in a coordinated assault.\nFire: 116% ATK + 664 per hit (2 hits) AoE damage\nWater: 139.2% ATK + 797 per hit (2 hits) damage\nEarth: 127.6% ATK + 731 damage\nWind: 104.4% ATK + 598 per hit (5 hits) AoE damage\nAncient: 185.6% ATK + 1063 per hit (5 hits) AoE damage\n\n50 Stagger Gauge Damage",
+  "values": [
+   "100% ATK + 573 per hit (5 hits)",
+   "116% ATK + 664 per hit (2 hits)",
+   "139.2% ATK + 797 per hit (2 hits)",
+   "127.6% ATK + 731",
+   "104.4% ATK + 598 per hit (5 hits)",
+   "185.6% ATK + 1063 per hit (5 hits)"
+  ],
+  "specs": [
+   "Changes to Charge Skill, dealing up to 200% more [Jointstrike: Destructive Attack] damage",
+   "+30% Skill Speed",
+   "$Le7Critical Hit on hit"
+  ],
+  "stats": {
+   "Attack ratio": "100%",
+   "Flat": "573",
+   "Hits": ""
+  }
+ },
+ {
+  "name": "Jointstrike: Destructive Attack - Lv.1",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Weapon": "Orb",
+   "Cooldown": "60s",
+   "MP": "200"
+  }
+ },
+ {
+  "name": "Jointstrike: Destructive Attack - Lv.2",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Weapon": "Orb",
+   "Cooldown": "60s",
+   "MP": "200"
+  }
+ },
+ {
+  "name": "Jointstrike: Destructive Attack - Max",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Weapon": "Orb",
+   "Cooldown": "60s",
+   "MP": "200"
+  }
+ },
+ {
+  "name": "Summon: Ancient Spirit",
+  "tags": "Active · Magic · Spawn · ",
+  "variants": 6,
+  "description": "Summons an Ancient Spirit for 30s and grants Four Elements status each time the Ancient Spirit uses its skill.\nThe Ancient Spirit uses a skill on a target within 20m, dealing 189% ATK + 1082 per hit (4 hits) damage to up to 4 enemies within 4m.\nThe Ancient Spirit fights alongside the caster using basic attacks and reuses its skill after 7 basic attacks. It is dismissed upon selecting the summon icon.\nEach skill level increases the Ancient Spirit's Attack, Defense, Accuracy, and Critical Hit by 2%.\n\n20 Stagger Gauge Damage",
+  "values": [
+   "189% ATK + 1082 per hit (4 hits)"
+  ],
+  "specs": [
+   "+10% Ancient Spirit Attack",
+   "x1.5 [Spirit's Descent] activation chance and damage for 30s",
+   "$LeaAncient Spirit uses skill after 5 basic attacks"
+  ],
+  "stats": {
+   "Attack ratio": "189%",
+   "Flat": "1082",
+   "Hits": ""
+  }
+ },
+ {
+  "name": "Ancient Spirit: Plasma Cannon",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "25m",
+   "Cooldown": "2s"
+  }
+ },
+ {
+  "name": "Magic Block",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 6,
+  "description": "Deals 187% ATK + 1071 damage to a target within 20m, with a 75% chance to inflict Seal for 5s.\n\n20 Stagger Gauge Damage",
+  "values": [
+   "187% ATK + 1071"
+  ],
+  "specs": [
+   "50% chance to inflict Root for 5s on hit",
+   "-1000 enemy Max Stamina for 5s on hit",
+   "+2s Seal duration",
+   "$Led$Lee+25% Seal chance"
+  ],
+  "stats": {
+   "Attack ratio": "187%",
+   "Flat": "1071"
+  }
+ },
+ {
+  "name": "Dismiss: Fire Spirit",
+  "tags": "Active · Magic · ",
+  "variants": 26,
+  "description": "Returns the Fire Spirit to the Spirit Realm.\nThe Fire Spirit rushes towards a target within 20m and uses a skill which deals 120% ATK + 68 damage to up to 4 enemies within 5m.\nContinues fighting using basic attacks with a 15% chance to use its skill each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Fire Spirit's Attack and Defense by 2%.\n\n7 Stagger Gauge Damage",
+  "values": [
+   "120% ATK + 68"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "120%",
+   "Flat": "68",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Dismiss: Water Spirit",
+  "tags": "Active · Magic · ",
+  "variants": 26,
+  "description": "Returns the Water Spirit to the Spirit Realm.\nThe Water Spirit uses a skill which deals 145% ATK + 143 Water damage to a target within 20m.\nContinues fighting using basic attacks with a 15% chance to use its skill and restores 20 of the Spiritmaster's MP each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Water Spirit's Attack and Critical Hit by 2%.\n\n7 Stagger Gauge Damage",
+  "values": [
+   "145% ATK + 143"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "145%",
+   "Flat": "143",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Dismiss: Earth Spirit",
+  "tags": "Active · Magic · ",
+  "variants": 26,
+  "description": "Returns the Earth Spirit to the Spirit Realm.\nThe Earth Spirit uses a skill which deals 135% ATK + 247 Earth damage to a target within 20m and increases Enmity by —. Has a 30% chance to inflict Taunt for 2s if the target is a player.\nContinues fighting using basic attacks with a 10% chance to use its skill and increases Enmity each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Earth Spirit's Defense and HP by 2%.\n\n7 Stagger Gauge Damage",
+  "values": [
+   "135% ATK + 247",
+   "—"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "135%",
+   "Flat": "247",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Dismiss: Wind Spirit",
+  "tags": "Active · Magic · ",
+  "variants": 26,
+  "description": "Returns the Wind Spirit to the Spirit Realm.\nThe Wind Spirit selects a target within 20m and uses a skill that deals 111% ATK + 273 per hit (4 hits) Wind damage to up to 4 enemies within 5m of the target and restores 134-147 HP to the Spiritmaster.\nContinues fighting using basic attacks with a 10% chance to use its skill and restores 1.5% of the Spiritmaster's HP each time an attack lands. It is dismissed upon selecting the summon icon.\nEach skill level increases the Wind Spirit's Accuracy and Critical Hit by 2%.\n\n7 Stagger Gauge Damage",
+  "values": [
+   "111% ATK + 273 per hit (4 hits)",
+   "134-147"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "111%",
+   "Flat": "273",
+   "Hits": "",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Dismiss: Ancient Spirit",
+  "tags": "Active · Magic · ",
+  "variants": 5,
+  "description": "Returns the Ancient Spirit to the Spirit Realm.\nThe Ancient Spirit uses a skill on a target within 20m which deals 189% ATK + 1082 per hit (4 hits) damage to up to 4 enemies within 4m.\nAfter using the skill, it continues fighting using basic attacks and reuses its skill after 7 basic attacks. It is dismissed upon selecting the summon icon.\nEach skill level increases the Spirit's Attack, Defense, Accuracy, and Critical Hit by 2%.\n\n20 Stagger Gauge Damage",
+  "values": [
+   "189% ATK + 1082 per hit (4 hits)"
+  ],
+  "specs": [
+   "+10% Ancient Spirit Attack",
+   "x1.5 [Spirit's Descent] activation chance and damage for 30s",
+   "Uses skill after Ancient Spirit uses Normal Attack 6 times",
+   "+20% Ancient Spirit Stats"
+  ],
+  "stats": {
+   "Attack ratio": "189%",
+   "Flat": "1082",
+   "Hits": "",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Elemental Fusion",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 26,
+  "description": "The Spiritmaster receives an element each time a Spirit uses its skill. Grants Four Elements status and the ability to use the [Elemental Fusion] skill upon reaching 4 stacks. [Elemental Fusion] can only be used when granted Four Elements, and using [Elemental Fusion] will immediately remove Four Elements. Cannot receive additional elements while in Four Elements status.\n\nDeals 331.8% ATK + 1075 damage to a target within 20m.\n\n10 Stagger Gauge Damage",
+  "values": [
+   "331.8% ATK + 1075"
+  ],
+  "specs": [
+   "Changes to AoE Skill",
+   "Extra damage after 3s on hit",
+   "+10 all Element Boost on hit"
+  ],
+  "stats": {
+   "Attack ratio": "331.8%",
+   "Flat": "1075"
+  }
+ },
+ {
+  "name": "Elemental Fusion - Lv.1",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Elemental Fusion - Lv.2",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Elemental Fusion - Max",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "20m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Dimensional Control",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 26,
+  "description": "A skill that is triggered briefly each time a Spirit uses its skill.\nSelects a target within 20m and deals 86% ATK + 157 damage to up to 4 enemies within 4m of the target and inflicts Slow, reducing Move Speed by 40% for 3s on hit. Restores 100 MP.\n\n5 Stagger Gauge Damage",
+  "values": [
+   "86% ATK + 157"
+  ],
+  "specs": [
+   "+20% Slow effect",
+   "Extra damage after 3s on hit",
+   "+50% Multi-Hit chance on hit",
+   "$Lf3Pull in nearby targets"
+  ],
+  "stats": {
+   "Attack ratio": "86%",
+   "Flat": "157"
+  }
+ },
+ {
+  "name": "Dimensional Control - Delayed Damage",
+  "tags": "System · Magic · Attack · ",
+  "variants": 1,
+  "description": "",
+  "values": [],
+  "specs": [],
+  "stats": {
+   "Range": "50m",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Rapid Scattershot",
+  "tags": "Active · Magic · Attack · ",
+  "variants": 26,
+  "description": "Deals 82.5% ATK + 116 per hit (4 hits) damage to a target afflicted with Stagger within 20m.",
+  "values": [
+   "82.5% ATK + 116 per hit (4 hits)"
+  ],
+  "specs": [
+   "Absorbs —% HP",
+   "Restores 120 MP",
+   "Changes to mobile skill",
+   "$Lf6$Lf7Multi-Hit on hit"
+  ],
+  "stats": {
+   "Attack ratio": "82.5%",
+   "Flat": "116",
+   "Hits": ""
+  }
+ },
+ {
+  "name": "Kaisinel's Power",
+  "tags": "Active · Magic · Buff · ",
+  "variants": 6,
+  "description": "Increases Status Effect Chance by 20% and Status Effect Resist by 20% for the caster for 10s.",
+  "values": [
+   "10s"
+  ],
+  "specs": [
+   "+150 Block and Evasion",
+   "+15% Status Effect Resist",
+   "+150 Accuracy",
+   "+15% Status Effect Chance"
+  ],
+  "stats": {}
+ },
+ {
+  "name": "Flame Blessing",
+  "tags": "Active · Magic · Buff · ",
+  "variants": 6,
+  "description": "Has a 50% chance to deal 41% ATK + 234 extra damage to enemies on landing an attack for 10s.\n\nCooldown: 1s",
+  "values": [
+   "41% ATK + 234",
+   "10s"
+  ],
+  "specs": [
+   "+100 Accuracy",
+   "+100 Critical Hit",
+   "+10% Critical Damage Boost",
+   "$Lfb$Lfc-50% extra damage cooldown"
+  ],
+  "stats": {
+   "Attack ratio": "41%",
+   "Flat": "234"
+  }
+ },
+ {
+  "name": "Assault Terror",
+  "tags": "Active · Magic · Attack · Debuff · ",
+  "variants": 6,
+  "description": "Selects a target within 20m and deals 164% ATK + 939 damage to up to 4 enemies within 4m of the target, with a 30% chance to inflict Fear for 5s.\n100% chance to inflict Fear on NPC targets.\n\nIncreases Defense by up to 20% proportional to the number of targets hit.",
+  "values": [
+   "164% ATK + 939"
+  ],
+  "specs": [
+   "+20% caster's Attack for 5s",
+   "500 MP damage on hit",
+   "+10m range",
+   "$Lfe+20% Fear Chance"
+  ],
+  "stats": {
+   "Attack ratio": "164%",
+   "Flat": "939"
+  }
+ },
+ {
+  "name": "Spirit Strike",
+  "tags": "Passive · Magic · ",
+  "variants": 1,
+  "description": "Increases the caster's PvE Damage Boost by 6%, PvP Damage Boost by 3%, and Perfect Chance by 0.4%. Increases the Spirit's PvE Damage Boost by 6%, PvP Damage Boost by 3%, and Perfect Chance 0.4%.",
+  "values": [
+   "6%",
+   "3%",
+   "0.4%",
+   "6%",
+   "3%",
+   "0.4%"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Spirit's Descent",
+  "tags": "Passive · Magic · ",
+  "variants": 2,
+  "description": "Has a 50% chance to deal 26% ATK + 47 extra damage whenever the Spiritmaster's attacks land within 10 seconds of summoning a Spirit. Duration is increased to 30s when an Ancient Spirit is summoned.\n\nCooldown: 1s",
+  "values": [
+   "26% ATK + 47"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "26%",
+   "Flat": "47",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Corrode",
+  "tags": "Passive · Magic · ",
+  "variants": 2,
+  "description": "Increases the caster's Critical Hit by 100, with a 50% chance to deal 50.5% ATK + 124 damage on landing a Critical Hit.\n\nCooldown: 1s",
+  "values": [
+   "100",
+   "50.5% ATK + 124"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "50.5%",
+   "Flat": "124",
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Spirit Revitalization",
+  "tags": "Passive · Magic · ",
+  "variants": 2,
+  "description": "Has a 11% chance to reduce the cooldown of Spirit summon skills by 1s on hit. Immediately heals the Spirit for 12% of its Max HP when its HP is 50% or less.\n\nCooldown: 1s\nSpirit Healing Cooldown: 30s",
+  "values": [
+   "11%",
+   "12%"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb",
+   "Cooldown": "30s"
+  }
+ },
+ {
+  "name": "Mental Focus",
+  "tags": "Passive · Magic · ",
+  "variants": 1,
+  "description": "Increases the caster's Mental-type Chance(s) by 11% and Double Chance by 0.3%.",
+  "values": [
+   "11%",
+   "0.3%"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Spirit Communion",
+  "tags": "Passive · Magic · ",
+  "variants": 2,
+  "description": "Increases the caster's Accuracy by 100. Has a 10% chance to restore the caster's and Spirit's HP by 182-200 when landing an attack.\n\nCooldown: 1s",
+  "values": [
+   "182-200"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Element Unification",
+  "tags": "Passive · Magic · Buff · ",
+  "variants": 2,
+  "description": "Increases Critical Damage Boost by 1.1% for the caster and Spirit for 10s upon landing a Spirit skill attack. Stacks up to 5 times.\n\nCooldown: 1s",
+  "values": [
+   "1.1%"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Revitalization Contract",
+  "tags": "Passive · Magic · Buff · Heal · ",
+  "variants": 2,
+  "description": "Increases the caster's Status Effect Resist by 17%. Increases Status Effect Resist by 10% for 5s when hit while afflicted with Stun, Knockdown, Airborne, Frost, or Fear (up to 10 stacks).\nImmediately restores 35% Max HP when HP is 10% or less.\n\nHealing Cooldown: 60s\nStatus Effect Resist Cooldown: 1s",
+  "values": [
+   "17%",
+   "35%"
+  ],
+  "specs": [],
+  "stats": {
+   "Weapon": "Orb"
+  }
+ },
+ {
+  "name": "Consecutive Countercurrent",
+  "tags": "Passive · Magic · Attack · Buff · ",
+  "variants": 2,
+  "description": "Has a 50% chance to deal 23.5% ATK + 97 extra damage on landing an attack on a target that is taking Damage over Time.\n\nCooldown: 1s",
+  "values": [
+   "23.5% ATK + 97"
+  ],
+  "specs": [],
+  "stats": {
+   "Attack ratio": "23.5%",
+   "Flat": "97",
+   "Weapon": "Orb"
+  }
+ }
+]

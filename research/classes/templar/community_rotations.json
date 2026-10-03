@@ -1,0 +1,87 @@
+[
+ {
+  "key": "s6-global-boss",
+  "source": "https://couga54.github.io/aion2-guides/en/templar/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "battlefield-banner",
+   "punishment",
+   "empyrean-lords-punishment",
+   "judgment",
+   "shield-smite",
+   "doom-shield",
+   "warding-strike",
+   "annihilate",
+   "debilitating-smash",
+   "pummel",
+   "vicious-strike"
+  ],
+  "note": "S6 (2026-10-03, Global S1, opinion; SolAshur build via couga54). Source gives three inputs: side-button Judgment line (Judgment > Shield Smite > Warding Strike > Doom Shield, 'Judgment always wins'), RMB Pummel macro line (Annihilate > Debilitating Smash > Flash Rampage > Pummel), LMB Vicious Strike, and by hand charged Punishment, Battlefield Banner, Empyrean Lord's Punishment, Taunt. Merging them into one list, with the hand-cast items first, is my reading. Flash Rampage left out (Staggered targets only), Taunt left out (aggro tool)."
+ },
+ {
+  "key": "s6-global-pvx-aoe",
+  "source": "https://couga54.github.io/aion2-guides/en/templar/",
+  "scenario_key": "aoe_pack",
+  "priority": [
+   "battlefield-banner",
+   "punishment",
+   "doom-shield",
+   "judgment",
+   "shield-smite",
+   "empyrean-lords-punishment",
+   "annihilate",
+   "debilitating-smash",
+   "warding-strike",
+   "pummel",
+   "vicious-strike"
+  ],
+  "note": "Same guide's PvX preset: Doom Shield takes the top priority of the RMB line (rush + guaranteed knockdown on NPCs unlocks Annihilate, resets on a kill at spec 15). Mapping PvX to the aoe_pack scenario is my assumption."
+ },
+ {
+  "key": "s6-global-level-pull",
+  "source": "https://couga54.github.io/aion2-guides/en/templar/",
+  "scenario_key": "level_pull",
+  "priority": [
+   "punishment",
+   "shield-smite",
+   "judgment",
+   "annihilate",
+   "warding-strike",
+   "poach",
+   "pummel",
+   "vicious-strike"
+  ],
+  "note": "Leveling section of the same guide (opinion): packs 'Poach one in, Warding Strike, hold Vicious Strike + Pummel macro'; elites 'charged Punishment, Shield Smite (stun), Judgment, Annihilate'. Combined order is my reading."
+ },
+ {
+  "key": "gegebase-sep-tank-boss",
+  "source": "https://gegebase.com/games/aion2/templar_pve_guide",
+  "scenario_key": "boss_180",
+  "priority": [
+   "taunt",
+   "punishment",
+   "judgment",
+   "shield-smite",
+   "warding-strike",
+   "vicious-strike",
+   "pummel"
+  ],
+  "note": "Beginner tank rotation, September 2026 (opinion, KR-derived, written before Global): Taunt > Punishment > Vicious Strike chain > Judgment > Shield Smite > Pummel > Punishing Strike > Judgment, Warding Strike for big hits. Advanced loop adds the CDR links (Vicious Strike reduces Warding Strike cooldown, Pummel chain reduces Punishment cooldown); those specs are not modelled."
+ },
+ {
+  "key": "trueeevil-solo-boss",
+  "source": "https://couga54.github.io/aion2-guides/en/templar/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "executing-blade",
+   "punishment",
+   "judgment",
+   "doom-shield",
+   "shield-smite",
+   "annihilate",
+   "pummel",
+   "vicious-strike"
+  ],
+  "note": "Day-two solo PvE pick quoted by couga54 from trueeevil (opinion): open with Executing Blade, then Punishment; stigmas Executing Blade, Empyrean Lord's, Doom Shield, Nezekan's Shield. Remainder of the order follows the S6 Judgment line."
+ }
+]

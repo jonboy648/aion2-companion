@@ -1,0 +1,359 @@
+[
+ {
+  "level": 1,
+  "kind": "zone",
+  "text": "Starting zone (Poeta / Ishalgen), levels 1-9",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 1,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Snipe, Snare Shot, Tempest Shot, Vigilant Eye (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 3,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Marking Shot",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 4,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Drill Dart",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 5,
+  "kind": "system",
+  "text": "Wings and Daeva ascension (Elyos 5 / Asmodian 6)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 5,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Arrow Scattershot",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 6,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Concentrated Fire (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 7,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Gale Arrow",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 8,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Explosion Trap",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 9,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Wind Vigor (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 10,
+  "kind": "zone",
+  "text": "Verteron / Altgard; Crafting and Sealed Dungeon tier 1 unlock",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 10,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Burst Arrow",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 11,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Focused Eye (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 12,
+  "kind": "daevanion",
+  "text": "Daevanion board 1: Nezekan",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 12,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Suppressing Arrow",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 13,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Hunter's Resolve (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 14,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Deadshot",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 15,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Unyielding Resolve (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 16,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Defiance",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 17,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Rooting Eye (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 20,
+  "kind": "daevanion",
+  "text": "Daevanion board 2: Zikel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 20,
+  "kind": "zone",
+  "text": "Krao Cave Exploration (IL 200)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 21,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Melee Fire (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 22,
+  "kind": "stigma",
+  "text": "Stigma skills (13 per class) and stigma slot 1",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 22,
+  "kind": "stigma",
+  "text": "Ranger stigma skills: Ambush Kick, Arrow Storm, Assault Smite, Bow of Blessing, Ensnaring Trap, Explosive Arrow, Griffon Arrow, Illusory Arrow, Mother Nature's Breath, Sealing Arrow, Stealth, Supporting Fire, Vaizel's Authority",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 23,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Revitalization Contract (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 25,
+  "kind": "skill",
+  "text": "Ranger skill unlock: Hunter's Soul (passive)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 27,
+  "kind": "stigma",
+  "text": "Stigma slot 2",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 28,
+  "kind": "zone",
+  "text": "Urugugu Canyon Exploration (IL 300)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 30,
+  "kind": "daevanion",
+  "text": "Daevanion board 3: Vaizel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 30,
+  "kind": "system",
+  "text": "Daily Dungeon",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 32,
+  "kind": "stigma",
+  "text": "Stigma slot 3",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 35,
+  "kind": "zone",
+  "text": "Fire Temple Exploration (IL 500)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 37,
+  "kind": "stigma",
+  "text": "Stigma slot 4",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 40,
+  "kind": "daevanion",
+  "text": "Daevanion board 4: Triniel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 45,
+  "kind": "daevanion",
+  "text": "Daevanion board 5: Azphel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 45,
+  "kind": "system",
+  "text": "Story end, Conquest modes, Draupnir",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 46,
+  "kind": "zone",
+  "text": "Eltnen / Morheim (KR only)",
+  "regions": [
+   "korea"
+  ]
+ },
+ {
+  "level": 47,
+  "kind": "system",
+  "text": "Chapter 1 / 2 content (KR only)",
+  "regions": [
+   "korea"
+  ]
+ },
+ {
+  "level": 50,
+  "kind": "system",
+  "text": "KR level cap 50",
+  "regions": [
+   "korea"
+  ]
+ }
+]

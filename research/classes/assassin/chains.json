@@ -1,0 +1,117 @@
+{
+ "_comment": "Assassin chains. Same shape as sorcerer chains.json. confirmed = text in the skill pages names the link; estimated = id/text inference. Unlinked hidden skills (no parent found): Frenzied Accord 13150000, Surging Bloodlust 13170000, Prepare to Assassinate 13290000.",
+ "links": [
+  {
+   "parent": 13010000,
+   "child": 13030000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Quick Slice > Breaking Slice; same text pattern, restores 100 then 105 MP (ids/names; Inven/guide call it the Quick/Breaking/Swift slice basic chain)"
+  },
+  {
+   "parent": 13030000,
+   "child": 13040000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Breaking Slice > Swift Slice; restores 105 then 120 MP, 0 cooldown, hits 2/3/4 per Metaroad"
+  },
+  {
+   "parent": 13100000,
+   "child": 13110000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Savage Roar > Savage Back Kick; each engraves 1 Insignia for 10s, 120 MP, 0 cooldown"
+  },
+  {
+   "parent": 13110000,
+   "child": 13120000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Savage Back Kick > Savage Smash; Savage Roar spec rank 16 text names [Savage Smash] (\"Pulls nearby targets on using Savage Smash\")"
+  },
+  {
+   "parent": 13020000,
+   "child": 13090000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Throw Shadowblade spec rank 5: \"Adds [Shadowblade Pursuit] Chain Skill\""
+  },
+  {
+   "parent": 13260000,
+   "child": 13330000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Defiance spec rank 8: \"Adds [Storm Slice] Chain Skill\" (Storm Slice cd 120s -> 42s over ranks)"
+  },
+  {
+   "parent": 13360000,
+   "child": 13380000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Infiltrate spec rank 12: \"Adds [Dark Strike] Chain Skill\""
+  },
+  {
+   "parent": 13230000,
+   "child": 13240000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Aerial Bind (Airborne) > Aerial Slaughter (makes target fall + Knockdown); id prefix 1323/1324, no text link"
+  },
+  {
+   "parent": 13060000,
+   "child": 13210000,
+   "kind": "proc",
+   "confidence": "confirmed",
+   "note": "Ambush spec rank 12: \"50% chance to trigger [Whirlwind Slice] on hit\""
+  },
+  {
+   "parent": 13220000,
+   "child": 13220037,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Shadow Fall proc child, same name/icon; \"5% chance to trigger on attacking a target with Incapacitated Immunity\""
+  },
+  {
+   "parent": 13350000,
+   "child": 13350007,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Heart Gore proc child (passive, same text, same icon); the on-crit trigger"
+  },
+  {
+   "parent": 13720000,
+   "child": 13350000,
+   "kind": "condition",
+   "confidence": "estimated",
+   "note": "Heart Gore fires only on landing a Critical Hit (text); Exploit Weakness adds +100 Critical Hit"
+  },
+  {
+   "parent": 13310000,
+   "child": 13350000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Illusive Clone removes Heart Gore cooldown for 10s"
+  },
+  {
+   "parent": 13340000,
+   "child": 13350000,
+   "kind": "cancel",
+   "confidence": "estimated",
+   "note": "Inven Sep 30 guide: holding Storm Rampage during stagger cancels into Heart Gore faster; Storm Rampage requires a Staggered target"
+  },
+  {
+   "parent": 13070000,
+   "child": 13220000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Shadowstrike Stuns; Shadow Fall requires a target afflicted with Stun (spec rank 16 also Blind)"
+  },
+  {
+   "parent": 13730000,
+   "child": 13160000,
+   "kind": "upgrade",
+   "confidence": "estimated",
+   "note": "Apply Poison passive (13730000) vs hidden active Apply Poison (13160000, 20% Poison 6s, cd 30s); relation not documented; likely older/variant form"
+  }
+ ]
+}

@@ -1,0 +1,84 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      # Engine tests (Qt-free webapi). conftest sets QT_QPA_PLATFORM=offscreen but the
+      # webapi tests do not need PySide6 itself.
+      - name: Python tests (webapi)
+        working-directory: app
+        run: |
+          python -m pip install --upgrade pip pytest
+          python -m pytest tests/test_webapi.py -q
+
+      - name: Bundle engine for Pyodide
+        run: python web/scripts/bundle_engine.py
+
+      - name: Install web dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Web tests (vitest)
+        working-directory: web
+        run: npx vitest run
+
+      - name: Warn if armory proxy URL is unset
+        if: ${{ vars.ARMORY_PROXY_URL == '' }}
+        run: echo "::warning::Repository variable ARMORY_PROXY_URL is not set; character search will not work."
+
+      - name: Build site
+        working-directory: web
+        env:
+          VITE_ARMORY_PROXY_URL: ${{ vars.ARMORY_PROXY_URL }}
+          # api.ts defaults to the mock engine; production must run the real Pyodide engine.
+          VITE_ENGINE: ${{ vars.VITE_ENGINE || 'real' }}
+        run: npm run build
+
+      # Link-preview image: Discord/Twitter/Facebook do not render SVG, and *.png is gitignored
+      # (NCSOFT art guard), so rasterise the authored og.svg at build time. Non-fatal.
+      - name: Render og.png from og.svg
+        continue-on-error: true
+        run: |
+          python -m pip install cairosvg
+          python -c "import cairosvg; cairosvg.svg2png(url='web/public/og.svg', write_to='web/dist/og.png', output_width=1200, output_height=630)"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

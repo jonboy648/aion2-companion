@@ -1,0 +1,152 @@
+{
+ "_comment": "data_contract.md section 2 for the Gladiator. 'confirmed' only where the client Chain table (aion2.app) lists the sequence; spec-gated 'Adds [X] Chain Skill' rows and id-prefix procs are 'estimated'. The sim does not model spec gating.",
+ "links": [
+  {
+   "parent": 11010000,
+   "child": 11420000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Rending Blow > Smashing Blow, 1/2 2/2 in client (aion2.app Chain section)"
+  },
+  {
+   "parent": 11020000,
+   "child": 11030000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Keen Strike > Rupture Strike, 1/3 2/3 in client"
+  },
+  {
+   "parent": 11030000,
+   "child": 11040000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Rupture Strike > Wrathful Strike, 2/3 3/3 in client"
+  },
+  {
+   "parent": 11050000,
+   "child": 11060000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Crushing Wave > Frenzied Wave, 1/2 2/2 in client"
+  },
+  {
+   "parent": 11080000,
+   "child": 11090000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Blade Toss > Blade Dance, 1/2 2/2 in client; Metaroad: Blade Dance max 3 chain attacks"
+  },
+  {
+   "parent": 11170000,
+   "child": 11440000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Overhead Slam spec (rank 8): \"Adds [Upward Strike] Chain Skill\"; core of the community rotation"
+  },
+  {
+   "parent": 11040000,
+   "child": 11180000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Keen/Rupture/Wrathful Strike spec (rank 16 on Keen Strike): \"Adds [Reckless Strike] Chain Skill\"; position after Wrathful Strike inferred"
+  },
+  {
+   "parent": 11200000,
+   "child": 11210000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Ankle Slice spec (rank 8): \"Adds [Ankle Smash] Chain Skill\""
+  },
+  {
+   "parent": 11300000,
+   "child": 11370000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Aerial Snare spec (rank 12): \"Adds [Forced Fall] Chain Skill\"; Forced Fall needs an Airborne target"
+  },
+  {
+   "parent": 11260000,
+   "child": 11320000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Defiance spec (rank 8): \"Adds [Wrath Burst] Chain Skill\""
+  },
+  {
+   "parent": 11450000,
+   "child": 11460000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Fracturing Rush stigma spec (rank 10): \"Adds [Destructive Rush] Chain Skill\""
+  },
+  {
+   "parent": 11460000,
+   "child": 11470000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Destructive Rush spec: \"Adds [Unsheathing Rush] Chain Skill\""
+  },
+  {
+   "parent": 11170000,
+   "child": 11170037,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Passive stub with the same name and icon, id prefix 1117 (inferred)"
+  },
+  {
+   "parent": 11300000,
+   "child": 11300037,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Passive stub \"Forced Fall\", id prefix 1130 = Aerial Snare (inferred)"
+  },
+  {
+   "parent": 11340000,
+   "child": "Predation",
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Lifestealing Blade spec (rank 10): \"Predation effect on party members for 20s\"; Metaroad lists Predation as a System row"
+  },
+  {
+   "parent": 11770000,
+   "child": "Destruction",
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Metaroad System row \"Destruction\" (Physical Attack, 50 m) sits next to Destructive Impulse; link inferred from the names only"
+  },
+  {
+   "parent": 11360000,
+   "child": "Rush Strike - Max",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "Rush Strike spec (rank 8): \"Changes to Charge Skill\"; Metaroad lists \"Rush Strike - Max\" (cd 20, range 10 m)"
+  },
+  {
+   "parent": 11390000,
+   "child": 11170000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Rage Burst: \"Triggers [Overhead Slam] on the target for 10s on hit\" (client text) - opens Overhead Slam without a Knockdown"
+  }
+ ],
+ "unlinked": [
+  11310000,
+  11330000,
+  11350000,
+  11140000,
+  11230000,
+  11120000,
+  11270000,
+  "Wave Attack"
+ ],
+ "stagger_condition_only": [
+  11280000,
+  11330000,
+  11770000
+ ],
+ "knockdown_condition_only": [
+  11170000,
+  11300000,
+  11370000
+ ],
+ "_unlinked_note": "Doom Advent, Madness Blow, 2nd Wrathful Strike (11350000), Intimidating Roar, Rush, active Blood Absorption and active Survival Stance have no parent in any source; 'Wave Attack' is an empty Metaroad System row next to Frenzied Wave."
+}

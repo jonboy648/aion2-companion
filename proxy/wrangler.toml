@@ -1,0 +1,7 @@
+name = "aion2-armory-proxy"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://becomecube.com,https://www.becomecube.com,http://localhost:5173,http://localhost:4173"

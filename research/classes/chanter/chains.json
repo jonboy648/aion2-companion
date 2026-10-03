@@ -1,0 +1,131 @@
+{
+ "_comment": "Same shape as aion2c/data/src/chains.json. 'confirmed' = stated in client text; 'estimated' = inferred.",
+ "links": [
+  {
+   "parent": 18010000,
+   "child": 18020000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "client Chain panel: Onslaught 1/3 > Resonance Crush 2/3 > Bolt Crush 3/3"
+  },
+  {
+   "parent": 18020000,
+   "child": 18030000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "client Chain panel 3/3; Resonance Crush page also shows 1/2 > 2/2"
+  },
+  {
+   "parent": 18010000,
+   "child": 18370000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Onslaught specialty rank 16 'Adds [Storm Chain] Chain Skill' (aion2.app + Metaroad)"
+  },
+  {
+   "parent": 18040000,
+   "child": 18050000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "client Chain panel: Incandescent Blow 1/2 > Bursting Blow 2/2"
+  },
+  {
+   "parent": 18060000,
+   "child": 18070000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "KR patch 2026-08-26 says Impactful Crush spec 4 used to be a 'Crushing Blow follow-up'; global client lists no parent"
+  },
+  {
+   "parent": 18100000,
+   "child": 18400000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Dark Crush specialty rank 12 'Adds [Piercing Strike] Chain Skill'"
+  },
+  {
+   "parent": 18200000,
+   "child": 18410000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Defiance specialty rank 8 'Adds [Crushing Strike] Chain Skill'"
+  },
+  {
+   "parent": 18210000,
+   "child": 18390000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Tremor Crush specialty rank 12 'Adds [Surging Strike] Chain Skill'"
+  },
+  {
+   "parent": 18080000,
+   "child": 18080037,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "same name and text as Wave Blow, Max 1, id suffix 37 (proc-child pattern like Sorcerer Frost Burst 15220037); 'changing the skill motion'"
+  },
+  {
+   "parent": 18090000,
+   "child": "Rushing Smash - Level 1",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "Metaroad charge tier row (no client id)"
+  },
+  {
+   "parent": 18090000,
+   "child": "Rushing Smash - Level 2",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "Metaroad charge tier row (no client id)"
+  },
+  {
+   "parent": 18090000,
+   "child": "Rushing Smash - Max",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "Metaroad charge tier row (no client id)"
+  },
+  {
+   "parent": 18090000,
+   "child": 18150000,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Rushing Smash specialty rank 8: 50% chance to trigger [Heat Wave Blow] on hit"
+  },
+  {
+   "parent": 18060000,
+   "child": 18100000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "'[Dark Crush] becomes available for 2s on skill use'"
+  },
+  {
+   "parent": 18290000,
+   "child": 18100000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "'[Dark Crush] becomes available for 2s on skill use'"
+  },
+  {
+   "parent": 18230000,
+   "child": 18100000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "'[Dark Crush] becomes available for 3s on skill use'"
+  },
+  {
+   "parent": 18330000,
+   "child": 18100000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "'[Dark Crush] becomes available for 3s on skill use'; KR patch lowered 7s to 3s"
+  }
+ ],
+ "unlinked": [
+  18000100
+ ],
+ "stagger_condition_only": [
+  18300000,
+  18770000
+ ]
+}

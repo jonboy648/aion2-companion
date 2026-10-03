@@ -1,0 +1,1793 @@
+{
+ "_comment": "Assassin hand-authored sim mechanics, same schema as sorcerer mechanics.json. Every Num carries confidence + source. Keys are skill slugs from skills.json.",
+ "anim_lock": {
+  "default": {
+   "value": 1.0,
+   "confidence": "estimated",
+   "source": "default 1.0 s; client cast_time is 0 everywhere; calibrate in app"
+  },
+  "long": {
+   "value": 1.5,
+   "confidence": "estimated",
+   "source": "no Assassin long-animation list found"
+  },
+  "long_skills": []
+ },
+ "element_overrides": {},
+ "kind_overrides": {
+  "breaking-slice": "chain",
+  "swift-slice": "chain",
+  "savage-back-kick": "chain",
+  "savage-smash": "chain",
+  "shadowblade-pursuit": "chain",
+  "storm-slice": "chain",
+  "dark-strike": "chain",
+  "aerial-slaughter": "chain",
+  "heart-gore-13350007": "proc",
+  "shadow-fall-13220037": "proc",
+  "heart-gore": "proc",
+  "clone-attack-system": "system",
+  "poison-system": "system",
+  "dodge": "dodge"
+ },
+ "statuses": {
+  "insignia": {
+   "key": "insignia",
+   "name": "Insignia",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): \"engraves ... Insignia for 10s\"; stacks cap at 5"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "savage-roar",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "stun": {
+   "key": "stun",
+   "name": "Stun",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Shadowstrike/Insignia Explosion/Storm Slice \"Stun for 3s\""
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "blind": {
+   "key": "blind",
+   "name": "Blind",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Flash Slice/Infiltrate 3s; Smoke Bomb and Assault Ambush 5s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "slow": {
+   "key": "slow",
+   "name": "Slow",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Throw Shadowblade -40% move speed for 5s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "knockdown": {
+   "key": "knockdown",
+   "name": "Knockdown",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Shadow Fall / Aerial Slaughter 3s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "airborne": {
+   "key": "airborne",
+   "name": "Airborne",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Aerial Bind 3s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "stagger": {
+   "key": "stagger",
+   "name": "Stagger",
+   "on": "target",
+   "duration_s": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "Stagger gauge break: duration not in any source; Storm Rampage requires it, Defense Break and Insignia-adjacent rules key on it"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "illusive_clone": {
+   "key": "illusive_clone",
+   "name": "Illusive Clone",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "\"deals 20% of damage dealt as extra damage for 10s\"; also removes Heart Gore cooldown for the window; bucket unknown"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "illusive-clone",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "swift_contract": {
+   "key": "swift_contract",
+   "name": "Swift Contract",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): +20% Combat Speed 10s (rank 1; token 20 at both slots)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "Combat Speed is a rate (shorter animations), not a damage multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "swift-contract",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "frenzied_accord": {
+   "key": "frenzied_accord",
+   "name": "Frenzied Accord",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): party within 40m, +20% PvE / +10% PvP Damage Boost"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "+20% PvE Damage Boost (hidden skill, cd 120s; unknown if obtainable at Global)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "frenzied-accord",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "surging_bloodlust": {
+   "key": "surging_bloodlust",
+   "name": "Surging Bloodlust",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): +120% damage on 1 skill, restores 300 MP"
+   },
+   "dmg_mult": {
+    "value": 2.2,
+    "confidence": "estimated",
+    "source": "+120% on ONE skill only (1 + 1.2); hidden skill cd 60s; applies to a single skill, not whole rotation"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "surging-bloodlust",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "exploit_weakness_atk": {
+   "key": "exploit_weakness_atk",
+   "name": "Exploit Weakness (Attack)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+   },
+   "dmg_mult": {
+    "value": 1.055,
+    "confidence": "estimated",
+    "source": "25% chance on attack: +5.5% Attack for 10s (cd 1s), rank 1; rank 40 value in extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "exploit-weakness",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "poison": {
+   "key": "poison",
+   "name": "Poison",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): passive form 10s (hidden active form 6s)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "apply-poison-13730000",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "flat tick known (233 at rank 1, 2885 at rank 40) but no ATK ratio"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "\"every 1s\""
+   }
+  },
+  "defense_break": {
+   "key": "defense_break",
+   "name": "Defense Break",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Defense -12%, Status Resist -11% (rank 1); cd 20s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "Defense -12% lowers the (defense - penetration)*0.1 term; exact effect depends on target defense, not a flat multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "defense-break",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "ambush_stance": {
+   "key": "ambush_stance",
+   "name": "Ambush Stance",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): granted by rush/movement skills"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "ambush-stance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "tenacity": {
+   "key": "tenacity",
+   "name": "Tenacity",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Defiance status-effect immunity (+2s at rank 12 spec)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "defiance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "stealth": {
+   "key": "stealth",
+   "name": "Stealth",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Shadowstep 3s; Shadow Walk / Prepare to Assassinate 20s, not usable in combat"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "shadowstep",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  },
+  "evasion_up": {
+   "key": "evasion_up",
+   "name": "Evasion Boost",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Evasion Contract +200 Evasion 10s; Evasion Stance guaranteed evasion, duration \"brief\" unknown"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status adds no direct multiplier; effect modelled by rules/extension"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "evasion-contract",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown (Metaroad has no ratio for DoT/system entries)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not applicable / unknown"
+   }
+  }
+ },
+ "triggers": [
+  {
+   "status_key": "exploit_weakness_atk",
+   "on_element": "none",
+   "chance": 0.25,
+   "source_skill": "exploit-weakness",
+   "confidence": "estimated"
+  },
+  {
+   "status_key": "poison",
+   "on_element": "none",
+   "chance": 0.15,
+   "source_skill": "apply-poison-13730000",
+   "confidence": "estimated"
+  },
+  {
+   "status_key": "insignia",
+   "on_element": "none",
+   "chance": 0.07,
+   "source_skill": "exploit-weakness",
+   "confidence": "estimated"
+  }
+ ],
+ "rules": {
+  "quick-slice": {
+   "skill_key": "quick-slice",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "breaking-slice",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "chain 1/3, restores 100 MP, 0 cd; chain link inferred, restore text from dump"
+  },
+  "breaking-slice": {
+   "skill_key": "breaking-slice",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "swift-slice",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 105.0,
+   "confidence": "estimated",
+   "note": "chain 2/3, restores 105 MP"
+  },
+  "swift-slice": {
+   "skill_key": "swift-slice",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 120.0,
+   "confidence": "estimated",
+   "note": "chain 3/3, restores 120 MP"
+  },
+  "savage-roar": {
+   "skill_key": "savage-roar",
+   "applies": [
+    "insignia"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "savage-back-kick",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "engraves 1 Insignia 10s (confirmed); costs 120 MP; Inven: keep on its own manual key"
+  },
+  "savage-back-kick": {
+   "skill_key": "savage-back-kick",
+   "applies": [
+    "insignia"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "savage-smash",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "engraves 1 Insignia 10s, 120 MP"
+  },
+  "savage-smash": {
+   "skill_key": "savage-smash",
+   "applies": [
+    "insignia"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "engraves 1 Insignia 10s, 120 MP; spec 16 on Savage Roar pulls targets"
+  },
+  "ambush": {
+   "skill_key": "ambush",
+   "applies": [
+    "insignia"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "base: +30% damage on a Back attack. Engraves 2 Insignias only with spec rank 8 option 1 AND from behind (guides take it); apply modelled as 1.0 only if that option is picked"
+  },
+  "heart-gore": {
+   "skill_key": "heart-gore",
+   "applies": [
+    "insignia"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "fires only on landing a Critical Hit, cd 5s; Insignia only with spec rank 8 option 2 (guides take it); spec 16 resets own cd on crit; Illusive Clone removes cd 10s"
+  },
+  "heart-gore-13350007": {
+   "skill_key": "heart-gore-13350007",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "proc child of Heart Gore (same numbers)"
+  },
+  "savage-fang": {
+   "skill_key": "savage-fang",
+   "applies": [
+    "insignia"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "engraves 5 Insignias 10s (confirmed); 50 stagger damage; opener skill before Triniel's Dagger"
+  },
+  "insignia-explosion": {
+   "skill_key": "insignia-explosion",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [
+    "insignia"
+   ],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "damage and Stun chance scale with stacks: 0:604/-, 1:677/10%, 2:749/20%, 3:822/30%, 4:894/40%, 5:967/50% (rank 1, Stun chance doubled on NPCs). Consumes stacks; spec 8 keeps 2 stacks. Whether stun applies at 0 stacks unknown"
+  },
+  "shadowstrike": {
+   "skill_key": "shadowstrike",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "moves behind target, Stun 3s guaranteed (confirmed); rank 8+ specs add Seal/Root 50%"
+  },
+  "whirlwind-slice": {
+   "skill_key": "whirlwind-slice",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 0.4,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "40% Stun on Evasion (100% on NPC targets)"
+  },
+  "flash-slice": {
+   "skill_key": "flash-slice",
+   "applies": [
+    "blind"
+   ],
+   "apply_chance": 0.4,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "40% Blind 3s (100% on NPC targets); 8 spec +2s"
+  },
+  "infiltrate": {
+   "skill_key": "infiltrate",
+   "applies": [
+    "blind"
+   ],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "50% Blind only after Dodge or while flying (100% on NPCs); Dark Strike chain with rank 12 spec"
+  },
+  "shadow-fall": {
+   "skill_key": "shadow-fall",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 1.0,
+   "requires": [
+    "stun"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "requires a Stunned target (or 5% trigger vs Incapacitated Immunity); spec 8 engraves 3 Insignias"
+  },
+  "shadow-fall-13220037": {
+   "skill_key": "shadow-fall-13220037",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "proc child, 5% on attacking a target with Incapacitated Immunity"
+  },
+  "storm-rampage": {
+   "skill_key": "storm-rampage",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "stagger"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "needs a Staggered target; spec 8 restores 120 MP; spec 16 -1s all cooldowns"
+  },
+  "storm-slice": {
+   "skill_key": "storm-slice",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "chain skill from Defiance (spec 8); Stun 3s; cd 120s falling to 42s with rank"
+  },
+  "dark-strike": {
+   "skill_key": "dark-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "chain skill from Infiltrate (spec 12), pushes 10m"
+  },
+  "shadowblade-pursuit": {
+   "skill_key": "shadowblade-pursuit",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "chain skill from Throw Shadowblade (spec 5)"
+  },
+  "aerial-slaughter": {
+   "skill_key": "aerial-slaughter",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "follow-up after Aerial Bind (inferred)"
+  },
+  "aerial-bind": {
+   "skill_key": "aerial-bind",
+   "applies": [
+    "airborne"
+   ],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "50% Airborne 3s; 100% vs 5 Insignia stacks or NPCs; whether stacks are consumed unknown"
+  },
+  "throw-shadowblade": {
+   "skill_key": "throw-shadowblade",
+   "applies": [
+    "slow"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Slow -40% 5s; Mobile skill (castable on the move)"
+  },
+  "smoke-bomb": {
+   "skill_key": "smoke-bomb",
+   "applies": [
+    "blind"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Blind 5s; cd 30s in dump vs 60s on Metaroad"
+  },
+  "assault-ambush": {
+   "skill_key": "assault-ambush",
+   "applies": [
+    "blind"
+   ],
+   "apply_chance": 0.3,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "30% Blind 5s (100% NPC); Defense up to +20% by targets hit"
+  },
+  "triniels-dagger": {
+   "skill_key": "triniels-dagger",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "+30% damage from behind; raises target skill cooldowns by 5%; Inven: use after Savage Fang"
+  },
+  "spiral-slice": {
+   "skill_key": "spiral-slice",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "removes 1 buff, +386 flat per buff removed (rank 1)"
+  },
+  "illusive-clone": {
+   "skill_key": "illusive-clone",
+   "applies": [
+    "illusive_clone"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "removes Heart Gore cooldown + 20% of damage dealt as extra for 10s; burst window"
+  },
+  "swift-contract": {
+   "skill_key": "swift-contract",
+   "applies": [
+    "swift_contract"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "+20% Combat Speed 10s; press before Illusive Clone (shorter animation)"
+  },
+  "frenzied-accord": {
+   "skill_key": "frenzied-accord",
+   "applies": [
+    "frenzied_accord"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "hidden skill, availability unknown"
+  },
+  "surging-bloodlust": {
+   "skill_key": "surging-bloodlust",
+   "applies": [
+    "surging_bloodlust"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 300.0,
+   "confidence": "estimated",
+   "note": "hidden skill, availability unknown; restores 300 MP"
+  },
+  "defiance": {
+   "skill_key": "defiance",
+   "applies": [
+    "tenacity"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "removes Stun/Knockdown/Airborne/Grab/Frost/Fear; ignores cooldown reduction; adds Storm Slice chain"
+  },
+  "shadowstep": {
+   "skill_key": "shadowstep",
+   "applies": [
+    "stealth"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "moves back + Stealth 3s"
+  },
+  "shadow-walk": {
+   "skill_key": "shadow-walk",
+   "applies": [
+    "stealth"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Stealth 20s, out of combat only (spec 15 allows in combat)"
+  },
+  "prepare-to-assassinate": {
+   "skill_key": "prepare-to-assassinate",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "hidden skill; Stealth 20s, out of combat only, cd 300s (no damage; out-of-combat utility, so it applies nothing in the rotation sim)"
+  },
+  "evasion-contract": {
+   "skill_key": "evasion-contract",
+   "applies": [
+    "evasion_up"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "removes Slow/Root, +200 Evasion 10s, Slow/Root immunity"
+  },
+  "evasion-stance": {
+   "skill_key": "evasion-stance",
+   "applies": [
+    "evasion_up"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 110.0,
+   "confidence": "estimated",
+   "note": "guaranteed evasion briefly; restores 110 MP and Stamina once on Evasion"
+  }
+ },
+ "assassin_extensions": {
+  "_comment": "NOT part of the sorcerer mechanics schema; structured extras for Assassin-only mechanics. Ignored by a loader that reads only the keys above.",
+  "skill_tags": {
+   "dodge": [
+    "manual",
+    "defense",
+    "mobility",
+    "evade"
+   ],
+   "quick-slice": [
+    "damage",
+    "builder",
+    "chain",
+    "sustain",
+    "macro"
+   ],
+   "throw-shadowblade": [
+    "damage",
+    "cc",
+    "slow",
+    "mobile_cast",
+    "manual"
+   ],
+   "breaking-slice": [
+    "damage",
+    "builder",
+    "chain",
+    "sustain",
+    "macro"
+   ],
+   "swift-slice": [
+    "damage",
+    "builder",
+    "chain",
+    "sustain",
+    "macro"
+   ],
+   "flash-slice": [
+    "damage",
+    "cc",
+    "blind",
+    "mobility",
+    "macro"
+   ],
+   "ambush": [
+    "damage",
+    "insignia_source",
+    "back_attack",
+    "macro"
+   ],
+   "shadowstrike": [
+    "damage",
+    "cc",
+    "stun",
+    "mobility",
+    "macro"
+   ],
+   "evasion-stance": [
+    "defense",
+    "evade",
+    "sustain",
+    "manual"
+   ],
+   "shadowblade-pursuit": [
+    "damage",
+    "mobility",
+    "chain",
+    "manual"
+   ],
+   "savage-roar": [
+    "damage",
+    "insignia_source",
+    "chain",
+    "manual"
+   ],
+   "savage-back-kick": [
+    "damage",
+    "insignia_source",
+    "chain",
+    "manual"
+   ],
+   "savage-smash": [
+    "damage",
+    "insignia_source",
+    "chain",
+    "manual"
+   ],
+   "insignia-explosion": [
+    "damage",
+    "cc",
+    "stun",
+    "insignia_consumer",
+    "manual",
+    "macro_conditional"
+   ],
+   "shadowstep": [
+    "damage",
+    "mobility",
+    "stealth",
+    "defense",
+    "manual"
+   ],
+   "frenzied-accord": [
+    "buff",
+    "party",
+    "manual"
+   ],
+   "apply-poison": [
+    "buff",
+    "manual"
+   ],
+   "surging-bloodlust": [
+    "buff",
+    "sustain",
+    "manual"
+   ],
+   "shadow-walk": [
+    "stealth",
+    "mobility",
+    "utility",
+    "manual"
+   ],
+   "whirlwind-slice": [
+    "damage",
+    "cc",
+    "stun",
+    "macro"
+   ],
+   "shadow-fall": [
+    "damage",
+    "cc",
+    "knockdown",
+    "mobility",
+    "insignia_source",
+    "macro"
+   ],
+   "shadow-fall-13220037": [
+    "damage",
+    "cc",
+    "proc"
+   ],
+   "aerial-bind": [
+    "damage",
+    "cc",
+    "airborne",
+    "insignia_consumer",
+    "manual"
+   ],
+   "aerial-slaughter": [
+    "damage",
+    "cc",
+    "knockdown",
+    "chain",
+    "manual"
+   ],
+   "smoke-bomb": [
+    "damage",
+    "cc",
+    "blind",
+    "manual"
+   ],
+   "defiance": [
+    "defense",
+    "cc_break",
+    "buff",
+    "sustain",
+    "manual"
+   ],
+   "savage-fang": [
+    "damage",
+    "insignia_source",
+    "buff",
+    "manual"
+   ],
+   "spiral-slice": [
+    "damage",
+    "mobility",
+    "dispel",
+    "manual"
+   ],
+   "prepare-to-assassinate": [
+    "stealth",
+    "utility",
+    "manual"
+   ],
+   "triniels-dagger": [
+    "damage",
+    "debuff",
+    "back_attack",
+    "manual"
+   ],
+   "illusive-clone": [
+    "buff",
+    "damage_amp",
+    "heart_gore_reset",
+    "manual"
+   ],
+   "storm-slice": [
+    "damage",
+    "cc",
+    "stun",
+    "chain",
+    "manual"
+   ],
+   "storm-rampage": [
+    "damage",
+    "mobility",
+    "sustain",
+    "stagger_only",
+    "manual"
+   ],
+   "heart-gore": [
+    "damage",
+    "proc",
+    "crit_trigger",
+    "sustain"
+   ],
+   "heart-gore-13350007": [
+    "damage",
+    "proc",
+    "crit_trigger"
+   ],
+   "infiltrate": [
+    "damage",
+    "cc",
+    "blind",
+    "mobility",
+    "macro"
+   ],
+   "evasion-contract": [
+    "defense",
+    "cc_break",
+    "buff",
+    "manual"
+   ],
+   "dark-strike": [
+    "damage",
+    "cc",
+    "push",
+    "chain",
+    "manual"
+   ],
+   "swift-contract": [
+    "buff",
+    "combat_speed",
+    "manual"
+   ],
+   "assault-ambush": [
+    "damage",
+    "cc",
+    "blind",
+    "defense",
+    "manual"
+   ],
+   "heightened-sixth-sense": [
+    "passive",
+    "defense",
+    "heal",
+    "evade"
+   ],
+   "exploit-weakness": [
+    "passive",
+    "crit",
+    "buff",
+    "insignia_source"
+   ],
+   "apply-poison-13730000": [
+    "passive",
+    "dot",
+    "debuff"
+   ],
+   "rear-smite": [
+    "passive",
+    "back_attack",
+    "buff"
+   ],
+   "assault-stance": [
+    "passive",
+    "crit_damage",
+    "buff"
+   ],
+   "impact-hit": [
+    "passive",
+    "impact",
+    "buff"
+   ],
+   "ambush-stance": [
+    "passive",
+    "proc",
+    "mobility"
+   ],
+   "defense-break": [
+    "passive",
+    "debuff"
+   ],
+   "revitalization-contract": [
+    "passive",
+    "defense",
+    "heal",
+    "cc_resist"
+   ],
+   "determination": [
+    "passive",
+    "proc",
+    "execute"
+   ],
+   "clone-attack-system": [
+    "system",
+    "proc"
+   ],
+   "poison-system": [
+    "system",
+    "proc"
+   ]
+  },
+  "manual_vs_macro": {
+   "basis": "Inven Sep 18/30 guides + aion2-assassin-guide.onrender.com (2026-10-03): game macro + normal attack held; buffs, movement, defense reactions, Savage Roar and conditional Insignia Explosion are pressed by hand",
+   "confidence": "estimated"
+  },
+  "resources": {
+   "MP": "builders restore MP: Quick Slice 100, Breaking Slice 105, Swift Slice 120, Heart Gore 100, Storm Rampage +120 (spec 8); Savage Roar chain costs 120 each; Stamina used by Dodge/Evasion Stance (+110 MP once)",
+   "confidence": "estimated"
+  },
+  "insignia": {
+   "max_stacks": {
+    "value": 5,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+   },
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+   },
+   "stack_sources": [
+    {
+     "skill": "savage-fang",
+     "stacks": 5,
+     "confidence": "confirmed"
+    },
+    {
+     "skill": "savage-roar",
+     "stacks": 1,
+     "confidence": "confirmed"
+    },
+    {
+     "skill": "savage-back-kick",
+     "stacks": 1,
+     "confidence": "confirmed"
+    },
+    {
+     "skill": "savage-smash",
+     "stacks": 1,
+     "confidence": "confirmed"
+    },
+    {
+     "skill": "ambush",
+     "stacks": 2,
+     "condition": "spec rank 8 + back attack",
+     "confidence": "confirmed"
+    },
+    {
+     "skill": "shadow-fall",
+     "stacks": 3,
+     "condition": "spec rank 8",
+     "confidence": "confirmed"
+    },
+    {
+     "skill": "heart-gore",
+     "stacks": 1,
+     "condition": "spec rank 8 option 2",
+     "confidence": "confirmed"
+    },
+    {
+     "skill": "exploit-weakness",
+     "stacks": "1 per clone, up to 5",
+     "condition": "7% chance on crit summons up to 5 clones",
+     "confidence": "confirmed"
+    }
+   ],
+   "insignia_explosion_rank1": [
+    {
+     "stacks": 0,
+     "dmg_flat": 604,
+     "stun_chance_pct": 0
+    },
+    {
+     "stacks": 1,
+     "dmg_flat": 677,
+     "stun_chance_pct": 10
+    },
+    {
+     "stacks": 2,
+     "dmg_flat": 749,
+     "stun_chance_pct": 20
+    },
+    {
+     "stacks": 3,
+     "dmg_flat": 822,
+     "stun_chance_pct": 30
+    },
+    {
+     "stacks": 4,
+     "dmg_flat": 894,
+     "stun_chance_pct": 40
+    },
+    {
+     "stacks": 5,
+     "dmg_flat": 967,
+     "stun_chance_pct": 50
+    }
+   ],
+   "insignia_explosion_ratio_pct_rank1": {
+    "value": 220.0,
+    "confidence": "estimated",
+    "source": "Metaroad base ratio 220% + flat 663 vs aion2.app flat 604: conflict; per-stack ratio unknown"
+   }
+  },
+  "heart_gore": {
+   "trigger": "landing a Critical Hit",
+   "cooldown_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+   },
+   "mp_restore": {
+    "value": 100.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+   },
+   "cooldown_removed_by": [
+    "illusive-clone (10s window, confirmed)",
+    "spec rank 16: resets own cooldown on crit (confirmed text)"
+   ],
+   "crit_chance_matters": "with spec 16, crit chance ~ Heart Gore casts (Inven)"
+  },
+  "trigger_conditions": {
+   "insignia/exploit-weakness": "on landing a Critical Hit",
+   "exploit_weakness_atk/exploit-weakness": "on attack (cd 1s)",
+   "poison/apply-poison-13730000": "on landing an attack (cd 1s)"
+  },
+  "positional": {
+   "back_attack": {
+    "ambush_bonus_pct": {
+     "value": 30.0,
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+    },
+    "triniels_dagger_bonus_pct": {
+     "value": 30.0,
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+    },
+    "rear_smite_back_damage_boost_pct_rank1": {
+     "value": 3.0,
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+    }
+   },
+   "note": "front/back boost bucket is non-zero for Assassin (zero for Sorcerer)"
+  },
+  "dot_ticks": {
+   "poison_passive": {
+    "tick_s": 1.0,
+    "se_abe_dmg:1373000711:1373000712:SkillUIDotMaxDmg:tick": {
+     "rank1": "233",
+     "rank40": "2885"
+    },
+    "se_abe_dmg:1373000711:1373000712:SkillUIDotMinDmg:tick": {
+     "rank1": "233",
+     "rank40": "2885"
+    }
+   },
+   "apply_poison_active": {
+    "rank1": 233,
+    "duration_s": 6,
+    "cd_s": 30,
+    "confidence": "confirmed"
+   },
+   "exploit_clone_hit": {
+    "se_dmg:1372000711:SkillUIMaxDmgsum": {
+     "rank1": "17",
+     "rank40": "279"
+    }
+   }
+  },
+  "conditional_flat_procs": {
+   "ambush_stance": {
+    "se_dmg:1377000811:SkillUIMaxDmgsum": {
+     "rank1": "152",
+     "rank40": "861"
+    }
+   },
+   "determination": {
+    "se_dmg:1380000711:SkillUIMaxDmgsum": {
+     "rank1": "228",
+     "rank40": "871"
+    }
+   }
+  },
+  "passive_values_rank1_vs_max": {
+   "rear-smite": {
+    "abe:1374000011:value02:divide100": {
+     "rank1": "3",
+     "rank40": "22.5"
+    },
+    "abe:1374000013:value02:divide100": {
+     "rank1": "3",
+     "rank40": "22.5"
+    },
+    "abe:1374000015:value02:divide100": {
+     "rank1": "1.5",
+     "rank40": "11.25"
+    }
+   },
+   "assault-stance": {
+    "abe:1375000011:value02:divide100": {
+     "rank1": "6",
+     "rank40": "45"
+    }
+   },
+   "impact-hit": {
+    "abe:1376000011:value02:divide100": {
+     "rank1": "11.2",
+     "rank40": "58"
+    },
+    "abe:1376000012:value02:divide100": {
+     "rank1": "0.3",
+     "rank40": "12"
+    }
+   },
+   "defense-break": {
+    "abe:1378000011:value03:time": {
+     "rank1": "20",
+     "rank40": "20"
+    },
+    "se:1378000711:effect_value02:time": {
+     "rank1": "10",
+     "rank40": "10"
+    },
+    "abe:1378000711:value02:divide100abs": {
+     "rank1": "12",
+     "rank40": "90"
+    },
+    "abe:1378000712:value02:divide100abs": {
+     "rank1": "11",
+     "rank40": "50"
+    }
+   },
+   "heightened-sixth-sense": {
+    "abe:1371000011:value02": {
+     "rank1": "200",
+     "rank40": "200"
+    },
+    "abe:1371000013:value02": {
+     "rank1": "150",
+     "rank40": "6000"
+    },
+    "abe:1371000014:value03:time": {
+     "rank1": "3",
+     "rank40": "3"
+    },
+    "abe:1371000012:value02:divide100": {
+     "rank1": "6",
+     "rank40": "45"
+    },
+    "abe:1371000013:value02:divide100": {
+     "rank1": "1.5",
+     "rank40": "60"
+    },
+    "se_dmg:1371000711:SkillUIHPHealMax:total": {
+     "rank1": "102",
+     "rank40": "2224"
+    },
+    "se_dmg:1371000711:SkillUIHPHealMin:total": {
+     "rank1": "85",
+     "rank40": "1853"
+    }
+   },
+   "revitalization-contract": {
+    "abe:1379000011:value03:time": {
+     "rank1": "60",
+     "rank40": "60"
+    },
+    "abe:1379000013:value03:time": {
+     "rank1": "1",
+     "rank40": "1"
+    },
+    "abe:1379000012:value02:divide100": {
+     "rank1": "17",
+     "rank40": "95"
+    },
+    "abe:1379000811:value02:divide100": {
+     "rank1": "10",
+     "rank40": "10"
+    },
+    "se:1379000811:effect_value02:time": {
+     "rank1": "5",
+     "rank40": "5"
+    },
+    "se:1379000711:effect_value02:divide100": {
+     "rank1": "35",
+     "rank40": "74"
+    }
+   },
+   "exploit-weakness": {
+    "abe:1372000011:value02": {
+     "rank1": "100",
+     "rank40": "490"
+    },
+    "abe:1372000013:value03:time": {
+     "rank1": "1",
+     "rank40": "1"
+    },
+    "abe:1372000023:value03:time": {
+     "rank1": "1",
+     "rank40": "1"
+    },
+    "abe:1372000013:value02:divide100": {
+     "rank1": "7",
+     "rank40": "7"
+    },
+    "abe:1372000023:value02:divide100": {
+     "rank1": "25",
+     "rank40": "25"
+    },
+    "abe:1372001011:value02:divide100": {
+     "rank1": "5.5",
+     "rank40": "25"
+    },
+    "se:1372000713:effect_value02:time": {
+     "rank1": "10",
+     "rank40": "10"
+    },
+    "se:1372001011:effect_value02:time": {
+     "rank1": "10",
+     "rank40": "10"
+    },
+    "se_dmg:1372000711:SkillUIMaxDmgsum": {
+     "rank1": "17",
+     "rank40": "279"
+    },
+    "se_dmg:1372000711:SkillUIMinDmgsum": {
+     "rank1": "17",
+     "rank40": "279"
+    }
+   }
+  },
+  "defense_heal_notes": "Heightened Sixth Sense: heals 85-102 HP on Evasion (cd 3s). Revitalization Contract: heals 35% Max HP at <=10% HP (cd 60s). Evasion Stance, Evasion Contract, Defiance, Shadow Walk/Shadowstep, Smoke Bomb are defense/utility, tagged not modelled as damage.",
+  "unknowns": [
+   "cast/animation times (client cast_time 0)",
+   "Seal and Root status values (spec-only)",
+   "Stagger duration",
+   "Impact-type status definition (Defense Break / Impact Hit)",
+   "physical element is not in Element enum (fire/water/earth/none): all Assassin skills use none"
+  ]
+ },
+ "korea_only_ids": [
+  13150000,
+  13170000,
+  13290000
+ ],
+ "skill_tags": {
+  "frenzied-accord": [
+   "availability-unknown"
+  ],
+  "surging-bloodlust": [
+   "availability-unknown"
+  ],
+  "prepare-to-assassinate": [
+   "availability-unknown"
+  ]
+ }
+}

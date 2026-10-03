@@ -1,0 +1,350 @@
+[
+ {
+  "level": 1,
+  "kind": "zone",
+  "text": "Starting zone (Poeta / Ishalgen), levels 1-9",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 1,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Cold Shock, Combustion, Summon: Fire Spirit, Spirit Strike",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 3,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Summon: Water Spirit",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 4,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Jointstrike: Curse",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 5,
+  "kind": "system",
+  "text": "Wings and Daeva ascension (Elyos 5 / Asmodian 6)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 5,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Rapid Scattershot",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 6,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Spirit Protection",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 7,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Summon: Earth Spirit",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 8,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Dimensional Control",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 9,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Spirit's Descent",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 10,
+  "kind": "zone",
+  "text": "Verteron / Altgard; Crafting and Sealed Dungeon tier 1 unlock",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 10,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Summon: Wind Spirit",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 11,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Corrode",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 12,
+  "kind": "daevanion",
+  "text": "Daevanion board 1: Nezekan",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 12,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Soul's Cry",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 13,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Spirit Revitalization",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 14,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Elemental Fusion",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 15,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Mental Focus",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 16,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Defiance",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 17,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Consecutive Countercurrent",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 20,
+  "kind": "zone",
+  "text": "Krao Cave Exploration (IL 200)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 20,
+  "kind": "daevanion",
+  "text": "Daevanion board 2: Zikel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 21,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Spirit Communion",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 22,
+  "kind": "stigma",
+  "text": "Stigma skills (13 per class) and stigma slot 1",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 23,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Revitalization Contract",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 25,
+  "kind": "skill",
+  "text": "Spiritmaster skill unlock: Element Unification",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 27,
+  "kind": "stigma",
+  "text": "Stigma slot 2",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 28,
+  "kind": "zone",
+  "text": "Urugugu Canyon Exploration (IL 300)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 30,
+  "kind": "daevanion",
+  "text": "Daevanion board 3: Vaizel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 30,
+  "kind": "system",
+  "text": "Daily Dungeon",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 32,
+  "kind": "stigma",
+  "text": "Stigma slot 3",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 35,
+  "kind": "zone",
+  "text": "Fire Temple Exploration (IL 500)",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 37,
+  "kind": "stigma",
+  "text": "Stigma slot 4",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 40,
+  "kind": "daevanion",
+  "text": "Daevanion board 4: Triniel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 45,
+  "kind": "daevanion",
+  "text": "Daevanion board 5: Azphel",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 45,
+  "kind": "system",
+  "text": "Story end, Conquest modes, Draupnir",
+  "regions": [
+   "global",
+   "korea"
+  ]
+ },
+ {
+  "level": 46,
+  "kind": "zone",
+  "text": "Eltnen / Morheim (KR only)",
+  "regions": [
+   "korea"
+  ]
+ },
+ {
+  "level": 47,
+  "kind": "system",
+  "text": "Chapter 1 / 2 content (KR only)",
+  "regions": [
+   "korea"
+  ]
+ },
+ {
+  "level": 50,
+  "kind": "system",
+  "text": "KR level cap 50",
+  "regions": [
+   "korea"
+  ]
+ }
+]

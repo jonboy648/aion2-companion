@@ -1,0 +1,57 @@
+{
+  "mastery": {
+    "note": "Mastery is the Skills-window tab for Active/Passive skills; no separate bonus system found. Costs are skill points per level-up.",
+    "levels": [
+      {"level": 1, "cost": 0, "cumulative": 0},
+      {"level": 2, "cost": 1, "cumulative": 1},
+      {"level": 3, "cost": 1, "cumulative": 2},
+      {"level": 4, "cost": 1, "cumulative": 3},
+      {"level": 5, "cost": 2, "cumulative": 5},
+      {"level": 6, "cost": 2, "cumulative": 7},
+      {"level": 7, "cost": 2, "cumulative": 9},
+      {"level": 8, "cost": 4, "cumulative": 13},
+      {"level": 9, "cost": 4, "cumulative": 17},
+      {"level": 10, "cost": 4, "cumulative": 21}
+    ],
+    "points_cap": 10,
+    "bonus_levels": "Daevanion up to +4; Arcana cards and Soul Bindings rolled (ranges unpublished); ceiling 12/16/20 unverified",
+    "specialty_slot_levels": [8, 12, 16, 20],
+    "source": "metabot class-builds-guide via search snippet; expcarry 13/21 cumulative; 2026-10-03",
+    "confidence": "single/dual source"
+  },
+  "specialties": [
+    {"skill_key": "hellfire", "rank_required": 20, "text": "Targets #1, #4, #3 in tooltip order", "effect": "speed; Multi-Hit; cast while moving"},
+    {"skill_key": "firestorm", "rank_required": 20, "text": "Targets #2, #4", "effect": "speed; Hellfire cooldown reduction"},
+    {"skill_key": "blaze", "rank_required": 20, "text": "Targets #3, #4, #5", "effect": "delayed damage and cooldown support"},
+    {"skill_key": "wish_of_concentration", "rank_required": 20, "text": "Targets #2, #4, #5", "effect": "Attack and cooldown reduction"}
+  ],
+  "stigma": {
+    "slots": [
+      {"region": "global", "slot": 1, "unlock_level": 22},
+      {"region": "global", "slot": 2, "unlock_level": 27},
+      {"region": "global", "slot": 3, "unlock_level": 32},
+      {"region": "global", "slot": 4, "unlock_level": 37},
+      {"region": "kr", "slot": 6, "unlock_level": 50, "note": "KR total 6; slot 5 level and slots 1-4 assumed same as global, unverified"}
+    ],
+    "level_cap": {"global": 20, "kr": 25},
+    "upgrade_costs": [
+      {"levels": "1-5", "cost_each": 1, "currency": "stigma points"},
+      {"levels": "6-10", "cost_each": 2, "currency": "stigma points"},
+      {"levels": "11-15", "cost_each": 4, "currency": "stigma points"},
+      {"levels": "16-20", "cost_each": 8, "currency": "stigma points"},
+      {"levels": "21-25", "cost_each": null, "currency": "Advanced Stigma Shards", "note": "KR only; per-level price not found"}
+    ],
+    "total_to_20": 75,
+    "set_bonuses": null,
+    "recommended": [
+      {"skill_key": "element_enhancement", "reason": "Primary buff, +20% Fire/Water Attack, covers both kit halves", "source": "expcarry / mmo-codex / metabot"},
+      {"skill_key": "fire_wall", "reason": "Embers DoT, strong vs moving targets, AoE", "source": "expcarry / mmo-codex / metabot"},
+      {"skill_key": "cold_storm", "reason": "Frostbite scaling, 30% Root at lvl 10", "source": "mmo-codex"},
+      {"skill_key": "delayed_explosion", "reason": "Burst window, +15% damage taken on target (Inven KR disagrees)", "source": "expcarry / mmo-codex"},
+      {"skill_key": "glacial_smite", "reason": "Largest single-hit coefficient, +250% ATK up to 4 targets", "source": "metabot"},
+      {"skill_key": "divine_burst", "reason": "Boss stagger gauge break", "source": "metabot"},
+      {"skill_key": "steel_barrier", "reason": "16-20% max HP shield, survival slot", "source": "mmo-codex"},
+      {"skill_key": "arctic_armor", "reason": "+20% PvE damage tolerance", "source": "mmo-codex"}
+    ]
+  }
+}

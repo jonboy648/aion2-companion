@@ -1,0 +1,27 @@
+# NCSOFT art: never published (site hotlinks the official CDN)
+assets/
+app/aion2c/data/classes/*/icons/
+app/aion2c/data/icons/
+research/tmp/
+*.png
+*.webp
+!app/aion2c/ui/assets/*.png
+
+# tooling / local
+.playwright-mcp/
+.ruff_cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+dist/
+.wrangler/
+.env
+.env.*
+*.bak
+
+.firecrawl/
+web/dist_verify/
+web/shots/
+web/.shots-ui-tools/
+.claude/

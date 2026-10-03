@@ -1,0 +1,331 @@
+{
+ "build": {
+  "name": "DarthThot",
+  "region": "global",
+  "level": 44,
+  "skill_ranks": {
+   "flame-arrow": 10,
+   "ice-chain": 5,
+   "firestorm": 9,
+   "bittercold-wind": 7,
+   "blaze": 9,
+   "flame-scattershot": 10,
+   "frost": 7,
+   "winters-shackles": 9,
+   "frost-burst": 2,
+   "wish-of-concentration": 9,
+   "hellfire": 5,
+   "defiance": 5,
+   "fire-mark": 6,
+   "robe-of-earth": 6,
+   "cold-snap-15730000": 2,
+   "robe-of-flame": 8,
+   "absorb-essence": 1,
+   "grace-of-resistance": 2,
+   "robe-of-cold": 5,
+   "grace-of-enhancement": 6,
+   "revitalization-contract": 1,
+   "vitality-evaporation": 1,
+   "divine-burst": 2,
+   "steel-barrier": 1,
+   "element-enhancement": 7,
+   "cold-storm": 4,
+   "fire-wall": 2,
+   "delayed-explosion": 2
+  },
+  "stigmas": [
+   "element-enhancement",
+   "cold-storm",
+   "fire-wall",
+   "delayed-explosion"
+  ],
+  "specs": {},
+  "stats": {
+   "attack": 1000,
+   "attack_increase_pct": 1.6,
+   "weapon_dmg_pct": 0,
+   "dmg_boost_pct": 0,
+   "pve_dmg_pct": 0,
+   "boss_dmg_pct": 0,
+   "crit_chance_pct": 2.8,
+   "crit_dmg_pct": 50,
+   "smite_pct": 0,
+   "combat_speed_pct": 3.8,
+   "cdr_pct": 0.1,
+   "max_mp": 2000,
+   "mp_regen_per_s": 20,
+   "target_defense": 0,
+   "penetration": 0
+  },
+  "show_kr": false,
+  "daevanion_nodes": [
+   4831,
+   4835,
+   4836,
+   4839,
+   4845,
+   4847,
+   4848,
+   4850,
+   4852,
+   4853,
+   4856,
+   4857,
+   4862,
+   4864,
+   4866,
+   4867,
+   4868,
+   4869,
+   4872,
+   4873,
+   4874,
+   4877,
+   4881,
+   4883,
+   4884,
+   4886,
+   4888,
+   4892,
+   4893,
+   4897,
+   4898,
+   4899,
+   4900,
+   4902,
+   4904,
+   4905,
+   4908,
+   4910,
+   4911,
+   4914,
+   4915,
+   4916,
+   4919,
+   5018,
+   5034,
+   5035,
+   5039,
+   5044,
+   5045,
+   5047,
+   5049,
+   5054,
+   5055,
+   5061,
+   5166,
+   27332,
+   27333,
+   27337,
+   27338,
+   27341,
+   27344,
+   27349,
+   27354,
+   27355,
+   27359,
+   27361,
+   27363,
+   27365,
+   27380,
+   27385,
+   27387,
+   27396,
+   27401,
+   27406,
+   27407,
+   27409,
+   27412,
+   27413,
+   27417,
+   27418,
+   27525,
+   27546,
+   27548,
+   27550
+  ],
+  "skill_points": null,
+  "stigma_points": null,
+  "class_key": "sorcerer"
+ },
+ "notes": [
+  "Stats not used by the simulator: Evasion increase +0.1%; Block increase +0.1%; Critical Hit Resist increase +0.1%; Defense increase +3.7%; Perfect Chance +3.7%; Accuracy increase +2%; Evasion increase +2%; Endurance Penetration +0.1%; HP increase +0.3%; Regeneration +0.3%; Double Resist +3.8%; Perfect Resist +0.2%; Regeneration Penetration +2.8%; MP Cost -0.1%; Double Chance +0.1%; MP increase +0.3%; Endurance +0.3%; Move Speed +1.1%; Block increase +1.1%.",
+  "Attack, crit damage and other gear stats are not in the public armory; they keep your entered values.",
+  "Imported level 44, 28 skill ranks, 4 stigmas, 84/84 Daevanion nodes."
+ ],
+ "profile": {
+  "name": "DarthThot",
+  "server": "Triniel",
+  "level": 44,
+  "combat_power": 33721,
+  "class_name": "Sorcerer",
+  "class_key": "sorcerer",
+  "item_level": 707,
+  "profile_image": "https://profileimg.plaync.com/game_profile_images/aion2global/images?gameServerKey=2103&charKey=591941876022790346",
+  "race": "Asmodians"
+ },
+ "gear": [
+  {
+   "slot": "MainHand",
+   "name": "Liberator Spellbook",
+   "enchant": 10,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "SubHand",
+   "name": "Liberator Guard",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Torso",
+   "name": "Liberator Breastplate",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Pants",
+   "name": "Liberator Greaves",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Helmet",
+   "name": "Faith Helm",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Shoulder",
+   "name": "Avenger Pauldrons",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Gloves",
+   "name": "Liberator Gloves",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Boots",
+   "name": "Liberator Boots",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Cape",
+   "name": "Liberator Cloak",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Belt",
+   "name": "Noble Belt",
+   "enchant": 2,
+   "exceed": 0,
+   "grade": "Rare"
+  },
+  {
+   "slot": "Necklace",
+   "name": "Silent Necklace",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Earring2",
+   "name": "Brave Warrior Earrings",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Earring1",
+   "name": "Liberator Earrings",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Ring2",
+   "name": "Incomplete Test Subject Ring",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Ring1",
+   "name": "Avenger Ring",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Legend"
+  },
+  {
+   "slot": "Bracelet1",
+   "name": "Old Mercenary Commander Bracelet",
+   "enchant": 0,
+   "exceed": 0,
+   "grade": "Common"
+  },
+  {
+   "slot": "Amulet",
+   "name": "Revelation Amulet",
+   "enchant": 10,
+   "exceed": 0,
+   "grade": "Rare"
+  }
+ ],
+ "stigmas": [
+  {
+   "key": "element-enhancement",
+   "name": "Element Enhancement",
+   "rank": 7
+  },
+  {
+   "key": "cold-storm",
+   "name": "Cold Storm",
+   "rank": 4
+  },
+  {
+   "key": "fire-wall",
+   "name": "Fire Wall",
+   "rank": 2
+  },
+  {
+   "key": "delayed-explosion",
+   "name": "Delayed Explosion",
+   "rank": 2
+  }
+ ],
+ "daevanion_summary": {
+  "boards": [
+   {
+    "board": "Nezekan",
+    "open": 68,
+    "matched": 68
+   },
+   {
+    "board": "Vaizel",
+    "open": 15,
+    "matched": 15
+   },
+   {
+    "board": "Triniel",
+    "open": 1,
+    "matched": 1
+   }
+  ],
+  "open": 84,
+  "matched": 84
+ }
+}

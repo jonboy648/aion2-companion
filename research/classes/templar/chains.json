@@ -1,0 +1,116 @@
+{
+ "_comment": "data_contract.md section 2 for the Templar. 'confirmed' = client Chain panel or explicit description text; 'estimated' = inferred from spec text. Debilitating Smash is also a spec proc of Shield Smite (50% on hit) but is a normal castable skill, so it is not linked as a child (that would make the app treat it as never castable).",
+ "links": [
+  {
+   "parent": 12010000,
+   "child": 12020000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Vicious Strike > Decisive Strike, 1/3 2/3 in the aion2.app Chain panel"
+  },
+  {
+   "parent": 12020000,
+   "child": 12030000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Decisive Strike > Desperate Strike, 2/3 3/3 (its own page also shows 1/2 2/2)"
+  },
+  {
+   "parent": 12040000,
+   "child": 12060000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Pummel > Punishing Strike, 1/2 2/2 in the Chain panel"
+  },
+  {
+   "parent": 12010000,
+   "child": 12440000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Vicious Strike spec rank 16: 'Adds [Threatening Blow] Chain Skill' (gegebase calls it the chain finisher; step position unknown)"
+  },
+  {
+   "parent": 12260000,
+   "child": 12330000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Defiance spec rank 8: 'Adds [Capture] Chain Skill'; Capture cooldown 120 -> 42 s over ranks"
+  },
+  {
+   "parent": 12090000,
+   "child": "Punishment - Level 1",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill (Metaroad id-less row)"
+  },
+  {
+   "parent": 12090000,
+   "child": "Punishment - Level 2",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill (Metaroad id-less row)"
+  },
+  {
+   "parent": 12090000,
+   "child": "Punishment - Max",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill (Metaroad id-less row)"
+  },
+  {
+   "parent": 12430000,
+   "child": "Shield Rush - Max",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "Shield Rush spec rank 8 'Changes to Charge Skill'; Metaroad id-less row"
+  },
+  {
+   "parent": 12070000,
+   "child": 12240000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Doom Shield 'Triggers [Judgment] for 3s'"
+  },
+  {
+   "parent": 12100000,
+   "child": 12240000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Shield Smite 'Triggers [Judgment] for 2s'"
+  },
+  {
+   "parent": 12430000,
+   "child": 12240000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Shield Rush 'Triggers [Judgment] for 2s'"
+  },
+  {
+   "parent": 12350000,
+   "child": 12240000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Warding Strike 'Triggers [Judgment] for 2s'"
+  },
+  {
+   "parent": 12070000,
+   "child": 12300000,
+   "kind": "condition",
+   "confidence": "estimated",
+   "note": "Annihilate needs a Stun/Knockdown target; Doom Shield knocks down and spec rank 5 resets Annihilate (text-based)"
+  },
+  {
+   "parent": 12100000,
+   "child": 12300000,
+   "kind": "condition",
+   "confidence": "estimated",
+   "note": "Annihilate needs a Stun/Knockdown target; Shield Smite stuns (text-based)"
+  }
+ ],
+ "unlinked": [
+  12420000
+ ],
+ "stagger_condition_only": [
+  12340000
+ ]
+}

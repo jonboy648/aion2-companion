@@ -1,0 +1,3390 @@
+{
+  "nodeList": [
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660010,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660011,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "PvP Damage Tolerance +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Tolerance",
+      "nodeId": 660008,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660009,
+      "open": 0,
+      "row": 1,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660014,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Damage Boost +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Boost",
+      "nodeId": 660015,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660012,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660013,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660002,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660003,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Damage Tolerance +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Tolerance",
+      "nodeId": 660001,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660006,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660007,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660004,
+      "open": 0,
+      "row": 1,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660005,
+      "open": 0,
+      "row": 1,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660026,
+      "open": 0,
+      "row": 2,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660027,
+      "open": 0,
+      "row": 2,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660024,
+      "open": 0,
+      "row": 2,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660025,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660030,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660031,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660028,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660029,
+      "open": 0,
+      "row": 2,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660018,
+      "open": 0,
+      "row": 2,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660019,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660016,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660017,
+      "open": 0,
+      "row": 2,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660022,
+      "open": 0,
+      "row": 2,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660023,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660020,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660021,
+      "open": 0,
+      "row": 2,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "HP +100"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max HP",
+      "nodeId": 660042,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660043,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660040,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660041,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660046,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660047,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660044,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660045,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660034,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660035,
+      "open": 0,
+      "row": 3,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660032,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660033,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "MP +50"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max MP",
+      "nodeId": 660038,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660039,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660036,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660037,
+      "open": 0,
+      "row": 3,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660058,
+      "open": 0,
+      "row": 4,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660059,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660056,
+      "open": 0,
+      "row": 4,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660057,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660062,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660063,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660060,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660061,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660050,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660051,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660048,
+      "open": 0,
+      "row": 4,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660049,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660054,
+      "open": 0,
+      "row": 4,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660055,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660052,
+      "open": 0,
+      "row": 4,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660053,
+      "open": 0,
+      "row": 4,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660074,
+      "open": 0,
+      "row": 5,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660075,
+      "open": 0,
+      "row": 5,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660072,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660073,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660078,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660079,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660076,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660077,
+      "open": 0,
+      "row": 6,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660066,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660067,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660064,
+      "open": 0,
+      "row": 5,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660065,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660070,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660071,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660068,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660069,
+      "open": 0,
+      "row": 5,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660090,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660091,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660088,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660089,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660094,
+      "open": 0,
+      "row": 7,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660095,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660092,
+      "open": 0,
+      "row": 7,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660093,
+      "open": 0,
+      "row": 7,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660082,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660083,
+      "open": 0,
+      "row": 6,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660080,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660081,
+      "open": 0,
+      "row": 6,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660086,
+      "open": 0,
+      "row": 6,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660087,
+      "open": 0,
+      "row": 6,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660084,
+      "open": 0,
+      "row": 6,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660085,
+      "open": 0,
+      "row": 6,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Damage Boost +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Boost",
+      "nodeId": 660106,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660107,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660104,
+      "open": 0,
+      "row": 7,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660105,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660110,
+      "open": 0,
+      "row": 8,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660111,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660108,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660109,
+      "open": 0,
+      "row": 8,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "HP +100"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max HP",
+      "nodeId": 660098,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660099,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660096,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660097,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "MP +50"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max MP",
+      "nodeId": 660102,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660103,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660100,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660101,
+      "open": 0,
+      "row": 7,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660122,
+      "open": 0,
+      "row": 9,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660123,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Damage Boost +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Boost",
+      "nodeId": 660120,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660121,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660126,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660127,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "HP +100"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max HP",
+      "nodeId": 660124,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660125,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660114,
+      "open": 0,
+      "row": 8,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660115,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660112,
+      "open": 0,
+      "row": 8,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": ""
+        }
+      ],
+      "grade": "None",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Start_Sprite.png",
+      "name": "Azphel - Start",
+      "nodeId": 660113,
+      "open": 0,
+      "row": 8,
+      "type": "Start"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660118,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660119,
+      "open": 0,
+      "row": 8,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660116,
+      "open": 0,
+      "row": 8,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660117,
+      "open": 0,
+      "row": 8,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660138,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660139,
+      "open": 0,
+      "row": 10,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660136,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660137,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660142,
+      "open": 0,
+      "row": 10,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660143,
+      "open": 0,
+      "row": 10,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660140,
+      "open": 0,
+      "row": 10,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660141,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660130,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660131,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "MP +50"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max MP",
+      "nodeId": 660128,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660129,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660134,
+      "open": 0,
+      "row": 9,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660135,
+      "open": 0,
+      "row": 9,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660132,
+      "open": 0,
+      "row": 9,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660133,
+      "open": 0,
+      "row": 9,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660154,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660155,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660152,
+      "open": 0,
+      "row": 11,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660153,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660158,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660159,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660156,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660157,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660146,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660147,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660144,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660145,
+      "open": 0,
+      "row": 10,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660150,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660151,
+      "open": 0,
+      "row": 11,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660148,
+      "open": 0,
+      "row": 10,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660149,
+      "open": 0,
+      "row": 10,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660170,
+      "open": 0,
+      "row": 12,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660171,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660168,
+      "open": 0,
+      "row": 12,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660169,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660174,
+      "open": 0,
+      "row": 12,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660175,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660172,
+      "open": 0,
+      "row": 12,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660173,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660162,
+      "open": 0,
+      "row": 11,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660163,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660160,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660161,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660166,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660167,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660164,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660165,
+      "open": 0,
+      "row": 11,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660186,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660187,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "MP +50"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max MP",
+      "nodeId": 660184,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660185,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660190,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660191,
+      "open": 0,
+      "row": 13,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "HP +100"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "Max HP",
+      "nodeId": 660188,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660189,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660178,
+      "open": 0,
+      "row": 12,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660179,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660176,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660177,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660182,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660183,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660180,
+      "open": 0,
+      "row": 12,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660181,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660202,
+      "open": 0,
+      "row": 14,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660203,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660200,
+      "open": 0,
+      "row": 14,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660201,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660206,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660207,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660204,
+      "open": 0,
+      "row": 14,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660205,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660194,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        },
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Accuracy, PvP Evasion",
+      "nodeId": 660195,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660192,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660193,
+      "open": 0,
+      "row": 13,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660198,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660199,
+      "open": 0,
+      "row": 14,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660196,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660197,
+      "open": 0,
+      "row": 14,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 8,
+      "effectList": [
+        {
+          "desc": "PvP Damage Tolerance +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Tolerance",
+      "nodeId": 660218,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 9,
+      "effectList": [
+        {
+          "desc": "PvP Accuracy +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Accuracy",
+      "nodeId": 660219,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 6,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        },
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Critical Hit, PvP Critical Hit Resist",
+      "nodeId": 660216,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 7,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660217,
+      "open": 0,
+      "row": 15,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 12,
+      "effectList": [
+        {
+          "desc": "Status Effect Chance +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Chance",
+      "nodeId": 660222,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Defense",
+      "nodeId": 660223,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 10,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        },
+        {
+          "desc": "PvP Defense +30"
+        }
+      ],
+      "grade": "Rare",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Rare_Sprite.png",
+      "name": "PvP Attack, PvP Defense",
+      "nodeId": 660220,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 11,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660221,
+      "open": 0,
+      "row": 15,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit",
+      "nodeId": 660210,
+      "open": 0,
+      "row": 14,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 1,
+      "effectList": [
+        {
+          "desc": "PvP Damage Boost +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Boost",
+      "nodeId": 660211,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 13,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660208,
+      "open": 0,
+      "row": 14,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [],
+      "grade": "None",
+      "icon": "",
+      "name": "",
+      "nodeId": 660209,
+      "open": 0,
+      "row": 14,
+      "type": "None"
+    },
+    {
+      "boardId": 66,
+      "col": 4,
+      "effectList": [
+        {
+          "desc": "Status Effect Resist +1%"
+        }
+      ],
+      "grade": "Legend",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Legend_Sprite.png",
+      "name": "Status Effect Resist",
+      "nodeId": 660214,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 5,
+      "effectList": [
+        {
+          "desc": "PvP Evasion +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Evasion",
+      "nodeId": 660215,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 2,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660212,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 3,
+      "effectList": [
+        {
+          "desc": "PvP Critical Hit Resist +5"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Critical Hit Resist",
+      "nodeId": 660213,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 14,
+      "effectList": [
+        {
+          "desc": "PvP Attack +3"
+        }
+      ],
+      "grade": "Common",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Common_Sprite.png",
+      "name": "PvP Attack",
+      "nodeId": 660224,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    },
+    {
+      "boardId": 66,
+      "col": 15,
+      "effectList": [
+        {
+          "desc": "PvP Damage Tolerance +1.5%"
+        }
+      ],
+      "grade": "Unique",
+      "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_FWindow_Daevanion_Node_Unique_Sprite.png",
+      "name": "PvP Damage Tolerance",
+      "nodeId": 660225,
+      "open": 0,
+      "row": 15,
+      "type": "Stat"
+    }
+  ],
+  "openSkillEffectList": [],
+  "openStatEffectList": []
+}

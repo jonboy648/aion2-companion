@@ -1,0 +1,48 @@
+[
+ {
+  "key": "inven-s30-boss",
+  "source": "https://www.inven.co.kr/board/aion2/6449/24247",
+  "scenario_key": "boss_180",
+  "priority": [
+   "swift-contract",
+   "illusive-clone",
+   "savage-fang",
+   "triniels-dagger",
+   "storm-rampage",
+   "insignia-explosion",
+   "heart-gore",
+   "quick-slice"
+  ],
+  "note": "Inven Sep 30 guide (opinion, via D:/Aion2/research/tmp/classes.json): opener Swift Contract > Illusive Clone > Savage Fang > Triniel's Dagger (Dagger only trims cooldowns already running), then hold Quick Slice + macro with the Storm Rampage key in stagger windows. Heart Gore fires itself on crits. Order of the last four is a sustained-priority guess, not stated in the source."
+ },
+ {
+  "key": "aion2-assassin-guide-boss",
+  "source": "https://aion2-assassin-guide.onrender.com/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "illusive-clone",
+   "swift-contract",
+   "savage-fang",
+   "triniels-dagger",
+   "heart-gore",
+   "quick-slice",
+   "insignia-explosion",
+   "savage-roar",
+   "storm-rampage"
+  ],
+  "note": "Opener \"Clone + Swift + Fang -> Triniel's Dagger -> rear core chain\" (fetched 2026-10-03). Four attacks in the full buff window: Quick Slice, Heart Gore, Insignia Explosion, Savage Roar. Storm Rampage only as a stagger bridge between Clone cycles. Savage Roar stays on its own manual key, not in the macro. Sustained order after the opener follows that list; exact order not stated."
+ },
+ {
+  "key": "ezg-macro-boss",
+  "source": "https://www.ezg.com/blog/aion-2-assassin-pve-build-skills-stigma-macro-rotation",
+  "scenario_key": "boss_180",
+  "priority": [
+   "swift-contract",
+   "illusive-clone",
+   "shadowstrike",
+   "insignia-explosion",
+   "quick-slice"
+  ],
+  "note": "Search-snippet summary (2026-10-03, not read in full): macro = Shadowstrike, Insignia Explosion, a fourth skill (garbled \"Hardcore\"), Quick Slice; Swift Contract + Illusive Clone as paired buffs. Low confidence."
+ }
+]

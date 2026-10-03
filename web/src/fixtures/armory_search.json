@@ -1,0 +1,20 @@
+{
+ "list": [
+  {
+   "characterId": "SQlrdtb1Tw1yEhS_c-OisaL9MCPPr9kxYIr6S7hx8JM=",
+   "name": "DarthThot",
+   "race": 2,
+   "pcId": 28,
+   "level": 44,
+   "serverId": 2103,
+   "serverName": "Triniel",
+   "region": "nae"
+  }
+ ],
+ "pagination": {
+  "page": 1,
+  "size": 100,
+  "total": 1,
+  "endPage": 1
+ }
+}

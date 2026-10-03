@@ -1,0 +1,42 @@
+[
+ {
+  "key": "gladiator",
+  "name": "Gladiator",
+  "role": "melee_dps"
+ },
+ {
+  "key": "templar",
+  "name": "Templar",
+  "role": "tank"
+ },
+ {
+  "key": "assassin",
+  "name": "Assassin",
+  "role": "melee_dps"
+ },
+ {
+  "key": "ranger",
+  "name": "Ranger",
+  "role": "ranged_dps"
+ },
+ {
+  "key": "sorcerer",
+  "name": "Sorcerer",
+  "role": "ranged_dps"
+ },
+ {
+  "key": "spiritmaster",
+  "name": "Spiritmaster",
+  "role": "support"
+ },
+ {
+  "key": "cleric",
+  "name": "Cleric",
+  "role": "healer"
+ },
+ {
+  "key": "chanter",
+  "name": "Chanter",
+  "role": "support"
+ }
+]

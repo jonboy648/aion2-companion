@@ -1,0 +1,274 @@
+ Templar PvE Guide - AION 2 Wiki | GEGEBASE 
+ GEGEBASE 
+ AION 2
+ AION 2 wiki — classes and skill bars
+ Main Page 
+ Guides 
+ Basics 
+ Beginners Guide 
+ Progression 
+ Leveling & Gearing 
+ Daevanion Boards 
+ Gear Enhancement 
+ Gathering 
+ Empyrean Traces 
+ Pets 
+ Farming 
+ Kinah Farming 
+ Events 
+ Shugo Festival 
+ Classes 
+ Gladiator 
+ Gladiator PvE Guide 
+ Templar 
+ Templar PvE Guide 
+ Assassin 
+ Assassin PvE Guide 
+ Ranger 
+ Ranger PvE Guide 
+ Sorcerer 
+ Sorcerer PvE Guide 
+ Elementalist 
+ Elementalist PvE Guide 
+ Cleric 
+ Cleric PvE Guide 
+ Chanter 
+ Chanter PvE Guide 
+ Class Tier List 
+ Items 
+ Pets 
+ Skills 
+ Character Builder 
+ Daevanion Planner 
+ Interactive map 
+ GEGEBASE / AION 2 
+ Ask us … 
+ Templar PvE Guide
+ article 
+ Contents 
+ 01 Overview
+ The Templar is AION 2's dedicated shield tank. Unlike Gladiator (bruiser/DPS), Templar's primary job is: keep the boss focused on you while reducing incoming damage and protecting the party .
+ September 2026 matter because Templar received a major rework on August 26 , then further PvE balance on September 2 and September 4 . Pre-September guides should not be copied blindly.
+ Name note: Will to Survive → Will to Survive (Survival Willpower) . Threatening Blow is the Vicious Strike Spec 5 chain finisher (no standalone wiki page). Community “Single-Target Taunt” → Taunt . “AoE Taunt” and “Avoiding Strike” appear in KR community write-ups but have no dedicated EN wiki pages yet — use Taunt + pack tools like Grapple / Insulting Roar , and defensive stigmas such as Doom Shield / Second Skin / Nezekan's Shield as the closest documented options.
+ A good Templar must: maintain Enmity, control boss facing, Block attacks, pre-cast defensives, manage MP, use Shield skills without killing uptime, and protect the party when needed. A weak DPS can be carried; a tank who loses the boss can wipe the group.
+ Strengths 
+ Excellent survivability (Block, Resistance, Tolerance, shields, defensives)
+ Strong Enmity generation on core attacks
+ Party protection utility beyond self-mitigation
+ Tanking priority 
+ Survivability > Enmity stability > DPS — do not build Templar like Gladiator.
+ 02 Current September 2026 Meta
+ August 26 — major class adjustment 
+ September 2 — attack-chain PvE damage reshuffle 
+ Vicious Strike chain PvE damage +30%
+ Judgment PvE damage +15%
+ Punishment PvE damage +20%
+ Pummel PvE damage −10%; Punishing Strike −20%
+ Vicious Strike Spec 4 temporarily reduced Punishment CD by 2s
+ September 4 — current rotation wiring 
+ Vicious Strike chain PvE damage +20%; Spec 4 now reduces Warding Strike CD
+ Pummel / Punishing Strike Spec 4 now reduces Punishment CD
+ Punishment Executor 10s → 20s; Punishment PvE damage −10%
+ Judgment PvE damage +5%
+ Warding Strike cooldown 25s → 30s
+ Shield Smite became mobile by default; animation improved
+ Modern Templar is interconnected: attack chains feed defensive and Punishment cooldowns. Learn Judgment + Vicious Strike + Shield Smite with Punishment / Executor first.
+ 03 Core PvE Skills
+ Skill Role Specs / Notes 
+ Judgment Main DPS / Enmity / rotation engine S — Specs 3+4+5; Spec 5 removes cooldown 
+ Vicious Strike Primary attack chain / Enmity / WS CDR Chain: Vicious Strike → Decisive Strike → Desperate Strike (+ Threatening Blow via Spec 5). Specs 3+4+5 
+ Pummel Secondary chain / Punishment CDR Chain: Pummel → Punishing Strike . Specs ~3+4+5 (Spec 1/2 if MP/HP sustain needed) 
+ Punishment Burst / Enmity / Executor S — Specs 3+4+5; Executor now 20s; Spec 4 mobile 
+ Shield Smite Shield attack / MP / Judgment loop S — Specs 2+4; Spec 2: no MP cost + 200 MP on hit 
+ Warding Strike Major defensive cooldown 30s CD; reduce via Vicious Strike Spec 4 
+ Flash Rampage Burst / Enmity / Stagger Use on stunned/controlled targets 
+ Annihilate Finisher / burst Specs ~3+4; never over Enmity/defense 
+ Defiance Status cleanse / Strong immunity Save for CC mechanics 
+ Poach Utility / Enmity 15s CD; encounter-dependent 
+ Debilitating Smash Debuff / utility Aug 12 Spec 3 heal-reduction 50→60% — mostly PvP 
+ Vicious Strike Specs (post–Sep 4) 
+ 3: more damage vs fewer targets (bosses)
+ 4: reduces Warding Strike cooldown
+ 5: adds Threatening Blow to the chain
+ Pummel Specs 
+ 1: lower MP cost — if starved
+ 2: Punishing Strike restores HP — sustain
+ 3: fewer-target damage — default boss
+ 4: reduces Punishment cooldown
+ 5: adds another chain attack
+ Punishment Specs 
+ 3: Skill Speed +30%
+ 4: mobile skill — reposition while attacking
+ 5: ignores Block/Evasion + guaranteed Crit
+ Judgment + Shield Smite loop: Shield Smite → Judgment → attack chain → Shield Smite → Judgment . Treat them as one engine, not separate buttons.
+ 04 Passive Priority
+ Prioritize Block, HP, Damage Resistance, Damage Tolerance, defensive stability, Enmity, and resource efficiency.
+ Ironclad Defense — high-value defensive passive
+ Will to Survive (Survival Willpower) — high-value survival passive
+ Then HP-related and other defensive passives
+ 05 Skill Leveling Priority
+ 1. Judgment 
+ 2. Shield Smite 
+ 3. Punishment 
+ 4. Vicious Strike 
+ 5. Pummel 
+ 6. Warding Strike 
+ 7. Flash Rampage 
+ 8. Annihilate 
+ 9. Defensive and utility skills
+ Recommended endgame specialization setup 
+ Skill Recommended Specs 
+ Judgment 3 + 4 + 5 
+ Vicious Strike chain 3 + 4 + 5 
+ Pummel / Punishing Strike 3 + 4 + 5 
+ Punishment 3 + 4 + 5 
+ Shield Smite 2 + 4 
+ Annihilate 3 + 4 
+ Warding Strike Defensive setup 
+ Defiance Utility 
+ Debilitating Smash Encounter-dependent 
+ KR post-August reference core: Judgment 345 / Vicious Strike 345 / Shield Smite 24, with Pummel chain ~345. September 4 rewired Spec 4 targets — treat this as the best September starting point, not a permanently solved meta.
+ 06 Stigma Build
+ Templar Stigmas cover Enmity, mitigation, and emergency survival — not personal DPS.
+ Stigma Priority Notes 
+ Taunt S Single-target Taunt — first high-level investment 
+ Shield of Protection S Frontal Block mitigation — standard dungeon defense 
+ Punishment A / Core Keep Executor uptime in the build 
+ Second Skin A +30% PvE Damage Tolerance (10s) at base; stronger at high levels 
+ Nezekan's Shield Situational Strong shield (~60% Max HP reported at Lv.20 in KR tests) 
+ Doom Shield A / Situational Closest documented defensive stigma to community “Avoiding Strike” 
+ Insulting Roar Utility Enmity Boost self-buff — useful on pulls 
+ Standard dungeon tank 
+ S: Taunt , Shield of Protection 
+ A: Punishment , Doom Shield / Second Skin 
+ Hard bosses: swap in Second Skin or Nezekan's Shield 
+ Community guides also list a separate “AoE Taunt” stigma. The current EN database only documents Taunt . For packs, combine Taunt with Grapple , Assault Fury , and Insulting Roar .
+ 07 Tank Rotation
+ Templar uses a priority system , not a strict DPS script.
+ 1. Boss control — Taunt when needed
+ 2. Defensives — Warding Strike / Shield of Protection / Second Skin 
+ 3. Judgment 
+ 4. Punishment — maintain Executor
+ 5. Vicious Strike chain — damage, Enmity, Warding Strike CDR
+ 6. Shield Smite — MP + Judgment engine
+ Single-boss opener 
+ Taunt → Punishment → Vicious Strike chain → Judgment → Shield Smite → Pummel → Punishing Strike → Judgment → repeat
+ Establish Enmity before DPS burst. If the boss opens with a killer attack, insert a defensive cooldown early — a dead tank has zero Enmity.
+ AoE pull 
+ AoE threat / Taunt → position pack → Punishment → Vicious Strike chain → Judgment → Shield Smite → AoE skills → re-Taunt as needed
+ Keep mobs stacked for Sorcerer / Spiritmaster / Gladiator / Ranger AoE.
+ Beginner rotation 
+ Taunt → Punishment → Vicious Strike → Judgment → Shield Smite → Pummel → Punishing Strike → Judgment → repeat; Warding Strike for big hits; Defiance for CC
+ Advanced (post–Sep 4 CDR loop) 
+ Punishment → Vicious Strike chain → Judgment → Shield Smite → Judgment → Pummel / Punishing Strike (reduce Punishment) → Punishment → Vicious Strike chain (reduce Warding Strike) → defensive window → repeat
+ Cancel style 
+ Standard KR configuration: Vicious Strike chain → Judgment cancel . Learn this first. A Pummel-heavy sustain variant exists but was considered weaker for max performance in August testing; re-test after September chain buffs.
+ Defensive layers — do not stack all at once 
+ Normal damage: Shield of Protection 
+ Strong boss attack: Warding Strike 
+ Extreme mechanic: Second Skin / Nezekan's Shield 
+ CC mechanic: Defiance 
+ Boss positioning 
+ Boss faces Templar. Party stays behind / outside frontal cones. Avoid spinning the boss through the party. Use mobile Shield Smite and Punishment Spec 4 to adjust without stopping the rotation.
+ MP management 
+ KR testing reported cancel rotations can starve MP after ~3 minutes. Shield Smite Spec 2 (no cost + 200 MP on hit) is critical. Also use consumables, cut filler, and don't dump skills into dying adds.
+ Combat Speed 
+ A KR endgame test suggested ~ 126%+ Combat Speed as a practical Vicious Strike chain benchmark with a 15% battlefield buff. Treat as a testing benchmark, not an official hard cap.
+ 08 Stats, Stones, Arcana & Gear
+ Tier Stats 
+ Primary tank Block · Damage Resistance · Damage Tolerance · Max HP · Enmity 
+ Offensive secondary Attack · Weapon Damage · Damage Amplification · Accuracy · Critical Hit 
+ Block is a core defensive stat — not optional. HP matters for EHP and HP-scaling shields, but do not pure-stack HP over Block/Resistance. Damage Tolerance helps unblockable mechanics (see Second Skin ). Accuracy supports reliable Enmity once defenses are met.
+ Magic Stones (main tank) 
+ Block
+ → HP
+ → Damage Resistance
+ → Accuracy
+ → Attack / Damage
+ Arcana: Block, Damage Resistance, HP, Damage Tolerance, Enmity, Accuracy first. Offensive Arcana only after survival is comfortable.
+ Weapon + Shield 
+ Longsword: Weapon Damage → Attack → Accuracy → Damage Boost → defensive options
+ Shield: Block → defensive stats → HP → Damage Resistance → tank bonuses
+ Gear progression 
+ Early: Weapon + Shield enhancement → Block → HP → Accuracy
+ Mid: Block + Damage Resistance + HP + Tolerance + Accuracy
+ End: balanced Block / Resistance / Tolerance / HP with enough Accuracy + Attack for threat
+ 09 Daevanion
+ 1. Defensive skill levels
+ 2. Block
+ 3. HP
+ 4. Damage Resistance / Damage Tolerance
+ 5. Enmity
+ 6. Accuracy
+ 7. Attack / Damage
+ Skill-level node priority: Judgment , Punishment , Shield Smite , Warding Strike , core attack-chain skills.
+ Publish node priority , not fixed board coordinates — seasonal boards change.
+ 10 Common Mistakes & Playstyles
+ Too much DPS gear — Templar is a tank first
+ Taunt too late — don't wait until DPS already has aggro
+ Spinning the boss — party should not chase
+ Stacking all defensives — layer cooldowns
+ Ignoring MP — rotation can starve
+ Ignoring Shield Smite — it is your MP/Judgment engine
+ Never using Warding Strike — unused defensives = zero mitigation
+ Tank vs DPS Templar 
+ Dungeon / hard PvE: full tank build
+ Solo / farm: more offensive or hybrid is fine
+ 11 September 2026 Balance Summary
+ September 2 
+ Vicious Strike chain +30% PvE; Judgment +15%; Punishment +20%
+ Pummel −10%; Punishing Strike −20%
+ Vicious Strike Spec 4 → Punishment −2s (temporary state)
+ September 4 
+ Vicious Strike chain +20% PvE; Spec 4 → Warding Strike CDR
+ Pummel/Punishing Strike Spec 4 → Punishment CDR
+ Punishment −10% PvE; Executor 10→20s
+ Judgment +5% PvE; Warding Strike 25→30s
+ Shield Smite mobile by default
+ 12 Final PvE Tank Build Checklist
+ Category Priority 
+ Main role Main Tank 
+ Main Enmity / Executor Punishment 
+ Main rotation skill Judgment 
+ Main chain Vicious Strike → Decisive Strike → Desperate Strike → Threatening Blow 
+ Secondary chain Pummel → Punishing Strike 
+ Shield skill Shield Smite 
+ Major defensive Warding Strike 
+ Emergency CC Defiance 
+ Judgment Spec 3 + 4 + 5 
+ Vicious Strike Spec 3 + 4 + 5 
+ Punishment Spec 3 + 4 + 5 
+ Shield Smite Spec 2 + 4 
+ Core Stigma Taunt 
+ Defensive Stigma Shield of Protection 
+ High-end defensive Second Skin / Nezekan's Shield / Doom Shield 
+ Main stat Block 
+ Defensive stats Damage Resistance / Tolerance / HP 
+ Threat Enmity + Accuracy 
+ 13 TL;DR
+ Core systems: Judgment + Vicious Strike chain + Shield Smite, with Punishment/Executor windows.
+ Defense: Warding Strike + Shield of Protection + Second Skin / Nezekan's Shield .
+ Real DPS metric: boss uptime + Enmity uptime + party survival — not personal parse.
+ September 4: Vicious Strike reduces Warding Strike; Pummel/Punishing Strike reduces Punishment — the rotation is deliberately interconnected.
+ Full skill list: Templar · Classes · Skills .
+ Categories : Guides Classes Templar 
+ Contents
+ 01 Overview 
+ 02 Current September 2026 Meta 
+ 03 Core PvE Skills 
+ 04 Passive Priority 
+ 05 Skill Leveling Priority 
+ 06 Stigma Build 
+ 07 Tank Rotation 
+ 08 Stats, Stones, Arcana & Gear 
+ 09 Daevanion 
+ 10 Common Mistakes & Playstyles 
+ 11 September 2026 Balance Summary 
+ 12 Final PvE Tank Build Checklist 
+ 13 TL;DR 
+ Reference data for AION 2 compiled for GEGEBASE. Game assets and names belong to their respective publishers. 
+ Home 
+ Sections 
+ Search 
+ Guides 
+ 

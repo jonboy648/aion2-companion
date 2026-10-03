@@ -1,0 +1,906 @@
+{
+  "korea_only_ids": [11000000, 11030000, 11040000, 11060000, 11090000, 11140000, 11180000, 11210000, 11230000, 11300037, 11310000, 11320000, 11330000, 11350000, 11370000, 11420000, 11440000, 11460000, 11470000],
+ "_comment": "Hand-authored Gladiator sim mechanics. Every Num carries confidence. Keys are validated against built skills at build time. Statuses model timed/conditional effects only; always-on passives (Attack Preparation, Identify Weakness, Impact Hit, Survival Stance...) are NOT statuses because imported gear stats already include them. Sources: aion2.app client dump 2026-09-18 (tokens), Metaroad 2026-10-03, couga54 guide 2026-10-03, Inven Gladiator guide 2026-09-05.",
+ "icon_prefix_aliases": {},
+ "skill_tags": {
+  "dodge": [
+   "manual",
+   "role:mobility"
+  ],
+  "crushing-wave": [
+   "manual",
+   "role:sustain"
+  ],
+  "blade-toss": [
+   "manual"
+  ],
+  "ruinous-blow": [
+   "role:mobility",
+   "role:burst"
+  ],
+  "focused-block": [
+   "manual",
+   "role:defense",
+   "role:sustain"
+  ],
+  "blood-absorption": [
+   "manual",
+   "role:sustain",
+   "role:heal"
+  ],
+  "armor-of-balance": [
+   "manual",
+   "role:defense"
+  ],
+  "intimidating-roar": [
+   "manual",
+   "role:defense"
+  ],
+  "leaping-slam": [
+   "manual",
+   "role:mobility"
+  ],
+  "ankle-slice": [
+   "manual",
+   "role:cc",
+   "role:mobility"
+  ],
+  "rush": [
+   "manual"
+  ],
+  "wrath-wave": [
+   "manual",
+   "role:cc"
+  ],
+  "defiance": [
+   "manual",
+   "role:defense"
+  ],
+  "survival-stance": [
+   "manual",
+   "role:defense"
+  ],
+  "mocking-blade": [
+   "manual",
+   "role:cc",
+   "role:sustain"
+  ],
+  "aerial-snare": [
+   "manual",
+   "role:cc"
+  ],
+  "forced-fall-11370000": [
+   "role:cc"
+  ],
+  "doom-advent": [
+   "manual",
+   "role:cc"
+  ],
+  "wrath-burst": [
+   "role:cc"
+  ],
+  "lifestealing-blade": [
+   "role:sustain",
+   "role:heal"
+  ],
+  "wrathful-strike-11350000": [
+   "manual"
+  ],
+  "rush-strike": [
+   "manual",
+   "role:mobility",
+   "role:cc"
+  ],
+  "tenaciousness": [
+   "manual",
+   "role:defense"
+  ],
+  "wave-armor": [
+   "dot"
+  ],
+  "forced-restraint": [
+   "manual",
+   "role:cc"
+  ],
+  "fracturing-rush": [
+   "manual",
+   "role:cc",
+   "role:mobility"
+  ],
+  "destructive-rush": [
+   "role:cc",
+   "role:mobility"
+  ],
+  "unsheathing-rush": [
+   "role:cc",
+   "role:mobility"
+  ],
+  "assault-strike": [
+   "manual",
+   "role:mobility",
+   "role:cc",
+   "role:defense"
+  ],
+  "survival-stance-11710000": [
+   "role:defense"
+  ],
+  "protection-armor": [
+   "role:defense",
+   "role:heal"
+  ],
+  "blood-absorption-11730000": [
+   "role:sustain",
+   "role:heal"
+  ],
+  "survival-willpower": [
+   "role:defense"
+  ]
+ },
+ "anim_lock": {
+  "default": {
+   "value": 1.0,
+   "confidence": "estimated",
+   "source": "default 1.0 s; client casting_time is 0 for every Gladiator skill; calibrate in app"
+  },
+  "long": {
+   "value": 1.5,
+   "confidence": "estimated",
+   "source": "long animation per guides (\"too slow for bosses\"); calibrate in app"
+  },
+  "long_skills": [
+   "crushing-wave"
+  ]
+ },
+ "element_overrides": {},
+ "kind_overrides": {
+  "wave-attack": "system",
+  "predation": "proc",
+  "destruction": "proc"
+ },
+ "statuses": {
+  "prepare_for_battle": {
+   "key": "prepare_for_battle",
+   "name": "Prepare for Battle",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "Ruinous Blow client token effect_value02:time = 20 s, all ranks (aion2.app client dump 2026-09-18); guide: \"+20% PvE damage for 20s\""
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "client tokens: PvE Damage Boost +20% (also PvP +10%, Critical Hit +100, Status Effect Chance +15%, all rank-independent); the PvE Damage Boost bucket is treated as a final multiplier, which overstates it"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "ruinous-blow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "rage_burst_buff": {
+   "key": "rage_burst_buff",
+   "name": "Rage Burst (damage boost)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Rage Burst client token = 10 s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.1,
+    "confidence": "estimated",
+    "source": "client token: PvE Damage Boost +10% (PvP +5%), rank-independent; spec 20 raises it; bucket treated as a final multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "rage-burst",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "wounded": {
+   "key": "wounded",
+   "name": "Wounded",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Rage Burst client token = 10 s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "Wounded cuts the ENEMY Attack by 10% (client text); no player damage change, so 1.0"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "rage-burst",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "knockdown": {
+   "key": "knockdown",
+   "name": "Knockdown",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Mocking Blade client token = 3 s, guaranteed; Wrath Burst / Forced Fall also 3 s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no extra-damage text; Knockdown only gates Overhead Slam / Aerial Snare (bosses are exempt per guides) and is not a multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "mocking-blade",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "lunge_stance": {
+   "key": "lunge_stance",
+   "name": "Lunge Stance",
+   "on": "self",
+   "duration_s": {
+    "value": 14.5,
+    "confidence": "estimated",
+    "source": "client token: 10 s at rank 1, 14.5 s at rank 10, 20 s at rank 20, 22.5 s at rank 25; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "Combat Speed +20% (client token) is a speed stat the sim cannot take from a status; spec 5 +5% Double Chance, spec 20: 50% chance on Critical Hit to cut all cooldowns by 1 s are not modelled"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "lunge-stance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "zikels_blessing": {
+   "key": "zikels_blessing",
+   "name": "Zikel's Blessing",
+   "on": "self",
+   "duration_s": {
+    "value": 14.5,
+    "confidence": "estimated",
+    "source": "client token: 10 s at rank 1, 14.5 s at rank 10, 20 s at rank 20, 22.5 s at rank 25; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "client token: Attack +20% and Accuracy +100; spec 10 adds PvE Damage Boost +10% / PvP +5%. +20% Attack lives in the Attack bucket, not a final multiplier, so 1.2 overstates it"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "zikels-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "experienced_counterstrike": {
+   "key": "experienced_counterstrike",
+   "name": "Experienced Counterstrike (block buff)",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "client token = 20 s at every rank (aion2.app client dump 2026-09-18); the buff is also given to party members"
+   },
+   "dmg_mult": {
+    "value": 1.09,
+    "confidence": "estimated",
+    "source": "client token PvE Damage Boost: 5.4% rank 1, 9% rank 10, 13% rank 20, 21% rank 40; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks; only on Block, so uptime depends on blocking; does not stack with Templar Fury"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "focused-block",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "murderous_burst_crit": {
+   "key": "murderous_burst_crit",
+   "name": "Murderous Burst (crit damage window)",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "client token = 3 s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "Critical Damage Boost +5.5% rank 1 / +10% rank 10 / +25% rank 40 only multiplies critical hits; the share of crits is not known here"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "murderous-burst",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "wave_armor_dot": {
+   "key": "wave_armor_dot",
+   "name": "Wave Armor (damage over time)",
+   "on": "target",
+   "duration_s": {
+    "value": 14.5,
+    "confidence": "estimated",
+    "source": "client token: 10 s rank 1, 14.5 s rank 10, 20 s rank 20, 22.5 s rank 25; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "DoT around the caster; no multiplier on other skills (spec 10/15 multiply passives x1.5 for the duration, not modelled)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "wave-armor",
+   "tick_ratio_pct": {
+    "value": 34.0,
+    "confidence": "estimated",
+    "source": "Metaroad: \"34% ATK + 207 Damage over Time to up to 4 enemies within 3m for 10s\"; whether 34% is per tick or the total is not stated"
+   },
+   "tick_s": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "tick interval not exposed by any source"
+   }
+  },
+  "blade_toss_debuff": {
+   "key": "blade_toss_debuff",
+   "name": "Blade Toss (defense and heal debuff)",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "client token = 10 s (aion2.app client dump 2026-09-18); -30% Defense, -50% Incoming Heal"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "Defense -30% only changes the defense-subtraction term; magnitude depends on target defense, so no flat multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "blade-toss",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "tenaciousness_immunity": {
+   "key": "tenaciousness_immunity",
+   "name": "Tenaciousness (immunity)",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "client token = 3 s; then +50% PvE / +25% PvP Damage Tolerance for 3 s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "defensive only, no damage effect in text"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "tenaciousness",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "defiance_tenacity": {
+   "key": "defiance_tenacity",
+   "name": "Defiance (Tenacity)",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "client token = 5 s Status Effect Immunity (aion2.app client dump 2026-09-18); spec 12 +2 s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "defensive only, no damage effect in text"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "defiance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "armor_of_balance": {
+   "key": "armor_of_balance",
+   "name": "Armor of Balance (Impact resist)",
+   "on": "self",
+   "duration_s": {
+    "value": 14.5,
+    "confidence": "estimated",
+    "source": "client token: 10 s rank 1, 22.5 s rank 25; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks; Impact-type Resist +50%"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "defensive only, no damage effect in text"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "armor-of-balance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  }
+ },
+ "triggers": [
+  {
+   "status_key": "murderous_burst_crit",
+   "on_element": "none",
+   "chance": 0.2,
+   "source_skill": "murderous-burst",
+   "confidence": "estimated"
+  }
+ ],
+ "rules": {
+  "rending-blow": {
+   "skill_key": "rending-blow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "smashing-blow",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "chain 1/2 in client (aion2.app); costs 120 MP; community \"cancel\": Overhead Slam > Rending Blow cuts Overhead Slam recovery (Inven, not modelled)"
+  },
+  "smashing-blow": {
+   "skill_key": "smashing-blow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "chain 2/2 in client; KR/TW-only per aion2hub"
+  },
+  "keen-strike": {
+   "skill_key": "keen-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "rupture-strike",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "confirmed",
+   "note": "chain 1/3 in client; restores 100 MP (Metaroad text); spec 8 +20% MP restored not modelled"
+  },
+  "rupture-strike": {
+   "skill_key": "rupture-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "wrathful-strike",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "confirmed",
+   "note": "chain 2/3 in client; restores 100 MP (text)"
+  },
+  "wrathful-strike": {
+   "skill_key": "wrathful-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 120.0,
+   "confidence": "confirmed",
+   "note": "chain 3/3 in client; restores 120 MP (text); spec: Keen Strike rank 16 adds Reckless Strike after it (not modelled)"
+  },
+  "reckless-strike": {
+   "skill_key": "reckless-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 150.0,
+   "confidence": "estimated",
+   "note": "restores 150 MP (text); reached only through the Keen Strike rank 16 spec"
+  },
+  "crushing-wave": {
+   "skill_key": "crushing-wave",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "frenzied-wave",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "chain 1/2 in client; costs 250 MP; slow animation per guides"
+  },
+  "frenzied-wave": {
+   "skill_key": "frenzied-wave",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "chain 2/2 in client"
+  },
+  "blade-toss": {
+   "skill_key": "blade-toss",
+   "applies": [
+    "blade_toss_debuff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "blade-dance",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "chain 1/2 in client; Defense -30% and Incoming Heal -50% for 10 s"
+  },
+  "blade-dance": {
+   "skill_key": "blade-dance",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "chain 2/2; Metaroad: max 3 chain attacks, cooldown 1 s"
+  },
+  "overhead-slam": {
+   "skill_key": "overhead-slam",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "upward-strike",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "chain only with the rank-8 spec \"Adds [Upward Strike] Chain Skill\" (the sim ignores specs); needs a Knockdown target except on bosses (client text: 7% chance to trigger vs Incapacitated Immunity, guides: bosses exempt) so no requires"
+  },
+  "upward-strike": {
+   "skill_key": "upward-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "spec-gated chain child of Overhead Slam; 0.5 s cooldown"
+  },
+  "ruinous-blow": {
+   "skill_key": "ruinous-blow",
+   "applies": [
+    "prepare_for_battle"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "grants Prepare for Battle for 20 s on every cast (client text); costs 250 MP; cooldown 45 s"
+  },
+  "rage-burst": {
+   "skill_key": "rage-burst",
+   "applies": [
+    "rage_burst_buff",
+    "wounded"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Wounded 10 s + caster PvE Damage Boost +10% for 10 s; also opens Overhead Slam on the target for 10 s (client text); costs 100 MP"
+  },
+  "lunge-stance": {
+   "skill_key": "lunge-stance",
+   "applies": [
+    "lunge_stance"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Combat Speed +20%; spec 20 cooldown-reduction proc not modelled"
+  },
+  "zikels-blessing": {
+   "skill_key": "zikels-blessing",
+   "applies": [
+    "zikels_blessing"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Attack +20%, Accuracy +100"
+  },
+  "wave-armor": {
+   "skill_key": "wave-armor",
+   "applies": [
+    "wave_armor_dot"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "DoT 34% ATK + 207 for the duration; tick data unknown"
+  },
+  "mocking-blade": {
+   "skill_key": "mocking-blade",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "guaranteed 3 s Knockdown (client text); costs 200 MP"
+  },
+  "wrath-burst": {
+   "skill_key": "wrath-burst",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Defiance chain child; Knockdown 3 s; KR/TW-only per aion2hub"
+  },
+  "forced-fall-11370000": {
+   "skill_key": "forced-fall-11370000",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "needs an Airborne target (Aerial Snare), Knockdown 3 s; KR/TW-only per aion2hub"
+  },
+  "wrath-wave": {
+   "skill_key": "wrath-wave",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "50% Knockdown chance (100% vs NPCs per text); the sim treats bosses as NPCs only if the user says so"
+  },
+  "assault-strike": {
+   "skill_key": "assault-strike",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 0.3,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "30% Knockdown chance; Defense up to +20% by targets hit"
+  },
+  "focused-block": {
+   "skill_key": "focused-block",
+   "applies": [
+    "experienced_counterstrike"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "every Block/Parry feeds Experienced Counterstrike (party buff) per guides; restores MP and Stamina once on Parry (110 at rank 1, 350 at rank 25) not modelled; this rule assumes the passive is learned"
+  },
+  "tenaciousness": {
+   "skill_key": "tenaciousness",
+   "applies": [
+    "tenaciousness_immunity"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "3 s immunity to damage and status effects, then Damage Tolerance up"
+  },
+  "defiance": {
+   "skill_key": "defiance",
+   "applies": [
+    "defiance_tenacity"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "CC break + 5 s Tenacity; cooldown falls 60 s to 21 s over ranks"
+  },
+  "armor-of-balance": {
+   "skill_key": "armor-of-balance",
+   "applies": [
+    "armor_of_balance"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Impact-type Resist +50%"
+  }
+ }
+}

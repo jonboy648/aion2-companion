@@ -1,0 +1,68 @@
+[
+ {
+  "key": "s1-global-boss-couga",
+  "source": "https://couga54.github.io/aion2-guides/en/ranger/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "vaizels-authority",
+   "bow-of-blessing",
+   "supporting-fire",
+   "marking-shot",
+   "deadshot",
+   "griffon-arrow",
+   "gale-arrow",
+   "snare-shot",
+   "burst-arrow",
+   "drill-dart",
+   "tempest-shot",
+   "snipe"
+  ],
+  "note": "Global S1 build (Whelps, checked 2026-10-03, opinion). Buffs by hand (Vaizel + Supporting Fire share one button), Marking Shot then charged Deadshot; macro = Griffon line (Griffon > Snare > Burst, bottom slot = top priority) then Gale line (Gale > Drill Dart > Tempest Shot), Snipe held on LMB. Recast Marking Shot below ~3 s Precision. Real play is two hotbar lines + a macro; this is the flattened order."
+ },
+ {
+  "key": "gegebase-boss-sep4",
+  "source": "https://gegebase.com/games/aion2/ranger_pve_guide",
+  "scenario_key": "boss_180",
+  "priority": [
+   "marking-shot",
+   "deadshot",
+   "burst-arrow",
+   "snipe",
+   "explosive-arrow-14360000",
+   "spiral-arrow",
+   "rapid-fire",
+   "gale-arrow",
+   "drill-dart",
+   "tempest-shot"
+  ],
+  "note": "Burst template and sustained list as written (post Sep 4 patch, opinion): Marking Shot > Deadshot > Burst Arrow > Snipe > Explosive Arrow > Spiral Arrow/Rapid Fire, sustained Snipe chain > Burst > Gale > Drill Dart > Tempest Shot. Source omits Snare Shot, which Burst Arrow and Explosive Arrow need (Slow or Root target); Snipe chain steps appear as Rapid Fire / Spiral Arrow."
+ },
+ {
+  "key": "inven-sep6-boss",
+  "source": "https://www.inven.co.kr/board/aion2/6450/19498",
+  "scenario_key": "boss_180",
+  "priority": [
+   "marking-shot",
+   "gale-arrow",
+   "vaizels-authority",
+   "bow-of-blessing",
+   "deadshot",
+   "supporting-fire",
+   "snipe"
+  ],
+  "note": "KR opener from the Sep 6 Ranger guide as summarised in research/tmp/classes.json: Marking Shot standing, Gale Arrow, Vaizel + Bow of Blessing for burst, hold Snipe + macro + Deadshot, Supporting Fire on cooldown. Macro line contents are in a screenshot and not captured, so only the hand-pressed part is listed."
+ },
+ {
+  "key": "couga-aoe-pack",
+  "source": "https://couga54.github.io/aion2-guides/en/ranger/",
+  "scenario_key": "aoe_pack",
+  "priority": [
+   "explosion-trap",
+   "snare-shot",
+   "arrow-storm",
+   "drill-dart",
+   "tempest-shot"
+  ],
+  "note": "Leveling pack routine (opinion): Explosion Trap at your feet > Snare Shot > Drill Dart + Tempest Shot; Arrow Storm is the guide leveling AoE stigma (\"AoE for packs while leveling\"), placed after Snare Shot by us."
+ }
+]

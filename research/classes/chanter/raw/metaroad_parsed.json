@@ -1,0 +1,1427 @@
+[
+ {
+  "id_attr": "skill-dodge",
+  "name": "Dodge",
+  "meta_head": "Active · 1 variant",
+  "description": "Evade by moving quickly in the desired direction.",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Cooldown": "0.5s"
+  }
+ },
+ {
+  "id_attr": "skill-onslaught",
+  "name": "Onslaught",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 84.21% ATK + 74 per hit (2 hits) damage to up to 4 enemies within 4m and restores 100 MP.",
+  "stats": {
+   "Attack ratio": "84.21%",
+   "Flat": "74",
+   "Hits": "2"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "+20% MP restored",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Absorbs —% HP",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+50% Multi-Hit on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "-1s [Spinning Strike] cooldown on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "Adds [Storm Chain] Chain Skill",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-resonance-crush",
+  "name": "Resonance Crush",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 98.18% ATK + 83 per hit (5 hits) damage to up to 4 enemies within 4m and restores 100 MP.",
+  "stats": {
+   "Attack ratio": "98.18%",
+   "Flat": "83",
+   "Hits": "5"
+  },
+  "specs": [
+   {
+    "unlock_level": null,
+    "text": "+20% MP restored",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Absorbs —% HP",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+50% Multi-Hit on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "-1s [Spinning Strike] cooldown on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Adds [Storm Chain] Chain Skill",
+    "icon": null
+   }
+  ],
+  "dl": {
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-bolt-crush",
+  "name": "Bolt Crush",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 134.8% ATK + 104 damage to up to 4 enemies within 4m and restores 120 MP.",
+  "stats": {
+   "Attack ratio": "134.8%",
+   "Flat": "104"
+  },
+  "specs": [
+   {
+    "unlock_level": null,
+    "text": "+20% MP restored",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Absorbs —% HP",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+50% Multi-Hit on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "-1s [Spinning Strike] cooldown on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Adds [Storm Chain] Chain Skill",
+    "icon": null
+   }
+  ],
+  "dl": {
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-incandescent-blow",
+  "name": "Incandescent Blow",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 228.77% ATK + 160 per hit (2 hits) damage to up to 4 enemies within 4m.\n\n2 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "228.77%",
+   "Flat": "160",
+   "Hits": "2"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "-20% MP consumed",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+200 Block while using skill",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Deals up to 12% more damage when less targets are hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "-200 enemy Accuracy for 3s on landing Bursting Blow",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "Ignores Block and Evasion and lands as Multi-Hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "MP": "120",
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-bursting-blow",
+  "name": "Bursting Blow",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 254.68% ATK + 175 per hit (2 hits) damage to up to 4 enemies within 4m.\n\n2 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "254.68%",
+   "Flat": "175",
+   "Hits": "2"
+  },
+  "specs": [
+   {
+    "unlock_level": null,
+    "text": "-20% MP consumed",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+200 Block while using skill",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Deals up to 12% more damage when less targets are hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "-200 enemy Accuracy for 3s on landing Bursting Blow",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Ignores Block and Evasion and lands as Multi-Hit",
+    "icon": null
+   }
+  ],
+  "dl": {
+   "MP": "120",
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-impactful-crush",
+  "name": "Impactful Crush",
+  "meta_head": "Active · Physic · Attack · Debuff · 26 variants",
+  "description": "Deals 218.4% ATK + 224 damage to a target within 20m. Has a 60% chance to inflict Stun for 3s.\n100% chance to inflict Stun on NPC targets.\n\n[Dark Crush] becomes available for 2s on skill use.\n10 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "218.4%",
+   "Flat": "224"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "Changes to AoE damage",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+1s [Impactful Crush] Stun duration",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Changes to mobile skill",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "+30% Skill Speed",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "+20% [Impactful Crush] Stun Chance",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "MP": "100",
+   "Cooldown": "15s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-crushing-blow",
+  "name": "Crushing Blow",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 251.1% ATK + 258 damage to a target within 20m. Lands as Multi-Hit on targets afflicted with Stun.",
+  "stats": {
+   "Attack ratio": "251.1%",
+   "Flat": "258"
+  },
+  "specs": [
+   {
+    "unlock_level": null,
+    "text": "Changes to AoE damage",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+1s [Impactful Crush] Stun duration",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Changes to mobile skill",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Adds [Crushing Blow] Chain Skill, [Crushing Blow] lands as Multi-Hit on targets afflicted with Stun",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+25% [Impactful Crush] Stun Chance",
+    "icon": null
+   }
+  ],
+  "dl": {
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-wave-blow",
+  "name": "Wave Blow",
+  "meta_head": "Active · Physic · Attack · Debuff · 26 variants",
+  "description": "Deals 211.2% ATK + 538 per hit (2 hits) damage to a target afflicted with Stun within 4m and inflicts Knockdown for 3s.\nHas a 7% chance to trigger on attacking a target with Incapacitated Immunity, changing the skill motion.\n\n10 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "211.2%",
+   "Flat": "538",
+   "Hits": "2"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "Multi-Hit on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+6m Range",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+1s Knockdown duration",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "-15% target's PvE Damage Boost and -7.5% PvP Damage Boost for 10s",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "-5s cooldown",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "20s",
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-rushing-smash",
+  "name": "Rushing Smash",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Rushes at a target within 20m and deals 189.75% ATK + 112 damage to up to 4 enemies and restores 100 MP.\n\n10 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "189.75%",
+   "Flat": "112"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "-20% target's Impact-type Resist for 5s",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Changes to Charge Skill, dealing up to 200% more damage",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "50% chance to trigger [Heat Wave Blow] on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "Resets cooldown on defeating an enemy",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "Ignores Block and Evasion and lands as Multi-Hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "15s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-rushing-smash-lv-1",
+  "name": "Rushing Smash - Lv. 1",
+  "meta_head": "Active · Physic · Attack · 1 variant",
+  "description": null,
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Cooldown": "15s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-rushing-smash-lv-2",
+  "name": "Rushing Smash - Lv. 2",
+  "meta_head": "Active · Physic · Attack · 1 variant",
+  "description": null,
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Cooldown": "15s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-rushing-smash-max",
+  "name": "Rushing Smash - MAX",
+  "meta_head": "Active · Physic · Attack · 1 variant",
+  "description": null,
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Cooldown": "15s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-dark-crush",
+  "name": "Dark Crush",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 210.18% ATK + 215 damage to a target within 20m.\n\n5 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "210.18%",
+   "Flat": "215"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "Absorbs —% HP",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Deals extra damage on attacking a target afflicted with Impact-type status",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Critical Hit on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "Adds [Piercing Strike] Chain Skill",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "Removes [Dark Crush] cooldown",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "5s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-recuperation",
+  "name": "Recuperation",
+  "meta_head": "Active · Magic · Heal · 26 variants",
+  "description": "Restores 183-201 HP and removes — debuff(s) for the caster and party members within 40m. Restores — HP every 2s for 8s.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "+1 consecutive use and Heal over Time can stack up to 2 times",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Removes up to — debuffs",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+4s healing duration",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "+5% HP restored",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "-3s cooldown",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "15s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-fracturing-blow",
+  "name": "Fracturing Blow",
+  "meta_head": "Active · Physic · Attack · 6 variants",
+  "description": "Rushes to a target within 20m and deals 218% ATK + 1288 damage and reduces their Defense by 30% for 5s. Increases damage by 20% to targets afflicted with an Impact-type status.\n\n20 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "218%",
+   "Flat": "1288"
+  },
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "-15s cooldown",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "Inflict Exposed for 5s on hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "Critical Hit on hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+30% additional Impact-type Status target damage",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "MP": "100",
+   "Cooldown": "45s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-focused-defense",
+  "name": "Focused Defense",
+  "meta_head": "Active · Magic · Buff · 6 variants",
+  "description": "Temporarily increases Block Damage Reduction by 100% and guarantees Block. Restores 110 MP and Stamina once on Block.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "+1 consecutive use",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "Changes to mobile skill",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+20% Move Speed for 3s on Block",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "Restores 5% HP once on Parry",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "20s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-heat-wave-blow",
+  "name": "Heat Wave Blow",
+  "meta_head": "Active · Physic · Attack · Debuff · 26 variants",
+  "description": "Selects a target within 4m and deals 182% ATK + 345 damage to up to 4 enemies within 4m with a 40% chance to inflict Seal for 3s on Block.\n100% chance to inflict Seal on NPC targets.\n\n10 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "182%",
+   "Flat": "345"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "40% chance to inflict Stun for 3s",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+20% Seal Chance",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Up to +20% damage when more targets hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "Ignores Block and Evasion and lands as Multi-Hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "25% chance to reset [Heat Wave Blow] cooldown on Block",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "10s",
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-sprint-mantra",
+  "name": "Sprint Mantra",
+  "meta_head": "Active · Magic · Buff · 6 variants",
+  "description": "Increases Move Speed by 10.5% and grants a 15% chance to restore  127-140 HP on landing an attack to the caster and nearby party members.\n\nHealing Cooldown: 1s",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "+10% Incoming Heal",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "+30% Natural Stamina Regen",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+50% amount restored when HP is 50% or less",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+10% Restoration",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "5s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-healing-touch",
+  "name": "Healing Touch",
+  "meta_head": "Active · Magic · Heal · 6 variants",
+  "description": "Restores 927-1020 HP for the caster and party members within 40m.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "+20% amount healed when HP is 50% or less",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "Restores 1000 Stamina",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "Removes — debuff(s)",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+5% HP restored",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "30s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-undefeated-mantra",
+  "name": "Undefeated Mantra",
+  "meta_head": "Active · Magic · Buff · 6 variants",
+  "description": "Increases PvE Damage Boost and PvE Damage Tolerance by 10.5% and PvP Damage Boost and PvP Damage Tolerance by 5.25% for the caster and nearby party members.\n\nDoes not stack with the Damage Boost effect from the Cleric skill [Light of Protection]; only the higher-level skill effect applies. If both skills are the same level, Undefeated Mantra takes precedence.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "+100 Critical Hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "+100 Accuracy",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+5% Critical Damage Boost",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+5% Double Chance",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "5s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-defiance",
+  "name": "Defiance",
+  "meta_head": "Active · Buff · 26 variants",
+  "description": "Removes Stun, Knockdown, Airborne, Grab, Frost, and Fear from the caster and grants Tenacity for 5s.\nTenacity: Grants Status Effect Immunity\n\nUnaffected by cooldown reduction effects.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "Adds [Crushing Strike] Chain Skill",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Restores 1000 Stamina on using [Defiance]",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Restores 10% HP on using [Defiance]",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "+2s Tenacity duration",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "+50% PvE Damage Tolerance and +25% PvP Damage Tolerance for Tenacity duration",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "60s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-tremor-crush",
+  "name": "Tremor Crush",
+  "meta_head": "Active · Physic · Attack · Debuff · 26 variants",
+  "description": "Move to a target within 10m and deal 102% ATK + 260 damage with a 50% chance to inflict Stun for 3s after using [Dodge] or while flying.\n100% chance to inflict Stun on NPC targets.\n\n10 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "102%",
+   "Flat": "260"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "Restores 300 Stamina on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+10m [Tremor Crush] range",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+50% Multi-Hit on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "Adds [Surging Strike] Chain Skill",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "+25% [Tremor Crush] Stun Chance",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "20s",
+   "Range": "10m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-obliterate",
+  "name": "Obliterate",
+  "meta_head": "Active · Physic · Attack · Debuff · 6 variants",
+  "description": "Deals 182.5% ATK + 1078 per hit (3 hits) damage to up to 4 enemies within 4m of the target, with a 50% chance to inflict Knockdown.\n100% chance to land Knockdown on NPC targets.\n\n50 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "182.5%",
+   "Flat": "1078",
+   "Hits": "3"
+  },
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "Up to +20% damage when more targets hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "+20% Skill Speed",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "Critical Hit on hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+25% Knockdown Chance",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "MP": "200",
+   "Cooldown": "60s",
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-ensnaring-mark",
+  "name": "Ensnaring Mark",
+  "meta_head": "Active · Physic · Attack · Debuff · 6 variants",
+  "description": "Selects a target within 20m and deals 175% ATK + 1034 damage to up to 4 enemies within 4m, with a 50% chance to inflict Seal for 5s.\n100% chance to inflict Seal on NPC targets.\n\n[Dark Crush] becomes available for 3s on skill use.",
+  "stats": {
+   "Attack ratio": "175%",
+   "Flat": "1034"
+  },
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "50% chance to inflict Root",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "50% chance to inflict -1000 enemy Max Stamina",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+3s Seal, Root, Max Stamina reduction effect",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+25% Seal, Root, Max Stamina reduction chance",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "MP": "200",
+   "Cooldown": "60s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-impeding-authority",
+  "name": "Impeding Authority",
+  "meta_head": "Active · Magic · Buff · 6 variants",
+  "description": "Grants a Protective Shield that blocks damage equaling 16% of Max HP for 20s to the caster and nearby party members within 40m.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "+15% Defense",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "+10% Incoming Heal",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+10% PvE Damage Tolerance, +5% PvP Damage Tolerance",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "Restores 7% of Max HP when Protective Shield ends or is broken",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "90s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-power-of-the-storm",
+  "name": "Power of the Storm",
+  "meta_head": "Active · Magic · Buff · 6 variants",
+  "description": "Increases Combat Speed by 20% and reduces skill cooldowns by 20% for 10s.\nIncreases Combat Speed by 20% and reduces skill cooldowns by 10% for party members within 40m.\n\nCannot receive effect of [Power of the Storm] if Cleric skill [Earth's Blessing] effect is active.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "-30s cooldown",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "+200 Accuracy",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+200 Critical Hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+20% Caster Attack and +10% party member Attack",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "120s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-spinning-strike",
+  "name": "Spinning Strike",
+  "meta_head": "Active · Physic · Attack · Buff · 26 variants",
+  "description": "Selects a target within 20m and deals 700.13% ATK + 2347 damage to up to 4 enemies nearby. Increases the caster's Critical Damage Boost by 15% for 30s on hit. Stacks up to 2 times.\n\n[Dark Crush] becomes available for 2s on skill use.\n15 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "700.13%",
+   "Flat": "2347"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "-5s cooldown",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "+10% Heal Boost (up to 20%)",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Up to +20% damage when less targets hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "40% chance to inflict Seal for 3s",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "Ignores Block and Evasion and lands as a Critical Hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "MP": "250",
+   "Cooldown": "30s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-gust-rampage",
+  "name": "Gust Rampage",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 82.5% ATK + 120 per hit (4 hits) damage to a target afflicted with Stagger within 4m.",
+  "stats": {
+   "Attack ratio": "82.5%",
+   "Flat": "120",
+   "Hits": "4"
+  },
+  "specs": [
+   {
+    "unlock_level": 8,
+    "text": "Absorbs —% HP",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_002.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Restores 120 MP",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_003.png"
+   },
+   {
+    "unlock_level": 8,
+    "text": "Changes to mobile skill",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_004.png"
+   },
+   {
+    "unlock_level": 12,
+    "text": "Multi-Hit on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_005.png"
+   },
+   {
+    "unlock_level": 16,
+    "text": "-1s all skill cooldowns on hit",
+    "icon": "Icon_Item_Usable_Stigma_CH_A_c_001.png"
+   }
+  ],
+  "dl": {
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-marchutan-s-wrath",
+  "name": "Marchutan's Wrath",
+  "meta_head": "Active · Physic · Attack · 7 variants",
+  "description": "Selects a target within 20m and deals 234.3% ATK + 1384 damage to up to 4 enemies within 4m.\n\n[Dark Crush] becomes available for 3s on skill use.",
+  "stats": {
+   "Attack ratio": "234.3%",
+   "Flat": "1384"
+  },
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "Up to +20% damage when less targets hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "50% chance to inflict Stun for 3s",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "-70% Incoming Heal and Potion Recovery",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+25% additional Stun Chance",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "30s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-storm-chain",
+  "name": "Storm Chain",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 294.11% ATK + 199 damage to up to 4 enemies within 4m and restores 180 MP.",
+  "stats": {
+   "Attack ratio": "294.11%",
+   "Flat": "199"
+  },
+  "specs": [
+   {
+    "unlock_level": null,
+    "text": "+20% MP restored",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Absorbs —% HP",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+50% Multi-Hit on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "-1s [Spinning Strike] cooldown on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Adds [Storm Chain] Chain Skill",
+    "icon": null
+   }
+  ],
+  "dl": {
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-surging-strike",
+  "name": "Surging Strike",
+  "meta_head": "Active · Physic · Attack · Debuff · 26 variants",
+  "description": "Deals 132.6% ATK + 338 damage to a target within 4m with a 30% chance to inflict Airborne for 3s to targets afflicted with Stun.",
+  "stats": {
+   "Attack ratio": "132.6%",
+   "Flat": "338"
+  },
+  "specs": [
+   {
+    "unlock_level": null,
+    "text": "Restores 300 Stamina on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+10m [Tremor Crush] range",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+50% Multi-Hit on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Adds [Surging Strike] Chain Skill",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "+25% [Tremor Crush] Stun Chance",
+    "icon": null
+   }
+  ],
+  "dl": {
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-piercing-strike",
+  "name": "Piercing Strike",
+  "meta_head": "Active · Physic · Attack · 26 variants",
+  "description": "Deals 327.33% ATK + 336 damage to a target within 20m.\n\n5 Stagger Gauge Damage",
+  "stats": {
+   "Attack ratio": "327.33%",
+   "Flat": "336"
+  },
+  "specs": [
+   {
+    "unlock_level": null,
+    "text": "Absorbs —% HP",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Deals extra damage on attacking a target afflicted with Impact-type status",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Critical Hit on hit",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Adds [Piercing Strike] Chain Skill",
+    "icon": null
+   },
+   {
+    "unlock_level": null,
+    "text": "Removes [Dark Crush] cooldown",
+    "icon": null
+   }
+  ],
+  "dl": {
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-crushing-strike",
+  "name": "Crushing Strike",
+  "meta_head": "Active · Physic · Attack · Debuff · 1 variant",
+  "description": "Selects a target within 4m and deals 125.15% ATK + 538 damage to up to 4 enemies. Inflicts Stun for 3s.",
+  "stats": {
+   "Attack ratio": "125.15%",
+   "Flat": "538"
+  },
+  "specs": [],
+  "dl": {
+   "Cooldown": "120s",
+   "Range": "4m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-guardian-blessing",
+  "name": "Guardian Blessing",
+  "meta_head": "Active · Magic · Buff · 6 variants",
+  "description": "Increases the caster's Max HP by 5.4% for 120s and immediately restores 5.4% HP.\n\nNot affected by buff dispel effects.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "+10% Status Effect Resist",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "x1.5 [Crossguard] effect for the duration",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "x1.5 [Wind's Promise] effect for the duration",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+10% Incoming Heal",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "120s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-barrier-spell",
+  "name": "Barrier Spell",
+  "meta_head": "Active · Magic · Buff · 6 variants",
+  "description": "Prevents the HP of the caster and party members within 40m from falling below 10% for 3s.\n\nCannot block certain powerful attacks. Unaffected by cooldown increase effects.\nTenaciousness, Salvation, Barrier Spell effects, and Unstoppable effect cannot be applied for 30s if Invincibility stacking is blocked.",
+  "stats": {},
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "Restores 10% HP when effect expires naturally",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "+10% PvE Damage Tolerance and +5% PvP Damage Tolerance for 10s when effect expires naturally",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+10% HP limit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+1s effect duration",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "180s",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-assault-shock",
+  "name": "Assault Shock",
+  "meta_head": "Active · Physic · Attack · Debuff · 6 variants",
+  "description": "Selects a target within 20m and deals 167% ATK + 986 damage to up to 4 enemies within 4m with a 30% chance to inflict Stun for 3s.\n100% chance to inflict Stun on NPC targets.\n\nIncreases Defense by up to 20% proportional to the number of targets hit.",
+  "stats": {
+   "Attack ratio": "167%",
+   "Flat": "986"
+  },
+  "specs": [
+   {
+    "unlock_level": 5,
+    "text": "+20% Attack for 5s on hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 10,
+    "text": "500 MP damage on hit",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 15,
+    "text": "+10m range",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   },
+   {
+    "unlock_level": 20,
+    "text": "+20% Stun Chance",
+    "icon": "Icon_Specialized_Skill_Stigma_Common_001.png"
+   }
+  ],
+  "dl": {
+   "Cooldown": "120s",
+   "Range": "20m",
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-blessing-of-life",
+  "name": "Blessing of Life",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Increases the caster's HP by 150. Increases Max HP by an additional 6.5% and Heal Boost by —% of Attack.",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-crossguard",
+  "name": "Crossguard",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Increases the caster's Block by 200 and restores 53-58 HP on Block.\n\nCooldown: 1s",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-protection-circle",
+  "name": "Protection Circle",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Grants a Protection Circle that lasts for 5s on landing an attack. Removes the Protection Circle at 10 stacks and grants Divine Barrier to the caster and party members, which blocks damage equaling 3.1% of Max HP for 10s. The Divine Barrier refreshes upon reaching 10 stacks of Protection Circle while Divine Barrier is active.\nGrants a Noble Protective Shield for 5s that blocks 21% damage when the caster's HP drops below 50%.\n\nProtection Circle Cooldown: 0.5s\nNoble Protective Shield Cooldown: 60s",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-inspiring-spell",
+  "name": "Inspiring Spell",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Increases the caster's Critical Hit by 100 and Perfect Chance by 0.5%.",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-attack-preparation",
+  "name": "Attack Preparation",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Increases the caster's PvE Damage Boost by 5.5%, PvP Damage Boost by 2.75%, Defense by 2%, and Accuracy by 100.",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-impact-hit",
+  "name": "Impact Hit",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Increases the caster's Impact-type Chance by 11.2% and Double Chance by 0.3%.",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-raging-spell",
+  "name": "Raging Spell",
+  "meta_head": "Passive · Physic · Buff · 1 variant",
+  "description": "Deals 34% ATK + 146 extra damage to targets afflicted with Stagger or an Impact-type status.\n\nCooldown: 1s",
+  "stats": {
+   "Attack ratio": "34%",
+   "Flat": "146"
+  },
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-earth-s-promise",
+  "name": "Earth's Promise",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Reduces the target's PvE Damage Tolerance by 5.4% and PvP Damage Tolerance by 2.7% for 5s each time an attack lands.\n\n[Earth's Promise]'s PvE/PvP Damage Tolerance reduction effect does not apply when used together with the Cleric skill [Chain of Torment].\n\nCooldown: 10s",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-survival-willpower",
+  "name": "Survival Willpower",
+  "meta_head": "Passive · Magic · Buff · 1 variant",
+  "description": "Increases the caster's Status Effect Resist by 17%. Increases PvE Damage Tolerance by 12% and PvP Damage Tolerance by 6% for 5s when afflicted with Stun, Knockdown, Airborne, Frost, or Fear. Increases Status Effect Resist by 10% for 5s when hit while afflicted with Stun, Knockdown, Airborne, Frost, or Fear (up to 10 stacks).\n\nDamage Tolerance Increase Cooldown: 60s\nStatus Effect Resist Increase Cooldown: 1s",
+  "stats": {},
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ },
+ {
+  "id_attr": "skill-wind-s-promise",
+  "name": "Wind's Promise",
+  "meta_head": "Passive · Physic · Buff · 1 variant",
+  "description": "Increases the caster's Critical Damage Boost by 5.7% and has a 50% chance to deal 82.58% ATK + 554 extra damage to the target on landing a Critical Hit.\n\nExtra Damage Cooldown: 1s",
+  "stats": {
+   "Attack ratio": "82.58%",
+   "Flat": "554"
+  },
+  "specs": [],
+  "dl": {
+   "Weapon": "Staff"
+  }
+ }
+]

@@ -1,0 +1,17 @@
+[project]
+name = "aion2c"
+version = "0.1.0"
+description = "Aion 2 companion (read-only advisor, never sends input to the game)"
+requires-python = ">=3.12"
+dependencies = ["PySide6"]
+
+[project.scripts]
+aion2c = "aion2c.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["aion2c*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = ["needs_sim: requires real simulator"]

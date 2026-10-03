@@ -1,0 +1,49 @@
+[
+ {
+  "key": "s5-boss",
+  "source": "https://gegebase.com/games/aion2/sorcerer_pve_guide",
+  "scenario_key": "boss_180",
+  "priority": [
+   "element-enhancement",
+   "delayed-explosion",
+   "fire-wall",
+   "cold-storm",
+   "blaze",
+   "firestorm",
+   "hellfire",
+   "flame-arrow"
+  ],
+  "note": "S5 (post Aug-26, opinion): opener EE, Delayed Explosion, Hellfire, Fire Wall, Cold Storm then macro; sustained list used here. Hellfire opener position not modelled."
+ },
+ {
+  "key": "s6-global-boss",
+  "source": "https://couga54.github.io/aion2-guides/en/sorcerer/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "element-enhancement",
+   "delayed-explosion",
+   "bittercold-wind",
+   "wish-of-concentration",
+   "firestorm",
+   "blaze",
+   "winters-shackles",
+   "flame-arrow"
+  ],
+  "note": "S6 (2026-10-03, Global S1, opinion): one macro, Hellfire cast by hand at full charge (not in list)."
+ },
+ {
+  "key": "s5-aoe",
+  "source": "https://gegebase.com/games/aion2/sorcerer_pve_guide",
+  "scenario_key": "aoe_pack",
+  "priority": [
+   "element-enhancement",
+   "fire-wall",
+   "bittercold-wind",
+   "cold-storm",
+   "firestorm",
+   "blaze",
+   "flame-arrow"
+  ],
+  "note": "S5 AoE (opinion), basics last; Hellfire only if single-target value justifies it. Builds doc section 3."
+ }
+]

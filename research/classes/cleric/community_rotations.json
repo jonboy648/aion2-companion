@@ -1,0 +1,62 @@
+[
+ {
+  "key": "kaeria-s1-boss",
+  "source": "https://couga54.github.io/aion2-guides/en/cleric/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "prayer-of-amplification",
+   "noble-aura",
+   "earth-punishment",
+   "condemnation",
+   "chain-of-torment",
+   "divine-aura",
+   "debilitating-mark",
+   "bolt",
+   "lightning-strike-scattershot",
+   "judgment-thunder",
+   "earths-retribution"
+  ],
+  "note": "Global S1 PvE build (2026-10-03, opinion, Kaeria TW video 2026-09-28). In-game macro lines: Earth Punishment > Condemnation > Chain of Torment (bottom slot wins), Divine Aura > Debilitating Mark > Light of Regeneration > Judgment Thunder, Lightning Strike Scattershot only on stagger. Prayer, Noble Aura and charged Bolt are pressed by hand; heals and Light of Regeneration omitted (not damage). Light of Protection is a toggle, modeled as a passive."
+ },
+ {
+  "key": "inven-s6-boss",
+  "source": "https://www.inven.co.kr/board/aion2/6452/29213",
+  "scenario_key": "boss_180",
+  "priority": [
+   "prayer-of-amplification",
+   "earth-punishment",
+   "chain-of-torment",
+   "condemnation",
+   "lightning-strike-scattershot",
+   "earths-retribution"
+  ],
+  "note": "Inven Cleric guide 2026-09-24 via research/tmp/classes.json (opinion, KR): opener buffs, then Earth Punishment > Chain of Torment > Condemnation from the macro, hold Earth's Retribution, Scattershot on stagger; Bolt and heals by hand; Debilitating Mark only when the party is hurting (left out). Prayer first is from the same page's skill sheet (\"biggest self buff\") and the Kaeria opener."
+ },
+ {
+  "key": "gegebase-support-dps",
+  "source": "https://gegebase.com/games/aion2/cleric_pve_guide",
+  "scenario_key": "boss_180",
+  "priority": [
+   "debilitating-mark",
+   "prayer-of-amplification",
+   "bolt",
+   "divine-aura",
+   "judgment-thunder",
+   "earths-retribution"
+  ],
+  "note": "Safe-window DPS order \"buff/debuff > Bolt > Divine Aura > filler\" (opinion, KR/TW patch history, retrieved 2026-10-03). The page names no filler, Judgment Thunder and Earth's Retribution are assumed. It does not mention Condemnation or Earth Punishment."
+ },
+ {
+  "key": "kaeria-leveling-aoe",
+  "source": "https://couga54.github.io/aion2-guides/en/cleric/",
+  "scenario_key": "aoe_pack",
+  "priority": [
+   "chain-of-torment",
+   "condemnation",
+   "divine-aura",
+   "judgment-thunder",
+   "earths-retribution"
+  ],
+  "note": "Leveling packs (2026-10-03, opinion): Chain of Torment (hits up to 4) > Condemnation > Divine Aura with the AoE specialization > Judgment Thunder; Earth's Retribution weaved for mana."
+ }
+]

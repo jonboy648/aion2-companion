@@ -1,0 +1,1721 @@
+{
+ "_comment": "Chanter hand-authored sim mechanics, same schema as aion2c/data/src/mechanics.json. Every Num carries confidence + source. Values at RANK 1 unless stated. Global client dump 2026-09-18; KR patch differences listed in NOTES.md.",
+ "anim_lock": {
+  "default": {
+   "value": 1.0,
+   "confidence": "estimated",
+   "source": "default 1.0 s; client cast_time is 0 everywhere; calibrate in app"
+  },
+  "long": {
+   "value": 1.5,
+   "confidence": "estimated",
+   "source": "charge animation per community (aoeah 2026-09-10); calibrate in app"
+  },
+  "long_skills": [
+   "rushing-smash"
+  ]
+ },
+ "element_overrides": {},
+ "kind_overrides": {
+  "raging-spell": "proc",
+  "winds-promise": "proc"
+ },
+ "icon_prefix_aliases": {
+  "rushing-smash-": "rushing-smash.png"
+ },
+ "skill_tags": {
+  "dodge": [
+   "manual",
+   "mobility",
+   "defense"
+  ],
+  "onslaught": [
+   "damage",
+   "aoe",
+   "chain",
+   "mp-restore",
+   "basic"
+  ],
+  "resonance-crush": [
+   "damage",
+   "aoe",
+   "chain",
+   "mp-restore",
+   "basic"
+  ],
+  "bolt-crush": [
+   "damage",
+   "aoe",
+   "chain",
+   "mp-restore",
+   "basic"
+  ],
+  "incandescent-blow": [
+   "damage",
+   "aoe",
+   "chain",
+   "basic",
+   "debuff"
+  ],
+  "bursting-blow": [
+   "damage",
+   "aoe",
+   "chain",
+   "basic"
+  ],
+  "impactful-crush": [
+   "damage",
+   "cc",
+   "debuff",
+   "opens-dark-crush"
+  ],
+  "crushing-blow": [
+   "damage",
+   "chain",
+   "conditional-stun"
+  ],
+  "wave-blow": [
+   "damage",
+   "cc",
+   "debuff",
+   "conditional-stun",
+   "stagger"
+  ],
+  "wave-blow-18080037": [
+   "proc",
+   "damage"
+  ],
+  "rushing-smash": [
+   "damage",
+   "aoe",
+   "mobility",
+   "charge",
+   "manual",
+   "mp-restore"
+  ],
+  "dark-crush": [
+   "damage",
+   "reactive",
+   "sustain",
+   "mobility",
+   "conditional-window"
+  ],
+  "recuperation": [
+   "manual",
+   "heal",
+   "sustain",
+   "cleanse",
+   "party"
+  ],
+  "fracturing-blow": [
+   "damage",
+   "mobility",
+   "debuff",
+   "stagger"
+  ],
+  "focused-defense": [
+   "manual",
+   "defense",
+   "sustain",
+   "toggle-sustained"
+  ],
+  "heat-wave-blow": [
+   "damage",
+   "aoe",
+   "cc",
+   "debuff"
+  ],
+  "sprint-mantra": [
+   "manual",
+   "heal",
+   "mobility",
+   "sustain",
+   "toggle",
+   "party"
+  ],
+  "healing-touch": [
+   "manual",
+   "heal",
+   "sustain",
+   "cleanse",
+   "party"
+  ],
+  "undefeated-mantra": [
+   "manual",
+   "buff",
+   "toggle",
+   "party"
+  ],
+  "defiance": [
+   "manual",
+   "defense",
+   "cleanse",
+   "sustain"
+  ],
+  "tremor-crush": [
+   "damage",
+   "cc",
+   "mobility",
+   "stagger"
+  ],
+  "obliterate": [
+   "damage",
+   "aoe",
+   "cc",
+   "stagger"
+  ],
+  "ensnaring-mark": [
+   "damage",
+   "aoe",
+   "cc",
+   "debuff",
+   "opens-dark-crush"
+  ],
+  "impeding-authority": [
+   "manual",
+   "defense",
+   "shield",
+   "party"
+  ],
+  "power-of-the-storm": [
+   "manual",
+   "buff",
+   "party",
+   "cooldown-reduction"
+  ],
+  "spinning-strike": [
+   "damage",
+   "aoe",
+   "mobility",
+   "buff",
+   "opens-dark-crush",
+   "stagger"
+  ],
+  "gust-rampage": [
+   "damage",
+   "conditional-stagger",
+   "sustain"
+  ],
+  "marchutans-wrath": [
+   "damage",
+   "aoe",
+   "cc",
+   "debuff",
+   "opens-dark-crush"
+  ],
+  "storm-chain": [
+   "damage",
+   "aoe",
+   "chain",
+   "mp-restore"
+  ],
+  "surging-strike": [
+   "damage",
+   "chain",
+   "cc"
+  ],
+  "piercing-strike": [
+   "damage",
+   "chain",
+   "mobility",
+   "stagger"
+  ],
+  "crushing-strike": [
+   "damage",
+   "aoe",
+   "cc",
+   "chain"
+  ],
+  "guardian-blessing": [
+   "manual",
+   "defense",
+   "sustain",
+   "buff",
+   "party"
+  ],
+  "barrier-spell": [
+   "manual",
+   "defense",
+   "party",
+   "cooldown-lockout"
+  ],
+  "assault-shock": [
+   "damage",
+   "aoe",
+   "cc",
+   "defense",
+   "buff"
+  ],
+  "blessing-of-life": [
+   "passive",
+   "sustain",
+   "heal"
+  ],
+  "crossguard": [
+   "passive",
+   "defense",
+   "sustain"
+  ],
+  "protection-circle": [
+   "passive",
+   "defense",
+   "shield",
+   "party"
+  ],
+  "inspiring-spell": [
+   "passive",
+   "buff"
+  ],
+  "attack-preparation": [
+   "passive",
+   "buff"
+  ],
+  "impact-hit": [
+   "passive",
+   "buff",
+   "impact-status"
+  ],
+  "raging-spell": [
+   "passive",
+   "damage",
+   "proc"
+  ],
+  "earths-promise": [
+   "passive",
+   "debuff",
+   "party"
+  ],
+  "survival-willpower": [
+   "passive",
+   "defense"
+  ],
+  "winds-promise": [
+   "passive",
+   "damage",
+   "proc",
+   "buff"
+  ],
+  "rushing-smash-level-1": [
+   "damage",
+   "aoe",
+   "mobility",
+   "charge",
+   "manual"
+  ],
+  "rushing-smash-level-2": [
+   "damage",
+   "aoe",
+   "mobility",
+   "charge",
+   "manual"
+  ],
+  "rushing-smash-max": [
+   "damage",
+   "aoe",
+   "mobility",
+   "charge",
+   "manual"
+  ]
+ },
+ "resources": {
+  "mp": {
+   "value": null,
+   "confidence": "unknown",
+   "source": "Pool size not published. Chain basics restore MP: Onslaught 100, Resonance Crush 100, Bolt Crush 120, Storm Chain 180, Rushing Smash 100; Incandescent/Bursting Blow cost 120, Impactful Crush 100, Spinning Strike 250 (global dump), Fracturing Blow 100, Obliterate/Ensnaring Mark 200"
+  },
+  "stamina": {
+   "value": null,
+   "confidence": "unknown",
+   "source": "Dodge, Tremor Crush, Defiance and several specs restore/consume Stamina (e.g. +1000 Stamina on Defiance spec, -1000 Max Stamina on Ensnaring Mark spec); costs not published"
+  }
+ },
+ "statuses": {
+  "stun": {
+   "key": "stun",
+   "name": "Stun",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Impactful Crush 'inflict Stun for 3s' (aion2.app client dump 2026-09-18); Crushing Strike, Assault Shock also 3s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no multiplier; gate for Wave Blow, Crushing Blow multi-hit, Surging Strike airborne"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "impactful-crush",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "knockdown": {
+   "key": "knockdown",
+   "name": "Knockdown",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Wave Blow 'inflicts Knockdown for 3s' (aion2.app client dump 2026-09-18); +1s with spec rank 8"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "wave-blow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "seal": {
+   "key": "seal",
+   "name": "Seal",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Heat Wave Blow / Spinning Strike spec: Seal 3s (aion2.app client dump 2026-09-18); Ensnaring Mark 5s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "heat-wave-blow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "staggered": {
+   "key": "staggered",
+   "name": "Staggered",
+   "on": "target",
+   "duration_s": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "stagger break window and gauge size not published; skills only list 'Stagger Gauge Damage' 2-50"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no multiplier itself; Raging Spell extra damage and Gust Rampage need it"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "impact_status": {
+   "key": "impact_status",
+   "name": "Impact-type status",
+   "on": "target",
+   "duration_s": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "umbrella flag; which statuses count as Impact-type is not documented (Stun/Knockdown likely)"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "Fracturing Blow: +20% damage to Impact-type targets (+30% more at spec rank 20) (aion2.app client dump 2026-09-18); other skills have their own bonus"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "impact-hit",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "dark_crush_ready": {
+   "key": "dark_crush_ready",
+   "name": "Dark Crush ready (2 s)",
+   "on": "self",
+   "duration_s": {
+    "value": 2.0,
+    "confidence": "confirmed",
+    "source": "Impactful Crush and Spinning Strike: '[Dark Crush] becomes available for 2s on skill use' (aion2.app client dump 2026-09-18, Metaroad)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "dark_crush_ready_3s": {
+   "key": "dark_crush_ready_3s",
+   "name": "Dark Crush ready (3 s)",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Ensnaring Mark and Marchutan's Wrath: '[Dark Crush] becomes available for 3s' (aion2.app client dump 2026-09-18); KR patch lowered Marchutan's from 7s to 3s (aion2hub Aug 26 2026 patch notes (Korea))"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "spinning_strike_crit": {
+   "key": "spinning_strike_crit",
+   "name": "Spinning Strike Crit Damage",
+   "on": "self",
+   "duration_s": {
+    "value": 30.0,
+    "confidence": "confirmed",
+    "source": "+15% Critical Damage Boost for 30s, stacks 2 (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "+15% crit damage boost per stack (x2 stacks = +30%); converts to damage only with crit chance, not a flat multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "spinning-strike",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "protection_circle": {
+   "key": "protection_circle",
+   "name": "Protection Circle stack",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "lasts 5s per attack landed, 10 stacks then Divine Barrier, 0.5s internal cooldown (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "protection-circle",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "divine_barrier": {
+   "key": "divine_barrier",
+   "name": "Divine Barrier",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "shield 3.1% Max HP (rank 1) to 7% (rank 40) for 10s on 10 stacks, caster and party (aion2.app client dump 2026-09-18); KR 4/5/6% (aion2hub Aug 26 2026 patch notes (Korea))"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "protection-circle",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "noble_protective_shield": {
+   "key": "noble_protective_shield",
+   "name": "Noble Protective Shield",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "blocks 21% damage (rank 1) to 60% (rank 40) for 5s when HP < 50%, cooldown 60s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "protection-circle",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "tenacity": {
+   "key": "tenacity",
+   "name": "Tenacity",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Defiance: removes CC, Status Effect Immunity 5s (+2s spec rank 12) (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "defiance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "recuperation_hot": {
+   "key": "recuperation_hot",
+   "name": "Recuperation HoT",
+   "on": "self",
+   "duration_s": {
+    "value": 8.0,
+    "confidence": "confirmed",
+    "source": "'Restores 183 HP every 2s for 8s' rank 1 (aion2.app client dump 2026-09-18); +4s spec rank 8"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "recuperation",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "flat heal 183/tick at rank 1 to 2032 at rank 40 (client per-level heal); Status only models ATK-ratio ticks"
+   },
+   "tick_s": {
+    "value": 2.0,
+    "confidence": "confirmed",
+    "source": "every 2s (aion2.app client dump 2026-09-18)"
+   }
+  },
+  "focused_defense": {
+   "key": "focused_defense",
+   "name": "Focused Defense (guaranteed Block)",
+   "on": "self",
+   "duration_s": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "sustained skill, duration not shown; 20s cooldown, block DR +100% (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "focused-defense",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "sprint_mantra": {
+   "key": "sprint_mantra",
+   "name": "Sprint Mantra",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "estimated",
+    "source": "toggle skill, no duration"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "sprint-mantra",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "undefeated_mantra": {
+   "key": "undefeated_mantra",
+   "name": "Undefeated Mantra",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "estimated",
+    "source": "toggle skill, no duration (party aura)"
+   },
+   "dmg_mult": {
+    "value": 1.105,
+    "confidence": "estimated",
+    "source": "+10.5% PvE Damage Boost at rank 1 (22.5% at rank 25) (aion2.app client dump 2026-09-18); treated as a damage multiplier, real bucket unknown; party-wide"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "undefeated-mantra",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "power_of_the_storm": {
+   "key": "power_of_the_storm",
+   "name": "Power of the Storm",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "+20% Combat Speed and -20% cooldowns for 10s at rank 1, 22.5s at rank 25 (aion2.app client dump 2026-09-18); party gets +20% speed and -10% cooldowns"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "speed/cooldown buff: feed Stats combat_speed_pct and cdr_pct (+20% each) instead of a multiplier; spec rank 20 adds +20% caster Attack"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "power-of-the-storm",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "impeding_authority": {
+   "key": "impeding_authority",
+   "name": "Protective Shield (Impeding Authority)",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "shield 16% Max HP (rank 1) to 40% (rank 25) for 20s, party within 40m (aion2.app client dump 2026-09-18); KR 20/30/40% (aion2hub Aug 26 2026 patch notes (Korea))"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "impeding-authority",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "barrier_spell": {
+   "key": "barrier_spell",
+   "name": "Barrier Spell",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "HP cannot fall below 10% for 3s, party within 40m; 180s cooldown (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "barrier-spell",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "guardian_blessing": {
+   "key": "guardian_blessing",
+   "name": "Guardian Blessing",
+   "on": "self",
+   "duration_s": {
+    "value": 300.0,
+    "confidence": "confirmed",
+    "source": "+5.4% Max HP (rank 1) to 15% (rank 25) for 300s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "guardian-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "attack_preparation": {
+   "key": "attack_preparation",
+   "name": "Attack Preparation",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "estimated",
+    "source": "passive, no duration"
+   },
+   "dmg_mult": {
+    "value": 1.055,
+    "confidence": "estimated",
+    "source": "+5.5% PvE Damage Boost at rank 1 (25% at rank 40), also +2% Defense, +100 Accuracy (aion2.app client dump 2026-09-18); rank scaling is large, app should pick by rank"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "attack-preparation",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "earths_promise_debuff": {
+   "key": "earths_promise_debuff",
+   "name": "Earth's Promise (target PvE Tolerance down)",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "-5.4% PvE Damage Tolerance (rank 1) to -21% (rank 40) for 5s per hit, internal cooldown 10s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.054,
+    "confidence": "estimated",
+    "source": "tolerance reduction treated as +damage taken; real bucket unknown; KR patch cut the effect to 9/13/17% (Aug 26)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "earths-promise",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "wave_blow_debuff": {
+   "key": "wave_blow_debuff",
+   "name": "Wave Blow damage-boost debuff",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "spec rank 12: -15% target PvE Damage Boost, -7.5% PvP for 10s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "reduces target outgoing damage: defensive only"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "wave-blow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "fracturing_defense_down": {
+   "key": "fracturing_defense_down",
+   "name": "Fracturing Blow Defense Down",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "-30% Defense for 5s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "defense reduction; impact depends on target defense (damage formula uses (def - pen) * 0.1)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "fracturing-blow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "rushing_smash_resist_down": {
+   "key": "rushing_smash_resist_down",
+   "name": "Impact Resist Down",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Rushing Smash spec rank 8: -20% Impact-type Resist for 5s (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification modelled; enabling/gating status"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "rushing-smash",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "winds_promise_crit": {
+   "key": "winds_promise_crit",
+   "name": "Wind's Promise",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "estimated",
+    "source": "passive, no duration"
+   },
+   "dmg_mult": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "+5.7% Crit Damage Boost (rank 1) to 33% (rank 40) plus 50% chance on crit for 554 flat extra damage, 1s cooldown (aion2.app client dump 2026-09-18); crit conversion needed"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "winds-promise",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  }
+ },
+ "triggers": [
+  {
+   "status_key": "protection_circle",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "protection-circle",
+   "confidence": "confirmed"
+  },
+  {
+   "status_key": "earths_promise_debuff",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "earths-promise",
+   "confidence": "confirmed"
+  }
+ ],
+ "rules": {
+  "onslaught": {
+   "skill_key": "onslaught",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "resonance-crush",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "confirmed",
+   "note": "chain 1/3 (client), restores 100 MP; 2 hits; spec rank 12 -1s Spinning Strike cooldown on hit; spec rank 16 adds Storm Chain. chain window unknown; 3.0 s placeholder (same as Sorcerer default), calibrate in app"
+  },
+  "resonance-crush": {
+   "skill_key": "resonance-crush",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "bolt-crush",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "confirmed",
+   "note": "chain 2/3 (client), restores 100 MP, 5 hits. chain window unknown; 3.0 s placeholder (same as Sorcerer default), calibrate in app"
+  },
+  "bolt-crush": {
+   "skill_key": "bolt-crush",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 120.0,
+   "confidence": "confirmed",
+   "note": "chain 3/3 (client), restores 120 MP"
+  },
+  "storm-chain": {
+   "skill_key": "storm-chain",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 180.0,
+   "confidence": "estimated",
+   "note": "added by Onslaught spec rank 16 (Metaroad: 'Adds Storm Chain Chain Skill'); restores 180 MP; position in the chain unknown"
+  },
+  "incandescent-blow": {
+   "skill_key": "incandescent-blow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "bursting-blow",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "chain 1/2 (client), MP cost 120, 2 hits, 2 stagger. chain window unknown; 3.0 s placeholder (same as Sorcerer default), calibrate in app"
+  },
+  "bursting-blow": {
+   "skill_key": "bursting-blow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "chain 2/2 (client), MP cost 120, 2 hits, 2 stagger"
+  },
+  "impactful-crush": {
+   "skill_key": "impactful-crush",
+   "applies": [
+    "stun",
+    "dark_crush_ready"
+   ],
+   "apply_chance": 0.6,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "60% Stun 3s on players, 100% on NPC targets (so use chance 1.0 vs mobs/bosses unless immune), aion2.app client dump 2026-09-18. Opens Dark Crush for 2s. apply_chance covers Stun only; dark_crush_ready is always applied"
+  },
+  "crushing-blow": {
+   "skill_key": "crushing-blow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Multi-Hit on Stunned targets; chain child of Impactful Crush in KR before Aug 26 patch (replaced by +30% Skill Speed spec); global client lists no parent"
+  },
+  "wave-blow": {
+   "skill_key": "wave-blow",
+   "applies": [
+    "knockdown"
+   ],
+   "apply_chance": 1.0,
+   "requires": [
+    "stun"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "needs a Stunned target (description). 7% chance to change motion vs Incapacitated-Immune targets: boss CC immunity makes the Stun gate uncertain. Knockdown 3s. Spec rank 12 applies wave_blow_debuff (not auto-applied here)"
+  },
+  "wave-blow-18080037": {
+   "skill_key": "wave-blow-18080037",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "unknown",
+   "note": "hidden passive-type variant (Required level 4, Max 1) with identical text to Wave Blow; probably the motion-change variant. Not rotation relevant"
+  },
+  "rushing-smash": {
+   "skill_key": "rushing-smash",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [
+    {
+     "level": 1,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "no source"
+     },
+     "dmg_mult": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "base hit"
+     }
+    },
+    {
+     "level": 2,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "no source"
+     },
+     "dmg_mult": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "Metaroad has Level 1/2/Max rows without ratios"
+     }
+    },
+    {
+     "level": 3,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "no source"
+     },
+     "dmg_mult": {
+      "value": 3.0,
+      "confidence": "estimated",
+      "source": "spec rank 8 'Changes to Charge Skill, dealing up to 200% more damage' = up to 3.0x"
+     }
+    }
+   ],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "Charge Skill only with the rank 8 specialty; without it a plain 15 s rush. Restores 100 MP. Community: remove from macro, press by hand (aoeah 2026-09-10)"
+  },
+  "dark-crush": {
+   "skill_key": "dark-crush",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "usable only inside a Dark Crush window: dark_crush_ready (2 s, from Impactful Crush / Spinning Strike) OR dark_crush_ready_3s (3 s, from Ensnaring Mark / Marchutan's Wrath). Schema has AND-only 'requires', so no requires is listed: engine must treat the two statuses as OR. 5 s cooldown, removed at spec rank 16. Chain spec rank 12 adds Piercing Strike. KR rework 2026-08-26: usable 'when using a ranged skill' (aion2hub Aug 26 2026 patch notes (Korea))"
+  },
+  "piercing-strike": {
+   "skill_key": "piercing-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "added by Dark Crush spec rank 12; shares the Dark Crush window logic (KR patch note groups them)"
+  },
+  "recuperation": {
+   "skill_key": "recuperation",
+   "applies": [
+    "recuperation_hot"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "heal + HoT, removes 1 debuff, party within 40m, cooldown 15s (aion2.app client dump 2026-09-18); defensive/heal, not in damage rotation"
+  },
+  "fracturing-blow": {
+   "skill_key": "fracturing-blow",
+   "applies": [
+    "fracturing_defense_down"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "rush 20m, -30% Defense 5s; +20% damage vs Impact-type targets"
+  },
+  "focused-defense": {
+   "skill_key": "focused-defense",
+   "applies": [
+    "focused_defense"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "guaranteed Block, restores 110 MP and Stamina once on Block (rank 1), sustained skill"
+  },
+  "heat-wave-blow": {
+   "skill_key": "heat-wave-blow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "40% Seal 3s on Block, 100% on NPC; spec rank 8: 40% Stun; reset chance on Block with spec rank 16"
+  },
+  "sprint-mantra": {
+   "skill_key": "sprint-mantra",
+   "applies": [
+    "sprint_mantra"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "toggle: +10.5% Move Speed, 15% on-hit heal (1s cooldown) for caster and party"
+  },
+  "healing-touch": {
+   "skill_key": "healing-touch",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "party heal 927-1020 at rank 1, cooldown 30s"
+  },
+  "undefeated-mantra": {
+   "skill_key": "undefeated-mantra",
+   "applies": [
+    "undefeated_mantra"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "toggle party aura; does not stack with Cleric Light of Protection (higher rank wins, ties go to Undefeated Mantra)"
+  },
+  "defiance": {
+   "skill_key": "defiance",
+   "applies": [
+    "tenacity"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "removes Stun/Knockdown/Airborne/Grab/Frost/Fear; unaffected by cooldown reduction; spec rank 8 adds Crushing Strike chain"
+  },
+  "crushing-strike": {
+   "skill_key": "crushing-strike",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "added by Defiance spec rank 8; Stun 3s; 120 s cooldown (Metaroad)"
+  },
+  "tremor-crush": {
+   "skill_key": "tremor-crush",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "50% Stun 3s after Dodge or while flying, 100% on NPC; spec rank 12 adds Surging Strike"
+  },
+  "surging-strike": {
+   "skill_key": "surging-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "added by Tremor Crush spec rank 12; 30% Airborne 3s on Stunned targets"
+  },
+  "obliterate": {
+   "skill_key": "obliterate",
+   "applies": [],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "50% Knockdown (100% on NPC), 50 stagger"
+  },
+  "ensnaring-mark": {
+   "skill_key": "ensnaring-mark",
+   "applies": [
+    "seal",
+    "dark_crush_ready_3s"
+   ],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "50% Seal 5s (100% on NPC); Dark Crush ready 3s always applied"
+  },
+  "impeding-authority": {
+   "skill_key": "impeding-authority",
+   "applies": [
+    "impeding_authority"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "party shield 16% Max HP 20s"
+  },
+  "power-of-the-storm": {
+   "skill_key": "power-of-the-storm",
+   "applies": [
+    "power_of_the_storm"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "+20% Combat Speed, -20% cooldowns 10s (party half)"
+  },
+  "spinning-strike": {
+   "skill_key": "spinning-strike",
+   "applies": [
+    "spinning_strike_crit",
+    "dark_crush_ready"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "20 m AoE, MP 250, cd 30 s in global dump. KR Aug 26 patch: cd 15 s, MP 100, +30% speed (aion2hub Aug 26 2026 patch notes (Korea)); global client not updated. Opens Dark Crush 2 s; crit damage +15% x2 stacks 30 s"
+  },
+  "gust-rampage": {
+   "skill_key": "gust-rampage",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "staggered"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "needs a Staggered target; spec rank 8 restores 120 MP and -1s all cooldowns at rank 16"
+  },
+  "marchutans-wrath": {
+   "skill_key": "marchutans-wrath",
+   "applies": [
+    "dark_crush_ready_3s"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Dark Crush ready 3s; spec rank 10 50% Stun, rank 15 -70% Incoming Heal and Potion Recovery on target (PvP)"
+  },
+  "guardian-blessing": {
+   "skill_key": "guardian-blessing",
+   "applies": [
+    "guardian_blessing"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "+5.4% Max HP 300s, immediate 5.4% heal, not dispellable"
+  },
+  "barrier-spell": {
+   "skill_key": "barrier-spell",
+   "applies": [
+    "barrier_spell"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "HP floor 10% for 3s; 180s cooldown not reduced by cooldown increase effects"
+  },
+  "assault-shock": {
+   "skill_key": "assault-shock",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 0.3,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "30% Stun 3s (100% on NPC); +defense up to 20% by targets hit; spec 5: +20% Attack 5s"
+  },
+  "protection-circle": {
+   "skill_key": "protection-circle",
+   "applies": [
+    "protection_circle",
+    "divine_barrier",
+    "noble_protective_shield"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: stacks on each landed attack (0.5 s ICD), 10 stacks pop Divine Barrier; Noble shield below 50% HP, 60 s cooldown"
+  },
+  "earths-promise": {
+   "skill_key": "earths-promise",
+   "applies": [
+    "earths_promise_debuff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: debuff on each landed attack, 10 s cooldown; does not apply together with Cleric Chain of Torment"
+  },
+  "raging-spell": {
+   "skill_key": "raging-spell",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "staggered"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "passive proc: 146 flat extra damage (rank 1) vs targets Staggered OR Impact-type, 1 s cooldown; AND-only requires lists staggered only"
+  },
+  "winds-promise": {
+   "skill_key": "winds-promise",
+   "applies": [
+    "winds_promise_crit"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "passive proc on crit, see status"
+  },
+  "attack-preparation": {
+   "skill_key": "attack-preparation",
+   "applies": [
+    "attack_preparation"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive buff"
+  },
+  "rushing-smash-level-1": {
+   "skill_key": "rushing-smash-level-1",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "unknown",
+   "note": "Metaroad charge tier row, no ratios"
+  },
+  "rushing-smash-level-2": {
+   "skill_key": "rushing-smash-level-2",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "unknown",
+   "note": "Metaroad charge tier row, no ratios"
+  },
+  "rushing-smash-max": {
+   "skill_key": "rushing-smash-max",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "unknown",
+   "note": "Metaroad charge tier row, no ratios"
+  }
+ }
+}

@@ -1,0 +1,165 @@
+{
+ "_comment": "data_contract.md section 2, Ranger. confirmed = client/spec text states it; estimated = inferred from ids, list order or guides.",
+ "links": [
+  {
+   "parent": 14020000,
+   "child": 14030000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Snipe > Rapid Fire; GEGEBASE names the chain Snipe > Rapid Fire > Spiral Arrow; ids 1402/1403/1404 consecutive, same restore-MP text (inferred, not shown as 1/3 in client text)"
+  },
+  {
+   "parent": 14030000,
+   "child": 14040000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Rapid Fire > Spiral Arrow (GEGEBASE 2026-09; Metaroad lists the 3 as one family with identical specializations)"
+  },
+  {
+   "parent": 14040000,
+   "child": 14100000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Snipe spec rank 16 \"Adds [Tempest Arrow] Chain Skill\" (client text, repeated on Rapid Fire and Spiral Arrow); position in the chain is inferred as 4th step"
+  },
+  {
+   "parent": 14130000,
+   "child": 14140000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Snare Shot spec rank 12 \"Adds [Shackling Arrow] Chain Skill\" (client text)"
+  },
+  {
+   "parent": 14180000,
+   "child": 14200000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Ensnaring Trap spec rank 5 \"Adds [Guerilla Strike] Chain Skill\" (client text)"
+  },
+  {
+   "parent": 14260000,
+   "child": 14370000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Defiance spec rank 8 \"Adds [Lightning Arrow] Chain Skill\" (client text); cooldown falls 120s to 42s over ranks like Defiance 60s to 21s"
+  },
+  {
+   "parent": 14170000,
+   "child": "Explosion",
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Trap detonation when stepped on; Metaroad lists Explosion directly after Explosion Trap, no id (inferred from list order)"
+  },
+  {
+   "parent": 14180000,
+   "child": "Root",
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Metaroad lists Root directly after Ensnaring Trap, no id; effect owner is inferred from list order only"
+  },
+  {
+   "parent": 14060000,
+   "child": "Crimson Flames",
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Griffon Arrow \"Inflicts Crimson Flames for 10s\" (client text); Crimson Flames is a System entry with no id"
+  },
+  {
+   "parent": 14010000,
+   "child": "Deadshot - Lv.1",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill (Max 3 Charge Levels, client text)"
+  },
+  {
+   "parent": 14010000,
+   "child": "Deadshot - Lv.2",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill"
+  },
+  {
+   "parent": 14010000,
+   "child": "Deadshot - Max",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill"
+  },
+  {
+   "parent": 14050000,
+   "child": 14050007,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Drill Dart proc child, same name and icon, carries the full Bleed text (inferred from id prefix 1405)"
+  },
+  {
+   "parent": 14130000,
+   "child": 14080000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Burst Arrow \"Selects a target afflicted with Slow or Root\" (client text); Snare Shot applies Slow"
+  },
+  {
+   "parent": 14140000,
+   "child": 14080000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Shackling Arrow applies Root, which also satisfies Burst Arrow"
+  },
+  {
+   "parent": 14090000,
+   "child": 14010000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Deadshot \"Increases damage by 35% if the caster has Precision\"; Marking Shot grants Precision (client text)"
+  },
+  {
+   "parent": 14090000,
+   "child": 14070000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Suppressing Arrow stun chance applies \"while Precision is active\" (Metaroad text)"
+  },
+  {
+   "parent": 14130000,
+   "child": 14360000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Explosive Arrow \"+20% damage to targets afflicted with Slow or Root\" (client text)"
+  },
+  {
+   "parent": 14130000,
+   "child": 14770000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Rooting Eye procs on targets afflicted with Slow or Root (client text)"
+  },
+  {
+   "parent": 14050000,
+   "child": 14720000,
+   "kind": "condition",
+   "confidence": "estimated",
+   "note": "Concentrated Fire procs on a target taking Damage over Time; Drill Dart Bleed is a DoT source (text-based)"
+  },
+  {
+   "parent": 14060000,
+   "child": 14720000,
+   "kind": "condition",
+   "confidence": "estimated",
+   "note": "Crimson Flames is the other DoT source for Concentrated Fire (text-based)"
+  }
+ ],
+ "unlinked": [
+  14210000,
+  14230000,
+  14240000,
+  14250000,
+  14290000,
+  14300000,
+  14320000,
+  "Basic Attack"
+ ],
+ "stagger_condition_only": [
+  14330000
+ ]
+}

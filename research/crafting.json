@@ -1,0 +1,2860 @@
+{
+ "professions": [
+  {
+   "name": "Alchemy",
+   "aliases": [],
+   "makes": "Spellbooks and orbs (Sorcerer weapon = spellbook/tome), potions, serums, scrolls, Manastones/Soulstones",
+   "source": "metabot.gg; aion2hub"
+  },
+  {
+   "name": "Armorsmithing",
+   "aliases": [
+    "Tailoring (aion2hub)"
+   ],
+   "makes": "Armor, all seven slots (metabot says cloth armor); cloth-vs-leather per recipe NOT verified",
+   "source": "metabot.gg; aion2hub"
+  },
+  {
+   "name": "Handicrafting",
+   "aliases": [
+    "Jewelcrafting (aion2hub)"
+   ],
+   "makes": "Accessories (ring, necklace, earrings, bracelet), bows, staves, materials (wikily.gg)",
+   "source": "wikily.gg; aion2hub"
+  },
+  {
+   "name": "Blacksmithing",
+   "aliases": [
+    "Weaponsmith"
+   ],
+   "makes": "Greatswords, longswords, daggers, maces, guards",
+   "source": "metabot.gg"
+  },
+  {
+   "name": "Cooking",
+   "aliases": [],
+   "makes": "Buff food/beverage; 17 recipes per faction (metabot)",
+   "source": "metabot.gg"
+  }
+ ],
+ "system": {
+  "unlock": "Upgrade/specialty quest available from character level 10 (metabot); recommended at 45",
+  "proficiency": "Mastery 1-100 per profession: Novice 1-50 (8,809 XP total), Professional 51-100 (82,680 more XP). At 50 take upgrade quest + craft test item (Blacksmithing: Novice Blacksmith's Hammer = 6 Orichalcum Ingot + 3 Odyle); reward item lifts cap to 100. Each recipe has a required proficiency; bigger gap gives higher success chance (secondary summary). XP-per-craft formula: not stated.",
+  "recipe_structure": "Direct components + intermediate crafts (Artisan's/Expert's/Splendent tiers) expanding to base materials. 'Splendent' variant is a ~25% proc on crafting the base item (aion2hub note on helm). Mastery level per recipe not exposed in extracted pages (aion2kina calculator shows Lv 30-95 for Blacksmithing greatswords).",
+  "conflicts": "aion2kina.com guide claims 300 skill levels, level-200 specialization, 4 crafting professions; contradicts metabot/wikily/aion2hub (100 levels, 5 professions). Treated as unreliable/Aion-1 style."
+ },
+ "item_level_info": "Crafted Dragon Lord gear spans IL 62-102 in tiers 62,70,78,86,94,102 (metabot). Mapping tier->specific item not extracted; per-recipe item_level null.",
+ "recipes": [
+  {
+   "id": 110630102,
+   "name": "Wise Dragon Lord Orb",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Orb",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Truth Orb",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 41,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Radiant Sapphire Gemstone",
+     "qty": 15,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 20
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9
+    },
+    {
+     "item": "Radiant Sapphire Gemstone",
+     "qty": 15
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 82
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Pure Sapphire Gemstone",
+     "qty": 8
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Fine Sapphire Gemstone",
+     "qty": 6
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 41
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Spiritstone",
+     "qty": 20
+    },
+    {
+     "item": "Catalyst (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Odyle",
+     "qty": 2
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-orb-110630102"
+  },
+  {
+   "id": 110530102,
+   "name": "Wise Dragon Lord Spellbook",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Spellbook",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Truth Spellbook",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 41,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 15,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 20
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 15
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 82
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Pure Ruby Gemstone",
+     "qty": 8
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Fine Ruby Gemstone",
+     "qty": 6
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 41
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Spiritstone",
+     "qty": 20
+    },
+    {
+     "item": "Catalyst (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Odyle",
+     "qty": 2
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-spellbook-110530102"
+  },
+  {
+   "id": 110530104,
+   "name": "Splendent Wise Dragon Lord Spellbook",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Splendent Wise Dragon Lord Spellbook",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 21,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 7,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 3,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 7
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 42
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 21
+    }
+   ],
+   "proc_note": [
+    "can also proc",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/splendent-wise-dragon-lord-spellbook-110530104"
+  },
+  {
+   "id": 110530095,
+   "name": "White Dragon Lord Spellbook",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "White Dragon Lord Spellbook",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Truth Spellbook",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Enhanced Hard Balaur Scale",
+     "qty": 29,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 15,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 12,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 7,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Will",
+     "qty": 15
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 12
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 7
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 58
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Pure Ruby Gemstone",
+     "qty": 8
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Fine Ruby Gemstone",
+     "qty": 6
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 3
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/white-dragon-lord-spellbook-110530095"
+  },
+  {
+   "id": 110530103,
+   "name": "Ebony Dragon Lord Spellbook",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Ebony Dragon Lord Spellbook",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Truth Spellbook",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 41,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 15,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 20
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 15
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 82
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Pure Ruby Gemstone",
+     "qty": 8
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Fine Ruby Gemstone",
+     "qty": 6
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 41
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Spiritstone",
+     "qty": 20
+    },
+    {
+     "item": "Catalyst (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Odyle",
+     "qty": 2
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/ebony-dragon-lord-spellbook-110530103"
+  },
+  {
+   "id": 110630103,
+   "name": "Ebony Dragon Lord Orb",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Ebony Dragon Lord Orb",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Truth Orb",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 41,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Radiant Sapphire Gemstone",
+     "qty": 15,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 20
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 3
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 6
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 3
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 9
+    },
+    {
+     "item": "Radiant Sapphire Gemstone",
+     "qty": 15
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 82
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Pure Sapphire Gemstone",
+     "qty": 8
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Fine Sapphire Gemstone",
+     "qty": 6
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 41
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Spiritstone",
+     "qty": 20
+    },
+    {
+     "item": "Catalyst (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Odyle",
+     "qty": 2
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/ebony-dragon-lord-orb-110630103"
+  },
+  {
+   "id": 110520039,
+   "name": "[True] Genesis Dragon Lord Spellbook",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "[True] Genesis Dragon Lord Spellbook",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Heroic"
+   },
+   "materials": [
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 250,
+     "source": null
+    },
+    {
+     "item": "Rampaging Fearsome Aura: [True] Weapon (Bound)",
+     "qty": 16,
+     "source": null
+    },
+    {
+     "item": "Rampaging Fearsome Aura: Weapon (Bound)",
+     "qty": 12,
+     "source": null
+    },
+    {
+     "item": "Radiant Balaur's Essence (Bound)",
+     "qty": 120,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 80,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 90,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 70,
+     "source": null
+    },
+    {
+     "item": "Transfer Stone: Weapon (Heroic) (Bound)",
+     "qty": 1,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Rampaging Fearsome Aura: [True] Weapon (Bound)",
+     "qty": 16
+    },
+    {
+     "item": "Rampaging Fearsome Aura: Weapon (Bound)",
+     "qty": 12
+    },
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 250
+    },
+    {
+     "item": "Transfer Stone: Weapon (Heroic) (Bound)",
+     "qty": 1
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 80
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 90
+    },
+    {
+     "item": "Radiant Balaur's Essence (Bound)",
+     "qty": 120
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 70
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/true-genesis-dragon-lord-spellbook-110520039"
+  },
+  {
+   "id": 110520041,
+   "name": "[True] Splendent Genesis Dragon Lord Spellbook",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "[True] Splendent Genesis Dragon Lord Spellbook",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Heroic"
+   },
+   "materials": [
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 63,
+     "source": null
+    },
+    {
+     "item": "Radiant Balaur's Essence (Bound)",
+     "qty": 30,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 23,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 18,
+     "source": null
+    },
+    {
+     "item": "Kina (All)",
+     "qty": 100000000,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 63
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 20
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 23
+    },
+    {
+     "item": "Radiant Balaur's Essence (Bound)",
+     "qty": 30
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 18
+    },
+    {
+     "item": "Kina (All)",
+     "qty": 100000000
+    }
+   ],
+   "proc_note": [
+    "can also proc",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/true-splendent-genesis-dragon-lord-spellbook-110520041"
+  },
+  {
+   "id": 110520030,
+   "name": "Lava Heart Tome",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Lava Heart Tome",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Heroic"
+   },
+   "materials": [
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 100,
+     "source": null
+    },
+    {
+     "item": "Rampaging Fearsome Aura: Weapon (Bound)",
+     "qty": 16,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 35,
+     "source": null
+    },
+    {
+     "item": "Maddened Wrathful Curse",
+     "qty": 10,
+     "source": null
+    },
+    {
+     "item": "Enhanced Robust Balaur Scale",
+     "qty": 60,
+     "source": null
+    },
+    {
+     "item": "Wrathful Belief",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Wrathful Flame",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 80,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 60,
+     "source": null
+    },
+    {
+     "item": "Kina (All)",
+     "qty": 100000000,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Rampaging Fearsome Aura: Weapon (Bound)",
+     "qty": 16
+    },
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 100
+    },
+    {
+     "item": "Maddened Wrathful Curse",
+     "qty": 10
+    },
+    {
+     "item": "Robust Balaur Scale",
+     "qty": 120
+    },
+    {
+     "item": "Wrathful Belief",
+     "qty": 20
+    },
+    {
+     "item": "Wrathful Flame",
+     "qty": 20
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 35
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 80
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 60
+    },
+    {
+     "item": "Ultimate Dragon Scale Hardener (Bound)",
+     "qty": 60
+    },
+    {
+     "item": "Kina (All)",
+     "qty": 100000000
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/lava-heart-tome-110520030"
+  },
+  {
+   "id": 110560023,
+   "name": "Truth Spellbook",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Truth Spellbook",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Common"
+   },
+   "materials": [
+    {
+     "item": "Magic Crystal",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Odyle",
+     "qty": 2,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Refining Stone",
+     "qty": 5
+    },
+    {
+     "item": "Spiritstone",
+     "qty": 20
+    },
+    {
+     "item": "Catalyst (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Odyle",
+     "qty": 2
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": false,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/truth-spellbook-110560023"
+  },
+  {
+   "id": 210130116,
+   "name": "Wise Dragon Lord Breastplate",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Breastplate",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Orichalcum Breastplate",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4,
+     "source": null
+    },
+    {
+     "item": "Tanned Durable Balaur Leather",
+     "qty": 27,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 13,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 10,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 6,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 13
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 6
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 10
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 54
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Pure Orichalcum Ore",
+     "qty": 5
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Fine Orichalcum Ore",
+     "qty": 4
+    },
+    {
+     "item": "Superior Dragon Leather Softener (Bound)",
+     "qty": 27
+    },
+    {
+     "item": "Orichalcum Solvent (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Raw Leather",
+     "qty": 20
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Orichalcum Ore",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-breastplate-210130116"
+  },
+  {
+   "id": 210230115,
+   "name": "Wise Dragon Lord Greaves",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Greaves",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Orichalcum Greaves",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4,
+     "source": null
+    },
+    {
+     "item": "Tanned Durable Balaur Leather",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 11,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 8,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 5,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 11
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 5
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 8
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 40
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Pure Orichalcum Ore",
+     "qty": 4
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Fine Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Superior Dragon Leather Softener (Bound)",
+     "qty": 20
+    },
+    {
+     "item": "Orichalcum Solvent (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Raw Leather",
+     "qty": 20
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Orichalcum Ore",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-greaves-210230115"
+  },
+  {
+   "id": 210330115,
+   "name": "Wise Dragon Lord Helm",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Helm",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Orichalcum Helm",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4,
+     "source": null
+    },
+    {
+     "item": "Tanned Durable Balaur Leather",
+     "qty": 17,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 8,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 7,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 4,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 8
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 7
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 34
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Pure Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Fine Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Superior Dragon Leather Softener (Bound)",
+     "qty": 17
+    },
+    {
+     "item": "Orichalcum Solvent (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Raw Leather",
+     "qty": 20
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Orichalcum Ore",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-helm-210330115"
+  },
+  {
+   "id": 210330117,
+   "name": "Splendent Wise Dragon Lord Helm",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Splendent Wise Dragon Lord Helm",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Tanned Durable Balaur Leather",
+     "qty": 9,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 2,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 3
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 1
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 2
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 18
+    },
+    {
+     "item": "Superior Dragon Leather Softener (Bound)",
+     "qty": 9
+    }
+   ],
+   "proc_note": [
+    "can also proc",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/splendent-wise-dragon-lord-helm-210330117"
+  },
+  {
+   "id": 210430115,
+   "name": "Wise Dragon Lord Pauldrons",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Pauldrons",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Orichalcum Pauldrons",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4,
+     "source": null
+    },
+    {
+     "item": "Tanned Durable Balaur Leather",
+     "qty": 17,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 8,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 7,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 4,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 8
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 7
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 34
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Pure Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Fine Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Superior Dragon Leather Softener (Bound)",
+     "qty": 17
+    },
+    {
+     "item": "Orichalcum Solvent (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Raw Leather",
+     "qty": 20
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Orichalcum Ore",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-pauldrons-210430115"
+  },
+  {
+   "id": 210530115,
+   "name": "Wise Dragon Lord Gloves",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Gloves",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Orichalcum Gloves",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Tanned Durable Balaur Leather",
+     "qty": 14,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 7,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 6,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 3,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 7
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 6
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 28
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Pure Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Fine Orichalcum Ore",
+     "qty": 2
+    },
+    {
+     "item": "Superior Dragon Leather Softener (Bound)",
+     "qty": 14
+    },
+    {
+     "item": "Orichalcum Solvent (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Raw Leather",
+     "qty": 20
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Orichalcum Ore",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-gloves-210530115"
+  },
+  {
+   "id": 210630115,
+   "name": "Wise Dragon Lord Boots",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Boots",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Orichalcum Boots",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Tanned Durable Balaur Leather",
+     "qty": 17,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 11,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 8,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 4,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 11
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 4
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 8
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 34
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Pure Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Fine Orichalcum Ore",
+     "qty": 3
+    },
+    {
+     "item": "Superior Dragon Leather Softener (Bound)",
+     "qty": 17
+    },
+    {
+     "item": "Orichalcum Solvent (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Raw Leather",
+     "qty": 20
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Orichalcum Ore",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-boots-210630115"
+  },
+  {
+   "id": 210120025,
+   "name": "Genesis Dragon Lord Breastplate",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Genesis Dragon Lord Breastplate",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Heroic"
+   },
+   "materials": [
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 70,
+     "source": null
+    },
+    {
+     "item": "Rampaging Fearsome Aura: Armor (Bound)",
+     "qty": 16,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 10,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 20,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 20,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Rampaging Fearsome Aura: Armor (Bound)",
+     "qty": 16
+    },
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 70
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 10
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 20
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/genesis-dragon-lord-breastplate-210120025"
+  },
+  {
+   "id": 210520025,
+   "name": "Genesis Dragon Lord Gloves",
+   "profession": "Armorsmithing (aion2hub label: Tailoring)",
+   "level": null,
+   "output": {
+    "item": "Genesis Dragon Lord Gloves",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Heroic"
+   },
+   "materials": [
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 45,
+     "source": null
+    },
+    {
+     "item": "Rampaging Fearsome Aura: Armor (Bound)",
+     "qty": 16,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 7,
+     "source": null
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 13,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 13,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Rampaging Fearsome Aura: Armor (Bound)",
+     "qty": 16
+    },
+    {
+     "item": "Rampaging Fearsome Mind (Bound)",
+     "qty": 45
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 7
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 13
+    },
+    {
+     "item": "Radiant Orichalcum Ore",
+     "qty": 13
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": null,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/genesis-dragon-lord-gloves-210520025"
+  },
+  {
+   "id": 310130117,
+   "name": "Wise Dragon Lord Necklace",
+   "profession": "Handicrafting (aion2hub label: Jewelcrafting)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Necklace",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Ruby Necklace",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 26,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 12,
+     "source": null
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 8,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 7,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 12
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Ruby Gemstone",
+     "qty": 8
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 7
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 52
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Pure Ruby Gemstone",
+     "qty": 5
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Fine Ruby Gemstone",
+     "qty": 4
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 26
+    },
+    {
+     "item": "Abrasive (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 4
+    },
+    {
+     "item": "Ruby Gemstone",
+     "qty": 20
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-necklace-310130117"
+  },
+  {
+   "id": 310230119,
+   "name": "Wise Dragon Lord Earrings",
+   "profession": "Handicrafting (aion2hub label: Jewelcrafting)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Earrings",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Diamond Earrings",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 21,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 11,
+     "source": null
+    },
+    {
+     "item": "Radiant Diamond Gemstone",
+     "qty": 7,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 5,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 11
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Diamond Gemstone",
+     "qty": 7
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 5
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 42
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Pure Diamond Gemstone",
+     "qty": 4
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Fine Diamond Gemstone",
+     "qty": 3
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 2
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 21
+    },
+    {
+     "item": "Abrasive (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 3
+    },
+    {
+     "item": "Diamond Gemstone",
+     "qty": 20
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-earrings-310230119"
+  },
+  {
+   "id": 310330119,
+   "name": "Wise Dragon Lord Ring",
+   "profession": "Handicrafting (aion2hub label: Jewelcrafting)",
+   "level": null,
+   "output": {
+    "item": "Wise Dragon Lord Ring",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Unique"
+   },
+   "materials": [
+    {
+     "item": "Artisan's Splendent Sapphire Ring",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Enhanced Durable Balaur Scale",
+     "qty": 16,
+     "source": null
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Wrathful Ego",
+     "qty": 8,
+     "source": null
+    },
+    {
+     "item": "Radiant Sapphire Gemstone",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 3,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Wrathful Ego",
+     "qty": 8
+    },
+    {
+     "item": "Wrathful Will",
+     "qty": 2
+    },
+    {
+     "item": "Artisan's Ultimate Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Wrathful Mind",
+     "qty": 2
+    },
+    {
+     "item": "Radiant Odyle",
+     "qty": 3
+    },
+    {
+     "item": "Radiant Sapphire Gemstone",
+     "qty": 5
+    },
+    {
+     "item": "Balaur's Essence",
+     "qty": 32
+    },
+    {
+     "item": "Artisan's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Pure Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Pure Sapphire Gemstone",
+     "qty": 3
+    },
+    {
+     "item": "Expert's Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Fine Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Fine Sapphire Gemstone",
+     "qty": 2
+    },
+    {
+     "item": "Superior Dragon Scale Hardener (Bound)",
+     "qty": 16
+    },
+    {
+     "item": "Abrasive (Bound)",
+     "qty": 10
+    },
+    {
+     "item": "Refining Stone",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Sapphire Gemstone",
+     "qty": 20
+    }
+   ],
+   "proc_note": null,
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/wise-dragon-lord-ring-310330119"
+  },
+  {
+   "id": 510715029,
+   "name": "Dark Dragon's Seafood Pasta",
+   "profession": "Cooking",
+   "level": null,
+   "output": {
+    "item": "Dark Dragon's Seafood Pasta",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Epic"
+   },
+   "materials": [
+    {
+     "item": "Soft Balaur Meat",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Pujery",
+     "qty": 4,
+     "source": null
+    },
+    {
+     "item": "Conide",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Raw Triora Noodles (Bound)",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Odyle",
+     "qty": 1,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Soft Balaur Meat",
+     "qty": 1
+    },
+    {
+     "item": "Conide",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Pujery",
+     "qty": 4
+    },
+    {
+     "item": "Raw Triora Noodles (Bound)",
+     "qty": 5
+    }
+   ],
+   "proc_note": [
+    "can also proc",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/dark-dragon-s-seafood-pasta-510715029"
+  },
+  {
+   "id": 510615010,
+   "name": "Dark Dragon's Herb Tea",
+   "profession": "Cooking",
+   "level": null,
+   "output": {
+    "item": "Dark Dragon's Herb Tea",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Epic"
+   },
+   "materials": [
+    {
+     "item": "Sweet Balaur Berry",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Morfa",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Ohkra",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Sugar (Bound)",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Odyle",
+     "qty": 1,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Sweet Balaur Berry",
+     "qty": 1
+    },
+    {
+     "item": "Morfa",
+     "qty": 3
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Ohkra",
+     "qty": 2
+    },
+    {
+     "item": "Sugar (Bound)",
+     "qty": 5
+    }
+   ],
+   "proc_note": [
+    "can also proc",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/dark-dragon-s-herb-tea-510615010"
+  },
+  {
+   "id": 510715026,
+   "name": "Dark Dragon's Beef Wellington",
+   "profession": "Cooking",
+   "level": null,
+   "output": {
+    "item": "Dark Dragon's Beef Wellington",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Epic"
+   },
+   "materials": [
+    {
+     "item": "Soft Balaur Meat",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Conide",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Ohkra",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Ulmus Oil (Bound)",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Odyle",
+     "qty": 1,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Soft Balaur Meat",
+     "qty": 1
+    },
+    {
+     "item": "Conide",
+     "qty": 3
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Ohkra",
+     "qty": 3
+    },
+    {
+     "item": "Ulmus Oil (Bound)",
+     "qty": 5
+    }
+   ],
+   "proc_note": [
+    "can also proc",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/dark-dragon-s-beef-wellington-510715026"
+  },
+  {
+   "id": 510615004,
+   "name": "White Dragon's Herb Tea",
+   "profession": "Cooking",
+   "level": null,
+   "output": {
+    "item": "White Dragon's Herb Tea",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Epic"
+   },
+   "materials": [
+    {
+     "item": "Sweet Balaur Berry",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Coriolus",
+     "qty": 3,
+     "source": null
+    },
+    {
+     "item": "Kukuru",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Sugar (Bound)",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Odyle",
+     "qty": 1,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Sweet Balaur Berry",
+     "qty": 1
+    },
+    {
+     "item": "Coriolus",
+     "qty": 3
+    },
+    {
+     "item": "Kukuru",
+     "qty": 2
+    },
+    {
+     "item": "Odyle",
+     "qty": 1
+    },
+    {
+     "item": "Sugar (Bound)",
+     "qty": 5
+    }
+   ],
+   "proc_note": [
+    "can also proc",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/white-dragon-s-herb-tea-510615004"
+  },
+  {
+   "id": 511351003,
+   "name": "Superior Abyssal Manastone",
+   "profession": "Alchemy",
+   "level": null,
+   "output": {
+    "item": "Superior Abyssal Manastone",
+    "qty": 1,
+    "item_level": null,
+    "stats": null,
+    "grade": "Rare"
+   },
+   "materials": [
+    {
+     "item": "Lesser Abyssal Manastone",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Spiritstone Powder",
+     "qty": 5,
+     "source": null
+    },
+    {
+     "item": "Professional Ink (Bound)",
+     "qty": 3,
+     "source": null
+    }
+   ],
+   "base_materials_expanded": [
+    {
+     "item": "Lesser Abyssal Manastone",
+     "qty": 5
+    },
+    {
+     "item": "Spiritstone",
+     "qty": 10
+    },
+    {
+     "item": "Professional Ink (Bound)",
+     "qty": 3
+    }
+   ],
+   "proc_note": [
+    "is not crafted directly — it procs",
+    "% chance each time you craft"
+   ],
+   "kr_tw_recipe_differs": true,
+   "sorc_relevant": true,
+   "source_url": "https://aion2hub.com/tools/crafting-calculator/superior-abyssal-manastone-511351003"
+  }
+ ],
+ "source_urls": [
+  "https://aion2hub.com/tools/crafting-calculator",
+  "https://aion2kina.com/en/tools/material-calculator/",
+  "https://aion2db.gg/crafting/",
+  "https://metabot.gg/en/aion-2/guides/crafting-guide",
+  "https://wikily.gg/aion-2/crafting/handicrafting",
+  "https://www.aion2kina.com/en/guides/aion-2-crafting-professions-guide/",
+  "https://github.com/PFG199/Aion2Kina",
+  "https://github.com/Grachy/aion2-craft"
+ ],
+ "fetched_at": "2026-10-03"
+}

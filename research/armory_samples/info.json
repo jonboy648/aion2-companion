@@ -1,0 +1,284 @@
+{
+  "profile": {
+    "characterId": "SQlrdtb1Tw1yEhS_c-OisaL9MCPPr9kxYIr6S7hx8JM=",
+    "characterLevel": 44,
+    "characterName": "DarthThot",
+    "className": "Sorcerer",
+    "combatPower": 33721,
+    "gender": 2,
+    "genderName": "Female",
+    "pcId": 28,
+    "profileImage": "https://profileimg.plaync.com/game_profile_images/aion2global/images?gameServerKey=2103&charKey=591941876022790346",
+    "raceId": 2,
+    "raceName": "Asmodians",
+    "regionName": "",
+    "serverId": 2103,
+    "serverName": "Triniel",
+    "titleGrade": "Rare",
+    "titleId": 22010016,
+    "titleName": "Shutting Down"
+  },
+  "stat": {
+    "statList": [
+      {
+        "name": "Might",
+        "statSecondList": [
+          "Attack increase +1.4%"
+        ],
+        "type": "STR",
+        "value": 14
+      },
+      {
+        "name": "Dexterity",
+        "statSecondList": [
+          "Evasion increase +0.1%",
+          "Block increase +0.1%",
+          "Critical Hit Resist increase +0.1%"
+        ],
+        "type": "DEX",
+        "value": 1
+      },
+      {
+        "name": "Intelligence",
+        "statSecondList": null,
+        "type": "INT",
+        "value": 0
+      },
+      {
+        "name": "Constitution",
+        "statSecondList": null,
+        "type": "CON",
+        "value": 0
+      },
+      {
+        "name": "Precision",
+        "statSecondList": null,
+        "type": "AGI",
+        "value": 0
+      },
+      {
+        "name": "Willpower",
+        "statSecondList": null,
+        "type": "WIS",
+        "value": 0
+      },
+      {
+        "name": "Justice [Nezekan]",
+        "statSecondList": [
+          "Defense increase +3.7%",
+          "Perfect Chance +3.7%"
+        ],
+        "type": "Justice",
+        "value": 37
+      },
+      {
+        "name": "Freedom [Vaizel]",
+        "statSecondList": [
+          "Accuracy increase +2%",
+          "Evasion increase +2%"
+        ],
+        "type": "Freedom",
+        "value": 20
+      },
+      {
+        "name": "Illusion [Kaisinel]",
+        "statSecondList": [
+          "Cooldown -0.1%",
+          "Endurance Penetration +0.1%"
+        ],
+        "type": "Illusion",
+        "value": 1
+      },
+      {
+        "name": "Life [Yustiel]",
+        "statSecondList": [
+          "HP increase +0.3%",
+          "Regeneration +0.3%"
+        ],
+        "type": "Life",
+        "value": 3
+      },
+      {
+        "name": "Time [Siel]",
+        "statSecondList": [
+          "Combat Speed +3.8%",
+          "Double Resist +3.8%"
+        ],
+        "type": "Time",
+        "value": 38
+      },
+      {
+        "name": "Destruction [Zikel]",
+        "statSecondList": [
+          "Attack increase +0.2%",
+          "Perfect Resist +0.2%"
+        ],
+        "type": "Destruction",
+        "value": 2
+      },
+      {
+        "name": "Death [Triniel]",
+        "statSecondList": [
+          "Critical Hit increase +2.8%",
+          "Regeneration Penetration +2.8%"
+        ],
+        "type": "Death",
+        "value": 28
+      },
+      {
+        "name": "Wisdom [Lumiel]",
+        "statSecondList": [
+          "MP Cost -0.1%",
+          "Double Chance +0.1%"
+        ],
+        "type": "Wisdom",
+        "value": 1
+      },
+      {
+        "name": "Destiny [Marchutan]",
+        "statSecondList": [
+          "MP increase +0.3%",
+          "Endurance +0.3%"
+        ],
+        "type": "Destiny",
+        "value": 3
+      },
+      {
+        "name": "Space [Israphel]",
+        "statSecondList": [
+          "Move Speed +1.1%",
+          "Block increase +1.1%"
+        ],
+        "type": "Space",
+        "value": 11
+      },
+      {
+        "name": "아이템레벨",
+        "statSecondList": null,
+        "type": "ItemLevel",
+        "value": 707
+      }
+    ]
+  },
+  "title": {
+    "ownedCount": 30,
+    "titleList": [
+      {
+        "equipCategory": "Defense",
+        "equipStatList": [
+          {
+            "desc": "Defense Bonus +200"
+          },
+          {
+            "desc": "Regeneration +1.5%"
+          }
+        ],
+        "grade": "Legend",
+        "id": 21010003,
+        "name": "Severer of Cursed Bonds",
+        "ownedCount": 12,
+        "ownedPercent": 13,
+        "statList": [
+          {
+            "desc": "Defense Bonus +20"
+          }
+        ],
+        "totalCount": 95
+      },
+      {
+        "equipCategory": "Attack",
+        "equipStatList": [
+          {
+            "desc": "Critical Attack +30"
+          },
+          {
+            "desc": "Block Penetration +40"
+          }
+        ],
+        "grade": "Legend",
+        "id": 21020038,
+        "name": "Celebrity",
+        "ownedCount": 9,
+        "ownedPercent": 9,
+        "statList": [
+          {
+            "desc": "Penetration +20"
+          }
+        ],
+        "totalCount": 103
+      },
+      {
+        "equipCategory": "Etc",
+        "equipStatList": [
+          {
+            "desc": "Stamina +155"
+          }
+        ],
+        "grade": "Rare",
+        "id": 23030001,
+        "name": "Altgard Cartographer",
+        "ownedCount": 9,
+        "ownedPercent": 9,
+        "statList": [
+          {
+            "desc": "Defense Bonus +10"
+          }
+        ],
+        "totalCount": 99
+      }
+    ],
+    "totalCount": 297
+  },
+  "ranking": {
+    "rankingList": null
+  },
+  "daevanion": {
+    "boardList": [
+      {
+        "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_Weapon_Sword_1H.png",
+        "id": 61,
+        "name": "Nezekan",
+        "open": 1,
+        "openNodeCount": 68,
+        "openPercent": 77,
+        "totalNodeCount": 88
+      },
+      {
+        "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_Weapon_Mace.png",
+        "id": 62,
+        "name": "Zikel",
+        "open": 1,
+        "openNodeCount": 0,
+        "openPercent": 0,
+        "totalNodeCount": 88
+      },
+      {
+        "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_Weapon_Sword_1H.png",
+        "id": 63,
+        "name": "Vaizel",
+        "open": 1,
+        "openNodeCount": 15,
+        "openPercent": 17,
+        "totalNodeCount": 88
+      },
+      {
+        "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_Weapon_Mace.png",
+        "id": 64,
+        "name": "Triniel",
+        "open": 1,
+        "openNodeCount": 1,
+        "openPercent": 1,
+        "totalNodeCount": 116
+      },
+      {
+        "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/UT_Weapon_Mace.png",
+        "id": 66,
+        "name": "Azphel",
+        "open": 0,
+        "openNodeCount": 0,
+        "openPercent": 0,
+        "totalNodeCount": 152
+      }
+    ]
+  }
+}

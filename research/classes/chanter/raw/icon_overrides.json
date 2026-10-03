@@ -1,0 +1,30 @@
+{
+ "18120000": [
+  "ICON_CH_SKILL_013",
+  "ICON_CH_SKILL_012"
+ ],
+ "18710000": [
+  "ICON_CH_SKILL_Passive_012",
+  "ICON_CH_SKILL_Passive_001"
+ ],
+ "18730000": [
+  "ICON_CH_SKILL_Passive_001",
+  "ICON_CH_SKILL_Passive_003"
+ ],
+ "18750000": [
+  "ICON_GL_SKILL_Passive_005",
+  "ICON_CH_SKILL_Passive_005"
+ ],
+ "18760000": [
+  "ICON_GL_SKILL_Passive_006",
+  "ICON_CH_SKILL_Passive_006"
+ ],
+ "18780000": [
+  "ICON_CH_SKILL_Passive_010",
+  "ICON_CH_SKILL_Passive_008"
+ ],
+ "18800000": [
+  "ICON_CH_SKILL_Passive_008",
+  "ICON_CH_SKILL_Passive_010"
+ ]
+}

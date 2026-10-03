@@ -1,0 +1,52 @@
+[
+ {
+  "key": "sm1-gegebase-boss",
+  "source": "https://gegebase.com/games/aion2/spiritmaster_pve_guide",
+  "source_date": "fetched 2026-10-03 (guide reflects Sep 2026 balance)",
+  "scenario_key": "boss_180",
+  "priority": [
+   "flame-blessing",
+   "enhance-spirits-benediction",
+   "command-proxy",
+   "jointstrike-curse",
+   "elemental-fusion",
+   "cold-shock",
+   "dimensional-control",
+   "combustion"
+  ],
+  "note": "Opinion guide. Opener Flame Blessing, basics, Spirit's Grace (Enhance: Spirit's Benediction), Fixed Spirit (Command: Proxy), debuffs, Fusion on a real window. Loop: Cold Shock, Jointstrike: Curse, Combustion (macro this alone), Dimensional Control, Fusion when ready. Rest manual. Spirits (Water first) must be kept up; not in list as they are upkeep."
+ },
+ {
+  "key": "sm2-expcarry-boss",
+  "source": "https://expcarry.com/aion-2-spiritmaster-guide",
+  "source_date": "fetched 2026-10-03",
+  "scenario_key": "boss_180",
+  "priority": [
+   "summon-ancient-spirit",
+   "enhance-spirits-benediction",
+   "jointstrike-corrode",
+   "jointstrike-curse",
+   "elemental-fusion",
+   "dimensional-control",
+   "cold-shock",
+   "combustion"
+  ],
+  "note": "Opinion guide (boosting-service site, treat with care). Keep spirits attacking, Curse + Combustion between cooldowns, Cold Shock before MP runs out, Dimensional Control in its window, Fusion at Four Elements, Ancient Spirit and buffs aligned to a damage window. Stigmas: Ancient Spirit, Benediction, Corrode, Flame Blessing."
+ },
+ {
+  "key": "sm3-expcarry-aoe",
+  "source": "https://expcarry.com/aion-2-spiritmaster-guide",
+  "source_date": "fetched 2026-10-03",
+  "scenario_key": "aoe_pack",
+  "priority": [
+   "summon-ancient-spirit",
+   "enhance-spirits-benediction",
+   "summon-fire-spirit",
+   "cursed-cloud",
+   "jointstrike-corrode",
+   "elemental-fusion",
+   "combustion"
+  ],
+  "note": "AoE/solo preset from the stigma table (Ancient, Benediction, Cursed Cloud, Corrode or Siphon) with Fire Spirit for grouped targets; Fusion AoE spec. Ordering is this file's reading of that table, not a stated rotation."
+ }
+]

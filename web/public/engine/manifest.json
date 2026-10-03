@@ -1,0 +1,25 @@
+{
+ "classes": [
+  "assassin",
+  "chanter",
+  "cleric",
+  "gladiator",
+  "ranger",
+  "sorcerer",
+  "spiritmaster",
+  "templar"
+ ],
+ "data_version": "2026-10-03+aion2app-2026-09-18",
+ "data_versions": {
+  "assassin": "2026-10-03+aion2app-2026-09-18",
+  "chanter": "2026-10-03+aion2app-2026-09-18",
+  "cleric": "2026-10-03+aion2app-2026-09-18",
+  "gladiator": "2026-10-03+aion2app-2026-09-18",
+  "ranger": "2026-10-03+aion2app-2026-09-18",
+  "sorcerer": "2026-10-03+aion2app-2026-09-18",
+  "spiritmaster": "2026-10-03+aion2app-2026-09-18",
+  "templar": "2026-10-03+aion2app-2026-09-18"
+ },
+ "built_at": "2026-10-03T19:52:41+00:00",
+ "modules": 28
+}

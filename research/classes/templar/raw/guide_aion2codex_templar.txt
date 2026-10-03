@@ -1,0 +1,118 @@
+ AION 2 Templar Build Guide: Skills & Role | Aion2 Codex 
+ Skip to content Aion2 Codex Launch ▾ Early Access 
+ Founder's Pack 
+ Download 
+ Servers 
+ Player Count 
+ Twitch Drops 
+ Start Here ▾ Beginner Guide 
+ Leveling Guide 
+ Free to Play 
+ Classes & Factions ▾ All Classes 
+ Tier List 
+ Factions 
+ Builds 
+ Systems ▾ Progression 
+ Flight 
+ Crafting 
+ Pets 
+ Endgame ▾ Dungeons 
+ PvP 
+ Menu Launch Early Access 
+ Founder's Pack 
+ Download 
+ Servers 
+ Player Count 
+ Twitch Drops 
+ Start Here Beginner Guide 
+ Leveling Guide 
+ Free to Play 
+ Classes & Factions All Classes 
+ Tier List 
+ Factions 
+ Builds 
+ Systems Progression 
+ Flight 
+ Crafting 
+ Pets 
+ Endgame Dungeons 
+ PvP 
+ Home 
+ / Classes 
+ / Templar 
+ AION 2 Templar — Main tank
+ Templar is one of the eight launch classes in AION 2, filling the main tank role in the Warrior archetype. Its official class description reads: A sworn guardian who stands firm like a fortress wall, holding the battlefield with an unbreakable shield .
+ Official description quoted from NCSOFT’s AION 2 class reveal. Source: aion2.plaync.com · Verified: 2026-09-28
+ Official AION 2 Templar class reveal art. © NCSOFT Corporation. 
+ AION 2 Templar Overview
+ AION 2 Templar: role, weapon, party slot, combat style Role Main tank 
+ Archetype Warrior 
+ Main weapon Sword + shield 
+ Combat style Melee 
+ Party slot 1 Tank 
+ Official order #2 in NCSOFT's class reveal 
+ What’s Confirmed About the Templar
+ One of the first two classes NCSOFT reworked for AION 2
+ Designed as the dedicated main tank — the only class built purely around holding aggro
+ Wields a sword and shield; the official description leans on the shield as its identity
+ Source: NCSOFT official class reveal · Verified: 2026-09-28
+ What’s Reported From the KR/TW Service
+ Slow-moving in open world, with guard skills, taunts and gap-closers used to keep enemy attention
+ Its ranged options are short-range with long cooldowns — the class is pushed into melee presence
+ Testers described the reworked version as one of the most improved classes versus the original AION
+ Community-reported — KR/TW live service, late September 2026. Not confirmed for the global client.
+ How the Templar Plays
+ The Templar is the class you pick when you want to decide where a fight happens. Its whole kit points at one job: hold attention off everyone else. Community reports describe a rotation built around guard skills and taunts, with more than one way to close distance — pulling a mob to you, or charging through it.
+ The trade-off is damage. It has fewer high-damage skills than any of the other seven, and its ranged attacks are short-range with long cooldowns, so poking from a distance is not a real option. Reported open-world solo damage is slow.
+ Worth knowing before you commit: this is one of the first two classes NCSOFT chose to rework, so the version you play at global launch may differ from the one described in older KR/TW footage.
+ AION 2 Templar Skills
+ Ferocious Strike
+ Pummel
+ Poach
+ Shield Smite
+ Judgment
+ Flash Rampage
+ Debilitating Smash
+ Warding Strike
+ Shield Rush
+ Annihilate
+ Punishment
+ Defiance
+ Skill names only — no values reproduced. Source: Community wiki data from an in-progress KR/TW build, February 2026 . Skill names may change before the global launch.
+ The first tested build is already out, though: the AION 2 Templar PvE build works from a community video guide’s tested skill priorities — community-reported, not officially confirmed.
+ AION 2 Templar Builds
+ The Templar ’s skill list on this page still fills in as the global client’s data gets confirmed — but the first tested build is already out: the Templar build linked below, built from a community video guide on the global early-access client and labeled community-reported. The groundwork every build rests on — Templar ’s main weapon, role, party slot and combat style — is covered above, so you can plan a direction before day one.
+ Pending launch: Skill list for the global client · Gear and stat priorities that carry exact numbers · Leveling route 
+ The live build for this class: AION 2 Templar PvE build — skill priorities, stigma picks and progression, built for the global client.
+ Published builds for every class — PvE and PvP — are collected in the AION 2 builds .
+ Should You Main the Templar ?
+ Pick it if
+ You want to run dungeons and never wait for a group — tank slots are the perennial bottleneck
+ You like controlling the pace of a fight rather than maximising your own numbers
+ You want a class that stays useful in every party composition
+ Look elsewhere if
+ Solo open-world farming is slow — this is a group-first class
+ If you want to see big damage numbers, this is the wrong pick
+ Other Warrior classes: AION 2 Gladiator 
+ Full roster and role comparison: AION 2 classes . Tier rankings: AION 2 tier list .
+ AION 2 Templar FAQ
+ Is the Templar the main tank in AION 2?
+ Yes. The Templar is the dedicated tank class, built around holding aggro and mitigating damage. Gladiator can fill a tank slot in a pinch but is a bruiser rather than a dedicated tank.
+ Can the Templar deal damage in AION 2?
+ It deals meaningful damage — every AION 2 class does — but it has fewer high-damage skills than the other seven. Reported solo damage in open-world content is slow.
+ Is the Templar good for solo play?
+ It is survivable but slow. The class is built for group content; if soloing is your priority, Chanter or Cleric are reported as more comfortable.
+ Updated: 2026-09-30 · Global-launch data
+ Aion2 Codex
+ The AION 2 Codex — builds, classes and launch coverage
+ Aion2 Codex is an unofficial fan site. AION 2 is a trademark of NCSOFT Corporation. We are not affiliated with or endorsed by NCSOFT.
+ About 
+ Contact 
+ Privacy Policy 
+ Terms of Use 
+ Disclaimer 
+ Search 
+ RSS 
+ Sitemap 
+ © 2026 Aion2 Codex · aion2codex.wiki
+ 

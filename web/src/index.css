@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Theme tokens come from D:\Aion2\DESIGN.md (dark navy + gold). The site is dark-only. */
+:root {
+  --bg: #0b1020;
+  --surface: #111831;
+  --surface2: #172040;
+  --surface3: #1f2a52;
+  --border: #2a3563;
+  --border-soft: #1c2547;
+  --text: #e8ebf6;
+  --text-dim: #a3adcc;
+  --text-faint: #6b7699;
+  --gold: #e0b458;
+  --gold-hi: #f2cf7e;
+  --gold-lo: #b98d35;
+  --gold-ink: #1a1405;
+  --cyan: #4cc3e8;
+  --ok: #4cc38a;
+  --warn: #e8a33d;
+  --error: #ef5f6b;
+  --confirmed: #4cc38a;
+  --estimated: #e69500;
+  --unknown: #808aa8;
+  --radius: 0.625rem; /* md 10px; sm 6, lg 14 derived below */
+
+  /* shadcn/ui semantic variables, mapped onto the tokens above */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface3);
+  --popover-foreground: var(--text);
+  --primary: var(--gold);
+  --primary-foreground: var(--gold-ink);
+  --secondary: var(--surface2);
+  --secondary-foreground: var(--text);
+  --muted: var(--surface2);
+  --muted-foreground: var(--text-dim);
+  --accent: var(--surface3);
+  --accent-foreground: var(--text);
+  --destructive: var(--error);
+  --input: var(--border);
+  --ring: var(--gold);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-surface3: var(--surface3);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-text: var(--text);
+  --color-dim: var(--text-dim);
+  --color-faint: var(--text-faint);
+  --color-gold: var(--gold);
+  --color-gold-hi: var(--gold-hi);
+  --color-gold-lo: var(--gold-lo);
+  --color-gold-ink: var(--gold-ink);
+  --color-cyan: var(--cyan);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-error: var(--error);
+  --color-confirmed: var(--confirmed);
+  --color-estimated: var(--estimated);
+  --color-unknown: var(--unknown);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --font-sans: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--border-soft);
+  }
+  html {
+    background: var(--bg);
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+  a {
+    color: var(--cyan);
+  }
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+}

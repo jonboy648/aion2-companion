@@ -1,0 +1,72 @@
+{
+ "_comment": "Same shape as the Sorcerer chains.json. Cleric chains are client-confirmed through the aion2.app Chain section (\"1/3 -> 2/3 -> 3/3\"); Metaroad charge rows and the system buff are inferred.",
+ "links": [
+  {
+   "parent": 17010000,
+   "child": 17020000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Earth's Retribution > Thunder and Lightning, client chain 1/3 2/3 (aion2.app); Metaroad lists them as separate ranks of one chain"
+  },
+  {
+   "parent": 17020000,
+   "child": 17030000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Thunder and Lightning > Discharge, client chain 2/3 3/3. Discharge is described with a trigger chance (spec rank 8 +20%), base chance unknown"
+  },
+  {
+   "parent": 17040000,
+   "child": 17050000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Judgment Thunder > Divine Punishment, client chain 1/2 2/2; spec rank 16 triggers it 1 extra time"
+  },
+  {
+   "parent": 17240000,
+   "child": 17320000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Defiance spec rank 8 text: \"Adds [Blessing of Regeneration] Chain Skill\" (client text). Blessing has no unlock level of its own and inherits Defiance's 16; spec gated"
+  },
+  {
+   "parent": 17070000,
+   "child": 17350000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Condemnation can only target a unit afflicted with Chain of Torment (client description); a condition, not a parent, Condemnation keeps its own unlock level 8"
+  },
+  {
+   "parent": 17060000,
+   "child": "Bolt Level 1",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill: Metaroad rows carry only cd 45, MP 300, range 20 (inferred, same as Sorcerer Hellfire)"
+  },
+  {
+   "parent": 17060000,
+   "child": "Bolt Level 2",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill: Metaroad rows carry only cd 45, MP 300, range 20 (inferred, same as Sorcerer Hellfire)"
+  },
+  {
+   "parent": 17060000,
+   "child": "Bolt Max",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill: Metaroad rows carry only cd 45, MP 300, range 20 (inferred, same as Sorcerer Hellfire)"
+  },
+  {
+   "parent": 17400000,
+   "child": "Earth's Blessing",
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "System buff applied together with Earth Punishment; spec rank 20 extends both durations (Metaroad spec text)"
+  }
+ ],
+ "unlinked": [],
+ "stagger_condition_only": [
+  17370000
+ ]
+}

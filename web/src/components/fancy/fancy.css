@@ -1,0 +1,15 @@
+/* ---- fancy component helpers (components/fancy/*): keyframes + aurora blob shape ---- */
+.aurora-blob {
+  position: absolute;
+  width: 55%;
+  height: 160%;
+  border-radius: 9999px;
+  filter: blur(70px);
+}
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6%, 8%, 0) scale(1.12); }
+}
+@keyframes beam-travel {
+  to { offset-distance: 100%; }
+}

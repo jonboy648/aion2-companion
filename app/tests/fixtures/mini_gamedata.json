@@ -1,0 +1,905 @@
+{
+ "schema_version": 1,
+ "data_version": "mini-fixture",
+ "built_at": "2026-10-03T00:00:00Z",
+ "level_caps": {
+  "global": 45,
+  "korea": 50
+ },
+ "rank_caps": {
+  "global": {
+   "core": 20,
+   "stigma": 20
+  },
+  "korea": {
+   "core": 40,
+   "stigma": 25
+  }
+ },
+ "stigma_slots": {
+  "global": 4,
+  "korea": 6
+ },
+ "skills": {
+  "strike": {
+   "key": "strike",
+   "skill_id": null,
+   "name": "Strike",
+   "name_kr": null,
+   "kind": "active",
+   "element": "fire",
+   "unlock_level": 1,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 100.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "nuke": {
+   "key": "nuke",
+   "skill_id": null,
+   "name": "Nuke",
+   "name_kr": null,
+   "kind": "active",
+   "element": "fire",
+   "unlock_level": 1,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 300.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 4.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 4,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "amp": {
+   "key": "amp",
+   "skill_id": null,
+   "name": "Amp",
+   "name_kr": null,
+   "kind": "active",
+   "element": "fire",
+   "unlock_level": 1,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "mark_hit": {
+   "key": "mark_hit",
+   "skill_id": null,
+   "name": "Mark Hit",
+   "name_kr": null,
+   "kind": "active",
+   "element": "fire",
+   "unlock_level": 1,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 50.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "blaze": {
+   "key": "blaze",
+   "skill_id": null,
+   "name": "Blaze",
+   "name_kr": null,
+   "kind": "active",
+   "element": "fire",
+   "unlock_level": 1,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 200.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 5.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "chain1": {
+   "key": "chain1",
+   "skill_id": null,
+   "name": "Chain1",
+   "name_kr": null,
+   "kind": "active",
+   "element": "fire",
+   "unlock_level": 1,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 100.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "chain2": {
+   "key": "chain2",
+   "skill_id": null,
+   "name": "Chain2",
+   "name_kr": null,
+   "kind": "chain",
+   "element": "fire",
+   "unlock_level": null,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 150.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "chain3": {
+   "key": "chain3",
+   "skill_id": null,
+   "name": "Chain3",
+   "name_kr": null,
+   "kind": "chain",
+   "element": "fire",
+   "unlock_level": null,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 200.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  },
+  "charge": {
+   "key": "charge",
+   "skill_id": null,
+   "name": "Charge",
+   "name_kr": null,
+   "kind": "active",
+   "element": "fire",
+   "unlock_level": 1,
+   "max_rank": 1,
+   "regions": [
+    "global",
+    "korea"
+   ],
+   "atk_ratio_pct": {
+    "value": 100.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "ranks": [
+    {
+     "rank": 1,
+     "flat_min": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "flat_max": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "cooldown_s": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "mp_cost": {
+      "value": 100.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "range_m": 20.0,
+   "aoe_targets": 1,
+   "hits": 1,
+   "anim_lock_s": {
+    "value": 0.5,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "icon": null,
+   "description": "",
+   "tags": [],
+   "specializations": []
+  }
+ },
+ "statuses": {
+  "amp_buff": {
+   "key": "amp_buff",
+   "name": "Amp Buff",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "dmg_mult": {
+    "value": 1.5,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": ""
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": ""
+   }
+  },
+  "mark": {
+   "key": "mark",
+   "name": "Mark",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "fixture"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": ""
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": ""
+   }
+  }
+ },
+ "rules": {
+  "amp": {
+   "skill_key": "amp",
+   "applies": [
+    "amp_buff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": ""
+  },
+  "mark_hit": {
+   "skill_key": "mark_hit",
+   "applies": [
+    "mark"
+   ],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": ""
+  },
+  "blaze": {
+   "skill_key": "blaze",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "mark"
+   ],
+   "consumes": [
+    "mark"
+   ],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": ""
+  },
+  "chain1": {
+   "skill_key": "chain1",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "chain2",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": ""
+  },
+  "chain2": {
+   "skill_key": "chain2",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "chain3",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": ""
+  },
+  "chain3": {
+   "skill_key": "chain3",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": ""
+  },
+  "charge": {
+   "skill_key": "charge",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [
+    {
+     "level": 1,
+     "charge_s": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "dmg_mult": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    },
+    {
+     "level": 2,
+     "charge_s": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "dmg_mult": {
+      "value": 2.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    },
+    {
+     "level": 3,
+     "charge_s": {
+      "value": 2.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     },
+     "dmg_mult": {
+      "value": 3.0,
+      "confidence": "confirmed",
+      "source": "fixture"
+     }
+    }
+   ],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": ""
+  }
+ },
+ "triggers": [],
+ "links": [
+  {
+   "parent_key": "chain1",
+   "child_key": "chain2",
+   "kind": "chain",
+   "confidence": "confirmed"
+  },
+  {
+   "parent_key": "chain2",
+   "child_key": "chain3",
+   "kind": "chain",
+   "confidence": "confirmed"
+  }
+ ],
+ "community": [],
+ "roadmap": [],
+ "daevanion": {
+  "tiny": {
+   "key": "tiny",
+   "name": "Tiny",
+   "unlock_level": 1,
+   "nodes": {
+    "1": {
+     "id": 1,
+     "name": "Start",
+     "rarity": "Common",
+     "cost": 0,
+     "node_type": "start",
+     "effects": [],
+     "skill_key": null,
+     "adjacent": [
+      2,
+      4
+     ],
+     "x": 0,
+     "y": 0
+    },
+    "2": {
+     "id": 2,
+     "name": "Attack",
+     "rarity": "Common",
+     "cost": 1,
+     "node_type": "stat",
+     "effects": [
+      {
+       "stat": "Attack Bonus",
+       "value": 10,
+       "unit": "flat"
+      }
+     ],
+     "skill_key": null,
+     "adjacent": [
+      1,
+      3
+     ],
+     "x": 1,
+     "y": 0
+    },
+    "3": {
+     "id": 3,
+     "name": "Skill Level Up - Strike",
+     "rarity": "Rare",
+     "cost": 2,
+     "node_type": "skill",
+     "effects": [
+      {
+       "stat": "strike",
+       "value": 1,
+       "unit": "flat"
+      }
+     ],
+     "skill_key": "strike",
+     "adjacent": [
+      2
+     ],
+     "x": 2,
+     "y": 0
+    },
+    "4": {
+     "id": 4,
+     "name": "Critical Hit",
+     "rarity": "Common",
+     "cost": 1,
+     "node_type": "stat",
+     "effects": [
+      {
+       "stat": "Critical Hit",
+       "value": 50,
+       "unit": "flat"
+      }
+     ],
+     "skill_key": null,
+     "adjacent": [
+      1
+     ],
+     "x": 0,
+     "y": 1
+    }
+   },
+   "start_id": 1
+  }
+ },
+ "recipes": [
+  {
+   "id": 1,
+   "name": "Mini Orb",
+   "profession": "Alchemy",
+   "level": null,
+   "output_item": "Mini Orb",
+   "output_qty": 1,
+   "item_level": null,
+   "grade": "Unique",
+   "materials": [
+    {
+     "item": "Intermediate Dust",
+     "qty": 2,
+     "source": null
+    },
+    {
+     "item": "Ore",
+     "qty": 3,
+     "source": null
+    }
+   ],
+   "base_materials": [
+    {
+     "item": "Ore",
+     "qty": 7,
+     "source": null
+    },
+    {
+     "item": "Dust",
+     "qty": 4,
+     "source": null
+    }
+   ],
+   "sorc_relevant": true,
+   "source_url": "fixture"
+  },
+  {
+   "id": 2,
+   "name": "Mini Potion",
+   "profession": "Alchemy",
+   "level": null,
+   "output_item": "Mini Potion",
+   "output_qty": 1,
+   "item_level": null,
+   "grade": "Common",
+   "materials": [
+    {
+     "item": "Ore",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Dust",
+     "qty": 1,
+     "source": null
+    }
+   ],
+   "base_materials": [
+    {
+     "item": "Ore",
+     "qty": 1,
+     "source": null
+    },
+    {
+     "item": "Dust",
+     "qty": 1,
+     "source": null
+    }
+   ],
+   "sorc_relevant": null,
+   "source_url": "fixture"
+  }
+ ]
+}

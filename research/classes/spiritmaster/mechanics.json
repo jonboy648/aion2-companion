@@ -1,0 +1,3802 @@
+{
+ "_comment": "Spiritmaster mechanics, same layout as app/aion2c/data/src/mechanics.json plus extension keys (rank_scaling, joint_attacks, resource_systems). Every Num has confidence+source. confirmed = client text/token; estimated = interpretation; unknown = value missing (null).",
+ "icon_prefix_aliases": {
+  "jointstrike-destructive-attack-": "jointstrike-destructive-attack.png",
+  "elemental-fusion-": "elemental-fusion.png",
+  "dimensional-control-": "dimensional-control.png"
+ },
+ "skill_tags": {
+  "dodge": [
+   "manual",
+   "role:mobility",
+   "role:defense"
+  ],
+  "return-all-spirits": [
+   "manual"
+  ],
+  "cold-shock": [
+   "role:sustain",
+   "role:mobility"
+  ],
+  "vacuum-explosion": [
+   "role:mobility"
+  ],
+  "earth-tremor": [
+   "role:mobility"
+  ],
+  "combustion": [
+   "role:mobility"
+  ],
+  "ashy-call": [
+   "role:mobility"
+  ],
+  "siphon": [
+   "manual",
+   "role:sustain",
+   "role:heal",
+   "role:cc"
+  ],
+  "souls-cry": [
+   "manual",
+   "role:cc"
+  ],
+  "cry-of-terror": [
+   "manual",
+   "role:cc"
+  ],
+  "magic-backflow": [
+   "manual",
+   "role:dot",
+   "role:debuff",
+   "role:mobility"
+  ],
+  "summon-fire-spirit": [
+   "role:summon",
+   "role:mobility"
+  ],
+  "summon-water-spirit": [
+   "role:sustain",
+   "role:summon",
+   "role:mobility"
+  ],
+  "summon-wind-spirit": [
+   "role:sustain",
+   "role:summon",
+   "role:mobility"
+  ],
+  "summon-earth-spirit": [
+   "role:summon",
+   "role:defense",
+   "role:mobility"
+  ],
+  "jointstrike-curse": [
+   "role:debuff",
+   "role:dot"
+  ],
+  "jointstrike-corrode": [
+   "manual",
+   "role:cc",
+   "role:debuff",
+   "role:dot"
+  ],
+  "fire-spirit-rage-burst": [
+   "spirit",
+   "role:cc"
+  ],
+  "fire-spirit-rage-burst-16151200": [
+   "spirit",
+   "role:cc"
+  ],
+  "fire-spirit-rage-burst-16151300": [
+   "spirit",
+   "role:cc"
+  ],
+  "fire-spirit-rage-burst-16151400": [
+   "spirit",
+   "role:cc"
+  ],
+  "water-spirit-ice-chain": [
+   "spirit",
+   "role:cc"
+  ],
+  "water-spirit-ice-chain-16152200": [
+   "spirit",
+   "role:cc"
+  ],
+  "water-spirit-ice-chain-16152300": [
+   "spirit",
+   "role:cc"
+  ],
+  "water-spirit-ice-chain-16152400": [
+   "spirit",
+   "role:cc"
+  ],
+  "earth-spirit-taunt": [
+   "spirit",
+   "role:cc"
+  ],
+  "earth-spirit-taunt-16153200": [
+   "spirit",
+   "role:cc"
+  ],
+  "earth-spirit-taunt-16153300": [
+   "spirit",
+   "role:cc"
+  ],
+  "earth-spirit-taunt-16153400": [
+   "spirit",
+   "role:cc"
+  ],
+  "wind-spirit-gale": [
+   "spirit",
+   "role:cc"
+  ],
+  "wind-spirit-gale-16154200": [
+   "spirit",
+   "role:cc"
+  ],
+  "wind-spirit-gale-16154300": [
+   "spirit",
+   "role:cc"
+  ],
+  "wind-spirit-gale-16154400": [
+   "spirit",
+   "role:cc"
+  ],
+  "ancient-spirit-break": [
+   "spirit",
+   "role:cc"
+  ],
+  "spirit-protection": [
+   "manual",
+   "role:defense"
+  ],
+  "command-proxy": [
+   "manual",
+   "role:defense",
+   "role:mobility"
+  ],
+  "spirit-momentum": [
+   "manual",
+   "role:burst",
+   "role:buff"
+  ],
+  "enhance-spirits-benediction": [
+   "manual",
+   "role:burst",
+   "role:heal",
+   "role:defense",
+   "role:mobility"
+  ],
+  "defiance": [
+   "manual",
+   "role:defense",
+   "role:cc"
+  ],
+  "curse-of-despair": [
+   "manual",
+   "role:cc"
+  ],
+  "cursed-cloud": [
+   "manual",
+   "role:dot",
+   "role:debuff"
+  ],
+  "seize-magic": [
+   "manual",
+   "role:cc",
+   "role:debuff",
+   "role:mobility"
+  ],
+  "jointstrike-destructive-attack": [
+   "manual",
+   "role:burst"
+  ],
+  "summon-ancient-spirit": [
+   "manual",
+   "role:summon",
+   "role:burst",
+   "role:mobility"
+  ],
+  "magic-block": [
+   "manual",
+   "role:cc"
+  ],
+  "elemental-replenishment": [
+   "manual",
+   "role:heal",
+   "role:sustain"
+  ],
+  "dismiss-fire-spirit": [
+   "manual"
+  ],
+  "dismiss-water-spirit": [
+   "manual"
+  ],
+  "dismiss-earth-spirit": [
+   "manual"
+  ],
+  "dismiss-wind-spirit": [
+   "manual"
+  ],
+  "dismiss-ancient-spirit": [
+   "manual",
+   "role:mobility"
+  ],
+  "elemental-fusion": [
+   "manual",
+   "role:burst",
+   "role:mobility"
+  ],
+  "elemental-fusion-16300001": [
+   "manual",
+   "role:burst",
+   "role:mobility"
+  ],
+  "extract-vitality": [
+   "manual",
+   "role:heal",
+   "role:sustain"
+  ],
+  "dimensional-control": [
+   "role:cc",
+   "role:mobility"
+  ],
+  "rapid-scattershot": [
+   "role:sustain"
+  ],
+  "kaisinels-power": [
+   "manual",
+   "role:defense",
+   "role:mobility"
+  ],
+  "flame-blessing": [
+   "manual",
+   "role:burst",
+   "role:buff",
+   "role:mobility"
+  ],
+  "assault-terror": [
+   "manual",
+   "role:cc",
+   "role:defense"
+  ],
+  "spirit-strike": [
+   "role:buff"
+  ],
+  "spirit-protection-16720000": [
+   "manual",
+   "role:defense"
+  ],
+  "spirits-descent": [
+   "role:summon"
+  ],
+  "spirit-revitalization": [
+   "role:sustain",
+   "role:heal"
+  ],
+  "mental-focus": [
+   "role:buff"
+  ],
+  "spirit-communion": [
+   "role:heal",
+   "role:sustain"
+  ],
+  "element-unification": [
+   "role:buff"
+  ],
+  "revitalization-contract": [
+   "role:defense",
+   "role:heal",
+   "role:sustain"
+  ],
+  "consecutive-countercurrent": [
+   "role:dot"
+  ],
+  "fire-spirit-basic-attack": [
+   "spirit"
+  ],
+  "water-spirit-basic-attack": [
+   "spirit"
+  ],
+  "wind-spirit-basic-attack": [
+   "spirit"
+  ],
+  "earth-spirit-basic-attack": [
+   "spirit"
+  ],
+  "ancient-spirit-basic-attack": [
+   "spirit"
+  ],
+  "lethargy": [
+   "role:cc"
+  ],
+  "elemental-immunity": [
+   "role:defense"
+  ],
+  "pvp-attack-increase": [
+   "pvp"
+  ],
+  "pvp-critical-hit-resist-increase": [
+   "pvp"
+  ],
+  "pvp-accuracy-increase": [
+   "pvp"
+  ],
+  "fire-spirit-flame-explosion": [
+   "spirit"
+  ],
+  "water-spirit-water-bomb": [
+   "spirit"
+  ],
+  "wind-spirit-malicious-whirlwind": [
+   "spirit"
+  ],
+  "earth-spirit-headbutt": [
+   "spirit"
+  ],
+  "ancient-spirit-destruction": [
+   "spirit"
+  ],
+  "fire-spirit-summon-meteor": [
+   "spirit"
+  ],
+  "water-spirit-glacier-harpoon": [
+   "spirit"
+  ],
+  "wind-spirit-storm": [
+   "spirit"
+  ],
+  "earth-spirit-colossal-stalk": [
+   "spirit"
+  ],
+  "ancient-spirit-magnetic-storm": [
+   "spirit"
+  ],
+  "fire-spirit-leaping-slam": [
+   "spirit"
+  ],
+  "water-spirit-discharge-chill": [
+   "spirit"
+  ],
+  "water-spirit-enhanced-discharge-chill": [
+   "spirit"
+  ],
+  "wind-spirit-falling-wind": [
+   "spirit"
+  ],
+  "wind-spirit-enhanced-falling-wind": [
+   "spirit"
+  ],
+  "earth-spirit-tackle": [
+   "spirit"
+  ],
+  "earth-spirit-enhanced-tackle": [
+   "spirit"
+  ],
+  "ancient-spirit-plasma-cannon": [
+   "spirit"
+  ],
+  "earth-chain": [
+   "role:cc"
+  ]
+ },
+ "anim_lock": {
+  "default": {
+   "value": 1.0,
+   "confidence": "estimated",
+   "source": "default 1.0 s; client cast_time is 0 everywhere; calibrate in app"
+  },
+  "long": {
+   "value": 1.5,
+   "confidence": "unknown",
+   "source": "no Spiritmaster-specific long-animation list found"
+  },
+  "long_skills": [],
+  "note": "Sep 2026 client set Spirit summon cast time to 0 (gegebase); keep ~1s spacing before Water Spirit after Proxy drops to avoid animation cancel (gegebase)."
+ },
+ "element_overrides": {},
+ "kind_overrides": {
+  "elemental-fusion-16300001": "charge_tier"
+ },
+ "resource_systems": {
+  "mp": {
+   "regen": "Cold Shock chain restores 100/100/150 MP; Dimensional Control +100; Water Spirit +20 per spirit hit; Siphon +300; Rapid Scattershot spec +120",
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03"
+  },
+  "hp": {
+   "note": "Elemental Replenishment spends caster HP to heal the Spirit",
+   "confidence": "estimated",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03"
+  },
+  "spirits": {
+   "types": [
+    "fire",
+    "water",
+    "wind",
+    "earth",
+    "ancient"
+   ],
+   "coexist": true,
+   "confidence": "estimated",
+   "source": "expcarry.com 2026-10 (\"several spirits can coexist\"); not confirmed in-game"
+  },
+  "four_elements": {
+   "stacks": 4,
+   "confidence": "confirmed",
+   "source": "Elemental Fusion description (aion2.app)"
+  }
+ },
+ "statuses": {
+  "curse": {
+   "key": "curse",
+   "name": "Curse (Jointstrike: Curse)",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 5 (dump); spec rank 8 adds +2s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "DoT only; also -10% damage the target deals to the Spiritmaster for 5s (dump text), not an amp"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "jointstrike-curse",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "\"every 1s\" in description"
+   },
+   "tick_flat": {
+    "rank1": {
+     "value": 148,
+     "confidence": "confirmed",
+     "source": "se_abe_dmg ...SkillUIDotMaxDmg:tick rank 1"
+    },
+    "rank40": {
+     "value": 3226,
+     "confidence": "confirmed",
+     "source": "same token rank 40"
+    }
+   },
+   "target_damage_reduction_pct": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "description: reduces damage dealt to the Spiritmaster by 10% for 5s"
+   }
+  },
+  "corrode_debuff": {
+   "key": "corrode_debuff",
+   "name": "Corrode (Jointstrike: Corrode)",
+   "on": "target",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 20; spec rank 20 +10s"
+   },
+   "dmg_mult": {
+    "value": 1.1,
+    "confidence": "confirmed",
+    "source": "description: increases damage taken from the Spirit by 10%; spec rank 5 +15% more, Aug 2026 balance 20->25% (gegebase)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "jointstrike-corrode",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "\"every 1s\" in description"
+   },
+   "applies_to": "damage dealt by the Spirit (joint attacks and spirit skills), not caster damage",
+   "tick_flat": {
+    "rank1": {
+     "value": 859,
+     "confidence": "confirmed",
+     "source": "SkillUIDotMaxDmg:tick rank 1"
+    },
+    "rank25": {
+     "value": 2722,
+     "confidence": "confirmed",
+     "source": "same token rank 25"
+    }
+   },
+   "spec_effects": [
+    {
+     "rank": 5,
+     "text": "+15% extra damage taken from Spirit"
+    },
+    {
+     "rank": 10,
+     "text": "-20% Combat Speed 10s"
+    },
+    {
+     "rank": 15,
+     "text": "-70% incoming heal (was 40%, Aug 2026)"
+    },
+    {
+     "rank": 20,
+     "text": "+10s duration"
+    }
+   ]
+  },
+  "cursed_cloud_dot": {
+   "key": "cursed_cloud_dot",
+   "name": "Cursed Cloud DoT",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 10; spec rank 15 +10s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "DoT only"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "cursed-cloud",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "\"every 1s\""
+   },
+   "tick_flat": {
+    "rank1": {
+     "value": 1203,
+     "confidence": "confirmed",
+     "source": "tick token rank 1"
+    },
+    "rank25": {
+     "value": 3811,
+     "confidence": "confirmed",
+     "source": "tick token rank 25"
+    }
+   }
+  },
+  "magic_backflow_dot": {
+   "key": "magic_backflow_dot",
+   "name": "Magic Backflow DoT",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 10"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "DoT only, plus buff-removal bonus hit"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "magic-backflow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "\"every 1s\""
+   },
+   "tick_flat": {
+    "rank1": {
+     "value": 618,
+     "confidence": "confirmed",
+     "source": "tick token rank 1 (3 buffs removed value)"
+    },
+    "rank20": {
+     "value": 1733,
+     "confidence": "confirmed",
+     "source": "tick token rank 20"
+    }
+   }
+  },
+  "four_elements": {
+   "key": "four_elements",
+   "name": "Four Elements",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "no duration stated; persists until Elemental Fusion is used"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "state flag, no multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "elemental-fusion",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "stacks_needed": {
+    "value": 4,
+    "confidence": "confirmed",
+    "source": "description: usable upon reaching 4 stacks"
+   },
+   "stack_source": "each Spirit skill use gives 1 element stack (counts activations, not distinct elements: expcarry 2026-10)",
+   "blocks_further_stacks": true,
+   "consumed_by": "elemental-fusion",
+   "regain_chance_spec16": {
+    "value": 0.25,
+    "confidence": "confirmed",
+    "source": "Elemental Fusion spec rank 16: 25% chance to regain Four Elements"
+   }
+  },
+  "spirit_summoned": {
+   "key": "spirit_summoned",
+   "name": "Spirit summoned (any)",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "until dismissed/killed; Ancient Spirit 30s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "spirit damage is separate from caster damage"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "summon-fire-spirit",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "spirit_skill_chance_per_attack": {
+    "fire": {
+     "value": 0.15,
+     "confidence": "confirmed",
+     "source": "Summon: Fire Spirit text"
+    },
+    "water": {
+     "value": 0.15,
+     "confidence": "confirmed",
+     "source": "Summon: Water Spirit text"
+    },
+    "wind": {
+     "value": 0.1,
+     "confidence": "confirmed",
+     "source": "Summon: Wind Spirit text"
+    },
+    "earth": {
+     "value": 0.1,
+     "confidence": "confirmed",
+     "source": "Summon: Earth Spirit text"
+    }
+   },
+   "spirit_skill_cooldown_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "\"Spirit Skill Cooldown: 3s\" in all four summon texts"
+   },
+   "spec8_extra_chance": {
+    "value": 0.1,
+    "confidence": "confirmed",
+    "source": "each summon spec rank 8: +10% chance to activate skill on attack (additive assumed)"
+   },
+   "ancient": {
+    "duration_s": {
+     "value": 30.0,
+     "confidence": "confirmed",
+     "source": "Summon: Ancient Spirit text"
+    },
+    "skill_after_basic_attacks": {
+     "value": 7,
+     "confidence": "confirmed",
+     "source": "text; 5 with spec rank 15"
+    }
+   },
+   "stat_scaling_per_rank_pct": {
+    "value": 2.0,
+    "confidence": "confirmed",
+    "source": "\"Each skill level increases the Spirit stats by 2%\" (Attack/Defense etc. per element)"
+   }
+  },
+  "spirit_protection_buff": {
+   "key": "spirit_protection_buff",
+   "name": "Spirit Protection (active)",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 3"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "defensive: +10% same-element tolerance, resists 1 skill attack"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "spirit-protection",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "tolerance_pct": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "abe value02:divide100 = 10"
+   },
+   "blocks_skill_attacks": {
+    "value": 1,
+    "confidence": "confirmed",
+    "source": "resists 1 Skill Attack"
+   },
+   "requires": "a Spirit summoned"
+  },
+  "command_proxy_buff": {
+   "key": "command_proxy_buff",
+   "name": "Command: Proxy",
+   "on": "self",
+   "duration_s": {
+    "value": 4.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 4; spec 5 +2s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "defensive redirect"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "command-proxy",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "spirit_pve_tolerance_pct": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "abe 1617000012"
+   },
+   "spirit_pvp_tolerance_pct": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "abe 1617000013"
+   },
+   "damage_share": "50% to Spiritmaster / 50% to Spirit at rank 1 (tokens fall to 26/26 at rank 25: semantics unknown)"
+  },
+  "spirits_benediction": {
+   "key": "spirits_benediction",
+   "name": "Enhance: Spirit's Benediction",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 10"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "+20% PvE Damage Boost (confirmed text); treated as a x1.2 multiplier, real stat bucket unknown; spec 20 +25% more"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "enhance-spirits-benediction",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "\"every 1s\" HoT"
+   },
+   "applies_to": "caster and Spirit",
+   "hot_tick_flat": {
+    "rank1": {
+     "value": 1850,
+     "confidence": "confirmed",
+     "source": "SkillUIHotMin rank 1 (max 2035)"
+    },
+    "rank25": {
+     "value": 7150,
+     "confidence": "confirmed",
+     "source": "SkillUIHotMin rank 25 (max 7865)"
+    }
+   },
+   "pve_tolerance_pct": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "abe 1619000013"
+   }
+  },
+  "spirit_momentum_buff": {
+   "key": "spirit_momentum_buff",
+   "name": "Spirit Momentum",
+   "on": "self",
+   "duration_s": {
+    "value": 15.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time = 15"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "Combat Speed +30%, Spell Action Speed +30%, Magic Attack Bonus +15 (r1) to +110 (r20): not a plain damage mult"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "spirit-momentum",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "combat_speed_pct": {
+    "value": 30.0,
+    "confidence": "confirmed",
+    "source": "token divide100 = 30"
+   },
+   "spell_action_speed_pct": {
+    "value": 30.0,
+    "confidence": "confirmed",
+    "source": "token divide100 = 30"
+   },
+   "magic_attack_bonus": {
+    "rank1": {
+     "value": 15,
+     "confidence": "confirmed",
+     "source": "token"
+    },
+    "rank20": {
+     "value": 110,
+     "confidence": "confirmed",
+     "source": "token"
+    }
+   }
+  },
+  "flame_blessing_buff": {
+   "key": "flame_blessing_buff",
+   "name": "Flame Blessing",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "se token effect_value02:time rank 1 (22.5 at rank 25)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "proc buff: extra hit, not a multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "flame-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "proc_chance": {
+    "value": 0.5,
+    "confidence": "confirmed",
+    "source": "50% chance on landing an attack"
+   },
+   "internal_cd_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "Cooldown: 1s; spec 20 -50%"
+   },
+   "proc_flat": {
+    "rank1": {
+     "value": 234,
+     "confidence": "confirmed",
+     "source": "se_dmg 1637000111"
+    },
+    "rank25": {
+     "value": 744,
+     "confidence": "confirmed",
+     "source": "se_dmg rank 25"
+    }
+   },
+   "proc_atk_ratio_pct": {
+    "value": 41.0,
+    "confidence": "confirmed",
+    "source": "Metaroad 41% ATK"
+   }
+  },
+  "kaisinels_power_buff": {
+   "key": "kaisinels_power_buff",
+   "name": "Kaisinel's Power",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "description"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "+20% Status Effect Chance and Resist, not damage"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "kaisinels-power",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   }
+  },
+  "tenacity": {
+   "key": "tenacity",
+   "name": "Tenacity (Defiance)",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Defiance text; spec 12 +2s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "status-effect immunity"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "defiance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   }
+  },
+  "fear": {
+   "key": "fear",
+   "name": "Fear",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Soul's Cry / Cry of Terror text; +2s with spec"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "CC"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "souls-cry",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "chance": {
+    "souls-cry": {
+     "value": 0.7,
+     "confidence": "confirmed",
+     "source": "text"
+    },
+    "cry-of-terror": {
+     "value": 0.5,
+     "confidence": "confirmed",
+     "source": "text"
+    },
+    "assault-terror": {
+     "value": 0.3,
+     "confidence": "confirmed",
+     "source": "text"
+    },
+    "curse-of-despair": {
+     "value": 0.75,
+     "confidence": "confirmed",
+     "source": "text (Fear and Root)"
+    }
+   },
+   "npc_chance": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "100% on NPC targets"
+   }
+  },
+  "staggered": {
+   "key": "staggered",
+   "name": "Staggered (target state)",
+   "on": "target",
+   "duration_s": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "stagger window length not in any source"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "condition for Rapid Scattershot, Continuous Impact, Soul Decimation"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval not stated"
+   },
+   "note": "Stagger gauge damage per skill is in skills.json coefficients.stagger_gauge_damage"
+  }
+ },
+ "triggers": [
+  {
+   "status_key": "four_elements",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "summon-fire-spirit",
+   "confidence": "estimated",
+   "note": "every Spirit skill activation adds 1 stack (all five spirit types); element field unused. Whether Jointstrike joint hits count is unknown."
+  }
+ ],
+ "rules": {
+  "cold-shock": {
+   "skill_key": "cold-shock",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "vacuum-explosion",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "confirmed",
+   "note": "chain 1/3 in client (aion2.app Chain section); restores 100 MP (description). Spec 12: +2% attack on landing Earth Tremor (<=5 stacks); spec 16: 10% to remove 1 buff on Earth Tremor. Cooldown 0."
+  },
+  "vacuum-explosion": {
+   "skill_key": "vacuum-explosion",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "earth-tremor",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "confirmed",
+   "note": "chain 2/3, restores 100 MP"
+  },
+  "earth-tremor": {
+   "skill_key": "earth-tremor",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 150.0,
+   "confidence": "confirmed",
+   "note": "chain 3/3, restores 150 MP"
+  },
+  "combustion": {
+   "skill_key": "combustion",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "ashy-call",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Chain to Ashy Call only after spec rank 16 (\"Adds [Ashy Call] Chain Skill\"); main PvE filler per gegebase/expcarry. Spec 8: up to +12% damage on fewer targets. 120 MP."
+  },
+  "ashy-call": {
+   "skill_key": "ashy-call",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "chain child of Combustion (spec 16); fire AoE 105% ATK + 84, 120 MP, 4 targets within 4m"
+  },
+  "defiance": {
+   "skill_key": "defiance",
+   "applies": [
+    "tenacity"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "curse-of-despair",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Chain to Curse of Despair only with spec rank 8. Cooldown 60s -> 21s at rank 40 (client). Not affected by cooldown reduction."
+  },
+  "curse-of-despair": {
+   "skill_key": "curse-of-despair",
+   "applies": [
+    "fear"
+   ],
+   "apply_chance": 0.75,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "125% ATK + 521; 75% Fear and Root 5s (100% on NPC); cooldown 120s -> 42s over ranks (client)"
+  },
+  "jointstrike-curse": {
+   "skill_key": "jointstrike-curse",
+   "applies": [
+    "curse"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Main debuff/DoT per gegebase. Cooldown 10s (spec 12 -2s). Spec 16: ignores Block/Evasion and lands as a Critical Hit. Spirit joint hits fire immediately since Sep 2026 patch (gegebase).",
+   "joint_attack": "each summoned Spirit joins with its element hit (see joint_attacks)"
+  },
+  "jointstrike-corrode": {
+   "skill_key": "jointstrike-corrode",
+   "applies": [
+    "corrode_debuff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma. Corrode: +10% damage taken from Spirit and DoT 20s; cd 45s. Do not confuse with passive Corrode (16740000).",
+   "joint_attack": "each summoned Spirit joins; Fire KD, Water slow, Earth seal, Wind stun, Ancient KD"
+  },
+  "jointstrike-destructive-attack": {
+   "skill_key": "jointstrike-destructive-attack",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [
+    {
+     "level": 1,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": 1.0,
+      "confidence": "unknown",
+      "source": "charge tier 1 multiplier unknown"
+     }
+    },
+    {
+     "level": 2,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge tier 2 multiplier unknown"
+     }
+    },
+    {
+     "level": 3,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": 3.0,
+      "confidence": "confirmed",
+      "source": "spec rank 5: up to 200% more damage at full charge = x3.0"
+     }
+    }
+   ],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma. 100% ATK + 573 x5 hits, 50 stagger. Spec 5 turns it into a Charge Skill (Lv.1/Lv.2/Max rows exist in Metaroad, cd 60s, 200 MP). Spec 20 resets Jointstrike: Curse and Corrode cooldowns on first hit. Keep charge release manual.",
+   "joint_attack": "spirit joint hits (see joint_attacks)"
+  },
+  "elemental-fusion": {
+   "skill_key": "elemental-fusion",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "four_elements"
+   ],
+   "consumes": [
+    "four_elements"
+   ],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [
+    {
+     "level": 1,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": 1.0,
+      "confidence": "unknown",
+      "source": "Lv.1 multiplier unknown"
+     }
+    },
+    {
+     "level": 2,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "Lv.2 multiplier unknown"
+     }
+    },
+    {
+     "level": 3,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": 3.0,
+      "confidence": "confirmed",
+      "source": "spec rank 12: up to 200% more damage = x3.0"
+     }
+    }
+   ],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "331.8% ATK + 1075 (rank 1; 7694 flat at rank 40). Usable only with Four Elements; using it removes the status. Spec 8 AoE variant, spec 16 25% chance to regain Four Elements. PvE damage +20% in Sep 2026 balance (gegebase). Do not cast into invulnerability."
+  },
+  "elemental-fusion-16300001": {
+   "skill_key": "elemental-fusion-16300001",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "follow-up damage skill (1075 flat only, 1 rank); the usable Fusion strike granted by Four Elements"
+  },
+  "dimensional-control": {
+   "skill_key": "dimensional-control",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "spirit_summoned"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "confirmed",
+   "note": "\"triggered briefly each time a Spirit uses its skill\"; 86% ATK + 157 AoE, Slow 40% 3s, restores 100 MP; spec 8 +20% slow, spec 12 pull, spec 16 30% root. Main-loop proc per gegebase."
+  },
+  "rapid-scattershot": {
+   "skill_key": "rapid-scattershot",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "staggered"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "82.5% ATK + 116 x4 hits, only on a Staggered target; spec 8 restores 120 MP; spec 16 -1s all skill cooldowns on hit"
+  },
+  "continuous-impact": {
+   "skill_key": "continuous-impact",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "staggered"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "140% ATK + 79 vs Staggered target; hidden skill, trigger unknown"
+  },
+  "soul-decimation": {
+   "skill_key": "soul-decimation",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "staggered"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "41.25% ATK + 101 vs Staggered target, cd 0.5s; hidden skill, trigger unknown"
+  },
+  "summon-fire-spirit": {
+   "skill_key": "summon-fire-spirit",
+   "applies": [
+    "spirit_summoned"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cd 15s, 150 MP (spec 8 -50%). Spirit skill 120% ATK + 68 AoE (cd 3s, 15% per attack). Spirits may coexist per expcarry (unverified in-game)."
+  },
+  "summon-water-spirit": {
+   "skill_key": "summon-water-spirit",
+   "applies": [
+    "spirit_summoned"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Spirit skill 145% ATK + 143 Water; 15% chance per attack; restores 20 MP per Spirit skill/attack landing (description wording). Prioritised in rotation (gegebase)."
+  },
+  "summon-wind-spirit": {
+   "skill_key": "summon-wind-spirit",
+   "applies": [
+    "spirit_summoned"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "4-hit skill 111% ATK + 273/hit, restores 134-147 HP; 10% chance; +1.5% HP per attack landed."
+  },
+  "summon-earth-spirit": {
+   "skill_key": "summon-earth-spirit",
+   "applies": [
+    "spirit_summoned"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "135% ATK + 247 Earth + enmity, 30% Taunt on players; 10% chance per attack."
+  },
+  "summon-ancient-spirit": {
+   "skill_key": "summon-ancient-spirit",
+   "applies": [
+    "spirit_summoned",
+    "four_elements"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma. 30s duration; 189% ATK + 1082 x4 hits, reuses skill after 7 basic attacks (5 with spec 15). Its skill grants Four Elements directly. cd 90s, 200 MP."
+  },
+  "spirit-protection": {
+   "skill_key": "spirit-protection",
+   "applies": [
+    "spirit_protection_buff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [
+    "spirit_summoned"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Hidden active (granted with passive Spirit Protection?), cd 20s; grant source not verified"
+  },
+  "command-proxy": {
+   "skill_key": "command-proxy",
+   "applies": [
+    "command_proxy_buff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 60s. Highest-HP Spirit takes shared damage if within 25m."
+  },
+  "enhance-spirits-benediction": {
+   "skill_key": "enhance-spirits-benediction",
+   "applies": [
+    "spirits_benediction"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 60s; spec 5 restores 10% Max HP on cast. Core burst buff per gegebase."
+  },
+  "spirit-momentum": {
+   "skill_key": "spirit-momentum",
+   "applies": [
+    "spirit_momentum_buff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "hidden active, cd 90s, 15s; grant source not verified"
+  },
+  "flame-blessing": {
+   "skill_key": "flame-blessing",
+   "applies": [
+    "flame_blessing_buff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 60s, 10s buff; PvE damage +50% (Jul 2026), spec 5 vs control-immune 50%->100% (Sep 2026) per gegebase"
+  },
+  "kaisinels-power": {
+   "skill_key": "kaisinels-power",
+   "applies": [
+    "kaisinels_power_buff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 60s, 10s"
+  },
+  "cursed-cloud": {
+   "skill_key": "cursed-cloud",
+   "applies": [
+    "cursed_cloud_dot"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 90s; 105% ATK + 601 AoE + DoT 10s"
+  },
+  "magic-backflow": {
+   "skill_key": "magic-backflow",
+   "applies": [
+    "magic_backflow_dot"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "hidden rank-20 skill, cd 90s; removes up to 3 buffs; damage by buffs removed 412/495/618 flat (r1). Possibly the sub-effect of Seize Magic; link unverified."
+  },
+  "seize-magic": {
+   "skill_key": "seize-magic",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 90s; removes up to 2 buffs (3 with spec 5), extra damage per buff removed; Seal 5s if >=3 removed (spec 10)"
+  },
+  "souls-cry": {
+   "skill_key": "souls-cry",
+   "applies": [
+    "fear"
+   ],
+   "apply_chance": 0.7,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cd 45s (spec 12 -10s), Fear 5s, 15 stagger"
+  },
+  "cry-of-terror": {
+   "skill_key": "cry-of-terror",
+   "applies": [
+    "fear"
+   ],
+   "apply_chance": 0.5,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 90s, AoE Fear"
+  },
+  "assault-terror": {
+   "skill_key": "assault-terror",
+   "applies": [
+    "fear"
+   ],
+   "apply_chance": 0.3,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 120s, +defense up to 20% by targets hit"
+  },
+  "siphon": {
+   "skill_key": "siphon",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 30s: 206% ATK + 1180, 300 MP damage, absorbs HP, restores 300 MP; spec 15 30% max HP shield, spec 20 Stun 3s"
+  },
+  "magic-block": {
+   "skill_key": "magic-block",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stigma, cd 60s; 75% Seal 5s"
+  },
+  "elemental-replenishment": {
+   "skill_key": "elemental-replenishment",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "hidden rank-20 heal: consumes own HP to heal the Spirit 111-129 (r1) to 3281-3828 (r20); cd 30s"
+  },
+  "extract-vitality": {
+   "skill_key": "extract-vitality",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "hidden rank-20 attack+Spirit heal; 67.5% ATK + 81 x2, cd 20s"
+  },
+  "spirit-strike": {
+   "skill_key": "spirit-strike",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: PvE damage boost 6% (rank 1) rising to 45% (rank 40) for caster AND Spirit; Perfect chance 0.4% -> 16%. Jul 2026 patch buffed (gegebase). Best passive investment."
+  },
+  "spirits-descent": {
+   "skill_key": "spirits-descent",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive proc: 50% for 26% ATK + 47 on attacks within 10s of summoning a Spirit (30s with Ancient); cd 1s; Sep PvE +30%"
+  },
+  "corrode": {
+   "skill_key": "corrode",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive proc: +100 Critical Hit, 50% for 50.5% ATK + 124 on a crit; cd 1s"
+  },
+  "consecutive-countercurrent": {
+   "skill_key": "consecutive-countercurrent",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive proc: 50% for 23.5% ATK + 97 on attacks vs targets taking DoT; cd 1s; PvE +30% (Jul 2026)"
+  },
+  "element-unification": {
+   "skill_key": "element-unification",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: +1.1% Crit Damage Boost 10s per Spirit skill attack, stacks 5, cd 1s"
+  },
+  "spirit-revitalization": {
+   "skill_key": "spirit-revitalization",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: 11% chance to reduce Spirit summon cooldown 1s on hit; heals Spirit 12% Max HP at <=50% HP (cd 30s)"
+  },
+  "spirit-communion": {
+   "skill_key": "spirit-communion",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: +100 Accuracy; 10% chance heal 182-200 caster and Spirit on hit; cd 1s"
+  },
+  "mental-focus": {
+   "skill_key": "mental-focus",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: Mental-type chance +11%, Double chance +0.3% (meaning of \"Mental-type Chance\" not documented)"
+  },
+  "revitalization-contract": {
+   "skill_key": "revitalization-contract",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "passive: +17% status resist; +35% Max HP heal at <=10% HP, 60s cd"
+  }
+ },
+ "joint_attacks": {
+  "confidence": "confirmed",
+  "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03; Metaroad spiritmaster skills page, retrieved 2026-10-03",
+  "by_skill": {
+   "jointstrike-curse": {
+    "fire": "101% ATK + 99 AoE",
+    "water": "121% ATK + 119 x5 hits",
+    "earth": "93% ATK + 92 x2 hits, -status resist",
+    "wind": "30% ATK + 29 x5 hits AoE + DoT",
+    "ancient": "172.5% ATK + 170 AoE"
+   },
+   "jointstrike-corrode": {
+    "fire": "95% ATK + 544 AoE + Knockdown",
+    "water": "114% ATK + 653 + Slow",
+    "earth": "103% ATK + 590 + Seal",
+    "wind": "85.5% ATK + 489 AoE + Stun",
+    "ancient": "161.5% ATK + 925 x2 hits AoE + Knockdown"
+   },
+   "jointstrike-destructive-attack": {
+    "fire": "116% ATK + 664 x2 hits AoE",
+    "water": "139.2% ATK + 797 x2 hits",
+    "earth": "127.6% ATK + 731",
+    "wind": "104.4% ATK + 598 x5 hits AoE",
+    "ancient": "185.6% ATK + 1063 x5 hits AoE"
+   }
+  },
+  "note": "Fires once per summoned Spirit; flat parts scale with rank (tokens in skills.json per_level)."
+ },
+ "rank_scaling": {
+  "jointstrike-curse": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_abe_dmg:1600110917:1600110911:SkillUIDotMaxDmg:total": {
+     "1": "59",
+     "5": "194",
+     "10": "437",
+     "15": "633",
+     "20": "786",
+     "25": "912",
+     "40": "1290"
+    },
+    "se_abe_dmg:1600110917:1600110911:SkillUIDotMinDmg:total": {
+     "1": "59",
+     "5": "194",
+     "10": "437",
+     "15": "633",
+     "20": "786",
+     "25": "912",
+     "40": "1290"
+    },
+    "se_abe_dmg:1614000013:1614000011:SkillUIDotMaxDmg:tick": {
+     "1": "148",
+     "5": "486",
+     "10": "1093",
+     "15": "1584",
+     "20": "1966",
+     "25": "2281",
+     "40": "3226"
+    },
+    "se_abe_dmg:1614000013:1614000011:SkillUIDotMinDmg:tick": {
+     "1": "148",
+     "5": "486",
+     "10": "1093",
+     "15": "1584",
+     "20": "1966",
+     "25": "2281",
+     "40": "3226"
+    },
+    "se_dmg:1600110111:SkillUIMaxDmgsum": {
+     "1": "99",
+     "5": "327",
+     "10": "736",
+     "15": "1066",
+     "20": "1324",
+     "25": "1536",
+     "40": "2172"
+    },
+    "se_dmg:1600110111:SkillUIMinDmgsum": {
+     "1": "99",
+     "5": "327",
+     "10": "736",
+     "15": "1066",
+     "20": "1324",
+     "25": "1536",
+     "40": "2172"
+    },
+    "se_dmg:1600110511:SkillUIMaxDmgsum": {
+     "1": "119",
+     "5": "392",
+     "10": "882",
+     "15": "1277",
+     "20": "1586",
+     "25": "1840",
+     "40": "2602"
+    },
+    "se_dmg:1600110511:SkillUIMinDmgsum": {
+     "1": "119",
+     "5": "392",
+     "10": "882",
+     "15": "1277",
+     "20": "1586",
+     "25": "1840",
+     "40": "2602"
+    },
+    "se_dmg:1600110911:SkillUIMaxDmgsum": {
+     "1": "29",
+     "5": "97",
+     "10": "218",
+     "15": "316",
+     "20": "393",
+     "25": "456",
+     "40": "645"
+    },
+    "se_dmg:1600110911:SkillUIMinDmgsum": {
+     "1": "29",
+     "5": "97",
+     "10": "218",
+     "15": "316",
+     "20": "393",
+     "25": "456",
+     "40": "645"
+    },
+    "se_dmg:1600111311:SkillUIMaxDmgsum": {
+     "1": "92",
+     "5": "301",
+     "10": "677",
+     "15": "982",
+     "20": "1219",
+     "25": "1414",
+     "40": "2000"
+    },
+    "se_dmg:1600111311:SkillUIMinDmgsum": {
+     "1": "92",
+     "5": "301",
+     "10": "677",
+     "15": "982",
+     "20": "1219",
+     "25": "1414",
+     "40": "2000"
+    },
+    "se_dmg:1600111711:SkillUIMaxDmgsum": {
+     "1": "170",
+     "5": "558",
+     "10": "1257",
+     "15": "1821",
+     "20": "2261",
+     "25": "2623",
+     "40": "3710"
+    },
+    "se_dmg:1600111711:SkillUIMinDmgsum": {
+     "1": "170",
+     "5": "558",
+     "10": "1257",
+     "15": "1821",
+     "20": "2261",
+     "25": "2623",
+     "40": "3710"
+    },
+    "se_dmg:1614000011:SkillUIMaxDmgsum": {
+     "1": "74",
+     "5": "243",
+     "10": "546",
+     "15": "792",
+     "20": "983",
+     "25": "1140",
+     "40": "1613"
+    },
+    "se_dmg:1614000011:SkillUIMinDmgsum": {
+     "1": "74",
+     "5": "243",
+     "10": "546",
+     "15": "792",
+     "20": "983",
+     "25": "1140",
+     "40": "1613"
+    },
+    "@dmg_min": {
+     "1": 74,
+     "5": 243,
+     "10": 546,
+     "15": 792,
+     "20": 983,
+     "25": 1140,
+     "40": 1613
+    },
+    "@dmg_max": {
+     "1": 74,
+     "5": 243,
+     "10": 546,
+     "15": 792,
+     "20": 983,
+     "25": 1140,
+     "40": 1613
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "jointstrike-corrode": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_abe_dmg:1615000013:1615000011:SkillUIDotMaxDmg:tick": {
+     "1": "859",
+     "5": "1350",
+     "10": "1755",
+     "15": "2092",
+     "20": "2407",
+     "25": "2722"
+    },
+    "se_abe_dmg:1615000013:1615000011:SkillUIDotMinDmg:tick": {
+     "1": "859",
+     "5": "1350",
+     "10": "1755",
+     "15": "2092",
+     "20": "2407",
+     "25": "2722"
+    },
+    "se_dmg:1615000011:SkillUIMaxDmgsum": {
+     "1": "429",
+     "5": "675",
+     "10": "877",
+     "15": "1046",
+     "20": "1203",
+     "25": "1361"
+    },
+    "se_dmg:1615000011:SkillUIMinDmgsum": {
+     "1": "429",
+     "5": "675",
+     "10": "877",
+     "15": "1046",
+     "20": "1203",
+     "25": "1361"
+    },
+    "se_dmg:1615110011:SkillUIMaxDmgsum": {
+     "1": "544",
+     "5": "855",
+     "10": "1111",
+     "15": "1325",
+     "20": "1524",
+     "25": "1724"
+    },
+    "se_dmg:1615110011:SkillUIMinDmgsum": {
+     "1": "544",
+     "5": "855",
+     "10": "1111",
+     "15": "1325",
+     "20": "1524",
+     "25": "1724"
+    },
+    "se_dmg:1615210011:SkillUIMaxDmgsum": {
+     "1": "653",
+     "5": "1026",
+     "10": "1333",
+     "15": "1590",
+     "20": "1829",
+     "25": "2069"
+    },
+    "se_dmg:1615210011:SkillUIMinDmgsum": {
+     "1": "653",
+     "5": "1026",
+     "10": "1333",
+     "15": "1590",
+     "20": "1829",
+     "25": "2069"
+    },
+    "se_dmg:1615310011:SkillUIMaxDmgsum": {
+     "1": "590",
+     "5": "927",
+     "10": "1205",
+     "15": "1436",
+     "20": "1653",
+     "25": "1869"
+    },
+    "se_dmg:1615310011:SkillUIMinDmgsum": {
+     "1": "590",
+     "5": "927",
+     "10": "1205",
+     "15": "1436",
+     "20": "1653",
+     "25": "1869"
+    },
+    "se_dmg:1615410011:SkillUIMaxDmgsum": {
+     "1": "489",
+     "5": "769",
+     "10": "1000",
+     "15": "1192",
+     "20": "1372",
+     "25": "1551"
+    },
+    "se_dmg:1615410011:SkillUIMinDmgsum": {
+     "1": "489",
+     "5": "769",
+     "10": "1000",
+     "15": "1192",
+     "20": "1372",
+     "25": "1551"
+    },
+    "se_dmg:1615510011:SkillUIMaxDmgsum": {
+     "1": "925",
+     "5": "1453",
+     "10": "1889",
+     "15": "2252",
+     "20": "2592",
+     "25": "2931"
+    },
+    "se_dmg:1615510011:SkillUIMinDmgsum": {
+     "1": "925",
+     "5": "1453",
+     "10": "1889",
+     "15": "2252",
+     "20": "2592",
+     "25": "2931"
+    },
+    "@dmg_min": {
+     "1": 429,
+     "5": 675,
+     "10": 877,
+     "15": 1046,
+     "20": 1203,
+     "25": 1361
+    },
+    "@dmg_max": {
+     "1": 429,
+     "5": 675,
+     "10": 877,
+     "15": 1046,
+     "20": 1203,
+     "25": 1361
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "cursed-cloud": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_abe_dmg:1622000012:1622000011:SkillUIDotMaxDmg:tick": {
+     "1": "1203",
+     "5": "1890",
+     "10": "2457",
+     "15": "2929",
+     "20": "3370",
+     "25": "3811"
+    },
+    "se_abe_dmg:1622000012:1622000011:SkillUIDotMinDmg:tick": {
+     "1": "1203",
+     "5": "1890",
+     "10": "2457",
+     "15": "2929",
+     "20": "3370",
+     "25": "3811"
+    },
+    "se_dmg:1622000011:SkillUIMaxDmgsum": {
+     "1": "601",
+     "5": "945",
+     "10": "1228",
+     "15": "1464",
+     "20": "1685",
+     "25": "1905"
+    },
+    "se_dmg:1622000011:SkillUIMinDmgsum": {
+     "1": "601",
+     "5": "945",
+     "10": "1228",
+     "15": "1464",
+     "20": "1685",
+     "25": "1905"
+    },
+    "@dmg_min": {
+     "1": 601,
+     "5": 945,
+     "10": 1228,
+     "15": 1464,
+     "20": 1685,
+     "25": 1905
+    },
+    "@dmg_max": {
+     "1": 601,
+     "5": 945,
+     "10": 1228,
+     "15": 1464,
+     "20": 1685,
+     "25": 1905
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "magic-backflow": {
+   "max_rank": 20,
+   "values_by_rank": {
+    "se_abe_dmg:10090012:10090011:SkillUIDotMaxDmg:tick": {
+     "1": "618",
+     "5": "972",
+     "10": "1263",
+     "15": "1506",
+     "20": "1733"
+    },
+    "se_abe_dmg:10090012:10090011:SkillUIDotMinDmg:tick": {
+     "1": "618",
+     "5": "972",
+     "10": "1263",
+     "15": "1506",
+     "20": "1733"
+    },
+    "se_dmg:10090111:SkillUIMaxDmgsum": {
+     "1": "412",
+     "5": "648",
+     "10": "842",
+     "15": "1004",
+     "20": "1155"
+    },
+    "se_dmg:10090111:SkillUIMinDmgsum": {
+     "1": "412",
+     "5": "648",
+     "10": "842",
+     "15": "1004",
+     "20": "1155"
+    },
+    "se_dmg:10090121:SkillUIMaxDmgsum": {
+     "1": "495",
+     "5": "777",
+     "10": "1010",
+     "15": "1205",
+     "20": "1386"
+    },
+    "se_dmg:10090121:SkillUIMinDmgsum": {
+     "1": "495",
+     "5": "777",
+     "10": "1010",
+     "15": "1205",
+     "20": "1386"
+    },
+    "se_dmg:10090131:SkillUIMaxDmgsum": {
+     "1": "618",
+     "5": "972",
+     "10": "1263",
+     "15": "1506",
+     "20": "1733"
+    },
+    "se_dmg:10090131:SkillUIMinDmgsum": {
+     "1": "618",
+     "5": "972",
+     "10": "1263",
+     "15": "1506",
+     "20": "1733"
+    },
+    "@dmg_min": {
+     "1": 618,
+     "5": 972,
+     "10": 1263,
+     "15": 1506,
+     "20": 1733
+    },
+    "@dmg_max": {
+     "1": 618,
+     "5": 972,
+     "10": 1263,
+     "15": 1506,
+     "20": 1733
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "enhance-spirits-benediction": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_abe_dmg:1619000011:1619000015:SkillUIHotMax:tick": {
+     "1": "2035",
+     "5": "3300",
+     "10": "4455",
+     "15": "5896",
+     "20": "6875",
+     "25": "7865"
+    },
+    "se_abe_dmg:1619000011:1619000015:SkillUIHotMin:tick": {
+     "1": "1850",
+     "5": "3000",
+     "10": "4050",
+     "15": "5360",
+     "20": "6250",
+     "25": "7150"
+    },
+    "@heal_min": {
+     "1": 1850,
+     "5": 3000,
+     "10": 4050,
+     "15": 5360,
+     "20": 6250,
+     "25": 7150
+    },
+    "@heal_max": {
+     "1": 2035,
+     "5": 3300,
+     "10": 4455,
+     "15": 5896,
+     "20": 6875,
+     "25": 7865
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "spirit-momentum": {
+   "max_rank": 20,
+   "values_by_rank": {
+    "se_abe:10180011:10180013:value02": {
+     "1": "15",
+     "5": "35",
+     "10": "60",
+     "15": "85",
+     "20": "110"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "spirit-strike": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "abe:1671000011:value02:divide100": {
+     "1": "6",
+     "5": "10",
+     "10": "15",
+     "15": "20",
+     "20": "25",
+     "25": "30",
+     "40": "45"
+    },
+    "abe:1671000012:value02:divide100": {
+     "1": "3",
+     "5": "5",
+     "10": "7.5",
+     "15": "10",
+     "20": "12.5",
+     "25": "15",
+     "40": "22.5"
+    },
+    "abe:1671000021:value02:divide100": {
+     "1": "0.4",
+     "5": "2",
+     "10": "4",
+     "15": "6",
+     "20": "8",
+     "25": "10",
+     "40": "16"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "spirit-protection-16720000": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "abe:1672000011:value02:divide100": {
+     "1": "2",
+     "5": "10",
+     "10": "20",
+     "15": "30",
+     "20": "40",
+     "25": "50",
+     "40": "80"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "corrode": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "abe:1674000011:value02": {
+     "1": "100",
+     "5": "140",
+     "10": "190",
+     "15": "240",
+     "20": "290",
+     "25": "340",
+     "40": "490"
+    },
+    "se_dmg:1674000111:SkillUIMaxDmgsum": {
+     "1": "124",
+     "5": "289",
+     "10": "483",
+     "15": "619",
+     "20": "725",
+     "25": "831",
+     "40": "1149"
+    },
+    "se_dmg:1674000111:SkillUIMinDmgsum": {
+     "1": "124",
+     "5": "289",
+     "10": "483",
+     "15": "619",
+     "20": "725",
+     "25": "831",
+     "40": "1149"
+    },
+    "@dmg_min": {
+     "1": 124,
+     "5": 289,
+     "10": 483,
+     "15": 619,
+     "20": 725,
+     "25": 831,
+     "40": 1149
+    },
+    "@dmg_max": {
+     "1": 124,
+     "5": 289,
+     "10": 483,
+     "15": 619,
+     "20": 725,
+     "25": 831,
+     "40": 1149
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "flame-blessing": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se:1637000011:effect_value02:time": {
+     "1": "10",
+     "5": "12",
+     "10": "14.5",
+     "15": "17",
+     "20": "20",
+     "25": "22.5"
+    },
+    "se_dmg:1637000111:SkillUIMaxDmgsum": {
+     "1": "234",
+     "5": "369",
+     "10": "479",
+     "15": "571",
+     "20": "658",
+     "25": "744"
+    },
+    "se_dmg:1637000111:SkillUIMinDmgsum": {
+     "1": "234",
+     "5": "369",
+     "10": "479",
+     "15": "571",
+     "20": "658",
+     "25": "744"
+    },
+    "@dmg_min": {
+     "1": 234,
+     "5": 369,
+     "10": 479,
+     "15": 571,
+     "20": 658,
+     "25": 744
+    },
+    "@dmg_max": {
+     "1": 234,
+     "5": 369,
+     "10": 479,
+     "15": 571,
+     "20": 658,
+     "25": 744
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "command-proxy": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "abe:1617000111:value02:divide100": {
+     "1": "50",
+     "5": "46",
+     "10": "41",
+     "15": "36",
+     "20": "31",
+     "25": "26"
+    },
+    "abe:1617000111:value03:divide100": {
+     "1": "50",
+     "5": "46",
+     "10": "41",
+     "15": "36",
+     "20": "31",
+     "25": "26"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "elemental-fusion": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1630000011:SkillUIMaxDmgsum": {
+     "1": "1075",
+     "5": "2160",
+     "10": "3314",
+     "15": "4210",
+     "20": "4907",
+     "25": "5604",
+     "40": "7694"
+    },
+    "se_dmg:1630000011:SkillUIMinDmgsum": {
+     "1": "1075",
+     "5": "2160",
+     "10": "3314",
+     "15": "4210",
+     "20": "4907",
+     "25": "5604",
+     "40": "7694"
+    },
+    "@dmg_min": {
+     "1": 1075,
+     "5": 2160,
+     "10": 3314,
+     "15": 4210,
+     "20": 4907,
+     "25": 5604,
+     "40": 7694
+    },
+    "@dmg_max": {
+     "1": 1075,
+     "5": 2160,
+     "10": 3314,
+     "15": 4210,
+     "20": 4907,
+     "25": 5604,
+     "40": 7694
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "spirits-descent": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1673000111:SkillUIMaxDmgsum": {
+     "1": "47",
+     "5": "128",
+     "10": "224",
+     "15": "294",
+     "20": "357",
+     "25": "411",
+     "40": "575"
+    },
+    "se_dmg:1673000111:SkillUIMinDmgsum": {
+     "1": "47",
+     "5": "128",
+     "10": "224",
+     "15": "294",
+     "20": "357",
+     "25": "411",
+     "40": "575"
+    },
+    "@dmg_min": {
+     "1": 47,
+     "5": 128,
+     "10": 224,
+     "15": 294,
+     "20": 357,
+     "25": 411,
+     "40": 575
+    },
+    "@dmg_max": {
+     "1": 47,
+     "5": 128,
+     "10": 224,
+     "15": 294,
+     "20": 357,
+     "25": 411,
+     "40": 575
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "consecutive-countercurrent": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1680000111:SkillUIMaxDmgsum": {
+     "1": "97",
+     "5": "171",
+     "10": "248",
+     "15": "308",
+     "20": "357",
+     "25": "406",
+     "40": "554"
+    },
+    "se_dmg:1680000111:SkillUIMinDmgsum": {
+     "1": "97",
+     "5": "171",
+     "10": "248",
+     "15": "308",
+     "20": "357",
+     "25": "406",
+     "40": "554"
+    },
+    "@dmg_min": {
+     "1": 97,
+     "5": 171,
+     "10": 248,
+     "15": 308,
+     "20": 357,
+     "25": 406,
+     "40": 554
+    },
+    "@dmg_max": {
+     "1": 97,
+     "5": 171,
+     "10": 248,
+     "15": 308,
+     "20": 357,
+     "25": 406,
+     "40": 554
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "element-unification": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "abe:1678000111:value02:divide100abs": {
+     "1": "1.1",
+     "5": "1.5",
+     "10": "2",
+     "15": "2.5",
+     "20": "3",
+     "25": "3.5",
+     "40": "5"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "spirit-communion": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1677000111:SkillUIHPHealMax": {
+     "1": "200",
+     "5": "372",
+     "10": "518",
+     "15": "696",
+     "20": "814",
+     "25": "934",
+     "40": "1310"
+    },
+    "se_dmg:1677000111:SkillUIHPHealMin": {
+     "1": "182",
+     "5": "338",
+     "10": "471",
+     "15": "633",
+     "20": "740",
+     "25": "849",
+     "40": "1191"
+    },
+    "@heal_min": {
+     "1": 182,
+     "5": 338,
+     "10": 471,
+     "15": 633,
+     "20": 740,
+     "25": 849,
+     "40": 1191
+    },
+    "@heal_max": {
+     "1": 200,
+     "5": 372,
+     "10": 518,
+     "15": 696,
+     "20": 814,
+     "25": 934,
+     "40": 1310
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "revitalization-contract": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "abe:1679000012:value02:divide100": {
+     "1": "17",
+     "5": "25",
+     "10": "35",
+     "15": "45",
+     "20": "55",
+     "25": "65",
+     "40": "95"
+    },
+    "se:1679000111:effect_value02:divide100": {
+     "1": "35",
+     "5": "39",
+     "10": "44",
+     "15": "49",
+     "20": "54",
+     "25": "59",
+     "40": "74"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "spirit-revitalization": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "abe:1675000012:value02:divide100": {
+     "1": "11",
+     "5": "15",
+     "10": "20",
+     "15": "25",
+     "20": "30",
+     "25": "35",
+     "40": "50"
+    },
+    "se:1675000111:effect_value02:divide100": {
+     "1": "12",
+     "5": "20",
+     "10": "30",
+     "15": "40",
+     "20": "50",
+     "25": "60",
+     "40": "90"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "mental-focus": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "abe:1676000011:value02:divide100": {
+     "1": "11",
+     "5": "15",
+     "10": "20",
+     "15": "25",
+     "20": "30",
+     "25": "35",
+     "40": "50"
+    },
+    "abe:1676000012:value02:divide100": {
+     "1": "0.3",
+     "5": "1.5",
+     "10": "3",
+     "15": "4.5",
+     "20": "6",
+     "25": "7.5",
+     "40": "12"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "summon-fire-spirit": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1610000121:SkillUIMaxDmgsum": {
+     "1": "68",
+     "5": "295",
+     "10": "781",
+     "15": "1198",
+     "20": "1522",
+     "25": "1774",
+     "40": "2530"
+    },
+    "se_dmg:1610000121:SkillUIMinDmgsum": {
+     "1": "68",
+     "5": "295",
+     "10": "781",
+     "15": "1198",
+     "20": "1522",
+     "25": "1774",
+     "40": "2530"
+    },
+    "@dmg_min": {
+     "1": 68,
+     "5": 295,
+     "10": 781,
+     "15": 1198,
+     "20": 1522,
+     "25": 1774,
+     "40": 2530
+    },
+    "@dmg_max": {
+     "1": 68,
+     "5": 295,
+     "10": 781,
+     "15": 1198,
+     "20": 1522,
+     "25": 1774,
+     "40": 2530
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "summon-water-spirit": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1611000111:SkillUIMaxDmgsum": {
+     "1": "143",
+     "5": "469",
+     "10": "1057",
+     "15": "1531",
+     "20": "1900",
+     "25": "2205",
+     "40": "3118"
+    },
+    "se_dmg:1611000111:SkillUIMinDmgsum": {
+     "1": "143",
+     "5": "469",
+     "10": "1057",
+     "15": "1531",
+     "20": "1900",
+     "25": "2205",
+     "40": "3118"
+    },
+    "@dmg_min": {
+     "1": 143,
+     "5": 469,
+     "10": 1057,
+     "15": 1531,
+     "20": 1900,
+     "25": 2205,
+     "40": 3118
+    },
+    "@dmg_max": {
+     "1": 143,
+     "5": 469,
+     "10": 1057,
+     "15": 1531,
+     "20": 1900,
+     "25": 2205,
+     "40": 3118
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "summon-wind-spirit": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1612000025:SkillUIHPHealMax": {
+     "1": "147",
+     "5": "393",
+     "10": "696",
+     "15": "1040",
+     "20": "1227",
+     "25": "1417",
+     "40": "2014"
+    },
+    "se_dmg:1612000025:SkillUIHPHealMin": {
+     "1": "134",
+     "5": "357",
+     "10": "633",
+     "15": "945",
+     "20": "1115",
+     "25": "1288",
+     "40": "1831"
+    },
+    "se_dmg:1612000111:SkillUIMaxDmgsum": {
+     "1": "273",
+     "5": "636",
+     "10": "1062",
+     "15": "1361",
+     "20": "1595",
+     "25": "1828",
+     "40": "2527"
+    },
+    "se_dmg:1612000111:SkillUIMinDmgsum": {
+     "1": "273",
+     "5": "636",
+     "10": "1062",
+     "15": "1361",
+     "20": "1595",
+     "25": "1828",
+     "40": "2527"
+    },
+    "@dmg_min": {
+     "1": 273,
+     "5": 636,
+     "10": 1062,
+     "15": 1361,
+     "20": 1595,
+     "25": 1828,
+     "40": 2527
+    },
+    "@dmg_max": {
+     "1": 273,
+     "5": 636,
+     "10": 1062,
+     "15": 1361,
+     "20": 1595,
+     "25": 1828,
+     "40": 2527
+    },
+    "@heal_min": {
+     "1": 134,
+     "5": 357,
+     "10": 633,
+     "15": 945,
+     "20": 1115,
+     "25": 1288,
+     "40": 1831
+    },
+    "@heal_max": {
+     "1": 147,
+     "5": 393,
+     "10": 696,
+     "15": 1040,
+     "20": 1227,
+     "25": 1417,
+     "40": 2014
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "summon-earth-spirit": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se:1613000121:aggro_absolute": {
+     "1": "3750",
+     "5": "6750",
+     "10": "10500",
+     "15": "14250",
+     "20": "18000",
+     "25": "21750",
+     "40": "33000"
+    },
+    "se_dmg:1613000121:SkillUIMaxDmgsum": {
+     "1": "247",
+     "5": "668",
+     "10": "1215",
+     "15": "1579",
+     "20": "1883",
+     "25": "2166",
+     "40": "3017"
+    },
+    "se_dmg:1613000121:SkillUIMinDmgsum": {
+     "1": "247",
+     "5": "668",
+     "10": "1215",
+     "15": "1579",
+     "20": "1883",
+     "25": "2166",
+     "40": "3017"
+    },
+    "@dmg_min": {
+     "1": 247,
+     "5": 668,
+     "10": 1215,
+     "15": 1579,
+     "20": 1883,
+     "25": 2166,
+     "40": 3017
+    },
+    "@dmg_max": {
+     "1": 247,
+     "5": 668,
+     "10": 1215,
+     "15": 1579,
+     "20": 1883,
+     "25": 2166,
+     "40": 3017
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "summon-ancient-spirit": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_dmg:1625000111:SkillUIMaxDmgsum": {
+     "1": "1082",
+     "5": "1701",
+     "10": "2211",
+     "15": "2636",
+     "20": "3033",
+     "25": "3430"
+    },
+    "se_dmg:1625000111:SkillUIMinDmgsum": {
+     "1": "1082",
+     "5": "1701",
+     "10": "2211",
+     "15": "2636",
+     "20": "3033",
+     "25": "3430"
+    },
+    "@dmg_min": {
+     "1": 1082,
+     "5": 1701,
+     "10": 2211,
+     "15": 2636,
+     "20": 3033,
+     "25": 3430
+    },
+    "@dmg_max": {
+     "1": 1082,
+     "5": 1701,
+     "10": 2211,
+     "15": 2636,
+     "20": 3033,
+     "25": 3430
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "combustion": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1604000011:SkillUIMaxDmgsum": {
+     "1": "63",
+     "5": "190",
+     "10": "462",
+     "15": "696",
+     "20": "878",
+     "25": "1019",
+     "40": "1443"
+    },
+    "se_dmg:1604000011:SkillUIMinDmgsum": {
+     "1": "63",
+     "5": "190",
+     "10": "462",
+     "15": "696",
+     "20": "878",
+     "25": "1019",
+     "40": "1443"
+    },
+    "@dmg_min": {
+     "1": 63,
+     "5": 190,
+     "10": 462,
+     "15": 696,
+     "20": 878,
+     "25": 1019,
+     "40": 1443
+    },
+    "@dmg_max": {
+     "1": 63,
+     "5": 190,
+     "10": 462,
+     "15": 696,
+     "20": 878,
+     "25": 1019,
+     "40": 1443
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "cold-shock": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1601000011:SkillUIMaxDmgsum": {
+     "1": "54",
+     "5": "151",
+     "10": "360",
+     "15": "539",
+     "20": "678",
+     "25": "786",
+     "40": "1111"
+    },
+    "se_dmg:1601000011:SkillUIMinDmgsum": {
+     "1": "54",
+     "5": "151",
+     "10": "360",
+     "15": "539",
+     "20": "678",
+     "25": "786",
+     "40": "1111"
+    },
+    "@dmg_min": {
+     "1": 54,
+     "5": 151,
+     "10": 360,
+     "15": 539,
+     "20": 678,
+     "25": 786,
+     "40": 1111
+    },
+    "@dmg_max": {
+     "1": 54,
+     "5": 151,
+     "10": 360,
+     "15": 539,
+     "20": 678,
+     "25": 786,
+     "40": 1111
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "dimensional-control": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1633000011:SkillUIMaxDmgsum": {
+     "1": "157",
+     "5": "425",
+     "10": "774",
+     "15": "1006",
+     "20": "1199",
+     "25": "1380",
+     "40": "1922"
+    },
+    "se_dmg:1633000011:SkillUIMinDmgsum": {
+     "1": "157",
+     "5": "425",
+     "10": "774",
+     "15": "1006",
+     "20": "1199",
+     "25": "1380",
+     "40": "1922"
+    },
+    "@dmg_min": {
+     "1": 157,
+     "5": 425,
+     "10": 774,
+     "15": 1006,
+     "20": 1199,
+     "25": 1380,
+     "40": 1922
+    },
+    "@dmg_max": {
+     "1": 157,
+     "5": 425,
+     "10": 774,
+     "15": 1006,
+     "20": 1199,
+     "25": 1380,
+     "40": 1922
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "rapid-scattershot": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1634000011:SkillUIMaxDmgsum": {
+     "1": "116",
+     "5": "344",
+     "10": "678",
+     "15": "1012",
+     "20": "1185",
+     "25": "1358",
+     "40": "1532"
+    },
+    "se_dmg:1634000011:SkillUIMinDmgsum": {
+     "1": "116",
+     "5": "344",
+     "10": "678",
+     "15": "1012",
+     "20": "1185",
+     "25": "1358",
+     "40": "1532"
+    },
+    "@dmg_min": {
+     "1": 116,
+     "5": 344,
+     "10": 678,
+     "15": 1012,
+     "20": 1185,
+     "25": 1358,
+     "40": 1532
+    },
+    "@dmg_max": {
+     "1": 116,
+     "5": 344,
+     "10": 678,
+     "15": 1012,
+     "20": 1185,
+     "25": 1358,
+     "40": 1532
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "siphon": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_dmg:1606000011:SkillUIMaxDmgsum": {
+     "1": "1180",
+     "5": "1854",
+     "10": "2410",
+     "15": "2873",
+     "20": "3306",
+     "25": "3738"
+    },
+    "se_dmg:1606000011:SkillUIMinDmgsum": {
+     "1": "1180",
+     "5": "1854",
+     "10": "2410",
+     "15": "2873",
+     "20": "3306",
+     "25": "3738"
+    },
+    "@dmg_min": {
+     "1": 1180,
+     "5": 1854,
+     "10": 2410,
+     "15": 2873,
+     "20": 3306,
+     "25": 3738
+    },
+    "@dmg_max": {
+     "1": 1180,
+     "5": 1854,
+     "10": 2410,
+     "15": 2873,
+     "20": 3306,
+     "25": 3738
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "souls-cry": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1607000011:SkillUIMaxDmgsum": {
+     "1": "246",
+     "5": "573",
+     "10": "957",
+     "15": "1227",
+     "20": "1437",
+     "25": "1647",
+     "40": "2277"
+    },
+    "se_dmg:1607000011:SkillUIMinDmgsum": {
+     "1": "246",
+     "5": "573",
+     "10": "957",
+     "15": "1227",
+     "20": "1437",
+     "25": "1647",
+     "40": "2277"
+    },
+    "@dmg_min": {
+     "1": 246,
+     "5": 573,
+     "10": 957,
+     "15": 1227,
+     "20": 1437,
+     "25": 1647,
+     "40": 2277
+    },
+    "@dmg_max": {
+     "1": 246,
+     "5": 573,
+     "10": 957,
+     "15": 1227,
+     "20": 1437,
+     "25": 1647,
+     "40": 2277
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "elemental-replenishment": {
+   "max_rank": 20,
+   "values_by_rank": {
+    "se_dmg:10270011:SkillUIHPHealMax": {
+     "1": "129",
+     "5": "1098",
+     "10": "2429",
+     "15": "3828",
+     "20": "3828"
+    },
+    "se_dmg:10270011:SkillUIHPHealMin": {
+     "1": "111",
+     "5": "941",
+     "10": "2082",
+     "15": "3281",
+     "20": "3281"
+    },
+    "@heal_min": {
+     "1": 111,
+     "5": 941,
+     "10": 2082,
+     "15": 3281,
+     "20": 3281
+    },
+    "@heal_max": {
+     "1": 129,
+     "5": 1098,
+     "10": 2429,
+     "15": 3828,
+     "20": 3828
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "extract-vitality": {
+   "max_rank": 20,
+   "values_by_rank": {
+    "se_dmg:10270011:SkillUIHPHealMax": {
+     "1": "129",
+     "5": "1098",
+     "10": "2429",
+     "15": "3828",
+     "20": "3828"
+    },
+    "se_dmg:10270011:SkillUIHPHealMin": {
+     "1": "111",
+     "5": "941",
+     "10": "2082",
+     "15": "3281",
+     "20": "3281"
+    },
+    "se_dmg:10310011:SkillUIMaxDmgSum": {
+     "1": "81",
+     "5": "309",
+     "10": "712",
+     "15": "1111",
+     "20": "1551"
+    },
+    "se_dmg:10310011:SkillUIMaxDmgsum": {
+     "1": "81",
+     "5": "309",
+     "10": "712",
+     "15": "1111",
+     "20": "1551"
+    },
+    "se_dmg:10310011:SkillUIMinDmgSum": {
+     "1": "81",
+     "5": "309",
+     "10": "712",
+     "15": "1111",
+     "20": "1551"
+    },
+    "se_dmg:10310011:SkillUIMinDmgsum": {
+     "1": "81",
+     "5": "309",
+     "10": "712",
+     "15": "1111",
+     "20": "1551"
+    },
+    "@dmg_min": {
+     "1": 81,
+     "5": 309,
+     "10": 712,
+     "15": 1111,
+     "20": 1551
+    },
+    "@dmg_max": {
+     "1": 81,
+     "5": 309,
+     "10": 712,
+     "15": 1111,
+     "20": 1551
+    },
+    "@heal_min": {
+     "1": 111,
+     "5": 941,
+     "10": 2082,
+     "15": 3281,
+     "20": 3281
+    },
+    "@heal_max": {
+     "1": 129,
+     "5": 1098,
+     "10": 2429,
+     "15": 3828,
+     "20": 3828
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "seize-magic": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_dmg:1623000013:SkillUIMaxDmgsum": {
+     "1": "1031",
+     "5": "1620",
+     "10": "2106",
+     "15": "2511",
+     "20": "2889",
+     "25": "3267"
+    },
+    "se_dmg:1623000013:SkillUIMinDmgsum": {
+     "1": "1031",
+     "5": "1620",
+     "10": "2106",
+     "15": "2511",
+     "20": "2889",
+     "25": "3267"
+    },
+    "se_dmg:1623000111:SkillUIMinDmgsum": {
+     "1": "371",
+     "5": "583",
+     "10": "758",
+     "15": "903",
+     "20": "1040",
+     "25": "1176"
+    },
+    "se_dmg:1623000211:SkillUIMaxDmgsum": {
+     "1": "495",
+     "5": "777",
+     "10": "1010",
+     "15": "1205",
+     "20": "1386",
+     "25": "1568"
+    },
+    "@dmg_min": {
+     "1": 1031,
+     "5": 1620,
+     "10": 2106,
+     "15": 2511,
+     "20": 2889,
+     "25": 3267
+    },
+    "@dmg_max": {
+     "1": 1031,
+     "5": 1620,
+     "10": 2106,
+     "15": 2511,
+     "20": 2889,
+     "25": 3267
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "magic-block": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_dmg:1626000011:SkillUIMaxDmgsum": {
+     "1": "1071",
+     "5": "1683",
+     "10": "2187",
+     "15": "2608",
+     "20": "3001",
+     "25": "3394"
+    },
+    "se_dmg:1626000011:SkillUIMinDmgsum": {
+     "1": "1071",
+     "5": "1683",
+     "10": "2187",
+     "15": "2608",
+     "20": "3001",
+     "25": "3394"
+    },
+    "@dmg_min": {
+     "1": 1071,
+     "5": 1683,
+     "10": 2187,
+     "15": 2608,
+     "20": 3001,
+     "25": 3394
+    },
+    "@dmg_max": {
+     "1": 1071,
+     "5": 1683,
+     "10": 2187,
+     "15": 2608,
+     "20": 3001,
+     "25": 3394
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "cry-of-terror": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_dmg:1608000011:SkillUIMaxDmgsum": {
+     "1": "859",
+     "5": "1350",
+     "10": "1755",
+     "15": "2092",
+     "20": "2407",
+     "25": "2722"
+    },
+    "se_dmg:1608000011:SkillUIMinDmgsum": {
+     "1": "859",
+     "5": "1350",
+     "10": "1755",
+     "15": "2092",
+     "20": "2407",
+     "25": "2722"
+    },
+    "@dmg_min": {
+     "1": 859,
+     "5": 1350,
+     "10": 1755,
+     "15": 2092,
+     "20": 2407,
+     "25": 2722
+    },
+    "@dmg_max": {
+     "1": 859,
+     "5": 1350,
+     "10": 1755,
+     "15": 2092,
+     "20": 2407,
+     "25": 2722
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "assault-terror": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_dmg:1670000021:SkillUIMaxDmgsum": {
+     "1": "939",
+     "5": "1476",
+     "10": "1918",
+     "15": "2287",
+     "20": "2632",
+     "25": "2976"
+    },
+    "se_dmg:1670000021:SkillUIMinDmgsum": {
+     "1": "939",
+     "5": "1476",
+     "10": "1918",
+     "15": "2287",
+     "20": "2632",
+     "25": "2976"
+    },
+    "@dmg_min": {
+     "1": 939,
+     "5": 1476,
+     "10": 1918,
+     "15": 2287,
+     "20": 2632,
+     "25": 2976
+    },
+    "@dmg_max": {
+     "1": 939,
+     "5": 1476,
+     "10": 1918,
+     "15": 2287,
+     "20": 2632,
+     "25": 2976
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "curse-of-despair": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "se_dmg:1621000011:SkillUIMaxDmgsum": {
+     "1": "521",
+     "5": "911",
+     "10": "1320",
+     "15": "1638",
+     "20": "1901",
+     "25": "2163",
+     "40": "2951"
+    },
+    "se_dmg:1621000011:SkillUIMinDmgsum": {
+     "1": "521",
+     "5": "911",
+     "10": "1320",
+     "15": "1638",
+     "20": "1901",
+     "25": "2163",
+     "40": "2951"
+    },
+    "@dmg_min": {
+     "1": 521,
+     "5": 911,
+     "10": 1320,
+     "15": 1638,
+     "20": 1901,
+     "25": 2163,
+     "40": 2951
+    },
+    "@dmg_max": {
+     "1": 521,
+     "5": 911,
+     "10": 1320,
+     "15": 1638,
+     "20": 1901,
+     "25": 2163,
+     "40": 2951
+    },
+    "@cooldown_s": {
+     "1": 120,
+     "5": 112,
+     "10": 102,
+     "15": 92,
+     "20": 82,
+     "25": 72,
+     "40": 42
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "jointstrike-destructive-attack": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se_dmg:1600130111:SkillUIMaxDmgsum": {
+     "1": "664",
+     "5": "1044",
+     "10": "1357",
+     "15": "1618",
+     "20": "1861",
+     "25": "2105"
+    },
+    "se_dmg:1600130111:SkillUIMinDmgsum": {
+     "1": "664",
+     "5": "1044",
+     "10": "1357",
+     "15": "1618",
+     "20": "1861",
+     "25": "2105"
+    },
+    "se_dmg:1600130511:SkillUIMaxDmgsum": {
+     "1": "797",
+     "5": "1252",
+     "10": "1628",
+     "15": "1941",
+     "20": "2234",
+     "25": "2526"
+    },
+    "se_dmg:1600130511:SkillUIMinDmgsum": {
+     "1": "797",
+     "5": "1252",
+     "10": "1628",
+     "15": "1941",
+     "20": "2234",
+     "25": "2526"
+    },
+    "se_dmg:1600130911:SkillUIMaxDmgsum": {
+     "1": "731",
+     "5": "1148",
+     "10": "1492",
+     "15": "1780",
+     "20": "2047",
+     "25": "2315"
+    },
+    "se_dmg:1600130911:SkillUIMinDmgsum": {
+     "1": "731",
+     "5": "1148",
+     "10": "1492",
+     "15": "1780",
+     "20": "2047",
+     "25": "2315"
+    },
+    "se_dmg:1600131311:SkillUIMaxDmgsum": {
+     "1": "598",
+     "5": "939",
+     "10": "1221",
+     "15": "1456",
+     "20": "1675",
+     "25": "1894"
+    },
+    "se_dmg:1600131311:SkillUIMinDmgsum": {
+     "1": "598",
+     "5": "939",
+     "10": "1221",
+     "15": "1456",
+     "20": "1675",
+     "25": "1894"
+    },
+    "se_dmg:1600131711:SkillUIMaxDmgsum": {
+     "1": "1063",
+     "5": "1670",
+     "10": "2171",
+     "15": "2589",
+     "20": "2978",
+     "25": "3368"
+    },
+    "se_dmg:1600131711:SkillUIMinDmgsum": {
+     "1": "1063",
+     "5": "1670",
+     "10": "2171",
+     "15": "2589",
+     "20": "2978",
+     "25": "3368"
+    },
+    "se_dmg:1624000011:SkillUIMaxDmgsum": {
+     "1": "573",
+     "5": "900",
+     "10": "1170",
+     "15": "1395",
+     "20": "1605",
+     "25": "1815"
+    },
+    "se_dmg:1624000011:SkillUIMinDmgsum": {
+     "1": "573",
+     "5": "900",
+     "10": "1170",
+     "15": "1395",
+     "20": "1605",
+     "25": "1815"
+    },
+    "@dmg_min": {
+     "1": 573,
+     "5": 900,
+     "10": 1170,
+     "15": 1395,
+     "20": 1605,
+     "25": 1815
+    },
+    "@dmg_max": {
+     "1": 573,
+     "5": 900,
+     "10": 1170,
+     "15": 1395,
+     "20": 1605,
+     "25": 1815
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "defiance": {
+   "max_rank": 40,
+   "values_by_rank": {
+    "@cooldown_s": {
+     "1": 60,
+     "5": 56,
+     "10": 51,
+     "15": 46,
+     "20": 41,
+     "25": 36,
+     "40": 21
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  },
+  "kaisinels-power": {
+   "max_rank": 25,
+   "values_by_rank": {
+    "se:1636000011:effect_value02:time": {
+     "1": "10",
+     "5": "12",
+     "10": "14.5",
+     "15": "17",
+     "20": "20",
+     "25": "22.5"
+    }
+   },
+   "confidence": "confirmed",
+   "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  }
+ }
+}

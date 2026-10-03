@@ -1,0 +1,688 @@
+ 
+ Templar — AION 2 Guides (PvE, PvP, Leveling) 
+ Skip to content 
+ AION 2 Guides 
+ Templar 
+ Gladiator Melee DPS · bruiser 
+ Ranger Ranged DPS · kiter 
+ Templar Tank · party buffer 
+ Assassin Melee DPS · burst 
+ Sorcerer Ranged magic DPS 
+ Elementalist Summoner · magic DPS 
+ Cleric Healer · earth and lightning damage 
+ Chanter Melee support · buffer 
+ Rift --:-- 
+ --:--:-- 
+ Guides 
+ Progress
+ Week 1 What to finish before the first reset 
+ After 45 Item level route to the raid 
+ Gathering and crafting Professions and gold blanks 
+ Game settings Controls, keys, FPS and mass PvP 
+ Trackers
+ Weekly Weekly entries and energy 
+ Bosses Kill tracker and timers 
+ Sources & credits Everyone this site builds on 
+ EN Language 
+ EN English RU Русский UA Українська 
+ All classes / Templar 
+ PvE PvP Leveling · Global Season 1
+ Templar
+ The main tank: blocks buff the whole party, Judgment turns every shield skill into damage, and more crowd control than anyone in PvP.
+ Updated: Oct 3, 2026 Patch: Season 1 
+ Source: SolAshur · trueeevil Source: SolAshur Source: NoBS Game Guides · TitanTheF 
+ Who to watch:
+ SolAshur trueeevil all creators → 
+ Role Tank · party buffer 
+ Weapon Sword & shield 
+ Difficulty Medium 
+ PvE 
+ PvP 
+ Leveling 
+ On this page
+ Leveling progress
+ 0 /27 done 
+ Reset progress 
+ Tick steps as you go. Progress is saved in this browser, separately for each class.
+ Start 
+ Route 
+ Follow yellow (main story) quests only . Side content scales with your level, so nothing is lost by doing it later.
+ Lv 1 
+ Class 
+ All points into Vicious Strike and Pummel . Put Pummel in an in-game macro (10 ms) and hold it together with Vicious Strike — they alternate, and Vicious Strike refills the MP Pummel spends.
+ Lv 1–8 
+ Class 
+ Then Poach and Warding Strike . At 8 take Resets cooldown on defeating an enemy — pull, kill, pull the next one.
+ After prologue 
+ Route 
+ Collect 40 feathers (120 shards) for an early amulet upgrade.
+ Judgment unlocked 
+ Class 
+ Judgment fires after Shield Smite , Warding Strike and Shield Rush. Early on it has a 5s cooldown — space those triggers out and follow each with Judgment.
+ Lv 12 
+ Route 
+ Daevanion unlocks (Nezekan board). Blue nodes = +1 skill level — see your class step below.
+ Lv 12 
+ Class 
+ Daevanion blue nodes: Judgment , Vicious Strike and Pummel first, then Punishment .
+ Lv 14 
+ Class 
+ Start raising Punishment : charge it to stage 3 and open every elite with it.
+ Lv 15 / 20 / 25 
+ Route 
+ Clear hideouts that are on your route — first clears give Enhance Stones and Daevanion Crystals.
+ ~Lv 17 
+ Route 
+ Amulet +10 , then Morph it into the blue version.
+ Any time 
+ Route 
+ Weapon to ~+10 — the biggest damage jump while leveling. Don't push further before the cap.
+ Lv 19 
+ Class 
+ First specializations: +20% MP restored and -20% MP consumed . Mana is tight while leveling; swap to the damage picks from the PvE tab at the cap.
+ Lv 20 
+ Route 
+ Zikel board opens — same node priority as before.
+ Lv 21 
+ Class 
+ Fury can take all ten levels — every block buffs you and the party.
+ Lv ~22 
+ Route 
+ Ascension → stigmas unlock (4 slots in global Season 1). The slots open one at a time at levels 22, 27, 32 and 37 — you can learn more stigmas, but only that many fit on the bar. Which ones — see your class step.
+ Lv ~22 
+ Class 
+ Stigmas: Doom Shield first (it triggers Judgment), then Battlefield Banner ; add Taunt as soon as you tank dungeons.
+ Acts 2–3 
+ Route 
+ Story only — don't get distracted by the map.
+ Lv 25 
+ Class 
+ Vicious Strike and Pummel reach 10.
+ Lv 30 
+ Route 
+ Vaizel board opens (critical damage).
+ Lv 32–38 
+ Class 
+ Punishment to 8 at 32 and to 10 at 38.
+ Act 4 
+ Route 
+ Side quests and solo dungeons are worth doing again here.
+ Lv 40 
+ Route 
+ Triniel board opens (multi-hit; mostly PvP — can wait). Krao Cave expects about 1000 Gear Score.
+ Lv 45 
+ Route 
+ Azphel board opens — PvP Damage Boost and Tolerance only, no skill nodes. For PvE keep filling the first four boards; global has no Ariel board.
+ Cap 
+ Class 
+ Core to 10 before anything else: Judgment , Vicious Strike , Pummel , Punishment . Then switch to the PvE tab.
+ Cap 
+ Route 
+ Shugo activities for the full level-cap reward set (gold gear, materials).
+ Cap 
+ Route 
+ Sweep the map: question marks, bonfires, green quests, hidden cubes, feathers. Turn in feathers — altar Lv 30 gives a title.
+ Daily 
+ Route 
+ Nightmare entry, Transformation floors as your GS allows, dungeons T2 before T3 (watch your energy).
+ Build at a glance
+ Core skills
+ 20 
+ Judgment 
+ 20 
+ Punishment 
+ 20 
+ Pummel 
+ 16 
+ Annihilate 
+ 16 
+ Shield Smite 
+ Stigma loadout
+ Lv 15 
+ Empyrean Lord's Punishment 
+ Lv 15 
+ Battlefield Banner 
+ Lv 15 
+ Doom Shield 
+ Lv 5 
+ Taunt 
+ Key passives
+ Fury
+ Punishing Benediction
+ Insulting Roar
+ Ironclad Defense
+ Build at a glance
+ Core skills
+ 20 
+ Judgment 
+ 20 
+ Punishment 
+ 20 
+ Pummel 
+ 20 
+ Annihilate 
+ Stigma loadout
+ Lv 10 
+ Executing Blade 
+ Lv 15 
+ Empyrean Lord's Punishment 
+ Lv 15 
+ Doom Shield 
+ Lv 15 
+ Nezekan's Shield 
+ Key passives
+ Fury
+ Punishing Benediction
+ Ironclad Defense
+ Survival Willpower
+ Overview
+ Templar is AION 2's main tank, and it still deals real damage. Its whole build rests on a "holy trinity" of skills taken to 20 as fast as possible — Judgment , Punishment and Pummel — that you use as often as you can. Survivability is not what limits a Templar; damage is.
+ The build in one sentence
+ Shield skills trigger Judgment : spam the Judgment line on a side button, hold the macro for Pummel and its procs, charge Punishment on cooldown, and block the big hits to keep Fury on the party.
+ This guide follows SolAshur's global-launch Templar build (solashur.com, September 27) and his video walkthrough of it (September 29), re-checked against the video frames on September 30.
+ Patch Season 1. The build is checked against guides from the global servers: 4 stigmas, cap 20.
+ Overview
+ In PvP the Templar keeps the same holy trinity and the same Judgment loop; what changes is the stigmas. Executing Blade gives you an edge in every duel, and Annihilate at 20 turns into an AoE knockdown.
+ Melee gets kited — a strong weapon matters less when you can't reach the target, so play around your gap-closers and Doom Shield.
+ Dedicated PvP gear sets from KR/TW are not confirmed for global, so the PvX gear from the PvE tab is the plan. If PvP gear does appear: level your PvP stigmas first, and only then spend on a PvP weapon or armor.
+ Patch Season 1. The build is checked against guides from the global servers: 4 stigmas, cap 20.
+ Global Season 1: what changes
+ Global servers open on October 5, 2026 (Founder's early access from September 30). What that means for Templar:
+ 4 stigmas at level 45. SolAshur's Taiwan loadouts had six; for global he drops two per profile (listed in Stigmas).
+ Create three skill presets before launch — PvX, PvP and PvE — so switching content is one click.
+ Collect Skill Point Shards early : they gate how fast the holy trinity reaches 20.
+ Join a legion — solo Abyss farming is ineffective.
+ Check stigma names at launch: some may be renamed in the global client.
+ Skills
+ The holy trinity goes to 20 first. Skills reach 10 from skill points, 14 with Daevanion, then rings and arcana push the trinity further. Specializations below are SolAshur's.
+ Judgment 20 
+ Your core damage: Shield Smite, Warding Strike, Shield Rush and Doom Shield trigger it, and at 16 its cooldown disappears.
+ 8 Extra damage on hit
+ 12 Critical Hit on hit
+ 16 Remove cooldown
+ All specializations 
+ 8 Absorbs 1% HP
+ 8 Deals extra damage on attacking a target afflicted with Impact-type status
+ 8 Extra damage on hit
+ 12 Critical Hit on hit
+ 16 Remove cooldown
+ Punishment 20 
+ Charged burst — DoT, guaranteed crit through Block and +30% skill speed. Never take the mobile or HP-absorb picks: "bait" once you have enough attack speed.
+ 8 Inflicts Damage over Time to target on hit
+ 8 +30% Skill Speed
+ 16 Ignores Block and Evasion and lands as a Critical Hit
+ All specializations 
+ 8 Absorbs 10% HP
+ 8 Inflicts Damage over Time to target on hit
+ 8 +30% Skill Speed
+ 12 Changes to mobile skill
+ 16 Ignores Block and Evasion and lands as a Critical Hit
+ Pummel 20 
+ Filler and stagger. SolAshur's picks all go into Punishing Strike — it heals you and fires a second time; he skips the −1s Punishment pick. Get it to 20 as soon as possible. trueeevil takes that −1s Punishment pick instead: Punishment comes back sooner — a fair swap for the HP absorb if you don't need the heal.
+ 8 [Punishing Strike] absorbs 3% HP
+ 8 Deals up to 12% more damage when less targets are hit
+ 16 Activates [Punishing Strike] 1 extra time
+ All specializations 
+ 8 -20% MP consumed
+ 8 [Punishing Strike] absorbs 3% HP
+ 8 Deals up to 12% more damage when less targets are hit
+ 12 -1s [Punishment] cooldown on landing [Punishing Strike]
+ 16 Activates [Punishing Strike] 1 extra time
+ Annihilate 16 20 
+ +100% damage to CC-immune bosses, −10s cooldown. The alternate build takes it to 20 for the AoE knockdown pick. The third slot opens at 20: Multi-Hit for bosses.
+ 8 +100% damage to targets with Incapacitated Immunity
+ 12 -10s cooldown
+ All specializations 
+ 8 +50% Multi-Hit on hit
+ 8 +20% Knockdown Chance
+ 8 +100% damage to targets with Incapacitated Immunity
+ 12 -10s cooldown
+ 16 Changes to AoE Skill
+ Shield Smite 16 
+ Triggers Judgment; −2s cooldown and a 50% chance to proc Debilitating Smash.
+ 8 50% chance to trigger [Debilitating Smash] on hit
+ 12 -2s cooldown
+ All specializations 
+ 8 +1s Stun duration
+ 8 Removes MP Cost and restores 200 MP on hit
+ 8 50% chance to trigger [Debilitating Smash] on hit
+ 12 -2s cooldown
+ 16 AoE Stun
+ Debilitating Smash 12 
+ Proc after a block or Shield Smite; ignores Block and Evasion.
+ 8 30% chance to inflict Stun for 3s
+ 12 Ignores Block and Evasion and lands as Multi-Hit
+ All specializations 
+ 8 30% chance to inflict Stun for 3s
+ 8 +3s Debilitate duration
+ 8 -60% Incoming Heal during Debilitate
+ 12 Ignores Block and Evasion and lands as Multi-Hit
+ 16 25% chance to reset cooldown on Block
+ Warding Strike 12 
+ Triggers Judgment; Block and damage tolerance during Warding.
+ 8 +100 Block during Warding
+ 12 Adds PvE Damage Tolerance and PvP Damage Tolerance increase effect when more targets hit to Warding
+ All specializations 
+ 8 -5s cooldown
+ 8 +100 Block during Warding
+ 8 Heal over Time during Warding
+ 12 Adds PvE Damage Tolerance and PvP Damage Tolerance increase effect when more targets hit to Warding
+ 16 +10% PvE Damage Tolerance and +5% PvP Damage Tolerance to party members on skill use
+ Flash Rampage 12 16 
+ Only on Staggered targets; −1s to all cooldowns per hit. In the PvE macro, but skip its Daevanion nodes — it falls off mid-game. The −1s pick needs level 16; at 12 take Multi-Hit and the MP restore.
+ 12 Multi-Hit on hit
+ 16 -1s all cooldowns on hit
+ All specializations 
+ 8 Absorbs 5% HP
+ 8 Restores 120 MP on hit
+ 8 Changes to mobile skill
+ 12 Multi-Hit on hit
+ 16 -1s all cooldowns on hit
+ Shield Rush 12 
+ Dodge → dash, triggers Judgment; −10s cooldown and +10m range.
+ 8 +10m Range
+ 12 -10s cooldown
+ All specializations 
+ 8 Restores 300 Stamina on hit
+ 8 +10m Range
+ 8 Changes to Charge Skill and deals AoE damage
+ 12 -10s cooldown
+ 16 +25% Stun Chance
+ Vicious Strike 10 
+ Basic attack on LMB; 10 from skill points is enough.
+ All specializations 
+ 8 +20% MP restored
+ 8 Absorbs 1% HP
+ 8 +50% Multi-Hit on hit
+ 12 -2s [Warding Strike] cooldown on hit
+ 16 Adds [Threatening Blow] Chain Skill
+ Skills
+ Judgment 20 
+ Same loop as in PvE: shield skills trigger it.
+ 8 Extra damage on hit
+ 12 Critical Hit on hit
+ 16 Remove cooldown
+ All specializations 
+ 8 Absorbs 1% HP
+ 8 Deals extra damage on attacking a target afflicted with Impact-type status
+ 8 Extra damage on hit
+ 12 Critical Hit on hit
+ 16 Remove cooldown
+ Punishment 20 
+ Burst through Block and Evasion.
+ 8 Inflicts Damage over Time to target on hit
+ 8 +30% Skill Speed
+ 16 Ignores Block and Evasion and lands as a Critical Hit
+ All specializations 
+ 8 Absorbs 10% HP
+ 8 Inflicts Damage over Time to target on hit
+ 8 +30% Skill Speed
+ 12 Changes to mobile skill
+ 16 Ignores Block and Evasion and lands as a Critical Hit
+ Pummel 20 
+ Filler between Judgment procs; Punishing Strike heals you and fires a second time.
+ 8 [Punishing Strike] absorbs 3% HP
+ 8 Deals up to 12% more damage when less targets are hit
+ 16 Activates [Punishing Strike] 1 extra time
+ All specializations 
+ 8 -20% MP consumed
+ 8 [Punishing Strike] absorbs 3% HP
+ 8 Deals up to 12% more damage when less targets are hit
+ 12 -1s [Punishment] cooldown on landing [Punishing Strike]
+ 16 Activates [Punishing Strike] 1 extra time
+ Annihilate 20 
+ The alternate build: at 20 it hits up to four enemies that are stunned or knocked down, with a 30% knockdown chance — an AoE knockdown you can spam with the −10s pick.
+ 8 +100% damage to targets with Incapacitated Immunity
+ 12 -10s cooldown
+ 16 Changes to AoE Skill
+ All specializations 
+ 8 +50% Multi-Hit on hit
+ 8 +20% Knockdown Chance
+ 8 +100% damage to targets with Incapacitated Immunity
+ 12 -10s cooldown
+ 16 Changes to AoE Skill
+ Shield Smite 16 
+ Judgment trigger and stun source.
+ 8 50% chance to trigger [Debilitating Smash] on hit
+ 12 -2s cooldown
+ All specializations 
+ 8 +1s Stun duration
+ 8 Removes MP Cost and restores 200 MP on hit
+ 8 50% chance to trigger [Debilitating Smash] on hit
+ 12 -2s cooldown
+ 16 AoE Stun
+ Passives
+ # Passive Why 
+ 1 Fury +PvE Damage Boost for you and the party after every block — the reason groups want a Templar. 
+ 2 Punishing Benediction Critical Hit and an extra-damage proc on every hit; the Bell arcana rolls it. 
+ 3 Insulting Roar Enmity plus Attack on front attacks. 
+ 4 Ironclad Defense Defense and Endurance — the core of the endurance stat build. On SolAshur's character (+6 levels) it gives +37% Defense and +16% Endurance. 
+ Gear path
+ If you start on day one, this is the route:
+ Holy Spirit set — farm it in the lower Abyss (AP, pets and gold drops per kill, plus boss spawns) or anywhere in the open world. Aim for about 1,600 combat power .
+ Skip the first dungeon tier : Urugugu Canyon for the Aulamus Longsword (item level 76, attack 308–385, binds on pickup) and Vakron Sky Island for the Vakron Guard (item level 76) and the Vakron armor. Keep upgrading the Vakron pieces until Fire Temple is doable.
+ Use Transcendence to get ready for Fire Temple — the Enraged Kromede Sword (item level 84, attack 340–425, extended range) — and Ferocious Horn (Nuakum armor). Nuakum is the safer farm: nearly every piece is an upgrade, while the weapon chest can drop other classes' weapons.
+ End goal — PvE: White Dragon Lord sword, then the guard, then the accessories, with Nuakum armor (full White Dragon armor only adds PvE tolerance and is whale territory). PvX, the setup for most players: Enraged Kromede sword, White Dragon guard, Nuakum armor, White Dragon accessories.
+ Wings: Dark Veil early (attack bonus, damage boost), Talisra late — Attack 60, Defense 400, Accuracy 35 and 4% cooldown reduction. Stack cooldown reduction as early as you can: shorter shield-skill cooldowns mean more Judgment procs. Collect every other wing too — their "owned" effects and flight power help with Abyss farming.
+ Stats, soul binds, pets
+ Two stat builds, chosen by what the stats synergize with:
+ A · Block + Evasion + Dexterity — early and mid game, against opponents without much Accuracy. Dexterity feeds both Block and Evasion. SolAshur's pick for launch.
+ B · Block + Endurance + Ironclad Defense — late game: at 100% Endurance a hit deals 50% less damage.
+ Slot Unique line Then 
+ Weapon, guard Combat Speed + Weapon Damage Boost Might + Multi-Hit; Precision if under the accuracy cap 
+ Helm Incoming Healing Attack, Might, Critical Hit, Precision 
+ Shoulders Critical Damage Boost Attack, Might, Precision, Perfect Chance 
+ Chest Damage Boost Attack, Might, Critical Hit, Constitution 
+ Gloves Combat Speed Perfect Chance, Attack, Might, Multi-Hit 
+ Legs Perfect Chance Damage Tolerance, Attack, Might, Constitution 
+ Boots Move Speed Perfect Chance, Attack, Might, Dexterity 
+ Cloak Critical Damage Tolerance Perfect Chance, Damage Tolerance, Attack 
+ Rings / earrings / necklace Rings: your top 4 active skills · Earrings: top 4 passives · Necklace: 2 actives + Attack, Critical Hit, Weapon Damage Boost 
+ Pets (Genus Insight) — don't skip them; in a couple of weeks they are the difference between hitting and missing. Non-special insight gives Attack and Accuracy, special insight Attack and Damage Boost. Level the Genus to 10 as soon as you can for better values. Locking is your first big kinah sink: lock only the important stats that rolled their unique 50% maximum, never filler. Lock slots in this order: 4 → 7 → 2 and 8 → the rest (Attack, Accuracy, Critical Hit).
+ Slot Non-special insight Special insight 
+ 1, 4, 7 Critical Hit, Accuracy, Block (or Evasion) Max Attack, Attack Bonus 
+ 2, 5, 8 Max Attack, Attack Bonus Max Attack, Attack Bonus 
+ 3 Damage Boost, Weapon Damage Boost, Double Chance or Perfect Chance 
+ 6 Critical Hit, Accuracy, Damage Tolerance Damage Tolerance, Weapon Damage Tolerance 
+ 9 Damage Boost, Weapon Damage Boost, Double Chance or Perfect Chance Damage Boost or Perfect Chance 
+ Pantheon: Wisdom (Double Chance) first, Space (Block); then Illusion (cooldown reduction) for PvE Time (attack speed) for PvP . Don't spend resources forcing portraits early — they unlock as you play.
+ Arcana
+ Card Roll for 
+ Chalice (Grail) Pummel , Punishment 
+ Parchment Judgment , Punishment 
+ Compass Pummel , Shield Smite 
+ Bell Fury , Punishing Benediction 
+ Go for damage set effects over survivability — Templar's survivability is already enough.
+ Daevanion boards
+ Daevanion takes your skills from 10 to 14 and adds stats. Each blue node gives +1 level to its skill.
+ Priority: blue nodes for Judgment , Punishment , Pummel , then Shield Smite and Annihilate ; orange nodes next.
+ Skip: MP nodes (put the points into Attack), Flash Rampage nodes, and the green Warding Shield / Guardian Shield nodes unless you have spare points.
+ No Ariel on global: there are five boards, and the level-45 one, Azphel, gives only PvP Damage Boost and Tolerance — in PvE finish the first four.
+ Azphel (level 45) is all PvP Damage Boost and Tolerance — take it.
+ Board Unlock Orange nodes 
+ Nezekan Lv 12 Combat Speed, Cooldown Reduction 
+ Zikel Lv 20 Damage Boost, Damage Tolerance 
+ Vaizel Lv 30 Critical Damage Boost and Tolerance 
+ Triniel Lv 40 Multi-Hit Chance and Resist 
+ Azphel Lv 45 PvP Damage Boost and Tolerance — no skill nodes 
+ The route on the boards
+ The real global boards from the game data. Gold marks the cheapest path from Start to the nodes this guide takes — the blue nodes of the five priority skills and the orange nodes; hover any node to see what it gives.
+ Nezekan Lv 12 · 67 pts Zikel Lv 20 · 69 pts Vaizel Lv 30 · 65 pts Triniel Lv 40 · 93 pts Azphel Lv 45 · 0 pts 
+ 294 points in total skill levels 
+ Annihilate +4 Judgment +4 Pummel +4 Shield Smite +4 Punishment +4 
+ on the way: Punishing Benediction +3 Block Pain +3 Warding Shield +2 Fury +2 Debilitating Smash +1 Shield Rush +1 Enhance Health +1 Guarding Seal +1 Insulting Roar +1 Impact Hit +1 Survival Willpower +1 Vicious Strike +1 
+ stat · 1 passive · 2 skill · 3 special · 4 stat · 2–3 route
+ Nezekan Lv 12 · 67 pts Zikel Lv 20 · 69 pts Vaizel Lv 30 · 65 pts Triniel Lv 40 · 93 pts Azphel Lv 45 · 110 pts 
+ 404 points in total skill levels 
+ Annihilate +4 Judgment +4 Pummel +4 Shield Smite +4 Punishment +4 
+ on the way: Punishing Benediction +3 Block Pain +3 Warding Shield +2 Fury +2 Debilitating Smash +1 Shield Rush +1 Enhance Health +1 Guarding Seal +1 Insulting Roar +1 Impact Hit +1 Survival Willpower +1 Vicious Strike +1 
+ stat · 1 passive · 2 skill · 3 special · 4 stat · 2–3 route
+ Boards and costs come from the global client data (questlog.gg); the path is calculated, not taken from a video. Stat values may still change at launch — check the in-game board before committing a full route.
+ Stigmas
+ Breadth before depth: put 1 point into all four first, then push Empyrean Lord's Punishment and Battlefield Banner to 5, then chase the breakpoints — Empyrean Lord 10 → 15, Banner 10 → 15, Doom Shield 15.
+ Empyrean Lord's Punishment Lv 15 
+ AoE damage with big stagger (+50 at 10); at 15 +10% PvE Damage Boost. Needed on bosses with stagger mechanics.
+ 5 Up to +20% damage when less targets hit
+ 10 +50 Stagger Gauge Damage
+ 15 +10% PvE Damage Boost and +5% PvP Damage Boost for 10s on hit
+ All specializations 
+ 5 Up to +20% damage when less targets hit
+ 10 +50 Stagger Gauge Damage
+ 15 +10% PvE Damage Boost and +5% PvP Damage Boost for 10s on hit
+ 20 +25% Stun Chance
+ Battlefield Banner Lv 15 
+ Your damage buff: Multi-Hit, Weapon Damage Boost and Attack from Defense. The level-10 and 15 tiers are the good ones.
+ 5 +10% Multi-Hit Chance for duration
+ 10 +10% Weapon Damage Boost for duration
+ 15 +20% Attack increase proportional to Defense
+ All specializations 
+ 5 +10% Multi-Hit Chance for duration
+ 10 +10% Weapon Damage Boost for duration
+ 15 +20% Attack increase proportional to Defense
+ 20 -30s cooldown
+ Doom Shield Lv 15 
+ Your main Judgment trigger. At 15 it resets on a kill — vital for PvX and pet farming.
+ 5 Resets [Annihilate] cooldown on hit
+ 10 +200 Block for 5s on hit
+ 15 Resets cooldown on defeating an enemy
+ All specializations 
+ 5 Resets [Annihilate] cooldown on hit
+ 10 +200 Block for 5s on hit
+ 15 Resets cooldown on defeating an enemy
+ 20 +25% Knockdown Chance
+ Taunt Lv 5 
+ Aggro in group content. Solo, take Nezekan's Shield instead.
+ 5 Adds 10% PvE Damage Tolerance reduction and 5% PvP Damage Tolerance reduction effect to Shrink
+ All specializations 
+ 5 Adds 10% PvE Damage Tolerance reduction and 5% PvP Damage Tolerance reduction effect to Shrink
+ 10 +10% Shrink Attack reduction
+ 15 -5s cooldown
+ 20 +2s Taunt duration, +5s Shrink duration
+ Nezekan's Shield alt. 
+ Survivability swap; not good before 15.
+ 5 +20% all Element Tolerance for Protective Shield duration
+ 10 +2s Protective Shield duration
+ 15 +20% PvE Damage Tolerance and +10% PvP Damage Tolerance for Protective Shield duration
+ All specializations 
+ 5 +20% all Element Tolerance for Protective Shield duration
+ 10 +2s Protective Shield duration
+ 15 +20% PvE Damage Tolerance and +10% PvP Damage Tolerance for Protective Shield duration
+ 20 Restores 20% of Max HP when Protective Shield is removed
+ Comrade in Arms group 
+ Survivability swap in dungeons, in place of Doom Shield. No use solo.
+ 5 Restores 25% of Max HP once if hit during Comrade in Arms while HP is 25% or less
+ 10 x1.5 [Guarding Seal] Protective Shield effect for the duration
+ 15 x1.5 [Block Pain] effect for the duration
+ All specializations 
+ 5 Restores 25% of Max HP once if hit during Comrade in Arms while HP is 25% or less
+ 10 x1.5 [Guarding Seal] Protective Shield effect for the duration
+ 15 x1.5 [Block Pain] effect for the duration
+ 20 Restores 50% of caster's Max HP when the effect ends
+ Executing Blade solo · start 
+ trueeevil's day-one PvE pick: −30% Defense on the target, and Exposed at 10. Open with it, then Punishment. A solo and early alternative to Empyrean Lord's Punishment or Taunt.
+ 5 -15s cooldown
+ 10 Inflict Exposed for 5s on hit
+ All specializations 
+ 5 -15s cooldown
+ 10 Inflict Exposed for 5s on hit
+ 15 Critical Hit on hit
+ 20 +30% damage on attacking a target inflicted with Impact-type status
+ Noble Armor solo · start 
+ Max HP and Defense for 2 minutes on a 2-minute cooldown — always up. trueeevil runs it solo; in a group Taunt and the stagger stigma matter more.
+ 5 +5% Defense for the duration
+ All specializations 
+ 5 +5% Defense for the duration
+ 10 x1.5 [Insulting Roar] effect for the duration
+ 15 x1.5 [Fury] effect for the duration
+ 20 +10% Incoming Heal for the duration
+ Profile 4 stigmas Alternates 
+ PvE Empyrean Lord's Punishment, Battlefield Banner, Doom Shield, Taunt Nezekan's Shield, Comrade in Arms 
+ PvE, solo Empyrean Lord's Punishment, Battlefield Banner, Doom Shield, Nezekan's Shield No aggro or team tools needed alone 
+ PvE, dungeon with more survivability Empyrean Lord's Punishment, Battlefield Banner, Taunt, Comrade in Arms Costs Doom Shield's Judgment procs 
+ PvX (all-purpose) Empyrean Lord's Punishment, Executing Blade, Battlefield Banner, Doom Shield Nezekan's Shield, Comrade in Arms, Second Skin 
+ Every swap costs something: without Doom Shield you lose Judgment procs, without Empyrean Lord stagger, without the Banner damage. If you need survivability, Doom Shield is the one to drop when the fight doesn't need its mobility.
+ Stigmas
+ Executing Blade Lv 10 
+ Best for 1v1: lowers the target's defense (Exposed at 10). The top 1v1 priority for your stigma points.
+ 5 -15s cooldown
+ 10 Inflict Exposed for 5s on hit
+ All specializations 
+ 5 -15s cooldown
+ 10 Inflict Exposed for 5s on hit
+ 15 Critical Hit on hit
+ 20 +30% damage on attacking a target inflicted with Impact-type status
+ Empyrean Lord's Punishment Lv 15 
+ Straight CC and AoE damage.
+ 5 Up to +20% damage when less targets hit
+ 10 +50 Stagger Gauge Damage
+ 15 +10% PvE Damage Boost and +5% PvP Damage Boost for 10s on hit
+ All specializations 
+ 5 Up to +20% damage when less targets hit
+ 10 +50 Stagger Gauge Damage
+ 15 +10% PvE Damage Boost and +5% PvP Damage Boost for 10s on hit
+ 20 +25% Stun Chance
+ Doom Shield Lv 15 
+ Gap-closer, knockdown and Judgment trigger.
+ 5 Resets [Annihilate] cooldown on hit
+ 10 +200 Block for 5s on hit
+ 15 Resets cooldown on defeating an enemy
+ All specializations 
+ 5 Resets [Annihilate] cooldown on hit
+ 10 +200 Block for 5s on hit
+ 15 Resets cooldown on defeating an enemy
+ 20 +25% Knockdown Chance
+ Nezekan's Shield Lv 15 
+ Against physical attackers. Not good before 15.
+ 5 +20% all Element Tolerance for Protective Shield duration
+ 10 +2s Protective Shield duration
+ 15 +20% PvE Damage Tolerance and +10% PvP Damage Tolerance for Protective Shield duration
+ All specializations 
+ 5 +20% all Element Tolerance for Protective Shield duration
+ 10 +2s Protective Shield duration
+ 15 +20% PvE Damage Tolerance and +10% PvP Damage Tolerance for Protective Shield duration
+ 20 Restores 20% of Max HP when Protective Shield is removed
+ Second Skin vs magic 
+ Against magic damage — swap it in for Empyrean Lord's Punishment when you need to survive.
+ 5 +10% all Element Tolerance for the duration
+ 10 +20% Block for the duration
+ All specializations 
+ 5 +10% all Element Tolerance for the duration
+ 10 +20% Block for the duration
+ 15 x1.5 [Ironclad Defense] effect for the duration
+ 20 +20% PvE Damage Tolerance increase and +10% PvP Damage Tolerance increase
+ Comrade in Arms group PvP 
+ In group PvP replace Nezekan's Shield with it; best at 20.
+ 5 Restores 25% of Max HP once if hit during Comrade in Arms while HP is 25% or less
+ 10 x1.5 [Guarding Seal] Protective Shield effect for the duration
+ 15 x1.5 [Block Pain] effect for the duration
+ 20 Restores 50% of caster's Max HP when the effect ends
+ All specializations 
+ 5 Restores 25% of Max HP once if hit during Comrade in Arms while HP is 25% or less
+ 10 x1.5 [Guarding Seal] Protective Shield effect for the duration
+ 15 x1.5 [Block Pain] effect for the duration
+ 20 Restores 50% of caster's Max HP when the effect ends
+ Assault Fury late game 
+ A late-game swap once your gear is deep: a ranged AoE hit with a stun chance. Put it in place of your weakest slot.
+ All specializations 
+ 5 +20% Attack for 5s on hit
+ 10 500 MP damage on hit
+ 15 +10m Range
+ 20 +20% Stun Chance
+ Macro & rotation
+ AION 2 has two separate tools:
+ Hotbar line — several skills stacked on one hotbar button. Pressing it casts the highest-priority skill that's ready, and in AION 2 the bottom slot has the highest priority . The cards show each line top to bottom as in the game.
+ In-game macro — while you hold its key, it presses your hotbar lines in order and cancels animation tails. Skills on cooldown are skipped.
+ 1. Hotbar lines
+ RMB Pummel line 
+ 4 
+ Pummel 
+ 3 
+ Flash Rampage 
+ 2 
+ Debilitating Smash 
+ 1 
+ Annihilate 
+ In-game order, top to bottom. 1 = highest priority — the bottom slot.
+ The in-game macro presses this line. Procs fire as soon as they light up; Pummel fills the rest. Flash Rampage only hits a Staggered target — the rest of the time the macro skips it, and in stagger windows every hit takes 1s off all cooldowns.
+ Side Judgment line 
+ 4 
+ Doom Shield 
+ 3 
+ Warding Strike 
+ 2 
+ Shield Smite 
+ 1 
+ Judgment 
+ In-game order, top to bottom. 1 = highest priority — the bottom slot.
+ Spam it: every shield skill triggers Judgment, and Judgment always wins.
+ RMB · PvX Pummel line for PvX 
+ 4 
+ Pummel 
+ 3 
+ Debilitating Smash 
+ 2 
+ Annihilate 
+ 1 
+ Doom Shield 
+ In-game order, top to bottom. 1 = highest priority — the bottom slot.
+ The same button with the PvX preset: Flash Rampage goes, Doom Shield takes the top priority and the rest move down. It sits in the Judgment line too on purpose: here it opens the fight — a rush and a guaranteed knockdown on NPCs that unlocks Annihilate — and at level 15 it resets on a kill, the key to PvX and pet farming.
+ 2. Keys
+ LMB Vicious Strike (quick slot 1). 
+ RMB The in-game macro (Pummel line), 10 ms. 
+ Side button The Judgment line. SolAshur binds it to R and has his mouse repeat R about 10 times a second. 
+ By hand Charged Punishment on cooldown, Battlefield Banner , Empyrean Lord's Punishment for stagger, Taunt . 
+ SolAshur covers his full hotkey setup in an earlier macro video; you will need to change a few in-game key bindings to match.
+ Recap
+ Skills: Judgment, Punishment, Pummel 20 first; Annihilate and Shield Smite 16; the rest 12.
+ Stigmas: Empyrean Lord's Punishment, Battlefield Banner, Doom Shield, Taunt — 1 point in each, then the breakpoints.
+ Stats: Block + Evasion + Dexterity early, Block + Endurance late; don't skip pets.
+ Gear: Holy Spirit → Urugugu / Vakron → Fire Temple and Ferocious Horn → White Dragon weapon, guard and accessories.
+ Recap
+ Skills: the same trinity at 20, plus Annihilate 20 for the AoE knockdown.
+ Stigmas: Executing Blade, Empyrean Lord's Punishment, Doom Shield, Nezekan's Shield (Second Skin vs magic, Comrade in Arms for groups).
+ Pantheon: Time (attack speed) instead of Illusion.
+ How to fight while leveling
+ Packs: Poach one in (a kill resets it) → Warding Strike → hold Vicious Strike + the Pummel macro.
+ Elites: charged Punishment → Shield Smite (stun) → Judgment → Annihilate .
+ Mana: Vicious Strike restores MP and Pummel spends it — alternate them and you never run dry.
+ Low HP: Warding Strike heals and cuts damage; every block heals through Warding Shield.
+ Leveling macro
+ A simpler setup for leveling and the first days at the cap, from Grobs' early-game macros. Only the skills you spam go in; buffs, stigma bursts and gap-closers stay on their own keys.
+ 1 Line 1 
+ 4 
+ Shield Smite 
+ 3 
+ Judgment 
+ 2 
+ Debilitating Smash 
+ 1 
+ Doom Shield 
+ In-game order, top to bottom. 1 = highest priority — the bottom slot.
+ 2 Line 2 
+ 2 
+ Pummel 
+ 1 
+ Warding Strike 
+ In-game order, top to bottom. 1 = highest priority — the bottom slot.
+ In-game macro: Line 1 → Line 2, each with a 10 ms delay. Hold your basic attack Vicious Strike on LMB and the macro key together.
+ Once your skills reach 12–16 and specializations change their cooldowns, switch to the full setup in the PvE tab.
+ Sources
+ SolAshur — AION 2 Templar global build and his video walkthrough — the build this guide follows (skills, stigmas by profile, macro, gear path, stats, pets, Pantheon, arcana); specializations from his questlog builds 
+ NoBS Game Guides — Aion 2 Templar Guide: Skills Introduction + Early Game Macro (base of the skill overview and leveling macro)
+ questlog.gg — skill & stigma data from the global client
+ Inven — Korean Templar skill specializations, stigmas and macro setup
+ Vortex Gaming — Korean PvE setup (skill levels, gear stats) and PvP setup directions 
+ Inven and FM Korea — PvP stigma choices
+ MMO Codex — skill order while leveling, passive priority
+ nemobek.github.io/aion2-guide (TitanTheF's table) — leveling route
+ Grobs — AION 2 Macro Guide — how hotbar lines and the in-game macro work
+ trueeevil — Ultimate Templar Guide for Aion 2: Skills, Stigmas, Rotations, Daevanion Board Explained — day-two global setup: Executing Blade and Noble Armor for solo PvE, the −1s Punishment pick on Pummel, passive order
+ All sources and creators → 
+ Report a mistake 
+ AION 2 Guides 
+ Unofficial fan site, not affiliated with NCSOFT. AION 2 and its skill icons are © NCSOFT.
+ Last checked: 2026-10-03 (before the global launch).
+ All sources and creators · Changelog · Report a mistake 
+ Esc 
+ What's new
+ Oct 3, 2026 
+ Elementalist: PvE and PvP — the class now has full PvE and PvP modes for Season 1, built on Evripides' global Spirit Master guide (aion2sm.com) and checked against DankRNG and aLuckyRO: skills and specializations, stigmas, passives, the buff-before-summon rule, rotation, macro, matchups and the Daevanion route. 
+ World bosses — all 48 field bosses of Verteron and Altgard with their respawn timers: mark a kill and the page shows when the boss is back (and notifies you, if notifications are on). Every boss now shows where it spawns. 
+ Sorcerer — skill priority rebuilt on a global level-45 Sorcerer (EUTOPIA): Hellfire and Firestorm are now core, Ice Chain is optional, Frost and Frost Burst leave the bar. 
+ Chanter — from two Chanter mains on global (notXeon, WallyJTV): Recuperation 12 is enough, Power of the Storm is a core stigma, Inspiring Spell moves up, plus a macro tip for before Dark Crush 16. 
+ Gladiator, Ranger, Templar, Assassin, Cleric — checked against the first global guides (aLuckyRO, Sen, LordRobson, trueeevil): day-one picks and alternatives added — Keen Strike and Aerial Snare on bosses, Explosive Arrow as an equal fourth stigma, Executing Blade for solo Templars, Determination over Impact Hit, early Cleric passives. 
+ Leveling checklist — the stigma slots open one at a time at levels 22, 27, 32 and 37. 
+ Got it 
+ Full changelog → 
+ Report a mistake
+ What is wrong or outdated? A link to a source or a screenshot helps a lot.
+ Your message 
+ Contact for a reply (optional) 
+ Sent together with the message: 
+ Send 
+ Cancel 
+ ✦ 
+ Early Access is open!
+ Founder's Pack servers are live — good luck on day one. Your class guides are ready.
+ × 
+ 

@@ -1,0 +1,436 @@
+{
+ "_comment": "Hand-authored sim mechanics. Every Num carries confidence. Keys are validated against built skills at build time.",
+ "icon_prefix_aliases": {"hellfire-": "hellfire.png"},
+ "skill_tags": {
+  "dodge": ["manual"],
+  "hellfire": ["manual", "gkey:G2:M1:0", "thumb:1"],
+  "steel-barrier": ["manual", "role:defense", "gkey:G5:M1:0"],
+  "defiance": ["manual", "gkey:G3:M1:0", "gkey:G3:M2:0", "thumb:2"],
+  "bittercold-wind": ["manual", "gkey:G5:M2:0"],
+  "frost-burst": ["gkey:G2:M2:0"],
+  "winters-shackles": ["role:cc", "gkey:G2:M2:1"],
+  "element-enhancement": ["role:burst", "gkey:G4:M1:0"],
+  "wish-of-concentration": ["gkey:G4:M1:1"],
+  "delayed-explosion": ["gkey:G4:M1:2"],
+  "fire-wall": ["gkey:G4:M2:0"],
+  "cold-storm": ["role:cc", "gkey:G4:M2:1"],
+  "arctic-armor": ["role:defense"],
+  "hibernation": ["role:defense", "role:sustain"],
+  "soul-freeze": ["role:cc"],
+  "curse-tree": ["role:cc"],
+  "lumiels-space": ["role:cc"],
+  "divine-burst": ["role:burst"]
+ },
+ "anim_lock": {
+  "default": {
+   "value": 1.0,
+   "confidence": "estimated",
+   "source": "default 1.0 s; client cast_time is 0 everywhere; calibrate in app"
+  },
+  "long": {
+   "value": 1.5,
+   "confidence": "estimated",
+   "source": "long animations per community (PLAN); calibrate in app"
+  },
+  "long_skills": [
+   "firestorm",
+   "fire-wall",
+   "cold-storm"
+  ]
+ },
+ "element_overrides": {
+  "cold-snap": "water"
+ },
+ "kind_overrides": {
+  "cold-snap": "proc",
+  "magic-energy-blast": "proc",
+  "flame-zone": "system"
+ },
+ "statuses": {
+  "fire_mark": {
+   "key": "fire_mark",
+   "name": "Fire Mark",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Fire Mark description: 'Inflicts Fire Mark for 5s on landing a Fire attack' (dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "Fire Mark itself adds no multiplier; Blaze requires it. Dump text: mark applies on every Fire attack, 20% is the extra-damage proc chance; PLAN S4 models 20% as the mark chance"
+   },
+   "elements": [
+    "fire"
+   ],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown until Jon's tooltips"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval unknown until Jon's tooltips"
+   }
+  },
+  "element_enhancement": {
+   "key": "element_enhancement",
+   "name": "Element Enhancement",
+   "on": "self",
+   "duration_s": {
+    "value": 15.0,
+    "confidence": "estimated",
+    "source": "dump: 10 s at rank 1 rising to 22.5 s at rank 40 (client tokens); single value 15 s ~ rank 15-16 used (PLAN default 15 s)"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "+20% Fire and Water Attack (dump description); treated as a damage multiplier, real stat bucket unknown"
+   },
+   "elements": [
+    "fire",
+    "water"
+   ],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown until Jon's tooltips"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval unknown until Jon's tooltips"
+   }
+  },
+  "delayed_explosion": {
+   "key": "delayed_explosion",
+   "name": "Delayed Explosion",
+   "on": "target",
+   "duration_s": {
+    "value": 4.0,
+    "confidence": "estimated",
+    "source": "dump: damage taken from caster +15% during the 4 s delay (cd 30 s); Inven KR live disagrees: 20 s / +25%"
+   },
+   "dmg_mult": {
+    "value": 1.15,
+    "confidence": "estimated",
+    "source": "dump +15% vs Inven KR live +25% (duration 20 s vs 4 s / 30 s): sources conflict"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown until Jon's tooltips"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval unknown until Jon's tooltips"
+   }
+  },
+  "grace_of_enhancement": {
+   "key": "grace_of_enhancement",
+   "name": "Grace of Enhancement",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "estimated",
+    "source": "passive, no duration"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "+20% PvE Damage Boost while MP >= threshold (dump). MP threshold conflicts: 25% (dump, Fextralife) vs 50% (S6, S7 guides). Also 50% chance for an extra 18% ATK + 106 hit, not modelled"
+   },
+   "elements": [],
+   "mp_min_pct": 25.0,
+   "source_skill": "grace-of-enhancement",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown until Jon's tooltips"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval unknown until Jon's tooltips"
+   }
+  },
+  "fire_wall_dot": {
+   "key": "fire_wall_dot",
+   "name": "Embers (Fire Wall)",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Embers lasts 10 s (dump token effect_value02:time)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification; DoT-only status"
+   },
+   "elements": [
+    "fire"
+   ],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "dump has FLAT 650/tick at rank 1 (2059 at rank 40) but Status only models ATK-ratio ticks; ratio unknown"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "'every 1s' in description"
+   }
+  },
+  "cold_storm_dot": {
+   "key": "cold_storm_dot",
+   "name": "Frostbite (Cold Storm)",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Frostbite lasts 10 s (dump token effect_value02:time)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification; DoT-only status"
+   },
+   "elements": [
+    "water"
+   ],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "dump has FLAT 472/tick at rank 1 (1497 at rank 40) but Status only models ATK-ratio ticks; ratio unknown"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "'every 1s' in description"
+   }
+  },
+  "firestorm_dot": {
+   "key": "firestorm_dot",
+   "name": "Firestorm ground fireballs",
+   "on": "target",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "placeholder per PLAN: dump shows 5 hits of flat damage and no DoT; not attached to any rule until Jon's tooltip"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no damage amplification; DoT-only status"
+   },
+   "elements": [
+    "fire"
+   ],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "unknown",
+    "source": "tick ratio unknown until Jon's tooltips"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "tick interval unknown until Jon's tooltips"
+   }
+  }
+ },
+ "triggers": [
+  {
+   "status_key": "fire_mark",
+   "on_element": "fire",
+   "chance": 0.2,
+   "source_skill": "fire-mark",
+   "confidence": "estimated"
+  }
+ ],
+ "rules": {
+  "flame-arrow": {
+   "skill_key": "flame-arrow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "burst",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "chain 1/3, restores 100 MP (dump description); chain confirmed in client"
+  },
+  "burst": {
+   "skill_key": "burst",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "pyroclasm",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "chain 2/3, restores 100 MP (dump description)"
+  },
+  "pyroclasm": {
+   "skill_key": "pyroclasm",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 120.0,
+   "confidence": "estimated",
+   "note": "chain 3/3, restores 120 MP (dump description)"
+  },
+  "blaze": {
+   "skill_key": "blaze",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "fire_mark"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "needs Fire Mark on target; restores 100 MP (dump description); Fire Mark not consumed (unknown)"
+  },
+  "element-enhancement": {
+   "skill_key": "element-enhancement",
+   "applies": [
+    "element_enhancement"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": ""
+  },
+  "delayed-explosion": {
+   "skill_key": "delayed-explosion",
+   "applies": [
+    "delayed_explosion"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": ""
+  },
+  "fire-wall": {
+   "skill_key": "fire-wall",
+   "applies": [
+    "fire_wall_dot"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Embers DoT: tick damage unknown until Jon's tooltip"
+  },
+  "cold-storm": {
+   "skill_key": "cold-storm",
+   "applies": [
+    "cold_storm_dot"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Frostbite DoT: tick damage unknown until Jon's tooltip"
+  },
+  "hellfire": {
+   "skill_key": "hellfire",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [
+    {
+     "level": 1,
+     "charge_s": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "PLAN estimate, no source; record a full charge to confirm"
+     },
+     "dmg_mult": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
+     }
+    },
+    {
+     "level": 2,
+     "charge_s": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "PLAN estimate, no source; record a full charge to confirm"
+     },
+     "dmg_mult": {
+      "value": 1.5,
+      "confidence": "estimated",
+      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
+     }
+    },
+    {
+     "level": 3,
+     "charge_s": {
+      "value": 2.0,
+      "confidence": "estimated",
+      "source": "PLAN estimate, no source; record a full charge to confirm"
+     },
+     "dmg_mult": {
+      "value": 2.0,
+      "confidence": "estimated",
+      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
+     }
+    }
+   ],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "charge timing and per-level multipliers are estimates"
+  }
+ }
+}

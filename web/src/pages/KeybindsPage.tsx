@@ -1,0 +1,1 @@
+export { KeybindsPage } from "./Keybinds";

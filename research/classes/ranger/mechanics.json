@@ -1,0 +1,1699 @@
+{
+ "_comment": "Hand-authored sim mechanics for the Ranger (same schema as the Sorcerer mechanics.json). Every Num carries confidence. Extra keys (resources, stat_effects, passive_stats, procs) are extensions the loader ignores; elements may be \"wind\", which the Element Literal in models.py lacks.",
+ "icon_prefix_aliases": {
+  "deadshot-": "deadshot.png",
+  "crimson-flames": "griffon-arrow.png",
+  "explosion": "explosion-trap.png"
+ },
+ "skill_tags": {
+  "dodge": [
+   "manual",
+   "role:defense",
+   "role:mobility"
+  ],
+  "deadshot": [
+   "manual"
+  ],
+  "marking-shot": [
+   "manual",
+   "role:mobility"
+  ],
+  "suppressing-arrow": [
+   "manual",
+   "role:cc"
+  ],
+  "snare-shot": [
+   "role:cc"
+  ],
+  "shackling-arrow": [
+   "role:cc"
+  ],
+  "explosion-trap": [
+   "manual",
+   "role:cc"
+  ],
+  "defiance": [
+   "manual",
+   "role:defense"
+  ],
+  "afterimage": [
+   "manual",
+   "role:defense"
+  ],
+  "mother-natures-breath": [
+   "manual",
+   "role:defense",
+   "role:sustain"
+  ],
+  "stealth": [
+   "manual",
+   "role:mobility"
+  ],
+  "ambush-kick": [
+   "manual",
+   "role:cc",
+   "role:mobility"
+  ],
+  "illusory-arrow": [
+   "manual",
+   "role:cc"
+  ],
+  "sealing-arrow": [
+   "manual",
+   "role:cc"
+  ],
+  "ensnaring-trap": [
+   "manual",
+   "role:cc"
+  ],
+  "arrow-storm": [
+   "manual",
+   "role:cc"
+  ],
+  "assault-smite": [
+   "manual",
+   "role:cc"
+  ],
+  "lightning-arrow": [
+   "manual",
+   "role:cc"
+  ],
+  "dust-arrow": [
+   "manual",
+   "role:cc"
+  ],
+  "arrow-of-space-time": [
+   "manual"
+  ],
+  "impact-kick": [
+   "manual"
+  ],
+  "guerilla-strike": [
+   "role:mobility"
+  ],
+  "bow-of-blessing": [
+   "manual"
+  ],
+  "vaizels-authority": [
+   "manual"
+  ],
+  "supporting-fire": [
+   "manual",
+   "role:sustain"
+  ],
+  "eye-of-rapid-burst": [
+   "manual"
+  ],
+  "hunters-resolve-active": [
+   "manual"
+  ],
+  "wind-vigor": [
+   "role:mobility"
+  ],
+  "vigilant-eye": [
+   "role:defense",
+   "role:sustain",
+   "role:heal"
+  ],
+  "unyielding-resolve": [
+   "role:defense"
+  ],
+  "revitalization-contract": [
+   "role:defense",
+   "role:sustain",
+   "role:heal"
+  ],
+  "explosion": [
+   "role:cc"
+  ],
+  "root": [
+   "role:cc"
+  ]
+ },
+ "anim_lock": {
+  "default": {
+   "value": 1.0,
+   "confidence": "estimated",
+   "source": "default 1.0 s; client cast_time is 0 everywhere; calibrate in app. Aug 26 patch added a minimum cancel time for all skills (GEGEBASE)"
+  },
+  "long": {
+   "value": 1.5,
+   "confidence": "estimated",
+   "source": "placeholder; no Ranger skill is reported as long"
+  },
+  "long_skills": []
+ },
+ "element_overrides": {
+  "deadshot": "wind",
+  "snipe": "wind",
+  "rapid-fire": "wind",
+  "spiral-arrow": "wind",
+  "suppressing-arrow": "wind",
+  "burst-arrow": "wind",
+  "marking-shot": "wind",
+  "tempest-arrow": "wind",
+  "gale-arrow": "wind",
+  "ambush-kick": "wind",
+  "illusory-arrow": "wind",
+  "sealing-arrow": "wind",
+  "guerilla-strike": "wind",
+  "arrow-storm": "wind",
+  "arrow-of-space-time": "wind",
+  "impact-kick": "wind",
+  "arrow-scattershot": "wind",
+  "tempest-shot": "wind",
+  "lightning-arrow": "wind",
+  "supporting-fire": "wind",
+  "assault-smite": "wind",
+  "concentrated-fire": "wind",
+  "rooting-eye": "wind",
+  "melee-fire": "wind",
+  "hunters-soul": "wind",
+  "deadshot-lv-1": "wind",
+  "deadshot-lv-2": "wind",
+  "deadshot-max": "wind",
+  "explosive-arrow-14360000": "fire"
+ },
+ "kind_overrides": {},
+ "statuses": {
+  "precision": {
+   "key": "precision",
+   "name": "Precision",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Marking Shot token se:1409000711 effect_value02:time = 10 at every rank (aion2.app client dump 2026-09-18); Aug 26 patch 7s to 10s (GEGEBASE). Spec rank 8 adds +5s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "Precision gives +300 Critical Hit (token abe:1409000011 = 300), not damage; Deadshot +35% is skill-specific, see stat_effects"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "marking-shot",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "gale": {
+   "key": "gale",
+   "name": "Gale (Gale Arrow buff)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Gale Arrow token se:1411000711 time = 10 at every rank (aion2.app client dump 2026-09-18); spec rank 8 +5s"
+   },
+   "dmg_mult": {
+    "value": 1.07,
+    "confidence": "estimated",
+    "source": "PvE Damage Boost +7% (tokens abe:1411000711/712 = 7, PvP 3.5). Damage Boost is an additive bucket, so 1.07 overstates when other boosts are present. Combat Speed +7% is in stat_effects"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "gale-arrow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "bow_of_blessing": {
+   "key": "bow_of_blessing",
+   "name": "Bow of Blessing",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "token se:1422000011 time per rank: 10 s at rank 1, 14.5 at 10, 20 at 20 (global cap), 30 at 40 (aion2.app client dump 2026-09-18); value is rank 20"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "buff is Critical Hit +200 and Accuracy +100 (tokens abe:1422000011/12), no direct damage multiplier; specs add Multi-Hit, Crit Damage +20%, Double Chance +7% (stat_effects)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "bow-of-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "vaizels_authority": {
+   "key": "vaizels_authority",
+   "name": "Vaizel's Authority",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "token se:1431000011 time per rank: 10 s at rank 1, 14.5 at 10, 20 at 20 (global cap), 30 at 40 (aion2.app client dump 2026-09-18); value is rank 20"
+   },
+   "dmg_mult": {
+    "value": 1.2,
+    "confidence": "estimated",
+    "source": "+20% Attack (token abe:1431000011 = 20). Treated as a damage multiplier like the Sorcerer Element Enhancement; the real bucket is the Attack stat, so 1.2 overstates"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "vaizels-authority",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "supporting_fire": {
+   "key": "supporting_fire",
+   "name": "Supporting Fire orb",
+   "on": "self",
+   "duration_s": {
+    "value": 15.0,
+    "confidence": "confirmed",
+    "source": "token se:1438000011 time = 15 at every rank (aion2.app client dump 2026-09-18); spec rank 10 +15s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "summon deals its own hits; no multiplier on the caster"
+   },
+   "elements": [
+    "wind"
+   ],
+   "mp_min_pct": null,
+   "source_skill": "supporting-fire",
+   "tick_ratio_pct": {
+    "value": 10.8,
+    "confidence": "estimated",
+    "source": "expected value per firing window: 25% chance (token abe:1438000011 value02 = 25) x 43.2% ATK (Metaroad rank 1). Flat part 243 at rank 1 to 1039 at rank 40 is not representable here; HP absorb unknown"
+   },
+   "tick_s": {
+    "value": 0.5,
+    "confidence": "confirmed",
+    "source": "Firing Cooldown 0.5s (token abe:1438000011 value03 time = 0.5)"
+   }
+  },
+  "bleed": {
+   "key": "bleed",
+   "name": "Bleed (Drill Dart)",
+   "on": "target",
+   "duration_s": {
+    "value": 6.0,
+    "confidence": "confirmed",
+    "source": "Drill Dart token se:1405000012 time = 6 (aion2.app client dump 2026-09-18); spec rank 8 +2s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "DoT only; also Incoming Heal -60% (token abe:1405002013 = 60), not stacking with Debilitating Smash / Firestorm"
+   },
+   "elements": [
+    "fire"
+   ],
+   "mp_min_pct": null,
+   "source_skill": "drill-dart",
+   "tick_ratio_pct": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "ATK ratio hidden (\"—\" on Metaroad); client has FLAT tick 43 at rank 1 up to 952 at rank 40 (token se_abe_dmg SkillUIDotMin/MaxDmg:tick), the Status model only holds ratio ticks"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "Drill Dart text \"every 1s\""
+   }
+  },
+  "crimson_flames": {
+   "key": "crimson_flames",
+   "name": "Crimson Flames (Griffon Arrow)",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Griffon Arrow token se:1406000012 time = 10 (aion2.app client dump 2026-09-18); spec rank 10 +5s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "DoT only; \"damage over time amount increases when targets move\", spec 15 adds extra damage when hit"
+   },
+   "elements": [
+    "fire"
+   ],
+   "mp_min_pct": null,
+   "source_skill": "griffon-arrow",
+   "tick_ratio_pct": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "ATK ratio hidden (\"—\"); client FLAT tick 482 at rank 1 up to 2056 at rank 40 (token se_abe_dmg ...:tick)"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "Griffon Arrow text \"every 1s\"; spec rank 20 halves the interval to 0.5s"
+   }
+  },
+  "slow": {
+   "key": "slow",
+   "name": "Slow (Snare Shot)",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Snare Shot token se:1413000012 time = 5 (aion2.app client dump 2026-09-18); spec rank 16 +2s; Move Speed -40% (token abe:1000000412 = 40, spec +20%)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "the status adds no damage; it is the condition for Burst Arrow, Explosive Arrow +20% (stigma), Rooting Eye"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "snare-shot",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "root": {
+   "key": "root",
+   "name": "Root (Shackling Arrow)",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Shackling Arrow token se:1414000012 time = 3 (aion2.app client dump 2026-09-18); 75% chance (token 75), 100% on NPC targets (text)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no direct damage amplification from the status itself; it is a condition/CC flag"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "shackling-arrow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "stun": {
+   "key": "stun",
+   "name": "Stun",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Suppressing Arrow / Explosion Trap / Arrow Storm / Lightning Arrow tokens time = 3 (aion2.app client dump 2026-09-18); Assault Smite 3 s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no direct damage amplification from the status itself; it is a condition/CC flag"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "airborne": {
+   "key": "airborne",
+   "name": "Airborne (Ensnaring Trap)",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Ensnaring Trap token se:1418000112 time = 3 (aion2.app client dump 2026-09-18); spec rank 15 +1s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no direct damage amplification from the status itself; it is a condition/CC flag"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "ensnaring-trap",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "blind": {
+   "key": "blind",
+   "name": "Blind",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Illusory Arrow token se:1415000012 time = 3 (aion2.app client dump 2026-09-18); Dust Arrow (KR/TW only) 5s at 75%"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no direct damage amplification from the status itself; it is a condition/CC flag"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "illusory-arrow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "seal": {
+   "key": "seal",
+   "name": "Seal (Sealing Arrow)",
+   "on": "target",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Sealing Arrow token se:1416000012 time = 5, 75% chance, 100% on NPC (aion2.app client dump 2026-09-18); spec rank 15 +2s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "no direct damage amplification from the status itself; it is a condition/CC flag"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "sealing-arrow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "tenacity": {
+   "key": "tenacity",
+   "name": "Tenacity (Defiance)",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "Defiance token se:1426000012 time = 5 (aion2.app client dump 2026-09-18); spec rank 12 +2s. Grants Status Effect Immunity"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "immunity buff, no damage effect (spec rank 16 adds Damage Tolerance +50% PvE / +25% PvP)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "defiance",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "stealth": {
+   "key": "stealth",
+   "name": "Stealth",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Stealth token se:1419000011 time = 10 at every rank (aion2.app client dump 2026-09-18); spec rank 20 +10s; unusable in combat, ends on entering combat"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "utility; spec rank 5 makes the first attack from Stealth a Critical Hit"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "stealth",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "mother_natures_embrace": {
+   "key": "mother_natures_embrace",
+   "name": "Mother Nature's Embrace",
+   "on": "self",
+   "duration_s": {
+    "value": 6.0,
+    "confidence": "confirmed",
+    "source": "Mother Nature's Breath token se:1435000011 time = 6 (aion2.app client dump 2026-09-18)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "defensive: PvE Damage Tolerance +20% (token 20), Critical Hit Resist +200, 50% chance to absorb 25% of damage taken as HP"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "mother-natures-breath",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "afterimage": {
+   "key": "afterimage",
+   "name": "Afterimage",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "Afterimage token se:1424000011 time = 3 (aion2.app client dump 2026-09-18); resists one Skill Attack. KR/TW only"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "defensive, no damage effect"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "afterimage",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "hunters_resolve_buff": {
+   "key": "hunters_resolve_buff",
+   "name": "Hunter's Resolve (active)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "token se:1425000011 time = 10 (aion2.app client dump 2026-09-18); KR/TW only, 60 s cooldown"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "Physical Critical Damage Boost +20% (token se_abe:1425000011 value02 divide100 = 20; Metaroad shows \"—\"). A crit-damage bucket, not a flat multiplier, so 1.0 here and the 20% is in stat_effects"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "hunters-resolve-active",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  },
+  "eye_of_rapid_burst": {
+   "key": "eye_of_rapid_burst",
+   "name": "Eye of Rapid Burst",
+   "on": "self",
+   "duration_s": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "toggle-like skill with 3 s cooldown; no duration token. KR/TW only"
+   },
+   "dmg_mult": {
+    "value": 1.03,
+    "confidence": "estimated",
+    "source": "Damage Boost +3% (token abe:1421000011 = 3), Physical Accuracy +20; Bow range reduced by a token that reads 142100m (broken value, ignore)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "eye-of-rapid-burst",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time effect"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick interval stated for this effect"
+   }
+  }
+ },
+ "triggers": [],
+ "rules": {
+  "snipe": {
+   "skill_key": "snipe",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "rapid-fire",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 120.0,
+   "confidence": "estimated",
+   "note": "basic chain 1/3 (community name Rapid Shot chain), restores 120 MP at rank 1 (text); spec rank 8 +20% MP restored. Chain order is inferred from guides, window 3.0 s is the shared default, not measured"
+  },
+  "rapid-fire": {
+   "skill_key": "rapid-fire",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "spiral-arrow",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 120.0,
+   "confidence": "estimated",
+   "note": "chain 2/3, 3 hits, restores 120 MP (Metaroad/dump text)"
+  },
+  "spiral-arrow": {
+   "skill_key": "spiral-arrow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "tempest-arrow",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 150.0,
+   "confidence": "estimated",
+   "note": "chain 3/3, restores 150 MP; Tempest Arrow follows only once Snipe spec rank 16 is taken (client spec text)"
+  },
+  "tempest-arrow": {
+   "skill_key": "tempest-arrow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 180.0,
+   "confidence": "estimated",
+   "note": "chain 4/4 (needs Snipe spec rank 16), restores 180 MP (text)"
+  },
+  "marking-shot": {
+   "skill_key": "marking-shot",
+   "applies": [
+    "precision"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "grants Precision 10 s (+5s with spec rank 8); moves the caster in the input direction; spec rank 12 +1 consecutive use (two casts back to back); costs 50 MP, cd 10 s. Cast standing still, recast with ~2-3 s left (Inven/couga)"
+  },
+  "deadshot": {
+   "skill_key": "deadshot",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [
+    {
+     "level": 1,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "rank-1 range 599-1798 flat and 188.25%-564.75% ATK: Lv.1 is the minimum"
+     }
+    },
+    {
+     "level": 2,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": 2.0,
+      "confidence": "estimated",
+      "source": "linear interpolation between 1x and 3x; Lv.2 value not stated anywhere"
+     }
+    },
+    {
+     "level": 3,
+     "charge_s": {
+      "value": null,
+      "confidence": "unknown",
+      "source": "charge time not in any source"
+     },
+     "dmg_mult": {
+      "value": 3.0,
+      "confidence": "confirmed",
+      "source": "max/min = 564.75/188.25 = 3.00 on ratio and 1798/599 = 3.00 flat at rank 1; 12884/4294 = 3.00 at rank 40"
+     }
+    }
+   ],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "charged skill, 3 charge levels (client text). +35% damage if Precision is active (stat_effects). Charge time per level unknown. Spec rank 8 can remove MP cost"
+  },
+  "drill-dart": {
+   "skill_key": "drill-dart",
+   "applies": [
+    "bleed"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 100.0,
+   "confidence": "estimated",
+   "note": "Bleed 6 s; restores 100 MP only on landing a Critical Hit (text), so mp_restore is an upper bound; spec rank 16 casts twice"
+  },
+  "griffon-arrow": {
+   "skill_key": "griffon-arrow",
+   "applies": [
+    "crimson_flames"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Crimson Flames 10 s DoT (client text); opens the Griffon macro line"
+  },
+  "gale-arrow": {
+   "skill_key": "gale-arrow",
+   "applies": [
+    "gale"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Gale buff 10 s; cooldown 20 s, -10s with spec rank 16"
+  },
+  "snare-shot": {
+   "skill_key": "snare-shot",
+   "applies": [
+    "slow"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "shackling-arrow",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Slow 5 s on up to 4 targets; chains into Shackling Arrow only with spec rank 12"
+  },
+  "shackling-arrow": {
+   "skill_key": "shackling-arrow",
+   "applies": [
+    "root"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Root 3 s, 75% on players, 100% on NPC (NPC targets 100% per skill text; players lower); KR/TW-only list on aion2hub but named as Snare Shot chain in client spec text"
+  },
+  "burst-arrow": {
+   "skill_key": "burst-arrow",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "slow"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "needs a Slowed or Rooted target (client text). Root also satisfies it; the engine has no OR, see requires_any",
+   "requires_any": [
+    [
+     "slow",
+     "root"
+    ]
+   ]
+  },
+  "explosive-arrow-14360000": {
+   "skill_key": "explosive-arrow-14360000",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "stigma Explosive Arrow: +20% damage to Slowed or Rooted targets at base (text), spec rank 10 +10%, rank 20 +20% more; cooldown 45 s, -15s with spec rank 5. Conditional bonus not expressible as status requirement",
+   "requires_any": [
+    [
+     "slow",
+     "root"
+    ]
+   ]
+  },
+  "suppressing-arrow": {
+   "skill_key": "suppressing-arrow",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stun 3 s; 40% while Precision is active on players; NPC targets 100% per skill text; players lower"
+  },
+  "explosion-trap": {
+   "skill_key": "explosion-trap",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "trap lasts 10 s, Stun 3 s 40% on players, NPC targets 100% per skill text; players lower; spec rank 8 pulls enemies"
+  },
+  "ensnaring-trap": {
+   "skill_key": "ensnaring-trap",
+   "applies": [
+    "airborne"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "guerilla-strike",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "trap lasts 30 s, Airborne 3 s; spec rank 5 adds Guerilla Strike chain"
+  },
+  "arrow-storm": {
+   "skill_key": "arrow-storm",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stun 3 s, 50% on players, NPC targets 100% per skill text; players lower"
+  },
+  "assault-smite": {
+   "skill_key": "assault-smite",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Stun 3 s, 30% on players, NPC targets 100% per skill text; players lower; spec rank 5 +20% Attack 5 s on hit"
+  },
+  "lightning-arrow": {
+   "skill_key": "lightning-arrow",
+   "applies": [
+    "stun"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Stun 3 s; chain child of Defiance (spec rank 8); cooldown falls 120 s to 42 s with rank"
+  },
+  "illusory-arrow": {
+   "skill_key": "illusory-arrow",
+   "applies": [
+    "blind"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Blind 3 s (text)"
+  },
+  "sealing-arrow": {
+   "skill_key": "sealing-arrow",
+   "applies": [
+    "seal"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Seal 5 s, 75% on players, NPC targets 100% per skill text; players lower"
+  },
+  "dust-arrow": {
+   "skill_key": "dust-arrow",
+   "applies": [
+    "blind"
+   ],
+   "apply_chance": 0.75,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "Blind 5 s at 75% (text); reduces 20 Stagger Points; KR/TW only"
+  },
+  "vaizels-authority": {
+   "skill_key": "vaizels-authority",
+   "applies": [
+    "vaizels_authority"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cd 60 s; stigma, best at rank 20 first (couga/Whelps). Spec rank 20: 50% chance on crit to cut all cooldowns 1 s (1 s internal cooldown)"
+  },
+  "bow-of-blessing": {
+   "skill_key": "bow-of-blessing",
+   "applies": [
+    "bow_of_blessing"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cd 120 s"
+  },
+  "supporting-fire": {
+   "skill_key": "supporting-fire",
+   "applies": [
+    "supporting_fire"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cd 90 s (-30s with spec rank 15); shares a button with Vaizel in the couga build"
+  },
+  "defiance": {
+   "skill_key": "defiance",
+   "applies": [
+    "tenacity"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": "lightning-arrow",
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cleanse + Tenacity 5 s; unaffected by cooldown reduction; cooldown falls 60 s to 21 s with rank"
+  },
+  "stealth": {
+   "skill_key": "stealth",
+   "applies": [
+    "stealth"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cd 120 s at rank 1 falling 3 s per rank (rank 20 = 63 s, rank 40 = 3 s per client)"
+  },
+  "mother-natures-breath": {
+   "skill_key": "mother-natures-breath",
+   "applies": [
+    "mother_natures_embrace"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "cd 90 s falling 2 s per rank to 12 s"
+  },
+  "afterimage": {
+   "skill_key": "afterimage",
+   "applies": [
+    "afterimage"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "KR/TW only, cd 20 s"
+  },
+  "hunters-resolve-active": {
+   "skill_key": "hunters-resolve-active",
+   "applies": [
+    "hunters_resolve_buff"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "KR/TW only, cd 60 s"
+  },
+  "eye-of-rapid-burst": {
+   "skill_key": "eye-of-rapid-burst",
+   "applies": [
+    "eye_of_rapid_burst"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "KR/TW only, cd 3 s"
+  },
+  "arrow-scattershot": {
+   "skill_key": "arrow-scattershot",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "usable only on a Staggered target (text); 4 hits; spec rank 8 restores 120 MP on hit; stagger is not a status in this model"
+  },
+  "tempest-shot": {
+   "skill_key": "tempest-shot",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "filler, costs 120 MP (spec rank 8 -20%), 2 hits, 4 targets"
+  }
+ },
+ "resources": {
+  "mp": {
+   "kind": "MP",
+   "confidence": "estimated",
+   "note": "MP is the constraint on long fights (GEGEBASE, Inven threads). Restores: Snipe 120, Rapid Fire 120, Spiral Arrow 150, Tempest Arrow 180 (rank 1 text, rank scaling unknown), Drill Dart 100 on crit, Arrow Scattershot spec 120. Spenders: Tempest Shot 120, Deadshot 200 (spec 8 removes), Gale Arrow 200, Snare Shot 150, Marking Shot 50. Natural regen and pool size are not in any source.",
+   "restores": {
+    "snipe": 120,
+    "rapid-fire": 120,
+    "spiral-arrow": 150,
+    "tempest-arrow": 180,
+    "drill-dart": 100
+   },
+   "costs": {
+    "deadshot": 200,
+    "griffon-arrow": 200,
+    "marking-shot": 50,
+    "gale-arrow": 200,
+    "snare-shot": 150,
+    "shackling-arrow": 150,
+    "illusory-arrow": 200,
+    "sealing-arrow": 200,
+    "explosion-trap": 200,
+    "arrow-storm": 200,
+    "dust-arrow": 100,
+    "tempest-shot": 120
+   }
+  },
+  "stamina": {
+   "confidence": "unknown",
+   "note": "Defiance spec rank 8 restores 1000 Stamina; Wind Vigor raises Max Stamina; Sealing Arrow spec 10 drains 1000 enemy Stamina. No stamina costs found."
+  },
+  "cooldown_reduction": {
+   "confidence": "confirmed",
+   "note": "Snipe spec 12: -1s Deadshot cooldown on hit; Arrow Scattershot spec 16: -1s all cooldowns on hit; Vaizel spec 20: 50% chance -1s all cooldowns on crit (1 s ICD); Burst Arrow spec 16 and Suppressing Arrow spec 16: 25% chance to reset cooldown on hit; Explosive Arrow spec 20 text -50% own cooldown vs Slow/Root."
+  }
+ },
+ "stat_effects": [
+  {
+   "status": "precision",
+   "stat": "Critical Hit",
+   "value": 300,
+   "unit": "flat",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "Marking Shot token abe:1409000011 = 300 (aion2.app client dump 2026-09-18)"
+  },
+  {
+   "status": "precision",
+   "stat": "Skill damage",
+   "value": 35,
+   "unit": "%",
+   "applies_to": [
+    "deadshot"
+   ],
+   "confidence": "confirmed",
+   "source": "Deadshot text \"Increases damage by 35% if the caster has Precision\"; patch May 20 25% to 35% (GEGEBASE)"
+  },
+  {
+   "status": "precision",
+   "stat": "Perfect Chance",
+   "value": 5,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "Marking Shot spec rank 8, token abe:1409001012 = 5; spec-gated"
+  },
+  {
+   "status": "precision",
+   "stat": "Stun chance (Suppressing Arrow)",
+   "value": 40,
+   "unit": "%",
+   "applies_to": [
+    "suppressing-arrow"
+   ],
+   "confidence": "confirmed",
+   "source": "Metaroad text, players only"
+  },
+  {
+   "status": "gale",
+   "stat": "Combat Speed",
+   "value": 7,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "Gale Arrow text/tokens (aion2.app client dump 2026-09-18)"
+  },
+  {
+   "status": "gale",
+   "stat": "PvE Damage Boost",
+   "value": 7,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "token abe:1411000711 = 7"
+  },
+  {
+   "status": "bow_of_blessing",
+   "stat": "Critical Hit",
+   "value": 200,
+   "unit": "flat",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "token abe:1422000011 = 200"
+  },
+  {
+   "status": "bow_of_blessing",
+   "stat": "Accuracy",
+   "value": 100,
+   "unit": "flat",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "token abe:1422000012 = 100"
+  },
+  {
+   "status": "bow_of_blessing",
+   "stat": "Multi-Hit Chance",
+   "value": 50,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "spec rank 5, token abe:1422001012 = 50"
+  },
+  {
+   "status": "bow_of_blessing",
+   "stat": "Critical Damage Boost",
+   "value": 20,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "spec rank 15, token abe:1422003014 = 20"
+  },
+  {
+   "status": "bow_of_blessing",
+   "stat": "Double Chance",
+   "value": 7,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "spec rank 20, token abe:1422004015 = 7"
+  },
+  {
+   "status": "bow_of_blessing",
+   "stat": "Attack from Critical Hit",
+   "value": null,
+   "unit": null,
+   "applies_to": "all",
+   "confidence": "unknown",
+   "source": "spec rank 10 \"Increases Attack proportional to Critical Hit\", ratio not given"
+  },
+  {
+   "status": "vaizels_authority",
+   "stat": "Attack",
+   "value": 20,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "token abe:1431000011 = 20"
+  },
+  {
+   "status": "vaizels_authority",
+   "stat": "Perfect Chance",
+   "value": 10,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "spec rank 5, token abe:1431001012 = 10"
+  },
+  {
+   "status": "vaizels_authority",
+   "stat": "Focused Eye effect multiplier",
+   "value": 1.5,
+   "unit": "x",
+   "applies_to": [
+    "focused-eye"
+   ],
+   "confidence": "confirmed",
+   "source": "spec rank 10 text (changed from Concentrated Fire on Aug 26)"
+  },
+  {
+   "status": "vaizels_authority",
+   "stat": "Hunter's Soul effect multiplier",
+   "value": 1.5,
+   "unit": "x",
+   "applies_to": [
+    "hunters-soul"
+   ],
+   "confidence": "confirmed",
+   "source": "spec rank 15 text"
+  },
+  {
+   "status": "vaizels_authority",
+   "stat": "All cooldowns -1s on Critical Hit",
+   "value": 50,
+   "unit": "% chance",
+   "applies_to": "all",
+   "confidence": "confirmed",
+   "source": "spec rank 20 text, internal cooldown 1 s (token se:1431004711 time = 1)"
+  },
+  {
+   "status": "hunters_resolve_buff",
+   "stat": "Physical Critical Damage Boost",
+   "value": 20,
+   "unit": "%",
+   "applies_to": "all",
+   "confidence": "estimated",
+   "source": "token se_abe:1425000011 divide100 = 20; Metaroad hides it; KR/TW only"
+  },
+  {
+   "status": "mother_natures_embrace",
+   "stat": "PvE Damage Tolerance",
+   "value": 20,
+   "unit": "%",
+   "applies_to": "self",
+   "confidence": "confirmed",
+   "source": "token abe:1435000011 = 20 (rank-independent)"
+  }
+ ],
+ "passive_stats": [
+  {
+   "skill": "focused-eye",
+   "stat": "PvE Damage Boost",
+   "unit": "%",
+   "rank_1": 1.0,
+   "rank_20": 20.0,
+   "rank_40": 40.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1474000013:value02:divide100"
+  },
+  {
+   "skill": "focused-eye",
+   "stat": "PvP Damage Boost",
+   "unit": "%",
+   "rank_1": 0.5,
+   "rank_20": 10.0,
+   "rank_40": 20.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1474000017:value02:divide100"
+  },
+  {
+   "skill": "focused-eye",
+   "stat": "Double Chance",
+   "unit": "%",
+   "rank_1": 0.2,
+   "rank_20": 4.0,
+   "rank_40": 8.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1474000015:value02:divide100"
+  },
+  {
+   "skill": "focused-eye",
+   "stat": "Accuracy",
+   "unit": "flat",
+   "rank_1": 100.0,
+   "rank_20": 100.0,
+   "rank_40": 100.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1474000011:value02"
+  },
+  {
+   "skill": "hunters-resolve",
+   "stat": "Critical Damage Boost",
+   "unit": "%",
+   "rank_1": 6.0,
+   "rank_20": 25.0,
+   "rank_40": 45.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1475000011:value02:divide100"
+  },
+  {
+   "skill": "unyielding-resolve",
+   "stat": "Ailment and Impact Resist",
+   "unit": "%",
+   "rank_1": 11.2,
+   "rank_20": 34.0,
+   "rank_40": 58.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1476000011:value02:divide100"
+  },
+  {
+   "skill": "vigilant-eye",
+   "stat": "Max HP",
+   "unit": "%",
+   "rank_1": 6.0,
+   "rank_20": 25.0,
+   "rank_40": 45.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1471000013:value02:divide100"
+  },
+  {
+   "skill": "vigilant-eye",
+   "stat": "Evasion",
+   "unit": "flat",
+   "rank_1": 200.0,
+   "rank_20": 200.0,
+   "rank_40": 200.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1471000011:value02"
+  },
+  {
+   "skill": "vigilant-eye",
+   "stat": "HP healed on Evasion (min)",
+   "unit": "flat",
+   "rank_1": 85.0,
+   "rank_20": 1112.0,
+   "rank_40": 1853.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token se_dmg:1471000711:SkillUIHPHealMin:total"
+  },
+  {
+   "skill": "vigilant-eye",
+   "stat": "HP healed on Evasion (max)",
+   "unit": "flat",
+   "rank_1": 102.0,
+   "rank_20": 1334.0,
+   "rank_40": 2224.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token se_dmg:1471000711:SkillUIHPHealMax:total"
+  },
+  {
+   "skill": "revitalization-contract",
+   "stat": "Status Effect Resist",
+   "unit": "%",
+   "rank_1": 17.0,
+   "rank_20": 55.0,
+   "rank_40": 95.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1479000012:value02:divide100"
+  },
+  {
+   "skill": "revitalization-contract",
+   "stat": "Max HP restored at <=10% HP (60s cd)",
+   "unit": "%",
+   "rank_1": 35.0,
+   "rank_20": 54.0,
+   "rank_40": 74.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token se:1479000711:effect_value02:divide100"
+  },
+  {
+   "skill": "wind-vigor",
+   "stat": "Move Speed when attacked (5s cd)",
+   "unit": "%",
+   "rank_1": 10.0,
+   "rank_20": 29.0,
+   "rank_40": 49.0,
+   "confidence": "confirmed",
+   "source": "aion2.app client dump 2026-09-18 per-rank token abe:1473000711:value02:divide100"
+  }
+ ],
+ "procs": [
+  {
+   "skill": "concentrated-fire",
+   "chance_pct": {
+    "value": 50.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 token abe:1472000011:value02:divide100"
+   },
+   "icd_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "text \"Cooldown: 1s\""
+   },
+   "condition": "target is taking Damage over Time (Bleed, Crimson Flames)",
+   "atk_ratio_pct_rank1": {
+    "value": 31.2,
+    "confidence": "estimated",
+    "source": "Metaroad rank-1 ratio; per-rank ratio not exposed"
+   },
+   "flat_rank_1": 56.0,
+   "flat_rank_20": 428.0,
+   "flat_rank_40": 686.0,
+   "note": "",
+   "flat_source": "aion2.app client dump 2026-09-18 token se_dmg:1472000711:SkillUIMinDmgsum"
+  },
+  {
+   "skill": "rooting-eye",
+   "chance_pct": {
+    "value": 50.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 token abe:1477000011:value02:divide100"
+   },
+   "icd_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "text \"Cooldown: 1s\""
+   },
+   "condition": "landing an attack on a Slowed or Rooted target",
+   "atk_ratio_pct_rank1": {
+    "value": 35.0,
+    "confidence": "estimated",
+    "source": "Metaroad rank-1 ratio; per-rank ratio not exposed"
+   },
+   "flat_rank_1": 143.0,
+   "flat_rank_20": 524.0,
+   "flat_rank_40": 812.0,
+   "note": "",
+   "flat_source": "aion2.app client dump 2026-09-18 token se_dmg:1477000711:SkillUIMinDmgsum"
+  },
+  {
+   "skill": "melee-fire",
+   "chance_pct": {
+    "value": 25.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 token abe:1478000012:value02:divide100"
+   },
+   "icd_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "text \"Cooldown: 1s\""
+   },
+   "condition": "any landed attack; separate 5% Knock Back chance within 5 m",
+   "atk_ratio_pct_rank1": {
+    "value": 26.4,
+    "confidence": "estimated",
+    "source": "Metaroad rank-1 ratio; per-rank ratio not exposed"
+   },
+   "flat_rank_1": 148.0,
+   "flat_rank_20": 417.0,
+   "flat_rank_40": 634.0,
+   "note": "",
+   "flat_source": "aion2.app client dump 2026-09-18 token se_dmg:1478000811:SkillUIMinDmgsum"
+  },
+  {
+   "skill": "hunters-soul",
+   "chance_pct": {
+    "value": 50.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 token abe:1480000011:value02:divide100"
+   },
+   "icd_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "text \"Cooldown: 1s\""
+   },
+   "condition": "on a Critical Hit",
+   "atk_ratio_pct_rank1": {
+    "value": 53.8,
+    "confidence": "estimated",
+    "source": "Metaroad rank-1 ratio; per-rank ratio not exposed"
+   },
+   "flat_rank_1": 344.0,
+   "flat_rank_20": 872.0,
+   "flat_rank_40": 1316.0,
+   "note": "x1.5 with Vaizel spec rank 15",
+   "flat_source": "aion2.app client dump 2026-09-18 token se_dmg:1480000711:SkillUIMinDmgsum"
+  }
+ ]
+}

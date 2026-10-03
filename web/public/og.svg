@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#172040"/>
+      <stop offset="1" stop-color="#0b1020"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2cf7e"/>
+      <stop offset="1" stop-color="#b98d35"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="582" rx="20" fill="none" stroke="#2a3563" stroke-width="2"/>
+  <g transform="translate(110 150) scale(5.6)">
+    <path d="M32 8 L54 52 H44 L32 28 L20 52 H10 Z" fill="url(#gold)"/>
+    <circle cx="32" cy="42" r="5" fill="#4cc3e8"/>
+  </g>
+  <g font-family="'Segoe UI Variable','Segoe UI',system-ui,sans-serif">
+    <text x="520" y="270" font-size="62" font-weight="700" fill="#e8ebf6">Aion 2 Companion</text>
+    <rect x="522" y="296" width="120" height="5" rx="2.5" fill="#e0b458"/>
+    <text x="520" y="366" font-size="32" fill="#a3adcc">Import your character, compare playstyles,</text>
+    <text x="520" y="410" font-size="32" fill="#a3adcc">plan Daevanion, keybinds and crafting.</text>
+    <text x="520" y="520" font-size="28" font-weight="600" fill="#e0b458">becomecube.com</text>
+    <text x="520" y="556" font-size="18" fill="#6b7699">Fan project. Not affiliated with NCSOFT.</text>
+  </g>
+</svg>

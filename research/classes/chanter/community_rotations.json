@@ -1,0 +1,70 @@
+[
+ {
+  "key": "aoeah-macro",
+  "source": "https://www.aoeah.com/news/4806--best-aion-2-chanter-builds-skills--macro-setup-2026-pvp--pve",
+  "scenario_key": "boss_180",
+  "priority": [
+   "spinning-strike",
+   "impactful-crush",
+   "marchutans-wrath",
+   "ensnaring-mark",
+   "bursting-blow",
+   "incandescent-blow",
+   "onslaught"
+  ],
+  "note": "aoeah, 2026-09-10 (opinion): macro order 'Spinning Strike > Impactful Crush > Marchutan's Wrath > Ensnaring Mark > Bursting Blow > Incandescent Blow > auto-attack cycle'; Rushing Smash left out of the macro and pressed by hand; Dark Crush fired on its window. Onslaught stands in for the auto-attack cycle."
+ },
+ {
+  "key": "pixelnitro-pve",
+  "source": "https://pixelnitro.com/?p=20617",
+  "scenario_key": "boss_180",
+  "priority": [
+   "incandescent-blow",
+   "dark-crush",
+   "wave-blow",
+   "heat-wave-blow",
+   "spinning-strike"
+  ],
+  "note": "pixelnitro, 2026-09-27 (opinion): Incandescent Blow opens, Dark Crush the moment it triggers, Wave Blow for the heavy phase, Heat Wave Blow in vulnerability windows, Spinning Strike fills cooldown gaps."
+ },
+ {
+  "key": "couga54-global",
+  "source": "https://couga54.github.io/aion2-guides/en/chanter/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "dark-crush",
+   "spinning-strike",
+   "impactful-crush",
+   "incandescent-blow",
+   "onslaught"
+  ],
+  "note": "couga54 guides, 2026-10-03 (opinion, Global S1): hotbar priority Dark Crush > Spinning Strike > Impactful Crush > Incandescent Blow, Onslaught spammed between; Marchutan's Wrath by hand when Dark Crush is unavailable."
+ },
+ {
+  "key": "gegebase-sustained",
+  "source": "https://gegebase.com/games/aion2/chanter_pve_guide",
+  "scenario_key": "boss_180",
+  "priority": [
+   "spinning-strike",
+   "dark-crush",
+   "incandescent-blow",
+   "bursting-blow",
+   "impactful-crush",
+   "onslaught"
+  ],
+  "note": "gegebase (opinion, date not shown): sustained loop Spinning Strike > Dark Crush > Incandescent/Bursting Blow > Impactful Crush > Onslaught chain; opener starts with Undefeated Mantra (toggle, not in list)."
+ },
+ {
+  "key": "aoeah-trash",
+  "source": "https://www.aoeah.com/news/4806--best-aion-2-chanter-builds-skills--macro-setup-2026-pvp--pve",
+  "scenario_key": "aoe_pack",
+  "priority": [
+   "fracturing-blow",
+   "tremor-crush",
+   "incandescent-blow",
+   "bursting-blow",
+   "onslaught"
+  ],
+  "note": "aoeah, 2026-09-10 (opinion): Fracturing Blow / Tremor Crush for trash packs; the AoE basics after them are our fill, not from the source."
+ }
+]

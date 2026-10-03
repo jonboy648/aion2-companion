@@ -1,0 +1,109 @@
+{
+ "_comment": "data_contract.md section 2. 'client-confirmed' -> confirmed; 'inferred' / 'text-based' -> estimated.",
+ "links": [
+  {
+   "parent": 15210000,
+   "child": 15030000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Flame Arrow > Burst, 1/3 2/3 3/3 in client"
+  },
+  {
+   "parent": 15030000,
+   "child": 15250000,
+   "kind": "chain",
+   "confidence": "confirmed",
+   "note": "Burst > Pyroclasm, restores MP 100/100/120"
+  },
+  {
+   "parent": 15090000,
+   "child": 15100000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Ice Chain > Cold Wave, near-identical text (inferred)"
+  },
+  {
+   "parent": 15110000,
+   "child": 15330000,
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Winter's Shackles > Winter's Illusion, spec unlock at rank 12 (inferred)"
+  },
+  {
+   "parent": 15300000,
+   "child": "The Depths",
+   "kind": "chain",
+   "confidence": "estimated",
+   "note": "Airborne target > Knockdown 2s (inferred)"
+  },
+  {
+   "parent": 15140000,
+   "child": 15340000,
+   "kind": "upgrade",
+   "confidence": "estimated",
+   "note": "Curse: Tree > Curse: Old Tree, CD 120 -> 42 over ranks (inferred)"
+  },
+  {
+   "parent": 15410000,
+   "child": 15410057,
+   "kind": "cancel",
+   "confidence": "estimated",
+   "note": "Hibernation > Remove Hibernation (inferred from id prefix 1541)"
+  },
+  {
+   "parent": 15220000,
+   "child": 15220037,
+   "kind": "proc",
+   "confidence": "estimated",
+   "note": "Frost Burst proc child, same name and icon (inferred from id prefix 1522)"
+  },
+  {
+   "parent": 15060000,
+   "child": "Hellfire - Level 1",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill (inferred)"
+  },
+  {
+   "parent": 15060000,
+   "child": "Hellfire - Level 2",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill (inferred)"
+  },
+  {
+   "parent": 15060000,
+   "child": "Hellfire - Max",
+   "kind": "charge",
+   "confidence": "estimated",
+   "note": "charge tier of one skill (inferred)"
+  },
+  {
+   "parent": 15710000,
+   "child": 15050000,
+   "kind": "condition",
+   "confidence": "estimated",
+   "note": "Blaze needs a Fire Mark target (text-based)"
+  },
+  {
+   "parent": 15040000,
+   "child": 15050000,
+   "kind": "condition",
+   "confidence": "estimated",
+   "note": "Firestorm / Fire Mark feed Blaze (text-based)"
+  }
+ ],
+ "unlinked": [
+  15020000,
+  15270000,
+  15290000,
+  15180000,
+  15380000,
+  "Flame Zone"
+ ],
+ "stagger_condition_only": [
+  15010000,
+  15080000,
+  15350000
+ ]
+}

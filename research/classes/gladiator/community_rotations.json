@@ -1,0 +1,57 @@
+[
+ {
+  "key": "couga-s1-boss",
+  "source": "https://couga54.github.io/aion2-guides/en/gladiator/",
+  "scenario_key": "boss_180",
+  "priority": [
+   "lunge-stance",
+   "zikels-blessing",
+   "ruinous-blow",
+   "rage-burst",
+   "overhead-slam",
+   "rending-blow"
+  ],
+  "note": "Global Season 1 PvE macro (guide updated 2026-10-03, opinion, built from Arthars Gaming / Grobs / aLuckyRO / Sen). Three hotbar lines held by one macro: main line = Rending Blow (3) / Overhead Slam (2) / Rage Burst (1, highest), Ruinous line = Ruinous Blow (+ Lifestealing Blade if equipped), buff line = Lunge Stance then Zikel's Blessing. Opener: Lunge Stance + Zikel's Blessing > Leaping Slam in > Ruinous Blow > hold macro; Focused Block by hand to trigger Experienced Counterstrike. Order here is the sim cast priority, not the in-game slot order. Overhead Slam > Upward Strike chain and the Overhead Slam > Rending Blow cancel are not modelled."
+ },
+ {
+  "key": "inven-s5-boss",
+  "source": "https://www.inven.co.kr/board/aion2/6448/31551",
+  "scenario_key": "boss_180",
+  "priority": [
+   "lunge-stance",
+   "zikels-blessing",
+   "wave-armor",
+   "ruinous-blow",
+   "rage-burst",
+   "overhead-slam",
+   "rending-blow"
+  ],
+  "note": "Korean Inven Gladiator guide (Sep 5, opinion, via D:\\Aion2\\research\\tmp\\classes.json): opener Lunge Stance, Zikel's Blessing, Wave Armor, then Ruinous Blow (Prepare for Battle), hold the macro and mash Overhead Slam with Rage Burst firing under it, recast Ruinous Blow every 45 s. KR build; Wave Armor level 15 is only worth it without a Templar. Damage split in the Aug 26-30 KR dummy logs: Overhead Slam (+ Upward Strike) and Rending Blow about two thirds."
+ },
+ {
+  "key": "couga-s1-aoe",
+  "source": "https://couga54.github.io/aion2-guides/en/gladiator/",
+  "scenario_key": "aoe_pack",
+  "priority": [
+   "lunge-stance",
+   "zikels-blessing",
+   "ruinous-blow",
+   "crushing-wave",
+   "rage-burst",
+   "overhead-slam",
+   "rending-blow"
+  ],
+  "note": "Assembled from the same page: macro lines as the boss entry plus Crushing Wave pressed by hand on packs (\"AoE and heal on trash packs\"). The position of Crushing Wave in the order is NOT stated by the guide; Crushing Wave is 250 MP with a slow animation. Treat as a low-confidence variant."
+ },
+ {
+  "key": "couga-leveling-pull",
+  "source": "https://couga54.github.io/aion2-guides/en/gladiator/",
+  "scenario_key": "level_pull",
+  "priority": [
+   "leaping-slam",
+   "crushing-wave",
+   "rending-blow"
+  ],
+  "note": "Guide \"How to fight while leveling\" (2026-10-03, opinion): \"Packs: Leaping Slam in > Crushing Wave > Rending Blow. A kill resets Leaping Slam > next pack\" (Leaping Slam spec 8 resets cooldown on defeating an enemy). Leveling macro is only Rage Burst / Overhead Slam / Rending Blow with Keen Strike on the basic attack."
+ }
+]
