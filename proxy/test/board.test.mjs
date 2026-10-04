@@ -135,6 +135,7 @@ test("a lower DPS cannot replace a higher one inside the cooldown, a higher one 
 test("the board page itself is a countable analytics path", async () => {
   const { normalizePath } = await import("../stats.js");
   assert.equal(normalizePath("/board"), "/board");
+  assert.equal(normalizePath("/maps"), "/maps");
 });
 
 test("POST /board/dps is only accepted from the site's own origin", async () => {

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { AdminPage } from "@/pages/AdminPage";
 import { Board } from "@/pages/Board";
+import { Maps } from "@/pages/Maps";
 import { BuildPage } from "@/pages/BuildPage";
 import { CharacterPage } from "@/pages/CharacterPage";
 import { CodexPage } from "@/pages/CodexPage";
@@ -22,6 +23,7 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="c/:region/:serverId/:name" element={<CharacterPage />} />
         <Route path="board" element={<Board />} />
+        <Route path="maps" element={<Maps />} />
         <Route path="compare/:a?/:b?" element={<ComparePage />} />
         <Route path="guide" element={<GuidePage />} />
         <Route path="build" element={<BuildPage />} />

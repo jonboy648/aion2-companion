@@ -86,6 +86,9 @@ function Shell() {
       <footer className="px-4 pb-6 pt-2 text-center text-xs text-faint">
         <div aria-hidden className="mx-auto mb-4 h-px max-w-6xl bg-gradient-to-r from-transparent via-[var(--metal)] to-transparent opacity-60" />
         {DISCLAIMER}
+        <div className="mt-1">
+          <NavLink to="/maps" className="text-faint underline-offset-2 hover:text-foreground">Maps</NavLink>
+        </div>
         <details className="mx-auto mt-2 max-w-xl">
           <summary className="cursor-pointer text-faint hover:text-foreground">Privacy</summary>
           <p className="mt-1.5 text-dim">{PRIVACY_NOTE}</p>
