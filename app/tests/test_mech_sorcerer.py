@@ -134,10 +134,21 @@ def test_stagger_gates(gd):
     assert "flame-scattershot" not in res.per_skill
 
 
-def test_flat_dot_ticks_are_recorded_not_invented(gd):
-    for k in ("fire_wall_dot", "cold_storm_dot"):
-        t = gd.statuses[k].tick_ratio_pct
-        assert t.confidence == "unknown" and "FLAT" in t.source
+def test_dot_ticks_come_from_the_client_tables(gd):
+    """Embers 110% ATK + flat, Frostbite 80% ATK + flat (client tables); the flat part is applied per tick."""
+    fw, cs = gd.statuses["fire_wall_dot"], gd.statuses["cold_storm_dot"]
+    assert (fw.tick_ratio_pct.value, cs.tick_ratio_pct.value) == (110.0, 80.0)
+    assert fw.tick_flat_ranks and cs.tick_flat_ranks and "client export" in fw.tick_ratio_pct.source
+    from aion2c.data.loader import load_gamedata
+    from aion2c.engine.simulator import simulate
+    from aion2c.models import CharacterBuild, Priority, PriorityEntry, Scenario, SimConfig, Stats
+    real = load_gamedata(class_key="sorcerer")
+    b = CharacterBuild("t", "global", 45, stats=Stats(attack=1800), skill_ranks={"fire-wall": 20}, stigmas=("fire-wall",))
+    res = simulate(real, b, Priority((PriorityEntry("fire-wall"),)), Scenario("x", "x", 30, 1, True), SimConfig())
+    assert not any("tick" in w for w in res.warnings)
+    one_hit = res.per_skill["fire-wall"].damage
+    # 10 s of Embers at 1 tick/s on top of the 5-hit cast: far more than the cast alone
+    assert one_hit > 5 * (1800 * 2.2 + 1476)
 
 
 # ---- hand-checked mechanics ----------------------------------------------------------------------

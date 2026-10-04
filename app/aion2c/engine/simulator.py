@@ -26,6 +26,7 @@ from aion2c.models import (
     LiveState,
     Num,
     Priority,
+    RankData,
     Scenario,
     SimConfig,
     SimResult,
@@ -105,7 +106,7 @@ class _Sim:
         self.covered: dict[str, float] = {}  # status key -> active ms inside [0, D)
         self.acc: dict[tuple, float] = {}
         self.chain: tuple | None = None  # (owner, tip_key, window_end_ms)
-        self.dots: dict[str, list] = {}  # status key -> [skill_key, next_tick_ms, tick_ms, ratio, targets]
+        self.dots: dict[str, list] = {}  # status key -> [skill_key, next_tick_ms, tick_ms, ratio, targets, flat]
         self.casts: list[CastEvent] = []
         self.tally: dict[str, list] = {}
         self.total = 0.0
@@ -379,7 +380,11 @@ class _Sim:
         elif v > 0:
             ratio = self.rd(st.tick_ratio_pct, f"{key} tick ratio", 0.0)
             tick = max(1, round(self.rd(st.tick_s, f"{key} tick interval", 1.0) * 1000))
-            self.dots[key] = [src, ta + tick, tick, ratio, min(self.sc.n_targets, sk.aoe_targets)]
+            flat = 0.0
+            if st.tick_flat_ranks:
+                tf = st.tick_flat_ranks[max(1, min(self._info(src).rank, len(st.tick_flat_ranks))) - 1]
+                flat = self.rd(tf, f"{key} tick flat damage", 0.0)
+            self.dots[key] = [src, ta + tick, tick, ratio, min(self.sc.n_targets, sk.aoe_targets), flat]
         for idx, tr in self.triggers_by_event["status"]:
             if tr.on_status == key and self._unlocked(tr.source_skill) and self._depth < 3 and self._trigger_ok(tr, ta):
                 self._conf(tr.confidence)
@@ -474,9 +479,10 @@ class _Sim:
             sk = self.gd.skills[d[0]]
             while d[1] < end and d[1] <= upto:
                 m, _ = self._mult(d[1], sk.element)
-                dmg, w = hit_damage_ex(
-                    replace(sk, atk_ratio_pct=Num(d[3]), ranks=(), hits=1), 1, self._stats_at(d[1]), m, self.sc.boss
-                )
+                tick_sk = replace(sk, atk_ratio_pct=Num(d[3]), ranks=(), hits=1)
+                if d[5]:  # flat part of the tick, one fixed number whatever the rank
+                    tick_sk = replace(tick_sk, ranks=(RankData(1, Num(d[5]), Num(d[5]), Num(0.0), Num(0.0)),))
+                dmg, w = hit_damage_ex(tick_sk, 1, self._stats_at(d[1]), m, self.sc.boss)
                 dmg *= d[4]
                 self.total += dmg
                 self.tally[d[0]][1] += dmg

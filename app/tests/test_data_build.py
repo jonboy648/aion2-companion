@@ -66,7 +66,14 @@ def test_slug_traps(shipped):
 
 def test_hellfire_charges(shipped):
     lv = shipped.rules["hellfire"].charge_levels
-    assert [c.dmg_mult.value for c in lv] == [1.0, 1.5, 2.0] and len(lv) == 3
+    # client tables: 4 tiers, ratios 339.25 / 474.95 / 678.5 / 1017.75 %, only the top tier hits twice
+    assert [c.dmg_mult.value for c in lv] == [1.0, 1.4, 2.0, 3.0] and len(lv) == 4
+    assert [c.hits for c in lv] == [1, 1, 1, 2]
+    assert [c.charge_s.value for c in lv] == [0.3, 0.5, 1.0, 1.5]
+    ratio = shipped.skills["hellfire"].atk_ratio_pct.value
+    assert [round(ratio * c.dmg_mult.value, 2) for c in lv] == [339.25, 474.95, 678.5, 1017.75]
+    r2 = shipped.skills["hellfire"].ranks[1]
+    assert [round(r2.flat_min.value + (r2.flat_max.value - r2.flat_min.value) * c.flat_frac) for c in lv] == [1460, 2044, 2920, 4381]
     r1 = shipped.skills["hellfire"].ranks[0]
     assert (r1.flat_min.value, r1.flat_max.value) == (1137, 3412)
     assert shipped.skills["hellfire"].ranks[-1].flat_max.value == 24364
@@ -139,8 +146,8 @@ def test_mechanics_values(shipped):
         assert shipped.skills[k].anim_lock_s.value == 1.5
     assert shipped.skills["flame-arrow"].anim_lock_s.value == 1.0
     for k in ("fire_wall_dot", "cold_storm_dot", "firestorm_dot"):
-        assert shipped.statuses[k].tick_ratio_pct.confidence == "unknown"
-        assert shipped.statuses[k].tick_ratio_pct.value == 0.0
+        assert shipped.statuses[k].tick_ratio_pct.confidence == ("unknown" if k == "firestorm_dot" else "confirmed")
+        assert shipped.statuses[k].tick_ratio_pct.value == {"fire_wall_dot": 110.0, "cold_storm_dot": 80.0, "firestorm_dot": 0.0}[k]
 
 
 def test_mp_restore_matches_description(shipped):
@@ -183,3 +190,20 @@ def test_recipes_loaded(shipped):
 
 def test_default_path_exists():
     assert default_path().is_file()
+
+
+def test_client_dot_ticks(shipped):
+    fw, cs = shipped.statuses["fire_wall_dot"], shipped.statuses["cold_storm_dot"]
+    assert (fw.tick_ratio_pct.value, fw.tick_s.value) == (110.0, 1.0)
+    assert (cs.tick_ratio_pct.value, cs.tick_s.value) == (80.0, 1.0)
+    assert [fw.tick_flat_ranks[i].value for i in (1, 2, 4, 24)] == [738, 826, 1019, 2059]
+    assert (cs.tick_flat_ranks[1].value, cs.tick_flat_ranks[24].value) == (537, 1497)
+    assert len(fw.tick_flat_ranks) == len(cs.tick_flat_ranks) == 25
+
+
+def test_client_zero_ratio_fixes():
+    sm, ra, ch = (load_gamedata(class_key=k).skills for k in ("spiritmaster", "ranger", "chanter"))
+    assert sm["magic-backflow"].atk_ratio_pct.value == 108 and sm["fire-spirit-rage-burst-16151200"].atk_ratio_pct.value == 95
+    assert sm["wind-spirit-gale-16154200"].atk_ratio_pct.value == 85.5
+    assert ra["explosive-arrow-14360000"].atk_ratio_pct.value == 253
+    assert ch["dark-crush"].atk_ratio_pct.value == 219.73

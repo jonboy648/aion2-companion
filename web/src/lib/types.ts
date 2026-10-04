@@ -77,6 +77,8 @@ export interface Status {
   stat_mods: { stat: string; value: Num }[];
   /** explicit aura flag; duration 0 behaves the same */
   permanent: boolean;
+  /** flat damage added to each tick, per rank of the applying skill (index 0 = rank 1) */
+  tick_flat_ranks: Num[];
 }
 
 export interface StatusTrigger {
@@ -99,6 +101,10 @@ export interface ChargeLevel {
   level: number;
   charge_s: Num;
   dmg_mult: Num;
+  /** hits of a cast released at this level (null = the skill's own hits) */
+  hits: number | null;
+  /** share of the rank's flat range dealt at this level (null = linear in the level) */
+  flat_frac: number | null;
 }
 
 export interface SkillRule {

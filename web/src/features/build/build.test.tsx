@@ -39,7 +39,7 @@ describe("helpers", () => {
     const rows = rotationRows(cmp.boss);
     expect(rows.length).toBe(cmp.boss.priority.entries.length);
     const hell = rows.find((r) => r.skillKey === "hellfire")!;
-    expect(hell.chargeLevel).toBe(3);
+    expect(hell.chargeLevel).toBe(4); // top of the 4 client charge tiers
     expect(hell.casts).toBeGreaterThan(0);  // exact count moves with every engine change; the join is what is tested
     expect(hell.damageShare).toBeGreaterThan(5);
     expect(roleNote({ ...hell, casts: 0 }, undefined, [])).toMatch(/Never cast/);

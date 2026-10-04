@@ -261,6 +261,65 @@ def build_skills(raw_skills: list[dict], keys: list[str], links: tuple[Link, ...
     return skills
 
 
+CLIENT_NUMBERS_FILE = "client_skill_numbers.json"
+
+
+def load_client_numbers(src_dir: Path = SRC_DIR) -> dict | None:
+    """Derived per-skill numbers from the private client export (client_export.py); None when absent."""
+    p = Path(src_dir) / CLIENT_NUMBERS_FILE
+    return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else None
+
+
+def apply_client_numbers(skills: dict[str, Skill], numbers: dict | None, class_key: str) -> dict[str, Skill]:
+    """Overwrite atk_ratio_pct, hits and per-rank flat damage with the client's numbers where a skill was matched;
+    everything else (unmatched skills, rank 1, cooldown, MP, ranks the client table lacks) keeps its current value."""
+    if not numbers:
+        return skills
+    src = numbers["source"]
+    entries = numbers["classes"].get(class_key, {}).get("skills", {})
+    out = dict(skills)
+    for key, e in entries.items():
+        sk = out.get(key)
+        if sk is None or "ratio_pct" not in e:
+            continue
+        conf = lambda v: Num(float(v), "confirmed", f"{src} (SkillEffectLv)")  # noqa: E731
+        tiers, lo_rank = (e.get("charge") or {}).get("tiers"), e["from_rank"]
+        ranks = []
+        for r in sk.ranks:
+            i = r.rank - lo_rank
+            if 0 <= i < len(e["flat_min"]):
+                fmax = e["flat_max"][i]
+                if tiers:  # the table's base group is the lowest charge tier; our flat_max is the top tier
+                    fmax = tiers[-1]["flat_min"][i]
+                elif (r.flat_min.value is not None and r.flat_max.value is not None
+                      and r.flat_max.value > r.flat_min.value):
+                    fmax = r.flat_max.value  # a charge range we have no tier groups for: keep our top end
+                r = replace(r, flat_min=conf(e["flat_min"][i]), flat_max=conf(fmax))
+            ranks.append(r)
+        out[key] = replace(sk, atk_ratio_pct=conf(e["ratio_pct"]), hits=e["hits"], ranks=tuple(ranks))
+    return out
+
+
+def apply_client_dots(statuses: dict[str, Status], mech: dict, numbers: dict | None, class_key: str) -> dict[str, Status]:
+    """mechanics.json `client_dots` {status: {skill, group, rank1_flat}} -> tick ratio, interval and per-rank flat."""
+    if not numbers:
+        return statuses
+    src = numbers["source"]
+    out = dict(statuses)
+    for skey, spec in (mech.get("client_dots") or {}).items():
+        d = numbers["classes"].get(class_key, {}).get("skills", {}).get(spec["skill"], {}).get("dots", {}).get(spec["group"])
+        if d is None or skey not in out:  # numbers file lacks it (or a reduced test tree): keep the status as authored
+            continue
+        assert d["from_rank"] == 2, "client DoT tables start at level 2"
+        flat = (Num(float(spec["rank1_flat"]), "estimated", spec["rank1_source"]),) + tuple(
+            Num(float(f), "confirmed", f"{src} (SkillAbnormalEffectLv)") for f in d["flat"])
+        out[skey] = replace(
+            out[skey], tick_flat_ranks=flat,
+            tick_ratio_pct=Num(d["ratio_pct"], "confirmed", f"{src} (SkillAbnormalEffectLv)"),
+            tick_s=Num(d["interval_ms"] / 1000, "confirmed", f"{src} (SkillAbnormalEffectLv)"))
+    return out
+
+
 def build_daevanion(path: Path, skills: dict[str, Skill]) -> dict[str, DaevanionBoard]:
     id_key = {s.skill_id: k for k, s in skills.items() if s.skill_id is not None}
     boards: dict[str, DaevanionBoard] = {}
@@ -334,13 +393,15 @@ def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: 
     icon_files = {k: f"{k}.png" for r, k in zip(raw_skills, keys)
                   if r.get("skill_id") is not None and (class_key == "sorcerer" or r["skill_id"] in indexed)}
     skills = build_skills(raw_skills, keys, links, mech, icon_files)
+    client = load_client_numbers()
+    skills = apply_client_numbers(skills, client, class_key)
     gd = GameData(
         schema_version=1, data_version=f"{built_at[:10]}+aion2app-{dump_date}", built_at=built_at,
         level_caps={"global": 45, "korea": 50},
         rank_caps={"global": {"core": 20, "stigma": 20}, "korea": {"core": 40, "stigma": 25}},
         stigma_slots={"global": 4, "korea": 6},
         skills=skills,
-        statuses={k: from_dict(Status, v) for k, v in mech["statuses"].items()},
+        statuses=apply_client_dots({k: from_dict(Status, v) for k, v in mech["statuses"].items()}, mech, client, class_key),
         rules={k: from_dict(SkillRule, v) for k, v in mech["rules"].items()},
         triggers=tuple(from_dict(StatusTrigger, t) for t in mech["triggers"]),
         links=links,

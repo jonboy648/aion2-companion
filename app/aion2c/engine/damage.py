@@ -16,13 +16,17 @@ BOSS_CRIT_FACTOR = 0.75  # estimated: crit damage is weaker against bosses
 DEFENSE_FACTOR = 0.1  # estimated: flat damage removed per point of effective defense
 
 
-def per_hit_multiplier(skill: Skill) -> int:
+def per_hit_multiplier(skill: Skill, charge: ChargeLevel | None = None) -> int:
     """Hits a cast multiplies its listed damage by. Metaroad words every multi-hit skill "X% ATK + Y per hit
     (N hits)" and Y equals our Dmgsum flat token (research/multihit_rule.md, ~85% confidence, no in-game dummy
     test), so ratio AND flat are per hit and a cast deals N x one hit. Some local descriptions (Assassin, Chanter,
     Cleric: the aion2.app wording) drop "per hit", so this is data-driven on `hits` alone. A skill whose listed
     number is the whole cast carries the tag "damage_total" (mechanics.json skill_tags) and is not multiplied."""
-    return 1 if "damage_total" in skill.tags else max(1, skill.hits)
+    if "damage_total" in skill.tags:
+        return 1
+    if charge is not None and charge.hits is not None:  # per-tier hit count (client data: only the top tier hits twice)
+        return max(1, charge.hits)
+    return max(1, skill.hits)
 
 
 def hit_damage_ex(
@@ -54,6 +58,8 @@ def hit_damage_ex(
             warns.append(f"unknown value: {skill.key} flat damage")
         elif charge is None:
             flat = (lo + hi) / 2
+        elif charge.flat_frac is not None:
+            flat = lo + (hi - lo) * charge.flat_frac
         elif n_levels > 1:
             flat = lo + (hi - lo) * (charge.level - 1) / (n_levels - 1)
         else:
@@ -64,7 +70,7 @@ def hit_damage_ex(
 
     raw = base * ratio / 100 * cmult + flat
     raw -= max(0.0, stats.target_defense - stats.penetration) * DEFENSE_FACTOR
-    raw = max(0.0, raw) * per_hit_multiplier(skill)
+    raw = max(0.0, raw) * per_hit_multiplier(skill, charge)
     boost = 1 + (stats.dmg_boost_pct + stats.pve_dmg_pct + (stats.boss_dmg_pct if boss else 0.0)) / 100
     crit_p = 100.0 if force_crit else min(stats.crit_chance_pct, CRIT_CHANCE_CAP_PCT)
     crit_exp = 1 + crit_p / 100 * stats.crit_dmg_pct / 100 * (

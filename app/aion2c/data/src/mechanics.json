@@ -120,12 +120,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    }
   },
   "element_enhancement": {
@@ -151,12 +151,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    }
   },
   "delayed_explosion": {
@@ -179,12 +179,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    }
   },
   "grace_of_enhancement": {
@@ -207,12 +207,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    },
    "stat_mods": [
     {
@@ -245,14 +245,14 @@
    "mp_min_pct": null,
    "source_skill": null,
    "tick_ratio_pct": {
-    "value": 0.0,
-    "confidence": "unknown",
-    "source": "dump has FLAT 650/tick at rank 1 (2059 at rank 40) but Status only models ATK-ratio ticks; ratio unknown"
+    "value": 110.0,
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 Sorcerer_Skill039_LvUp_AB01"
    },
    "tick_s": {
     "value": 1.0,
-    "confidence": "estimated",
-    "source": "'every 1s' in description"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 Sorcerer_Skill039_LvUp_AB01 (1000 ms)"
    }
   },
   "cold_storm_dot": {
@@ -275,14 +275,14 @@
    "mp_min_pct": null,
    "source_skill": null,
    "tick_ratio_pct": {
-    "value": 0.0,
-    "confidence": "unknown",
-    "source": "dump has FLAT 472/tick at rank 1 (1497 at rank 40) but Status only models ATK-ratio ticks; ratio unknown"
+    "value": 80.0,
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 Sorcerer_Skill012_LvUp_AB01 (Frostbite)"
    },
    "tick_s": {
     "value": 1.0,
-    "confidence": "estimated",
-    "source": "'every 1s' in description"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 Sorcerer_Skill012_LvUp_AB01 (1000 ms)"
    }
   },
   "firestorm_dot": {
@@ -292,7 +292,7 @@
    "duration_s": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "placeholder per PLAN: dump shows 5 hits of flat damage and no DoT; not attached to any rule until verified against in-game tooltips"
+    "source": "placeholder: the client table shows 5 hits of flat damage and no DoT; not attached to any rule"
    },
    "dmg_mult": {
     "value": 1.0,
@@ -307,12 +307,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    }
   },
   "wish_of_concentration": {
@@ -837,7 +837,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Embers DoT: tick damage unknown until verified against in-game tooltips; every Fire attack inflicts Fire Mark for 5 s (description)"
+   "note": "Embers DoT: 110% ATK + flat 738 (rank 2) to 2059 (rank 25) per 1 s tick (client tables; rank 1 flat 650 from the dump); every Fire attack inflicts Fire Mark for 5 s (description). The client says the amount rises when targets move: not modelled."
   },
   "cold-storm": {
    "skill_key": "cold-storm",
@@ -852,7 +852,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Frostbite DoT: tick damage unknown until verified against in-game tooltips"
+   "note": "Frostbite DoT: 80% ATK + flat 537 (rank 2) to 1497 (rank 25) per 1 s tick (client tables; rank 1 flat 472 from the dump). The client says the amount rises when targets move: not modelled."
   },
   "hellfire": {
    "skill_key": "hellfire",
@@ -868,46 +868,67 @@
     {
      "level": 1,
      "charge_s": {
-      "value": 0.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate, no source; record a full charge to confirm"
+      "value": 0.3,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
      },
      "dmg_mult": {
       "value": 1.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
-     }
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 1,
+     "flat_frac": 0.0
     },
     {
      "level": 2,
      "charge_s": {
-      "value": 1.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate, no source; record a full charge to confirm"
+      "value": 0.5,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
      },
      "dmg_mult": {
-      "value": 1.5,
-      "confidence": "estimated",
-      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
-     }
+      "value": 1.4,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 1,
+     "flat_frac": 0.2
     },
     {
      "level": 3,
      "charge_s": {
-      "value": 2.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate, no source; record a full charge to confirm"
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
      },
      "dmg_mult": {
       "value": 2.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
-     }
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 1,
+     "flat_frac": 0.5
+    },
+    {
+     "level": 4,
+     "charge_s": {
+      "value": 1.5,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
+     },
+     "dmg_mult": {
+      "value": 3.0,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 2,
+     "flat_frac": 1.0
     }
    ],
    "mp_restore": 0.0,
-   "confidence": "estimated",
-   "note": "charge timing and per-level multipliers are estimates; every Fire attack inflicts Fire Mark for 5 s (description)"
+   "confidence": "confirmed",
+   "note": "4 charge tiers from the client tables: ratio and flat damage scale 1 / 1.4 / 2 / 3, only the top tier hits twice; every Fire attack inflicts Fire Mark for 5 s (description)"
   },
   "wish-of-concentration": {
    "skill_key": "wish-of-concentration",
@@ -1572,5 +1593,19 @@
    ]
   }
  },
- "spec_notes": "Overrides only where the generic parser is wrong or has no value. Chain children share the root's specialty set and are neutralised (no double counting). Unquantified (kept unknown, listed by tests): Multi-Hit (no value in any official source), Delayed Damage after 3s (Blaze), Enhanced Frostbite / Enhanced Embers (DoT amount is flat and not modelled). Slot ranks stay 8/12/20 (datamine option unlocks 8/8/8/12/16 for actives, 5/10/15/20 for stigmas)."
+ "spec_notes": "Overrides only where the generic parser is wrong or has no value. Chain children share the root's specialty set and are neutralised (no double counting). Unquantified (kept unknown, listed by tests): Multi-Hit (no value in any official source), Delayed Damage after 3s (Blaze), Enhanced Frostbite / Enhanced Embers (DoT amount is flat and not modelled). Slot ranks stay 8/12/20 (datamine option unlocks 8/8/8/12/16 for actives, 5/10/15/20 for stigmas).",
+ "client_dots": {
+  "fire_wall_dot": {
+   "skill": "fire-wall",
+   "group": "AB01",
+   "rank1_flat": 650,
+   "rank1_source": "aion2.app client dump 2026-09-18 (the client table starts at rank 2)"
+  },
+  "cold_storm_dot": {
+   "skill": "cold-storm",
+   "group": "AB01",
+   "rank1_flat": 472,
+   "rank1_source": "aion2.app client dump 2026-09-18 (the client table starts at rank 2)"
+  }
+ }
 }

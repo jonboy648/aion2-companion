@@ -6,7 +6,7 @@ import { armoryExtras } from "@/lib/armory";
 import type { ArmoryRaw, CompareResult, IconUrls } from "@/lib/types";
 import { RotationPlan } from "./RotationPlan";
 
-const rot = (cmpFx as unknown as CompareResult).boss.rotation_explained;
+const rot = (cmpFx as unknown as CompareResult).aoe.rotation_explained; // a playstyle whose fixture still has unused skills
 const icons: IconUrls = { "element-enhancement": "https://assets.playnccdn.com/static-aion2-gamedata/resources/x.png" };
 
 describe("RotationPlan", () => {

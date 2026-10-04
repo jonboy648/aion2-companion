@@ -158,6 +158,7 @@ class Status:
     tick_s: Num = Num(1.0, "unknown")
     stat_mods: tuple[StatMod, ...] = ()  # live-stat changes while active (self statuses)
     permanent: bool = False  # explicit aura flag; duration_s.value == 0 behaves the same
+    tick_flat_ranks: tuple[Num, ...] = ()  # flat damage added to each tick, per rank (index 0 = rank 1) of the skill that applies it
 
 
 @dataclass(frozen=True)
@@ -190,6 +191,8 @@ class ChargeLevel:
     level: int
     charge_s: Num
     dmg_mult: Num
+    hits: int | None = None  # hits of a cast released at this level; None = the skill's own `hits`
+    flat_frac: float | None = None  # share of (flat_max - flat_min) this level deals; None = linear in the level
 
 
 @dataclass(frozen=True)

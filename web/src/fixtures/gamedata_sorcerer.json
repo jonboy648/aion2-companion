@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "data_version": "2026-10-04+aion2app-2026-09-18",
- "built_at": "2026-10-04T00:49:21+00:00",
+ "built_at": "2026-10-04T17:17:08+00:00",
  "level_caps": {
   "global": 45,
   "korea": 50
@@ -157,8 +157,8 @@
    ],
    "atk_ratio_pct": {
     "value": 82.5,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -189,12 +189,12 @@
      "flat_min": {
       "value": 156.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 156.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -212,12 +212,12 @@
      "flat_min": {
       "value": 210.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 210.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -441,8 +441,8 @@
    ],
    "atk_ratio_pct": {
     "value": 70.25,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -473,12 +473,12 @@
      "flat_min": {
       "value": 97.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 97.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -496,12 +496,12 @@
      "flat_min": {
       "value": 127.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 127.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -662,8 +662,8 @@
    ],
    "atk_ratio_pct": {
     "value": 192.5,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -694,12 +694,12 @@
      "flat_min": {
       "value": 197.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 197.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 5.0,
@@ -717,12 +717,12 @@
      "flat_min": {
       "value": 281.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 281.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 5.0,
@@ -883,8 +883,8 @@
    ],
    "atk_ratio_pct": {
     "value": 193.2,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -915,12 +915,12 @@
      "flat_min": {
       "value": 282.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 282.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 5.0,
@@ -938,12 +938,12 @@
      "flat_min": {
       "value": 366.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 366.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 5.0,
@@ -1105,8 +1105,8 @@
    ],
    "atk_ratio_pct": {
     "value": 339.25,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -1137,12 +1137,12 @@
      "flat_min": {
       "value": 1460.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 4381.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 45.0,
@@ -1160,12 +1160,12 @@
      "flat_min": {
       "value": 1732.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 5198.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 45.0,
@@ -1406,8 +1406,8 @@
    ],
    "atk_ratio_pct": {
     "value": 92.5,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -1438,12 +1438,12 @@
      "flat_min": {
       "value": 120.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 120.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -1461,12 +1461,12 @@
      "flat_min": {
       "value": 160.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 160.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -1676,8 +1676,8 @@
    ],
    "atk_ratio_pct": {
     "value": 103.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -1708,12 +1708,12 @@
      "flat_min": {
       "value": 130.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 130.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -1731,12 +1731,12 @@
      "flat_min": {
       "value": 175.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 175.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -1898,8 +1898,8 @@
    ],
    "atk_ratio_pct": {
     "value": 145.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -1930,12 +1930,12 @@
      "flat_min": {
       "value": 369.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 369.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 45.0,
@@ -1953,12 +1953,12 @@
      "flat_min": {
       "value": 486.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 486.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 45.0,
@@ -2153,8 +2153,8 @@
    ],
    "atk_ratio_pct": {
     "value": 250.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -2185,12 +2185,12 @@
      "flat_min": {
       "value": 1678.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1678.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 90.0,
@@ -2208,12 +2208,12 @@
      "flat_min": {
       "value": 1878.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1878.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 90.0,
@@ -2368,8 +2368,8 @@
    ],
    "atk_ratio_pct": {
     "value": 175.5,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -2400,12 +2400,12 @@
      "flat_min": {
       "value": 1178.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1178.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -2423,12 +2423,12 @@
      "flat_min": {
       "value": 1318.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1318.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -2765,8 +2765,8 @@
    ],
    "atk_ratio_pct": {
     "value": 94.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -2797,12 +2797,12 @@
      "flat_min": {
       "value": 239.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 239.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 30.0,
@@ -2820,12 +2820,12 @@
      "flat_min": {
       "value": 315.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 315.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 30.0,
@@ -3249,8 +3249,8 @@
    ],
    "atk_ratio_pct": {
     "value": 160.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -3281,12 +3281,12 @@
      "flat_min": {
       "value": 1074.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1074.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -3304,12 +3304,12 @@
      "flat_min": {
       "value": 1202.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1202.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -3449,8 +3449,8 @@
    ],
    "atk_ratio_pct": {
     "value": 63.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -3481,12 +3481,12 @@
      "flat_min": {
       "value": 89.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 89.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -3504,12 +3504,12 @@
      "flat_min": {
       "value": 117.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 117.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -3670,8 +3670,8 @@
    ],
    "atk_ratio_pct": {
     "value": 155.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -3702,12 +3702,12 @@
      "flat_min": {
       "value": 519.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 519.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 10.0,
@@ -3725,12 +3725,12 @@
      "flat_min": {
       "value": 667.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 667.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 10.0,
@@ -4390,8 +4390,8 @@
    ],
    "atk_ratio_pct": {
     "value": 82.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -4422,12 +4422,12 @@
      "flat_min": {
       "value": 109.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 109.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -4445,12 +4445,12 @@
      "flat_min": {
       "value": 144.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 144.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -4674,8 +4674,8 @@
    ],
    "atk_ratio_pct": {
     "value": 232.25,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -4706,12 +4706,12 @@
      "flat_min": {
       "value": 339.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 339.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 15.0,
@@ -4729,12 +4729,12 @@
      "flat_min": {
       "value": 440.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 440.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 15.0,
@@ -4973,8 +4973,8 @@
    ],
    "atk_ratio_pct": {
     "value": 169.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -5005,12 +5005,12 @@
      "flat_min": {
       "value": 1134.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1134.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 90.0,
@@ -5028,12 +5028,12 @@
      "flat_min": {
       "value": 1270.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1270.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 90.0,
@@ -5392,8 +5392,8 @@
    ],
    "atk_ratio_pct": {
     "value": 189.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -5424,12 +5424,12 @@
      "flat_min": {
       "value": 1268.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1268.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 30.0,
@@ -5447,12 +5447,12 @@
      "flat_min": {
       "value": 1420.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1420.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 30.0,
@@ -5593,8 +5593,8 @@
    ],
    "atk_ratio_pct": {
     "value": 188.5,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -5625,12 +5625,12 @@
      "flat_min": {
       "value": 480.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 480.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.5,
@@ -5648,12 +5648,12 @@
      "flat_min": {
       "value": 631.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 631.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.5,
@@ -6095,8 +6095,8 @@
    ],
    "atk_ratio_pct": {
     "value": 193.05,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -6127,12 +6127,12 @@
      "flat_min": {
       "value": 1295.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1295.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -6150,12 +6150,12 @@
      "flat_min": {
       "value": 1450.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1450.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -6354,8 +6354,8 @@
    ],
    "atk_ratio_pct": {
     "value": 220.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -6386,12 +6386,12 @@
      "flat_min": {
       "value": 1476.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1476.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -6409,12 +6409,12 @@
      "flat_min": {
       "value": 1653.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1653.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 60.0,
@@ -7015,8 +7015,8 @@
    ],
    "atk_ratio_pct": {
     "value": 150.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -7047,12 +7047,12 @@
      "flat_min": {
       "value": 1006.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1006.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 120.0,
@@ -7070,12 +7070,12 @@
      "flat_min": {
       "value": 1127.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 1127.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 120.0,
@@ -7214,8 +7214,8 @@
    ],
    "atk_ratio_pct": {
     "value": 55.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -7246,12 +7246,12 @@
      "flat_min": {
       "value": 56.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 56.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -7269,12 +7269,12 @@
      "flat_min": {
       "value": 80.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 80.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -7431,8 +7431,8 @@
    ],
    "atk_ratio_pct": {
     "value": 23.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -7463,12 +7463,12 @@
      "flat_min": {
       "value": 58.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 58.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -7486,12 +7486,12 @@
      "flat_min": {
       "value": 77.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 77.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -7973,8 +7973,8 @@
    ],
    "atk_ratio_pct": {
     "value": 18.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -8005,12 +8005,12 @@
      "flat_min": {
       "value": 120.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 120.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -8028,12 +8028,12 @@
      "flat_min": {
       "value": 135.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 135.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -8191,8 +8191,8 @@
    ],
    "atk_ratio_pct": {
     "value": 39.0,
-    "confidence": "estimated",
-    "source": "rank-1 ratio from dump/Metaroad, applied at all ranks (assumption)"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillEffectLv)"
    },
    "ranks": [
     {
@@ -8223,12 +8223,12 @@
      "flat_min": {
       "value": 293.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 293.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -8246,12 +8246,12 @@
      "flat_min": {
       "value": 330.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "flat_max": {
       "value": 330.0,
       "confidence": "confirmed",
-      "source": "aion2.app client dump 2026-09-18"
+      "source": "client export 2026-10-04 (SkillEffectLv)"
      },
      "cooldown_s": {
       "value": 0.0,
@@ -8692,7 +8692,8 @@
     "source": "assumed 1 s tick (not in the text)"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "spec_flame-arrow_3_elem": {
    "key": "spec_flame-arrow_3_elem",
@@ -8724,7 +8725,8 @@
     "source": ""
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "spec_assault-bombardment_0_buff": {
    "key": "spec_assault-bombardment_0_buff",
@@ -8763,7 +8765,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "fire_mark": {
    "key": "fire_mark",
@@ -8787,15 +8790,16 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "element_enhancement": {
    "key": "element_enhancement",
@@ -8820,15 +8824,16 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "delayed_explosion": {
    "key": "delayed_explosion",
@@ -8850,15 +8855,16 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "grace_of_enhancement": {
    "key": "grace_of_enhancement",
@@ -8880,12 +8886,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    },
    "stat_mods": [
     {
@@ -8897,7 +8903,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "fire_wall_dot": {
    "key": "fire_wall_dot",
@@ -8919,17 +8926,144 @@
    "mp_min_pct": null,
    "source_skill": null,
    "tick_ratio_pct": {
-    "value": 0.0,
-    "confidence": "unknown",
-    "source": "dump has FLAT 650/tick at rank 1 (2059 at rank 40) but Status only models ATK-ratio ticks; ratio unknown"
+    "value": 110.0,
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
    },
    "tick_s": {
     "value": 1.0,
-    "confidence": "estimated",
-    "source": "'every 1s' in description"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": [
+    {
+     "value": 650.0,
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 (the client table starts at rank 2)"
+    },
+    {
+     "value": 738.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 826.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 931.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1019.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1084.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1131.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1196.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1260.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1324.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1389.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1437.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1485.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1532.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1580.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1628.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1676.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1724.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1772.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1819.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1867.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1915.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1963.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 2011.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 2059.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    }
+   ]
   },
   "cold_storm_dot": {
    "key": "cold_storm_dot",
@@ -8951,17 +9085,144 @@
    "mp_min_pct": null,
    "source_skill": null,
    "tick_ratio_pct": {
-    "value": 0.0,
-    "confidence": "unknown",
-    "source": "dump has FLAT 472/tick at rank 1 (1497 at rank 40) but Status only models ATK-ratio ticks; ratio unknown"
+    "value": 80.0,
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
    },
    "tick_s": {
     "value": 1.0,
-    "confidence": "estimated",
-    "source": "'every 1s' in description"
+    "confidence": "confirmed",
+    "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": [
+    {
+     "value": 472.0,
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 (the client table starts at rank 2)"
+    },
+    {
+     "value": 537.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 601.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 677.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 741.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 788.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 823.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 870.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 916.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 963.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1010.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1045.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1080.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1114.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1149.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1184.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1219.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1254.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1288.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1323.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1358.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1393.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1428.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1462.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    },
+    {
+     "value": 1497.0,
+     "confidence": "confirmed",
+     "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
+    }
+   ]
   },
   "firestorm_dot": {
    "key": "firestorm_dot",
@@ -8970,7 +9231,7 @@
    "duration_s": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "placeholder per PLAN: dump shows 5 hits of flat damage and no DoT; not attached to any rule until verified against in-game tooltips"
+    "source": "placeholder: the client table shows 5 hits of flat damage and no DoT; not attached to any rule"
    },
    "dmg_mult": {
     "value": 1.0,
@@ -8985,15 +9246,16 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until verified against in-game tooltips"
+    "source": "no tick damage ratio found in the client tables"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until verified against in-game tooltips"
+    "source": "no tick interval found in the client tables"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "wish_of_concentration": {
    "key": "wish_of_concentration",
@@ -9032,7 +9294,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "wish_atk_plus": {
    "key": "wish_atk_plus",
@@ -9071,7 +9334,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "wish_combat_speed": {
    "key": "wish_combat_speed",
@@ -9110,7 +9374,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "ee_plus": {
    "key": "ee_plus",
@@ -9143,7 +9408,8 @@
     "source": "unused (no tick)"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "ee_robe_of_flame": {
    "key": "ee_robe_of_flame",
@@ -9182,7 +9448,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "ee_grace": {
    "key": "ee_grace",
@@ -9221,7 +9488,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "de_plus": {
    "key": "de_plus",
@@ -9251,7 +9519,8 @@
     "source": "unused (no tick)"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "ws_boost": {
    "key": "ws_boost",
@@ -9290,7 +9559,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "frost": {
    "key": "frost",
@@ -9320,7 +9590,8 @@
     "source": "unused (no tick)"
    },
    "stat_mods": [],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "robe_of_earth": {
    "key": "robe_of_earth",
@@ -9359,7 +9630,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   },
   "robe_of_flame": {
    "key": "robe_of_flame",
@@ -9398,7 +9670,8 @@
      }
     }
    ],
-   "permanent": false
+   "permanent": false,
+   "tick_flat_ranks": []
   }
  },
  "rules": {
@@ -9515,7 +9788,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Embers DoT: tick damage unknown until verified against in-game tooltips; every Fire attack inflicts Fire Mark for 5 s (description)",
+   "note": "Embers DoT: 110% ATK + flat 738 (rank 2) to 2059 (rank 25) per 1 s tick (client tables; rank 1 flat 650 from the dump); every Fire attack inflicts Fire Mark for 5 s (description). The client says the amount rises when targets move: not modelled.",
    "requires_spec": null
   },
   "cold-storm": {
@@ -9531,7 +9804,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Frostbite DoT: tick damage unknown until verified against in-game tooltips",
+   "note": "Frostbite DoT: 80% ATK + flat 537 (rank 2) to 1497 (rank 25) per 1 s tick (client tables; rank 1 flat 472 from the dump). The client says the amount rises when targets move: not modelled.",
    "requires_spec": null
   },
   "hellfire": {
@@ -9548,46 +9821,67 @@
     {
      "level": 1,
      "charge_s": {
-      "value": 0.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate, no source; record a full charge to confirm"
+      "value": 0.3,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
      },
      "dmg_mult": {
       "value": 1.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
-     }
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 1,
+     "flat_frac": 0.0
     },
     {
      "level": 2,
      "charge_s": {
-      "value": 1.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate, no source; record a full charge to confirm"
+      "value": 0.5,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
      },
      "dmg_mult": {
-      "value": 1.5,
-      "confidence": "estimated",
-      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
-     }
+      "value": 1.4,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 1,
+     "flat_frac": 0.2
     },
     {
      "level": 3,
      "charge_s": {
-      "value": 2.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate, no source; record a full charge to confirm"
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
      },
      "dmg_mult": {
       "value": 2.0,
-      "confidence": "estimated",
-      "source": "PLAN estimate 1/1.5/2; Fextralife shows 3x flat AND ratio from L1 to Max (339-1017%)"
-     }
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 1,
+     "flat_frac": 0.5
+    },
+    {
+     "level": 4,
+     "charge_s": {
+      "value": 1.5,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
+     },
+     "dmg_mult": {
+      "value": 3.0,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
+     },
+     "hits": 2,
+     "flat_frac": 1.0
     }
    ],
    "mp_restore": 0.0,
-   "confidence": "estimated",
-   "note": "charge timing and per-level multipliers are estimates; every Fire attack inflicts Fire Mark for 5 s (description)",
+   "confidence": "confirmed",
+   "note": "4 charge tiers from the client tables: ratio and flat damage scale 1 / 1.4 / 2 / 3, only the top tier hits twice; every Fire attack inflicts Fire Mark for 5 s (description)",
    "requires_spec": null
   },
   "wish-of-concentration": {

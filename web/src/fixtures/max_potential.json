@@ -13,7 +13,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_WP_MB_0078_T05.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 28.80829361507422
+   "gain_pct": 29.006025354916055
   },
   {
    "slot": "offhand",
@@ -26,7 +26,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Weapon_Guarder_R_011.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 18.661183201571816
+   "gain_pct": 18.76981906591424
   },
   {
    "slot": "helmet",
@@ -39,7 +39,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Helmet.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 1.0427463619535615
+   "gain_pct": 1.0503125268856994
   },
   {
    "slot": "shoulder",
@@ -52,7 +52,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Shoulder.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.9057836412059039
+   "gain_pct": 0.9123462181608311
   },
   {
    "slot": "torso",
@@ -65,7 +65,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Torso.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 4.885201442518827
+   "gain_pct": 4.867902105078659
   },
   {
    "slot": "legs",
@@ -78,7 +78,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Pants.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 1.0909266039093701
+   "gain_pct": 1.098830916189275
   },
   {
    "slot": "gloves",
@@ -91,7 +91,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Gloves.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.7728203724166827
+   "gain_pct": 0.7783880861350623
   },
   {
    "slot": "boots",
@@ -104,7 +104,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Boots.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.9538481421092371
+   "gain_pct": 0.9607471295100867
   },
   {
    "slot": "cape",
@@ -117,7 +117,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Cape.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.9057836412059039
+   "gain_pct": 0.9123462181608311
   },
   {
    "slot": "belt",
@@ -143,7 +143,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_NL_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 7.1232116289817515
+   "gain_pct": 7.179765482695011
   },
   {
    "slot": "earring1",
@@ -156,7 +156,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 6.369421229665617
+   "gain_pct": 6.419740092365922
   },
   {
    "slot": "earring2",
@@ -169,7 +169,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 6.369421229665617
+   "gain_pct": 6.419740092365922
   },
   {
    "slot": "ring1",
@@ -182,7 +182,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 5.49544882387929
+   "gain_pct": 5.538526611000538
   },
   {
    "slot": "ring2",
@@ -195,7 +195,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 5.49544882387929
+   "gain_pct": 5.538526611000538
   },
   {
    "slot": "bracelet1",
@@ -208,7 +208,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
    "source": "Ascension",
    "reachable": true,
-   "gain_pct": 4.551311743593844
+   "gain_pct": 4.588889210792213
   },
   {
    "slot": "bracelet2",
@@ -221,7 +221,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
    "source": "Ascension",
    "reachable": true,
-   "gain_pct": 4.551311743593844
+   "gain_pct": 4.588889210792213
   },
   {
    "slot": "amulet",
@@ -234,33 +234,33 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Item_Craft_Conversion_Crystal_L_lv5_01.png",
    "source": "Substance Morph",
    "reachable": true,
-   "gain_pct": 7.236755560171959
+   "gain_pct": 7.298464413998262
   }
  ],
  "build": {
   "stigmas": [
    {
-    "key": "assault-bombardment",
-    "name": "Assault Bombardment"
-   },
-   {
-    "key": "cold-storm",
-    "name": "Cold Storm"
+    "key": "fire-wall",
+    "name": "Fire Wall"
    },
    {
     "key": "element-enhancement",
     "name": "Element Enhancement"
    },
    {
-    "key": "fire-wall",
-    "name": "Fire Wall"
+    "key": "divine-burst",
+    "name": "Divine Burst"
+   },
+   {
+    "key": "cold-storm",
+    "name": "Cold Storm"
    }
   ],
   "specialties": [
    {
     "skill": "Bittercold Wind",
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 14.294443217410425
+    "dps_gain_pct": 11.363007959592352
    }
   ],
   "daevanion_nodes": 380,
@@ -327,29 +327,29 @@
    }
   ]
  },
- "dps": 32989.59749180822,
- "dps_without_gear": 4902.903637468899,
- "gear_gain_pct": 232.60996265684497,
- "current_dps": 8240.683239414895,
- "gain_vs_current_pct": 170.77471484551435,
+ "dps": 35828.80524993692,
+ "dps_without_gear": 5654.910685080559,
+ "gear_gain_pct": 237.47475043239996,
+ "current_dps": 9043.607956576727,
+ "gain_vs_current_pct": 177.8127798856553,
  "with_current_gear": {
-  "dps": 12352.459927873822,
+  "dps": 14280.137431235775,
   "stigmas": [
-   {
-    "key": "assault-bombardment",
-    "name": "Assault Bombardment"
-   },
    {
     "key": "fire-wall",
     "name": "Fire Wall"
    },
    {
-    "key": "cold-storm",
-    "name": "Cold Storm"
+    "key": "element-enhancement",
+    "name": "Element Enhancement"
    },
    {
-    "key": "curse-tree",
-    "name": "Curse: Tree"
+    "key": "glacial-smite",
+    "name": "Glacial Smite"
+   },
+   {
+    "key": "cold-storm",
+    "name": "Cold Storm"
    }
   ],
   "daevanion_nodes": 84
