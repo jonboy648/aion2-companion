@@ -32,6 +32,7 @@ from aion2c.models import (
     SimResult,
     SkillKind,
     SkillTally,
+    cooldown_scale,
     total_rank,
 )
 from aion2c.specs import active_options
@@ -579,7 +580,7 @@ class _Sim:
             return
         inf = self._info(key)
         st = self._stats_at(ta)
-        self.ready[key] = ta + round(inf.cd_s * max(0.0, 1 - st.cdr_pct / 100) * 1000)
+        self.ready[key] = ta + round(inf.cd_s * cooldown_scale(st.cdr_pct) * 1000)
         dmg, _act = self._dmg(key, inf, ta, None, 1)
         tl = self.tally.setdefault(key, [0, 0.0])
         tl[0] += 1
@@ -662,7 +663,7 @@ class _Sim:
                 cd_s, self.acc[("uses", key)] = 0.0, used
             else:
                 self.acc[("uses", key)] = 0.0
-        self.ready[key] = t + round(cd_s * max(0.0, 1 - st0.cdr_pct / 100) * 1000)
+        self.ready[key] = t + round(cd_s * cooldown_scale(st0.cdr_pct) * 1000)
         ta = t + round(charge_s / speed * 1000)
 
         self._tick_until(ta)

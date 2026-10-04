@@ -262,6 +262,7 @@ def build_skills(raw_skills: list[dict], keys: list[str], links: tuple[Link, ...
 
 
 CLIENT_NUMBERS_FILE = "client_skill_numbers.json"
+CLIENT_DETAILS_FILE = "client_skill_details.json"
 
 
 def load_client_numbers(src_dir: Path = SRC_DIR) -> dict | None:
@@ -297,6 +298,47 @@ def apply_client_numbers(skills: dict[str, Skill], numbers: dict | None, class_k
                 r = replace(r, flat_min=conf(e["flat_min"][i]), flat_max=conf(fmax))
             ranks.append(r)
         out[key] = replace(sk, atk_ratio_pct=conf(e["ratio_pct"]), hits=e["hits"], ranks=tuple(ranks))
+    return out
+
+
+# ---- client skill details step: cooldown, range, skill type, hit count (client_skill_details.json) ----------------------
+# Separate from client_skill_numbers.json above: its own file, loader and apply step (see client_export.py).
+def load_client_details(src_dir: Path = SRC_DIR) -> dict | None:
+    """Derived cooldown/range/kind/hits corrections from the private client export; None when the file is absent."""
+    p = Path(src_dir) / CLIENT_DETAILS_FILE
+    return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else None
+
+
+def apply_client_details(skills: dict[str, Skill], details: dict | None, class_key: str,
+                         numbers: dict | None = None) -> dict[str, Skill]:
+    """Apply the client's cooldown (every rank), range, skill kind and hit count to the skills listed for this class.
+    Kind only turns a plain `active` skill into the client's `stigma`/`system` (chain/proc/charge children and kind
+    overrides keep theirs); a client range of 0 means no targeted range (None); a hit count that
+    client_skill_numbers.json already sets for the skill is left to that step."""
+    if not details:
+        return skills
+    src = details["source"]
+    covered = {k for k, e in ((numbers or {}).get("classes", {}).get(class_key, {}).get("skills", {})).items() if "hits" in e}
+    out = dict(skills)
+    for key, e in details["classes"].get(class_key, {}).items():
+        sk = out.get(key)
+        if sk is None:
+            continue
+        changes: dict = {}
+        if "cooldown_s" in e:
+            cds = e["cooldown_s"]
+            ranks = tuple(replace(r, cooldown_s=Num(float(cds[min(i, len(cds) - 1)] if isinstance(cds, list) else cds),
+                                                    "confirmed", f"{src} (Skill NeedCoolTime)"))
+                          for i, r in enumerate(sk.ranks))
+            changes["ranks"] = ranks
+        if "range_m" in e:
+            changes["range_m"] = float(e["range_m"]) or None
+        if "kind" in e and sk.kind == SkillKind.ACTIVE:
+            changes["kind"] = SkillKind(e["kind"])
+        if "hits" in e and key not in covered:
+            changes["hits"] = int(e["hits"])
+        if changes:
+            out[key] = replace(sk, **changes)
     return out
 
 
@@ -395,6 +437,7 @@ def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: 
     skills = build_skills(raw_skills, keys, links, mech, icon_files)
     client = load_client_numbers()
     skills = apply_client_numbers(skills, client, class_key)
+    skills = apply_client_details(skills, load_client_details(), class_key, client)
     gd = GameData(
         schema_version=1, data_version=f"{built_at[:10]}+aion2app-{dump_date}", built_at=built_at,
         level_caps={"global": 45, "korea": 50},
