@@ -62,6 +62,10 @@ describe("gear helpers", () => {
     expect(moveText({ kind: "enchant", from: { name: "B", enchant: 0 }, to })).toBe("B +0 -> +10");
     expect(moveText({ kind: "item", from: { name: "A", enchant: 3 }, to })).toBe("A +3 -> B +10");
     expect(moveText({ kind: "item", from: null, to })).toBe("Empty -> B +10");
+    // same name, different version: show what changes
+    expect(
+      moveText({ kind: "item", from: { name: "Revelation Amulet", enchant: 10, grade: "Rare", il: 13 }, to: { name: "Revelation Amulet", enchant: 10, grade: "Unique", il: 65 } }),
+    ).toBe("Revelation Amulet (Rare, IL 13) +10 -> Revelation Amulet (Unique, IL 65) +10");
   });
 });
 
