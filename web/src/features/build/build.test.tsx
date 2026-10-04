@@ -85,10 +85,11 @@ describe("BuildResults", () => {
     fireEvent.click(screen.getByRole("tab", { name: /AoE/i }));
     expect(screen.getByRole("tab", { name: /AoE/i })).toHaveAttribute("aria-selected", "true");
     fireEvent.click(screen.getByRole("tab", { name: /Boss DPS/ }));
+    fireEvent.mouseDown(screen.getByRole("tab", { name: "Trade-offs" }), { button: 0, ctrlKey: false });
     const buttons = screen.getAllByRole("button", { name: /Use this variant/ });
     fireEvent.click(buttons[buttons.length - 1]);
     expect(screen.getByRole("button", { name: /Using this variant/ })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByText(/Variant applied/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Variant applied/).length).toBeGreaterThan(0);
   });
 });
 
@@ -120,13 +121,17 @@ describe("pages (mock engine)", () => {
     at("/c/nae/2103/DarthThot");
     expect(screen.getByTestId("progress")).toBeInTheDocument();
     const card = await screen.findByTestId("character-card", undefined, { timeout: 5000 });
+    fireEvent.click(screen.getByText("Character profile and equipment"));
+    fireEvent.click(within(card).getByText("Equipped gear, pet and wings"));
     expect(within(card).getByText("Combat power")).toBeInTheDocument();
     expect(within(card).getByText("Liberator Spellbook")).toBeInTheDocument();
     expect(within(card).getAllByText("+10")).toHaveLength(2); // weapon and amulet
-    const tabs = await screen.findAllByRole("tab", undefined, { timeout: 5000 });
+    const strip = await screen.findByRole("tablist", { name: "Playstyles" }, { timeout: 5000 });
+    const tabs = within(strip).getAllByRole("tab");
     expect(tabs).toHaveLength(4);
     expect(await screen.findByTestId("playstyle-detail")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Share/ })).toBeInTheDocument();
+    fireEvent.mouseDown(screen.getByRole("tab", { name: "Stat gains" }), { button: 0, ctrlKey: false });
     expect(screen.getByText("Next stat upgrades")).toBeInTheDocument();
   });
 

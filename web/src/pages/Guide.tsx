@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { ArrowRight, BookOpen, Compass, Layers, Map, Sparkles } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PageHeader } from "@/components/PageHeader";
 import { ChapterCard } from "@/features/guide/ChapterCard";
 import { CHAPTERS, chapterForLevel } from "@/features/guide/chapters";
@@ -10,6 +12,7 @@ import { useGuideData } from "@/features/guide/useGuideData";
 import { YouAreHere } from "@/features/guide/YouAreHere";
 
 import { SectionTitle } from "@/components/game/SectionTitle";
+import "@/features/guide/guide-layout.css";
 
 function Heading({ id, title, caption }: { id: string; title: string; caption?: string }) {
   return (
@@ -21,10 +24,19 @@ function Heading({ id, title, caption }: { id: string; title: string; caption?: 
 
 export function GuidePage() {
   const data = useGuideData();
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const requested = params.get("chapter");
   const level = data.build?.level ?? null;
   const current = level != null ? chapterForLevel(level) : null;
+  const requestedView = params.get("view");
+  const view = requested ? (requested === FIRST_HOUR_ID ? "first" : "journey") :
+    (["first", "journey", "systems"].includes(requestedView ?? "") ? requestedView! : (current ? "journey" : "first"));
+  const changeView = (next: string) => {
+    const updated = new URLSearchParams(params);
+    updated.delete("chapter");
+    updated.set("view", next);
+    setParams(updated, { preventScrollReset: true });
+  };
 
   const [open, setOpen] = useState<Set<string>>(() => new Set([requested && requested !== FIRST_HOUR_ID ? requested : (current ?? CHAPTERS[0]).id]));
   const seededFor = useRef<string | null>(current?.id ?? null);
@@ -56,21 +68,43 @@ export function GuidePage() {
   const classLabel = data.classes.find((c) => c.key === data.classKey)?.name ?? "Your class";
 
   return (
-    <>
-      <PageHeader title="New player guide" caption="Start here. Follow the journey from your first hour to max power. Each chapter says what unlocks, what to focus on and when you are done." />
+    <div className="start-guide">
+      <header className="guide-intro">
+        <div className="guide-intro-copy">
+          <span className="guide-eyebrow"><Compass size={15} aria-hidden /> Start here</span>
+          <PageHeader title="New player guide" caption="Your next step, from your first class to endgame." />
+          <div className="guide-shortcuts">
+            <Link to="/build"><Sparkles size={16} aria-hidden /> Build my character <ArrowRight size={14} aria-hidden /></Link>
+            <Link to="/maps"><Map size={16} aria-hidden /> Explore maps <ArrowRight size={14} aria-hidden /></Link>
+          </div>
+        </div>
+      </header>
 
       <div className="space-y-6">
         <YouAreHere data={data} />
-        <JourneyStrip level={level} />
+        <Tabs value={view} onValueChange={changeView} className="guide-content">
+          <TabsList aria-label="Guide sections" className="guide-tabs">
+            <TabsTrigger value="first"><Compass size={17} aria-hidden /> First hour</TabsTrigger>
+            <TabsTrigger value="journey"><BookOpen size={17} aria-hidden /> Level journey</TabsTrigger>
+            <TabsTrigger value="systems"><Layers size={17} aria-hidden /> Game systems</TabsTrigger>
+          </TabsList>
 
+        <TabsContent value="first">
         <section id={FIRST_HOUR_ID} aria-labelledby="first-h" className="scroll-mt-36 sm:scroll-mt-24">
           <Heading id="first-h" title="Your first hour" caption="Pick a class, learn the keys, and skip what does not matter yet." />
           <FirstHour classKey={data.classKey} onPick={data.setClassKey} />
         </section>
+        <div className="guide-next">
+          <div><strong>Ready for the next milestone?</strong><p>See what unlocks at each level and what to focus on.</p></div>
+          <button type="button" onClick={() => changeView("journey")}>Continue to the journey <ArrowRight size={16} aria-hidden /></button>
+        </div>
+        </TabsContent>
 
+        <TabsContent value="journey">
+        <JourneyStrip level={level} className="guide-journey" />
         <section aria-labelledby="chapters-h">
           <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
-            <Heading id="chapters-h" title="The journey, level by level" caption={`Tap a chapter to open it. Skills shown are for ${classLabel}.`} />
+            <Heading id="chapters-h" title="The journey, level by level" caption={`Unlocks and priorities for ${classLabel}.`} />
             <button
               type="button"
               onClick={() => setOpen(allOpen ? new Set() : new Set(CHAPTERS.map((c) => c.id)))}
@@ -96,7 +130,9 @@ export function GuidePage() {
             ))}
           </div>
         </section>
+        </TabsContent>
 
+        <TabsContent value="systems" className="space-y-8">
         <section aria-labelledby="systems-h">
           <Heading id="systems-h" title="Systems explained simply" caption="Seven things the game never explains well, each with why it matters." />
           <Systems />
@@ -108,8 +144,10 @@ export function GuidePage() {
         </section>
 
         <Sources />
+        </TabsContent>
+        </Tabs>
       </div>
-    </>
+    </div>
   );
 }
 

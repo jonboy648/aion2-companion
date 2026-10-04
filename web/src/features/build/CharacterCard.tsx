@@ -38,7 +38,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: ClassData; extras?: ArmoryExtras | null }) {
   const { profile, gear, stigmas, daevanion_summary: dv } = imp;
   return (
-    <SpotlightCard className="mb-6" data-testid="character-card">
+    <SpotlightCard className="mb-6 !rounded-lg" data-testid="character-card">
       <div className="grid gap-5 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
         <div className="min-w-0">
           <div className="flex items-start gap-4">
@@ -64,7 +64,9 @@ export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: 
             <Stat label="Item level" value={profile.item_level != null ? String(profile.item_level) : "n/a"} />
           </div>
 
-          <h3 className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-faint">Stigmas</h3>
+          <details className="mt-4">
+          <summary className="cursor-pointer text-sm text-cyan">Stigmas and Daevanion</summary>
+          <h3 className="mb-2 mt-5 text-xs font-semibold uppercase text-faint">Stigmas</h3>
           {stigmas.length === 0 ? (
             <p className="text-sm text-dim">No stigmas equipped.</p>
           ) : (
@@ -96,9 +98,11 @@ export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: 
               </li>
             ))}
           </ul>
+          </details>
         </div>
 
-        <div className="min-w-0">
+        <details className="min-w-0">
+          <summary className="mb-3 cursor-pointer text-sm text-cyan">Equipped gear, pet and wings</summary>
           <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-faint">Gear</h3>
           <ul className="grid gap-1.5 sm:grid-cols-2" aria-label="Equipped gear">
             {gear.map((g) => {
@@ -140,7 +144,7 @@ export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: 
             </>
           )}
           <p className="mt-2 text-[11px] text-faint">Frame colours: grey common, green rare, blue epic, purple heroic, orange legend.</p>
-        </div>
+        </details>
       </div>
     </SpotlightCard>
   );

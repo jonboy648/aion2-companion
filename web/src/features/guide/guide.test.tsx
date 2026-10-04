@@ -61,18 +61,23 @@ describe("GuidePage", () => {
     renderGuide();
     expect(screen.getByRole("heading", { level: 1, name: "New player guide" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "Your first hour" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /Systems explained/ })).not.toBeInTheDocument();
+    const first = screen.getByRole("heading", { level: 2, name: "Your first hour" }).closest("section")!;
+    expect(within(first).getAllByRole("button", { name: /(Gladiator|Templar|Assassin|Ranger|Sorcerer|Spiritmaster|Cleric|Chanter)/ })).toHaveLength(8);
+    fireEvent.mouseDown(screen.getByRole("tab", { name: "Level journey" }), { button: 0, ctrlKey: false });
+    await screen.findByRole("heading", { name: "The journey, level by level" });
     for (const c of CHAPTERS) expect(screen.getByRole("heading", { level: 3, name: new RegExp(c.title.slice(0, 12)) })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { level: 2, name: /Systems explained/ })).toBeInTheDocument();
+    fireEvent.mouseDown(screen.getByRole("tab", { name: "Game systems" }), { button: 0, ctrlKey: false });
+    expect(await screen.findByRole("heading", { level: 2, name: /Systems explained/ })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: /Endgame overview/ })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: /Sources and what is unconfirmed/ })).toBeInTheDocument();
     expect(screen.getAllByText(/Why it matters/).length).toBe(7);
-    // 8 class cards, one per launch class
-    const first = screen.getByRole("heading", { level: 2, name: "Your first hour" }).closest("section")!;
-    expect(within(first).getAllByRole("button", { name: /(Gladiator|Templar|Assassin|Ranger|Sorcerer|Spiritmaster|Cleric|Chanter)/ })).toHaveLength(8);
   });
 
   it("chapters collapse and expand", async () => {
     renderGuide();
+    fireEvent.mouseDown(screen.getByRole("tab", { name: "Level journey" }), { button: 0, ctrlKey: false });
+    await screen.findByRole("heading", { name: "The journey, level by level" });
     const btn = screen.getByRole("button", { name: /Levels 20-30: stigmas/ });
     expect(btn).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(btn);
@@ -85,6 +90,20 @@ describe("GuidePage", () => {
   it("opens the chapter named in the link", async () => {
     renderGuide("/guide?chapter=lv-30-40");
     expect(screen.getByRole("button", { name: /Levels 30-40/ })).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("continues from the first hour into the level journey", async () => {
+    renderGuide();
+    fireEvent.click(screen.getByRole("button", { name: "Continue to the journey" }));
+    expect(await screen.findByRole("heading", { name: "The journey, level by level" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Your first hour" })).not.toBeInTheDocument();
+  });
+
+  it("restores the linked systems view without rendering the class picker", () => {
+    renderGuide("/guide?view=systems");
+    expect(screen.getByRole("tab", { name: "Game systems" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("heading", { name: "Systems explained simply" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "1. Pick a class" })).not.toBeInTheDocument();
   });
 
   it("is personal when a character is stored: you are here, next unlocks, three steps", async () => {
@@ -116,6 +135,7 @@ describe("navigation", () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByRole("link", { name: /New to Aion 2\? Start here/ })).toHaveAttribute("href", "/guide");
+    const hero = screen.getByRole("region", { name: "Character lookup" });
+    expect(within(hero).getByRole("link", { name: "Start here" })).toHaveAttribute("href", "/guide");
   });
 });

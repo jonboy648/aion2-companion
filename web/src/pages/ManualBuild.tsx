@@ -103,7 +103,7 @@ export function ManualBuild() {
 
   return (
     <>
-      <PageHeader title="Manual build" caption="Pick a class and enter your level and stats by hand. The optimizer picks stigmas and the rotation for you." />
+      <PageHeader title="Manual build" caption="Class, level and combat stats" />
 
       <div className="mb-5 flex flex-wrap gap-2" role="group" aria-label="Class">
         {classes.data?.map((c) => (
@@ -127,7 +127,9 @@ export function ManualBuild() {
       </div>
 
       <form onSubmit={onSubmit} noValidate>
-        <Card className="mb-4">
+        <details open={!cmp || busy} className="mb-4">
+          <summary className="mb-3 cursor-pointer text-sm text-cyan">Build inputs</summary>
+        <Card className="mb-4 rounded-lg">
           <CardHeader>
             <CardTitle>Level and stats</CardTitle>
           </CardHeader>
@@ -177,6 +179,7 @@ export function ManualBuild() {
             </div>
           </CardContent>
         </Card>
+        </details>
       </form>
 
       {busy && <ProgressPanel title="Comparing playstyles" message={message} />}
