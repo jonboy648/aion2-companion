@@ -86,6 +86,8 @@ export function Character() {
 
   const title = imp?.profile.name ?? name;
   const caption = imp ? `${imp.profile.class_name} - Lv ${imp.profile.level ?? "?"} - ${imp.profile.server}` : "Loading from the official armory...";
+  // No `key`s on the siblings below: CharacterPage already remounts this page per character, and two siblings sharing a key
+  // (they both used the character name) make React insert duplicates and skip removals in production builds.
   return (
     <>
       <PageHeader title={title} caption={caption}>
@@ -112,9 +114,9 @@ export function Character() {
       {imp && <UnspentPoints value={st.points} onChange={st.setPoints} />}
 
       {imp && st.phase !== "done" && <ProgressPanel title="Comparing playstyles" message={st.message} steps={st.steps} />}
-      {st.cmp && <BuildResults key={imp?.profile.name} cmp={st.cmp} data={data} selected={playstyle} onSelect={setPlaystyle} />}
+      {st.cmp && <BuildResults cmp={st.cmp} data={data} selected={playstyle} onSelect={setPlaystyle} />}
 
-      {imp && st.raw && <GearSection key={imp.profile.name} imp={imp} raw={st.raw} playstyle={playstyle} onPlaystyle={setPlaystyle} ready={st.phase === "done"} region={region} />}
+      {imp && st.raw && <GearSection imp={imp} raw={st.raw} playstyle={playstyle} onPlaystyle={setPlaystyle} ready={st.phase === "done"} region={region} />}
 
       {imp && imp.notes.length > 0 && st.phase === "done" && (
         <details className="mt-6 text-xs text-dim">

@@ -1,6 +1,6 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { CharacterPage } from "./CharacterPage";
 
 let go: (to: string) => void = () => {};
@@ -24,5 +24,21 @@ describe("CharacterPage", () => {
     act(() => go("/c/nae/1101/Luna"));
     await waitFor(() => expect(screen.getAllByText(/Boss DPS plan/).length).toBe(1), { timeout: 5000 });
     expect(screen.getAllByText(/Boss DPS plan/).length).toBe(1);
+  });
+
+  it("never renders sibling elements with the same key (React then duplicates blocks and skips removals in production)", async () => {
+    const err = vi.spyOn(console, "error").mockImplementation(() => {});
+    render(
+      <MemoryRouter initialEntries={["/c/nae/2103/DarthThot"]}>
+        <Routes>
+          <Route path="/c/:region/:serverId/:name" element={<CharacterPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    await waitFor(() => expect(screen.getAllByText(/Boss DPS plan/).length).toBe(1), { timeout: 5000 });
+    await waitFor(() => expect(screen.getByText(/Max potential/)).toBeTruthy());
+    const dup = err.mock.calls.map((c) => String(c[0])).filter((m) => /same key|unique "key"/i.test(m));
+    err.mockRestore();
+    expect(dup).toEqual([]);
   });
 });
