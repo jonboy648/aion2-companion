@@ -105,7 +105,7 @@ export function Character() {
           <Button asChild variant="secondary" size="sm">
             <Link to={comparePath({ region: region as ArmoryRegion, serverId: String(hit?.serverId ?? serverId), name: imp?.profile.name ?? name }, null)}>Compare with…</Link>
           </Button>
-          <Button variant="secondary" size="sm" onClick={st.refresh} disabled={st.phase !== "done" && st.phase !== "error"} title="Reload this character from the official armory">
+          <Button variant="secondary" size="sm" onClick={st.refresh} disabled={st.phase !== "done"} title="Reload this character from the official armory">
             Refresh
           </Button>
           <ShareButton />
