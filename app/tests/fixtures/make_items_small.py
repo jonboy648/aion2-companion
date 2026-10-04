@@ -1,8 +1,10 @@
-"""Build tests/fixtures/items_small.json from real endpoint data (cache under research/items_cache)."""
+"""Build tests/fixtures/items_small.json: a handful of real items cut out of app/aion2c/data/items.json, with only the
+enchant/odds/Exceed tables they reference. Re-run after regenerating items.json:  python tests/fixtures/make_items_small.py
+(from app/)."""
 import json
 from pathlib import Path
 
-from aion2c.data import build_items as b
+ITEMS = Path(__file__).parents[2] / "aion2c" / "data" / "items.json"
 
 IDS = [
     110520003,  # Ludra's Grimoire (Sorcerer, Unique IL 102?)
@@ -19,22 +21,17 @@ IDS = [
     310130040,  # Splendent Dragon Lord Necklace
     311050001,  # Revelation Amulet
     310460006,  # Old Mercenary Commander Bracelet
+    310130023,  # Wise Dragon Lord Necklace (Unique IL 94, Exceed up to +5)
 ]
 
 if __name__ == "__main__":
-    items = []
-    for i in IDS:
-        d0, _ = b.fetch_one(i, 0)
-        mx = int(d0.get("maxEnchantLevel") or 0)
-        dm, _ = b.fetch_one(i, mx) if mx else (None, False)
-        it = b.compact(d0, dm)
-        if it:
-            it["slope_known"] = True
-            items.append(it)
-        else:
-            print("missing", i)
-    out = Path(__file__).with_name("items_small.json")
-    out.write_text(json.dumps({"schema": 1, "items": items}, indent=1), encoding="utf8")
+    doc = json.loads(ITEMS.read_text(encoding="utf8"))
+    by_id = {it["id"]: it for it in doc["items"]}
+    items = [by_id[i] for i in IDS]
+    out = {"schema": doc["schema"], "items": items}
+    for table, key in (("enchant_series", "enchant_group"), ("enchant_odds", "odds_group"), ("exceed", "exceed_group")):
+        out[table] = {g: doc[table][g] for g in sorted({it[key] for it in items if key in it})}
+    dest = Path(__file__).with_name("items_small.json")
+    dest.write_text(json.dumps(out, indent=1), encoding="utf8")
     for it in items:
-        print(it["id"], it["name"], it["slot"], it["grade"], it["il"], it["max_enchant"], it["class_lock"],
-              [(m["id"], m["v"], m.get("slope")) for m in it["main"][:2]], it["sub_random"], it["sub_count"])
+        print(it["id"], it["name"], it["slot"], it["grade"], it["il"], it["max_enchant"], it.get("max_exceed", 0))

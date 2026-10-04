@@ -15,99 +15,115 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 525.0,
-     "min": 473.0,
+     "v": 525,
+     "min": 473,
      "slope": 11.6
     },
     {
      "id": "WeaponAccuracy",
-     "v": 100.0
+     "v": 100
     },
     {
      "id": "Critical",
-     "v": 100.0
+     "v": 100
     }
    ],
    "subs": [
     {
-     "id": "STR",
-     "v": 32.0,
-     "min": 22.0
-    },
-    {
-     "id": "AGI",
-     "v": 32.0,
-     "min": 22.0
-    },
-    {
-     "id": "WeaponFixingDamage",
-     "v": 51.0,
-     "min": 38.0
-    },
-    {
-     "id": "WeaponAccuracy",
-     "v": 98.0,
-     "min": 79.0
-    },
-    {
-     "id": "Critical",
-     "v": 75.0,
-     "min": 59.0
-    },
-    {
-     "id": "HPMax",
-     "v": 418.0,
-     "min": 357.0
-    },
-    {
-     "id": "MPMax",
-     "v": 211.0,
-     "min": 177.0
-    },
-    {
      "id": "CombatSpeed",
-     "v": 13.0,
-     "min": 11.2
-    },
-    {
-     "id": "AdditionalHitRate",
-     "v": 9.6,
-     "min": 8.3
-    },
-    {
-     "id": "AbnormalAccuracy",
-     "v": 25.6,
-     "min": 22.2
-    },
-    {
-     "id": "CriticalAddDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "BackAttackDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "FrontAttackDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "Block",
-     "v": 62.0,
-     "min": 48.0
+     "v": 12.98,
+     "min": 11.23,
+     "w": 4000
     },
     {
      "id": "AmplifyAllDamage",
      "v": 7.3,
-     "min": 6.3
+     "min": 6.29,
+     "w": 2000
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 9.64,
+     "min": 8.32,
+     "w": 6000
     },
     {
      "id": "AmplifyWeaponDamage",
-     "v": 9.6,
-     "min": 8.3
+     "v": 9.64,
+     "min": 8.32,
+     "w": 4000
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 25.6,
+     "min": 22.2,
+     "w": 4000
+    },
+    {
+     "id": "STR",
+     "v": 32,
+     "min": 22,
+     "w": 6000
+    },
+    {
+     "id": "AGI",
+     "v": 32,
+     "min": 22,
+     "w": 7000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 51,
+     "min": 38,
+     "w": 7000
+    },
+    {
+     "id": "Critical",
+     "v": 75,
+     "min": 59,
+     "w": 7000
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 102,
+     "min": 83,
+     "w": 8000
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 102,
+     "min": 83,
+     "w": 7000
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 102,
+     "min": 83,
+     "w": 7000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 98,
+     "min": 79,
+     "w": 8000
+    },
+    {
+     "id": "Block",
+     "v": 62,
+     "min": 48,
+     "w": 7000
+    },
+    {
+     "id": "MPMax",
+     "v": 211,
+     "min": 177,
+     "w": 8000
+    },
+    {
+     "id": "HPMax",
+     "v": 418,
+     "min": 357,
+     "w": 8000
     }
    ],
    "sub_random": true,
@@ -118,7 +134,11 @@
     "Reward Chest",
     "Sanctuary"
    ],
+   "icon": "Icon_WP_MB_0108_T06",
    "max_exceed": 5,
+   "exceed_group": "Weapon_Unique_102",
+   "odds_group": "Enchant_Unique_102",
+   "enchant_group": "Weapon_Unique_102",
    "slope_known": true
   },
   {
@@ -135,34 +155,37 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 198.0,
-     "min": 178.0,
+     "v": 198,
+     "min": 178,
      "slope": 4.4
     },
     {
      "id": "WeaponAccuracy",
-     "v": 100.0
+     "v": 100
     },
     {
      "id": "Critical",
-     "v": 100.0
+     "v": 100
     }
    ],
    "subs": [
     {
      "id": "STR",
-     "v": 14.0,
-     "min": 14.0
-    },
-    {
-     "id": "MPMax",
-     "v": 49.0,
-     "min": 49.0
+     "v": 14,
+     "min": 14,
+     "w": 0
     },
     {
      "id": "Block",
-     "v": 20.0,
-     "min": 20.0
+     "v": 20,
+     "min": 20,
+     "w": 0
+    },
+    {
+     "id": "MPMax",
+     "v": 49,
+     "min": 49,
+     "w": 0
     }
    ],
    "sub_random": false,
@@ -172,6 +195,9 @@
    "sources": [
     "Quest"
    ],
+   "icon": "Icon_WP_MB_0067_T05",
+   "odds_group": "Enchant_Legend_39",
+   "enchant_group": "Weapon_Legend_39",
    "slope_known": true
   },
   {
@@ -188,99 +214,115 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 229.0,
-     "min": 206.0,
+     "v": 229,
+     "min": 206,
      "slope": 5.1
     },
     {
      "id": "WeaponAccuracy",
-     "v": 100.0
+     "v": 100
     },
     {
      "id": "Critical",
-     "v": 100.0
+     "v": 100
     }
    ],
    "subs": [
     {
-     "id": "STR",
-     "v": 23.0,
-     "min": 14.0
-    },
-    {
-     "id": "AGI",
-     "v": 23.0,
-     "min": 14.0
-    },
-    {
-     "id": "WeaponFixingDamage",
-     "v": 36.0,
-     "min": 25.0
-    },
-    {
-     "id": "WeaponAccuracy",
-     "v": 65.0,
-     "min": 50.0
-    },
-    {
-     "id": "Critical",
-     "v": 50.0,
-     "min": 37.0
-    },
-    {
-     "id": "HPMax",
-     "v": 266.0,
-     "min": 225.0
-    },
-    {
-     "id": "MPMax",
-     "v": 136.0,
-     "min": 112.0
-    },
-    {
      "id": "CombatSpeed",
-     "v": 8.2,
-     "min": 7.1
-    },
-    {
-     "id": "AdditionalHitRate",
-     "v": 6.1,
-     "min": 5.3
-    },
-    {
-     "id": "AbnormalAccuracy",
-     "v": 16.2,
-     "min": 14.0
-    },
-    {
-     "id": "CriticalAddDamage",
-     "v": 68.0,
-     "min": 53.0
-    },
-    {
-     "id": "BackAttackDamage",
-     "v": 68.0,
-     "min": 53.0
-    },
-    {
-     "id": "FrontAttackDamage",
-     "v": 68.0,
-     "min": 53.0
-    },
-    {
-     "id": "Block",
-     "v": 40.0,
-     "min": 29.0
+     "v": 8.22,
+     "min": 7.09,
+     "w": 4000
     },
     {
      "id": "AmplifyAllDamage",
-     "v": 4.6,
-     "min": 4.0
+     "v": 4.62,
+     "min": 3.96,
+     "w": 2000
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 6.11,
+     "min": 5.25,
+     "w": 6000
     },
     {
      "id": "AmplifyWeaponDamage",
-     "v": 6.1,
-     "min": 5.3
+     "v": 6.11,
+     "min": 5.25,
+     "w": 4000
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 16.17,
+     "min": 14,
+     "w": 4000
+    },
+    {
+     "id": "STR",
+     "v": 23,
+     "min": 14,
+     "w": 6000
+    },
+    {
+     "id": "AGI",
+     "v": 23,
+     "min": 14,
+     "w": 7000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 36,
+     "min": 25,
+     "w": 7000
+    },
+    {
+     "id": "Critical",
+     "v": 50,
+     "min": 37,
+     "w": 7000
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 68,
+     "min": 53,
+     "w": 8000
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 68,
+     "min": 53,
+     "w": 7000
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 68,
+     "min": 53,
+     "w": 7000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 65,
+     "min": 50,
+     "w": 8000
+    },
+    {
+     "id": "Block",
+     "v": 40,
+     "min": 29,
+     "w": 7000
+    },
+    {
+     "id": "MPMax",
+     "v": 136,
+     "min": 112,
+     "w": 8000
+    },
+    {
+     "id": "HPMax",
+     "v": 266,
+     "min": 225,
+     "w": 8000
     }
    ],
    "sub_random": true,
@@ -291,6 +333,9 @@
     "Reward Chest",
     "Sanctuary"
    ],
+   "icon": "Icon_WP_MB_0079_T05",
+   "odds_group": "Enchant_Legend_45",
+   "enchant_group": "Weapon_Legend_45",
    "slope_known": true
   },
   {
@@ -307,99 +352,115 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 525.0,
-     "min": 473.0,
+     "v": 525,
+     "min": 473,
      "slope": 11.6
     },
     {
      "id": "WeaponAccuracy",
-     "v": 100.0
+     "v": 100
     },
     {
      "id": "Critical",
-     "v": 100.0
+     "v": 100
     }
    ],
    "subs": [
     {
-     "id": "STR",
-     "v": 32.0,
-     "min": 22.0
-    },
-    {
-     "id": "AGI",
-     "v": 32.0,
-     "min": 22.0
-    },
-    {
-     "id": "WeaponFixingDamage",
-     "v": 51.0,
-     "min": 38.0
-    },
-    {
-     "id": "WeaponAccuracy",
-     "v": 98.0,
-     "min": 79.0
-    },
-    {
-     "id": "Critical",
-     "v": 75.0,
-     "min": 59.0
-    },
-    {
-     "id": "HPMax",
-     "v": 418.0,
-     "min": 357.0
-    },
-    {
-     "id": "MPMax",
-     "v": 211.0,
-     "min": 177.0
-    },
-    {
      "id": "CombatSpeed",
-     "v": 13.0,
-     "min": 11.2
-    },
-    {
-     "id": "AdditionalHitRate",
-     "v": 9.6,
-     "min": 8.3
-    },
-    {
-     "id": "AbnormalAccuracy",
-     "v": 25.6,
-     "min": 22.2
-    },
-    {
-     "id": "CriticalAddDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "BackAttackDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "FrontAttackDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "Block",
-     "v": 62.0,
-     "min": 48.0
+     "v": 12.98,
+     "min": 11.23,
+     "w": 4000
     },
     {
      "id": "AmplifyAllDamage",
      "v": 7.3,
-     "min": 6.3
+     "min": 6.29,
+     "w": 2000
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 9.64,
+     "min": 8.32,
+     "w": 6000
     },
     {
      "id": "AmplifyWeaponDamage",
-     "v": 9.6,
-     "min": 8.3
+     "v": 9.64,
+     "min": 8.32,
+     "w": 4000
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 25.6,
+     "min": 22.2,
+     "w": 4000
+    },
+    {
+     "id": "STR",
+     "v": 32,
+     "min": 22,
+     "w": 6000
+    },
+    {
+     "id": "AGI",
+     "v": 32,
+     "min": 22,
+     "w": 7000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 51,
+     "min": 38,
+     "w": 7000
+    },
+    {
+     "id": "Critical",
+     "v": 75,
+     "min": 59,
+     "w": 7000
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 102,
+     "min": 83,
+     "w": 8000
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 102,
+     "min": 83,
+     "w": 7000
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 102,
+     "min": 83,
+     "w": 7000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 98,
+     "min": 79,
+     "w": 8000
+    },
+    {
+     "id": "Block",
+     "v": 62,
+     "min": 48,
+     "w": 7000
+    },
+    {
+     "id": "MPMax",
+     "v": 211,
+     "min": 177,
+     "w": 8000
+    },
+    {
+     "id": "HPMax",
+     "v": 418,
+     "min": 357,
+     "w": 8000
     }
    ],
    "sub_random": true,
@@ -409,7 +470,11 @@
    "sources": [
     "Crafting"
    ],
+   "icon": "Icon_WP_MB_0100_T06",
    "max_exceed": 5,
+   "exceed_group": "Weapon_Unique_102_Craft",
+   "odds_group": "Enchant_Unique_102",
+   "enchant_group": "Weapon_Unique_102",
    "slope_known": true
   },
   {
@@ -426,103 +491,119 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 604.0,
-     "min": 446.0,
+     "v": 604,
+     "min": 446,
      "slope": 11.6
     },
     {
      "id": "WeaponAccuracy",
-     "v": 100.0
+     "v": 100
     },
     {
      "id": "Critical",
-     "v": 150.0
+     "v": 150
     },
     {
      "id": "Block",
-     "v": 150.0
+     "v": 150
     }
    ],
    "subs": [
     {
-     "id": "STR",
-     "v": 32.0,
-     "min": 22.0
-    },
-    {
-     "id": "AGI",
-     "v": 32.0,
-     "min": 22.0
-    },
-    {
-     "id": "WeaponFixingDamage",
-     "v": 51.0,
-     "min": 38.0
-    },
-    {
-     "id": "WeaponAccuracy",
-     "v": 98.0,
-     "min": 79.0
-    },
-    {
-     "id": "Critical",
-     "v": 75.0,
-     "min": 59.0
-    },
-    {
-     "id": "HPMax",
-     "v": 418.0,
-     "min": 357.0
-    },
-    {
-     "id": "MPMax",
-     "v": 211.0,
-     "min": 177.0
-    },
-    {
      "id": "CombatSpeed",
-     "v": 13.0,
-     "min": 11.2
-    },
-    {
-     "id": "AdditionalHitRate",
-     "v": 9.6,
-     "min": 8.3
-    },
-    {
-     "id": "AbnormalAccuracy",
-     "v": 25.6,
-     "min": 22.2
-    },
-    {
-     "id": "CriticalAddDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "BackAttackDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "FrontAttackDamage",
-     "v": 102.0,
-     "min": 83.0
-    },
-    {
-     "id": "Block",
-     "v": 62.0,
-     "min": 48.0
+     "v": 12.98,
+     "min": 11.23,
+     "w": 4000
     },
     {
      "id": "AmplifyAllDamage",
      "v": 7.3,
-     "min": 6.3
+     "min": 6.29,
+     "w": 2000
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 9.64,
+     "min": 8.32,
+     "w": 6000
     },
     {
      "id": "AmplifyWeaponDamage",
-     "v": 9.6,
-     "min": 8.3
+     "v": 9.64,
+     "min": 8.32,
+     "w": 4000
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 25.6,
+     "min": 22.2,
+     "w": 4000
+    },
+    {
+     "id": "STR",
+     "v": 32,
+     "min": 22,
+     "w": 6000
+    },
+    {
+     "id": "AGI",
+     "v": 32,
+     "min": 22,
+     "w": 7000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 51,
+     "min": 38,
+     "w": 7000
+    },
+    {
+     "id": "Critical",
+     "v": 75,
+     "min": 59,
+     "w": 7000
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 102,
+     "min": 83,
+     "w": 8000
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 102,
+     "min": 83,
+     "w": 7000
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 102,
+     "min": 83,
+     "w": 7000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 98,
+     "min": 79,
+     "w": 8000
+    },
+    {
+     "id": "Block",
+     "v": 62,
+     "min": 48,
+     "w": 7000
+    },
+    {
+     "id": "MPMax",
+     "v": 211,
+     "min": 177,
+     "w": 8000
+    },
+    {
+     "id": "HPMax",
+     "v": 418,
+     "min": 357,
+     "w": 8000
     }
    ],
    "sub_random": true,
@@ -533,7 +614,11 @@
     "Reward Chest",
     "Sanctuary"
    ],
+   "icon": "Icon_WP_GS_0108_T06",
    "max_exceed": 5,
+   "exceed_group": "Weapon_Unique_102",
+   "odds_group": "Enchant_Unique_102",
+   "enchant_group": "Weapon_Unique_102",
    "slope_known": true
   },
   {
@@ -548,33 +633,36 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 79.0,
+     "v": 79,
      "slope": 4.4
     },
     {
      "id": "WeaponAccuracy",
-     "v": 50.0
+     "v": 50
     },
     {
      "id": "Critical",
-     "v": 50.0
+     "v": 50
     }
    ],
    "subs": [
     {
-     "id": "MPMax",
-     "v": 37.0,
-     "min": 37.0
-    },
-    {
      "id": "BackAttackDamage",
-     "v": 14.0,
-     "min": 14.0
+     "v": 14,
+     "min": 14,
+     "w": 0
     },
     {
      "id": "Block",
-     "v": 16.0,
-     "min": 16.0
+     "v": 16,
+     "min": 16,
+     "w": 0
+    },
+    {
+     "id": "MPMax",
+     "v": 37,
+     "min": 37,
+     "w": 0
     }
    ],
    "sub_random": false,
@@ -584,6 +672,9 @@
    "sources": [
     "Quest"
    ],
+   "icon": "Icon_Weapon_Guarder_C_028",
+   "odds_group": "Enchant_Legend_39",
+   "enchant_group": "Weapon_Guarder_Legend_39",
    "slope_known": true
   },
   {
@@ -598,30 +689,33 @@
    "main": [
     {
      "id": "ArmorDefense",
-     "v": 277.0,
+     "v": 277,
      "slope": 10.9
     },
     {
      "id": "HPMax",
-     "v": 152.0,
+     "v": 152,
      "slope": 9.0
     }
    ],
    "subs": [
     {
      "id": "ArmorDefense",
-     "v": 50.0,
-     "min": 50.0
+     "v": 50,
+     "min": 50,
+     "w": 0
     },
     {
      "id": "MPMax",
-     "v": 31.0,
-     "min": 31.0
+     "v": 31,
+     "min": 31,
+     "w": 0
     },
     {
      "id": "MPRegen",
-     "v": 10.0,
-     "min": 10.0
+     "v": 10,
+     "min": 10,
+     "w": 0
     }
    ],
    "sub_random": false,
@@ -631,6 +725,9 @@
    "sources": [
     "Quest"
    ],
+   "icon": "Icon_GM_0019_T04_Torso",
+   "odds_group": "Enchant_Legend_38",
+   "enchant_group": "Armor_Torso_Legend_38",
    "slope_known": true
   },
   {
@@ -645,135 +742,159 @@
    "main": [
     {
      "id": "ArmorDefense",
-     "v": 756.0,
+     "v": 756,
      "slope": 29.6667
     },
     {
      "id": "HPMax",
-     "v": 408.0,
+     "v": 408,
      "slope": 24.0
     }
    ],
    "subs": [
     {
-     "id": "DEX",
-     "v": 21.0,
-     "min": 12.0
+     "id": "AmplifyAllDamage",
+     "v": 6.58,
+     "min": 5.66,
+     "w": 3000
     },
     {
-     "id": "CON",
-     "v": 29.0,
-     "min": 19.0
+     "id": "Restoration",
+     "v": 2.93,
+     "min": 2.49,
+     "w": 1200
     },
     {
-     "id": "WIS",
-     "v": 17.0,
-     "min": 9.0
-    },
-    {
-     "id": "WeaponFixingDamage",
-     "v": 33.0,
-     "min": 23.0
-    },
-    {
-     "id": "ArmorDefense",
-     "v": 326.0,
-     "min": 277.0
-    },
-    {
-     "id": "WeaponAccuracy",
-     "v": 61.0,
-     "min": 47.0
-    },
-    {
-     "id": "ArmorEvasion",
-     "v": 38.0,
-     "min": 27.0
-    },
-    {
-     "id": "Critical",
-     "v": 47.0,
-     "min": 35.0
-    },
-    {
-     "id": "CriticalResist",
-     "v": 63.0,
-     "min": 49.0
-    },
-    {
-     "id": "HPMax",
-     "v": 253.0,
-     "min": 214.0
-    },
-    {
-     "id": "MPMax",
-     "v": 129.0,
-     "min": 106.0
+     "id": "Perfect",
+     "v": 5.81,
+     "min": 4.99,
+     "w": 1200
     },
     {
      "id": "DefenseRatio",
      "v": 3.9,
-     "min": 3.3
-    },
-    {
-     "id": "AbnormalResistance",
-     "v": 8.3,
-     "min": 7.1
-    },
-    {
-     "id": "MPRegen",
-     "v": 36.0,
-     "min": 25.0
-    },
-    {
-     "id": "HPRegen",
-     "v": 63.0,
-     "min": 49.0
-    },
-    {
-     "id": "CriticalDamageDefense",
-     "v": 335.0,
-     "min": 285.0
-    },
-    {
-     "id": "BackAttackDefense",
-     "v": 335.0,
-     "min": 285.0
-    },
-    {
-     "id": "FrontAttackDefense",
-     "v": 335.0,
-     "min": 285.0
-    },
-    {
-     "id": "Block",
-     "v": 39.0,
-     "min": 28.0
-    },
-    {
-     "id": "AmplifyAllDamage",
-     "v": 6.6,
-     "min": 5.7
-    },
-    {
-     "id": "Restoration",
-     "v": 2.9,
-     "min": 2.5
-    },
-    {
-     "id": "Perfect",
-     "v": 5.8,
-     "min": 5.0
-    },
-    {
-     "id": "DecreaseWeaponDamage",
-     "v": 9.6,
-     "min": 8.3
+     "min": 3.33,
+     "w": 1200
     },
     {
      "id": "HardHitResist",
      "v": 3.9,
-     "min": 3.3
+     "min": 3.33,
+     "w": 1200
+    },
+    {
+     "id": "AbnormalResistance",
+     "v": 8.27,
+     "min": 7.13,
+     "w": 3000
+    },
+    {
+     "id": "DecreaseWeaponDamage",
+     "v": 9.64,
+     "min": 8.32,
+     "w": 1200
+    },
+    {
+     "id": "DEX",
+     "v": 21,
+     "min": 12,
+     "w": 4000
+    },
+    {
+     "id": "CON",
+     "v": 29,
+     "min": 19,
+     "w": 4000
+    },
+    {
+     "id": "WIS",
+     "v": 17,
+     "min": 9,
+     "w": 4000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 33,
+     "min": 23,
+     "w": 4000
+    },
+    {
+     "id": "Critical",
+     "v": 47,
+     "min": 35,
+     "w": 5000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 61,
+     "min": 47,
+     "w": 5000
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 326,
+     "min": 277,
+     "w": 5000
+    },
+    {
+     "id": "ArmorEvasion",
+     "v": 38,
+     "min": 27,
+     "w": 5000
+    },
+    {
+     "id": "CriticalDamageDefense",
+     "v": 335,
+     "min": 285,
+     "w": 6000
+    },
+    {
+     "id": "BackAttackDefense",
+     "v": 335,
+     "min": 285,
+     "w": 5000
+    },
+    {
+     "id": "FrontAttackDefense",
+     "v": 335,
+     "min": 285,
+     "w": 5000
+    },
+    {
+     "id": "CriticalResist",
+     "v": 63,
+     "min": 49,
+     "w": 6000
+    },
+    {
+     "id": "Block",
+     "v": 39,
+     "min": 28,
+     "w": 6000
+    },
+    {
+     "id": "MPMax",
+     "v": 129,
+     "min": 106,
+     "w": 6000
+    },
+    {
+     "id": "HPMax",
+     "v": 253,
+     "min": 214,
+     "w": 6000
+    },
+    {
+     "id": "MPRegen",
+     "v": 36,
+     "min": 25,
+     "w": 6000
+    },
+    {
+     "id": "HPRegen",
+     "v": 63,
+     "min": 49,
+     "w": 6000
     }
    ],
    "sub_random": true,
@@ -783,7 +904,11 @@
    "sources": [
     "Crafting"
    ],
+   "icon": "Icon_Equip_AR_L_0005_T05_Torso",
    "max_exceed": 5,
+   "exceed_group": "Armor_Torso_Unique_102_Craft",
+   "odds_group": "Enchant_Unique_102",
+   "enchant_group": "Armor_Torso_Unique_102",
    "slope_known": true
   },
   {
@@ -797,13 +922,13 @@
    "max_enchant": 10,
    "main": [
     {
-     "id": "HPMax",
-     "v": 100.0,
-     "slope": 50.0
+     "id": "HpPotionRate",
+     "v": 10
     },
     {
-     "id": "HpPotionRate",
-     "v": 10.0
+     "id": "HPMax",
+     "v": 100,
+     "slope": 50.0
     }
    ],
    "subs": [],
@@ -814,6 +939,9 @@
    "sources": [
     "Quest"
    ],
+   "icon": "Icon_Acc_Belt_C_018",
+   "odds_group": "Belt_Rare",
+   "enchant_group": "Belt_Rare",
    "slope_known": true
   },
   {
@@ -827,22 +955,22 @@
    "max_enchant": 10,
    "main": [
     {
-     "id": "ArmorDefense",
-     "v": 500.0,
-     "slope": 30.0
-    },
-    {
-     "id": "HPMax",
-     "v": 1100.0,
-     "slope": 50.0
-    },
-    {
      "id": "HpPotionRate",
-     "v": 30.0
+     "v": 30
     },
     {
      "id": "Restoration",
-     "v": 5.0
+     "v": 5
+    },
+    {
+     "id": "HPMax",
+     "v": 1100,
+     "slope": 50.0
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 500,
+     "slope": 30.0
     }
    ],
    "subs": [],
@@ -853,6 +981,9 @@
    "sources": [
     "Substance Morph"
    ],
+   "icon": "Icon_Acc_Belt_C_022",
+   "odds_group": "Belt_Unique",
+   "enchant_group": "Belt_Unique",
    "slope_known": true
   },
   {
@@ -867,95 +998,111 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 58.0,
+     "v": 58,
      "slope": 2.1
     },
     {
      "id": "ArmorDefense",
-     "v": 138.0,
+     "v": 138,
      "slope": 5.4
     }
    ],
    "subs": [
     {
-     "id": "STR",
-     "v": 14.0,
-     "min": 6.0
+     "id": "CombatSpeed",
+     "v": 2.59,
+     "min": 2.19,
+     "w": 2000
     },
     {
-     "id": "INT",
-     "v": 17.0,
-     "min": 9.0
+     "id": "STR",
+     "v": 14,
+     "min": 6,
+     "w": 2000
     },
     {
      "id": "AGI",
-     "v": 14.0,
-     "min": 6.0
+     "v": 14,
+     "min": 6,
+     "w": 2000
     },
     {
-     "id": "WeaponFixingDamage",
-     "v": 25.0,
-     "min": 16.0
-    },
-    {
-     "id": "ArmorDefense",
-     "v": 224.0,
-     "min": 189.0
-    },
-    {
-     "id": "WeaponAccuracy",
-     "v": 44.0,
-     "min": 32.0
-    },
-    {
-     "id": "ArmorEvasion",
-     "v": 29.0,
-     "min": 19.0
-    },
-    {
-     "id": "Critical",
-     "v": 35.0,
-     "min": 24.0
-    },
-    {
-     "id": "CriticalResist",
-     "v": 46.0,
-     "min": 34.0
-    },
-    {
-     "id": "HPMax",
-     "v": 175.0,
-     "min": 146.0
-    },
-    {
-     "id": "MPMax",
-     "v": 90.0,
-     "min": 72.0
-    },
-    {
-     "id": "CombatSpeed",
-     "v": 2.6,
-     "min": 2.2
-    },
-    {
-     "id": "MPRegen",
-     "v": 27.0,
-     "min": 17.0
-    },
-    {
-     "id": "HPRegen",
-     "v": 46.0,
-     "min": 34.0
+     "id": "INT",
+     "v": 17,
+     "min": 9,
+     "w": 2000
     },
     {
      "id": "FPMax",
-     "v": 209.0,
-     "min": 182.0
+     "v": 209.37,
+     "min": 182,
+     "w": 6000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 25,
+     "min": 16,
+     "w": 6000
+    },
+    {
+     "id": "Critical",
+     "v": 35,
+     "min": 24,
+     "w": 6000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 44,
+     "min": 32,
+     "w": 6000
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 224,
+     "min": 189,
+     "w": 6000
+    },
+    {
+     "id": "ArmorEvasion",
+     "v": 29,
+     "min": 19,
+     "w": 6000
+    },
+    {
+     "id": "CriticalResist",
+     "v": 46,
+     "min": 34,
+     "w": 9000
     },
     {
      "id": "Block",
-     "v": 29.0,
-     "min": 19.0
+     "v": 29,
+     "min": 19,
+     "w": 9000
+    },
+    {
+     "id": "MPMax",
+     "v": 90,
+     "min": 72,
+     "w": 9000
+    },
+    {
+     "id": "HPMax",
+     "v": 175,
+     "min": 146,
+     "w": 9000
+    },
+    {
+     "id": "MPRegen",
+     "v": 27,
+     "min": 17,
+     "w": 10000
+    },
+    {
+     "id": "HPRegen",
+     "v": 46,
+     "min": 34,
+     "w": 10000
     }
    ],
    "sub_random": true,
@@ -967,6 +1114,9 @@
     "Expedition",
     "Quest"
    ],
+   "icon": "Icon_ACC_NL_0020",
+   "odds_group": "Enchant_Legend_38",
+   "enchant_group": "Accessory_Necklace_Legend_38",
    "slope_known": true
   },
   {
@@ -981,95 +1131,111 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 158.0,
+     "v": 158,
      "slope": 5.7333
     },
     {
      "id": "ArmorDefense",
-     "v": 378.0,
+     "v": 378,
      "slope": 14.5333
     }
    ],
    "subs": [
     {
-     "id": "STR",
-     "v": 20.0,
-     "min": 11.0
+     "id": "CombatSpeed",
+     "v": 4.37,
+     "min": 3.74,
+     "w": 2000
     },
     {
-     "id": "INT",
-     "v": 24.0,
-     "min": 15.0
+     "id": "STR",
+     "v": 20,
+     "min": 11,
+     "w": 2000
     },
     {
      "id": "AGI",
-     "v": 20.0,
-     "min": 11.0
+     "v": 20,
+     "min": 11,
+     "w": 2000
     },
     {
-     "id": "WeaponFixingDamage",
-     "v": 38.0,
-     "min": 27.0
-    },
-    {
-     "id": "ArmorDefense",
-     "v": 378.0,
-     "min": 323.0
-    },
-    {
-     "id": "WeaponAccuracy",
-     "v": 70.0,
-     "min": 55.0
-    },
-    {
-     "id": "ArmorEvasion",
-     "v": 44.0,
-     "min": 32.0
-    },
-    {
-     "id": "Critical",
-     "v": 54.0,
-     "min": 41.0
-    },
-    {
-     "id": "CriticalResist",
-     "v": 74.0,
-     "min": 58.0
-    },
-    {
-     "id": "HPMax",
-     "v": 293.0,
-     "min": 249.0
-    },
-    {
-     "id": "MPMax",
-     "v": 150.0,
-     "min": 124.0
-    },
-    {
-     "id": "CombatSpeed",
-     "v": 4.4,
-     "min": 3.7
-    },
-    {
-     "id": "MPRegen",
-     "v": 40.0,
-     "min": 29.0
-    },
-    {
-     "id": "HPRegen",
-     "v": 74.0,
-     "min": 58.0
+     "id": "INT",
+     "v": 24,
+     "min": 15,
+     "w": 2000
     },
     {
      "id": "FPMax",
-     "v": 357.0,
-     "min": 311.0
+     "v": 357.49,
+     "min": 310.8,
+     "w": 6000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 38,
+     "min": 27,
+     "w": 6000
+    },
+    {
+     "id": "Critical",
+     "v": 54,
+     "min": 41,
+     "w": 6000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 70,
+     "min": 55,
+     "w": 6000
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 378,
+     "min": 323,
+     "w": 6000
+    },
+    {
+     "id": "ArmorEvasion",
+     "v": 44,
+     "min": 32,
+     "w": 6000
+    },
+    {
+     "id": "CriticalResist",
+     "v": 74,
+     "min": 58,
+     "w": 9000
     },
     {
      "id": "Block",
-     "v": 45.0,
-     "min": 33.0
+     "v": 45,
+     "min": 33,
+     "w": 9000
+    },
+    {
+     "id": "MPMax",
+     "v": 150,
+     "min": 124,
+     "w": 9000
+    },
+    {
+     "id": "HPMax",
+     "v": 293,
+     "min": 249,
+     "w": 9000
+    },
+    {
+     "id": "MPRegen",
+     "v": 40,
+     "min": 29,
+     "w": 10000
+    },
+    {
+     "id": "HPRegen",
+     "v": 74,
+     "min": 58,
+     "w": 10000
     }
    ],
    "sub_random": true,
@@ -1079,7 +1245,11 @@
    "sources": [
     "Crafting"
    ],
+   "icon": "Icon_ACC_NL_0047",
    "max_exceed": 5,
+   "exceed_group": "Accessory_Necklace_Unique_102_Craft",
+   "odds_group": "Enchant_Unique_102",
+   "enchant_group": "Accessory_Necklace_Unique_102",
    "slope_known": true
   },
   {
@@ -1093,13 +1263,13 @@
    "max_enchant": 10,
    "main": [
     {
-     "id": "DefensePierce",
-     "v": 100.0,
-     "slope": 30.0
+     "id": "AmplifyWeaponDamage",
+     "v": 5
     },
     {
-     "id": "AmplifyWeaponDamage",
-     "v": 5.0
+     "id": "DefensePierce",
+     "v": 100,
+     "slope": 30.0
     }
    ],
    "subs": [],
@@ -1110,6 +1280,9 @@
    "sources": [
     "Quest"
    ],
+   "icon": "Icon_Item_Craft_Conversion_Crystal_L_lv3_01",
+   "odds_group": "Amulet_Rare",
+   "enchant_group": "Amulet_Rare",
    "slope_known": true
   },
   {
@@ -1124,20 +1297,21 @@
    "main": [
     {
      "id": "WeaponFixingDamage",
-     "v": 17.0,
+     "v": 17,
      "slope": 1.0
     },
     {
      "id": "ArmorDefense",
-     "v": 41.0,
+     "v": 41,
      "slope": 2.0
     }
    ],
    "subs": [
     {
      "id": "HPMax",
-     "v": 23.0,
-     "min": 23.0
+     "v": 23,
+     "min": 23,
+     "w": 0
     }
    ],
    "sub_random": false,
@@ -1148,7 +1322,728 @@
     "Crafting",
     "Quest"
    ],
+   "icon": "Icon_ACC_Bracelet_0014",
+   "odds_group": "Enchant_Common_14",
+   "enchant_group": "Accessory_Bracelet_Common_14",
+   "slope_known": true
+  },
+  {
+   "id": 310130023,
+   "name": "Wise Dragon Lord Necklace",
+   "slot": "necklace",
+   "grade": "Unique",
+   "il": 94,
+   "equip_level": 45,
+   "class_lock": [],
+   "max_enchant": 15,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 145,
+     "slope": 5.2667
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 349,
+     "slope": 13.4
+    }
+   ],
+   "subs": [
+    {
+     "id": "CombatSpeed",
+     "v": 4.14,
+     "min": 3.54,
+     "w": 2000
+    },
+    {
+     "id": "STR",
+     "v": 19,
+     "min": 10,
+     "w": 2000
+    },
+    {
+     "id": "AGI",
+     "v": 19,
+     "min": 10,
+     "w": 2000
+    },
+    {
+     "id": "INT",
+     "v": 23,
+     "min": 14,
+     "w": 2000
+    },
+    {
+     "id": "FPMax",
+     "v": 338.17,
+     "min": 294,
+     "w": 6000
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 36,
+     "min": 25,
+     "w": 6000
+    },
+    {
+     "id": "Critical",
+     "v": 52,
+     "min": 39,
+     "w": 6000
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 67,
+     "min": 52,
+     "w": 6000
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 359,
+     "min": 306,
+     "w": 6000
+    },
+    {
+     "id": "ArmorEvasion",
+     "v": 42,
+     "min": 30,
+     "w": 6000
+    },
+    {
+     "id": "CriticalResist",
+     "v": 70,
+     "min": 55,
+     "w": 9000
+    },
+    {
+     "id": "Block",
+     "v": 43,
+     "min": 31,
+     "w": 9000
+    },
+    {
+     "id": "MPMax",
+     "v": 142,
+     "min": 117,
+     "w": 9000
+    },
+    {
+     "id": "HPMax",
+     "v": 278,
+     "min": 236,
+     "w": 9000
+    },
+    {
+     "id": "MPRegen",
+     "v": 39,
+     "min": 28,
+     "w": 10000
+    },
+    {
+     "id": "HPRegen",
+     "v": 70,
+     "min": 55,
+     "w": 10000
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 5,
+   "mana_slots": 4,
+   "god_slots": 0,
+   "sources": [
+    "Crafting"
+   ],
+   "icon": "Icon_ACC_NL_0047",
+   "max_exceed": 5,
+   "exceed_group": "Accessory_Necklace_Unique_94",
+   "odds_group": "Enchant_Unique_94",
+   "enchant_group": "Accessory_Necklace_Unique_94",
    "slope_known": true
   }
- ]
+ ],
+ "enchant_series": {
+  "Accessory_Bracelet_Common_14": {
+   "ArmorDefense": [
+    2,
+    4,
+    6,
+    8,
+    10
+   ],
+   "WeaponFixingDamage": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "Accessory_Necklace_Legend_38": {
+   "ArmorDefense": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    36,
+    42,
+    48,
+    54
+   ],
+   "WeaponFixingDamage": [
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    21
+   ]
+  },
+  "Accessory_Necklace_Unique_102": {
+   "ArmorDefense": [
+    14,
+    28,
+    42,
+    56,
+    70,
+    84,
+    98,
+    113,
+    128,
+    143,
+    158,
+    173,
+    188,
+    203,
+    218
+   ],
+   "WeaponFixingDamage": [
+    5,
+    10,
+    15,
+    20,
+    26,
+    32,
+    38,
+    44,
+    50,
+    56,
+    62,
+    68,
+    74,
+    80,
+    86
+   ]
+  },
+  "Accessory_Necklace_Unique_94": {
+   "ArmorDefense": [
+    13,
+    26,
+    39,
+    52,
+    65,
+    78,
+    91,
+    104,
+    117,
+    131,
+    145,
+    159,
+    173,
+    187,
+    201
+   ],
+   "WeaponFixingDamage": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    55,
+    61,
+    67,
+    73,
+    79
+   ]
+  },
+  "Amulet_Rare": {
+   "DefensePierce": [
+    30,
+    60,
+    90,
+    120,
+    150,
+    180,
+    210,
+    240,
+    270,
+    300
+   ]
+  },
+  "Armor_Torso_Legend_38": {
+   "ArmorDefense": [
+    10,
+    21,
+    32,
+    43,
+    54,
+    65,
+    76,
+    87,
+    98,
+    109
+   ],
+   "HPMax": [
+    9,
+    18,
+    27,
+    36,
+    45,
+    54,
+    63,
+    72,
+    81,
+    90
+   ]
+  },
+  "Armor_Torso_Unique_102": {
+   "ArmorDefense": [
+    29,
+    58,
+    87,
+    116,
+    145,
+    175,
+    205,
+    235,
+    265,
+    295,
+    325,
+    355,
+    385,
+    415,
+    445
+   ],
+   "HPMax": [
+    24,
+    48,
+    72,
+    96,
+    120,
+    144,
+    168,
+    192,
+    216,
+    240,
+    264,
+    288,
+    312,
+    336,
+    360
+   ]
+  },
+  "Belt_Rare": {
+   "HPMax": [
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500
+   ]
+  },
+  "Belt_Unique": {
+   "ArmorDefense": [
+    30,
+    60,
+    90,
+    120,
+    150,
+    180,
+    210,
+    240,
+    270,
+    300
+   ],
+   "HPMax": [
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500
+   ]
+  },
+  "Weapon_Guarder_Legend_39": {
+   "WeaponFixingDamage": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    29,
+    34,
+    39,
+    44
+   ]
+  },
+  "Weapon_Legend_39": {
+   "WeaponFixingDamage": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    29,
+    34,
+    39,
+    44
+   ]
+  },
+  "Weapon_Legend_45": {
+   "WeaponFixingDamage": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    51
+   ]
+  },
+  "Weapon_Unique_102": {
+   "WeaponFixingDamage": [
+    11,
+    22,
+    33,
+    44,
+    55,
+    66,
+    78,
+    90,
+    102,
+    114,
+    126,
+    138,
+    150,
+    162,
+    174
+   ]
+  }
+ },
+ "enchant_odds": {
+  "Amulet_Rare": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100
+  ],
+  "Belt_Rare": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100
+  ],
+  "Belt_Unique": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100
+  ],
+  "Enchant_Common_14": [
+   100,
+   100,
+   100,
+   100,
+   100
+  ],
+  "Enchant_Legend_38": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100
+  ],
+  "Enchant_Legend_39": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100
+  ],
+  "Enchant_Legend_45": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100
+  ],
+  "Enchant_Unique_102": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   65,
+   50,
+   35,
+   25,
+   20
+  ],
+  "Enchant_Unique_94": [
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   100,
+   65,
+   50,
+   35,
+   25,
+   20
+  ]
+ },
+ "exceed": {
+  "Accessory_Necklace_Unique_102_Craft": {
+   "odds": [
+    66,
+    50,
+    33,
+    25,
+    20
+   ],
+   "levels": [
+    {
+     "WeaponFixingDamage": 7,
+     "ArmorDefense": 14,
+     "AmplifyAllDamage": 0.5
+    },
+    {
+     "WeaponFixingDamage": 14,
+     "ArmorDefense": 28,
+     "AmplifyAllDamage": 1
+    },
+    {
+     "WeaponFixingDamage": 21,
+     "ArmorDefense": 43,
+     "AmplifyAllDamage": 1.5
+    },
+    {
+     "WeaponFixingDamage": 28,
+     "ArmorDefense": 58,
+     "AmplifyAllDamage": 2
+    },
+    {
+     "WeaponFixingDamage": 36,
+     "ArmorDefense": 73,
+     "AmplifyAllDamage": 2.5
+    }
+   ]
+  },
+  "Accessory_Necklace_Unique_94": {
+   "odds": [
+    66,
+    50,
+    33,
+    25,
+    20
+   ],
+   "levels": [
+    {
+     "WeaponFixingDamage": 6,
+     "ArmorDefense": 13,
+     "AmplifyAllDamage": 0.5
+    },
+    {
+     "WeaponFixingDamage": 12,
+     "ArmorDefense": 26,
+     "AmplifyAllDamage": 1
+    },
+    {
+     "WeaponFixingDamage": 19,
+     "ArmorDefense": 39,
+     "AmplifyAllDamage": 1.5
+    },
+    {
+     "WeaponFixingDamage": 26,
+     "ArmorDefense": 53,
+     "AmplifyAllDamage": 2
+    },
+    {
+     "WeaponFixingDamage": 33,
+     "ArmorDefense": 67,
+     "AmplifyAllDamage": 2.5
+    }
+   ]
+  },
+  "Armor_Torso_Unique_102_Craft": {
+   "odds": [
+    66,
+    50,
+    33,
+    25,
+    20
+   ],
+   "levels": [
+    {
+     "ArmorDefense": 29,
+     "HPMax": 29,
+     "DecreaseDamage": 0.5,
+     "MaxHPRatio": 0.5
+    },
+    {
+     "ArmorDefense": 59,
+     "HPMax": 59,
+     "DecreaseDamage": 1,
+     "MaxHPRatio": 1
+    },
+    {
+     "ArmorDefense": 89,
+     "HPMax": 89,
+     "DecreaseDamage": 1.5,
+     "MaxHPRatio": 1.5
+    },
+    {
+     "ArmorDefense": 119,
+     "HPMax": 119,
+     "DecreaseDamage": 2,
+     "MaxHPRatio": 2
+    },
+    {
+     "ArmorDefense": 149,
+     "HPMax": 149,
+     "DecreaseDamage": 2.5,
+     "MaxHPRatio": 2.5
+    }
+   ]
+  },
+  "Weapon_Unique_102": {
+   "odds": [
+    66,
+    50,
+    33,
+    25,
+    20
+   ],
+   "levels": [
+    {
+     "WeaponFixingDamage": 14,
+     "AmplifyAllDamage": 1
+    },
+    {
+     "WeaponFixingDamage": 28,
+     "AmplifyAllDamage": 2
+    },
+    {
+     "WeaponFixingDamage": 43,
+     "AmplifyAllDamage": 3
+    },
+    {
+     "WeaponFixingDamage": 58,
+     "AmplifyAllDamage": 4
+    },
+    {
+     "WeaponFixingDamage": 73,
+     "AmplifyAllDamage": 5
+    }
+   ]
+  },
+  "Weapon_Unique_102_Craft": {
+   "odds": [
+    66,
+    50,
+    33,
+    25,
+    20
+   ],
+   "levels": [
+    {
+     "WeaponFixingDamage": 14,
+     "AmplifyAllDamage": 1
+    },
+    {
+     "WeaponFixingDamage": 28,
+     "AmplifyAllDamage": 2
+    },
+    {
+     "WeaponFixingDamage": 43,
+     "AmplifyAllDamage": 3
+    },
+    {
+     "WeaponFixingDamage": 58,
+     "AmplifyAllDamage": 4
+    },
+    {
+     "WeaponFixingDamage": 73,
+     "AmplifyAllDamage": 5
+    }
+   ]
+  }
+ }
 }

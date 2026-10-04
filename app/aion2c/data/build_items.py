@@ -1,4 +1,7 @@
-"""Build app/aion2c/data/items.json from the official open gameconst item endpoint.
+"""Build app/aion2c/data/items.json.
+
+Primary source: the private client table export (`export`, see the section below). Legacy source: the official open
+gameconst item endpoint (`fetch` / `build` / `all`), kept working:
 
     python -m aion2c.data.build_items fetch    # polite, resumable; cache under research/items_cache/
     python -m aion2c.data.build_items build    # cache -> items.json (no network)
@@ -13,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 import urllib.request
@@ -163,11 +167,204 @@ def build(cache: Path = CACHE, out: Path = OUT) -> int:
     return len(items)
 
 
+# ---- client export (primary source) -----------------------------------------------------------------------------
+#
+#     set AION2_EXPORT_DIR=<the private export's Table directory>      (never stored in this repo)
+#     python -m aion2c.data.build_items export                          (from app/)
+#
+# Reads Item, Enchant, EnchantEffect, ExceedEnchant, AdditionalStat, StatCorrectionNumber and L10N/en-US/L10NString
+# and writes only OUR derived fields. Same per-item schema as the endpoint build, plus:
+#   sub lines    "w"            client RandomWeight of the pool line (0 on fixed lines)
+#   item         "enchant_group" / "odds_group" / "exceed_group"   keys into the three top-level tables below
+#   top level    "enchant_series": {group: {stat: [bonus at +1, +2, ... +max]}}   (cumulative, per-level, from the client)
+#                "enchant_odds":   {group: [success % of going +0->+1, +1->+2, ...]}
+#                "exceed":         {group: {"odds": [success % per step], "levels": [{stat: value at level 1, 2, ...}]}}
+# `slope` (series[-1] / max, the old linear fit) is kept so older consumers still work. `icon` and `sources` are not in
+# the client tables: they are carried over by id from the previous items.json; the 199 items the endpoint never listed
+# have neither.
+ENV_VAR = "AION2_EXPORT_DIR"
+EXPORT_SOURCE = "client export 2026-10-04"
+EXPORT_TABLES = ("Item", "Enchant", "EnchantEffect", "ExceedEnchant", "AdditionalStat", "StatCorrectionNumber")
+CATEGORY_SLOT = {
+    "Greatsword": "weapon", "Sword": "weapon", "Dagger": "weapon", "Bow": "weapon", "Magicbook": "weapon",
+    "Orb": "weapon", "Mace": "weapon", "Staff": "weapon", "Gauntlet": "weapon", "Guarder": "offhand",
+    "Torso": "torso", "Pants": "legs", "Helmet": "helmet", "Shoulder": "shoulder", "Gloves": "gloves",
+    "Boots": "boots", "Cape": "cape", "Belt": "belt", "Necklace": "necklace", "Earring": "earring",
+    "Ring": "ring", "Bracelet": "bracelet", "Amulet": "amulet", "Rune": "rune",
+    "ArcanaGrail": "arcana", "ArcanaParchment": "arcana", "ArcanaCompass": "arcana", "ArcanaBell": "arcana",
+    "ArcanaMirror": "arcana",
+}
+CATEGORY_CLASS = {
+    "Greatsword": "Gladiator", "Sword": "Templar", "Dagger": "Assassin", "Bow": "Ranger", "Magicbook": "Sorcerer",
+    "Orb": "Spiritmaster", "Mace": "Cleric", "Staff": "Chanter", "Gauntlet": "Fighter",
+}
+GRADE_NAME = {"Legend": "Epic"}  # the client calls our Epic "Legend"
+NOT_MAIN = {"DecreaseWeaponBlock", "MaxWeaponBlock", "DecreaseShieldBlock", "MaxShieldBlock"}  # block caps, not stats a player reads
+
+
+def export_dir() -> Path:
+    raw = os.environ.get(ENV_VAR)
+    if not raw:
+        raise SystemExit(f"{ENV_VAR} is not set. Point it at the private client export's Table directory "
+                         f"(it is never stored in this repo), then re-run `build_items export`.")
+    p = Path(raw)
+    missing = [t for t in EXPORT_TABLES if not (p / f"{t}.json").is_file()]
+    if missing:
+        raise SystemExit(f"{ENV_VAR}={raw!r} is missing {', '.join(t + '.json' for t in missing)}; "
+                         f"it must be the exported Table directory.")
+    return p
+
+
+def _rows(table_dir: Path, name: str) -> list[dict]:
+    return json.loads((table_dir / f"{name}.json").read_text(encoding="utf-8"))["Properties"]["Data"]
+
+
+def _sid(key: str) -> str:
+    return key.split("::", 1)[-1]
+
+
+def _clean(x: float):
+    x = round(x, 4)
+    return int(x) if x == int(x) else x
+
+
+class _Scale:
+    """client raw -> displayed number. Percent stats (DivideNumber 1) and FP-type stats (StatUnit 100) are raw / 100."""
+
+    def __init__(self, rows: list[dict]):
+        self.div = {_sid(r["StatName"]): 100 if (r["DivideNumber"] == 1 or r["StatUnit"] == 100) else 1 for r in rows}
+
+    def __call__(self, sid: str, raw) -> float:
+        if sid not in self.div:
+            raise KeyError(f"stat {sid} has no StatCorrectionNumber row")
+        return _clean(raw / self.div[sid])
+
+
+def _by_group(rows: list[dict], level_key: str) -> dict[str, list[dict]]:
+    out: dict[str, list[dict]] = {}
+    for r in rows:
+        out.setdefault(r["Group"], []).append(r)
+    for g in out.values():
+        g.sort(key=lambda r: r[level_key])
+    return out
+
+
+def _main_stats(it: dict, sc: _Scale) -> list[dict]:
+    vals = {_sid(s["Key"]): s["Value"] for s in it["MainStats"] if _sid(s["Key"]) not in NOT_MAIN}
+    out = []
+    if "WeaponDamage" in vals:  # weapons: WeaponMinDamage..WeaponDamage is our WeaponFixingDamage min..v
+        mx, mn = vals.pop("WeaponDamage"), vals.pop("WeaponMinDamage", None)
+        out.append({"id": "WeaponFixingDamage", "v": sc("WeaponDamage", mx), "min": sc("WeaponMinDamage", mn if mn is not None else mx)})
+    for sid, raw in vals.items():
+        if raw:  # a zero main stat (Block on a bow) is not a line
+            out.append({"id": sid, "v": sc(sid, raw)})
+    return out
+
+
+def _sub_stats(it: dict, sc: _Scale) -> list[dict]:
+    out = []
+    for s in it["SubStats"]:
+        sid, v = _sid(s["Key"]), s["Value"]
+        out.append({"id": sid, "v": sc(sid, v["MaxValue"]), "min": sc(sid, v["MinValue"]), "w": v["RandomWeight"]})
+    return out
+
+
+def _series_table(groups: dict[str, list[dict]], sc: _Scale, wanted: set[str]) -> dict[str, dict[str, list]]:
+    out: dict[str, dict[str, list]] = {}
+    for g in sorted(wanted):
+        rows = groups[g]
+        per: dict[str, list] = {}
+        for lv, r in enumerate(rows, 1):
+            if r["Level"] != lv:
+                raise ValueError(f"EnchantEffect group {g}: levels are not 1..N")
+            for s in r["StatList"]:
+                per.setdefault(_sid(s["StatType"]), [0] * len(rows))[lv - 1] = s["StatValue"]
+        if "WeaponDamage" in per:  # fold Min/Max attack into one WeaponFixingDamage series (client: identical)
+            mn, mx = per.pop("WeaponMinDamage", per["WeaponDamage"]), per.pop("WeaponDamage")
+            per["WeaponFixingDamage"] = [(a + b) / 2 for a, b in zip(mn, mx)]
+        out[g] = {sid: [sc(sid, v) for v in vals]
+                  for sid, vals in sorted(per.items())}
+    return out
+
+
+def build_from_export(table_dir: Path, previous: dict[int, dict] | None = None) -> dict:
+    """The whole items.json document from the client tables. `previous` supplies icon/sources by id."""
+    sc = _Scale(_rows(table_dir, "StatCorrectionNumber"))
+    l10n = json.loads((table_dir / "L10N" / "en-US" / "L10NString.json").read_text(encoding="utf-8"))["Entries"]
+    enchant = _by_group(_rows(table_dir, "Enchant"), "CurrentLevel")
+    effect = _by_group(_rows(table_dir, "EnchantEffect"), "Level")
+    exceed = _by_group(_rows(table_dir, "ExceedEnchant"), "CurrentLevel")
+    extra = {r["Name"]: r["AdditionalStats"] for r in _rows(table_dir, "AdditionalStat")}
+    previous = previous or {}
+    items, used_effect, used_odds, used_exceed = [], set(), set(), set()
+    for it in _rows(table_dir, "Item"):
+        if it["ItemType"] != "EItemType::Equip":
+            continue
+        cat = _sid(it["EquipCategory"])
+        iid = it["ID"]["Value"]
+        grade = _sid(it["ItemGrade"])
+        og, eg, xg = it["EnchantGroup"], it["EnchantEffectGroup"], it["ExceedEnchantGroup"]
+        mx = max(0, len(enchant.get(og, [])) - 1)
+        out = {
+            "id": iid, "name": l10n[f"String_{it['Desc']['Key']}_body"], "slot": CATEGORY_SLOT[cat],
+            "grade": GRADE_NAME.get(grade, grade), "il": it["ItemLevel"], "equip_level": it["PermitLevelMin"],
+            "class_lock": [CATEGORY_CLASS[cat]] if cat in CATEGORY_CLASS else [],
+            "max_enchant": mx, "main": _main_stats(it, sc), "subs": _sub_stats(it, sc),
+            "sub_random": bool(it["SoulbindRandomStat"]), "sub_count": it["SoulbindRandomStatCount"],
+            "mana_slots": it["MagicStoneSlotCount"], "god_slots": it["GodStoneSlotCount"],
+        }
+        old = previous.get(iid, {})
+        out["sources"] = list(old.get("sources") or [])
+        if old.get("icon"):
+            out["icon"] = old["icon"]
+        if xg != "None" and len(exceed.get(xg, [])) > 1:
+            out["max_exceed"] = len(exceed[xg]) - 1
+            out["exceed_group"] = xg
+            used_exceed.add(xg)
+        if mx and og != "None":
+            out["odds_group"] = og
+            used_odds.add(og)
+        if mx and eg != "None" and len(effect.get(eg, [])) == mx:
+            out["enchant_group"] = eg
+            used_effect.add(eg)
+        out["slope_known"] = True
+        items.append(out)
+    series = _series_table(effect, sc, used_effect)
+    for out in items:  # old linear fit, now read off the real series
+        g = out.get("enchant_group")
+        for m in out["main"]:
+            top = series[g].get(m["id"], [0])[-1] if g else 0
+            if top:
+                m["slope"] = round(top / out["max_enchant"], 4)
+    odds = {g: [_clean(r["SuccessProb"] / 100) for r in enchant[g][:-1]] for g in sorted(used_odds)}
+    ex_table = {}
+    for g in sorted(used_exceed):
+        rows = exceed[g]
+        ex_table[g] = {
+            "odds": [_clean(r["SuccessProb"] / 100) for r in rows[:-1]],
+            "levels": [{_sid(s["Type"]): sc(_sid(s["Type"]), s["Value"]) for s in extra[r["AdditionalStatName"]]}
+                       for r in rows[1:]],
+        }
+    items.sort(key=lambda x: x["id"])
+    return {"schema": 1, "source": EXPORT_SOURCE, "items": items, "enchant_series": series, "enchant_odds": odds,
+            "exceed": ex_table}
+
+
+def write_items(doc: dict, out: Path = OUT) -> None:
+    out.write_text(json.dumps(doc, separators=(",", ":"), ensure_ascii=False), encoding="utf8")
+
+
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["fetch", "build", "all"])
+    ap.add_argument("cmd", choices=["fetch", "build", "all", "export"])
     ap.add_argument("--no-seed-scan", action="store_true")
     a = ap.parse_args(argv)
+    if a.cmd == "export":
+        prev = {it["id"]: it for it in json.loads(OUT.read_text(encoding="utf8"))["items"]} if OUT.exists() else {}
+        doc = build_from_export(export_dir(), prev)
+        write_items(doc)
+        print("items:", len(doc["items"]))
+        return
     if a.cmd in ("fetch", "all"):
         fetch_all(candidate_ids(), seed_scan=not a.no_seed_scan)
     if a.cmd in ("build", "all"):

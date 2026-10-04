@@ -46,14 +46,42 @@ def test_item_lines_enchant_linear_and_clamped(items):
     assert gear.item_lines(lib, 10)["WeaponAccuracy"] == 100  # accuracy does not scale
 
 
-def test_random_pool_expected_value(items):
+def test_random_pool_expected_value_is_weighted_by_the_client_draw_weights(items):
     lun = items[LUNATIC]
-    assert lun["sub_random"] and lun["sub_count"] == 3
+    assert lun["sub_random"] and lun["sub_count"] == 3 and all(s["w"] > 0 for s in lun["subs"])
     exp = gear.item_lines(lun, 0, "expected")
     none = gear.item_lines(lun, 0, "none")
-    pool_attack = [s for s in lun["subs"] if s["id"] == "WeaponFixingDamage"][0]
-    want = 3 * (pool_attack["min"] + pool_attack["v"]) / 2 / len(lun["subs"])
-    assert exp["WeaponFixingDamage"] - none["WeaponFixingDamage"] == pytest.approx(want)
+    p = gear.pool_inclusion(lun["subs"], 3)
+    assert sum(p) == pytest.approx(3) and all(0 < x < 1 for x in p)
+    by = {s["id"]: (s, x) for s, x in zip(lun["subs"], p)}
+    for sid, (s, x) in by.items():
+        assert exp.get(sid, 0) - none.get(sid, 0) == pytest.approx(x * (s["min"] + s["v"]) / 2)
+    # a rarer line (smaller weight) is picked less often than a common one, which uniform averaging could not show
+    rare, common = min(lun["subs"], key=lambda s: s["w"]), max(lun["subs"], key=lambda s: s["w"])
+    assert by[rare["id"]][1] < by[common["id"]][1]
+    uniform = 3 / len(lun["subs"])
+    assert by[rare["id"]][1] < uniform < by[common["id"]][1]
+
+
+def test_pool_inclusion_is_exact_successive_sampling():
+    # one pick: proportional to weight; picking everything: every line certain
+    assert gear.pool_inclusion([{"w": 1}, {"w": 3}], 1) == pytest.approx([0.25, 0.75])
+    assert gear.pool_inclusion([{"w": 1}, {"w": 3}], 2) == pytest.approx([1, 1])
+    # weights (1, 1, 2), two picks: P(heavy) = 1/2 + 1/2 * 2/3 = 5/6, the two light lines share the other 7/6
+    assert gear.pool_inclusion([{"w": 1}, {"w": 1}, {"w": 2}], 2) == pytest.approx([7 / 12, 7 / 12, 5 / 6])
+    # no weights (older data): the old uniform average
+    assert gear.pool_inclusion([{}, {}, {}, {}], 2) == [0.5] * 4
+    # brute force over every ordered draw
+    import itertools
+    w = [2, 7, 7, 3, 5]
+    want = [0.0] * 5
+    for order in itertools.permutations(range(5), 3):
+        pr, left = 1.0, sum(w)
+        for i in order:
+            pr, left = pr * w[i] / left, left - w[i]
+        for i in order:
+            want[i] += pr
+    assert gear.pool_inclusion([{"w": x} for x in w], 3) == pytest.approx(want)
 
 
 def test_best_rolls_pick_weighted_lines(items):
@@ -231,8 +259,8 @@ def test_equipped_from_armory_sample(items):
     raw = json.loads(EQUIP_SAMPLE.read_text(encoding="utf8"))
     eq = gear.equipped_from_armory(raw)
     assert len(eq) == 17 and {e["slot"] for e in eq} <= set(gear.SLOTS)
-    assert next(e for e in eq if e["id"] == LIBERATOR) == {"id": LIBERATOR, "enchant": 10, "slot": "weapon",
-                                                         "name": "Liberator Spellbook"}
+    assert next(e for e in eq if e["id"] == LIBERATOR) == {"id": LIBERATOR, "enchant": 10, "exceed": 0,
+                                                         "slot": "weapon", "name": "Liberator Spellbook"}
     ok, tot = gear.resolution(eq, items)  # the small fixture only holds a few of them
     assert tot == 17 and 3 <= ok < tot
 

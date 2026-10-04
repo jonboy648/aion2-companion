@@ -35,6 +35,16 @@ def test_register_items_overrides_disk(monkeypatch):
     assert webapi._items() == {7: {"id": "7", "name": "x"}}
 
 
+def test_register_items_links_the_client_tables(monkeypatch):
+    monkeypatch.setattr(webapi, "_ITEMS", None)
+    webapi.register_items({"schema": 1, "items": [{"id": 7, "name": "x", "enchant_group": "E", "exceed_group": "X"}],
+                           "enchant_series": {"E": {"WeaponFixingDamage": [3, 7]}},
+                           "exceed": {"X": {"odds": [50], "levels": [{"WeaponFixingDamage": 9}]}}})
+    it = webapi._items()[7]
+    assert it["enchant_series"] == {"WeaponFixingDamage": [3, 7]}
+    assert it["exceed_levels"] == [{"WeaponFixingDamage": 9}] and it["exceed_odds"] == [50]
+
+
 def test_gear_upgrades_shape(raw, build):
     out = js(webapi.gear_upgrades(raw, build, "boss", steps=5))
     assert set(out) == {"equipped", "upgrades", "notes", "assumptions"}
@@ -46,10 +56,17 @@ def test_gear_upgrades_shape(raw, build):
     assert 1 <= len(ups) <= 5
     assert ups[0]["dps_gain_pct"] == max(u["dps_gain_pct"] for u in ups)
     for u in ups:
-        assert u["kind"] in ("item", "enchant") and u["dps_gain_pct"] > 0 and u["reachable"] is True
+        assert u["kind"] in ("item", "enchant", "exceed") and u["dps_gain_pct"] > 0 and u["reachable"] is True
         assert u["to"]["name"] and u["source"] and u["icon"].startswith("https://")
         if u["kind"] == "enchant":
             assert u["from"]["id"] == u["to"]["id"] and u["to"]["enchant"] == u["to"]["max_enchant"]
+        if u["kind"] == "exceed":
+            assert u["from"]["id"] == u["to"]["id"] and u["to"]["exceed"] == u["to"]["max_exceed"] > u["from"]["exceed"]
+            assert len(u["to"]["exceed_odds"]) == u["to"]["max_exceed"] and u["source"] == "Exceed"
+    # every view says where the item stands on both ladders, and the success odds the UI could show later
+    for e in out["equipped"]:
+        assert e["exceed"] == 0 and e["max_exceed"] >= 0 and len(e["enchant_odds"]) == e["max_enchant"]
+        assert len(e["exceed_odds"]) == e["max_exceed"]
 
 
 def test_gear_upgrades_unknown_items_noted(raw, build):
@@ -69,6 +86,7 @@ def test_max_potential_shape_and_gap(raw, build):
     out = js(webapi.max_potential("sorcerer", "boss", True, build, raw))
     assert time.time() - t < 120
     assert out["gear"] and all(g["reachable"] and g["enchant"] == g["max_enchant"] for g in out["gear"])
+    assert all(g["exceed"] == g["max_exceed"] for g in out["gear"])
     assert {"weapon", "torso"} <= {g["slot"] for g in out["gear"]}
     assert out["dps"] > 0 and out["gear_gain_pct"] > 0
     assert out["current_dps"] > 0 and out["gain_vs_current_pct"] is not None
@@ -85,4 +103,7 @@ def test_max_potential_shape_and_gap(raw, build):
 def test_max_potential_without_build():
     out = js(webapi.max_potential("sorcerer", "boss"))
     assert out["gain_vs_current_pct"] is None and out["current_dps"] is None and out["gear"]
+    # a level-45 character reaches Unique IL 78 gear, which carries Exceed: the ceiling is taken at the top level
+    ex = [g for g in out["gear"] if g["max_exceed"]]
+    assert len(ex) >= 10 and all(g["exceed"] == g["max_exceed"] and len(g["exceed_odds"]) == g["exceed"] for g in ex)
     assert out["with_current_gear"] is None  # no character: nothing "current" to report
