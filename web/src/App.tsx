@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { DocumentMeta } from "@/seo/DocumentMeta";
 import { Layout } from "@/components/Layout";
 import { AdminPage } from "@/pages/AdminPage";
 import { Board } from "@/pages/Board";
@@ -18,23 +19,26 @@ import { RoadmapPage } from "@/pages/RoadmapPage";
 /** Route table. Each page group is owned by one Wave 1 team; keep paths stable (they are shareable links). */
 export default function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="c/:region/:serverId/:name" element={<CharacterPage />} />
-        <Route path="board" element={<Board />} />
-        <Route path="maps" element={<Maps />} />
-        <Route path="compare/:a?/:b?" element={<ComparePage />} />
-        <Route path="guide" element={<GuidePage />} />
-        <Route path="build" element={<BuildPage />} />
-        <Route path="daevanion" element={<DaevanionPage />} />
-        <Route path="codex/:classKey?" element={<CodexPage />} />
-        <Route path="keybinds" element={<KeybindsPage />} />
-        <Route path="crafting" element={<CraftingPage />} />
-        <Route path="roadmap" element={<RoadmapPage />} />
-        <Route path="admin" element={<AdminPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+    <>
+      <DocumentMeta />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="c/:region/:serverId/:name" element={<CharacterPage />} />
+          <Route path="board" element={<Board />} />
+          <Route path="maps" element={<Maps />} />
+          <Route path="compare/:a?/:b?" element={<ComparePage />} />
+          <Route path="guide" element={<GuidePage />} />
+          <Route path="build" element={<BuildPage />} />
+          <Route path="daevanion" element={<DaevanionPage />} />
+          <Route path="codex/:classKey?" element={<CodexPage />} />
+          <Route path="keybinds" element={<KeybindsPage />} />
+          <Route path="crafting" element={<CraftingPage />} />
+          <Route path="roadmap" element={<RoadmapPage />} />
+          <Route path="admin" element={<AdminPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }

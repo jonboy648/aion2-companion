@@ -1,0 +1,142 @@
+{
+ "site": {
+  "name": "Become Cube",
+  "url": "https://becomecube.com",
+  "image": "https://becomecube.com/og.png"
+ },
+ "routes": [
+  {
+   "path": "/",
+   "title": "Become Cube: free Aion 2 build planner and character analyzer",
+   "h1": "Find your best Aion 2 build",
+   "description": "Type your Aion 2 character name for stigma picks, a rotation, Daevanion and gear upgrades for boss, AoE, leveling and burst. Free fan tool.",
+   "intro": "Import a character from the official Aion 2 armory, or build one by hand, and compare boss, AoE, leveling and burst playstyles: stigmas, rotation, Daevanion and your next upgrades."
+  },
+  {
+   "path": "/guide",
+   "title": "Start here: how to use Become Cube for Aion 2",
+   "h1": "Start here",
+   "description": "A short guide to the Aion 2 build planner: import your character, read the four playstyle cards, and apply the stigma, Daevanion and gear advice.",
+   "intro": "New to Aion 2 or to this site? This page walks through importing a character, reading the results, and what to change first."
+  },
+  {
+   "path": "/build",
+   "title": "Aion 2 build planner: make a build by hand",
+   "h1": "Build one by hand",
+   "description": "Pick an Aion 2 class, enter your level and stats, and get the same stigma, rotation and Daevanion analysis without importing a character.",
+   "intro": "No character yet? Pick a class, enter level and stats, and get the same analysis as an imported character."
+  },
+  {
+   "path": "/daevanion",
+   "title": "Aion 2 Daevanion planner: best node order",
+   "h1": "Daevanion planner",
+   "description": "Plan your Aion 2 Daevanion boards: which nodes to open first for the biggest damage gain, based on your class and current build.",
+   "intro": "See which Daevanion nodes add the most damage and in what order to open them."
+  },
+  {
+   "path": "/compare",
+   "title": "Compare two Aion 2 characters side by side",
+   "h1": "Compare characters",
+   "description": "Compare two Aion 2 characters or builds side by side: stigmas, gear, Daevanion and estimated damage for each playstyle.",
+   "intro": "Put two characters next to each other to see how their stigmas, gear and estimated damage differ."
+  },
+  {
+   "path": "/codex",
+   "title": "Aion 2 skill codex: skills, stigmas and specialties by class",
+   "h1": "Skill codex",
+   "description": "Browse Aion 2 skills, stigmas and specialties for every class with ranks, cooldowns and what each option changes.",
+   "intro": "A reference for every class's skills, stigmas and specialty options."
+  },
+  {
+   "path": "/keybinds",
+   "title": "Aion 2 keybinds and macro setup for your rotation",
+   "h1": "Keybinds and macros",
+   "description": "Turn your Aion 2 rotation into a key layout and an in-game macro you set up yourself. Nothing is sent to the game.",
+   "intro": "Lay out your skills on the hotbar and build the in-game macro for your rotation."
+  },
+  {
+   "path": "/crafting",
+   "title": "Aion 2 crafting shopping list and recipes",
+   "h1": "Crafting",
+   "description": "Pick Aion 2 crafting recipes and get the full shopping list of base materials in one place.",
+   "intro": "Choose recipes and get a combined list of the materials you need."
+  },
+  {
+   "path": "/roadmap",
+   "title": "Aion 2 road map: what to do at each level",
+   "h1": "Road map",
+   "description": "A level-by-level checklist for Aion 2: what to unlock, upgrade and farm next as your character grows.",
+   "intro": "A level-by-level list of what to do next for your class."
+  },
+  {
+   "path": "/board",
+   "title": "Aion 2 board: recent lookups and top characters",
+   "h1": "Board",
+   "description": "The latest Aion 2 characters looked up on Become Cube and the top characters by Combat Power. Public armory info only.",
+   "intro": "Recent lookups and the top characters. Public armory info only."
+  },
+  {
+   "path": "/maps",
+   "title": "Aion 2 maps: links to community interactive maps",
+   "h1": "Maps",
+   "description": "Links to community Aion 2 maps with zones, bosses, portals and gathering nodes. Unofficial; we link to them and host no map art.",
+   "intro": "Unofficial community maps. We link to them and do not host or copy any map art."
+  },
+  {
+   "path": "/codex/gladiator",
+   "title": "Aion 2 Gladiator skills, stigmas and specialties",
+   "h1": "Gladiator skills",
+   "description": "Every Aion 2 Gladiator skill, stigma and specialty with ranks and cooldowns. Import your Gladiator to see the best stigmas and rotation.",
+   "intro": "The Gladiator is a melee damage dealer in Aion 2. This page lists its skills, stigmas and specialty options. Import your Gladiator from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  },
+  {
+   "path": "/codex/templar",
+   "title": "Aion 2 Templar skills, stigmas and specialties",
+   "h1": "Templar skills",
+   "description": "Every Aion 2 Templar skill, stigma and specialty with ranks and cooldowns. Import your Templar to see the best stigmas and rotation.",
+   "intro": "The Templar is a tank in Aion 2. This page lists its skills, stigmas and specialty options. Import your Templar from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  },
+  {
+   "path": "/codex/assassin",
+   "title": "Aion 2 Assassin skills, stigmas and specialties",
+   "h1": "Assassin skills",
+   "description": "Every Aion 2 Assassin skill, stigma and specialty with ranks and cooldowns. Import your Assassin to see the best stigmas and rotation.",
+   "intro": "The Assassin is a melee damage dealer in Aion 2. This page lists its skills, stigmas and specialty options. Import your Assassin from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  },
+  {
+   "path": "/codex/ranger",
+   "title": "Aion 2 Ranger skills, stigmas and specialties",
+   "h1": "Ranger skills",
+   "description": "Every Aion 2 Ranger skill, stigma and specialty with ranks and cooldowns. Import your Ranger to see the best stigmas and rotation.",
+   "intro": "The Ranger is a ranged damage dealer in Aion 2. This page lists its skills, stigmas and specialty options. Import your Ranger from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  },
+  {
+   "path": "/codex/sorcerer",
+   "title": "Aion 2 Sorcerer skills, stigmas and specialties",
+   "h1": "Sorcerer skills",
+   "description": "Every Aion 2 Sorcerer skill, stigma and specialty with ranks and cooldowns. Import your Sorcerer to see the best stigmas and rotation.",
+   "intro": "The Sorcerer is a ranged damage dealer in Aion 2. This page lists its skills, stigmas and specialty options. Import your Sorcerer from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  },
+  {
+   "path": "/codex/spiritmaster",
+   "title": "Aion 2 Spiritmaster skills, stigmas and specialties",
+   "h1": "Spiritmaster skills",
+   "description": "Every Aion 2 Spiritmaster skill, stigma and specialty with ranks and cooldowns. Import your Spiritmaster to see the best stigmas and rotation.",
+   "intro": "The Spiritmaster is a support in Aion 2. This page lists its skills, stigmas and specialty options. Import your Spiritmaster from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  },
+  {
+   "path": "/codex/cleric",
+   "title": "Aion 2 Cleric skills, stigmas and specialties",
+   "h1": "Cleric skills",
+   "description": "Every Aion 2 Cleric skill, stigma and specialty with ranks and cooldowns. Import your Cleric to see the best stigmas and rotation.",
+   "intro": "The Cleric is a healer in Aion 2. This page lists its skills, stigmas and specialty options. Import your Cleric from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  },
+  {
+   "path": "/codex/chanter",
+   "title": "Aion 2 Chanter skills, stigmas and specialties",
+   "h1": "Chanter skills",
+   "description": "Every Aion 2 Chanter skill, stigma and specialty with ranks and cooldowns. Import your Chanter to see the best stigmas and rotation.",
+   "intro": "The Chanter is a support in Aion 2. This page lists its skills, stigmas and specialty options. Import your Chanter from the armory to see which stigmas, rotation and gear add the most damage for boss, AoE, leveling or burst play."
+  }
+ ]
+}

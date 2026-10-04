@@ -7,12 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet" />
-    <title>Aion 2 Companion</title>
+    <title>Become Cube: free Aion 2 build planner and character analyzer</title>
     <meta name="description" content="Aion 2 companion: import your character, compare playstyles, plan Daevanion, keybinds and crafting. Fan project, not affiliated with NCSOFT." />
     <link rel="canonical" href="https://becomecube.com/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Aion 2 Companion" />
+    <meta property="og:site_name" content="Become Cube" />
     <meta property="og:title" content="Aion 2 Companion" />
     <meta property="og:description" content="Import your character, compare playstyles, plan Daevanion, keybinds and crafting." />
     <meta property="og:url" content="https://becomecube.com/" />
@@ -26,6 +26,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Old shared links used hash routes (/#/c/nae/1101/Luna). Turn them into the real path before the app starts.
+      (function () {
+        var h = location.hash;
+        if (h.indexOf("#/") === 0) history.replaceState(null, "", h.slice(1));
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
