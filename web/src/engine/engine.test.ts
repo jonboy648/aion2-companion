@@ -97,4 +97,64 @@ describe("pyodide client", () => {
     await client.optimize(build, "boss");
     expect(sent.length).toBe(2);
   });
+
+  describe("parallel compare", () => {
+    /** N fake workers; each answers optimize() with a result naming its playstyle and which worker served it. */
+    const pool = (n: number, store: MemStore | null = new MemStore()) => {
+      const ws = Array.from({ length: n }, (_, i) =>
+        fakeWorker((m, send) => {
+          const key = (m.args as unknown[])[1] as string;
+          send({ id: m.id, type: "progress", message: `${key} on ${i}` });
+          send({ id: m.id, type: "result", json: JSON.stringify({ playstyle: key, worker: i }) });
+        }),
+      );
+      let made = 0;
+      const client = createPyodideClient({ workerFactory: () => ws[made++].w, store, base: "/", dataVersion: async () => "dv1", parallelism: n });
+      return { client, ws };
+    };
+
+    it("runs one optimize per playstyle across the workers and returns the engine's compare shape in order", async () => {
+      const { client, ws } = pool(4);
+      const msgs: string[] = [];
+      const r = (await client.compare(build, 7, (m) => msgs.push(m))) as unknown as Record<string, { playstyle: string; worker: number }>;
+      expect(Object.keys(r)).toEqual(["boss", "aoe", "leveling", "burst"]);
+      expect(Object.values(r).map((x) => x.playstyle)).toEqual(["boss", "aoe", "leveling", "burst"]);
+      expect(Object.values(r).map((x) => x.worker)).toEqual([0, 1, 2, 3]); // one each
+      for (const w of ws) {
+        expect(w.sent.length).toBe(1);
+        expect(w.sent[0].method).toBe("optimize");
+        expect(w.sent[0].args[0]).toEqual(build);
+        expect(w.sent[0].args[2]).toBe(7);
+      }
+      expect(msgs.length).toBe(4);
+    });
+
+    it("shares the saved result with the serial path, so a second compare is free", async () => {
+      const { client, ws } = pool(4);
+      const first = await client.compare(build, null);
+      const again = await client.compare(build, undefined);
+      expect(again).toEqual(first);
+      expect(ws.reduce((n, w) => n + w.sent.length, 0)).toBe(4);
+    });
+
+    it("spreads the four playstyles over a smaller pool", async () => {
+      const { client, ws } = pool(2);
+      await client.compare(build, null);
+      expect(ws.map((w) => w.sent.length)).toEqual([2, 2]);
+    });
+
+    it("keeps one worker (serial compare) when parallelism is 1", async () => {
+      const { client, ws } = pool(1);
+      await client.compare(build, null);
+      expect(ws[0].sent.map((m) => m.method)).toEqual(["compare"]);
+    });
+
+    it("fails the whole compare if one worker errors", async () => {
+      const bad = fakeWorker((m, send) => send({ id: m.id, type: "error", message: "boom" }));
+      const ok = fakeWorker((m, send) => send({ id: m.id, type: "result", json: "{}" }));
+      let made = 0;
+      const client = createPyodideClient({ workerFactory: () => [bad, ok][made++ % 2].w, store: null, base: "/", dataVersion: async () => "dv1", parallelism: 2 });
+      await expect(client.compare(build, null)).rejects.toThrow("boom");
+    });
+  });
 });

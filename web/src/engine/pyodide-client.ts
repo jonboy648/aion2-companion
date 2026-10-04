@@ -24,6 +24,11 @@ export interface WorkerLike {
 
 export interface ClientOptions {
   workerFactory?: () => WorkerLike;
+  /**
+   * Engine workers to use for compare(): each playstyle is an independent search, so with N > 1 they run side by side
+   * (results are identical, only faster). Default: auto from the device when the real Worker is used, else 1.
+   */
+  parallelism?: number;
   /** null disables caching. Default: localStorage when usable. */
   store?: Parameters<typeof cacheGet>[0];
   base?: string;
@@ -38,6 +43,19 @@ interface Pending {
 
 const CACHED: ReadonlySet<Method> = new Set<Method>(["compare", "optimize"]);
 
+/** Same keys and order as the engine's playstyles (webapi.compare returns one FullBuild per key). */
+const PLAYSTYLES: PlaystyleKey[] = ["boss", "aoe", "leveling", "burst"];
+const MAX_WORKERS = PLAYSTYLES.length;
+
+/** Each extra worker is a whole Python runtime (about 150-250 MB), so only use several on capable desktops. */
+export function autoParallelism(): number {
+  if (typeof navigator === "undefined") return 1;
+  const cores = navigator.hardwareConcurrency ?? 1;
+  const mem = (navigator as { deviceMemory?: number }).deviceMemory; // GB, Chromium only; unknown = assume enough
+  if (cores < 4 || (mem !== undefined && mem < 4)) return 1;
+  return Math.min(MAX_WORKERS, cores - 1);
+}
+
 /** Drop trailing undefined args: JSON would turn them into null, which webapi params do not all accept. */
 function trim(args: unknown[]): unknown[] {
   const a = [...args];
@@ -50,7 +68,8 @@ export function createPyodideClient(opts: ClientOptions = {}) {
   const config: InitConfig = { base, pyodideUrl: PYODIDE_URL };
   const store = opts.store === undefined ? defaultStore() : opts.store;
   const pending = new Map<number, Pending>();
-  let worker: WorkerLike | null = null;
+  const workers: WorkerLike[] = [];
+  const poolSize = Math.max(1, Math.min(MAX_WORKERS, opts.parallelism ?? (opts.workerFactory ? 1 : autoParallelism())));
   let nextId = 1;
   let versionP: Promise<string> | null = null;
 
@@ -65,12 +84,13 @@ export function createPyodideClient(opts: ClientOptions = {}) {
   function failAll(e: Error) {
     for (const p of pending.values()) p.reject(e);
     pending.clear();
-    worker?.terminate();
-    worker = null; // next call spawns a fresh worker (and re-boots Pyodide)
+    for (const w of workers) w.terminate();
+    workers.length = 0; // next call spawns fresh workers (and re-boots Pyodide)
   }
 
-  function getWorker(): WorkerLike {
-    if (worker) return worker;
+  /** Worker `i` of the pool, created on first use (worker 0 serves everything except the parallel compare). */
+  function getWorker(i = 0): WorkerLike {
+    if (workers[i]) return workers[i];
     const w =
       opts.workerFactory?.() ??
       (new Worker(new URL("./worker.ts", import.meta.url), { type: "module" }) as unknown as WorkerLike);
@@ -84,16 +104,16 @@ export function createPyodideClient(opts: ClientOptions = {}) {
       else p.reject(new Error(m.message));
     });
     w.addEventListener("error", () => failAll(new Error("The calculation engine crashed. Try again.")));
-    worker = w;
+    workers[i] = w;
     return w;
   }
 
-  function send(method: Method, args: unknown[], onProgress?: ProgressFn): Promise<string> {
+  function send(method: Method, args: unknown[], onProgress?: ProgressFn, workerIndex = 0): Promise<string> {
     return new Promise((resolve, reject) => {
       const id = nextId++;
       pending.set(id, { resolve, reject, onProgress });
       try {
-        getWorker().postMessage({ id, method, args: trim(args), config });
+        getWorker(workerIndex).postMessage({ id, method, args: trim(args), config });
       } catch (e) {
         pending.delete(id);
         reject(e instanceof Error ? e : new Error(String(e)));
@@ -102,6 +122,7 @@ export function createPyodideClient(opts: ClientOptions = {}) {
   }
 
   async function call<T>(method: Method, args: unknown[], onProgress?: ProgressFn): Promise<T> {
+    if (method === "compare" && poolSize > 1) return compareParallel(args, onProgress) as Promise<T>;
     let key: string | null = null;
     if (CACHED.has(method) && store) {
       try {
@@ -116,6 +137,30 @@ export function createPyodideClient(opts: ClientOptions = {}) {
       }
     }
     const out = JSON.parse(await send(method, args, PROGRESS_METHODS.has(method) ? onProgress : undefined)) as T;
+    if (key) cacheSet(store, key, out);
+    return out;
+  }
+
+  /** compare() as one optimize() per playstyle across the pool; same cache entry and same result as the serial call. */
+  async function compareParallel(args: unknown[], onProgress?: ProgressFn): Promise<CompareResult> {
+    const [build, points] = args as [CharacterBuild, number | null | undefined];
+    let key: string | null = null;
+    if (store) {
+      try {
+        key = cacheKey(await dataVersion(), "compare", trim(args));
+        const hit = cacheGet<CompareResult>(store, key);
+        if (hit !== null) {
+          onProgress?.("Loaded saved result");
+          return hit;
+        }
+      } catch {
+        key = null;
+      }
+    }
+    const parts = await Promise.all(
+      PLAYSTYLES.map((k, i) => send("optimize", [build, k, points], onProgress, i % poolSize).then((j) => [k, JSON.parse(j) as FullBuild] as const)),
+    );
+    const out = Object.fromEntries(parts) as unknown as CompareResult;
     if (key) cacheSet(store, key, out);
     return out;
   }
