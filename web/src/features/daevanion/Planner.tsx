@@ -8,6 +8,7 @@ import { daevanionSuggest } from "@/engine/api";
 import type { CharacterBuild, DaevanionNode, DaevanionSuggestion, GameData, IconUrls, ImportResult } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { BoardSvg } from "./BoardSvg";
+import { ART } from "./art";
 import { NodeDetail, StatTotals } from "./Panels";
 import { SuggestCard } from "./SuggestCard";
 import {
@@ -160,6 +161,7 @@ export function Planner({ gd, icons, imp, classes, hasCharacter, onClass }: Plan
           </CardContent>
         </Card>
 
+        <img src={ART.titleDeco} alt="" aria-hidden className="mx-auto block h-5 w-auto max-w-full opacity-80" onError={(e) => (e.currentTarget.style.display = "none")} />
         <div role="tablist" aria-label="Gods" className="flex flex-wrap gap-1.5">
           {boardKeys.map((k) => {
             const b = gd.daevanion[k];
@@ -207,6 +209,7 @@ export function Planner({ gd, icons, imp, classes, hasCharacter, onClass }: Plan
               focusId={hover?.id ?? null}
               onToggle={toggle}
               onFocus={setHover}
+              classKey={gd.class_key}
             />
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border-soft px-4 py-2 text-xs text-dim">
@@ -214,7 +217,7 @@ export function Planner({ gd, icons, imp, classes, hasCharacter, onClass }: Plan
             <Legend color="#4cc38a" label="Rare" />
             <Legend color="#4a9df0" label="Epic" />
             <Legend color="#f0922f" label="Unique" />
-            <span className="text-faint">dashed ring = available</span>
+            <span className="text-faint">dashed ring = available, glow = learned</span>
             <span className="min-h-4 text-warn" role="status" aria-live="polite">
               {note}
             </span>
