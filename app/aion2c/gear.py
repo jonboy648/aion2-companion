@@ -4,7 +4,11 @@ Items come from data/items.json (build_items.py). Gear is turned into a Stats de
 ranking is a real engine simulation (module-level `simulate` / `optimize_full_build`, patchable).
 
 Assumptions (flagged in notes, not hidden):
-  * rating -> % conversions (CRIT_RATING_PER_PCT, CRIT_DMG_PER_PCT) are guesses; the endpoint gives raw ratings.
+  * the rating -> % conversion CRIT_RATING_PER_PCT is a guess; the endpoint gives raw ratings.
+  * Critical Attack (CriticalAddDamage) is a FLAT stat in the client (StatCorrectionNumber DivideNumber 0, shown
+    without %), not percent crit damage, so it is not converted into crit_dmg_pct. Its exact use in the damage
+    formula is server-side; the kit total is about 20-100 against hits of thousands, so it is left out of the DPS
+    model (it shows up under "not modelled"). The percent crit stat is AmplifyCriticalDamage.
   * random sub-stat lines are not in the armory, so a real item is scored at the pool's expected value.
   * only Attack/Defense/HP scale with enchant (linear fit); Exceed is not modelled.
   * build.stats is taken to INCLUDE the currently equipped gear (relative upgrades), see `base_stats`.
@@ -24,7 +28,6 @@ from aion2c.models import CharacterBuild, GameData, SearchBudget, SimConfig, Sta
 ITEMS_PATH = Path(__file__).parent / "data" / "items.json"
 REACHABLE_IL = 85  # IL 86-102 Uniques may not be obtainable at launch
 CRIT_RATING_PER_PCT = 100.0
-CRIT_DMG_PER_PCT = 100.0
 DEITY_PCT_PER_POINT = 0.1  # armory: Death 28 -> Critical Hit +2.8%, Time 38 -> Combat Speed +3.8%, ...
 PREFILTER_K = 6  # candidates per slot that get a real simulation
 
@@ -40,12 +43,15 @@ ARMORY_SLOTPOS = {1: "weapon", 2: "offhand", 3: "helmet", 4: "shoulder", 5: "tor
 _FLAT = {
     "WeaponFixingDamage": ("attack", 1.0),
     "Critical": ("crit_chance_pct", 1 / CRIT_RATING_PER_PCT),
-    "CriticalAddDamage": ("crit_dmg_pct", 1 / CRIT_DMG_PER_PCT),
+    "AmplifyCriticalDamage": ("crit_dmg_pct", 1.0),  # percent stat (D1): "Critical Damage Boost", base crit is +50%
+    "HardHit": ("smite_pct", 1.0),  # "Double Chance", a percent stat
     "CombatSpeed": ("combat_speed_pct", 1.0),
     "AmplifyAllDamage": ("dmg_boost_pct", 1.0),
     "AmplifyWeaponDamage": ("weapon_dmg_pct", 1.0),
     "STR": ("attack_increase_pct", DEITY_PCT_PER_POINT),  # Might 14 -> Attack increase +1.4%
     "Death": ("crit_chance_pct", DEITY_PCT_PER_POINT),
+    "AGI": ("crit_chance_pct", DEITY_PCT_PER_POINT),  # Precision: Accuracy + Critical Hit increase, 0.1% per point
+    "Wisdom": ("smite_pct", DEITY_PCT_PER_POINT),  # Wisdom [Lumiel]: MP Cost -0.1% and Double Chance +0.1% per point
     "Time": ("combat_speed_pct", DEITY_PCT_PER_POINT),
     "Destruction": ("attack_increase_pct", DEITY_PCT_PER_POINT),
     "Illusion": ("cdr_pct", DEITY_PCT_PER_POINT),
@@ -166,8 +172,7 @@ def stats_from_gear(equipped: list[dict], items: dict[int, dict] | None = None,
     delta, ignored = lines_to_delta(total)
     if any(e["item"]["sub_random"] for e in eq):
         notes.append("random sub-stat lines are not public: scored at the pool's expected value")
-    notes.append(f"rating conversions are assumed: {CRIT_RATING_PER_PCT:g} crit rating = 1%, "
-                 f"{CRIT_DMG_PER_PCT:g} crit damage = 1%")
+    notes.append(f"rating conversions are assumed: {CRIT_RATING_PER_PCT:g} crit rating = 1%")
     if ignored:
         notes.append("not modelled: " + ", ".join(f"{k} {v:g}" for k, v in sorted(ignored.items())))
     return delta, notes

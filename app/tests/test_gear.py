@@ -21,7 +21,7 @@ def items():
 
 
 def fake_dps(stats: Stats) -> float:
-    crit = min(stats.crit_chance_pct, 80) / 100 * stats.crit_dmg_pct / 100
+    crit = min(stats.crit_chance_pct, 50) / 100 * stats.crit_dmg_pct / 100
     return (stats.attack * (1 + stats.attack_increase_pct / 100) * (1 + stats.weapon_dmg_pct / 100)
             * (1 + stats.dmg_boost_pct / 100) * (1 + crit))
 
@@ -62,6 +62,22 @@ def test_best_rolls_pick_weighted_lines(items):
     best = gear.item_lines(lun, 0, "best", w)
     cs = [s for s in lun["subs"] if s["id"] == "CombatSpeed"][0]["v"]
     assert best["CombatSpeed"] == pytest.approx(cs)
+
+
+def test_stat_point_and_crit_lines_map_to_stats():
+    # per-point values come from the client's PcStatSecond (0.1% per point); AGI feeds crit, Wisdom feeds Double
+    d, ignored = gear.lines_to_delta({"AGI": 20.0, "Death": 10.0, "Wisdom": 30.0, "HardHit": 2.0})
+    assert d.crit_chance_pct == pytest.approx(3.0)  # (20 + 10) x 0.1
+    assert d.smite_pct == pytest.approx(5.0)  # 30 x 0.1 + a 2% Double Chance line
+    assert not ignored
+
+
+def test_critical_attack_is_flat_not_percent_crit_damage():
+    # CriticalAddDamage is a flat stat (client DivideNumber 0): it must NOT become percent crit damage;
+    # AmplifyCriticalDamage is the percent stat and maps 1:1
+    d, ignored = gear.lines_to_delta({"CriticalAddDamage": 102.0, "AmplifyCriticalDamage": 11.8})
+    assert d.crit_dmg_pct == pytest.approx(11.8)
+    assert ignored == {"CriticalAddDamage": 102.0}
 
 
 def test_stats_from_gear_delta_and_notes(items):
