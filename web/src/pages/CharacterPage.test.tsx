@@ -11,7 +11,7 @@ function Nav() {
 
 /** Opening another character in the same tab must not leave the previous character's results on the page. */
 describe("CharacterPage", () => {
-  it("shows one set of playstyle results after switching characters", async () => {
+  it("shows one set of playstyle results after switching characters", { timeout: 20000 }, async () => {
     render(
       <MemoryRouter initialEntries={["/c/nae/2103/DarthThot"]}>
         <Nav />

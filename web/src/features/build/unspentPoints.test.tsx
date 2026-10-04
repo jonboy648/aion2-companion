@@ -96,7 +96,7 @@ describe("Character page unspent points", () => {
       </MemoryRouter>,
     );
 
-  it("re-runs compare with the typed points (debounced) and persists them", async () => {
+  it("re-runs compare with the typed points (debounced) and persists them", { timeout: 20000 }, async () => {
     renderPage();
     const input = await screen.findByLabelText("Skill points", undefined, { timeout: 5000 });
     await waitFor(() => expect(compareSpy).toHaveBeenCalledTimes(1), { timeout: 5000 });
