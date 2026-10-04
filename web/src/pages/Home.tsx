@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, GitCompareArrows, Network, Wrench, X } from "lucide-react";
+import { BookOpen, GitCompareArrows, Megaphone, Network, Wrench, X } from "lucide-react";
 import { LogoCloud } from "@/components/ui/logo-cloud-2";
 import RuixenMoonChat, { type MoonQuickAction } from "@/components/ui/ruixen-moon-chat";
 import { ClassEmblem } from "@/components/game/ClassEmblem";
-import { SectionTitle } from "@/components/game/SectionTitle";
 import { SearchBox } from "@/features/build/SearchBox";
 import { characterPath, clearRecent, loadRecent } from "@/features/build/helpers";
 import { useAsync } from "@/hooks/useAsync";
@@ -66,6 +65,11 @@ export function Home() {
   const classes = useAsync(() => listClasses(), []);
   return (
     <div className="original-home-page">
+      <aside className="home-launch-banner" aria-label="Launch announcement">
+        <Megaphone size={16} aria-hidden />
+        <p><strong>Become Cube goes live tonight.</strong><span> Our Aion 2 companion is opening to the community.</span></p>
+        <Link to="/guide">Start here <BookOpen size={14} aria-hidden /></Link>
+      </aside>
       <RuixenMoonChat
         title="Become Cube"
         description="Import a character from the official armory and find your best Aion 2 build."
@@ -75,13 +79,15 @@ export function Home() {
         <SearchBox />
       </RuixenMoonChat>
 
-      <section aria-labelledby="classes-h" className="mb-8">
-        <SectionTitle id="classes-h" caption="Pick a class, enter level and stats, get the same analysis.">
-          No character? Build one by hand
-        </SectionTitle>
+      <section aria-labelledby="classes-h" className="home-classes mb-8">
+        <div className="home-class-heading"><div>
+          <h2 id="classes-h">No character? Build one by hand</h2>
+          <p>Pick a class, enter level and stats, get the same analysis.</p>
+        </div><span>8 classes</span></div>
         {classes.error && <p className="text-sm text-error">{classes.error}</p>}
         <LogoCloud
-          className="mx-auto max-w-3xl"
+          shaderCaptions
+          className="home-class-cards"
           aria-label="Classes"
           loading={classes.loading}
           items={(classes.data ?? []).map((c) => ({
@@ -91,7 +97,7 @@ export function Home() {
             logo: {
               src: `/brand/classes/${c.key}-640.webp`,
               srcSet: `/brand/classes/${c.key}-320.webp 320w, /brand/classes/${c.key}-640.webp 640w`,
-              sizes: "110px",
+              sizes: "(max-width: 767px) 46vw, 260px",
               objectPosition: CLASS_ART_POSITION[c.key] ?? "50% 0%",
               alt: "",
               width: 640,

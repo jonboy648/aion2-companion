@@ -3,6 +3,8 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { trackHit } from "@/lib/analytics";
 import { isMockEngine } from "@/engine/api";
 import { BrandCrest } from "@/components/ui/brand-crest";
+import { RuixenGradientFooter } from "@/components/ui/ruixen-gradient-footer";
+import "./site-footer.css";
 import { FactionThemeProvider, useFaction, type Faction } from "@/components/game/faction";
 import { cn } from "@/lib/utils";
 
@@ -78,22 +80,24 @@ function Shell() {
         </div>
         <div aria-hidden className="h-px bg-gradient-to-r from-transparent via-[var(--metal)] to-transparent opacity-70" />
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">
+      <main className="relative z-10 mx-auto w-full max-w-6xl flex-1 px-4 py-6">
         <Outlet />
       </main>
-      <footer className="px-4 pb-6 pt-2 text-center text-xs text-faint">
-        <div aria-hidden className="mx-auto mb-4 h-px max-w-6xl bg-gradient-to-r from-transparent via-[var(--metal)] to-transparent opacity-60" />
-        {DISCLAIMER}
-        <div className="mt-1 flex justify-center gap-4">
-          <NavLink to="/board" className="text-faint underline-offset-2 hover:text-foreground">Board</NavLink>
-          <NavLink to="/maps" className="text-faint underline-offset-2 hover:text-foreground">Maps</NavLink>
+      <RuixenGradientFooter gradientHeight="min(40vh, 360px)" className="site-footer">
+        <div className="site-footer-inner">
+          <div className="site-footer-grid">
+            <div>
+              <NavLink to="/" className="site-footer-brand"><BrandCrest /><span>Become Cube</span></NavLink>
+              <p className="site-footer-description">Your character. Your build. Your next step.</p>
+            </div>
+            <nav aria-label="Footer build tools"><h2>Build & plan</h2><NavLink to="/build">Build by hand</NavLink><NavLink to="/compare">Compare builds</NavLink><NavLink to="/daevanion">Daevanion</NavLink><NavLink to="/keybinds">Keybinds</NavLink></nav>
+            <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink></nav>
+            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink></nav>
+          </div>
+          <div className="site-footer-bottom"><p>{DISCLAIMER}</p><ThemePicker /></div>
+          <details className="site-footer-privacy"><summary>Privacy</summary><p>{PRIVACY_NOTE}</p></details>
         </div>
-        <details className="mx-auto mt-2 max-w-xl">
-          <summary className="cursor-pointer text-faint hover:text-foreground">Privacy</summary>
-          <p className="mt-1.5 text-dim">{PRIVACY_NOTE}</p>
-        </details>
-        <ThemePicker />
-      </footer>
+      </RuixenGradientFooter>
     </div>
   );
 }
