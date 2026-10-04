@@ -228,11 +228,13 @@ from aion2c import gear as gear_mod  # noqa: E402  (appended section; the gear e
 
 GEAR_ASSUMPTIONS = [
     "Rating conversions are guesses: 100 crit rating = 1% crit chance and 100 crit damage = 1% (the armory only gives raw ratings).",
-    "Random sub-stat lines are not public, so an item you own is scored at the expected value of its pool.",
-    "Only Attack, Defense and HP scale with enchant (a linear fit); Exceed is not modelled.",
+    "Random sub-stat lines are not public, so an item you own is scored at the expected value of its pool "
+    "(the game's own draw weights, read as draw probabilities).",
+    "Enchant adds the game's per-level stat series and Exceed adds the stats of its level. Success odds are in the "
+    "item data but not priced into a step, and Exceed is assumed to be available at any enchant level.",
     "Your imported stats are assumed to already include the equipped gear, so upgrades are relative to what you wear now.",
-    "Max potential is an upper bound: best sub-stat lines on every item, max enchant everywhere, every Daevanion point spent. "
-    "Success odds and material costs are not included.",
+    "Max potential is an upper bound: best sub-stat lines on every item, max enchant and max Exceed everywhere, every "
+    "Daevanion point spent. Success odds and material costs are not included.",
 ]
 
 _ITEMS: dict[int, dict] | None = None
@@ -241,7 +243,7 @@ _ITEMS: dict[int, dict] | None = None
 def register_items(data: dict) -> None:
     """Browser entry: install the parsed engine/items.json ({"schema", "items": [...]})."""
     global _ITEMS
-    _ITEMS = {int(it["id"]): it for it in data["items"]}
+    _ITEMS = gear_mod.attach_tables(data)
 
 
 def _items() -> dict[int, dict]:
@@ -254,10 +256,12 @@ def _item_icon(item: dict, armory_icon: str | None = None) -> str | None:
     return ICON_CDN.format(name=item["icon"]) if item.get("icon") else None
 
 
-def _item_view(item: dict, enchant: int, slot: str | None = None, icon: str | None = None) -> dict:
+def _item_view(item: dict, enchant: int, slot: str | None = None, icon: str | None = None, exceed: int = 0) -> dict:
     return {
         "slot": slot or item["slot"], "id": item["id"], "name": item["name"], "grade": item["grade"],
         "il": item["il"], "enchant": int(enchant), "max_enchant": item["max_enchant"],
+        "exceed": int(exceed), "max_exceed": gear_mod.max_exceed(item),
+        "enchant_odds": gear_mod.enchant_odds(item), "exceed_odds": gear_mod.exceed_odds(item),
         "icon": _item_icon(item, icon), "source": ", ".join(item.get("sources") or []) or None,
         "reachable": gear_mod.reachable(item),
     }
@@ -272,7 +276,7 @@ def _armory_icons(raw: dict) -> dict[int, str]:
 def gear_upgrades(raw_armory: dict, build: dict, playstyle: str, steps: int = 10,
                   reachable_only: bool = True) -> dict:
     """Ordered gear upgrades for an imported character.
-    -> {equipped: [item views], upgrades: [{slot, from, to, kind: item|enchant, dps_gain_pct, dps_after, source,
+    -> {equipped: [item views], upgrades: [{slot, from, to, kind: item|enchant|exceed, dps_gain_pct, dps_after, source,
         reachable, icon}], notes, assumptions}. build.stats must be the import's (it includes the worn gear)."""
     b = _build(build)
     gd = _gd(b.class_key)
@@ -287,9 +291,10 @@ def gear_upgrades(raw_armory: dict, build: dict, playstyle: str, steps: int = 10
     if not norm:
         return {"equipped": [], "upgrades": [], "notes": notes + ["no equipped items could be resolved"],
                 "assumptions": list(GEAR_ASSUMPTIONS)}
-    path = gear_mod.upgrade_path(gd, b, [{"id": e["id"], "enchant": e["enchant"], "slot": e["slot"]} for e in norm],
+    path = gear_mod.upgrade_path(gd, b, [{"id": e["id"], "enchant": e["enchant"], "exceed": e["exceed"],
+                                          "slot": e["slot"]} for e in norm],
                                  playstyle, steps, reachable_only, items)
-    equipped = [_item_view(e["item"], e["enchant"], e["slot"], icons.get(e["id"])) for e in norm]
+    equipped = [_item_view(e["item"], e["enchant"], e["slot"], icons.get(e["id"]), e["exceed"]) for e in norm]
     upgrades = []
     for p in path:
         to = items[p["to"]["id"]]
@@ -297,9 +302,11 @@ def gear_upgrades(raw_armory: dict, build: dict, playstyle: str, steps: int = 10
         frm_item = items[frm["id"]] if frm else None
         upgrades.append({
             "slot": p["slot"],
-            "from": _item_view(frm_item, frm["enchant"], p["slot"], icons.get(frm["id"])) if frm_item else None,
-            "to": _item_view(to, p["to"]["enchant"], p["slot"], icons.get(to["id"]) if frm and to["id"] == frm["id"] else None),
-            "kind": "enchant" if p["kind"] == "enchant" else "item",
+            "from": (_item_view(frm_item, frm["enchant"], p["slot"], icons.get(frm["id"]), frm["exceed"])
+                     if frm_item else None),
+            "to": _item_view(to, p["to"]["enchant"], p["slot"],
+                             icons.get(to["id"]) if frm and to["id"] == frm["id"] else None, p["to"]["exceed"]),
+            "kind": p["kind"] if p["kind"] in ("enchant", "exceed") else "item",
             "dps_gain_pct": p["dps_gain_pct"], "dps_after": p["dps_after"],
             "source": p["source"], "reachable": p["reachable"],
             "icon": _item_icon(to, icons.get(to["id"]) if frm and to["id"] == frm["id"] else None),
@@ -327,7 +334,7 @@ def max_potential(class_key: str, playstyle: str, reachable_only: bool = True, b
     gear = []
     for s in sorted(mp.gear, key=slots.get):
         r = mp.gear[s]
-        v = _item_view(r.item, r.enchant, s)
+        v = _item_view(r.item, r.enchant, s, None, r.exceed)
         v["gain_pct"] = r.gain_pct
         gear.append(v)
     fb = mp.full
