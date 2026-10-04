@@ -21,3 +21,27 @@ CREATE TABLE IF NOT EXISTS searches (
 );
 CREATE INDEX IF NOT EXISTS idx_searches_ts ON searches (ts);
 CREATE INDEX IF NOT EXISTS idx_searches_keyword ON searches (keyword COLLATE NOCASE);
+
+-- Public board: one row per character the site has looked up. Filled by the Worker itself from the armory's own
+-- /info response (never from the browser), so name, class and combat power cannot be faked. Only PUBLIC armory
+-- fields are stored. max_dps is the one browser-supplied value (the in-browser max-potential estimate): it only
+-- updates a row the Worker already created, is clamped, and is shown as an unverified estimate.
+CREATE TABLE IF NOT EXISTS board (
+  region       TEXT    NOT NULL,
+  server_id    INTEGER NOT NULL,
+  character_id TEXT    NOT NULL,
+  name         TEXT    NOT NULL,
+  class_name   TEXT    NOT NULL,
+  server_name  TEXT    NOT NULL DEFAULT '',
+  level        INTEGER,
+  combat_power INTEGER,
+  max_dps      INTEGER,
+  max_dps_ts   INTEGER,
+  first_seen   INTEGER NOT NULL,
+  last_seen    INTEGER NOT NULL,
+  lookups      INTEGER NOT NULL DEFAULT 1,
+  PRIMARY KEY (region, server_id, character_id)
+);
+CREATE INDEX IF NOT EXISTS idx_board_seen  ON board (last_seen);
+CREATE INDEX IF NOT EXISTS idx_board_power ON board (combat_power);
+CREATE INDEX IF NOT EXISTS idx_board_dps   ON board (max_dps);

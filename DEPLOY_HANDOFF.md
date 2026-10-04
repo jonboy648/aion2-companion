@@ -28,7 +28,7 @@ Jon wants visit counts and the list of searched character names. The Worker logs
 the site has a hidden dashboard at `#/admin`. No IPs or user agents are stored (visitor = truncated `SHA-256(ip + day + ADMIN_SALT)`).
 1. Create the database: `cd proxy && npx wrangler d1 create aion2-stats`. It prints a `database_id`.
 2. Paste that id into `proxy/wrangler.toml` under `[[d1_databases]]` (replace `REPLACE_WITH_DATABASE_ID_FROM_wrangler_d1_create`). The id is not a secret; committing it is fine.
-3. Create the tables: `npx wrangler d1 execute aion2-stats --remote --file=schema.sql` (idempotent).
+3. Create the tables: `npx wrangler d1 execute aion2-stats --remote --file=schema.sql` (idempotent). **Re-run this and `npx wrangler deploy` whenever `schema.sql` or the Worker changes (the public Board needs the `board` table and the new `/board` routes, and must be deployed before or together with the site build).**
 4. Set the two secrets (interactive prompts; never put them on a command line, in chat, or in git):
    - `npx wrangler secret put ADMIN_TOKEN` : the dashboard password. **Jon picks it and keeps it** (ask him for it, or let him type it at the prompt himself). Use 20+ random characters.
    - `npx wrangler secret put ADMIN_SALT` : any long random string; nobody needs to remember it.

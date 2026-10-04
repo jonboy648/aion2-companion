@@ -114,7 +114,7 @@ export function Character() {
       {imp && st.phase !== "done" && <ProgressPanel title="Comparing playstyles" message={st.message} steps={st.steps} />}
       {st.cmp && <BuildResults key={imp?.profile.name} cmp={st.cmp} data={data} selected={playstyle} onSelect={setPlaystyle} />}
 
-      {imp && st.raw && <GearSection key={imp.profile.name} imp={imp} raw={st.raw} playstyle={playstyle} onPlaystyle={setPlaystyle} ready={st.phase === "done"} />}
+      {imp && st.raw && <GearSection key={imp.profile.name} imp={imp} raw={st.raw} playstyle={playstyle} onPlaystyle={setPlaystyle} ready={st.phase === "done"} region={region} />}
 
       {imp && imp.notes.length > 0 && st.phase === "done" && (
         <details className="mt-6 text-xs text-dim">

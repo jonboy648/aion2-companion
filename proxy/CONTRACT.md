@@ -122,3 +122,27 @@ malformed or wrong token, or `ADMIN_TOKEN` unset/empty: `401 {"error":"unauthori
 ```
 `visits_per_day`: exactly 30 UTC days, oldest first, zero-filled. `top_paths`: top 20, last 30 days. `top_searches`: top 50,
 all time, grouped case-insensitively. `recent_searches`: newest 100, `picked` is `null` until a character is opened.
+
+## Public board (D1 table `board`, same STATS binding)
+Public data only. The Worker records a character itself from the armory's own `/info` response (cache hit or miss):
+`profile.characterName`, `className`, `serverId`, `serverName`, `characterLevel`, `combatPower`, plus the region from the
+request. Nothing about the visitor is stored. Repeat lookups update the row and bump `lookups`. No D1 binding: nothing is
+recorded and `GET /board` answers `503 {"error":"board_unavailable"}`.
+
+### GET /board
+Query: `sort` = `recent` (default, newest lookups) | `power` (Combat Power) | `dps` (max-potential estimate, only rows
+that have one); optional `class` (name, case-insensitive, `[A-Za-z' -]{1,24}`); `limit` 1-50 (default 25). Public,
+read-only, own rate-limit bucket, `Cache-Control: public, max-age=30`. Bad param: `400 {"error":"bad_request","param"}`.
+```json
+{ "sort": "power", "generated_at": 1760000000000,
+  "rows": [ {"name":"DarthThot","class_name":"Sorcerer","server_name":"Triniel","region":"nae","server_id":2103,
+             "level":45,"combat_power":38507,"max_dps":15000,"last_seen":1760000000000} ] }
+```
+The internal `character_id` is never returned.
+
+### POST /board/dps
+Body `{"region","serverId":int,"characterId","dps":number}` (text/plain JSON, like `/hit`). The one browser-supplied
+number: the site's max-potential DPS estimate for the boss playstyle with obtainable gear. Only the site's own origin;
+own rate limit. Updates a row the Worker already created (`404 {"error":"unknown_character"}` otherwise); `dps` must be
+1..1,000,000 (rounded), so a forged or out-of-range value changes nothing. The board labels it an unverified estimate.
+`204` on success.

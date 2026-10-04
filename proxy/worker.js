@@ -1,6 +1,7 @@
 // Aion 2 armory proxy (Cloudflare Worker). Whitelisted armory GET routes plus owner analytics; see CONTRACT.md.
 // Secrets (set with `wrangler secret put`, optional): ADMIN_TOKEN, ADMIN_SALT. Optional D1 binding: STATS.
 import { adminStats, hasDb, logPicked, logSearch, logVisit, normalizePath, safeEqual, clean, MAX_KEYWORD } from "./stats.js";
+import { BOARD_SORTS, MAX_DPS, boardRows, recordDps, recordInfo } from "./board.js";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 const REGIONS = new Set(["nae", "naw", "eu", "la", "as"]);
@@ -139,6 +140,54 @@ async function handleBeacon(request, pathname, env, ctx, cors) {
   return new Response(null, { status: 204, headers: cors });
 }
 
+/** GET /board?sort=recent|power|dps&class=&limit=: public recent lookups and leaderboards (public armory fields only). */
+async function handleBoard(request, url, env, cors) {
+  if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET, OPTIONS", ...cors });
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const retry = rateLimit(`board:${ip}`);
+  if (retry) return json({ error: "rate_limited" }, 429, { "Retry-After": String(retry), ...cors });
+  const sort = url.searchParams.get("sort") ?? "recent";
+  if (!BOARD_SORTS.has(sort)) return json({ error: "bad_request", param: "sort" }, 400, cors);
+  const rawClass = url.searchParams.get("class") ?? "";
+  const className = clean(rawClass, 24);
+  if (rawClass && !/^[A-Za-z' -]{1,24}$/.test(className)) return json({ error: "bad_request", param: "class" }, 400, cors);
+  const rawLimit = url.searchParams.get("limit");
+  const limit = rawLimit === null ? 25 : /^\d{1,3}$/.test(rawLimit) && +rawLimit >= 1 && +rawLimit <= 50 ? +rawLimit : null;
+  if (limit === null) return json({ error: "bad_request", param: "limit" }, 400, cors);
+  if (!hasDb(env)) return json({ error: "board_unavailable" }, 503, cors);
+  try {
+    const rows = await boardRows(env, { sort, className, limit });
+    return json({ sort, generated_at: Date.now(), rows }, 200, { "Cache-Control": "public, max-age=30", ...cors });
+  } catch {
+    return json({ error: "board_error" }, 500, cors);
+  }
+}
+
+/** POST /board/dps {region, serverId, characterId, dps}: the browser's max-potential estimate for an already-seen character. */
+async function handleBoardDps(request, env, cors) {
+  if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405, { Allow: "POST, OPTIONS", ...cors });
+  if (!cors["Access-Control-Allow-Origin"]) return json({ error: "forbidden_origin" }, 403, cors);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const retry = rateLimit(`boarddps:${ip}`);
+  if (retry) return json({ error: "rate_limited" }, 429, { "Retry-After": String(retry), ...cors });
+  const body = await readJsonBody(request);
+  if (!body) return json({ error: "bad_request" }, 400, cors);
+  const region = typeof body.region === "string" ? validators.region(body.region) : null;
+  const serverId = Number.isInteger(body.serverId) && body.serverId >= 1 && body.serverId <= 999_999 ? body.serverId : null;
+  const characterId = typeof body.characterId === "string" ? validators.characterId(body.characterId) : null;
+  const dps = Number.isFinite(body.dps) && body.dps >= 1 && body.dps <= MAX_DPS ? Math.round(body.dps) : null;
+  for (const [param, v] of [["region", region], ["serverId", serverId], ["characterId", characterId], ["dps", dps]]) {
+    if (v === null) return json({ error: "bad_request", param }, 400, cors);
+  }
+  if (!hasDb(env)) return json({ error: "board_unavailable" }, 503, cors);
+  try {
+    const ok = await recordDps(env, { region, serverId, characterId, dps });
+    return ok ? new Response(null, { status: 204, headers: cors }) : json({ error: "unknown_character" }, 404, cors);
+  } catch {
+    return json({ error: "board_error" }, 500, cors);
+  }
+}
+
 /** GET /admin/stats with `Authorization: Bearer <ADMIN_TOKEN>`. */
 async function handleAdmin(request, env, cors) {
   if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET, OPTIONS", ...cors });
@@ -168,6 +217,8 @@ export async function handle(request, env, ctx, deps = {}) {
   const url = new URL(request.url);
   if (url.pathname === "/hit" || url.pathname === "/picked") return handleBeacon(request, url.pathname, env, ctx, cors);
   if (url.pathname === "/admin/stats") return handleAdmin(request, env, cors);
+  if (url.pathname === "/board") return handleBoard(request, url, env, cors);
+  if (url.pathname === "/board/dps") return handleBoardDps(request, env, cors);
   if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET, OPTIONS", ...cors });
 
   const route = ROUTES[url.pathname];
@@ -207,6 +258,10 @@ export async function handle(request, env, ctx, deps = {}) {
         const copy = hit.clone();
         track(env, ctx, async () => logSearch(env, { keyword: p.keyword, region: p.region, results: resultCount(await copy.arrayBuffer()) }));
       }
+      if (url.pathname === "/info") {
+        const copy = hit.clone();
+        track(env, ctx, async () => recordInfo(env, p.region, await copy.arrayBuffer()));
+      }
       const h = new Headers(hit.headers);
       h.set("X-Cache", "HIT");
       for (const [k, v] of Object.entries(cors)) h.set(k, v);
@@ -244,6 +299,7 @@ export async function handle(request, env, ctx, deps = {}) {
   if (url.pathname === "/search" && p.page === "1") {
     track(env, ctx, () => logSearch(env, { keyword: p.keyword, region: p.region, results: resultCount(body) }));
   }
+  if (url.pathname === "/info") track(env, ctx, () => recordInfo(env, p.region, body));
   const h = new Headers(store.headers);
   h.set("X-Cache", "MISS");
   for (const [k, v] of Object.entries(cors)) h.set(k, v);

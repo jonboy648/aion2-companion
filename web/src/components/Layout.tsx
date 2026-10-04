@@ -12,6 +12,7 @@ const NAV = [
   { to: "/build", label: "Build" },
   { to: "/daevanion", label: "Daevanion" },
   { to: "/compare", label: "Compare" },
+  { to: "/board", label: "Board" },
   { to: "/codex", label: "Codex" },
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
@@ -50,7 +51,7 @@ function ThemePicker() {
 }
 
 export const PRIVACY_NOTE =
-  "We count visits anonymously (no cookies, no IP stored) and keep a log of searched character names (public game data) to improve the site.";
+  "We count visits anonymously (no cookies, no IP stored). Characters you look up appear on the public Board with their public armory info (name, class, server, level, Combat Power); the max-potential DPS shown there is an unverified estimate from the visitor's browser.";
 
 function Shell() {
   const { faction } = useFaction();
