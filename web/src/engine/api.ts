@@ -43,6 +43,8 @@ import type {
 } from "@/lib/types";
 
 export interface EngineApi {
+  /** Start booting the engine now (idempotent, never throws), so it is ready when the first real call arrives. */
+  warm(): void;
   listClasses(): Promise<ClassInfo[]>;
   gamedata(classKey: string): Promise<GameData>;
   /** raw = what lib/armory.ts fetchCharacter returns. Class comes from the armory profile. */
@@ -75,6 +77,7 @@ const clone = <T,>(x: unknown): T => structuredClone(x) as T;
 
 /** Fixtures only cover Sorcerer; every class key returns it (class_key rewritten) so class pickers work in mock mode. */
 const mockEngine: EngineApi = {
+  warm() {},
   async listClasses() {
     await wait();
     return clone<ClassInfo[]>(classesFx);
@@ -141,12 +144,20 @@ const mockEngine: EngineApi = {
 };
 
 /** Real engine: Pyodide in a Web Worker (see pyodide-client.ts). The worker is only spawned on the first call. */
-const realEngine: EngineApi = createPyodideClient();
+const pyodide = createPyodideClient();
+const realEngine: EngineApi = {
+  ...pyodide,
+  // The class list (key, name, role) is tiny and fixed (make_fixtures.py regenerates it from the engine), so serve it
+  // directly: asking the engine would download and boot the whole ~6 MB Python runtime just to show eight names on the
+  // landing page, Codex, Keybinds and the manual build page.
+  listClasses: async () => structuredClone(classesFx) as ClassInfo[],
+};
 
 export const isMockEngine = import.meta.env.VITE_ENGINE === "mock";
 export const engine: EngineApi = isMockEngine ? mockEngine : realEngine;
 
 export const {
+  warm: warmEngine,
   listClasses,
   gamedata,
   importCharacter,

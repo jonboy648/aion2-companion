@@ -96,14 +96,18 @@ export async function fetchCharacter(characterId: string, serverId: number | str
   if (!info || typeof info !== "object" || !info.profile) {
     throw new ArmoryError("The armory has no profile for that character (wrong region or server?).");
   }
-  await delay(400);
-  const equipment = (await getJson("/equipment", common)) ?? {};
+  // equipment and every Daevanion board are independent: ask for them all at once (the armory handles the burst, and the
+  // old 400 ms pauses between requests added about three seconds to every character load)
+  const boardIds: (string | number)[] = (info.daevanion?.boardList ?? []).filter((b: { openNodeCount?: number }) => b.openNodeCount).map((b: { id: string | number }) => b.id);
+  const [equipmentRaw, ...boards] = await Promise.all([
+    getJson("/equipment", common),
+    ...boardIds.map((id) => getJson("/daevanion", { ...common, boardId: id })),
+  ]);
+  const equipment = equipmentRaw ?? {};
   const daevanion: Record<string, Record<string, unknown>> = {};
-  for (const b of info.daevanion?.boardList ?? []) {
-    if (!b.openNodeCount) continue; // nothing opened on that board: skip the request
-    await delay(400);
-    daevanion[String(b.id)] = await getJson("/daevanion", { ...common, boardId: b.id });
-  }
+  boardIds.forEach((id, i) => {
+    daevanion[String(id)] = boards[i];
+  });
   return { info, equipment, daevanion };
 }
 

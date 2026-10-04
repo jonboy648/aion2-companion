@@ -98,6 +98,21 @@ describe("pyodide client", () => {
     expect(sent.length).toBe(2);
   });
 
+  describe("warm-up", () => {
+    it("boots every worker of the pool once, ahead of any real call, and tolerates a failing boot", async () => {
+      const ws = [0, 1, 2].map(() => fakeWorker((m, send) => send({ id: m.id, type: "result", json: "[]" })));
+      let made = 0;
+      const client = createPyodideClient({ workerFactory: () => ws[made++].w, store: null, base: "/", dataVersion: async () => "dv1", parallelism: 3 });
+      client.warm();
+      client.warm(); // idempotent
+      await Promise.resolve();
+      expect(ws.map((w) => w.sent.map((m) => m.method))).toEqual([["listClasses"], ["listClasses"], ["listClasses"]]);
+      const bad = fakeWorker((m, send) => send({ id: m.id, type: "error", message: "offline" }));
+      const c2 = createPyodideClient({ workerFactory: () => bad.w, store: null, base: "/", dataVersion: async () => "dv1" });
+      expect(() => c2.warm()).not.toThrow();
+    });
+  });
+
   describe("parallel compare", () => {
     /** N fake workers; each answers optimize() with a result naming its playstyle and which worker served it. */
     const pool = (n: number, store: MemStore | null = new MemStore()) => {

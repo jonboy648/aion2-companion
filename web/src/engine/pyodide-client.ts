@@ -165,7 +165,23 @@ export function createPyodideClient(opts: ClientOptions = {}) {
     return out;
   }
 
+  let warmed = false;
+  /**
+   * Boot every worker the next compare will use (Pyodide download and start, about 6 MB) without waiting for a real call.
+   * The first search otherwise boots the engine only after the armory data has arrived, so the waits add up.
+   */
+  function warm(): void {
+    if (warmed) return;
+    warmed = true;
+    for (let i = 0; i < poolSize; i++) {
+      send("listClasses", [], undefined, i).catch(() => {
+        warmed = false; // a failed boot (offline) can be tried again on the next real call or warm()
+      });
+    }
+  }
+
   return {
+    warm,
     listClasses: () => call<ClassInfo[]>("listClasses", []),
     gamedata: (classKey: string) => call<GameData>("gamedata", [classKey]),
     importCharacter: (raw: ArmoryRaw, baseBuild?: CharacterBuild | null) =>

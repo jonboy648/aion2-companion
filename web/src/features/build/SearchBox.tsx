@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LoaderCircle, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { warmEngine } from "@/engine/api";
 import { trackPicked } from "@/lib/analytics";
 import { ARMORY_REGIONS, search } from "@/lib/armory";
 import type { ArmoryRegion, ArmorySearchHit } from "@/lib/types";
@@ -52,7 +53,10 @@ export function SearchBox() {
             placeholder="Character name"
             autoComplete="off"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value) warmEngine(); // they are about to search: start the engine now
+              setName(e.target.value);
+            }}
             className="h-12 bg-bg/70 pl-9 text-base"
           />
         </div>
