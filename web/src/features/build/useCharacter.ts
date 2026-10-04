@@ -84,7 +84,7 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
         const step = (message: string) => live && setState((s) => ({ ...s, message, steps: [...s.steps, message] }));
         setState((s) => ({ ...s, phase: "optimize", message: "Comparing playstyles...", steps: [...s.steps, "Comparing playstyles..."] }));
         try {
-          const cmp = await compare(build, null, step);
+          const cmp = await compare(build, 0, step);
           if (live) setState((s) => ({ ...s, phase: "done", cmp, message: "Done" }));
         } catch (e) {
           if (live) setState((s) => ({ ...s, phase: "error", error: e instanceof Error ? e.message : String(e) }));

@@ -42,7 +42,7 @@ export function useCompareSlot(t: Triplet | null): SlotState {
         patch({ phase: "import", extras: armoryExtras(raw), message: "Reading the build..." });
         const imp = await importCharacter(raw);
         patch({ imp, phase: "optimize", message: "Estimating boss DPS..." });
-        const cmp = await compare(imp.build, null, (m) => patch({ message: m }));
+        const cmp = await compare(imp.build, 0, (m) => patch({ message: m }));
         patch({ cmp, phase: "done", message: "Done" });
       } catch (e) {
         patch({ phase: "error", error: e instanceof Error ? e.message : String(e) });

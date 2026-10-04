@@ -107,7 +107,7 @@ describe("GearSection (mock engine)", () => {
       expect(screen.getByText("Ceiling vs best now")).toBeInTheDocument();
       const note = screen.getByTestId("with-current-note").textContent!;
       expect(note).toContain("84 Daevanion nodes you have opened");
-      expect(note).toContain("every Daevanion point"); // says why the playstyle cards read higher
+      expect(note).toContain("playstyle cards above use the same assumption");
       expect(now.dps).toBeLessThan(result.dps);
     });
 

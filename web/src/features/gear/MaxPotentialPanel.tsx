@@ -57,7 +57,7 @@ export function MaxPotentialPanel({ result, busy, error, onRun, classLabel }: Pr
           {now && (
             <p className="mb-4 text-xs text-dim" data-testid="with-current-note">
               Best with your gear: your current gear and the {now.daevanion_nodes} Daevanion nodes you have opened, with stigmas, skill ranks and specialties chosen for you
-              ({now.stigmas.map((s) => s.name).join(", ")}). The playstyle cards above also assume every Daevanion point is spent, so they read higher than this.
+              ({now.stigmas.map((s) => s.name).join(", ")}). The playstyle cards above use the same assumption, so they match this number.
             </p>
           )}
           <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-faint">Best in slot</h3>
