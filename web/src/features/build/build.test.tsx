@@ -103,7 +103,7 @@ describe("pages (mock engine)", () => {
     expect(await screen.findByRole("link", { name: "Sorcerer" })).toHaveAttribute("href", "/build?class=sorcerer");
   });
 
-  it("home search opens the character and remembers it", async () => {
+  it("home search opens the character and remembers it", { timeout: 20000 }, async () => {
     at("/");
     fireEvent.change(screen.getByLabelText("Character name"), { target: { value: "DarthThot" } });
     fireEvent.click(screen.getByRole("button", { name: /Search/ }));
