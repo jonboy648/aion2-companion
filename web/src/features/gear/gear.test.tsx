@@ -26,8 +26,8 @@ describe("gear fixtures (real webapi output)", () => {
     expect(Object.keys(r).sort()).toEqual(["assumptions", "equipped", "notes", "upgrades"]);
     expect(r.upgrades.length).toBeGreaterThan(0);
     expect(Object.keys(r.upgrades[0]).sort()).toEqual(["dps_after", "dps_gain_pct", "from", "icon", "kind", "reachable", "slot", "source", "to"]);
-    expect(Object.keys(r.equipped[0]).sort()).toEqual(["enchant", "grade", "icon", "id", "il", "max_enchant", "name", "reachable", "slot", "source"]);
-    expect(r.upgrades.map((u) => u.kind).every((k) => k === "item" || k === "enchant")).toBe(true);
+    expect(Object.keys(r.equipped[0]).sort()).toEqual(["enchant", "enchant_odds", "exceed", "exceed_odds", "grade", "icon", "id", "il", "max_enchant", "max_exceed", "name", "reachable", "slot", "source"]);
+    expect(r.upgrades.map((u) => u.kind).every((k) => k === "item" || k === "enchant" || k === "exceed")).toBe(true);
     expect(keys(r.upgrades[0].to)).toEqual(keys(r.equipped[0]));
   });
   it("max_potential shape", () => {
@@ -64,6 +64,7 @@ describe("gear helpers", () => {
     expect(moveText({ kind: "enchant", from: { name: "B", enchant: 0 }, to })).toBe("B +0 -> +10");
     expect(moveText({ kind: "item", from: { name: "A", enchant: 3 }, to })).toBe("A +3 -> B +10");
     expect(moveText({ kind: "item", from: null, to })).toBe("Empty -> B +10");
+    expect(moveText({ kind: "exceed", from: { name: "B", enchant: 15, exceed: 0 }, to: { name: "B", enchant: 15, exceed: 5 } })).toBe("B Exceed 0 -> 5");
     // same name, different version: show what changes
     expect(
       moveText({ kind: "item", from: { name: "Revelation Amulet", enchant: 10, grade: "Rare", il: 13 }, to: { name: "Revelation Amulet", enchant: 10, grade: "Unique", il: 65 } }),

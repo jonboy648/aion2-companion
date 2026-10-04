@@ -10,10 +10,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_WP_MB_0078_T05.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 29.006025354916055
+   "gain_pct": 29.000776552447462
   },
   {
    "slot": "offhand",
@@ -23,10 +43,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Weapon_Guarder_R_011.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 18.76981906591424
+   "gain_pct": 18.770166033097357
   },
   {
    "slot": "helmet",
@@ -36,10 +76,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Helmet.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 1.0503125268856994
+   "gain_pct": 2.1927755415788397
   },
   {
    "slot": "shoulder",
@@ -49,10 +109,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Shoulder.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.9123462181608311
+   "gain_pct": 2.834071159227669
   },
   {
    "slot": "torso",
@@ -62,10 +142,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Torso.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 4.867902105078659
+   "gain_pct": 4.90468481240609
   },
   {
    "slot": "legs",
@@ -75,10 +175,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Pants.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 1.098830916189275
+   "gain_pct": 1.1173898689621709
   },
   {
    "slot": "gloves",
@@ -88,10 +208,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Gloves.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.7783880861350623
+   "gain_pct": 0.7918264386584717
   },
   {
    "slot": "boots",
@@ -101,10 +241,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Boots.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.9607471295100867
+   "gain_pct": 0.977028945276226
   },
   {
    "slot": "cape",
@@ -114,10 +274,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Cape.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.9123462181608311
+   "gain_pct": 1.834058511838954
   },
   {
    "slot": "belt",
@@ -127,6 +307,21 @@
    "il": 65,
    "enchant": 10,
    "max_enchant": 10,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Belt_C_022.png",
    "source": "Substance Morph",
    "reachable": true,
@@ -140,10 +335,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_NL_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 7.179765482695011
+   "gain_pct": 7.927296630826297
   },
   {
    "slot": "earring1",
@@ -153,10 +368,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 6.419740092365922
+   "gain_pct": 7.068131892321494
   },
   {
    "slot": "earring2",
@@ -166,10 +401,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 6.419740092365922
+   "gain_pct": 7.068131892321494
   },
   {
    "slot": "ring1",
@@ -179,10 +434,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 5.538526611000538
+   "gain_pct": 6.089213411363703
   },
   {
    "slot": "ring2",
@@ -192,10 +467,30 @@
    "il": 46,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 5.538526611000538
+   "gain_pct": 6.089213411363703
   },
   {
    "slot": "bracelet1",
@@ -205,10 +500,30 @@
    "il": 51,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
    "source": "Ascension",
    "reachable": true,
-   "gain_pct": 4.588889210792213
+   "gain_pct": 4.596564367179279
   },
   {
    "slot": "bracelet2",
@@ -218,10 +533,30 @@
    "il": 51,
    "enchant": 15,
    "max_enchant": 15,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    65,
+    50,
+    35,
+    25,
+    20
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
    "source": "Ascension",
    "reachable": true,
-   "gain_pct": 4.588889210792213
+   "gain_pct": 4.596564367179279
   },
   {
    "slot": "amulet",
@@ -231,25 +566,40 @@
    "il": 65,
    "enchant": 10,
    "max_enchant": 10,
+   "exceed": 0,
+   "max_exceed": 0,
+   "enchant_odds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+   ],
+   "exceed_odds": [],
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Item_Craft_Conversion_Crystal_L_lv5_01.png",
    "source": "Substance Morph",
    "reachable": true,
-   "gain_pct": 7.298464413998262
+   "gain_pct": 7.310516117797428
   }
  ],
  "build": {
   "stigmas": [
    {
-    "key": "fire-wall",
-    "name": "Fire Wall"
-   },
-   {
     "key": "element-enhancement",
     "name": "Element Enhancement"
    },
    {
-    "key": "divine-burst",
-    "name": "Divine Burst"
+    "key": "fire-wall",
+    "name": "Fire Wall"
+   },
+   {
+    "key": "assault-bombardment",
+    "name": "Assault Bombardment"
    },
    {
     "key": "cold-storm",
@@ -260,7 +610,7 @@
    {
     "skill": "Bittercold Wind",
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 11.363007959592352
+    "dps_gain_pct": 12.737040191192994
    }
   ],
   "daevanion_nodes": 380,
@@ -327,13 +677,13 @@
    }
   ]
  },
- "dps": 35828.80524993692,
- "dps_without_gear": 5654.910685080559,
- "gear_gain_pct": 237.47475043239996,
- "current_dps": 9043.607956576727,
- "gain_vs_current_pct": 177.8127798856553,
+ "dps": 39246.81268616921,
+ "dps_without_gear": 5626.164088980773,
+ "gear_gain_pct": 259.80877232189783,
+ "current_dps": 9049.938482146305,
+ "gain_vs_current_pct": 193.6026894143649,
  "with_current_gear": {
-  "dps": 14280.137431235775,
+  "dps": 14290.133527437642,
   "stigmas": [
    {
     "key": "fire-wall",
@@ -355,15 +705,15 @@
   "daevanion_nodes": 84
  },
  "notes": [
-  "upper bound: best sub-stat lines on every item, all at max enchant (success odds and costs unknown)",
+  "upper bound: best sub-stat lines on every item, all at max enchant and max Exceed (success odds are in the item data, not priced in; costs not modelled)",
   "gear limited to item level <= 85",
   "rating conversions assumed: 100 crit rating = 1%"
  ],
  "assumptions": [
   "Rating conversions are guesses: 100 crit rating = 1% crit chance and 100 crit damage = 1% (the armory only gives raw ratings).",
-  "Random sub-stat lines are not public, so an item you own is scored at the expected value of its pool.",
-  "Only Attack, Defense and HP scale with enchant (a linear fit); Exceed is not modelled.",
+  "Random sub-stat lines are not public, so an item you own is scored at the expected value of its pool (the game's own draw weights, read as draw probabilities).",
+  "Enchant adds the game's per-level stat series and Exceed adds the stats of its level. Success odds are in the item data but not priced into a step, and Exceed is assumed to be available at any enchant level.",
   "Your imported stats are assumed to already include the equipped gear, so upgrades are relative to what you wear now.",
-  "Max potential is an upper bound: best sub-stat lines on every item, max enchant everywhere, every Daevanion point spent. Success odds and material costs are not included."
+  "Max potential is an upper bound: best sub-stat lines on every item, max enchant and max Exceed everywhere, every Daevanion point spent. Success odds and material costs are not included."
  ]
 }

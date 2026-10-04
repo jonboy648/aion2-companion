@@ -565,6 +565,12 @@ export interface GearPiece {
   il: number;
   enchant: number;
   max_enchant: number;
+  /** Exceed level (0 when not exceeded) and the item's maximum */
+  exceed: number;
+  max_exceed: number;
+  /** success chance per enchant / Exceed step, as the client lists it (data only, not priced into a move yet) */
+  enchant_odds: unknown;
+  exceed_odds: unknown;
   icon: string | null;
   source: string | null;
   reachable: boolean;
@@ -575,7 +581,7 @@ export interface GearUpgrade {
   /** null when the slot is empty */
   from: GearPiece | null;
   to: GearPiece;
-  kind: "item" | "enchant";
+  kind: "item" | "enchant" | "exceed";
   dps_gain_pct: number;
   dps_after: number;
   source: string;

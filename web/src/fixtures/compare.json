@@ -66,7 +66,7 @@
     "boss_dmg_pct": 0.0,
     "crit_chance_pct": 2.8,
     "crit_dmg_pct": 50.0,
-    "smite_pct": 0.0,
+    "smite_pct": 0.1,
     "combat_speed_pct": 3.8,
     "cdr_pct": 0.1,
     "max_mp": 2000.0,
@@ -465,11 +465,11 @@
   "stigma_picks": [
    [
     "fire-wall",
-    0.20543655157685414
+    0.20543655157680973
    ],
    [
     "element-enhancement",
-    4.6071079828039485
+    4.607107982803815
    ],
    [
     "glacial-smite",
@@ -477,7 +477,7 @@
    ],
    [
     "cold-storm",
-    14.013737362881319
+    14.013737362881296
    ]
   ],
   "rank_log": [],
@@ -779,7 +779,7 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 20.575847675293033,
+  "daevanion_gain_pct": 20.57584767529308,
   "priority": {
    "entries": [
     {
@@ -836,8 +836,8 @@
    "label": "Option 1"
   },
   "result": {
-   "total_damage": 3141423.8892462803,
-   "dps": 17452.35494025711,
+   "total_damage": 3143622.8859687527,
+   "dps": 17464.57158871529,
    "duration_s": 180,
    "casts": [
     {
@@ -856,7 +856,7 @@
      "t_s": 0.936,
      "skill_key": "fire-wall",
      "charge_level": 0,
-     "damage": 36639.196408900796,
+     "damage": 36664.843846387026,
      "mp_after": 1800.0,
      "active_statuses": [
       "element_enhancement",
@@ -869,7 +869,7 @@
      "t_s": 2.34,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 36555.9377922882,
+     "damage": 36581.5269487428,
      "mp_after": 1578.08,
      "active_statuses": [
       "fire_mark",
@@ -884,7 +884,7 @@
      "t_s": 3.744,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 89045.81276009818,
+     "damage": 89108.14482903025,
      "mp_after": 1456.1599999999999,
      "active_statuses": [
       "fire_mark",
@@ -899,7 +899,7 @@
      "t_s": 4.68,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 7543.227232133049,
+     "damage": 7548.507491195542,
      "mp_after": 1574.8799999999999,
      "active_statuses": [
       "fire_mark",
@@ -914,7 +914,7 @@
      "t_s": 5.616,
      "skill_key": "cold-storm",
      "charge_level": 0,
-     "damage": 5841.62686755648,
+     "damage": 5845.716006363768,
      "mp_after": 1393.6,
      "active_statuses": [
       "fire_mark",
@@ -929,7 +929,7 @@
      "t_s": 7.02,
      "skill_key": "hellfire",
      "charge_level": 4,
-     "damage": 79488.87352612035,
+     "damage": 79544.51573758862,
      "mp_after": 1221.6799999999998,
      "active_statuses": [
       "fire_mark",
@@ -945,7 +945,7 @@
      "t_s": 9.456,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 36555.9377922882,
+     "damage": 36581.5269487428,
      "mp_after": 1020.3999999999999,
      "active_statuses": [
       "fire_mark",
@@ -961,7 +961,7 @@
      "t_s": 10.86,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 7543.227232133049,
+     "damage": 7548.507491195542,
      "mp_after": 1148.4799999999998,
      "active_statuses": [
       "fire_mark",
@@ -977,7 +977,7 @@
      "t_s": 11.796,
      "skill_key": "frost",
      "charge_level": 0,
-     "damage": 3670.300579806432,
+     "damage": 3672.8697902122963,
      "mp_after": 1067.1999999999998,
      "active_statuses": [
       "fire_mark",
@@ -1007,7 +1007,7 @@
      "t_s": 13.668,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 2634.978267042264,
+     "damage": 2636.8227518291937,
      "mp_after": 1104.6399999999999,
      "active_statuses": [
       "fire_mark",
@@ -1024,7 +1024,7 @@
      "t_s": 14.604,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 36630.7220750757,
+     "damage": 36656.36358052825,
      "mp_after": 873.3599999999999,
      "active_statuses": [
       "fire_mark",
@@ -1040,7 +1040,7 @@
      "t_s": 16.008,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 7943.646487929609,
+     "damage": 7949.207040471159,
      "mp_after": 1001.4399999999999,
      "active_statuses": [
       "fire_mark",
@@ -1055,7 +1055,7 @@
      "t_s": 16.944,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 2634.978267042264,
+     "damage": 2636.8227518291937,
      "mp_after": 1120.1599999999999,
      "active_statuses": [
       "fire_mark",
@@ -1070,7 +1070,7 @@
      "t_s": 17.88,
      "skill_key": "burst",
      "charge_level": 0,
-     "damage": 1745.3881153128418,
+     "damage": 1746.6098869935608,
      "mp_after": 1238.8799999999999,
      "active_statuses": [
       "fire_mark",
@@ -1085,7 +1085,7 @@
      "t_s": 18.816,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 94100.01776872597,
+     "damage": 94165.88778116407,
      "mp_after": 1107.6,
      "active_statuses": [
       "fire_mark",
@@ -1100,7 +1100,7 @@
      "t_s": 19.752,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 36630.7220750757,
+     "damage": 36656.36358052825,
      "mp_after": 876.3199999999999,
      "active_statuses": [
       "fire_mark",
@@ -1114,7 +1114,7 @@
      "t_s": 21.156,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 6619.705406608008,
+     "damage": 6624.339200392633,
      "mp_after": 1004.4,
      "active_statuses": [
       "fire_mark",
@@ -1128,7 +1128,7 @@
      "t_s": 22.092,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 2195.81522253522,
+     "damage": 2197.3522931909947,
      "mp_after": 1123.12,
      "active_statuses": [
       "fire_mark",
@@ -1142,7 +1142,7 @@
      "t_s": 23.028,
      "skill_key": "burst",
      "charge_level": 0,
-     "damage": 1454.490096094035,
+     "damage": 1455.5082391613007,
      "mp_after": 1241.84,
      "active_statuses": [
       "fire_mark",
@@ -1156,7 +1156,7 @@
      "t_s": 23.964,
      "skill_key": "pyroclasm",
      "charge_level": 0,
-     "damage": 1691.62140684108,
+     "damage": 1692.8055418258687,
      "mp_after": 1380.56,
      "active_statuses": [
       "fire_mark",
@@ -1170,7 +1170,7 @@
      "t_s": 24.9,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 32125.65008270475,
+     "damage": 32148.13803776264,
      "mp_after": 1149.28,
      "active_statuses": [
       "fire_mark",
@@ -1184,7 +1184,7 @@
      "t_s": 26.304,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 6619.705406608008,
+     "damage": 6624.339200392633,
      "mp_after": 1277.36,
      "active_statuses": [
       "fire_mark",
@@ -1202,35 +1202,35 @@
     },
     "fire-wall": {
      "casts": 4,
-     "damage": 252810.4552214156
+     "damage": 252987.4225400704
     },
     "firestorm": {
      "casts": 34,
-     "damage": 1132394.3045573295
+     "damage": 1133186.9805705203
     },
     "bittercold-wind": {
      "casts": 12,
-     "damage": 967511.7203045777
+     "damage": 968188.978508791
     },
     "blaze": {
      "casts": 33,
-     "damage": 222157.15340612922
+     "damage": 222312.66341351342
     },
     "cold-storm": {
      "casts": 3,
-     "damage": 96572.97959186591
+     "damage": 96640.58067758023
     },
     "hellfire": {
      "casts": 4,
-     "damage": 281726.64306939696
+     "damage": 281923.8517195455
     },
     "fire-mark": {
      "casts": 27,
-     "damage": 44230.31333262829
+     "damage": 44261.274551961134
     },
     "frost": {
      "casts": 6,
-     "damage": 20186.65318893538
+     "damage": 20200.78384616763
     },
     "wish-of-concentration": {
      "casts": 3,
@@ -1238,15 +1238,15 @@
     },
     "flame-arrow": {
      "casts": 40,
-     "damage": 90030.21054580245
+     "damage": 90093.2316931845
     },
     "burst": {
      "casts": 20,
-     "damage": 28870.216975788913
+     "damage": 28890.426127671955
     },
     "pyroclasm": {
      "casts": 3,
-     "damage": 4933.23905241024
+     "damage": 4936.692319746927
     }
    },
    "status_uptime": {
@@ -1270,13 +1270,13 @@
    {
     "stat": "cdr_pct",
     "delta": 1.0,
-    "dps_gain_pct": 1.0815370104315303,
+    "dps_gain_pct": 1.0815370104315836,
     "confidence": "estimated"
    },
    {
     "stat": "smite_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.7000000000000561,
+    "dps_gain_pct": 0.6995103427601901,
     "confidence": "estimated"
    },
    {
@@ -1288,13 +1288,13 @@
    {
     "stat": "weapon_dmg_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5769340554412805,
+    "dps_gain_pct": 0.5769340554413027,
     "confidence": "estimated"
    },
    {
     "stat": "attack_increase_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5520961963261461,
+    "dps_gain_pct": 0.5520961963262794,
     "confidence": "estimated"
    }
   ],
@@ -1366,7 +1366,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -1765,11 +1765,11 @@
     "stigma_picks": [
      [
       "fire-wall",
-      0.20543655157685414
+      0.20543655157680973
      ],
      [
       "element-enhancement",
-      4.6071079828039485
+      4.607107982803815
      ],
      [
       "glacial-smite",
@@ -1777,10 +1777,10 @@
      ],
      [
       "cold-storm",
-      14.013737362881319
+      14.013737362881296
      ]
     ],
-    "dps": 17452.35494025711,
+    "dps": 17464.57158871529,
     "dps_delta_pct": 0.0
    },
    {
@@ -1841,7 +1841,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -2240,7 +2240,7 @@
     "stigma_picks": [
      [
       "fire-wall",
-      0.20543655157685414
+      0.20543655157680973
      ],
      [
       "glacial-smite",
@@ -2248,15 +2248,15 @@
      ],
      [
       "cold-storm",
-      14.013737362881319
+      14.013737362881296
      ],
      [
       "steel-barrier",
       0.0
      ]
     ],
-    "dps": 16364.618851094025,
-    "dps_delta_pct": -6.232603524777169
+    "dps": 16376.074084289789,
+    "dps_delta_pct": -6.232603524777181
    },
    {
     "key": "sustain",
@@ -2316,7 +2316,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -2715,7 +2715,7 @@
     "stigma_picks": [
      [
       "fire-wall",
-      0.20543655157685414
+      0.20543655157680973
      ],
      [
       "glacial-smite",
@@ -2723,15 +2723,15 @@
      ],
      [
       "cold-storm",
-      14.013737362881319
+      14.013737362881296
      ],
      [
       "hibernation",
       0.0
      ]
     ],
-    "dps": 16364.618851094025,
-    "dps_delta_pct": -6.232603524777169
+    "dps": 16376.074084289789,
+    "dps_delta_pct": -6.232603524777181
    }
   ],
   "spec_picks": [
@@ -2739,7 +2739,7 @@
     "skill_key": "bittercold-wind",
     "option": 0,
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 11.440690362721151,
+    "dps_gain_pct": 11.440690362721174,
     "confidence": "estimated"
    }
   ],
@@ -2747,7 +2747,7 @@
    "scenario": "boss_180",
    "scenario_name": "Single-target boss",
    "duration_s": 180,
-   "dps": 17452.35494025711,
+   "dps": 17464.57158871529,
    "priority": [
     {
      "skill_key": "element-enhancement",
@@ -3143,7 +3143,7 @@
     "boss_dmg_pct": 0.0,
     "crit_chance_pct": 2.8,
     "crit_dmg_pct": 50.0,
-    "smite_pct": 0.0,
+    "smite_pct": 0.1,
     "combat_speed_pct": 3.8,
     "cdr_pct": 0.1,
     "max_mp": 2000.0,
@@ -3542,11 +3542,11 @@
   "stigma_picks": [
    [
     "fire-wall",
-    27.68485465778474
+    27.68485465778463
    ],
    [
     "element-enhancement",
-    18.249133637161584
+    18.249133637161542
    ],
    [
     "cold-storm",
@@ -3554,7 +3554,7 @@
    ],
    [
     "delayed-explosion",
-    1.9618456049243838
+    1.961845604924406
    ]
   ],
   "rank_log": [],
@@ -3856,7 +3856,7 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 19.236976918722505,
+  "daevanion_gain_pct": 19.23697691872239,
   "priority": {
    "entries": [
     {
@@ -3933,8 +3933,8 @@
    "label": "Option 1"
   },
   "result": {
-   "total_damage": 1884626.9014302948,
-   "dps": 62820.89671434316,
+   "total_damage": 1886511.5283317238,
+   "dps": 62883.71761105746,
    "duration_s": 30,
    "casts": [
     {
@@ -3966,7 +3966,7 @@
      "t_s": 1.872,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 383961.34540480515,
+     "damage": 384345.30675020994,
      "mp_after": 1787.44,
      "active_statuses": [
       "element_enhancement",
@@ -3980,7 +3980,7 @@
      "t_s": 2.808,
      "skill_key": "cold-storm",
      "charge_level": 0,
-     "damage": 25188.989830850558,
+     "damage": 25214.178820681405,
      "mp_after": 1606.16,
      "active_statuses": [
       "element_enhancement",
@@ -3994,7 +3994,7 @@
      "t_s": 4.212,
      "skill_key": "fire-wall",
      "charge_level": 0,
-     "damage": 158803.3474574976,
+     "damage": 158962.1508049551,
      "mp_after": 1434.24,
      "active_statuses": [
       "element_enhancement",
@@ -4009,7 +4009,7 @@
      "t_s": 5.616,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 8103.2216179328125,
+     "damage": 8111.324839550744,
      "mp_after": 1562.32,
      "active_statuses": [
       "fire_mark",
@@ -4026,7 +4026,7 @@
      "t_s": 6.552,
      "skill_key": "hellfire",
      "charge_level": 4,
-     "damage": 341556.5099466199,
+     "damage": 341898.0664565665,
      "mp_after": 1381.04,
      "active_statuses": [
       "fire_mark",
@@ -4043,7 +4043,7 @@
      "t_s": 8.988,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 39325.2035023276,
+     "damage": 39364.52870582992,
      "mp_after": 1179.76,
      "active_statuses": [
       "fire_mark",
@@ -4060,7 +4060,7 @@
      "t_s": 10.392,
      "skill_key": "frost",
      "charge_level": 0,
-     "damage": 15771.0625662487,
+     "damage": 15786.833628814948,
      "mp_after": 1107.84,
      "active_statuses": [
       "fire_mark",
@@ -4077,7 +4077,7 @@
      "t_s": 11.328,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 8103.2216179328125,
+     "damage": 8111.324839550744,
      "mp_after": 1226.56,
      "active_statuses": [
       "fire_mark",
@@ -4095,7 +4095,7 @@
      "t_s": 12.264,
      "skill_key": "winters-shackles",
      "charge_level": 0,
-     "damage": 25427.426650088317,
+     "damage": 25452.854076738404,
      "mp_after": 1045.28,
      "active_statuses": [
       "fire_mark",
@@ -4113,7 +4113,7 @@
      "t_s": 13.2,
      "skill_key": "frost-burst",
      "charge_level": 0,
-     "damage": 22377.51267971648,
+     "damage": 22399.890192396193,
      "mp_after": 1064.0,
      "active_statuses": [
       "fire_mark",
@@ -4130,7 +4130,7 @@
      "t_s": 14.136,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 36765.1261367676,
+     "damage": 36801.89126290436,
      "mp_after": 832.72,
      "active_statuses": [
       "fire_mark",
@@ -4145,7 +4145,7 @@
      "t_s": 15.54,
      "skill_key": "delayed-explosion",
      "charge_level": 0,
-     "damage": 6377.224498815456,
+     "damage": 6383.601723314271,
      "mp_after": 660.8000000000001,
      "active_statuses": [
       "fire_mark",
@@ -4159,7 +4159,7 @@
      "t_s": 16.476,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 412810.206787802,
+     "damage": 413223.0169945897,
      "mp_after": 529.5200000000001,
      "active_statuses": [
       "fire_mark",
@@ -4174,7 +4174,7 @@
      "t_s": 17.412,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 8712.055606065102,
+     "damage": 8720.767661671167,
      "mp_after": 648.2400000000001,
      "active_statuses": [
       "fire_mark",
@@ -4189,7 +4189,7 @@
      "t_s": 18.348,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 2889.8664131299247,
+     "damage": 2892.756279543054,
      "mp_after": 766.9600000000002,
      "active_statuses": [
       "fire_mark",
@@ -4204,7 +4204,7 @@
      "t_s": 19.284,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 42279.89505728273,
+     "damage": 42322.174952340014,
      "mp_after": 535.6800000000002,
      "active_statuses": [
       "fire_mark",
@@ -4219,7 +4219,7 @@
      "t_s": 20.688,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 2388.4038294779516,
+     "damage": 2390.7922333074293,
      "mp_after": 663.7600000000002,
      "active_statuses": [
       "fire_mark",
@@ -4232,7 +4232,7 @@
      "t_s": 21.624,
      "skill_key": "burst",
      "charge_level": 0,
-     "damage": 1271.40749209188,
+     "damage": 1272.6788995839718,
      "mp_after": 782.4800000000002,
      "active_statuses": [
       "fire_mark",
@@ -4244,7 +4244,7 @@
      "t_s": 22.56,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 5994.857085332544,
+     "damage": 6000.851942417876,
      "mp_after": 901.2000000000003,
      "active_statuses": [
       "fire_mark",
@@ -4256,7 +4256,7 @@
      "t_s": 23.496,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 2128.9302415409597,
+     "damage": 2131.0591717825005,
      "mp_after": 1019.9200000000003,
      "active_statuses": [
       "fire_mark",
@@ -4269,7 +4269,7 @@
      "t_s": 24.432,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 29052.236654297998,
+     "damage": 29081.28889095229,
      "mp_after": 788.6400000000003,
      "active_statuses": [
       "fire_mark",
@@ -4281,7 +4281,7 @@
      "t_s": 25.836,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 1990.3365245649597,
+     "damage": 1992.3268610895245,
      "mp_after": 916.7200000000004,
      "active_statuses": [
       "fire_mark",
@@ -4301,55 +4301,55 @@
     },
     "bittercold-wind": {
      "casts": 2,
-     "damage": 796771.5521926072
+     "damage": 797568.3237447997
     },
     "cold-storm": {
      "casts": 1,
-     "damage": 138539.44406967808
+     "damage": 138677.98351374772
     },
     "fire-wall": {
      "casts": 1,
-     "damage": 300692.54770498956
+     "damage": 300993.24025269446
     },
     "blaze": {
      "casts": 5,
-     "damage": 37325.65474465555
+     "damage": 37362.9803994002
     },
     "hellfire": {
      "casts": 1,
-     "damage": 341556.5099466199
+     "damage": 341898.0664565665
     },
     "firestorm": {
      "casts": 5,
-     "damage": 178497.70135877392
+     "damage": 178676.1990601327
     },
     "frost": {
      "casts": 1,
-     "damage": 15771.0625662487
+     "damage": 15786.833628814948
     },
     "fire-mark": {
      "casts": 4,
-     "damage": 7132.450473701313
+     "damage": 7139.582924175014
     },
     "winters-shackles": {
      "casts": 1,
-     "damage": 25427.426650088317
+     "damage": 25452.854076738404
     },
     "frost-burst": {
      "casts": 1,
-     "damage": 22377.51267971648
+     "damage": 22399.890192396193
     },
     "delayed-explosion": {
      "casts": 1,
-     "damage": 6377.224498815456
+     "damage": 6383.601723314271
     },
     "flame-arrow": {
      "casts": 5,
-     "damage": 11526.467250254756
+     "damage": 11537.993717505009
     },
     "burst": {
      "casts": 2,
-     "damage": 2631.347294145093
+     "damage": 2633.9786414392383
     }
    },
    "status_uptime": {
@@ -4374,31 +4374,31 @@
    {
     "stat": "smite_pct",
     "delta": 1.0,
-    "dps_gain_pct": 1.0000000000000009,
+    "dps_gain_pct": 0.9990009990010096,
     "confidence": "estimated"
    },
    {
     "stat": "dmg_boost_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6993006993006645,
+    "dps_gain_pct": 0.6993006993007089,
     "confidence": "estimated"
    },
    {
     "stat": "weapon_dmg_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5976191297112576,
+    "dps_gain_pct": 0.5976191297113242,
     "confidence": "estimated"
    },
    {
     "stat": "attack_increase_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5377912847535526,
+    "dps_gain_pct": 0.5377912847536415,
     "confidence": "estimated"
    },
    {
     "stat": "attack",
     "delta": 10.0,
-    "dps_gain_pct": 0.5265366781596947,
+    "dps_gain_pct": 0.5265366781598058,
     "confidence": "estimated"
    }
   ],
@@ -4469,7 +4469,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -4868,11 +4868,11 @@
     "stigma_picks": [
      [
       "fire-wall",
-      27.68485465778474
+      27.68485465778463
      ],
      [
       "element-enhancement",
-      18.249133637161584
+      18.249133637161542
      ],
      [
       "cold-storm",
@@ -4880,10 +4880,10 @@
      ],
      [
       "delayed-explosion",
-      1.9618456049243838
+      1.961845604924406
      ]
     ],
-    "dps": 62820.89671434316,
+    "dps": 62883.71761105746,
     "dps_delta_pct": 0.0
    },
    {
@@ -4944,7 +4944,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -5343,11 +5343,11 @@
     "stigma_picks": [
      [
       "fire-wall",
-      27.68485465778474
+      27.68485465778463
      ],
      [
       "element-enhancement",
-      18.249133637161584
+      18.249133637161542
      ],
      [
       "cold-storm",
@@ -5358,8 +5358,8 @@
       0.0
      ]
     ],
-    "dps": 61681.5118301183,
-    "dps_delta_pct": -1.813703630188257
+    "dps": 61743.19334194836,
+    "dps_delta_pct": -1.8137036301882792
    },
    {
     "key": "sustain",
@@ -5419,7 +5419,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -5818,11 +5818,11 @@
     "stigma_picks": [
      [
       "fire-wall",
-      27.68485465778474
+      27.68485465778463
      ],
      [
       "element-enhancement",
-      18.249133637161584
+      18.249133637161542
      ],
      [
       "cold-storm",
@@ -5833,8 +5833,8 @@
       0.0
      ]
     ],
-    "dps": 61681.5118301183,
-    "dps_delta_pct": -1.813703630188257
+    "dps": 61743.19334194836,
+    "dps_delta_pct": -1.8137036301882792
    }
   ],
   "spec_picks": [
@@ -5842,7 +5842,7 @@
     "skill_key": "bittercold-wind",
     "option": 0,
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 16.404234025673546,
+    "dps_gain_pct": 16.404234025673503,
     "confidence": "estimated"
    }
   ],
@@ -5850,7 +5850,7 @@
    "scenario": "aoe_pack",
    "scenario_name": "AoE pack (4)",
    "duration_s": 30,
-   "dps": 62820.89671434316,
+   "dps": 62883.71761105746,
    "priority": [
     {
      "skill_key": "wish-of-concentration",
@@ -6350,7 +6350,7 @@
     "boss_dmg_pct": 0.0,
     "crit_chance_pct": 2.8,
     "crit_dmg_pct": 50.0,
-    "smite_pct": 0.0,
+    "smite_pct": 0.1,
     "combat_speed_pct": 3.8,
     "cdr_pct": 0.1,
     "max_mp": 2000.0,
@@ -6753,15 +6753,15 @@
    ],
    [
     "element-enhancement",
-    18.936204357894802
+    18.93620435789487
    ],
    [
     "cold-storm",
-    7.833603946353684
+    7.83360394635364
    ],
    [
     "glacial-smite",
-    0.560081109451005
+    0.5600811094509828
    ]
   ],
   "rank_log": [],
@@ -7063,7 +7063,7 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 17.865779350276178,
+  "daevanion_gain_pct": 17.865779350276114,
   "priority": {
    "entries": [
     {
@@ -7135,15 +7135,15 @@
    "label": "Option 1"
   },
   "result": {
-   "total_damage": 1207515.6804141775,
-   "dps": 80501.04536094517,
+   "total_damage": 1208723.1960945914,
+   "dps": 80581.5464063061,
    "duration_s": 15,
    "casts": [
     {
      "t_s": 0.0,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 227086.50115549398,
+     "damage": 227313.5876566494,
      "mp_after": 1850.0,
      "active_statuses": [
       "grace_of_enhancement",
@@ -7180,7 +7180,7 @@
      "t_s": 2.808,
      "skill_key": "fire-wall",
      "charge_level": 0,
-     "damage": 119102.51059312321,
+     "damage": 119221.61310371633,
      "mp_after": 1606.16,
      "active_statuses": [
       "element_enhancement",
@@ -7194,7 +7194,7 @@
      "t_s": 4.212,
      "skill_key": "cold-storm",
      "charge_level": 0,
-     "damage": 18891.742373137917,
+     "damage": 18910.634115511053,
      "mp_after": 1434.24,
      "active_statuses": [
       "fire_mark",
@@ -7210,7 +7210,7 @@
      "t_s": 5.616,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 8103.2216179328125,
+     "damage": 8111.324839550744,
      "mp_after": 1562.32,
      "active_statuses": [
       "fire_mark",
@@ -7227,7 +7227,7 @@
      "t_s": 6.552,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 39325.2035023276,
+     "damage": 39364.52870582992,
      "mp_after": 1331.04,
      "active_statuses": [
       "fire_mark",
@@ -7244,7 +7244,7 @@
      "t_s": 7.956,
      "skill_key": "frost",
      "charge_level": 0,
-     "damage": 11828.296924686525,
+     "damage": 11840.125221611212,
      "mp_after": 1259.12,
      "active_statuses": [
       "fire_mark",
@@ -7261,7 +7261,7 @@
      "t_s": 8.892,
      "skill_key": "frost-burst",
      "charge_level": 0,
-     "damage": 16783.13450978736,
+     "damage": 16799.917644297144,
      "mp_after": 1277.84,
      "active_statuses": [
       "fire_mark",
@@ -7279,7 +7279,7 @@
      "t_s": 9.828,
      "skill_key": "hellfire",
      "charge_level": 4,
-     "damage": 256167.38245996495,
+     "damage": 256423.54984242487,
      "mp_after": 1096.56,
      "active_statuses": [
       "fire_mark",
@@ -7296,7 +7296,7 @@
      "t_s": 12.264,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 8103.2216179328125,
+     "damage": 8111.324839550744,
      "mp_after": 1245.28,
      "active_statuses": [
       "fire_mark",
@@ -7313,7 +7313,7 @@
      "t_s": 13.2,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 39325.2035023276,
+     "damage": 39364.52870582992,
      "mp_after": 1014.0,
      "active_statuses": [
       "fire_mark",
@@ -7329,7 +7329,7 @@
      "t_s": 14.604,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 269224.0479050883,
+     "damage": 269493.2719529933,
      "mp_after": 892.0799999999999,
      "active_statuses": [
       "fire_mark",
@@ -7343,7 +7343,7 @@
    "per_skill": {
     "bittercold-wind": {
      "casts": 2,
-     "damage": 496310.5490605823
+     "damage": 496806.8596096427
     },
     "element-enhancement": {
      "casts": 1,
@@ -7355,35 +7355,35 @@
     },
     "fire-wall": {
      "casts": 1,
-     "damage": 226294.77012693405
+     "damage": 226521.06489706095
     },
     "cold-storm": {
      "casts": 1,
-     "damage": 103289.65524848252
+     "damage": 103392.94490373103
     },
     "blaze": {
      "casts": 2,
-     "damage": 16206.443235865625
+     "damage": 16222.649679101489
     },
     "firestorm": {
      "casts": 2,
-     "damage": 78650.4070046552
+     "damage": 78729.05741165984
     },
     "frost": {
      "casts": 1,
-     "damage": 11828.296924686525
+     "damage": 11840.125221611212
     },
     "frost-burst": {
      "casts": 1,
-     "damage": 16783.13450978736
+     "damage": 16799.917644297144
     },
     "hellfire": {
      "casts": 1,
-     "damage": 256167.38245996495
+     "damage": 256423.54984242487
     },
     "fire-mark": {
      "casts": 1,
-     "damage": 1985.0418432187198
+     "damage": 1987.0268850619382
     }
    },
    "status_uptime": {
@@ -7406,7 +7406,7 @@
    {
     "stat": "smite_pct",
     "delta": 1.0,
-    "dps_gain_pct": 1.0000000000000009,
+    "dps_gain_pct": 0.9990009990009874,
     "confidence": "estimated"
    },
    {
@@ -7418,19 +7418,19 @@
    {
     "stat": "weapon_dmg_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5960410231024227,
+    "dps_gain_pct": 0.5960410231024005,
     "confidence": "estimated"
    },
    {
     "stat": "attack_increase_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5436516898875254,
+    "dps_gain_pct": 0.5436516898875476,
     "confidence": "estimated"
    },
    {
     "stat": "attack",
     "delta": 10.0,
-    "dps_gain_pct": 0.5251462758611325,
+    "dps_gain_pct": 0.5251462758611547,
     "confidence": "estimated"
    }
   ],
@@ -7502,7 +7502,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -7905,18 +7905,18 @@
      ],
      [
       "element-enhancement",
-      18.936204357894802
+      18.93620435789487
      ],
      [
       "cold-storm",
-      7.833603946353684
+      7.83360394635364
      ],
      [
       "glacial-smite",
-      0.560081109451005
+      0.5600811094509828
      ]
     ],
-    "dps": 80501.04536094517,
+    "dps": 80581.5464063061,
     "dps_delta_pct": 0.0
    },
    {
@@ -7977,7 +7977,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -8380,18 +8380,18 @@
      ],
      [
       "element-enhancement",
-      18.936204357894802
+      18.93620435789487
      ],
      [
       "cold-storm",
-      7.833603946353684
+      7.83360394635364
      ],
      [
       "steel-barrier",
       0.0
      ]
     ],
-    "dps": 80501.04536094517,
+    "dps": 80581.5464063061,
     "dps_delta_pct": 0.0
    },
    {
@@ -8452,7 +8452,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -8855,18 +8855,18 @@
      ],
      [
       "element-enhancement",
-      18.936204357894802
+      18.93620435789487
      ],
      [
       "cold-storm",
-      7.833603946353684
+      7.83360394635364
      ],
      [
       "hibernation",
       0.0
      ]
     ],
-    "dps": 80501.04536094517,
+    "dps": 80581.5464063061,
     "dps_delta_pct": 0.0
    }
   ],
@@ -8875,7 +8875,7 @@
     "skill_key": "bittercold-wind",
     "option": 0,
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 15.87565593011755,
+    "dps_gain_pct": 15.875655930117505,
     "confidence": "estimated"
    }
   ],
@@ -8883,7 +8883,7 @@
    "scenario": "level_pull",
    "scenario_name": "Leveling pull (3)",
    "duration_s": 15,
-   "dps": 80501.04536094517,
+   "dps": 80581.5464063061,
    "priority": [
     {
      "skill_key": "bittercold-wind",
@@ -9280,7 +9280,7 @@
     "boss_dmg_pct": 0.0,
     "crit_chance_pct": 2.8,
     "crit_dmg_pct": 50.0,
-    "smite_pct": 0.0,
+    "smite_pct": 0.1,
     "combat_speed_pct": 3.8,
     "cdr_pct": 0.1,
     "max_mp": 2000.0,
@@ -9679,19 +9679,19 @@
   "stigma_picks": [
    [
     "fire-wall",
-    13.357654905043304
+    13.357654905043326
    ],
    [
     "element-enhancement",
-    18.983233028441827
+    18.983233028441802
    ],
    [
     "cold-storm",
-    5.087990818713362
+    5.087990818713339
    ],
    [
     "delayed-explosion",
-    3.4299776022479245
+    3.429977602247969
    ]
   ],
   "rank_log": [],
@@ -9993,7 +9993,7 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 18.295841556105973,
+  "daevanion_gain_pct": 18.295841556105906,
   "priority": {
    "entries": [
     {
@@ -10065,15 +10065,15 @@
    "label": "Option 1"
   },
   "result": {
-   "total_damage": 453684.8463490812,
-   "dps": 30245.65642327208,
+   "total_damage": 454002.4257415253,
+   "dps": 30266.828382768355,
    "duration_s": 15,
    "casts": [
     {
      "t_s": 0.0,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 74204.84396674849,
+     "damage": 74256.7873575252,
      "mp_after": 1850.0,
      "active_statuses": [
       "grace_of_enhancement",
@@ -10110,7 +10110,7 @@
      "t_s": 2.808,
      "skill_key": "fire-wall",
      "charge_level": 0,
-     "damage": 38919.0161882808,
+     "damage": 38946.25949961259,
      "mp_after": 1606.16,
      "active_statuses": [
       "element_enhancement",
@@ -10124,7 +10124,7 @@
      "t_s": 4.212,
      "skill_key": "cold-storm",
      "charge_level": 0,
-     "damage": 6173.237017284479,
+     "damage": 6177.558283196578,
      "mp_after": 1434.24,
      "active_statuses": [
       "fire_mark",
@@ -10140,7 +10140,7 @@
      "t_s": 5.616,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 38550.7800992457,
+     "damage": 38577.765645315165,
      "mp_after": 1212.32,
      "active_statuses": [
       "fire_mark",
@@ -10157,7 +10157,7 @@
      "t_s": 7.02,
      "skill_key": "hellfire",
      "charge_level": 4,
-     "damage": 83707.57639969123,
+     "damage": 83766.171703171,
      "mp_after": 1040.3999999999999,
      "active_statuses": [
       "fire_mark",
@@ -10174,7 +10174,7 @@
      "t_s": 9.456,
      "skill_key": "frost",
      "charge_level": 0,
-     "damage": 3672.6155127124316,
+     "damage": 3675.1863435713303,
      "mp_after": 989.1199999999999,
      "active_statuses": [
       "fire_mark",
@@ -10190,7 +10190,7 @@
      "t_s": 10.392,
      "skill_key": "frost-burst",
      "charge_level": 0,
-     "damage": 5484.20919444684,
+     "damage": 5488.048140882953,
      "mp_after": 1007.8399999999999,
      "active_statuses": [
       "fire_mark",
@@ -10208,7 +10208,7 @@
      "t_s": 11.328,
      "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 36630.7220750757,
+     "damage": 36656.36358052825,
      "mp_after": 776.56,
      "active_statuses": [
       "fire_mark",
@@ -10225,7 +10225,7 @@
      "t_s": 12.732,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 7548.00566973985,
+     "damage": 7553.289273708668,
      "mp_after": 904.64,
      "active_statuses": [
       "fire_mark",
@@ -10241,7 +10241,7 @@
      "t_s": 13.668,
      "skill_key": "winters-shackles",
      "charge_level": 0,
-     "damage": 5921.29802105556,
+     "damage": 5925.442929670298,
      "mp_after": 723.36,
      "active_statuses": [
       "fire_mark",
@@ -10256,7 +10256,7 @@
      "t_s": 14.604,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 89413.27748159708,
+     "damage": 89475.86677583419,
      "mp_after": 592.08,
      "active_statuses": [
       "fire_mark",
@@ -10270,7 +10270,7 @@
    "per_skill": {
     "bittercold-wind": {
      "casts": 2,
-     "damage": 163618.12144834557
+     "damage": 163732.65413335938
     },
     "element-enhancement": {
      "casts": 1,
@@ -10282,39 +10282,39 @@
     },
     "fire-wall": {
      "casts": 1,
-     "damage": 73364.61124658953
+     "damage": 73415.96647446213
     },
     "cold-storm": {
      "casts": 1,
-     "damage": 33337.875791288636
+     "damage": 33361.21230434254
     },
     "firestorm": {
      "casts": 2,
-     "damage": 75181.50217432139
+     "damage": 75234.12922584341
     },
     "hellfire": {
      "casts": 1,
-     "damage": 83707.57639969123
+     "damage": 83766.171703171
     },
     "frost": {
      "casts": 1,
-     "damage": 3672.6155127124316
+     "damage": 3675.1863435713303
     },
     "frost-burst": {
      "casts": 1,
-     "damage": 5484.20919444684
+     "damage": 5488.048140882953
     },
     "blaze": {
      "casts": 1,
-     "damage": 7548.00566973985
+     "damage": 7553.289273708668
     },
     "fire-mark": {
      "casts": 1,
-     "damage": 1849.03089089004
+     "damage": 1850.325212513663
     },
     "winters-shackles": {
      "casts": 1,
-     "damage": 5921.29802105556
+     "damage": 5925.442929670298
     }
    },
    "status_uptime": {
@@ -10337,31 +10337,31 @@
    {
     "stat": "smite_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6999999999999451,
+    "dps_gain_pct": 0.6995103427600791,
     "confidence": "estimated"
    },
    {
     "stat": "dmg_boost_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6993006993006645,
+    "dps_gain_pct": 0.6993006993007311,
     "confidence": "estimated"
    },
    {
     "stat": "weapon_dmg_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5931962166229487,
+    "dps_gain_pct": 0.5931962166230154,
     "confidence": "estimated"
    },
    {
     "stat": "attack_increase_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5398564840221276,
+    "dps_gain_pct": 0.539856484022172,
     "confidence": "estimated"
    },
    {
     "stat": "attack",
     "delta": 10.0,
-    "dps_gain_pct": 0.5226398384343023,
+    "dps_gain_pct": 0.5226398384343467,
     "confidence": "estimated"
    }
   ],
@@ -10433,7 +10433,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -10832,22 +10832,22 @@
     "stigma_picks": [
      [
       "fire-wall",
-      13.357654905043304
+      13.357654905043326
      ],
      [
       "element-enhancement",
-      18.983233028441827
+      18.983233028441802
      ],
      [
       "cold-storm",
-      5.087990818713362
+      5.087990818713339
      ],
      [
       "delayed-explosion",
-      3.4299776022479245
+      3.429977602247969
      ]
     ],
-    "dps": 30245.65642327208,
+    "dps": 30266.828382768355,
     "dps_delta_pct": 0.0
    },
    {
@@ -10908,7 +10908,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -11307,22 +11307,22 @@
     "stigma_picks": [
      [
       "fire-wall",
-      13.357654905043304
+      13.357654905043326
      ],
      [
       "element-enhancement",
-      18.983233028441827
+      18.983233028441802
      ],
      [
       "cold-storm",
-      5.087990818713362
+      5.087990818713339
      ],
      [
       "steel-barrier",
       0.0
      ]
     ],
-    "dps": 30245.65642327208,
+    "dps": 30266.828382768355,
     "dps_delta_pct": 0.0
    },
    {
@@ -11383,7 +11383,7 @@
       "boss_dmg_pct": 0.0,
       "crit_chance_pct": 2.8,
       "crit_dmg_pct": 50.0,
-      "smite_pct": 0.0,
+      "smite_pct": 0.1,
       "combat_speed_pct": 3.8,
       "cdr_pct": 0.1,
       "max_mp": 2000.0,
@@ -11782,22 +11782,22 @@
     "stigma_picks": [
      [
       "fire-wall",
-      13.357654905043304
+      13.357654905043326
      ],
      [
       "element-enhancement",
-      18.983233028441827
+      18.983233028441802
      ],
      [
       "cold-storm",
-      5.087990818713362
+      5.087990818713339
      ],
      [
       "hibernation",
       0.0
      ]
     ],
-    "dps": 30245.65642327208,
+    "dps": 30266.828382768355,
     "dps_delta_pct": 0.0
    }
   ],
@@ -11814,7 +11814,7 @@
    "scenario": "burst_15",
    "scenario_name": "Burst opener (15 s)",
    "duration_s": 15,
-   "dps": 30245.65642327208,
+   "dps": 30266.828382768355,
    "priority": [
     {
      "skill_key": "bittercold-wind",

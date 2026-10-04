@@ -25,7 +25,7 @@ export function UpgradeRow({ u, rank }: { u: GearUpgrade; rank: number }) {
           {moveText(u)}
         </span>
         <span className="mt-1 flex flex-wrap gap-1">
-          <Badge tone={u.kind === "enchant" ? "info" : "gold"}>{u.kind === "enchant" ? "Enchant" : "New item"}</Badge>
+          <Badge tone={u.kind === "item" ? "gold" : "info"}>{u.kind === "enchant" ? "Enchant" : u.kind === "exceed" ? "Exceed" : "New item"}</Badge>
           {sources(u.source).map((s) => (
             <Badge key={s}>{s}</Badge>
           ))}

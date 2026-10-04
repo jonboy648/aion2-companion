@@ -567,7 +567,7 @@ STAT_MAP_NOTES: dict[str, str] = {
     "Damage Boost": "orange (Unique) node, value is already a % (1.5): added to dmg_boost_pct 1:1",
     "Critical Damage Boost": "orange (Unique) node, value is already a % (1.5): added to crit_dmg_pct 1:1 (same bucket)",
     "Penetration": "flat Penetration, added 1:1",
-    "Critical Hit": "flat rating (+5); %-conversion depends on the target's crit resist gap (cap 80% at a 1,200 gap): not simulated",
+    "Critical Hit": "flat rating (+5); %-conversion depends on the target's crit resist gap (crit chance caps at 50%): not simulated",
     "Multi-hit Chance": "orange node (%), Multi-Hit damage per proc is unverified: not simulated",
     "Status Effect Chance": "no damage effect modelled: not simulated",
     "MP": "flat MP, no DPS conversion modelled",

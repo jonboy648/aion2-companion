@@ -18,17 +18,18 @@ export function sources(source: string | null | undefined): string[] {
   return (source ?? "").split(",").map((s) => s.trim()).filter(Boolean);
 }
 
-type Piece = { name: string; enchant: number; grade?: string; il?: number };
+type Piece = { name: string; enchant: number; grade?: string; il?: number; exceed?: number };
 
 /** "Rare, IL 13": what tells two same-named items apart (a morph or grade-up keeps the name). */
 const tier = (p: Piece) => [p.grade, p.il != null ? `IL ${p.il}` : null].filter(Boolean).join(", ");
 
 /**
- * One line for an upgrade: "Old +10 -> New +10", or "Item +0 -> +10" for an enchant step. When an item steps up to a
+ * One line for an upgrade: "Old +10 -> New +10", "Item +0 -> +10" for an enchant step, or "Item Exceed 0 -> 5". When an item steps up to a
  * version with the same name (Revelation Amulet Rare -> Unique), the grade and item level are shown so the line says
  * what changes.
  */
-export function moveText(u: { kind: "item" | "enchant"; from: Piece | null; to: Piece }): string {
+export function moveText(u: { kind: "item" | "enchant" | "exceed"; from: Piece | null; to: Piece }): string {
+  if (u.kind === "exceed") return `${u.to.name} Exceed ${u.from?.exceed ?? 0} -> ${u.to.exceed ?? 0}`;
   if (u.kind === "enchant") return `${u.to.name} +${u.from?.enchant ?? 0} -> +${u.to.enchant}`;
   const same = u.from !== null && u.from.name === u.to.name && (tier(u.from) || tier(u.to)) !== "";
   const label = (p: Piece) => (same ? `${p.name} (${tier(p)})` : p.name);

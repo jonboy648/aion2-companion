@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "data_version": "2026-10-04+aion2app-2026-09-18",
- "built_at": "2026-10-04T17:17:08+00:00",
+ "built_at": "2026-10-04T18:46:17+00:00",
  "level_caps": {
   "global": 45,
   "korea": 50
@@ -1373,7 +1373,7 @@
      }
     }
    ],
-   "range_m": null,
+   "range_m": 20.0,
    "aoe_targets": 1,
    "hits": 1,
    "anim_lock_s": {
@@ -6284,7 +6284,7 @@
    "skill_id": 15380000,
    "name": "Lumiel's Authority",
    "name_kr": "루미엘의 권능",
-   "kind": "active",
+   "kind": "stigma",
    "element": "none",
    "unlock_level": null,
    "max_rank": 1,
@@ -7505,7 +7505,7 @@
      }
     }
    ],
-   "range_m": 20.0,
+   "range_m": null,
    "aoe_targets": 1,
    "hits": 1,
    "anim_lock_s": {
