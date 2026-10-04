@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./components/game/game.css";
+@import "./components/ui/beam-search.css";
+@import "./components/ui/prism-flux-loader.css";
+@import "./components/ui/brand-crest.css";
+@import "./original-home-artwork.css";
 
 /* Theme tokens come from D:\Aion2\DESIGN.md (dark navy + gold). The site is dark-only. */
 /* ---- theme tokens. Three faction themes selected by <html data-faction>: neutral (default), asmodian, elyos ---- */

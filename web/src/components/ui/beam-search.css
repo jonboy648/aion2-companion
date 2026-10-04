@@ -1,0 +1,116 @@
+.beam-search {
+  --beam-search-background: var(--bg, #0a1224);
+  --beam-search-foreground: var(--text, #eaeefa);
+  --beam-search-muted: var(--text-faint, #98a3c8);
+  --beam-search-border: var(--border-soft, #243459);
+  --beam-search-accent: var(--gold, #e0b458);
+  width: 100%;
+  min-width: 0;
+  color-scheme: dark;
+}
+
+.beam-search[data-beam-theme="light"] {
+  --beam-search-background: #fff;
+  --beam-search-foreground: #20252d;
+  --beam-search-muted: #626b78;
+  --beam-search-border: #cbd0d8;
+  color-scheme: light;
+}
+
+.beam-search[data-color-variant="mono"] { --beam-search-accent: var(--beam-search-foreground); }
+.beam-search[data-color-variant="ocean"],
+.beam-search[data-color-variant="ice"] { --beam-search-accent: var(--cyan, #5fd0f0); }
+.beam-search[data-color-variant="forest"] { --beam-search-accent: var(--ok, #4cc38a); }
+.beam-search[data-color-variant="candy"] { --beam-search-accent: #e68ac4; }
+.beam-search[data-color-variant="sunset"] { --beam-search-accent: var(--warn, #e8a33d); }
+
+.beam-search-control {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--beam-search-border);
+  border-radius: 8px;
+  background: var(--beam-search-background);
+  color: var(--beam-search-foreground);
+}
+
+.beam-search[data-highlighted="true"] .beam-search-control {
+  border-color: var(--beam-search-accent);
+}
+
+.beam-search[data-focused="true"] .beam-search-control {
+  outline: 2px solid var(--beam-search-accent);
+  outline-offset: 2px;
+}
+
+.beam-search-icon { flex: 0 0 18px; color: var(--beam-search-muted); }
+
+.beam-search-input {
+  flex: 1 1 0;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  caret-color: var(--beam-search-accent);
+  font: inherit;
+  font-size: 16px;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+
+.beam-search-input:focus-visible,
+.beam-search-input:focus { outline: none; box-shadow: none; }
+.beam-search-input::placeholder { color: var(--beam-search-muted); opacity: 1; }
+.beam-search-input::-webkit-search-cancel-button,
+.beam-search-input::-webkit-search-decoration { -webkit-appearance: none; }
+
+.beam-search-clear {
+  display: grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--beam-search-muted);
+  cursor: pointer;
+}
+
+.beam-search-clear[data-visible="false"] { visibility: hidden; pointer-events: none; }
+.beam-search-clear:hover { background: var(--beam-search-border); color: var(--beam-search-foreground); }
+.beam-search-clear:focus-visible { outline: 2px solid var(--beam-search-accent); outline-offset: 1px; }
+.beam-search-trailing { display: flex; align-items: center; flex: 0 0 auto; min-width: 0; }
+.beam-search[data-disabled="true"] .beam-search-control { opacity: 0.55; cursor: not-allowed; }
+.beam-search-input:disabled { cursor: not-allowed; }
+
+.beam-search .beam-search-beam {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+}
+
+.beam-search-beam-surface { width: 100%; height: 100%; border-radius: 8px; }
+
+/* Stop LINE's CSS animations immediately, before the media-query listener removes the decoration. */
+@media (prefers-reduced-motion: reduce) {
+  .beam-search .beam-search-beam,
+  .beam-search .beam-search-beam::before,
+  .beam-search .beam-search-beam::after,
+  .beam-search .beam-search-beam [data-beam-bloom] {
+    animation: none !important;
+    transition: none !important;
+  }
+  .beam-search .beam-search-beam { visibility: hidden; }
+}

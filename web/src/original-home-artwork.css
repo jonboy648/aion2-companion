@@ -1,0 +1,46 @@
+/* The Home input, toolbar and results keep their own layout beneath the scene. */
+#root:has(.original-home-page) { overflow-x: clip; }
+.original-home-page h1, .original-home-page h2 { letter-spacing: 0; }
+
+.moon-search-composer { display: flex; flex-direction: column; min-width: 0; border: 1px solid color-mix(in srgb, var(--metal-hi) 62%, transparent); border-radius: 8px; background: rgb(0 0 0 / .60); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgb(0 0 0 / .18), inset 0 1px 0 rgb(255 255 255 / .06); }
+.moon-search-composer:focus-within { border-color: var(--gold-hi); box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 28%, transparent), 0 10px 30px rgb(0 0 0 / .18); }
+.moon-search-composer .beam-search-control { height: 64px; border: 0; border-radius: 8px 8px 0 0; background: transparent; padding-inline: 20px; }
+.moon-search-composer .beam-search[data-focused="true"] .beam-search-control { outline: none; }
+.moon-search-composer .beam-search-input { color: #f0f5f4; }
+.moon-search-composer .beam-search-input::placeholder, .moon-search-composer .beam-search-icon { color: #becdcd; }
+.character-search-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px 12px; border-top: 1px solid rgb(255 255 255 / .08); }
+.character-search-region { width: 180px; max-width: calc(100% - 56px); height: 36px; min-width: 0; border: 1px solid color-mix(in srgb, var(--metal) 30%, transparent); border-radius: 6px; background: rgb(255 255 255 / .04); color: #d1dddd; padding: 0 10px; font-size: 13px; letter-spacing: 0; color-scheme: dark; }
+.character-search-region option { background: var(--bg); color: var(--text); }
+.character-search-region:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 2px; }
+.character-search-region:disabled { opacity: .6; }
+.game-btn.character-search-submit[data-variant="primary"] {
+  flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border-radius: 6px; border: 1px solid var(--gold-hi); background: var(--gold); color: var(--gold-ink);
+  text-shadow: none; box-shadow: inset 0 1px 0 rgb(255 255 255 / .25); letter-spacing: 0;
+}
+.game-btn.character-search-submit[data-variant="primary"]:hover { background: var(--gold-hi); filter: none; }
+.game-btn.character-search-submit[data-variant="primary"]:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.game-btn.character-search-submit[data-variant="primary"]:active { transform: translateY(1px); }
+.moon-search-feedback { padding: 10px 12px; border-radius: 6px; background: rgb(10 21 24 / .92); }
+.moon-search-feedback.text-dim { color: #d5e1e0; }
+.character-search-results { overflow: hidden; border: 1px solid color-mix(in srgb, var(--metal) 30%, var(--border-soft)); border-radius: 8px; background: var(--bg); }
+.character-search-result { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; text-align: left; }
+.character-search-result:hover, .character-search-result:focus-visible { background: var(--surface2); }
+.character-search-result > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.home-recent-clear { display: inline-flex; width: 28px; height: 28px; align-items: center; justify-content: center; border-radius: 4px; color: var(--text-faint); }
+.home-recent-clear:hover { background: rgb(255 255 255 / .06); color: var(--text); }
+.home-recent-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--metal) 22%, var(--border-soft)); border-radius: 6px; background: color-mix(in srgb, var(--bg) 88%, transparent); font-size: 13px; color: var(--text); text-decoration: none; }
+.home-recent-link:hover { border-color: var(--metal); color: var(--gold-hi); }
+.home-recent-link strong { overflow-wrap: anywhere; }
+
+@media (max-width: 639px) {
+  .home-recent-link { flex-wrap: wrap; row-gap: 2px; }
+}
+@media (max-width: 639px) and (max-height: 640px) {
+  .moon-search-composer .beam-search-control { height: 48px; padding-inline: 12px; }
+  .character-search-toolbar { padding: 6px 10px 8px; }
+  .game-btn.character-search-submit[data-variant="primary"] { flex-basis: 40px; width: 40px; height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .character-search-submit { transition: none; }
+  .game-btn.character-search-submit[data-variant="primary"]:active { transform: none; }
+}

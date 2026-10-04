@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { trackHit } from "@/lib/analytics";
 import { isMockEngine } from "@/engine/api";
-import { FactionEmblem } from "@/components/game/Ornaments";
+import { BrandCrest } from "@/components/ui/brand-crest";
 import { FactionThemeProvider, useFaction, type Faction } from "@/components/game/faction";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,6 @@ const NAV = [
   { to: "/build", label: "Build" },
   { to: "/daevanion", label: "Daevanion" },
   { to: "/compare", label: "Compare" },
-  { to: "/board", label: "Board" },
   { to: "/codex", label: "Codex" },
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
@@ -54,15 +53,14 @@ export const PRIVACY_NOTE =
   "We count visits anonymously (no cookies, no IP stored). Characters you look up appear on the public Board with their public armory info (name, class, server, level, Combat Power); the max-potential DPS shown there is an unverified estimate from the visitor's browser.";
 
 function Shell() {
-  const { faction } = useFaction();
   const { pathname } = useLocation();
   useEffect(() => trackHit(pathname), [pathname]);
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--metal)_40%,var(--border-soft))] bg-bg/90 shadow-[0_6px_18px_-10px_rgb(0_0_0/0.6)] backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2.5">
-          <NavLink to="/" className="flex items-center gap-2 text-gold no-underline" aria-label="Become Cube home">
-            <FactionEmblem faction={faction} size={30} className="drop-shadow-[0_0_6px_rgb(var(--ether)/0.6)]" />
+          <NavLink to="/" className="brand-home flex items-center gap-2 text-gold no-underline" aria-label="Become Cube home">
+            <BrandCrest />
             <span className="font-display text-[18px] font-bold tracking-wider">Become Cube</span>
           </NavLink>
           <nav aria-label="Main" className="flex flex-wrap gap-1.5">
@@ -86,7 +84,8 @@ function Shell() {
       <footer className="px-4 pb-6 pt-2 text-center text-xs text-faint">
         <div aria-hidden className="mx-auto mb-4 h-px max-w-6xl bg-gradient-to-r from-transparent via-[var(--metal)] to-transparent opacity-60" />
         {DISCLAIMER}
-        <div className="mt-1">
+        <div className="mt-1 flex justify-center gap-4">
+          <NavLink to="/board" className="text-faint underline-offset-2 hover:text-foreground">Board</NavLink>
           <NavLink to="/maps" className="text-faint underline-offset-2 hover:text-foreground">Maps</NavLink>
         </div>
         <details className="mx-auto mt-2 max-w-xl">

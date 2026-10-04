@@ -1,0 +1,66 @@
+.moon-home { position: relative; isolation: isolate; margin-top: -24px; margin-bottom: 28px; }
+.moon-home .original-home-scene { position: absolute; inset-block: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: -2; overflow: hidden; }
+.moon-home .original-home-scene img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
+.moon-home::after {
+  content: ""; position: absolute; inset-block: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: -1;
+  background: linear-gradient(0deg, var(--bg) 0%, rgb(10 19 23 / .40) 8%, rgb(10 19 23 / .08) 24%, rgb(10 19 23 / .08) 100%);
+}
+.moon-home-content { width: 100%; max-width: 768px; margin-inline: auto; padding: 48px 16px 40px; text-align: center; }
+.moon-home-content h1 { margin: 0; color: #f5f6ef; font-size: 48px; line-height: 1.15; font-weight: 600; letter-spacing: 0; text-shadow: 0 2px 8px rgb(0 0 0 / .65); }
+.moon-home-description { max-width: 540px; margin: 12px auto 0; color: #edf0f1; font-size: 16px; line-height: 24px; text-shadow: 0 1px 4px rgb(0 0 0 / .85); }
+.moon-home-search { max-width: 620px; margin: 28px auto 0; text-align: left; }
+.moon-quick-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+.game-btn.moon-quick-action[data-variant="secondary"] {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-width: 0; height: 40px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--metal-hi) 48%, transparent);
+  background: rgb(0 0 0 / .50); backdrop-filter: blur(8px); color: #e1e8e8;
+  font-family: var(--font-sans); font-size: 13px; font-weight: 500; letter-spacing: 0;
+  text-shadow: none; box-shadow: inset 0 1px 0 rgb(255 255 255 / .06); text-decoration: none;
+  transition: background-color 150ms, border-color 150ms, color 150ms;
+}
+.moon-quick-action > span:first-child { display: flex; flex: 0 0 auto; color: var(--gold-hi); }
+.game-btn.moon-quick-action[data-variant="secondary"]:hover { background: rgb(28 46 45 / .95); border-color: var(--gold-hi); color: #fff; filter: none; }
+.game-btn.moon-quick-action[data-variant="secondary"]:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
+.moon-start-action {
+  min-width: 0; height: 40px; padding: 2px; background: transparent;
+  font-family: var(--font-sans); font-size: 13px; line-height: 24px; letter-spacing: 0;
+}
+.moon-start-action .gradient-borders-button-content {
+  height: 36px; padding-inline: 14px; background: rgb(0 0 0 / .50); backdrop-filter: blur(8px); color: #e1e8e8;
+}
+/* Keep the supplied gradient on the border, leaving the glass center see-through. */
+.moon-start-action .gradient-borders-button-glow {
+  padding: 2px; background: radial-gradient(75% 100% at 50% 0%, rgb(189 56 222) 0%, rgb(56 189 248) 75%); opacity: .4;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude;
+}
+.moon-start-action:is(:hover, :focus-visible) .gradient-borders-button-glow { opacity: 1; }
+.moon-start-action:is(:hover, :focus-visible) .gradient-borders-button-line { opacity: .4; }
+.moon-start-action [aria-hidden="true"]:has(svg) { display: flex; flex: 0 0 auto; color: var(--gold-hi); }
+.moon-start-action:focus-visible { outline: 2px solid #38bdf8; outline-offset: 3px; box-shadow: none; }
+.moon-home-recent { max-width: 620px; margin-inline: auto; text-align: left; }
+
+@media (max-width: 639px) {
+  .moon-home-content { padding-top: 28px; padding-bottom: 28px; }
+  .moon-home-content h1 { font-size: 36px; }
+  .moon-home-description { max-width: 340px; font-size: 14px; line-height: 21px; }
+  .moon-home .original-home-scene img { object-position: 59% 35%; }
+  .moon-home-search { margin-top: 22px; }
+  .moon-quick-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 340px; margin: 16px auto 0; }
+  .game-btn.moon-quick-action[data-variant="secondary"] { padding-inline: 10px; }
+  .moon-start-action .gradient-borders-button-content { padding-inline: 10px; }
+}
+@media (max-width: 639px) and (max-height: 640px) {
+  .moon-home { margin-bottom: 16px; }
+  .moon-home-content { padding-top: 12px; padding-bottom: 16px; }
+  .moon-home-content h1 { font-size: 26px; }
+  .moon-home-description { margin-top: 8px; font-size: 13px; line-height: 18px; }
+  .moon-home-search { margin-top: 12px; }
+  .moon-quick-actions { margin-top: 12px; gap: 6px; }
+  .game-btn.moon-quick-action[data-variant="secondary"] { height: 32px; font-size: 12px; }
+  .moon-start-action { height: 32px; font-size: 12px; }
+  .moon-start-action .gradient-borders-button-content { height: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-btn.moon-quick-action[data-variant="secondary"] { transition: none; }
+}
