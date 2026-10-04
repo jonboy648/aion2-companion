@@ -130,10 +130,29 @@ def test_status_stat_mods_apply_while_active(mini_gd, scen10, stat, value, stats
 
 
 def test_cdr_status_mod_shortens_cooldowns(mini_gd, scen10):
-    gd = buff_gd(mini_gd, "cdr_pct", 100)
+    gd = buff_gd(mini_gd, "cdr_pct", 50)
     r = run(gd, scen10, "amp", "nuke", "strike")
-    assert [c.t_s for c in r.casts if c.skill_key == "nuke"] == [1.0, 2.0, 3.0, 4.0, 5.0, 9.0]
-    assert r.total_damage == 6 * 3000 + 3 * 1000
+    assert [c.t_s for c in r.casts if c.skill_key == "nuke"] == [1.0, 3.0, 5.0, 9.0]  # 4 s cooldown x 0.5 = 2 s while the buff lasts
+
+
+def test_cooldown_scale_is_capped_at_60_percent():
+    from aion2c.models import CDR_CAP_PCT, cooldown_scale
+    assert CDR_CAP_PCT == 60.0
+    assert cooldown_scale(0) == 1.0 and cooldown_scale(30) == pytest.approx(0.7)
+    assert cooldown_scale(60) == pytest.approx(0.4) and cooldown_scale(100) == pytest.approx(0.4)
+    assert cooldown_scale(-5) == 1.0  # a negative total never lengthens a cooldown
+
+
+def test_cdr_above_the_cap_changes_nothing(mini_gd, scen10):
+    """The cap is on the TOTAL: build CDR 100 and a status +100 give the same casts as exactly 60."""
+    def nukes(stats, mod):
+        r = run(buff_gd(mini_gd, "cdr_pct", mod), scen10, "amp", "nuke", "strike", stats=stats)
+        return [c.t_s for c in r.casts if c.skill_key == "nuke"], r.total_damage
+    capped = nukes(Stats(), 60)
+    assert nukes(Stats(), 100) == capped
+    assert nukes(Stats(cdr_pct=100), 0) == nukes(Stats(cdr_pct=60), 0)  # build CDR alone
+    assert nukes(Stats(cdr_pct=40), 40) == nukes(Stats(cdr_pct=40), 20)  # build 40 + status 40 = 80, capped to 60
+    assert nukes(Stats(), 20) != capped  # below the cap the extra CDR still counts
 
 
 def test_stat_mod_read_confidence_counts(mini_gd, scen10):

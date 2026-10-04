@@ -334,6 +334,17 @@ class Stats:
     penetration: float = 0
 
 
+# Client UI text (UI_desc_CoolTimeIncrease: "Cooldown reduction is capped at 60%"; StatCorrectionNumber.CoolTimeIncrease
+# min -6000 = -60%). The cap applies to the total of every source (gear, Illusion, Daevanion, buffs), so it is applied
+# where a cooldown is turned into a ready time, never to one source on its own.
+CDR_CAP_PCT = 60.0
+
+
+def cooldown_scale(cdr_pct: float) -> float:
+    """Multiplier on a base cooldown for a total cooldown reduction of `cdr_pct` percent, capped at CDR_CAP_PCT."""
+    return 1.0 - min(max(cdr_pct, 0.0), CDR_CAP_PCT) / 100
+
+
 # Explicit "typical level-45 character" profile for validation runs and manual-build defaults, applied identically to
 # every class. Stats() stays the all-zero contract default (tests depend on it). Sources: attack +1.6%, combat speed
 # +3.8%, cooldown 0.1% come from the DarthThot armory sample (tests/fixtures/armory/info.json, level 44, attribute

@@ -16,6 +16,9 @@ How a skill of ours is tied to client rows (the real skill -> effect link lives 
      ours when ours is non-zero) - accepted only when every such group belongs to ONE client skill number;
   3. a skill whose flat damage in the client table disagrees with ours at any rank is NOT matched (reported).
 The first group found in step 1/2 supplies ratio, hits and flats; siblings (`_01.._05` parts) are not summed.
+
+The same run also writes src/client_skill_details.json (cooldown, range, skill kind, hit count corrections; see
+`build_skill_details` below). It is a separate derived file and a separate step.
 """
 from __future__ import annotations
 
@@ -263,6 +266,146 @@ def build(table_dir: Path, research_dir: Path, icons_dir: Path) -> dict:
             "classes": {ck: extract_class(t, ck, research_dir, icons_dir) for ck in CLIENT_CLASS}}
 
 
+# ---- skill details: cooldown, range, skill type, hit count -> client_skill_details.json -----------------------------
+# A SEPARATE derived file and a separate step (client_skill_numbers.json above is untouched by it). Only OUR corrections
+# are stored: a field is written for one of our skills when the client's value differs from our dump's value, so the file
+# stays small and a matching skill carries nothing. Keyed by our skill keys, no raw rows, ids or strings.
+DETAILS_OUT_PATH = bg.SRC_DIR / bg.CLIENT_DETAILS_FILE
+CLIENT_CLASS_CODE = {"gladiator": 11, "templar": 12, "assassin": 13, "ranger": 14,
+                     "sorcerer": 15, "spiritmaster": 16, "cleric": 17, "chanter": 18}
+DIFF_FRACTION = 0.05  # same threshold as research/skill_details_extract_2026-10-04.md section 3
+# A keyless skill of ours is matched by exact name to the LOWEST client id of that name (the no-specialization variant).
+# More variants than this means the name is shared by unrelated rows (the spirit basic attacks x8-9, the summons x16),
+# so there is no safe match; real specialization variants come in two to four (Predation x4).
+MAX_NAME_VARIANTS = 4
+
+
+def _norm(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", name.lower())
+
+
+def _differs(a: float, b: float) -> bool:
+    return abs(a - b) > DIFF_FRACTION * max(abs(a), abs(b))
+
+
+class DetailTables:
+    """The client tables behind the skill details, regrouped: `skill[id]` (type, cooldown, range, level group, effect
+    groups), `lv_cd[group][rank] -> seconds`, `hits[effect_group_id]` (hit count of the group's Damage row) and
+    `by_name[class_token][normalised name] -> ids with that name`."""
+
+    def __init__(self, table_dir: Path):
+        self.skill: dict[int, dict] = {}
+        for r in _rows(table_dir, "Skill"):
+            sid = r["ID"]["Value"]
+            groups = [x["SkillEffectGroupId"]["Value"] for x in r.get("SkillEffectTimeDataList") or []
+                      if x["SkillEffectGroupId"]["Value"]]
+            typ = r["SkillType"].split("::")[-1].lower()
+            self.skill[sid] = {
+                "type": "stigma" if r.get("bIsStigmaSkill") and typ == "active" else typ,
+                "cd_s": float(r["NeedCoolTime"]) / 1000, "range_m": float(r["NeedSkillUseRange"]) / 100,
+                "lv_group": r["SkillLvGroupId"], "groups": groups, "str_key": r.get("SkillString_Key")}
+        self.lv_cd: dict[str, dict[int, float]] = defaultdict(dict)
+        for r in _rows(table_dir, "SkillLv"):
+            self.lv_cd[r["SkillLvGroupId"]][r["SkillLv"]] = float(r["NeedCoolTime"]) / 1000
+        self.hits: dict[int, int] = {}
+        for r in _rows(table_dir, "SkillEffect"):
+            v = r.get("EffectValueList") or []
+            if r["EffectType"].endswith("::Damage") and len(v) == 28 and _f(v[4]) is not None:
+                self.hits.setdefault(r["SkillEffectGroupId"]["Value"], int(float(v[4])))
+        l10n = table_dir / "L10N" / "en-US" / "L10NString.json"
+        entries = json.loads(l10n.read_text(encoding="utf-8"))["Entries"] if l10n.is_file() else {}
+        self.by_name: dict[str, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
+        for sid, sk in self.skill.items():
+            m = re.fullmatch(r"STR_SKILL_PC_([A-Z]+)_\d+", sk["str_key"] or "")
+            name = entries.get(f"SkillString_{sk['str_key']}_skill_name") if m else None
+            if name:
+                self.by_name[m.group(1)][_norm(name)].append(sid)
+
+    def cooldown(self, sid: int, rank: int) -> float:
+        s = self.skill[sid]
+        return self.lv_cd.get(s["lv_group"], {}).get(rank, s["cd_s"]) if rank > 1 else s["cd_s"]
+
+    def hit_count(self, sid: int) -> int | None:
+        return next((self.hits[g] for g in self.skill[sid]["groups"] if g in self.hits), None)
+
+
+def _our_rows(ck: str, research_dir: Path, icons_dir: Path) -> list[dict]:
+    """Per skill of ours: key, skill_id, name, whether build_skills would type it `active` by default, cooldown per rank,
+    range, hit count (same inputs and key rules as build_gamedata.build; hit count read from the description exactly as
+    build_skills does). A chain/proc/charge child or a mechanics.json kind override is never default-active."""
+    srcs = bg.ClassSources(research_dir, icons_dir, ck)
+    raw = json.loads(srcs.skills.read_text(encoding="utf-8"))
+    keys = bg.assign_keys(raw, json.loads(srcs.index.read_text(encoding="utf-8")), lenient=ck != "sorcerer")
+    chains = json.loads((srcs.src / "chains.json").read_text(encoding="utf-8"))
+    mech = json.loads((srcs.src / "mechanics.json").read_text(encoding="utf-8"))
+    typed = {ln.child_key for ln in bg.build_links(chains, raw, keys) if ln.kind != "condition"} | set(mech["kind_overrides"])
+    out = []
+    for r, k in zip(raw, keys):
+        per = r.get("per_level") or []
+        cds = [float(p["cooldown_s"]) for p in per] or ([float(r["cooldown_s"])] if r.get("cooldown_s") is not None else [])
+        hit = re.search(r"\((\d+) hits?\)", r.get("description") or "")
+        stated = re.search(r"Cooldown:\s*(\d+(?:\.\d+)?)\s*s\b", r.get("description") or "")
+        out.append({"key": k, "skill_id": r.get("skill_id"), "name": r["name"],
+                    "stated_cd": float(stated.group(1)) if stated else None,
+                    "default_active": k not in typed and bg.CATEGORY_KIND.get(r["category"], bg.SkillKind.ACTIVE) == bg.SkillKind.ACTIVE,
+                    "cds": cds, "range_m": r.get("range_m"), "hits": int(hit.group(1)) if hit else 1})
+    return out
+
+
+def skill_details_class(t: DetailTables, ck: str, research_dir: Path, icons_dir: Path,
+                        covered_hits: frozenset[str] = frozenset()) -> dict[str, dict]:
+    """`covered_hits`: our keys whose hit count client_skill_numbers.json already sets (that group-based number wins)."""
+    token = CLIENT_CLASS[ck].upper()
+    skills: dict[str, dict] = {}
+    for o in _our_rows(ck, research_dir, icons_dir):
+        sid = o["skill_id"]
+        by_id = sid in t.skill and sid // 1000000 == CLIENT_CLASS_CODE[ck]
+        if not by_id:  # keyless skill: exact name, lowest id = the no-specialization variant
+            variants = t.by_name[token].get(_norm(o["name"]), []) if sid is None else []
+            if not 0 < len(variants) <= MAX_NAME_VARIANTS:
+                continue
+            sid = min(variants)
+        c, e = t.skill[sid], {}
+        if o["cds"]:
+            client = [round(t.cooldown(sid, r), 3) for r in range(1, len(o["cds"]) + 1)]
+            # A client NeedCoolTime of 0 under a tooltip that states "Cooldown: Ns" is a proc's INTERNAL cooldown, which the
+            # client keeps outside Skill/SkillLv (the engine rate-limits the proc with it): not a correction.
+            internal = o["stated_cd"] is not None and set(client) == {0.0} and o["stated_cd"] == o["cds"][0]
+            if not internal and any(_differs(a, b) for a, b in zip(o["cds"], client)):
+                e["cooldown_s"] = client[0] if len(set(client)) == 1 else client
+        ours_r, client_r = o["range_m"], round(c["range_m"], 2)
+        if (ours_r is None and client_r > 0) or (ours_r is not None and _differs(float(ours_r), client_r)):
+            e["range_m"] = client_r
+        if by_id:  # kind and hit count only from an exact skill_id match
+            if o["default_active"] and c["type"] in ("stigma", "system"):
+                e["kind"] = c["type"]
+            hits = t.hit_count(sid)
+            if o["key"] not in covered_hits and hits is not None and hits >= 1 and hits != o["hits"]:
+                e["hits"] = hits
+        if e:
+            skills[o["key"]] = e
+    return skills
+
+
+def build_skill_details(table_dir: Path, research_dir: Path, icons_dir: Path) -> dict:
+    t = DetailTables(table_dir)
+    numbers = bg.load_client_numbers() or {"classes": {}}
+    covered = {ck: frozenset(k for k, e in numbers["classes"].get(ck, {}).get("skills", {}).items() if "hits" in e)
+               for ck in CLIENT_CLASS}
+    return {"schema": 1, "source": SOURCE,
+            "note": "corrections only: a field is listed when the client value differs from our dump's; "
+                    "cooldown_s is seconds (one number, or one per rank), range_m metres, kind a skill kind, hits a count",
+            "classes": {ck: skill_details_class(t, ck, research_dir, icons_dir, covered[ck]) for ck in CLIENT_CLASS}}
+
+
+def write_skill_details(table_dir: Path, research_dir: Path, icons_dir: Path, out: Path = DETAILS_OUT_PATH) -> dict:
+    data = build_skill_details(table_dir, research_dir, icons_dir)
+    out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":"), sort_keys=True), encoding="utf-8")
+    print(f"wrote {out} ({out.stat().st_size} bytes): "
+          + ", ".join(f"{ck} {len(c)}" for ck, c in data["classes"].items()), file=sys.stderr)
+    return data
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--research", type=Path, default=bg.REPO / "research")
@@ -275,6 +418,7 @@ def main() -> None:
         print(f"[{ck}] {len(c['skills'])} skills with client numbers, {len(c['unmatched'])} unmatched: "
               f"{', '.join(c['unmatched']) or '-'}", file=sys.stderr)
     print(f"wrote {a.out} ({a.out.stat().st_size // 1024} KiB)", file=sys.stderr)
+    write_skill_details(export_dir(), a.research, a.icons)
 
 
 if __name__ == "__main__":
