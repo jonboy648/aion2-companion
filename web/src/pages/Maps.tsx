@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/PageHeader";
+import { PartyMap } from "@/features/maps/PartyMap";
 
 interface MapSite {
   name: string;
@@ -28,6 +29,7 @@ export function Maps() {
   return (
     <>
       <PageHeader title="Maps" caption="Unofficial community maps. We link to them and do not host or copy any map art." />
+      <PartyMap />
       <ul className="space-y-3">
         {MAP_SITES.map((s) => (
           <li key={s.url} className="ornate p-5">

@@ -6,7 +6,7 @@ import { Maps, MAP_SITES } from "./Maps";
 
 describe("Maps page", () => {
   it("links out to each community map safely, in a new tab", () => {
-    render(<Maps />);
+    render(<MemoryRouter><Maps /></MemoryRouter>);
     for (const s of MAP_SITES) {
       const a = screen.getByRole("link", { name: new RegExp(s.name) });
       expect(a.getAttribute("href")).toBe(s.url);
