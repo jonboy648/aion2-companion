@@ -7,6 +7,7 @@ const UA =
 const REGIONS = new Set(["nae", "naw", "eu", "la", "as"]);
 const TIMEOUT_MS = 10_000;
 const CACHE_TTL_S = 600;
+const FRESH_MIN_AGE_MS = 30_000; // ?fresh=1 re-reads the armory, but not more often than this per cached entry
 const RATE_LIMIT = 60; // requests per rolling minute per IP, per isolate (best-effort)
 const RATE_WINDOW_MS = 60_000;
 
@@ -22,15 +23,16 @@ const validators = {
   // each class has its own board range (Templar 21-26, Sorcerer 61-68, Cleric 71-76, ...)
   boardId: (v) => (/^\d{1,4}$/.test(v) && +v > 0 ? String(+v) : null),
   keyword: (v) => (v.length >= 1 && v.length <= 32 && !/[\u0000-\u001f\u007f]/.test(v) ? v : null),
+  fresh: (v) => (v === "1" ? "1" : null),
   page: intRange(1, 10),
   size: intRange(1, 100),
 };
 
 const ROUTES = {
   "/search": { required: ["keyword", "region"], optional: { page: "1", size: "100" } },
-  "/info": { required: ["characterId", "serverId", "region"], optional: {} },
-  "/equipment": { required: ["characterId", "serverId", "region"], optional: {} },
-  "/daevanion": { required: ["characterId", "serverId", "region", "boardId"], optional: {} },
+  "/info": { required: ["characterId", "serverId", "region"], optional: { fresh: "" } },
+  "/equipment": { required: ["characterId", "serverId", "region"], optional: { fresh: "" } },
+  "/daevanion": { required: ["characterId", "serverId", "region", "boardId"], optional: { fresh: "" } },
 };
 
 // A characterId that still contains "%" is already in the armory's percent-encoded form: send as-is.
@@ -181,8 +183,8 @@ async function handleBoardDps(request, env, cors) {
   }
   if (!hasDb(env)) return json({ error: "board_unavailable" }, 503, cors);
   try {
-    const ok = await recordDps(env, { region, serverId, characterId, dps });
-    return ok ? new Response(null, { status: 204, headers: cors }) : json({ error: "unknown_character" }, 404, cors);
+    const out = await recordDps(env, { region, serverId, characterId, dps });
+    return out === "unknown" ? json({ error: "unknown_character" }, 404, cors) : new Response(null, { status: 204, headers: cors });
   } catch {
     return json({ error: "board_error" }, 500, cors);
   }
@@ -246,6 +248,9 @@ export async function handle(request, env, ctx, deps = {}) {
     p[name] = v;
   }
 
+  // ?fresh=1 only asks to skip the cache; it is not part of the cache key
+  const wantFresh = p.fresh === "1";
+  delete p.fresh;
   const cache = deps.cache ?? (typeof caches !== "undefined" ? caches.default : null);
   const key = new Request(
     `https://cache.invalid${url.pathname}?` +
@@ -253,7 +258,9 @@ export async function handle(request, env, ctx, deps = {}) {
   );
   if (cache) {
     const hit = await cache.match(key);
-    if (hit) {
+    // a fresh request is served from cache only if that entry was fetched moments ago (protects the armory and the quota)
+    const tooRecent = hit && Date.now() - Number(hit.headers.get("X-Cached-At") || 0) < FRESH_MIN_AGE_MS;
+    if (hit && (!wantFresh || tooRecent)) {
       if (url.pathname === "/search" && p.page === "1") {
         const copy = hit.clone();
         track(env, ctx, async () => logSearch(env, { keyword: p.keyword, region: p.region, results: resultCount(await copy.arrayBuffer()) }));
@@ -289,6 +296,7 @@ export async function handle(request, env, ctx, deps = {}) {
     headers: {
       "Content-Type": up.headers.get("Content-Type") || "application/json; charset=utf-8",
       "Cache-Control": `public, max-age=${CACHE_TTL_S}`,
+      "X-Cached-At": String(Date.now()),
     },
   });
   if (cache) {

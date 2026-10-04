@@ -41,4 +41,21 @@ describe("CharacterPage", () => {
     err.mockRestore();
     expect(dup).toEqual([]);
   });
+
+  it("has a Refresh button that is off while loading and reloads the character when pressed", async () => {
+    render(
+      <MemoryRouter initialEntries={["/c/nae/2103/DarthThot"]}>
+        <Routes>
+          <Route path="/c/:region/:serverId/:name" element={<CharacterPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    const btn = screen.getByRole("button", { name: "Refresh" }) as HTMLButtonElement;
+    expect(btn.disabled).toBe(true); // still loading
+    await waitFor(() => expect(btn.disabled).toBe(false), { timeout: 5000 });
+    act(() => btn.click());
+    expect((screen.getByRole("button", { name: "Refresh" }) as HTMLButtonElement).disabled).toBe(true); // reloading
+    await waitFor(() => expect(screen.getAllByText(/Boss DPS plan/).length).toBe(1), { timeout: 5000 });
+    await waitFor(() => expect((screen.getByRole("button", { name: "Refresh" }) as HTMLButtonElement).disabled).toBe(false));
+  });
 });

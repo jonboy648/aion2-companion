@@ -34,8 +34,10 @@ export function pickHit(hits: ArmorySearchHit[], name: string, serverId: string)
  * Armory search -> fetch -> engine import -> compare, publishing each phase so the page can show the
  * character card as soon as the import lands while the (slow, in the real engine) optimizer still runs.
  */
-export function useCharacter(region: string, serverId: string, name: string): CharacterState & { points: Points; setPoints: (p: Points) => void } {
+export function useCharacter(region: string, serverId: string, name: string): CharacterState & { points: Points; setPoints: (p: Points) => void; refresh: () => void } {
   const [state, setState] = useState<CharacterState>(INITIAL);
+  // bumped by refresh(): re-run the load, asking the proxy to skip its cache
+  const [reloads, setReloads] = useState(0);
   const [points, setPoints] = usePoints(pointsKey(region, serverId, name));
   const comparedFor = useRef<ImportResult | null>(null);
 
@@ -52,7 +54,7 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
         if (!hit) throw new ArmoryError(`No character named "${name}" was found in that region.`);
         patch({ hit });
         step("Fetching gear and Daevanion from the armory...");
-        const raw = await fetchCharacter(hit.characterId, hit.serverId ?? serverId, region as ArmoryRegion);
+        const raw = await fetchCharacter(hit.characterId, hit.serverId ?? serverId, region as ArmoryRegion, reloads > 0);
         patch({ phase: "import", extras: armoryExtras(raw), raw });
         step("Reading the build...");
         const imp = await importCharacter(raw);
@@ -65,7 +67,7 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
     return () => {
       live = false;
     };
-  }, [region, serverId, name]);
+  }, [region, serverId, name, reloads]);
 
   // compare = import + the typed unspent points. Immediate for a fresh import, debounced when the points change.
   const imp = state.imp;
@@ -95,5 +97,5 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
     };
   }, [imp, points.skill, points.stigma]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { ...state, points, setPoints };
+  return { ...state, points, setPoints, refresh: () => setReloads((n) => n + 1) };
 }

@@ -51,14 +51,28 @@ export async function recordInfo(env, region, buf, now = Date.now()) {
 }
 
 /** Store the browser's max-potential estimate on a character the Worker has already seen. Returns true if a row changed. */
+export const DPS_COOLDOWN_MS = 600_000;
+
+/**
+ * Store the browser's max-potential estimate on a character the Worker has already seen. Anyone can call this, so a new
+ * value only replaces the stored one if it is higher, or the stored one is older than DPS_COOLDOWN_MS (so engine fixes
+ * can still lower it, but nobody can zero out or flip a score repeatedly).
+ * Returns "updated" | "ignored" (character known, value not accepted now) | "unknown" (never seen via /info).
+ */
 export async function recordDps(env, { region, serverId, characterId, dps }, now = Date.now()) {
-  if (!hasDb(env)) return false;
+  if (!hasDb(env)) return "unknown";
   const r = await env.STATS.prepare(
-    "UPDATE board SET max_dps = ?1, max_dps_ts = ?2 WHERE region = ?3 AND server_id = ?4 AND character_id = ?5",
+    `UPDATE board SET max_dps = ?1, max_dps_ts = ?2
+     WHERE region = ?3 AND server_id = ?4 AND character_id = ?5
+       AND (max_dps IS NULL OR ?1 > max_dps OR max_dps_ts IS NULL OR max_dps_ts < ?6)`,
   )
-    .bind(dps, now, region, serverId, characterId)
+    .bind(dps, now, region, serverId, characterId, now - DPS_COOLDOWN_MS)
     .run();
-  return (r?.meta?.changes ?? 0) > 0;
+  if ((r?.meta?.changes ?? 0) > 0) return "updated";
+  const known = await env.STATS.prepare("SELECT 1 AS x FROM board WHERE region = ?1 AND server_id = ?2 AND character_id = ?3")
+    .bind(region, serverId, characterId)
+    .all();
+  return known.results?.length ? "ignored" : "unknown";
 }
 
 const COLUMNS = "name, class_name, server_name, region, server_id, level, combat_power, max_dps, last_seen";

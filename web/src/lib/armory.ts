@@ -84,13 +84,14 @@ export async function search(name: string, region?: ArmoryRegion): Promise<Armor
 }
 
 /** info + equipment + the Daevanion boards that have open nodes, as webapi.import_character expects. */
-export async function fetchCharacter(characterId: string, serverId: number | string, region: ArmoryRegion): Promise<ArmoryRaw> {
+/** `fresh` asks the proxy to re-read the armory instead of its 10-minute cache (the proxy still rate-limits this per entry). */
+export async function fetchCharacter(characterId: string, serverId: number | string, region: ArmoryRegion, fresh = false): Promise<ArmoryRaw> {
   if (isMockEngine) {
     await delay(400);
     return structuredClone(rawFx) as unknown as ArmoryRaw;
   }
   if (!PROXY_URL) throw new ArmoryError("Armory proxy is not configured (VITE_ARMORY_PROXY_URL).");
-  const common = { characterId, serverId, region };
+  const common = { characterId, serverId, region, ...(fresh ? { fresh: 1 } : {}) };
   const info = await getJson("/info", common);
   if (!info || typeof info !== "object" || !info.profile) {
     throw new ArmoryError("The armory has no profile for that character (wrong region or server?).");

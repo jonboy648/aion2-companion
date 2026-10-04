@@ -118,6 +118,25 @@ test("POST /board/dps updates only a character the Worker already saw, with clam
   assert.equal(rows(env)[0].max_dps, 12346, "bad submissions change nothing");
 });
 
+test("a lower DPS cannot replace a higher one inside the cooldown, a higher one can, and an old one can be replaced", async () => {
+  const env = mkEnv();
+  await lookup(env, info());
+  const send = (dps) => postDps(env, { region: "nae", serverId: 2103, characterId: CID, dps });
+  assert.equal((await send(20000)).status, 204);
+  assert.equal((await send(1)).status, 204, "ignored but not an error");
+  assert.equal(rows(env)[0].max_dps, 20000, "a forged low value does not zero the score");
+  assert.equal((await send(30000)).status, 204);
+  assert.equal(rows(env)[0].max_dps, 30000, "higher values are accepted");
+  env.STATS.db.prepare("UPDATE board SET max_dps_ts = ?1").run(Date.now() - 11 * 60_000);
+  assert.equal((await send(25000)).status, 204);
+  assert.equal(rows(env)[0].max_dps, 25000, "after the cooldown the value can come down (engine fixes)");
+});
+
+test("the board page itself is a countable analytics path", async () => {
+  const { normalizePath } = await import("../stats.js");
+  assert.equal(normalizePath("/board"), "/board");
+});
+
 test("POST /board/dps is only accepted from the site's own origin", async () => {
   const env = mkEnv();
   await lookup(env, info());
