@@ -134,7 +134,7 @@ export function PartyMap() {
         role="img"
         aria-label={`Party board with ${markers.length} pins`}
         viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
-        className="w-full cursor-crosshair touch-none select-none rounded border border-border bg-surface"
+        className="mx-auto max-h-[70vh] w-full cursor-crosshair touch-none select-none rounded border border-border bg-surface"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
