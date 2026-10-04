@@ -1,6 +1,6 @@
 from dataclasses import replace
 
-from aion2c.engine.damage import hit_damage, hit_damage_ex
+from aion2c.engine.damage import crit_chance_frac, hit_damage, hit_damage_ex
 from aion2c.models import ChargeLevel, Num, Stats
 
 
@@ -27,9 +27,18 @@ def test_crit_and_smite_expectation(mini_gd):
     s = mini_gd.skills["strike"]
     st = Stats(crit_chance_pct=50, crit_dmg_pct=100, smite_pct=20)
     assert abs(hit_damage(s, 1, st, 1.0, False) - 1000 * 1.5 * 1.2) < 1e-9  # smite = double chance: bonus 1.0
-    # boss: crit x0.75, smite x0.7; crit chance capped at 80
+    # boss: crit x0.75, smite x0.7; crit chance capped at 50 (client: "Max Critical Hit Rate is 50%")
     st2 = Stats(crit_chance_pct=200, crit_dmg_pct=100, smite_pct=20)
-    assert abs(hit_damage(s, 1, st2, 1.0, True) - 1000 * (1 + 0.8 * 0.75) * (1 + 0.2 * 1.0 * 0.7)) < 1e-9
+    assert abs(hit_damage(s, 1, st2, 1.0, True) - 1000 * (1 + 0.5 * 0.75) * (1 + 0.2 * 1.0 * 0.7)) < 1e-9
+
+
+def test_crit_chance_cap_is_50_percent(mini_gd):
+    # client UI text: "Max Critical Hit Rate is 50%": anything above 50 adds nothing, 50 itself counts in full
+    s = mini_gd.skills["strike"]
+    at50 = hit_damage(s, 1, Stats(crit_chance_pct=50, crit_dmg_pct=100), 1.0, False)
+    assert at50 == 1000 * 1.5
+    assert hit_damage(s, 1, Stats(crit_chance_pct=80, crit_dmg_pct=100), 1.0, False) == at50
+    assert crit_chance_frac(Stats(crit_chance_pct=80)) == 0.5 and crit_chance_frac(Stats(crit_chance_pct=30)) == 0.3
 
 
 def test_attack_multipliers(mini_gd):

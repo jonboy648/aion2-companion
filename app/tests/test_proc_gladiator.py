@@ -72,15 +72,15 @@ def test_rending_blow_crit_restores_50_mp(gd):
 
 
 def test_lunge_stance_spec20_cuts_cooldowns_only_on_crit(gd):
-    """Spec rank 20: 50% on crit, while the buff is up, to cut all cooldowns by 1 s: more Lunge Stance casts at 100%
-    crit, none extra at 0% crit."""
+    """Spec rank 20: 50% on crit, while the buff is up, to cut all cooldowns by 1 s: more Lunge Stance casts at the 50%
+    crit cap (client max crit rate), none extra at 0% crit."""
     rk = {"lunge-stance": 20, "rage-burst": 20}
 
     def casts(crit, specs):
         b = _b(skill_ranks=rk, stigmas=("lunge-stance", "rage-burst"), specs=specs,
                stats=Stats(attack=3000, crit_chance_pct=crit))
-        return _sim(gd, b, ["lunge-stance", "rage-burst", "keen-strike"], 180).per_skill["lunge-stance"].casts
-    assert casts(100, {"lunge-stance": (3,)}) > casts(100, {})
+        return _sim(gd, b, ["lunge-stance", "rage-burst", "keen-strike"], 360).per_skill["lunge-stance"].casts
+    assert casts(50, {"lunge-stance": (3,)}) > casts(50, {})
     assert casts(0, {"lunge-stance": (3,)}) == casts(0, {})
 
 

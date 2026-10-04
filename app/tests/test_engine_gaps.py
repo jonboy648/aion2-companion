@@ -15,9 +15,10 @@ from aion2c.models import (
 )
 
 C = lambda v: Num(v, "confirmed", "test")  # noqa: E731
-# Crit chance is capped at 80% (damage.CRIT_CHANCE_CAP_PCT): 80% x trigger chance 1.25 = exactly one trigger per hit.
-CRIT = Stats(crit_chance_pct=80)
+# Crit chance is capped at 50% (damage.CRIT_CHANCE_CAP_PCT): 50% x crit-trigger chance 2.0 = exactly one trigger per hit.
+CRIT = Stats(crit_chance_pct=50)
 CHANCE = 1.25
+CRIT_TRIGGER_CHANCE = 2.0
 
 
 def P(*keys):
@@ -38,7 +39,7 @@ def casts(res, key):
 def proc_gd(mini_gd, requires_status=None, on="crit"):
     gore = replace(mini_gd.skills["strike"], key="gore", kind=SkillKind.PROC,
                    ranks=(replace(mini_gd.skills["strike"].ranks[0], cooldown_s=C(5)),))
-    trig = StatusTrigger("", "none", CHANCE, "gore", "confirmed", event=on, on_skills=("strike",) if on == "cast" else (),
+    trig = StatusTrigger("", "none", CRIT_TRIGGER_CHANCE if on == "crit" else CHANCE, "gore", "confirmed", event=on, on_skills=("strike",) if on == "cast" else (),
                          proc_skill="gore", requires_status=requires_status)
     return replace(mini_gd, skills={**mini_gd.skills, "gore": gore}, triggers=(trig,))
 

@@ -97,12 +97,12 @@ def test_gale_arrow_minus_10s_cooldown_doubles_casts(gd):
 
 
 def test_hunters_soul_fires_half_of_crit_events_with_1s_cooldown(gd):
-    """Tempest Shot = 2 hits, crit 80%: 1.6 crit events per cast, 50% -> 0.8 procs per cast, 10 casts -> 8."""
-    b = CharacterBuild("t", "global", 45, stats=Stats(attack=1000, crit_chance_pct=80, crit_dmg_pct=0))
+    """Tempest Shot = 2 hits, crit 50% (the cap): 1.0 crit events per cast, 50% -> 0.5 procs per cast, 10 casts -> 5."""
+    b = CharacterBuild("t", "global", 45, stats=Stats(attack=1000, crit_chance_pct=50, crit_dmg_pct=0))
     r = simulate(gd, b, P("tempest-shot"), scen(10))
     assert r.per_skill["tempest-shot"].casts == 10
     hs = r.per_skill["hunters-soul"]
-    assert hs.casts == 8
+    assert hs.casts == 5
     # 53.8% ATK + 344 flat at rank 1, crit damage 0 so the proc's own crit adds nothing
     assert hs.damage / hs.casts == pytest.approx(1000 * 0.538 + 344, rel=1e-6)
     assert "melee-fire" not in r.per_skill

@@ -119,6 +119,7 @@ _PCT = re.compile(r"^\s*(.*?)\s*([+-]?\d+(?:\.\d+)?)\s*%\s*$")
 _STAT_LABELS = {
     "attack increase": ("attack_increase_pct", 1.0),
     "critical hit increase": ("crit_chance_pct", 1.0),
+    "double chance": ("smite_pct", 1.0),  # Wisdom [Lumiel]; the client's HardHit stat is "Double"
     "combat speed": ("combat_speed_pct", 1.0),
     "cooldown": ("cdr_pct", -1.0),  # "Cooldown -0.1%" is a 0.1% reduction
 }

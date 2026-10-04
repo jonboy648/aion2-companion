@@ -11,7 +11,9 @@ from aion2c.models import ChargeLevel, Skill, Stats
 # 0.007/1.175 = 0.60%. The old 0.5 gave 0.32% (boss). tests/test_mechanics_core.py pins both numbers.
 SMITE_BONUS = 1.0
 BOSS_SMITE_FACTOR = 0.7  # estimated: smite is weaker against bosses
-CRIT_CHANCE_CAP_PCT = 80.0  # estimated: crit chance is capped
+# Client UI text (String_UI_desc_Critical): "Max Critical Hit Rate is 50%, and this is reduced by target's Critical Hit
+# Resist". The boss's resist is server-side and not modelled, so the flat 50% cap is applied. (Was an 80% guess.)
+CRIT_CHANCE_CAP_PCT = 50.0
 BOSS_CRIT_FACTOR = 0.75  # estimated: crit damage is weaker against bosses
 DEFENSE_FACTOR = 0.1  # estimated: flat damage removed per point of effective defense
 
@@ -40,7 +42,7 @@ def hit_damage_ex(
     force_crit: bool = False,
 ) -> tuple[float, list[str]]:
     """Damage of ONE cast on ONE target plus warnings. Unknown flat -> 0 + warning, never raises.
-    `force_crit`: every hit crits (a specialty that lands as a Critical Hit): chance 100%, no 80% cap."""
+    `force_crit`: every hit crits (a specialty that lands as a Critical Hit): chance 100%, no cap."""
     warns: list[str] = []
     base = stats.attack * (1 + stats.attack_increase_pct / 100) * (1 + stats.weapon_dmg_pct / 100)
 

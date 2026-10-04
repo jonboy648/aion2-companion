@@ -129,6 +129,19 @@ def test_to_build_stats_mapping(gd, raw, base):
     assert b2.stats == b.stats  # re-import does not accumulate
 
 
+def test_to_build_maps_agi_crit_and_wisdom_double(gd, raw, base):
+    # Precision (AGI) shows the same "Critical Hit increase" line as Death, Wisdom [Lumiel] shows "Double Chance":
+    # both must land in the engine (crit chance and smite) and add up with the other sources
+    info = raw["info"]
+    by_name = {s["name"].split(" [")[0]: s for s in info["stat"]["statList"]}
+    by_name["Precision"]["statSecondList"] = ["Accuracy increase +1.5%", "Critical Hit increase +1.5%"]
+    by_name["Wisdom"]["statSecondList"] = ["MP Cost -2.1%", "Double Chance +2.1%"]
+    b, notes = armory.to_build(gd, raw, base)
+    assert b.stats.crit_chance_pct == pytest.approx(2.8 + 1.5)
+    assert b.stats.smite_pct == pytest.approx(2.1)
+    assert not any("Double Chance" in n for n in notes)
+
+
 def test_summary(gd, raw):
     sm = armory.summary(gd, raw)
     assert sm["combat_power"] == 33721 and sm["server"] == "Triniel" and sm["item_level"] == 707
