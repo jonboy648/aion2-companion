@@ -11,13 +11,20 @@ hosts none of NCSOFT's art: skill and item icons are loaded straight from NCSOFT
 
 ## Privacy
 
-- There are no accounts, no analytics, and no cookies. Your builds and settings stay in your browser (`localStorage`).
+- There are no accounts and no cookies. Your builds and settings stay in your browser (`localStorage`).
 - A character lookup goes **through a small proxy** (a Cloudflare Worker, `proxy/`) to NCSOFT's public armory API.
   The proxy only forwards four whitelisted endpoints (search, info, equipment, Daevanion), caches results for
-  10 minutes, rate-limits per IP, and holds no secrets. What you type in the search box (character name, region)
-  is therefore seen by the proxy and by NCSOFT's armory, as it would be on NCSOFT's own site. Cloudflare may log
-  request metadata (such as IP address) per its standard Worker logging.
-- The proxy does not store lookups. See `proxy/CONTRACT.md` for exactly what it does.
+  10 minutes, and rate-limits per IP. What you type in the search box (character name, region) is therefore seen by
+  the proxy and by NCSOFT's armory, as it would be on NCSOFT's own site. Cloudflare may log request metadata (such as
+  IP address) per its standard Worker logging.
+- **The site keeps a small database (Cloudflare D1) for the owner:** anonymous visit counts (no IP address or browser
+  details are stored; a "visitor" is a hash that changes every day) and the character names that were searched
+  (public game data). Characters you look up also appear on the public **Board** with their public armory info only:
+  name, class, server, level and Combat Power. The "max-potential DPS" shown there is an unverified estimate sent by
+  the visitor's browser. The two Worker secrets (`ADMIN_TOKEN`, `ADMIN_SALT`) exist only for the owner dashboard.
+  The browser's Do Not Track setting turns the counting off. See `proxy/CONTRACT.md` for exactly what is stored.
+- The calculation engine (Pyodide, about 6 MB) is downloaded from the jsDelivr CDN when an analysis starts, and skill
+  and item icons are loaded from NCSOFT's CDN (`assets.playnccdn.com`).
 
 ## Layout
 
