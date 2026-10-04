@@ -41,6 +41,56 @@ CLIENT_CLASS = {
 # named after Glacial Smite's animation number (012); Glacial Smite itself has no DoT in its text, and the top-rank flat
 # 1497 equals the one our dump carries for Frostbite. Claimed groups are not offered to the name rule.
 DOT_GROUP_OVERRIDES = {("sorcerer", "cold-storm"): "Sorcerer_Skill012_LvUp_AB01"}
+
+# ---- explicit mappings (phase 2) ---------------------------------------------------------------------------------------
+# Skills the automatic rules cannot place, keyed by OUR (class, skill key). The client's numbers replace ours at every rank
+# the client group has: client build 5.3.2.0 is newer than our 2026-09-18 source, so where the flats differ the client wins
+# (Assassin and Templar flats are 1.07-1.5x ours). Ranks the group lacks (our rank 1) keep our values.
+# Client group of the skill's damage effect (`SkillEffectLv`, 28-value rows):
+GROUP_OVERRIDES = {
+    ("assassin", "quick-slice"): "Assassin_Skill001_LvUp",
+    ("assassin", "breaking-slice"): "Assassin_Skill003_LvUp",
+    ("assassin", "swift-slice"): "Assassin_Skill004_LvUp",
+    ("assassin", "insignia-explosion"): "Assassin_Skill013_LvUp",  # base group; _01.._05 are specialization variants
+    ("templar", "punishment"): "Templar_Skill009_LvUp",  # the Charge01..03 tier groups are found by _charge()
+    ("templar", "shield-smite"): "Templar_Skill010_LvUp",
+    ("templar", "annihilate"): "Templar_Skill030_LvUp",
+    ("templar", "warding-strike"): "Templar_Skill035_LvUp",
+    # stigma buffs whose damage is a triggered hit: the "_SE" / "_Dmg" group is that hit (its ratio equals ours)
+    ("assassin", "illusive-clone"): "Assassin_Skill031_ABCD_LvUp_SE",
+    ("gladiator", "lunge-stance"): "Gladiator_Skill040_A5_LvUp_Dmg",
+}
+# The same for client groups that carry only five values per level (flat min, flat max, ratio min, ratio max, hits):
+SHORT_GROUP_OVERRIDES = {
+    ("spiritmaster", "continuous-impact"): "Elementalist_Skill028_LvUp",
+    ("spiritmaster", "extract-vitality"): "Elementalist_Skill031_LvUp",
+    ("spiritmaster", "soul-decimation"): "Elementalist_Skill035_LvUp",
+}
+# Damage `SkillEffect` rows that have no level group: one fixed value at every rank (ours equals it; this pins it).
+EFFECT_ROW_OVERRIDES = {
+    ("ranger", "explosive-arrow"): 1423000011,
+    ("ranger", "dust-arrow"): 1430000011,
+    ("ranger", "impact-kick"): 1432000011,
+    ("templar", "blade-storm"): 1242000011,
+}
+# Poison: skill -> abnormal -> `Dot_NormalCalc` effect, values [interval ms, ., ., flat min, flat max, ratio x100 min,
+# ratio x100 max, ...]: tick 138% ATK + flat. Either a level group (flat per rank) or one fixed abnormal-effect row.
+DOT_GROUP_SKILLS = {("assassin", "apply-poison-13730000"): "Assassin_Passive003_LvUp_AB2"}
+DOT_ROW_SKILLS = {("assassin", "apply-poison"): 1316000711}
+# Left as authored, with the reason: no client damage row of their own.
+UNRESOLVED = {
+    ("ranger", "basic-attack"): "no Skill row",
+    ("spiritmaster", "lethargy"): "no Skill row",
+    ("spiritmaster", "earth-chain"): "no Skill row",
+    ("spiritmaster", "pvp-attack-increase"): "no Skill row",
+    ("spiritmaster", "pvp-critical-hit-resist-increase"): "no Skill row",
+    ("spiritmaster", "pvp-accuracy-increase"): "no Skill row",
+    ("assassin", "shadow-fall-13220037"): "trigger-marker proc: its effect group only applies an empty abnormal",
+    ("assassin", "heart-gore-13350007"): "trigger-marker proc: its effect group only applies an empty abnormal",
+    ("ranger", "drill-dart-14050007"): "trigger-marker proc: its effect group only applies an empty abnormal",
+    ("chanter", "wave-blow-18080037"): "trigger-marker proc: its effect group only applies an empty abnormal",
+    ("spiritmaster", "elemental-fusion-16300001"): "passive with no damage row of its own (client charge tiers are 1.0/1.4/2.0/3.0x)",
+}
 _VARIANT_TOKEN = re.compile(r"^(?:A\d+(?:A\d+)*|[A-E]{1,5})$")
 
 
@@ -76,6 +126,26 @@ class Tables:
             v = r["EffectValueList"]
             if len(v) == 28 and all(_f(x) is not None for x in v[:5]):
                 self.eff[r["SkillEffectLvGroupId"]][r["SkillEffectLv"]] = v
+        # only what the explicit mappings name: five-value groups, single damage rows, single abnormal-effect rows
+        short = set(SHORT_GROUP_OVERRIDES.values())
+        self.short: dict[str, dict[int, list[str]]] = defaultdict(dict)
+        for r in _rows(table_dir, "SkillEffectLv"):
+            if r["SkillEffectLvGroupId"] in short and len(r["EffectValueList"]) == 5:
+                self.short[r["SkillEffectLvGroupId"]][r["SkillEffectLv"]] = r["EffectValueList"]
+        # The base SkillEffect damage row carries the real hit count: for 6 level-group rows (Chanter Bursting Blow among
+        # them) the group's own hits column says 1 while the base row says 2 (and our dump's text agrees with the base row).
+        rows = set(EFFECT_ROW_OVERRIDES.values())
+        self.effect_row: dict[int, list[str]] = {}
+        self.base_hits: dict[str, int] = {}
+        for r in _rows(table_dir, "SkillEffect"):
+            if r["ID"]["Value"] in rows:
+                self.effect_row[r["ID"]["Value"]] = r["EffectValueList"]
+            g = r["SkillEffectLvGroupId"]
+            if r["EffectType"] == "ESkillEffectType::Damage" and g != "None" and _f(r["EffectValueList"][4]) is not None:
+                self.base_hits[g] = max(self.base_hits.get(g, 0), int(float(r["EffectValueList"][4])))
+        rows = set(DOT_ROW_SKILLS.values())
+        self.abn_row = {r["ID"]["Value"]: r["Values"] for r in _rows(table_dir, "SkillAbnormalEffect")
+                        if r["ID"]["Value"] in rows}
         self.abn: dict[str, dict[int, list[str]]] = defaultdict(dict)
         for r in _rows(table_dir, "SkillAbnormalEffectLv"):
             self.abn[r["AbnormalEffectLevelGroupId"]][r["AbnormalEffectLevel"]] = r["Values"]
@@ -136,13 +206,13 @@ def match_skill(t: Tables, cp: str, sid: int | None, flats: list[float], ratio: 
     return None, f"ambiguous: {len(owners)} client skills share this flat sequence"
 
 
-def _group_numbers(group: dict[int, list[str]]) -> dict:
+def _group_numbers(group: dict[int, list[str]], hits: int | None = None) -> dict:
     lv0 = min(group)
     ratios = {float(v[2]) / 100 for v in group.values()}
     return {
         "ratio_pct": float(group[lv0][2]) / 100,
         "ratio_constant": len(ratios) == 1,
-        "hits": int(float(group[lv0][4])),
+        "hits": hits if hits is not None else int(float(group[lv0][4])),
         "from_rank": lv0,
         "flat_min": [int(float(group[lv][0])) for lv in sorted(group)],
         "flat_max": [int(float(group[lv][1])) for lv in sorted(group)],
@@ -167,7 +237,7 @@ def _charge(t: Tables, cp: str, sid: int, group: str) -> dict | None:
         ch = group.replace("_LvUp", "")
         names = [group] + [g for i in range(1, n) for g in (f"{ch}_Charge{i:02d}_LvUp",) if g in t.eff]
     if len(names) == n and all(g in t.eff for g in names):
-        out["tiers"] = [{k: v for k, v in _group_numbers(t.eff[g]).items() if k in ("ratio_pct", "hits", "flat_min")}
+        out["tiers"] = [{k: v for k, v in _group_numbers(t.eff[g], t.base_hits.get(g)).items() if k in ("ratio_pct", "hits", "flat_min")}
                         for g in names]
     return out
 
@@ -200,6 +270,38 @@ def _dots(t: Tables, cp: str, sid: int, ck: str, key: str) -> dict:
     return out
 
 
+def override_entry(t: Tables, ck: str, key: str, sid: int | None) -> dict | None:
+    """Numbers of a skill named in one of the explicit-mapping tables above (None when it is in none of them)."""
+    k, cp = (ck, key), CLIENT_CLASS[ck]
+    if k in GROUP_OVERRIDES or k in SHORT_GROUP_OVERRIDES:
+        g = GROUP_OVERRIDES.get(k) or SHORT_GROUP_OVERRIDES[k]
+        entry = _group_numbers(t.eff[g] if k in GROUP_OVERRIDES else t.short[g], t.base_hits.get(g))
+        entry["how"] = "override"
+        ch = _charge(t, cp, sid, g) if sid and k in GROUP_OVERRIDES else None
+        if ch:
+            entry["charge"] = ch
+            if "tiers" in ch:
+                entry["hits"] = max(x["hits"] for x in ch["tiers"])
+        return entry
+    if k in EFFECT_ROW_OVERRIDES:
+        v = t.effect_row[EFFECT_ROW_OVERRIDES[k]]
+        return {"ratio_pct": float(v[2]) / 100, "ratio_constant": True, "hits": int(float(v[4])), "from_rank": 1,
+                "flat_min": [int(float(v[0]))], "flat_max": [int(float(v[1]))], "how": "effect-row"}
+    if k in DOT_GROUP_SKILLS:
+        rows = t.abn[DOT_GROUP_SKILLS[k]]
+        assert _dot_shape(rows), DOT_GROUP_SKILLS[k]
+        lv = sorted(rows)
+        flat = [int(float(rows[x][3])) for x in lv]
+        ratios = {float(rows[x][5]) / 100 for x in lv}
+        return {"ratio_pct": float(rows[lv[0]][5]) / 100, "ratio_constant": len(ratios) == 1, "hits": 1,
+                "from_rank": lv[0], "flat_min": flat, "flat_max": flat, "how": "dot"}
+    if k in DOT_ROW_SKILLS:
+        v = t.abn_row[DOT_ROW_SKILLS[k]]
+        return {"ratio_pct": float(v[5]) / 100, "ratio_constant": True, "hits": 1, "from_rank": 1,
+                "flat_min": [int(float(v[3]))], "flat_max": [int(float(v[4]))], "how": "dot"}
+    return None
+
+
 def class_skills(ck: str, research_dir: Path, icons_dir: Path) -> list[dict]:
     """Our skills for one class from the research pack (same inputs and key rule as build_gamedata.build)."""
     srcs = bg.ClassSources(research_dir, icons_dir, ck)
@@ -225,7 +327,14 @@ def extract_class(t: Tables, ck: str, research_dir: Path, icons_dir: Path) -> di
         sid = s["skill_id"]
         has_flat = any(s["flats"])
         entry: dict = {}
-        if has_flat or (s["ratio"] and sid):
+        forced = override_entry(t, ck, s["key"], sid)
+        if forced is not None:
+            entry.update(forced)
+            if not entry["ratio_constant"]:
+                mismatch.append(s["key"])
+        elif (ck, s["key"]) in UNRESOLVED:
+            unmatched[s["key"]] = UNRESOLVED[(ck, s["key"])]
+        elif has_flat or (s["ratio"] and sid):
             g, how = match_skill(t, cp, sid, s["flats"], s["ratio"]) if has_flat else (None, "no flat data to match on")
             if g is None and not has_flat and sid:  # ratio-only skill: name rule on ratio equality, flat-less
                 for cand in _name_candidates(t, cp, sid):
@@ -235,7 +344,7 @@ def extract_class(t: Tables, ck: str, research_dir: Path, icons_dir: Path) -> di
             if g is None:
                 unmatched[s["key"]] = how
             else:
-                entry.update(_group_numbers(t.eff[g]))
+                entry.update(_group_numbers(t.eff[g], t.base_hits.get(g)))
                 entry["how"] = how
                 ch = _charge(t, cp, sid, g)
                 if ch:
@@ -263,12 +372,67 @@ def build(table_dir: Path, research_dir: Path, icons_dir: Path) -> dict:
             "classes": {ck: extract_class(t, ck, research_dir, icons_dir) for ck in CLIENT_CLASS}}
 
 
+def check_class(gd, entries: dict, unmatched: dict) -> dict:
+    """Drift check of one class: every skill with client numbers must carry exactly them in the built gamedata `gd`
+    (ratio, hits, flat damage on every rank the client has). Not compared: ranks the client table lacks, and the top end of
+    a charge range for which the client has no tier groups (build_gamedata keeps ours there). Needs no export."""
+    problems, matched = [], 0
+    for key, e in entries.items():
+        if "ratio_pct" not in e:
+            continue
+        matched += 1
+        sk = gd.skills.get(key)
+        if sk is None:
+            problems.append(f"{key}: not in gamedata")
+            continue
+        got = sk.atk_ratio_pct.value
+        if got is None or abs(got - e["ratio_pct"]) > 1e-6:
+            problems.append(f"{key}: ratio {got} != client {e['ratio_pct']}")
+        if sk.hits != e["hits"]:
+            problems.append(f"{key}: hits {sk.hits} != client {e['hits']}")
+        tiers = (e.get("charge") or {}).get("tiers")
+        for r in sk.ranks:
+            i = r.rank - e["from_rank"]
+            if not 0 <= i < len(e["flat_min"]):
+                continue
+            want_max = tiers[-1]["flat_min"][i] if tiers else e["flat_max"][i]
+            ranged = r.flat_max.value is not None and r.flat_min.value is not None and r.flat_max.value > r.flat_min.value
+            if r.flat_min.value != e["flat_min"][i]:
+                problems.append(f"{key} rank {r.rank}: flat_min {r.flat_min.value} != client {e['flat_min'][i]}")
+            if r.flat_max.value != want_max and not (ranged and not tiers and e["flat_max"][i] == e["flat_min"][i]):
+                problems.append(f"{key} rank {r.rank}: flat_max {r.flat_max.value} != client {want_max}")
+    return {"matched": matched, "unmatched": dict(unmatched), "mismatched": problems}
+
+
+def check(numbers: dict | None = None) -> dict[str, dict]:
+    """`check_class` for every class whose gamedata is built; {class: {matched, unmatched, mismatched}}."""
+    from aion2c.data import loader
+    numbers = numbers or bg.load_client_numbers()
+    assert numbers, f"{bg.SRC_DIR / bg.CLIENT_NUMBERS_FILE} is missing"
+    out = {}
+    for ck, c in numbers["classes"].items():
+        if loader.default_path(ck).is_file():
+            out[ck] = check_class(loader.load_gamedata(class_key=ck), c["skills"], c["unmatched"])
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--research", type=Path, default=bg.REPO / "research")
     ap.add_argument("--icons", type=Path, default=bg.REPO / "assets" / "icons")
     ap.add_argument("--out", type=Path, default=OUT_PATH)
+    ap.add_argument("--check", action="store_true",
+                    help="drift check: compare the built gamedata with client_skill_numbers.json (no export needed)")
     a = ap.parse_args()
+    if a.check:
+        res = check()
+        for ck, r in res.items():
+            print(f"[{ck}] matched {r['matched']}, unmatched {len(r['unmatched'])}, mismatched {len(r['mismatched'])}")
+            for k, why in r["unmatched"].items():
+                print(f"    unmatched  {k}: {why}")
+            for p in r["mismatched"]:
+                print(f"    MISMATCH   {p}")
+        sys.exit(1 if any(r["mismatched"] for r in res.values()) else 0)
     data = build(export_dir(), a.research, a.icons)
     a.out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":"), sort_keys=True), encoding="utf-8")
     for ck, c in data["classes"].items():

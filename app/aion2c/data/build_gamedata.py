@@ -282,7 +282,8 @@ def apply_client_numbers(skills: dict[str, Skill], numbers: dict | None, class_k
         sk = out.get(key)
         if sk is None or "ratio_pct" not in e:
             continue
-        conf = lambda v: Num(float(v), "confirmed", f"{src} (SkillEffectLv)")  # noqa: E731
+        table = {"dot": "SkillAbnormalEffect", "effect-row": "SkillEffect"}.get(e.get("how"), "SkillEffectLv")
+        conf = lambda v: Num(float(v), "confirmed", f"{src} ({table})")  # noqa: E731
         tiers, lo_rank = (e.get("charge") or {}).get("tiers"), e["from_rank"]
         ranks = []
         for r in sk.ranks:
