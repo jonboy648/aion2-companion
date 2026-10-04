@@ -27,10 +27,19 @@
   <body>
     <div id="root"></div>
     <script>
-      // Old shared links used hash routes (/#/c/nae/1101/Luna). Turn them into the real path before the app starts.
+      // Old shared links used hash routes (/#/c/nae/1101/Luna). Turn them into the real path before the app starts, and
+      // again if one is pasted into a tab that is already open (then the router is told the address changed).
       (function () {
-        var h = location.hash;
-        if (h.indexOf("#/") === 0) history.replaceState(null, "", h.slice(1));
+        function fix() {
+          var h = location.hash;
+          if (h.indexOf("#/") !== 0) return false;
+          history.replaceState(null, "", h.slice(1));
+          return true;
+        }
+        fix();
+        window.addEventListener("hashchange", function () {
+          if (fix()) window.dispatchEvent(new PopStateEvent("popstate"));
+        });
       })();
     </script>
     <script type="module" src="/src/main.tsx"></script>

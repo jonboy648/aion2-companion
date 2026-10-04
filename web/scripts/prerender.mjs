@@ -33,7 +33,7 @@ export function renderPage(template, route, site, allRoutes, { noindex = false }
   h = replaceOnce(h, /<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${esc(route.title)}" />`);
   h = replaceOnce(h, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${esc(route.description)}" />`);
   if (noindex) h = replaceOnce(h, /<meta name="viewport"[^>]*\/>/, (m) => `${m}\n    <meta name="robots" content="noindex" />`);
-  const links = allRoutes.filter((r) => !r.path.startsWith("/codex/")).map((r) => `<li><a href="${r.path}">${esc(r.h1)}</a></li>`).join("");
+  const links = allRoutes.filter((r) => !r.path.startsWith("/codex/")).map((r) => `<li><a href="${r.path === "/" ? "/" : `${r.path}/`}">${esc(r.h1)}</a></li>`).join("");
   const text = `<main><h1>${esc(route.h1)}</h1><p>${esc(route.intro)}</p><nav aria-label="Pages"><ul>${links}</ul></nav></main>`;
   h = replaceOnce(h, /<div id="root"><\/div>/, `<div id="root">${text}</div>`);
   return h;

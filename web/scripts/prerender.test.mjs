@@ -28,6 +28,8 @@ describe("prerender", () => {
       expect(html).toContain(`content="${r.description}"`);
       expect(html).toContain(`<link rel="canonical" href="${urlFor(seo.site, r.path)}" />`);
       expect(html).toContain(`<h1>${r.h1}</h1>`);
+      expect(html).toContain('<a href="/guide/">'); // crawlable links use the same trailing-slash URLs as the canonicals and sitemap
+      expect(html).not.toMatch(/<a href="\/[a-z]+">/);
       expect(html).toContain('<script type="module"'); // the app still boots
       expect(html).not.toContain('name="robots"');
     }
