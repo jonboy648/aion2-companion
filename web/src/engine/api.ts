@@ -12,6 +12,8 @@ import compareFx from "@/fixtures/compare.json";
 import daevanionFx from "@/fixtures/daevanion_suggest.json";
 import gamedataFx from "@/fixtures/gamedata_sorcerer.json";
 import iconsFx from "@/fixtures/icon_urls_sorcerer.json";
+import gearUpgradesFx from "@/fixtures/gear_upgrades.json";
+import maxPotentialFx from "@/fixtures/max_potential.json";
 import importFx from "@/fixtures/import_character.json";
 import keybindsFx from "@/fixtures/keybinds.json";
 import marginalFx from "@/fixtures/marginal.json";
@@ -25,9 +27,11 @@ import type {
   DaevanionSuggestion,
   FullBuild,
   GameData,
+  GearUpgradesResult,
   IconUrls,
   ImportResult,
   KeybindsResult,
+  MaxPotentialResult,
   PlaystyleKey,
   Priority,
   ProgressFn,
@@ -60,6 +64,10 @@ export interface EngineApi {
   roadmap(classKey: string, region: Region, build?: CharacterBuild | null): Promise<RoadmapItem[]>;
   /** {skill_key: official CDN url | null}. Hotlinked from NCSoft's CDN; never host the art. */
   iconUrls(classKey: string): Promise<IconUrls>;
+  /** Ranked gear upgrades (items.json is fetched lazily on the first call). rawArmory = what fetchCharacter returned. */
+  gearUpgrades(rawArmory: ArmoryRaw, build: CharacterBuild, playstyle: PlaystyleKey, steps?: number, reachableOnly?: boolean): Promise<GearUpgradesResult>;
+  /** BIS gear + full build for the class; pass build (+rawArmory) to get the gap to you. Slow: full optimizer. */
+  maxPotential(classKey: string, playstyle: PlaystyleKey, reachableOnly?: boolean, build?: CharacterBuild | null, rawArmory?: ArmoryRaw | null): Promise<MaxPotentialResult>;
 }
 
 const wait = (ms = 150) => new Promise<void>((r) => setTimeout(r, ms));
@@ -117,6 +125,19 @@ const mockEngine: EngineApi = {
     await wait();
     return clone<IconUrls>(iconsFx);
   },
+  async gearUpgrades() {
+    await wait(200);
+    return clone<GearUpgradesResult>(gearUpgradesFx);
+  },
+  async maxPotential(_classKey, _playstyle, _reachable, build) {
+    await wait(300);
+    const r = clone<MaxPotentialResult>(maxPotentialFx);
+    if (!build) {
+      r.current_dps = null;
+      r.gain_vs_current_pct = null;
+    }
+    return r;
+  },
 };
 
 /** Real engine: Pyodide in a Web Worker (see pyodide-client.ts). The worker is only spawned on the first call. */
@@ -137,4 +158,6 @@ export const {
   shopping,
   roadmap,
   iconUrls,
+  gearUpgrades,
+  maxPotential,
 } = engine;

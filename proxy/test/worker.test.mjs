@@ -89,8 +89,9 @@ test("strict validation", async () => {
     [`/info?characterId=${ID}%3Cx&serverId=1&region=nae`, "characterId"],
     [`/info?characterId=${ID}&serverId=abc&region=nae`, "serverId"],
     [`/info?characterId=${ID}&serverId=1&region=xx`, "region"],
-    [`/daevanion?characterId=${ID}&serverId=1&region=nae&boardId=60`, "boardId"],
-    [`/daevanion?characterId=${ID}&serverId=1&region=nae&boardId=69`, "boardId"],
+    [`/daevanion?characterId=${ID}&serverId=1&region=nae&boardId=0`, "boardId"],
+    [`/daevanion?characterId=${ID}&serverId=1&region=nae&boardId=12345`, "boardId"],
+    [`/daevanion?characterId=${ID}&serverId=1&region=nae&boardId=6a`, "boardId"],
     [`/daevanion?characterId=${ID}&serverId=1&region=nae`, "boardId"],
   ];
   for (const [path, param] of bad) {
@@ -100,9 +101,9 @@ test("strict validation", async () => {
   }
 });
 
-test("all valid boardIds 61..68 accepted", async () => {
+test("boardIds from every class range accepted (Templar, Sorcerer, Cleric)", async () => {
   const d = { fetch: mockUp().fetch, cache: memCache() };
-  for (let b = 61; b <= 68; b++) {
+  for (const b of [21, 26, 61, 68, 71, 76]) {
     const r = await run(`/daevanion?characterId=${ID}&serverId=1&region=nae&boardId=${b}`, d);
     assert.equal(r.status, 200);
   }
@@ -133,8 +134,8 @@ test("CORS: allowed origin, foreign origin, no origin, preflight", async () => {
   assert.equal(none.headers.get("access-control-allow-origin"), null);
   const pre = await run("/search", d, { Origin: "https://becomecube.com" }, "OPTIONS");
   assert.equal(pre.status, 204);
-  assert.equal(pre.headers.get("access-control-allow-methods"), "GET, OPTIONS");
-  assert.equal(pre.headers.get("access-control-allow-headers"), "Content-Type");
+  assert.equal(pre.headers.get("access-control-allow-methods"), "GET, POST, OPTIONS");
+  assert.equal(pre.headers.get("access-control-allow-headers"), "Content-Type, Authorization");
   assert.equal(pre.headers.get("access-control-max-age"), "86400");
   const preEvil = await run("/search", d, { Origin: "https://evil.example" }, "OPTIONS");
   assert.equal(preEvil.status, 204);

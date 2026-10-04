@@ -69,3 +69,28 @@ def test_level_gate_and_unknown_skill(sorc_gd, default_build, sorc_bar):
 def test_empty_priority(sorc_gd, default_build, sorc_bar, n):
     stacks = recommend_stacks(sorc_gd, default_build, pr(*(["flame-arrow"] * n)), sorc_bar)
     assert all(len(s.stack) <= 4 for s in stacks)
+
+
+def test_stacks_are_priority_groups(sorc_gd, default_build, sorc_bar):
+    """Burst cooldowns share a slot, the 0-cooldown filler is last, no stack mixes a manual skill in."""
+    from aion2c.keybinds.layout import is_manual, layout
+
+    stacks, _ = layout(sorc_gd, default_build, pr(*BIG), sorc_bar, style="roles")
+    by = {k: s for s in stacks for k in s.stack}
+    assert by["element-enhancement"].stack[0] == "element-enhancement"  # buff leads its group
+    for s in stacks:
+        assert not (len(s.stack) > 1 and any(is_manual(sorc_gd, k) for k in s.stack))
+        assert all(cd(sorc_gd, k) > 0 for k in s.stack[:-1])
+    assert by["flame-arrow"].stack[-1] == "flame-arrow"
+
+
+def test_every_style_keeps_the_rules(sorc_gd, default_build, sorc_bar):
+    from aion2c.keybinds.layout import STYLES, layout
+
+    for style in STYLES:
+        stacks, _ = layout(sorc_gd, default_build, pr(*BIG), sorc_bar, style=style)
+        placed = [k for s in stacks for k in s.stack]
+        assert len(placed) == len(set(placed)), style  # a skill sits on one slot only
+        for s in stacks:
+            assert 1 <= len(s.stack) <= 4
+            assert all(cd(sorc_gd, k) > 0 for k in s.stack[:-1]), (style, s)

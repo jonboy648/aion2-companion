@@ -232,14 +232,14 @@
    "name": "Illusive Clone",
    "on": "self",
    "duration_s": {
-    "value": 10.0,
+    "value": 20.0,
     "confidence": "confirmed",
-    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+    "source": "aion2.app client dump 2026-09-18 datamine token se:1331000011:effect_value02:time (rank 20 = 20 s; duration scale 10/12/14.5/17/20/25/30 s at ranks 1/5/10/15/20/30/40)"
    },
    "dmg_mult": {
     "value": 1.2,
-    "confidence": "estimated",
-    "source": "\"deals 20% of damage dealt as extra damage for 10s\"; also removes Heart Gore cooldown for the window; bucket unknown"
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 datamine token abe:1331000011:value01:divide100 (rank 20 = 20%; 20% of damage dealt as extra damage, all ranks)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -260,9 +260,9 @@
    "name": "Swift Contract",
    "on": "self",
    "duration_s": {
-    "value": 10.0,
+    "value": 20.0,
     "confidence": "confirmed",
-    "source": "aion2.app client dump 2026-09-18 (skill page + token values): +20% Combat Speed 10s (rank 1; token 20 at both slots)"
+    "source": "aion2.app client dump 2026-09-18 datamine token se:1339000011:effect_value02:time (rank 20 = 20 s; duration scale 10/12/14.5/17/20/25/30 s at ranks 1/5/10/15/20/30/40)"
    },
    "dmg_mult": {
     "value": 1.0,
@@ -281,21 +281,31 @@
     "value": 1.0,
     "confidence": "unknown",
     "source": "tick interval not applicable / unknown"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "combat_speed_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 datamine token abe:1339000011:value02:divide100 (rank 20 = 20%; +20% Combat Speed, all ranks)"
+     }
+    }
+   ]
   },
   "frenzied_accord": {
    "key": "frenzied_accord",
    "name": "Frenzied Accord",
    "on": "self",
    "duration_s": {
-    "value": 10.0,
+    "value": 20.0,
     "confidence": "confirmed",
-    "source": "aion2.app client dump 2026-09-18 (skill page + token values): party within 40m, +20% PvE / +10% PvP Damage Boost"
+    "source": "aion2.app client dump 2026-09-18 datamine token se:1315000011:effect_value02:time (rank 20 = 20 s; duration scale 10/12/14.5/17/20/25/30 s at ranks 1/5/10/15/20/30/40)"
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "+20% PvE Damage Boost (hidden skill, cd 120s; unknown if obtainable at Global)"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage carried by the stat mod (PvE Damage Boost bucket)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -309,7 +319,17 @@
     "value": 1.0,
     "confidence": "unknown",
     "source": "tick interval not applicable / unknown"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 datamine token abe:1315000011:value02:divide100 (rank 20 = 20%; PvE Damage Boost +20%, all ranks; hidden skill, availability unknown)"
+     }
+    }
+   ]
   },
   "surging_bloodlust": {
    "key": "surging_bloodlust",
@@ -321,9 +341,9 @@
     "source": "aion2.app client dump 2026-09-18 (skill page + token values): +120% damage on 1 skill, restores 300 MP"
    },
    "dmg_mult": {
-    "value": 2.2,
-    "confidence": "estimated",
-    "source": "+120% on ONE skill only (1 + 1.2); hidden skill cd 60s; applies to a single skill, not whole rotation"
+    "value": null,
+    "confidence": "unknown",
+    "source": "text: 'Increases damage of 1 skill by 120%' (token abe:1317000011:value01 = 120): ONE skill, not every cast for 10 s; the engine has no next-cast bonus (old 2.2x multiplier applied it to every cast)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -346,12 +366,12 @@
    "duration_s": {
     "value": 10.0,
     "confidence": "confirmed",
-    "source": "aion2.app client dump 2026-09-18 (skill page + token values)"
+    "source": "aion2.app client dump 2026-09-18 datamine token se:1372001011:effect_value02:time (rank 20 = 10 s; all ranks)"
    },
    "dmg_mult": {
-    "value": 1.055,
-    "confidence": "estimated",
-    "source": "25% chance on attack: +5.5% Attack for 10s (cd 1s), rank 1; rank 40 value in extension"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage carried by the stat mod (Attack bucket)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -365,7 +385,17 @@
     "value": 1.0,
     "confidence": "unknown",
     "source": "tick interval not applicable / unknown"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 15.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 datamine token abe:1372001011:value02:divide100 (rank 20 = 15%; rank 1 5.5, 5 7.5, 10 10, 15 12.5, 20 15, 30 20, 40 25)"
+     }
+    }
+   ]
   },
   "poison": {
    "key": "poison",
@@ -385,14 +415,14 @@
    "mp_min_pct": null,
    "source_skill": "apply-poison-13730000",
    "tick_ratio_pct": {
-    "value": 0.0,
+    "value": null,
     "confidence": "unknown",
-    "source": "flat tick known (233 at rank 1, 2885 at rank 40) but no ATK ratio"
+    "source": "aion2.app client dump 2026-09-18 datamine token se_abe_dmg:1373000711:1373000712:SkillUIDotMaxDmg:tick (rank 20 = 1809 per 1 s tick for 10 s; rank 1 233, rank 40 2885; FLAT damage, the engine DoT only takes an ATK ratio)"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "confirmed",
-    "source": "\"every 1s\""
+    "source": "aion2.app client dump 2026-09-18 datamine token abe:1373000011:value03:time (rank 20 = cooldown 1 s; tick every 1 s per text)"
    }
   },
   "defense_break": {
@@ -512,9 +542,9 @@
    "name": "Evasion Boost",
    "on": "self",
    "duration_s": {
-    "value": 10.0,
+    "value": 20.0,
     "confidence": "confirmed",
-    "source": "aion2.app client dump 2026-09-18 (skill page + token values): Evasion Contract +200 Evasion 10s; Evasion Stance guaranteed evasion, duration \"brief\" unknown"
+    "source": "aion2.app client dump 2026-09-18 datamine token se:1337000011:effect_value02:time (rank 20 = 20 s; duration scale 10/12/14.5/17/20/25/30 s at ranks 1/5/10/15/20/30/40)"
    },
    "dmg_mult": {
     "value": 1.0,
@@ -534,6 +564,123 @@
     "confidence": "unknown",
     "source": "tick interval not applicable / unknown"
    }
+  },
+  "illusive_ew_boost": {
+   "key": "illusive_ew_boost",
+   "name": "Illusive Clone x1.5 Exploit Weakness",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "same window as Illusive Clone (aion2.app client dump 2026-09-18 datamine token se:1331000011:effect_value02:time (rank 20 = 20 s))"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage carried by the stat mod"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "illusive-clone",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": ""
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 7.5,
+      "confidence": "estimated",
+      "source": "specialty 'x1.5 [Exploit Weakness] effect': +50% of the rank-20 Attack bonus (15% -> 22.5%); assumes the Exploit Weakness buff is up (25% per attack, 10 s window: practically always)"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "swift_rear_smite": {
+   "key": "swift_rear_smite",
+   "name": "Swift Contract x1.5 Rear Smite",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "same window as Swift Contract (aion2.app client dump 2026-09-18 datamine token se:1339000011:effect_value02:time (rank 20 = 20 s))"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage carried by the stat mod"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "swift-contract",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": ""
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 6.25,
+      "confidence": "estimated",
+      "source": "specialty 'x1.5 [Rear Smite] effect': +50% of Rear Smite's rank-20 PvE Damage Boost 12.5% (token abe:1374000013:value02:divide100). The Back Attack Damage Boost half (12.5%) has no Stats field: not modelled"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "swift_assault_stance": {
+   "key": "swift_assault_stance",
+   "name": "Swift Contract x1.5 Assault Stance",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "same window as Swift Contract"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage carried by the stat mod"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "swift-contract",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": ""
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 12.5,
+      "confidence": "estimated",
+      "source": "specialty 'x1.5 [Assault Stance] effect': +50% of Assault Stance's rank-20 Critical Damage Boost 25% (token abe:1375000011:value02:divide100)"
+     }
+    }
+   ],
+   "permanent": false
   }
  },
  "triggers": [
@@ -552,11 +699,23 @@
    "confidence": "estimated"
   },
   {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "heart-gore",
+   "confidence": "confirmed",
+   "event": "crit",
+   "proc_skill": "heart-gore",
+   "note": "Heart Gore text: 'Triggers on landing a Critical Hit'; cd 5 s (datamine cooldown_s)"
+  },
+  {
    "status_key": "insignia",
    "on_element": "none",
    "chance": 0.07,
    "source_skill": "exploit-weakness",
-   "confidence": "estimated"
+   "confidence": "confirmed",
+   "event": "crit",
+   "note": "aion2.app client dump 2026-09-18 datamine token abe:1372000013:value02:divide100 (rank 20 = 7%; 7% on landing a Critical Hit, cd 1 s; all ranks)"
   }
  ],
  "rules": {
@@ -646,9 +805,7 @@
   },
   "ambush": {
    "skill_key": "ambush",
-   "applies": [
-    "insignia"
-   ],
+   "applies": [],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -657,13 +814,11 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "base: +30% damage on a Back attack. Engraves 2 Insignias only with spec rank 8 option 1 AND from behind (guides take it); apply modelled as 1.0 only if that option is picked"
+   "note": "base: +30% damage on a Back attack (positional, not modelled). Insignia only via specialty 1 (see specialization_effects)"
   },
   "heart-gore": {
    "skill_key": "heart-gore",
-   "applies": [
-    "insignia"
-   ],
+   "applies": [],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -672,7 +827,7 @@
    "charge_levels": [],
    "mp_restore": 100.0,
    "confidence": "estimated",
-   "note": "fires only on landing a Critical Hit, cd 5s; Insignia only with spec rank 8 option 2 (guides take it); spec 16 resets own cd on crit; Illusive Clone removes cd 10s"
+   "note": "auto proc: fires on landing a Critical Hit (crit trigger below), cd 5 s, restores 100 MP; Illusive Clone removing the cd and spec 16 reset-on-crit are NOT simulated (engine: proc owners do not feed crit specialties)"
   },
   "heart-gore-13350007": {
    "skill_key": "heart-gore-13350007",
@@ -1789,5 +1944,411 @@
   "prepare-to-assassinate": [
    "availability-unknown"
   ]
- }
+ },
+ "specialization_effects": {
+  "quick-slice": {
+   "2": [
+    {
+     "kind": "extra_hits",
+     "value": {
+      "value": 0.5,
+      "confidence": "estimated",
+      "source": "text '+50% Multi-Hit on hit' read as a 50% chance of one extra full hit (Multi-Hit damage is in no source)"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "cdr_skill_s",
+     "skill_key": "insignia-explosion",
+     "value": {
+      "value": 2.0,
+      "confidence": "estimated",
+      "source": "text '-1s [Insignia Explosion] cooldown on hit' x 2 hits per cast (Metaroad hits=2); community S1: 'per hit'"
+     }
+    }
+   ]
+  },
+  "throw-shadowblade": {
+   "0": [
+    {
+     "kind": "extra_hits",
+     "value": {
+      "value": 1.1,
+      "confidence": "estimated",
+      "source": "datamine: shadowblade-pursuit atk ratio and flat are both x1.1 of throw-shadowblade (rank 1; flat at rank 20 agrees). Assumes the chain skill lands after every cast (its own MP and lock are ignored)"
+     }
+    }
+   ],
+   "1": [
+    {
+     "kind": "reset_skill",
+     "skill_key": "throw-shadowblade",
+     "trigger": "kill",
+     "note": "kill-triggered effect: the simulator has no kills (trigger 'kill' is not applied)",
+     "value": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "text 'Resets cooldown on defeating an enemy'"
+     }
+    }
+   ],
+   "2": [
+    {
+     "kind": "force_crit",
+     "value": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "text 'Critical Hit on hit' read as the hit landing as a Critical Hit (same wording family as 'lands as a Critical Hit')"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "unknown",
+     "note": "'Changes to AoE Skill': target count not in any source",
+     "value": null
+    }
+   ]
+  },
+  "ambush": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "status_key": "insignia",
+     "note": "2 Insignias on a back attack (stack count is not tracked by the engine; presence only)",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 datamine token se:1306001711:effect_value02:time (rank 20 = 10 s)"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "unknown",
+     "note": "'50% chance to trigger [Whirlwind Slice]': Whirlwind Slice atk ratio and flat do not scale together vs Ambush",
+     "value": null
+    }
+   ]
+  },
+  "insignia-explosion": {
+   "1": [
+    {
+     "kind": "extra_hits",
+     "value": {
+      "value": 0.5,
+      "confidence": "estimated",
+      "source": "text '+50% Multi-Hit on hit' read as a 50% chance of one extra full hit (Multi-Hit damage is in no source)"
+     }
+    }
+   ],
+   "2": [
+    {
+     "kind": "unknown",
+     "note": "keeps 2 Insignia stacks: Insignia Explosion damage by stack (604..967 at rank 1) is not modelled (no stack counter)",
+     "value": null
+    }
+   ]
+  },
+  "shadowstep": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "status_key": "insignia",
+     "note": "5 Insignias on hit (stack count is not tracked; presence only)",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 datamine token se:1314002024:effect_value02:time (rank 20 = 10 s)"
+     }
+    }
+   ]
+  },
+  "shadow-walk": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "stealth-only crit: out of the combat rotation"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "PvP kill-assist reset"
+     }
+    }
+   ]
+  },
+  "whirlwind-slice": {
+   "0": [
+    {
+     "kind": "extra_hits",
+     "value": {
+      "value": 0.5,
+      "confidence": "estimated",
+      "source": "text '+50% Multi-Hit on hit' read as a 50% chance of one extra full hit (Multi-Hit damage is in no source)"
+     }
+    }
+   ],
+   "1": [
+    {
+     "kind": "unknown",
+     "note": "'Changes to AoE damage': target count not in any source",
+     "value": null
+    }
+   ]
+  },
+  "shadow-fall": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "status_key": "insignia",
+     "note": "3 Insignias on hit (stack count is not tracked; presence only)",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 datamine token se:1322002043:effect_value02:time (rank 20 = 10 s)"
+     }
+    }
+   ]
+  },
+  "aerial-bind": {
+   "1": [
+    {
+     "kind": "extra_hits",
+     "value": {
+      "value": 1.5,
+      "confidence": "estimated",
+      "source": "datamine: aerial-slaughter atk ratio and flat are both x1.5 of aerial-bind (rank 1; flat at rank 20 agrees). Assumes the chain skill lands after every cast (its own MP and lock are ignored)"
+     }
+    }
+   ],
+   "2": [
+    {
+     "kind": "unknown",
+     "note": "'x1.5 [Ambush Stance] effect': Ambush Stance flat proc (152..861) is not modelled",
+     "value": null
+    }
+   ]
+  },
+  "smoke-bomb": {
+   "1": [
+    {
+     "kind": "unknown",
+     "note": "'Changes to AoE Skill': target count not in any source",
+     "value": null
+    }
+   ]
+  },
+  "shadowstrike": {
+   "4": [
+    {
+     "kind": "unknown",
+     "note": "'Changes to AoE Skill': target count not in any source",
+     "value": null
+    }
+   ]
+  },
+  "defiance": {
+   "0": [
+    {
+     "kind": "unknown",
+     "note": "adds the Storm Slice chain (133% + 518 flat at rank 1, own cd 120 s); the engine cannot chain it without chain_next on Defiance",
+     "value": null
+    }
+   ]
+  },
+  "infiltrate": {
+   "3": [
+    {
+     "kind": "extra_hits",
+     "value": {
+      "value": 1.3,
+      "confidence": "estimated",
+      "source": "datamine: dark-strike atk ratio and flat are both x1.3 of infiltrate (rank 1; flat at rank 20 agrees). Assumes the chain skill lands after every cast (its own MP and lock are ignored)"
+     }
+    }
+   ]
+  },
+  "savage-fang": {
+   "3": [
+    {
+     "kind": "force_crit",
+     "value": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "text 'Critical Hit on hit' read as the hit landing as a Critical Hit (same wording family as 'lands as a Critical Hit')"
+     }
+    }
+   ]
+  },
+  "triniels-dagger": {
+   "1": [
+    {
+     "kind": "unknown",
+     "note": "'-10% all skill cooldowns on hit' (token se:1330002711:effect_value02:divide100 = 10): a % of REMAINING cooldown, the engine only removes seconds",
+     "value": null
+    }
+   ],
+   "2": [
+    {
+     "kind": "reset_skill",
+     "skill_key": "triniels-dagger",
+     "trigger": "kill",
+     "note": "kill-triggered effect: the simulator has no kills (trigger 'kill' is not applied)",
+     "value": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "text 'Resets cooldown on defeating an enemy with [Triniel's Dagger]'"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "raises the TARGET's skill cooldowns (base text: +5% of their duration): no effect on your damage"
+     }
+    }
+   ]
+  },
+  "illusive-clone": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "aion2.app client dump 2026-09-18 datamine token abe:1331001012:value02:divide100 (rank 20 = 10%); Status Effect Chance: CC only"
+     }
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "status_key": "illusive_ew_boost",
+     "note": "x1.5 Exploit Weakness while the clone lasts",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "aion2.app client dump 2026-09-18 datamine token se:1331000011:effect_value02:time (rank 20 = 20 s)"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "unknown",
+     "note": "'50% chance to deal extra damage on Critical Hit': the extra damage amount is in no source (token abe:1331004014:value02:divide100 = 50 is the chance only)",
+     "value": null
+    }
+   ]
+  },
+  "swift-contract": {
+   "0": [
+    {
+     "kind": "unknown",
+     "note": "'-20% MP Cost for the duration' (token abe:1339001012 = 20): needs a status-gated global MP-cost modifier",
+     "value": null
+    }
+   ],
+   "1": [
+    {
+     "kind": "adds_status",
+     "status_key": "swift_rear_smite",
+     "note": "x1.5 Rear Smite",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "aion2.app client dump 2026-09-18 datamine token se:1339000011:effect_value02:time (rank 20 = 20 s)"
+     }
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "status_key": "swift_assault_stance",
+     "note": "x1.5 Assault Stance",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "aion2.app client dump 2026-09-18 datamine token se:1339000011:effect_value02:time (rank 20 = 20 s)"
+     }
+    }
+   ]
+  },
+  "storm-rampage": {
+   "3": [
+    {
+     "kind": "unknown",
+     "note": "'Multi-Hit on hit' (no percentage in the text)",
+     "value": null
+    }
+   ],
+   "4": [
+    {
+     "kind": "cdr_all_s",
+     "value": {
+      "value": 4.0,
+      "confidence": "estimated",
+      "source": "text '-1s all skill cooldowns on hit' x 4 hits (Metaroad hits=4); Storm Rampage is stagger-gated, so it never casts in the sim"
+     }
+    }
+   ]
+  },
+  "heart-gore": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "status_key": "insignia",
+     "note": "1 Insignia on hit (presence only); Heart Gore is a proc, its cast effects are not run by the engine",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 datamine token se:1335002012:effect_value02:time (rank 20 = 10 s)"
+     }
+    }
+   ],
+   "2": [
+    {
+     "kind": "crit_chance_add",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "text 'Up to +20% Critical Hit when less targets hit': full value on one target (boss); the simulator applies it at every target count"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "unknown",
+     "note": "'Multi-Hit on hit' (no percentage in the text)",
+     "value": null
+    }
+   ],
+   "4": [
+    {
+     "kind": "reset_skill",
+     "skill_key": "heart-gore",
+     "trigger": "crit",
+     "note": "ENGINE GAP: a PROC owner never feeds crit specialties, so this is inert until the core handles it",
+     "value": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "text 'Resets [Heart Gore] cooldown on landing a Critical Hit'"
+     }
+    }
+   ]
+  }
+ },
+ "spec_slot_ranks_note": "Assassin uses the default 8/12/20 slot ranks (option unlock ranks 8/8/8/12/16 actives, 5/10/15/20 stigmas)"
 }

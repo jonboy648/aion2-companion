@@ -13,12 +13,17 @@ export const PY_NAME = {
   shopping: "shopping",
   roadmap: "roadmap",
   iconUrls: "icon_urls",
+  gearUpgrades: "gear_upgrades",
+  maxPotential: "max_potential",
 } as const;
 
 export type Method = keyof typeof PY_NAME;
 
 /** Methods that report progress (the trailing JS callback is wired to webapi's `progress=`). */
 export const PROGRESS_METHODS: ReadonlySet<Method> = new Set<Method>(["compare", "optimize"]);
+
+/** Methods that need engine/items.json (3.8 MB): fetched by the worker on the first such call only. */
+export const GEAR_METHODS: ReadonlySet<Method> = new Set<Method>(["gearUpgrades", "maxPotential"]);
 
 export interface InitConfig {
   /** Site base, e.g. "/" (import.meta.env.BASE_URL). Engine files live at `${base}engine/...`. */
@@ -40,6 +45,7 @@ export function classKeyFor(method: Method, args: unknown[]): string | null {
     case "shopping":
     case "roadmap":
     case "iconUrls":
+    case "maxPotential":
       return typeof args[0] === "string" ? args[0] : null;
     case "compare":
     case "optimize":
@@ -47,6 +53,10 @@ export function classKeyFor(method: Method, args: unknown[]): string | null {
     case "keybinds":
     case "daevanionSuggest": {
       const b = args[0] as { class_key?: string } | null | undefined;
+      return b?.class_key ?? null;
+    }
+    case "gearUpgrades": {
+      const b = args[1] as { class_key?: string } | null | undefined;
       return b?.class_key ?? null;
     }
     default:

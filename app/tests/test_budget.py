@@ -69,6 +69,24 @@ def test_budget_never_overspends(gd10, scen10):
     assert ranks == {"strike": 10, "nuke": 10}
 
 
+def test_budget_never_buys_a_loss_when_skills_interact(gd10, scen10, monkeypatch):
+    """Upgrading one skill shrinks the other's value (shared buff window, rotation shift). Stale
+    cached values used to buy ranks at a DPS loss; every purchase must be a real gain."""
+    def sim(gd, build, priority, scenario, cfg=None, initial=None):
+        a = build.skill_ranks.get("strike", 1)
+        b = build.skill_ranks.get("nuke", 1)
+        total = 100.0 * a + 90.0 * b - 25.0 * (a - 1) * (b - 1)
+        return SimResult(total, total, 10.0, (), {}, {}, (), "estimated")
+
+    monkeypatch.setattr("aion2c.engine.budget.simulate", sim)
+    prio = Priority((PriorityEntry("strike"), PriorityEntry("nuke")))
+    ranks, log = allocate_points(gd10, build_with(36), prio, scen10)
+    assert log, "something should be bought"
+    assert all(g > 0 for _, _, g in log), log
+    b = build_with(36, skill_ranks=ranks)
+    assert sim(gd10, b, prio, scen10).dps >= sim(gd10, build_with(36), prio, scen10).dps
+
+
 def test_budget_prefers_damage(gd10, scen10):
     prio = Priority((PriorityEntry("strike"), PriorityEntry("nuke")))
     ranks, log = allocate_points(gd10, build_with(3), prio, scen10)

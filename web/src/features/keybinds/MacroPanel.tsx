@@ -75,7 +75,7 @@ export function MacroPanel({
             step={5}
             value={delayMs}
             onChange={(e) => onDelay(Number(e.target.value))}
-            className="h-9 w-28 rounded-md border border-border bg-bg px-2.5 text-sm text-foreground outline-none focus:border-gold"
+            className="h-9 w-28 game-input px-2.5 text-sm text-foreground "
           />
         </label>
         <p className="max-w-md text-xs text-faint">
@@ -87,7 +87,7 @@ export function MacroPanel({
         const meta = MACRO_META[m.name as keyof typeof MACRO_META];
         const eff = macroEfficiency(plan, m);
         return (
-          <section key={m.name} aria-label={m.name} className="rounded-lg border border-border-soft bg-surface2/50 p-3.5">
+          <section key={m.name} aria-label={m.name} className="frame p-3.5">
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-[15px] font-semibold">{m.name}</h3>
               {meta && <span className="text-xs text-faint">{meta.label}</span>}
@@ -97,7 +97,7 @@ export function MacroPanel({
                   <select
                     value={m.hotkey}
                     onChange={(e) => onHotkey(meta.hotkey, e.target.value)}
-                    className="h-8 rounded-md border border-border bg-bg px-2 text-sm text-gold outline-none focus:border-gold"
+                    className="h-8 game-input px-2 text-sm text-gold "
                   >
                     {[...new Set([...HOTKEY_CHOICES, m.hotkey])].map((k) => (
                       <option key={k} value={k}>
@@ -135,6 +135,17 @@ export function MacroPanel({
 
             <div className="mt-3.5">
               {eff ? <DpsBar {...eff} /> : <p className="text-xs text-faint">No DPS estimate for this macro.</p>}
+              {plan.hybrid_dps?.[m.name] != null && eff && (
+                <p className="mt-1.5 text-xs text-dim" data-testid="hybrid-line">
+                  With the hand presses below: <span className="font-semibold text-estimated">~{fmt(plan.hybrid_dps[m.name])}</span> DPS, about{" "}
+                  <span className="font-semibold text-foreground">{Math.round((plan.hybrid_dps[m.name] / eff.ideal) * 100)}%</span> of ideal.
+                </p>
+              )}
+              {plan.macro_advice?.[m.name] && (
+                <p className="mt-2 rounded-md border border-[var(--metal-lo)] bg-gold/10 px-3 py-2 text-xs text-foreground" data-testid="macro-advice">
+                  {plan.macro_advice[m.name]}
+                </p>
+              )}
             </div>
           </section>
         );
@@ -145,7 +156,7 @@ export function MacroPanel({
           <h3 className="mb-2 text-sm font-semibold">Press by hand (not in any macro)</h3>
           <ul className="grid gap-1.5 sm:grid-cols-2">
             {Object.entries(plan.manual_every_s).map(([sk, s]) => (
-              <li key={sk} className="flex items-center gap-2.5 rounded-md border border-border-soft bg-surface px-2.5 py-1.5 text-sm">
+              <li key={sk} className="flex items-center gap-2.5 frame px-2.5 py-1.5 text-sm">
                 <SkillIcon url={icons[sk]} name={nameOf(sk)} size={28} />
                 <span className="min-w-0 flex-1 truncate">{nameOf(sk)}</span>
                 <Badge tone="neutral">key {slotOf(sk) ?? "?"}</Badge>

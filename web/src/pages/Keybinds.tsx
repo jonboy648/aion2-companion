@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useActiveBuild } from "@/features/keybinds/activeBuild";
 import { Hotbar, SlotEditor } from "@/features/keybinds/Hotbar";
+import { RotationPlan } from "@/features/build/RotationPlan";
 import { MacroPanel } from "@/features/keybinds/MacroPanel";
 import { SetupSheet } from "@/features/keybinds/SetupSheet";
 import { isSlotHint, useKeybindPlan } from "@/features/keybinds/useKeybindPlan";
@@ -96,7 +97,7 @@ export function KeybindsPage() {
           </Banner>
         )}
         {kb.phase.status === "ready" && !result && !kb.planError && (
-          <div className="h-40 animate-pulse rounded-lg border border-border-soft bg-surface" aria-busy="true" aria-label="Building plan" />
+          <div className="h-40 animate-pulse ornate" aria-busy="true" aria-label="Building plan" />
         )}
         {kb.planError && (
           <Banner tone="error">
@@ -111,7 +112,8 @@ export function KeybindsPage() {
               <CardHeader>
                 <CardTitle>Hotbar</CardTitle>
                 <CardDescription>
-                  Each key holds up to 4 stacked skills; one press fires the first usable one (numbers show the order). Select a key to pin the skill you
+                  Each key holds up to 4 stacked skills, drawn as in game: one press fires the usable skill in the lowest cell (the bottom cell is
+                  priority 0). To reorder in game, click a skill, then click another cell in the column to swap them. Select a key to pin the skill you
                   already keep there, and the planner builds around it.
                 </CardDescription>
               </CardHeader>
@@ -127,6 +129,7 @@ export function KeybindsPage() {
                   level={build.level}
                   onPin={(s) => kb.pin(selected, s)}
                   onUnpin={() => kb.unpin(selected)}
+                  note={plan.slot_notes?.[selected]}
                 />
                 <div className="flex flex-wrap items-center gap-3 text-xs text-faint">
                   {hasSlotHints && Object.keys(kb.pins).length === 0 && (
@@ -140,6 +143,18 @@ export function KeybindsPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {plan.rotation?.boss_180?.core && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Rotation</CardTitle>
+                  <CardDescription>What the stacks and macros below are trying to do, step by step (single-target boss).</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <RotationPlan rot={plan.rotation.boss_180} icons={kb.icons} />
+                </CardContent>
+              </Card>
+            )}
 
             <Card>
               <CardHeader>

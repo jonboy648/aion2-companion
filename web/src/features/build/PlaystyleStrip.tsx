@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import type { CompareResult, PlaystyleKey } from "@/lib/types";
 import type { ClassData } from "./useClassData";
 import { SkillIcon } from "./SkillIcon";
@@ -29,25 +28,22 @@ export function PlaystyleStrip({ cmp, data, selected, onSelect, overrides }: Pro
             role="tab"
             aria-selected={active}
             onClick={() => onSelect(k)}
-            className={cn(
-              "flex min-w-0 flex-col gap-2 rounded-lg border bg-card p-3 text-left transition-colors sm:p-4",
-              active ? "border-gold bg-surface2 shadow-[0_0_0_1px_var(--gold),0_0_28px_rgba(224,180,88,0.12)]" : "border-border-soft hover:border-border hover:bg-surface2",
-            )}
+            className="game-tab flex min-w-0 flex-col gap-2 !rounded-lg p-3 text-left text-foreground sm:p-4"
           >
-            <span className="text-[15px] font-semibold">{fb.playstyle.name}</span>
+            <span className="font-display text-[15px] font-bold tracking-wide">{fb.playstyle.name}</span>
             <span>
               <span className="text-2xl font-semibold tabular-nums text-gold">~{fmtDps(fb.result.dps)}</span>
               <span className="ml-1 text-xs text-dim">DPS</span>
             </span>
-            <span className="h-1.5 overflow-hidden rounded-full bg-surface3" aria-hidden>
-              <span className="block h-full rounded-full bg-gradient-to-r from-gold-lo to-gold-hi" style={{ width: `${(fb.result.dps / top) * 100}%` }} />
+            <span className="xp-bar xp-bar-sm" aria-hidden>
+              <span className="xp-fill" style={{ width: `${(fb.result.dps / top) * 100}%` }} />
             </span>
             <span className="flex flex-wrap gap-1.5" aria-label="Stigmas">
               {stigmas.map((key) => (
                 <SkillIcon key={key} name={skillName(data.gd?.skills, key)} url={data.icons[key]} size={30} />
               ))}
             </span>
-            <span className={cn("mt-auto text-xs font-medium", active ? "text-gold" : "text-cyan")}>{active ? "Viewing" : "View"}</span>
+            <span className={active ? "mt-auto text-xs font-semibold text-gold" : "mt-auto text-xs font-medium text-cyan"}>{active ? "Viewing" : "View"}</span>
           </button>
         );
       })}

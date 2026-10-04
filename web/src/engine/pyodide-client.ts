@@ -7,7 +7,7 @@ import { PROGRESS_METHODS } from "./protocol";
 import type { FromWorker, InitConfig, Method, ToWorker } from "./protocol";
 import type {
   ArmoryRaw, CharacterBuild, ClassInfo, CompareResult, DaevanionSuggestion, FullBuild, GameData, IconUrls,
-  ImportResult, KeybindsResult, PlaystyleKey, Priority, ProgressFn, RecipeMaterial, Region, RoadmapItem,
+  GearUpgradesResult, ImportResult, KeybindsResult, MaxPotentialResult, PlaystyleKey, Priority, ProgressFn, RecipeMaterial, Region, RoadmapItem,
   SkillBar, StatGain,
 } from "@/lib/types";
 
@@ -145,6 +145,10 @@ export function createPyodideClient(opts: ClientOptions = {}) {
     roadmap: (classKey: string, region: Region, build?: CharacterBuild | null) =>
       call<RoadmapItem[]>("roadmap", [classKey, region, build]),
     iconUrls: (classKey: string) => call<IconUrls>("iconUrls", [classKey]),
+    gearUpgrades: (rawArmory: ArmoryRaw, build: CharacterBuild, playstyle: PlaystyleKey, steps?: number, reachableOnly?: boolean) =>
+      call<GearUpgradesResult>("gearUpgrades", [rawArmory, build, playstyle, steps, reachableOnly]),
+    maxPotential: (classKey: string, playstyle: PlaystyleKey, reachableOnly?: boolean, build?: CharacterBuild | null, rawArmory?: ArmoryRaw | null) =>
+      call<MaxPotentialResult>("maxPotential", [classKey, playstyle, reachableOnly, build, rawArmory]),
     /** Test/debug hook. */
     dispose: () => failAll(new Error("Engine disposed")),
   };

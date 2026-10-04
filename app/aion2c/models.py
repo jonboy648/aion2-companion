@@ -30,6 +30,18 @@ class Num:
     source: str = ""
 
 
+# Specialty slots open at these skill ranks (mastery_stigma.md: skycoach.gg 2026-09-29 via aion2guide.org: "lvl 8 =
+# first three specialties + first slot; 12 = fourth specialty + second slot; 16 = fifth specialty; 20 = third
+# slot"). Options unlock per Specialization.rank_required (datamine unlock_level 8/8/8/12/16 on Sorcerer).
+# allthings.how reads the slots as 8/12/16 instead: unresolved, so this is `estimated` data, overridable per
+# class with mechanics.json "spec_slot_ranks".
+SPEC_SLOT_RANKS = tuple(
+    Num(float(r), "estimated", "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; "
+        "allthings.how says 8/12/16 (research/mastery_stigma.md)")
+    for r in (8, 12, 20)
+)
+
+
 @dataclass(frozen=True)
 class RankData:
     rank: int
@@ -39,10 +51,57 @@ class RankData:
     mp_cost: Num
 
 
+# Specialty effect kinds (engine/simulator.py applies them; specs.py parses text into them).
+#   cooldown_add_s     value = seconds added to the skill's own cooldown (negative = shorter)
+#   cooldown_mult      value = multiplier on the skill's own cooldown (0.8 = -20%)
+#   cast_speed_pct     value = +% Skill Speed: this skill's animation lock and charge time shrink by 1/(1+v/100)
+#   anim_add_s         value = seconds added to the skill's animation lock (negative = faster)
+#   dmg_mult           value = multiplier on this skill's damage (see `cond`)
+#   extra_hits         value = additional hits per cast, each worth one more hit of the skill's damage
+#   adds_status        status_key = Status applied by this skill (on every cast, `chance` accumulator)
+#   resource_restore   value = MP restored per cast (or per crit event when trigger == "crit")
+#   removes_cooldown   the skill's own cooldown becomes 0 (optionally only while `requires_status` is active)
+#   cdr_skill_s        value = seconds taken off skill_key's remaining cooldown per event
+#   cdr_all_s          value = seconds taken off every other skill's remaining cooldown per event
+#   reset_skill        skill_key's cooldown is reset per event
+#   aoe_targets_add    value = extra targets hit
+#   duration_add_s     value = seconds added to every status this skill applies
+#   mp_cost_mult       value = multiplier on the skill's MP cost (0 = free)
+#   force_crit         every hit of this skill crits (effective crit chance 100%)
+#   crit_chance_add    value = +% crit chance on this skill's hits only
+#   charges            value = extra consecutive uses before the cooldown starts
+#   charge             value = charge-time multiplier (0.5 = half the charge time)
+#   mobile             skill can be cast while moving: no DPS effect
+#   ignore_block       ignores Block/Evasion: no effect against a PvE dummy (modelled as 0)
+#   no_dps             anything else with no damage-race effect (heal, shield, CC chance ...)
+#   unknown            text the parser could not turn into numbers: warned about, never applied silently
+SPEC_EFFECT_KINDS = (
+    "cooldown_add_s", "cooldown_mult", "cast_speed_pct", "anim_add_s", "dmg_mult", "extra_hits", "adds_status",
+    "resource_restore", "removes_cooldown", "cdr_skill_s", "cdr_all_s", "reset_skill", "aoe_targets_add",
+    "duration_add_s", "mp_cost_mult", "force_crit", "crit_chance_add", "charges", "charge", "mobile", "ignore_block", "no_dps",
+    "unknown",
+)
+
+
+@dataclass(frozen=True)
+class SpecEffect:
+    kind: str
+    value: Num = Num(None, "unknown")
+    chance: float = 1.0  # probability the effect fires per event (accumulator, never random)
+    trigger: str = "cast"  # "cast" (every cast / on hit) | "crit" (per crit event) | "kill" (not modelled)
+    cond: str = ""  # "" | "more_targets" | "less_targets" | "unmodeled" (listed but not simulated)
+    skill_key: str | None = None  # target skill for cdr_skill_s / reset_skill (or a cooldown effect on ANOTHER skill)
+    on_skill: str | None = None  # trigger "cast" fires on a cast of this skill instead of the owner
+    status_key: str | None = None  # Status for adds_status
+    requires_status: str | None = None  # effect only applies while this status is active
+    note: str = ""
+
+
 @dataclass(frozen=True)
 class Specialization:
     rank_required: int | None
     text: str
+    effects: tuple[SpecEffect, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -67,6 +126,22 @@ class Skill:
     description: str = ""
     tags: tuple[str, ...] = ()
     specializations: tuple[Specialization, ...] = ()
+    # Stagger-only skills (damage is stagger gauge, not HP): tag "stagger_only" (or "stagger") or
+    # hp_dmg_coeff 0.0 makes the simulator value them at zero HP damage. A coefficient between 0 and 1
+    # scales the listed damage (e.g. a hit that is partly stagger gauge).
+    hp_dmg_coeff: float = 1.0
+    stagger_gauge: float | None = None  # datamine "Stagger Gauge Damage" (range -> upper bound), information only
+
+
+STATUS_STAT_FIELDS = (
+    "combat_speed_pct", "cdr_pct", "crit_chance_pct", "crit_dmg_pct", "attack_increase_pct", "dmg_boost_pct",
+)  # Stats fields a Status may modify while active
+
+
+@dataclass(frozen=True)
+class StatMod:
+    stat: str  # one of STATUS_STAT_FIELDS
+    value: Num  # added to the live stat while the status is active
 
 
 @dataclass(frozen=True)
@@ -74,22 +149,40 @@ class Status:
     key: str
     name: str
     on: Literal["self", "target"]
-    duration_s: Num
+    duration_s: Num  # value 0.0 = permanent aura/toggle: active from the first cast (passive: always)
     dmg_mult: Num
     elements: frozenset[Element] = frozenset()
     mp_min_pct: float | None = None
     source_skill: str | None = None
     tick_ratio_pct: Num = Num(0.0, "unknown")
     tick_s: Num = Num(1.0, "unknown")
+    stat_mods: tuple[StatMod, ...] = ()  # live-stat changes while active (self statuses)
+    permanent: bool = False  # explicit aura flag; duration_s.value == 0 behaves the same
 
 
 @dataclass(frozen=True)
 class StatusTrigger:
+    """Fires on an event and (a) applies `status_key`, (b) auto-fires `proc_skill`, (c) resets `reset_skill`.
+
+    event "cast": a cast of a skill whose element is `on_element` (any skill in `on_skills` if given) - the
+        original behaviour. event "crit": expected crit events (accumulator over hits x effective crit
+        chance). event "status": `on_status` was just applied. For "crit"/"status", on_element "none" = any.
+    chance is per event. `window_s` > 0 makes the applied status last that long (a trigger window that
+    PROC-kind skills with SkillRule.requires=(status_key,) can be cast in). proc_skill (kind PROC) deals its
+    own damage for free each time the trigger fires, subject to its own cooldown.
+    """
     status_key: str
     on_element: Element
     chance: float
     source_skill: str
     confidence: Confidence = "estimated"
+    event: Literal["cast", "crit", "status"] = "cast"
+    on_skills: tuple[str, ...] = ()
+    on_status: str | None = None
+    proc_skill: str | None = None
+    reset_skill: str | None = None
+    window_s: float = 0.0
+    requires_status: str | None = None  # fires only while this status (e.g. a target debuff) is active
 
 
 @dataclass(frozen=True)
@@ -112,6 +205,9 @@ class SkillRule:
     mp_restore: float = 0.0
     confidence: Confidence = "estimated"
     note: str = ""
+    # (owner skill key, 0-based option index): this skill (a chain follow-up or proc) only exists while that
+    # specialty option is chosen AND unlocked at the owner's rank. None = always available.
+    requires_spec: tuple[str, int] | None = None
 
 
 @dataclass(frozen=True)
@@ -211,6 +307,9 @@ class GameData:
     daevanion: dict[str, DaevanionBoard] = field(default_factory=dict)
     recipes: tuple[Recipe, ...] = ()
     class_key: str = "sorcerer"
+    # skill rank at which each specialty SLOT opens (a skill equips as many options as it has open slots)
+    spec_slot_ranks: tuple[Num, ...] = field(default_factory=lambda: SPEC_SLOT_RANKS)
+    specs_parsed: bool = False  # True once every Specialization.effects was filled (build or load time)
 
 
 @dataclass(frozen=True)
@@ -232,6 +331,14 @@ class Stats:
     penetration: float = 0
 
 
+# Explicit "typical level-45 character" profile for validation runs and manual-build defaults, applied identically to
+# every class. Stats() stays the all-zero contract default (tests depend on it). Sources: attack +1.6%, combat speed
+# +3.8%, cooldown 0.1% come from the DarthThot armory sample (tests/fixtures/armory/info.json, level 44, attribute
+# bonuses only); crit chance 15% is an ESTIMATE (the same sample shows only +2.8% from attributes, gear adds the
+# rest; 10-20% is typical at 45), needed because crit-triggered procs (Heart Gore) never fire at 0% crit.
+BASELINE_L45_STATS = Stats(attack_increase_pct=1.6, combat_speed_pct=3.8, cdr_pct=0.1, crit_chance_pct=15.0)
+
+
 @dataclass(frozen=True)
 class CharacterBuild:
     name: str
@@ -246,6 +353,9 @@ class CharacterBuild:
     skill_points: int | None = None
     stigma_points: int | None = None
     class_key: str = "sorcerer"
+    # Rank bonuses entered by the user for sources the data cannot compute (Arcana / Soul Binding), skill key -> +ranks.
+    # Added on top of skill-point ranks and Daevanion skill nodes, then clamped to the region cap (see total_rank).
+    bonus_ranks: dict[str, int] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -376,7 +486,7 @@ class SkillBar:
 @dataclass(frozen=True)
 class SlotStack:
     key_label: str
-    stack: tuple[str, ...]  # <= 4, index 0 fires first
+    stack: tuple[str, ...]  # <= 4, index 0 fires first = the BOTTOM cell in game (priority 0)
 
 
 @dataclass(frozen=True)
@@ -411,6 +521,12 @@ class KeybindPlan:
     ideal_dps: dict[str, float] = field(default_factory=dict)
     manual_every_s: dict[str, float] = field(default_factory=dict)
     warnings: tuple[str, ...] = ()
+    # additive fields (macro redesign): all optional, old callers never set them
+    hybrid_dps: dict[str, float] = field(default_factory=dict)  # macro name -> macro + hand-pressed manual skills
+    slot_notes: dict[str, str] = field(default_factory=dict)  # slot label -> why this stack is ordered that way
+    macro_advice: dict[str, str] = field(default_factory=dict)  # macro name -> plain-English verdict
+    rotation: dict[str, dict] = field(default_factory=dict)  # scenario key -> engine.rotation.explain_rotation output
+    thumbs: tuple[tuple[str, str, str], ...] = ()  # G900 (button, sends, description)
 
 
 # ---- constants (PLAN 3b), all `estimated` ----
@@ -421,13 +537,27 @@ STAT_MAP: dict[str, tuple[str, float, Confidence]] = {
     "Combat Speed": ("combat_speed_pct", 1.0, "estimated"),
     "Cooldown Reduction": ("cdr_pct", 1.0, "estimated"),
     "Damage Boost": ("dmg_boost_pct", 1.0, "estimated"),
+    "Critical Damage Boost": ("crit_dmg_pct", 1.0, "estimated"),
     "Penetration": ("penetration", 1.0, "estimated"),
     "Critical Hit": ("", 0.0, "unknown"),
-    "Critical Damage Boost": ("", 0.0, "unknown"),
     "Multi-hit Chance": ("", 0.0, "unknown"),
     "Status Effect Chance": ("", 0.0, "unknown"),
     "MP": ("", 0.0, "unknown"),
     "HP": ("", 0.0, "unknown"),
+}
+# How each conversion was reached (shown next to the node; "unknown" rows are counted but not simulated).
+STAT_MAP_NOTES: dict[str, str] = {
+    "Attack Bonus": "flat Attack, added 1:1 (datamine node value, e.g. +3)",
+    "Combat Speed": "orange (Unique) node, value is already a % (1.5): added to combat_speed_pct 1:1",
+    "Cooldown Reduction": "orange (Unique) node, value is already a % (1.5): added to cdr_pct 1:1",
+    "Damage Boost": "orange (Unique) node, value is already a % (1.5): added to dmg_boost_pct 1:1",
+    "Critical Damage Boost": "orange (Unique) node, value is already a % (1.5): added to crit_dmg_pct 1:1 (same bucket)",
+    "Penetration": "flat Penetration, added 1:1",
+    "Critical Hit": "flat rating (+5); %-conversion depends on the target's crit resist gap (cap 80% at a 1,200 gap): not simulated",
+    "Multi-hit Chance": "orange node (%), Multi-Hit damage per proc is unverified: not simulated",
+    "Status Effect Chance": "no damage effect modelled: not simulated",
+    "MP": "flat MP, no DPS conversion modelled",
+    "HP": "flat HP, no DPS conversion modelled",
 }
 SKILL_POINT_COST = (0, 1, 1, 1, 2, 2, 2, 4, 4, 4)  # index 0 = rank 1 (free)
 # index i = cost of stigma level i+1 (levels 1-20, sum 75 per mastery_stigma.md; PLAN's [8]*4 summed to 67)
@@ -439,3 +569,45 @@ def effective_rank(gd: "GameData", build: "CharacterBuild", skill: Skill) -> int
     cap_key = "stigma" if skill.kind == SkillKind.STIGMA else "core"
     cap = min(len(skill.ranks), gd.rank_caps[build.region][cap_key])
     return max(1, min(build.skill_ranks.get(skill.key, 1), cap))
+
+
+MAX_DAEVANION_RANK_BONUS = 4  # each Daevanion skill node of a skill is +1 rank, at most +4 (mastery_stigma.md)
+
+
+_BONUS_CACHE: dict[tuple, tuple] = {}  # (id(gd), level, nodes) -> (gd, {skill key: +ranks}); gd kept alive so ids stay unique
+
+
+def _daevanion_bonus_map(gd: "GameData", build: "CharacterBuild") -> dict[str, int]:
+    ck = (id(gd), build.level, build.daevanion_nodes)
+    hit = _BONUS_CACHE.get(ck)
+    if hit is None or hit[0] is not gd:
+        counts: dict[str, int] = {}
+        for board in gd.daevanion.values():
+            if board.unlock_level > build.level:
+                continue
+            for i in build.daevanion_nodes:
+                nd = board.nodes.get(i)
+                if nd is not None and nd.skill_key:
+                    counts[nd.skill_key] = counts.get(nd.skill_key, 0) + 1
+        hit = (gd, {k: min(v, MAX_DAEVANION_RANK_BONUS) for k, v in counts.items()})
+        if len(_BONUS_CACHE) > 256:
+            _BONUS_CACHE.clear()
+        _BONUS_CACHE[ck] = hit
+    return hit[1]
+
+
+def daevanion_rank_bonus(gd: "GameData", build: "CharacterBuild", key: str) -> int:
+    """Selected Daevanion skill nodes of `key` on boards unlocked at the build's level, capped at +4."""
+    if not build.daevanion_nodes:
+        return 0
+    return _daevanion_bonus_map(gd, build).get(key, 0)
+
+
+def total_rank(gd: "GameData", build: "CharacterBuild", skill: Skill) -> int:
+    """The rank a skill really plays at: skill-point rank (<= 10 bought) + Daevanion skill nodes (+1 each, <= +4)
+    + the user's `bonus_ranks` entry (Arcana / Soul Binding), clamped to the region cap. Specialty slots and
+    options (rank 8/12/16/20) unlock on this rank, not on the skill-point rank."""
+    cap_key = "stigma" if skill.kind == SkillKind.STIGMA else "core"
+    cap = min(len(skill.ranks), gd.rank_caps[build.region][cap_key])
+    bonus = daevanion_rank_bonus(gd, build, skill.key) + max(0, build.bonus_ranks.get(skill.key, 0))
+    return max(1, min(effective_rank(gd, build, skill) + bonus, cap)) if cap >= 1 else 1

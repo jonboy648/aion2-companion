@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Check, Gem, Hexagon, MapPin, Settings2, Shield, Sword } from "lucide-react";
 import type { RoadmapItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { chapterForLevel, chapterRange } from "@/features/guide/chapters";
 import { groupStates, KIND_LABEL, type GroupState, type LevelGroup } from "./levels";
 
 const KIND_ICON = { skill: Sword, zone: MapPin, system: Settings2, stigma: Gem, gear: Shield, daevanion: Hexagon } as const;
@@ -31,8 +33,21 @@ export function Timeline({ groups, level }: { groups: LevelGroup[]; level: numbe
       {groups.map((g, i) => {
         const st = states[i];
         const isCurrent = st === "current";
+        const ch = chapterForLevel(g.level);
+        const startsChapter = i === 0 || chapterForLevel(groups[i - 1].level).id !== ch.id;
         return (
-          <li key={g.level} ref={isCurrent ? currentRef : undefined} aria-current={isCurrent ? "step" : undefined} className="relative flex gap-3 sm:gap-4">
+          <Fragment key={g.level}>
+          {startsChapter && (
+            <li className="relative z-10 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-border bg-surface3 px-3 py-2">
+              <h2 className="text-sm font-semibold text-gold">
+                {ch.hi === Infinity ? "Endgame" : `Levels ${chapterRange(ch)}`}: {ch.title.replace(/^[^:]*: /, "")}
+              </h2>
+              <Link to={`/guide?chapter=${ch.id}`} className="ml-auto text-xs text-cyan">
+                Open guide chapter
+              </Link>
+            </li>
+          )}
+          <li ref={isCurrent ? currentRef : undefined} aria-current={isCurrent ? "step" : undefined} className="relative flex gap-3 sm:gap-4">
             <div
               className={cn(
                 "relative z-10 grid size-[54px] shrink-0 place-items-center rounded-full border-2 text-center sm:size-16",
@@ -89,6 +104,7 @@ export function Timeline({ groups, level }: { groups: LevelGroup[]; level: numbe
               </ul>
             </div>
           </li>
+          </Fragment>
         );
       })}
     </ol>

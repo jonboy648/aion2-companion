@@ -11,6 +11,7 @@ from aion2c.data.loader import allowed_skills
 from aion2c.engine.advisor import marginal_stats
 from aion2c.engine.budget import allocate_points
 from aion2c.engine.search import _seeds, candidate_skills, optimize
+from aion2c.engine.specialties import SpecPick, _matters, choose_specs, spec_picks
 from aion2c.engine.simulator import simulate
 from aion2c.models import (
     SCENARIOS,
@@ -22,9 +23,13 @@ from aion2c.models import (
     SearchBudget,
     SimConfig,
     SimResult,
+    MAX_DAEVANION_RANK_BONUS,
     SkillKind,
     StatGain,
+    daevanion_rank_bonus,
+    total_rank,
 )
+from aion2c.specs import available_options
 
 _BY_KEY = {s.key: s for s in SCENARIOS}
 
@@ -73,12 +78,45 @@ class FullBuild:
     stat_gains: tuple[StatGain, ...]
     warnings: tuple[str, ...]
     variants: tuple["BuildVariant", ...] = ()
+    spec_picks: tuple[SpecPick, ...] = ()  # equipped specialty options with the DPS each adds (best first)
 
 
 def _heuristic_priority(gd, build, scenario, budget) -> Priority:
     """Greedy seed priority from search (buffs first, then damage per lock-second)."""
     seeds = _seeds(gd, build, scenario, candidate_skills(gd, build), 64)  # untruncated: stigmas must not fall off the end
     return Priority(seeds[0][1]) if seeds else Priority(())
+
+
+def _front_variants(gd, build, scenario, budget, skip=frozenset(), base=None):
+    """The heuristic priority plus, for each equipped stigma not in `skip`, that priority with the stigma moved to
+    the front. A stigma whose value is indirect (a buff, a window opener) can sit late in the greedy order and
+    never fire against always-ready fillers; the front variant guarantees the candidate is actually cast."""
+    base = base or _heuristic_priority(gd, build, scenario, budget)
+    out = [base]
+    for k in build.stigmas:
+        front = tuple(e for e in base.entries if e.skill_key == k)
+        if front and k not in skip:
+            out.append(Priority(front + tuple(e for e in base.entries if e.skill_key != k)))
+    return out
+
+
+def _best_stigma_dps(gd, build, scenario, cfg, budget) -> float:
+    """DPS of the best of: the greedy priority, and (for every equipped stigma the greedy priority never casts)
+    that priority with the stigma forced to the front. Keeps the better, so a stigma is never judged by a
+    priority that did not cast it."""
+    pri = _heuristic_priority(gd, build, scenario, budget)
+    base = simulate(gd, build, pri, scenario, cfg)
+    cast = {k for k, t in base.per_skill.items() if t.casts}
+    best = base.dps
+    for p in _front_variants(gd, build, scenario, budget, skip=frozenset(cast), base=pri)[1:]:
+        best = max(best, simulate(gd, build, p, scenario, cfg).dps)
+    # Never worse than leaving a stigma uncast: an equipped stigma the greedy order casts badly (it costs lock time
+    # for little) must not make the set look worse than the same set without it, or the chooser skips real picks.
+    for k in cast & set(build.stigmas):
+        rest = Priority(tuple(e for e in pri.entries if e.skill_key != k))
+        if rest.entries:
+            best = max(best, simulate(gd, build, rest, scenario, cfg).dps)
+    return best
 
 
 def _optimize_stigmas(gd, build, scenario, cfg, budget, slots, progress):
@@ -93,7 +131,7 @@ def _optimize_stigmas(gd, build, scenario, cfg, budget, slots, progress):
         key = tuple(sorted(picks))
         if key not in cache:
             b = replace(build, stigmas=key)
-            cache[key] = simulate(gd, b, _heuristic_priority(gd, b, scenario, budget), scenario, cfg).dps
+            cache[key] = _best_stigma_dps(gd, b, scenario, cfg, budget)
         return cache[key]
 
     picks: list[str] = []
@@ -148,7 +186,7 @@ _GIVES = {
     "sustain": "healing or resource sustain",
 }
 _LABELS = {"defense": "Survivable", "cc": "Crowd control", "mobility": "Mobile", "sustain": "Sustain"}
-VARIANT_BUDGET = SearchBudget(max_candidates=60)
+VARIANT_BUDGET = SearchBudget(max_candidates=30)  # was 60: same picks on DarthThot; the main search stays 200 (100 cost Ranger 4% DPS)
 
 
 def _derive_tags(skill) -> tuple[str, ...]:
@@ -181,7 +219,13 @@ def _fast_eval(gd, build, sc, cfg, budget=VARIANT_BUDGET, extra: tuple[Priority,
     The search is stochastic, so trying the other builds' priorities removes most of the noise."""
     opt = optimize(gd, build, sc, cfg, budget)
     best = (opt.options[0].result.dps, opt.options[0].priority, opt.options[0].result) if opt.options else (0.0, None, None)
+    castable = {e.skill_key for e in candidate_skills(gd, build)}
     for p in extra:
+        # another build's priority may name its own swapped-in stigma: drop what this build cannot cast, so the
+        # priority we return only lists castable skills
+        p = Priority(tuple(e for e in p.entries if e.skill_key in castable), p.label)
+        if not p.entries:
+            continue
         r = simulate(gd, build, p, sc, cfg)
         if r.dps > best[0]:
             best = (r.dps, p, r)
@@ -208,7 +252,7 @@ def _variants(gd, base_in, fb_build, picks, sc, cfg, max_dps, final_budget=VARIA
 
     def heur_dps(stigmas):
         b = replace(fb_build, stigmas=stigmas)
-        return simulate(gd, b, _heuristic_priority(gd, b, sc, VARIANT_BUDGET), sc, cfg).dps
+        return _best_stigma_dps(gd, b, sc, cfg, VARIANT_BUDGET)
 
     for tag in _VARIANT_TAGS:
         if any(tag in utility_tags(gd, k) for k in chosen):
@@ -254,6 +298,27 @@ def _variants(gd, base_in, fb_build, picks, sc, cfg, max_dps, final_budget=VARIA
 # ---- Daevanion ------------------------------------------------------------------------------
 
 
+def _skill_node_gain(gd, build, priority, sc, cfg, key: str, base: float) -> float:
+    """Per-node DPS gain of a Daevanion skill node for `key`: +1 rank each, so the value is the best average over
+    taking 1..4 more nodes, counting the best newly unlocked specialty (rank 12/16/20 breakpoints are two to four
+    nodes away, so a one-node look would see nothing)."""
+    sk = gd.skills[key]
+    have = daevanion_rank_bonus(gd, build, key)
+    best = 0.0
+    r0 = total_rank(gd, build, sk)
+    for m in range(1, MAX_DAEVANION_RANK_BONUS - have + 1):
+        b = replace(build, bonus_ranks={**build.bonus_ranks, key: build.bonus_ranks.get(key, 0) + m})
+        r = total_rank(gd, b, sk)
+        if r == r0:
+            break  # at the region cap
+        d = simulate(gd, b, priority, sc, cfg).dps
+        for i in available_options(gd, sk, r):
+            if i not in available_options(gd, sk, r0) and _matters(sk, i):
+                d = max(d, simulate(gd, replace(b, specs={**b.specs, key: (i,)}), priority, sc, cfg).dps)
+        best = max(best, (d - base) / m)
+    return max(0.0, best)
+
+
 def plan_daevanion(gd, build, priority, sc, cfg) -> list[int]:
     """Full ordered node path over boards unlocked at build.level (PvP-only nodes skipped).
 
@@ -272,8 +337,11 @@ def plan_daevanion(gd, build, priority, sc, cfg) -> list[int]:
                 continue
             sig = (tuple((e.stat, e.value) for e in n.effects), n.skill_key)
             if sig not in sig_gain:
-                d = simulate(gd, replace(build, daevanion_nodes=frozenset(sel | {nid})), priority, sc, cfg).dps
-                sig_gain[sig] = max(0.0, d - base)
+                if n.skill_key and n.skill_key in gd.skills:
+                    sig_gain[sig] = _skill_node_gain(gd, build, priority, sc, cfg, n.skill_key, base)
+                else:
+                    d = simulate(gd, replace(build, daevanion_nodes=frozenset(sel | {nid})), priority, sc, cfg).dps
+                    sig_gain[sig] = max(0.0, d - base)
             gain[nid] = sig_gain[sig]
     skill_n: dict[str, int] = {}
 
@@ -379,6 +447,10 @@ def optimize_full_build(
         b = replace(b, daevanion_nodes=frozenset(b.daevanion_nodes) | frozenset(take))
         dgain = (simulate(gd, b, heur, sc, cfg).dps / d0 - 1) * 100 if d0 > 0 else 0.0
 
+    # 3b. specialties for the final ranks (Daevanion skill nodes raise ranks, which unlocks options)
+    say("Choosing specialties")
+    b = replace(b, specs=choose_specs(gd, b, heur, sc, cfg, progress))
+
     # 4. final priority search
     say("Searching rotation")
     # Room for every castable skill: a 10-entry cap silently dropped picked stigmas from the rotation.
@@ -389,6 +461,12 @@ def optimize_full_build(
         priority, result = best.priority, best.result
     else:
         priority = heur
+        result = simulate(gd, b, priority, sc, cfg)
+
+    # 4b. re-choose specialties against the final rotation (step 3b used the seed priority, which can differ)
+    chosen = choose_specs(gd, b, priority, sc, cfg)
+    if chosen != b.specs:
+        b = replace(b, specs=chosen)
         result = simulate(gd, b, priority, sc, cfg)
 
     # 5. stats
@@ -412,9 +490,18 @@ def optimize_full_build(
     if unused:
         warnings.append(f"{', '.join(unused)}: equipped but the best rotation never casts it, "
                         "so that slot is free for a utility stigma (see Trade-offs).")
+    sp = spec_picks(gd, b, priority, sc, cfg)
+    if any(p.dps_gain_pct <= 1e-9 for p in sp):
+        # specialties were chosen against the seed priority; drop options the final rotation gets nothing from
+        useful = {(p.skill_key, p.option) for p in sp if p.dps_gain_pct > 1e-9}
+        kept = {k: tuple(i for i in opts if (k, i) in useful) for k, opts in b.specs.items()}
+        b = replace(b, specs={k: v for k, v in kept.items() if v})
+        sp = spec_picks(gd, b, priority, sc, cfg)
+    if any(p.confidence == "unknown" for p in sp):
+        warnings.append("A chosen specialty has an unknown value.")
     return FullBuild(
         style, b, tuple(picks), tuple(rank_log), tuple(path), dgain, priority, result, gains,
-        tuple(dict.fromkeys(warnings)), variants,
+        tuple(dict.fromkeys(warnings)), variants, sp,
     )
 
 

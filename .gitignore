@@ -25,3 +25,13 @@ web/dist_verify/
 web/shots/
 web/.shots-ui-tools/
 .claude/
+
+# verbatim third-party page copies: local research only, never published
+research/**/_raw/
+research/**/raw/
+.mcp.json
+aion2.cmd
+research/items_cache/
+research/gear_samples/
+research/community_builds/
+web/dist_*/

@@ -26,10 +26,10 @@ def test_boss_dmg_only_on_boss(mini_gd):
 def test_crit_and_smite_expectation(mini_gd):
     s = mini_gd.skills["strike"]
     st = Stats(crit_chance_pct=50, crit_dmg_pct=100, smite_pct=20)
-    assert abs(hit_damage(s, 1, st, 1.0, False) - 1000 * 1.5 * 1.1) < 1e-9
+    assert abs(hit_damage(s, 1, st, 1.0, False) - 1000 * 1.5 * 1.2) < 1e-9  # smite = double chance: bonus 1.0
     # boss: crit x0.75, smite x0.7; crit chance capped at 80
     st2 = Stats(crit_chance_pct=200, crit_dmg_pct=100, smite_pct=20)
-    assert abs(hit_damage(s, 1, st2, 1.0, True) - 1000 * (1 + 0.8 * 0.75) * (1 + 0.2 * 0.5 * 0.7)) < 1e-9
+    assert abs(hit_damage(s, 1, st2, 1.0, True) - 1000 * (1 + 0.8 * 0.75) * (1 + 0.2 * 1.0 * 0.7)) < 1e-9
 
 
 def test_attack_multipliers(mini_gd):

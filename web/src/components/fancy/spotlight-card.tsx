@@ -18,13 +18,13 @@ export function SpotlightCard({ className, children, ...props }: React.Component
     <div
       ref={ref}
       onPointerMove={onMove}
-      className={cn("group relative overflow-hidden rounded-lg border border-border-soft bg-card", className)}
+      className={cn("group ornate ornate-hover ornate-sm relative overflow-hidden", className)}
       {...props}
     >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: "radial-gradient(240px circle at var(--sx, 50%) var(--sy, 50%), rgba(224,180,88,0.14), transparent 70%)" }}
+        style={{ background: "radial-gradient(240px circle at var(--sx, 50%) var(--sy, 50%), rgb(var(--ether) / 0.16), transparent 70%)" }}
       />
       <div className="relative">{children}</div>
     </div>

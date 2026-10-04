@@ -9,11 +9,11 @@ import { PLAYSTYLE_ORDER } from "./helpers";
 /** Spinner + the engine's latest progress line. */
 export function ProgressPanel({ title, message, steps }: { title: string; message: string; steps?: string[] }) {
   return (
-    <div role="status" aria-live="polite" className="rounded-lg border border-border-soft bg-card p-5" data-testid="progress">
+    <div role="status" aria-live="polite" className="ornate p-5" data-testid="progress">
       <div className="flex items-center gap-3">
         <LoaderCircle className="size-5 animate-spin text-gold motion-reduce:animate-none" />
         <div>
-          <div className="font-medium">{title}</div>
+          <div className="font-display font-bold tracking-wide">{title}</div>
           <div className="text-sm text-dim">{message}</div>
         </div>
       </div>
@@ -29,9 +29,14 @@ export function ProgressPanel({ title, message, steps }: { title: string; messag
 }
 
 /** Playstyle comparison strip + the selected playstyle's detail cards, with per-playstyle trade-off variants. */
-export function BuildResults({ cmp, data }: { cmp: CompareResult; data: ClassData }) {
+export function BuildResults({ cmp, data, selected: picked, onSelect }: { cmp: CompareResult; data: ClassData; selected?: PlaystyleKey; onSelect?: (k: PlaystyleKey) => void }) {
   const first = PLAYSTYLE_ORDER.find((k) => cmp[k]) ?? "boss";
-  const [selected, setSelected] = useState<PlaystyleKey>(first);
+  const [own, setOwn] = useState<PlaystyleKey>(first);
+  const selected = picked ?? own; // controlled when the page shares the playstyle with the gear card
+  const setSelected = (k: PlaystyleKey) => {
+    setOwn(k);
+    onSelect?.(k);
+  };
   const [variants, setVariants] = useState<Partial<Record<PlaystyleKey, string>>>({});
   const fb = cmp[selected] ?? cmp[first];
 

@@ -34,7 +34,7 @@ export interface PlannerProps {
 }
 
 const selectCls =
-  "h-9 rounded-md border border-input bg-surface px-3 text-sm text-foreground outline-none focus-visible:border-gold";
+  "h-9 game-input px-3 text-sm text-foreground ";
 
 export function Planner({ gd, icons, imp, classes, hasCharacter, onClass }: PlannerProps) {
   const boardKeys = useMemo(() => Object.keys(gd.daevanion), [gd]);
@@ -148,7 +148,7 @@ export function Planner({ gd, icons, imp, classes, hasCharacter, onClass }: Plan
                 max={99}
                 value={level}
                 onChange={(e) => setLevel(Math.max(1, Math.min(99, Number(e.target.value) || 1)))}
-                className="h-9 w-20 rounded-md border border-input bg-surface px-3 text-sm text-foreground outline-none focus-visible:border-gold"
+                className="h-9 w-20 game-input px-3 text-sm text-foreground "
               />
             </label>
             <div className="ml-auto flex items-center gap-2 text-sm">

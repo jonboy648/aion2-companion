@@ -1,25 +1,75 @@
 {
  "_comment": "Hand-authored sim mechanics. Every Num carries confidence. Keys are validated against built skills at build time.",
- "icon_prefix_aliases": {"hellfire-": "hellfire.png"},
+ "icon_prefix_aliases": {
+  "hellfire-": "hellfire.png"
+ },
  "skill_tags": {
-  "dodge": ["manual"],
-  "hellfire": ["manual", "gkey:G2:M1:0", "thumb:1"],
-  "steel-barrier": ["manual", "role:defense", "gkey:G5:M1:0"],
-  "defiance": ["manual", "gkey:G3:M1:0", "gkey:G3:M2:0", "thumb:2"],
-  "bittercold-wind": ["manual", "gkey:G5:M2:0"],
-  "frost-burst": ["gkey:G2:M2:0"],
-  "winters-shackles": ["role:cc", "gkey:G2:M2:1"],
-  "element-enhancement": ["role:burst", "gkey:G4:M1:0"],
-  "wish-of-concentration": ["gkey:G4:M1:1"],
-  "delayed-explosion": ["gkey:G4:M1:2"],
-  "fire-wall": ["gkey:G4:M2:0"],
-  "cold-storm": ["role:cc", "gkey:G4:M2:1"],
-  "arctic-armor": ["role:defense"],
-  "hibernation": ["role:defense", "role:sustain"],
-  "soul-freeze": ["role:cc"],
-  "curse-tree": ["role:cc"],
-  "lumiels-space": ["role:cc"],
-  "divine-burst": ["role:burst"]
+  "dodge": [
+   "manual"
+  ],
+  "hellfire": [
+   "manual",
+   "gkey:G2:M1:0",
+   "thumb:1"
+  ],
+  "steel-barrier": [
+   "manual",
+   "role:defense",
+   "gkey:G5:M1:0"
+  ],
+  "defiance": [
+   "manual",
+   "gkey:G3:M1:0",
+   "gkey:G3:M2:0",
+   "thumb:2"
+  ],
+  "bittercold-wind": [
+   "manual",
+   "gkey:G5:M2:0"
+  ],
+  "frost-burst": [
+   "gkey:G2:M2:0"
+  ],
+  "winters-shackles": [
+   "role:cc",
+   "gkey:G2:M2:1"
+  ],
+  "element-enhancement": [
+   "role:burst",
+   "gkey:G4:M1:0"
+  ],
+  "wish-of-concentration": [
+   "gkey:G4:M1:1"
+  ],
+  "delayed-explosion": [
+   "gkey:G4:M1:2"
+  ],
+  "fire-wall": [
+   "gkey:G4:M2:0"
+  ],
+  "cold-storm": [
+   "role:cc",
+   "gkey:G4:M2:1"
+  ],
+  "arctic-armor": [
+   "role:defense"
+  ],
+  "hibernation": [
+   "role:defense",
+   "role:sustain"
+  ],
+  "soul-freeze": [
+   "role:cc"
+  ],
+  "curse-tree": [
+   "role:cc"
+  ],
+  "lumiels-space": [
+   "role:cc"
+  ],
+  "divine-burst": [
+   "role:burst"
+  ]
  },
  "anim_lock": {
   "default": {
@@ -44,7 +94,8 @@
  "kind_overrides": {
   "cold-snap": "proc",
   "magic-energy-blast": "proc",
-  "flame-zone": "system"
+  "flame-zone": "system",
+  "fire-mark": "proc"
  },
  "statuses": {
   "fire_mark": {
@@ -69,12 +120,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
+    "source": "tick interval unknown until verified against in-game tooltips"
    }
   },
   "element_enhancement": {
@@ -82,9 +133,9 @@
    "name": "Element Enhancement",
    "on": "self",
    "duration_s": {
-    "value": 15.0,
+    "value": 20.0,
     "confidence": "estimated",
-    "source": "dump: 10 s at rank 1 rising to 22.5 s at rank 40 (client tokens); single value 15 s ~ rank 15-16 used (PLAN default 15 s)"
+    "source": "datamine token se:1540000011:effect_value02:time: 10 s rank 1, 17 s rank 15, 20 s rank 20 (global cap), 22.5 s rank 25; rank-20 value used (was 15 s, a PLAN default)"
    },
    "dmg_mult": {
     "value": 1.2,
@@ -100,12 +151,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
+    "source": "tick interval unknown until verified against in-game tooltips"
    }
   },
   "delayed_explosion": {
@@ -114,8 +165,8 @@
    "on": "target",
    "duration_s": {
     "value": 4.0,
-    "confidence": "estimated",
-    "source": "dump: damage taken from caster +15% during the 4 s delay (cd 30 s); Inven KR live disagrees: 20 s / +25%"
+    "confidence": "confirmed",
+    "source": "datamine token se:1532000011:effect_value02:time = 4 at every rank, cooldown 30 s, description +15% (aion2.app 15320000); Inven KR live says 20 s / +25% (older/other build)"
    },
    "dmg_mult": {
     "value": 1.15,
@@ -128,12 +179,12 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
+    "source": "tick interval unknown until verified against in-game tooltips"
    }
   },
   "grace_of_enhancement": {
@@ -146,9 +197,9 @@
     "source": "passive, no duration"
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "+20% PvE Damage Boost while MP >= threshold (dump). MP threshold conflicts: 25% (dump, Fextralife) vs 50% (S6, S7 guides). Also 50% chance for an extra 18% ATK + 106 hit, not modelled"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: the +20% PvE Damage Boost is a dmg_boost_pct stat mod (additive bucket). MP threshold conflicts: 25% (dump, Fextralife) vs 50% (S6, S7 guides); rank-invariant 20% (token abe:1578000011:value02:divide100)"
    },
    "elements": [],
    "mp_min_pct": 25.0,
@@ -156,13 +207,23 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
-   }
+    "source": "tick interval unknown until verified against in-game tooltips"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "datamine token abe:1578000011:value02:divide100 = 20 at ranks 1 and 20 (+10% PvP half not simulated)"
+     }
+    }
+   ]
   },
   "fire_wall_dot": {
    "key": "fire_wall_dot",
@@ -231,7 +292,7 @@
    "duration_s": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "placeholder per PLAN: dump shows 5 hits of flat damage and no DoT; not attached to any rule until Jon's tooltip"
+    "source": "placeholder per PLAN: dump shows 5 hits of flat damage and no DoT; not attached to any rule until verified against in-game tooltips"
    },
    "dmg_mult": {
     "value": 1.0,
@@ -246,13 +307,407 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
+    "source": "tick interval unknown until verified against in-game tooltips"
    }
+  },
+  "wish_of_concentration": {
+   "key": "wish_of_concentration",
+   "name": "Wish of Concentration",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "datamine token se:1531000011:effect_value02:time: 10 s rank 1, 20 s rank 20 (global cap), 30 s rank 40; rank-20 value used"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "datamine token se_abe:1531000011:1531000012:value02:divide100 = 10 at ranks 1 and 40 (Attack +10%); Accuracy +100 not simulated"
+     }
+    }
+   ]
+  },
+  "wish_atk_plus": {
+   "key": "wish_atk_plus",
+   "name": "Wish of Concentration specialty: +10% additional Attack",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "datamine token se:1531000011:effect_value02:time: 10 s rank 1, 20 s rank 20 (global cap), 30 s rank 40; rank-20 value used"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "specialty text '+10% additional Attack' (aion2.app skill 15310000, level 8 option)"
+     }
+    }
+   ]
+  },
+  "wish_combat_speed": {
+   "key": "wish_combat_speed",
+   "name": "Wish of Concentration specialty: +10% Combat Speed",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "datamine token se:1531000011:effect_value02:time: 10 s rank 1, 20 s rank 20 (global cap), 30 s rank 40; rank-20 value used"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "combat_speed_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "specialty text '+10% Combat Speed' (aion2.app skill 15310000, level 12 option); lasts the buff duration"
+     }
+    }
+   ]
+  },
+  "ee_plus": {
+   "key": "ee_plus",
+   "name": "Element Enhancement specialty: +10% additional Fire and Water Attack",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "lasts the Element Enhancement duration (rank-20 value)"
+   },
+   "dmg_mult": {
+    "value": 1.0833333333333335,
+    "confidence": "estimated",
+    "source": "+10% additional on top of +20% in the same Attack bucket: 1.30 / 1.20 (estimated: bucket additivity assumed)"
+   },
+   "elements": [
+    "fire",
+    "water"
+   ],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": []
+  },
+  "ee_robe_of_flame": {
+   "key": "ee_robe_of_flame",
+   "name": "Element Enhancement specialty: x1.5 Robe of Flame",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "lasts the Element Enhancement duration (rank-20 value)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "estimated",
+      "source": "x1.5 of Robe of Flame's +20% PvE Damage Boost at rank 20 (datamine token abe:1574000011) = +10%"
+     }
+    }
+   ]
+  },
+  "ee_grace": {
+   "key": "ee_grace",
+   "name": "Element Enhancement specialty: x1.5 Grace of Enhancement",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "lasts the Element Enhancement duration (rank-20 value)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "estimated",
+      "source": "x1.5 of Grace of Enhancement's +20% PvE Damage Boost (token abe:1578000011) = +10%; assumes MP stays above the Grace threshold"
+     }
+    }
+   ]
+  },
+  "de_plus": {
+   "key": "de_plus",
+   "name": "Delayed Explosion specialty: +10% additional Damage Taken",
+   "on": "target",
+   "duration_s": {
+    "value": 4.0,
+    "confidence": "confirmed",
+    "source": "same 4 s window as Delayed Explosion (token se:1532000011:effect_value02:time)"
+   },
+   "dmg_mult": {
+    "value": 1.0869565217391306,
+    "confidence": "estimated",
+    "source": "+10% additional Damage Taken on top of +15% in one bucket: 1.25 / 1.15 (estimated: bucket additivity assumed)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": []
+  },
+  "ws_boost": {
+   "key": "ws_boost",
+   "name": "Winter's Shackles specialty: +20% PvE Damage Boost",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "token se:1511003711:effect_value02:time = 5"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "token abe:1511003011:value02:divide100 = 20 (PvE half; the +10% PvP half is not simulated)"
+     }
+    }
+   ]
+  },
+  "frost": {
+   "key": "frost",
+   "name": "Frost",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "token se:1515000012:effect_value02:time = 3 (Frost skill; +1 s with its specialty 5)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "Frost itself adds no multiplier; Frost Burst requires it ('Selects a target afflicted with Frost')"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": []
+  },
+  "robe_of_earth": {
+   "key": "robe_of_earth",
+   "name": "Robe of Earth",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "passive aura: duration 0 = permanent while MP >= threshold"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": 50.0,
+   "source_skill": "robe-of-earth",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 13.333333333333334,
+      "confidence": "estimated",
+      "source": "Critical Hit +200 at rank 20 (datamine token abe:1572000012:value02: 105 rank 1, 200 rank 20, 300 rank 40) converted at 80% / 1200 points (estimated); Max MP +45% and Natural MP Regen are not status stats"
+     }
+    }
+   ]
+  },
+  "robe_of_flame": {
+   "key": "robe_of_flame",
+   "name": "Robe of Flame",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "passive aura: permanent"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "robe-of-flame",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "PvE Damage Boost +20% at rank 20 (datamine token abe:1574000011:value02:divide100: 1 rank 1, 20 rank 20, 40 rank 40); Double Chance 4% is not a status stat"
+     }
+    }
+   ]
   }
  },
  "triggers": [
@@ -262,12 +717,24 @@
    "chance": 0.2,
    "source_skill": "fire-mark",
    "confidence": "estimated"
+  },
+  {
+   "status_key": "",
+   "on_element": "fire",
+   "chance": 0.2,
+   "source_skill": "fire-mark",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [],
+   "proc_skill": "fire-mark"
   }
  ],
  "rules": {
   "flame-arrow": {
    "skill_key": "flame-arrow",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -276,11 +743,13 @@
    "charge_levels": [],
    "mp_restore": 100.0,
    "confidence": "estimated",
-   "note": "chain 1/3, restores 100 MP (dump description); chain confirmed in client"
+   "note": "chain 1/3, restores 100 MP (dump description); chain confirmed in client; every Fire attack inflicts Fire Mark for 5 s (description)"
   },
   "burst": {
    "skill_key": "burst",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -289,11 +758,13 @@
    "charge_levels": [],
    "mp_restore": 100.0,
    "confidence": "estimated",
-   "note": "chain 2/3, restores 100 MP (dump description)"
+   "note": "chain 2/3, restores 100 MP (dump description); every Fire attack inflicts Fire Mark for 5 s (description)"
   },
   "pyroclasm": {
    "skill_key": "pyroclasm",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -302,11 +773,13 @@
    "charge_levels": [],
    "mp_restore": 120.0,
    "confidence": "estimated",
-   "note": "chain 3/3, restores 120 MP (dump description)"
+   "note": "chain 3/3, restores 120 MP (dump description); every Fire attack inflicts Fire Mark for 5 s (description)"
   },
   "blaze": {
    "skill_key": "blaze",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [
     "fire_mark"
@@ -317,7 +790,7 @@
    "charge_levels": [],
    "mp_restore": 100.0,
    "confidence": "estimated",
-   "note": "needs Fire Mark on target; restores 100 MP (dump description); Fire Mark not consumed (unknown)"
+   "note": "needs Fire Mark on target; restores 100 MP (dump description); Fire Mark not consumed (unknown); every Fire attack inflicts Fire Mark for 5 s (description)"
   },
   "element-enhancement": {
    "skill_key": "element-enhancement",
@@ -337,7 +810,8 @@
   "delayed-explosion": {
    "skill_key": "delayed-explosion",
    "applies": [
-    "delayed_explosion"
+    "delayed_explosion",
+    "fire_mark"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -347,12 +821,13 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": ""
+   "note": "every Fire attack inflicts Fire Mark for 5 s (description)"
   },
   "fire-wall": {
    "skill_key": "fire-wall",
    "applies": [
-    "fire_wall_dot"
+    "fire_wall_dot",
+    "fire_mark"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -362,7 +837,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Embers DoT: tick damage unknown until Jon's tooltip"
+   "note": "Embers DoT: tick damage unknown until verified against in-game tooltips; every Fire attack inflicts Fire Mark for 5 s (description)"
   },
   "cold-storm": {
    "skill_key": "cold-storm",
@@ -377,11 +852,13 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Frostbite DoT: tick damage unknown until Jon's tooltip"
+   "note": "Frostbite DoT: tick damage unknown until verified against in-game tooltips"
   },
   "hellfire": {
    "skill_key": "hellfire",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -430,7 +907,670 @@
    ],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "charge timing and per-level multipliers are estimates"
+   "note": "charge timing and per-level multipliers are estimates; every Fire attack inflicts Fire Mark for 5 s (description)"
+  },
+  "wish-of-concentration": {
+   "skill_key": "wish-of-concentration",
+   "applies": [
+    "wish_of_concentration"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Attack +10% for 10-30 s by rank (datamine); specialties add Attack/Combat Speed statuses"
+  },
+  "frost": {
+   "skill_key": "frost",
+   "applies": [
+    "frost"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Frost lands 100% on NPC targets (description); a boss with Incapacitated Immunity would not take it"
+  },
+  "assault-bombardment": {
+   "skill_key": "assault-bombardment",
+   "applies": [
+    "frost"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "100% chance to land Frost on NPC targets (description)"
+  },
+  "frost-burst": {
+   "skill_key": "frost-burst",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "frost"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "'Selects a target afflicted with Frost' (description). The 7% 'Incapacitated Immunity' proc (child 15220037) is not modelled: it replaces Frost on immune bosses"
+  },
+  "divine-burst": {
+   "skill_key": "divine-burst",
+   "applies": [
+    "fire_mark"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Fire attack applies Fire Mark"
+  },
+  "firestorm": {
+   "skill_key": "firestorm",
+   "applies": [
+    "fire_mark"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Fire attack applies Fire Mark; 5 fireballs per cast"
   }
- }
+ },
+ "_statuses_note": "Statuses wish_*, ee_*, de_plus, ws_boost, frost, robe_* added from datamine tokens; flat DoT ticks (Fire Wall 650-2059, Frostbite 472-1497 per tick r1-r25) cannot be expressed as an ATK ratio.",
+ "_procs_note": "Only fire-mark is a proc: 20% x (55% ATK + 32..674 flat) per Fire cast on a Fire-Marked target (datamine tokens abe:1571000011), fired per cast (the game fires per hit; its 1 s cooldown is not in the rank data). NOT modelled on purpose: Grace of Enhancement's 50% x (18% ATK + 106..297) extra hit and Vitality Evaporation's 39% ATK + 261..662 hit (target HP above 70% at rank 1, 51% at rank 20, token abe:1580000011:value11), both with a 1 s internal cooldown. The engine fires procs per cast with no internal cooldown, which would reward spamming cheap skills and inflates their share (they pushed tests/test_rotation.py damage shares to 76%). Absorb Essence (25 MP per attack at rank 1, cd 1 s; aion2.app 15760000) is also not modelled: the research description has the amount blanked and a rule's mp_restore must match the description text (tests/test_data_build.py).",
+ "specialization_effects": {
+  "burst": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "4": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ]
+  },
+  "pyroclasm": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ],
+   "4": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+    }
+   ]
+  },
+  "cold-wave": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+    }
+   ],
+   "4": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+    }
+   ]
+  },
+  "winters-illusion": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+    }
+   ],
+   "4": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+    }
+   ]
+  },
+  "curse-old-tree": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+    }
+   ],
+   "4": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+    }
+   ]
+  },
+  "the-depths": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+    }
+   ],
+   "4": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+    }
+   ]
+  },
+  "firestorm": {
+   "3": [
+    {
+     "kind": "cdr_skill_s",
+     "value": 10.0,
+     "confidence": "estimated",
+     "source": "text '-2s [Hellfire] cooldown per fireball' x 5 fireballs (description: 5 hits)",
+     "skill_key": "hellfire",
+     "note": "2 s per fireball, 5 fireballs per cast"
+    }
+   ],
+   "4": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.45,
+     "confidence": "estimated",
+     "source": "text '+15% damage per fireball, up to +75%': 5 fireballs reach +75% on the last, mean +45%",
+     "note": "mean over the 5 fireballs"
+    }
+   ]
+  },
+  "ice-chain": {
+   "0": [
+    {
+     "kind": "mp_cost_mult",
+     "value": 0.8,
+     "confidence": "confirmed",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+    },
+    {
+     "kind": "mp_cost_mult",
+     "value": 0.8,
+     "confidence": "confirmed",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "skill_key": "cold-wave",
+     "note": "chain member"
+    }
+   ],
+   "1": [
+    {
+     "kind": "cast_speed_pct",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+    },
+    {
+     "kind": "cast_speed_pct",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "skill_key": "cold-wave",
+     "note": "chain member"
+    }
+   ],
+   "2": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.12,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "cond": "less_targets",
+     "note": "'up to' 12%, scaled by targets hit"
+    },
+    {
+     "kind": "dmg_mult",
+     "value": 1.12,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "cond": "less_targets",
+     "skill_key": "cold-wave",
+     "note": "chain member"
+    }
+   ]
+  },
+  "winters-shackles": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "value": 3.0,
+     "confidence": "confirmed",
+     "source": "text '30% chance to inflict Frost for 3s'",
+     "status_key": "frost",
+     "chance": 0.3
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": 5.0,
+     "confidence": "confirmed",
+     "source": "token se:1511003711:effect_value02:time = 5, abe:1511003011 = +20% PvE",
+     "status_key": "ws_boost"
+    }
+   ],
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "value": 2.3,
+     "confidence": "estimated",
+     "source": "Winter's Illusion = 1.30x a Winter's Shackles hit (188.5/145 ATK%, 357/275 flat, both 1.30): the chain cast adds 1.30 hits",
+     "note": "chain skill added at rank 12"
+    },
+    {
+     "kind": "anim_add_s",
+     "value": 1.0,
+     "confidence": "estimated",
+     "source": "the added chain cast has its own ~1 s animation lock"
+    },
+    {
+     "kind": "mp_cost_mult",
+     "value": 2.0,
+     "confidence": "confirmed",
+     "source": "Winter's Illusion costs 200 MP, the same as Winter's Shackles"
+    }
+   ]
+  },
+  "glacial-smite": {
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": 3.0,
+     "confidence": "confirmed",
+     "source": "text '50% chance to inflict Frost for 3s'",
+     "status_key": "frost",
+     "chance": 0.5
+    }
+   ]
+  },
+  "frost": {
+   "4": [
+    {
+     "kind": "duration_add_s",
+     "value": 1.0,
+     "confidence": "confirmed",
+     "source": "text '+1s Frost duration'"
+    }
+   ]
+  },
+  "cold-storm": {
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "+3 s storm: the 160% ATK hit is not periodic; Frostbite tick damage is flat and not modelled"
+    }
+   ],
+   "3": [
+    {
+     "kind": "duration_add_s",
+     "value": 10.0,
+     "confidence": "confirmed",
+     "source": "text '+10s Frostbite duration'"
+    }
+   ]
+  },
+  "fire-wall": {
+   "2": [
+    {
+     "kind": "extra_hits",
+     "value": 3.3333333333333335,
+     "confidence": "estimated",
+     "source": "text '+2s summoning duration': the wall lasts 3 s for 5 hits; hits assumed evenly spread (1.67/s)",
+     "note": "+3.33 hits"
+    }
+   ]
+  },
+  "bittercold-wind": {
+   "0": [
+    {
+     "kind": "extra_hits",
+     "value": 3.5,
+     "confidence": "estimated",
+     "source": "text '+1s summon duration': the wind lasts 2 s for 7 hits; hits assumed evenly spread (3.5/s)"
+    }
+   ]
+  },
+  "wish-of-concentration": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "text '+10% additional Attack' (lasts the buff)",
+     "status_key": "wish_atk_plus"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "+500 Max MP while the buff is up: max MP is not a status stat"
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "text '+10% Combat Speed' (lasts the buff)",
+     "status_key": "wish_combat_speed"
+    }
+   ]
+  },
+  "delayed-explosion": {
+   "2": [
+    {
+     "kind": "aoe_targets_add",
+     "value": 3.0,
+     "confidence": "estimated",
+     "source": "text 'Changes to AoE Skill'; class AoE skills hit up to 4 targets, assumed the same (no value in the text)"
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": 4.0,
+     "confidence": "confirmed",
+     "source": "text '+10% additional Damage Taken'",
+     "status_key": "de_plus"
+    }
+   ]
+  },
+  "element-enhancement": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "text 'x1.5 [Robe of Flame] effect'",
+     "status_key": "ee_robe_of_flame"
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "text 'x1.5 [Grace of Enhancement] effect'",
+     "status_key": "ee_grace"
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "text '+10% additional Fire and Water Attack'",
+     "status_key": "ee_plus"
+    }
+   ]
+  },
+  "arctic-armor": {
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "x1.5 Absorb Essence MP restore during a 10 s defensive buff; MP sustain / defence only: not part of the damage race"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "x1.5 Robe of Cold effect (Slow on the attacker); defence only"
+    }
+   ]
+  },
+  "hibernation": {
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0,
+     "confidence": "estimated",
+     "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)",
+     "note": "triggers on Impact-type status: defence only"
+    }
+   ]
+  }
+ },
+ "spec_notes": "Overrides only where the generic parser is wrong or has no value. Chain children share the root's specialty set and are neutralised (no double counting). Unquantified (kept unknown, listed by tests): Multi-Hit (no value in any official source), Delayed Damage after 3s (Blaze), Enhanced Frostbite / Enhanced Embers (DoT amount is flat and not modelled). Slot ranks stay 8/12/20 (datamine option unlocks 8/8/8/12/16 for actives, 5/10/15/20 for stigmas)."
 }

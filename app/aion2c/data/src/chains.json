@@ -91,6 +91,13 @@
    "kind": "condition",
    "confidence": "estimated",
    "note": "Firestorm / Fire Mark feed Blaze (text-based)"
+  },
+  {
+   "parent": 15150000,
+   "child": 15220000,
+   "kind": "condition",
+   "confidence": "confirmed",
+   "note": "Frost Burst 'Selects a target afflicted with Frost' (description); Frost applies it"
   }
  ],
  "unlinked": [

@@ -8,7 +8,7 @@ export function ClassSelect({ classes, value, onChange }: { classes: ClassInfo[]
       <select
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
-        className="h-9 rounded-md border border-border bg-surface2 px-2.5 text-sm text-foreground outline-none focus:border-gold"
+        className="h-9 game-input px-2.5 text-sm text-foreground "
       >
         {classes.map((c) => (
           <option key={c.key} value={c.key}>

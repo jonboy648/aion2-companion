@@ -5,3 +5,12 @@ workers_dev = true
 
 [vars]
 ALLOWED_ORIGINS = "https://becomecube.com,https://www.becomecube.com,http://localhost:5173,http://localhost:4173"
+
+# Owner analytics (D1, free tier). DEPLOY: `npx wrangler d1 create aion2-stats`, paste the printed database_id below,
+# then `npx wrangler d1 execute aion2-stats --remote --file=schema.sql`. Secrets (never commit):
+# `npx wrangler secret put ADMIN_TOKEN` and `npx wrangler secret put ADMIN_SALT`. See ../DEPLOY_HANDOFF.md.
+# Without this binding the Worker still runs; analytics logging is simply off.
+[[d1_databases]]
+binding = "STATS"
+database_name = "aion2-stats"
+database_id = "REPLACE_WITH_DATABASE_ID_FROM_wrangler_d1_create"

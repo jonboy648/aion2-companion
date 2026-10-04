@@ -98,7 +98,7 @@ def fake_simulate(
     )
 
 
-def fake_simulate_macro(gd, build, plan, macro_name, scenario, cfg: SimConfig = SimConfig()) -> SimResult:
+def fake_simulate_macro(gd, build, plan, macro_name, scenario, cfg: SimConfig = SimConfig(), hand=()) -> SimResult:
     return fake_sim_result(dps=1500)
 
 

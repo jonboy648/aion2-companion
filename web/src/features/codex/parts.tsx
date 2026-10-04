@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { IconFrame, type Rarity } from "@/components/game/IconFrame";
 import type { Confidence, Element, Num } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { fmtNum } from "./logic";
@@ -43,29 +43,7 @@ export function ElementDot({ element }: { element: Element }) {
   );
 }
 
-/** Official CDN icon (hotlinked). Shows an initial tile when the URL is missing or fails to load. */
-export function SkillIcon({ url, name, size = 48, className }: { url: string | null | undefined; name: string; size?: number; className?: string }) {
-  const [failed, setFailed] = useState(false);
-  const box = { width: size, height: size };
-  if (!url || failed)
-    return (
-      <span
-        style={box}
-        className={cn("grid shrink-0 place-items-center rounded-md border border-border bg-surface2 font-semibold text-faint", className)}
-        aria-hidden
-      >
-        {name.slice(0, 1)}
-      </span>
-    );
-  return (
-    <img
-      src={url}
-      alt=""
-      style={box}
-      loading="lazy"
-      referrerPolicy="no-referrer"
-      onError={() => setFailed(true)}
-      className={cn("shrink-0 rounded-md border border-border bg-surface2 object-cover", className)}
-    />
-  );
+/** Official CDN icon (hotlinked) in a rarity frame. Shows initials when the URL is missing or fails to load. */
+export function SkillIcon({ url, name, size = 48, className, rarity }: { url: string | null | undefined; name: string; size?: number; className?: string; rarity?: Rarity }) {
+  return <IconFrame url={url} name={name} size={size} className={className} rarity={rarity ?? "epic"} alt="" />;
 }

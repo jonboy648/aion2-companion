@@ -19,6 +19,7 @@ const K = {
   build: keysOf<T.CharacterBuild>({
     name: true, region: true, level: true, skill_ranks: true, stigmas: true, specs: true, stats: true,
     show_kr: true, daevanion_nodes: true, skill_points: true, stigma_points: true, class_key: true,
+    bonus_ranks: true,
   }),
   stats: keysOf<T.Stats>({
     attack: true, attack_increase_pct: true, weapon_dmg_pct: true, dmg_boost_pct: true, pve_dmg_pct: true,
@@ -28,6 +29,7 @@ const K = {
   fullBuild: keysOf<T.FullBuild>({
     playstyle: true, build: true, stigma_picks: true, rank_log: true, daevanion_path: true,
     daevanion_gain_pct: true, priority: true, result: true, stat_gains: true, warnings: true, variants: true,
+    rotation_explained: true, spec_picks: true,
   }),
   playstyle: keysOf<T.Playstyle>({ key: true, name: true, description: true, scenario: true }),
   scenario: keysOf<T.Scenario>({ key: true, name: true, duration_s: true, n_targets: true, boss: true }),
@@ -42,6 +44,15 @@ const K = {
   variant: keysOf<T.BuildVariant>({ key: true, label: true, gives: true, build: true, stigma_picks: true, dps: true, dps_delta_pct: true }),
   plan: keysOf<T.KeybindPlan>({
     stacks: true, macros: true, gkeys: true, macro_dps: true, ideal_dps: true, manual_every_s: true, warnings: true,
+    hybrid_dps: true, slot_notes: true, macro_advice: true, rotation: true, thumbs: true,
+  }),
+  rotation: keysOf<T.RotationExplained>({
+    scenario: true, scenario_name: true, duration_s: true, dps: true, priority: true, opener: true, core: true,
+    chains: true, filler: true, skip: true,
+  }),
+  rotCore: keysOf<T.RotationCore>({
+    skill_key: true, name: true, icon_key: true, charge_level: true, cooldown_s: true, casts: true, cast_every_s: true,
+    damage_share_pct: true, rule: true, status: true, text: true,
   }),
   stack: keysOf<T.SlotStack>({ key_label: true, stack: true }),
   macro: keysOf<T.MacroPlan>({ name: true, hotkey: true, entries: true }),
@@ -60,22 +71,23 @@ const K = {
   gamedata: keysOf<T.GameData>({
     schema_version: true, data_version: true, built_at: true, level_caps: true, rank_caps: true, stigma_slots: true,
     skills: true, statuses: true, rules: true, triggers: true, links: true, community: true, roadmap: true,
-    daevanion: true, recipes: true, class_key: true,
+    daevanion: true, recipes: true, class_key: true, spec_slot_ranks: true, specs_parsed: true,
   }),
   skill: keysOf<T.Skill>({
     key: true, skill_id: true, name: true, name_kr: true, kind: true, element: true, unlock_level: true,
     max_rank: true, regions: true, atk_ratio_pct: true, ranks: true, range_m: true, aoe_targets: true, hits: true,
-    anim_lock_s: true, icon: true, description: true, tags: true, specializations: true,
+    anim_lock_s: true, icon: true, description: true, tags: true, specializations: true, hp_dmg_coeff: true,
+    stagger_gauge: true,
   }),
   rank: keysOf<T.RankData>({ rank: true, flat_min: true, flat_max: true, cooldown_s: true, mp_cost: true }),
   num: keysOf<T.Num>({ value: true, confidence: true, source: true }),
   status: keysOf<T.Status>({
     key: true, name: true, on: true, duration_s: true, dmg_mult: true, elements: true, mp_min_pct: true,
-    source_skill: true, tick_ratio_pct: true, tick_s: true,
+    source_skill: true, tick_ratio_pct: true, tick_s: true, stat_mods: true, permanent: true,
   }),
   rule: keysOf<T.SkillRule>({
     skill_key: true, applies: true, apply_chance: true, requires: true, consumes: true, chain_next: true,
-    chain_window_s: true, charge_levels: true, mp_restore: true, confidence: true, note: true,
+    chain_window_s: true, charge_levels: true, mp_restore: true, confidence: true, note: true, requires_spec: true,
   }),
   link: keysOf<T.Link>({ parent_key: true, child_key: true, kind: true, confidence: true }),
   community: keysOf<T.CommunityRotation>({ key: true, source: true, scenario_key: true, priority: true, note: true }),
@@ -119,6 +131,8 @@ describe("types.ts matches real webapi output (fixtures)", () => {
     same(fb.variants[0], K.variant);
     same(fb.variants[0].build, K.build);
     expect(fb.stigma_picks[0]).toHaveLength(2);
+    same(fb.rotation_explained, K.rotation);
+    same(fb.rotation_explained.core[0], K.rotCore);
   });
 
   it("marginal, daevanion_suggest, shopping, roadmap", () => {
@@ -135,6 +149,8 @@ describe("types.ts matches real webapi output (fixtures)", () => {
     same(keybindsFx.plan.macros[0], K.macro);
     same(keybindsFx.plan.macros[0].entries[0], K.macroEntry);
     same(keybindsFx.plan.gkeys[0], K.gkey);
+    same(keybindsFx.plan.rotation.boss_180, K.rotation);
+    expect(Object.keys(keybindsFx.plan.slot_notes).sort()).toEqual(keybindsFx.plan.stacks.map((s) => s.key_label).sort());
   });
 
   it("gamedata", () => {

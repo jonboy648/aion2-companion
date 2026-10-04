@@ -69,7 +69,7 @@
    "dp": 0
   },
   "range_m": 4.0,
-  "description": "Deals 58-58 damage to up to 4 enemies within 4m and restores 100 MP.",
+  "description": "Deals 58-58 damage (2 hits) to up to 4 enemies within 4m and restores 100 MP.",
   "coefficients": {
    "atk_ratio_pct_rank1": 70.0,
    "flat_rank1": 61.0,
@@ -20093,7 +20093,7 @@
    "dp": 0
   },
   "range_m": 4.0,
-  "description": "Deals 107-107 damage to a target afflicted with Stagger within 4m.",
+  "description": "Deals 107-107 damage (4 hits) to a target afflicted with Stagger within 4m.",
   "coefficients": {
    "atk_ratio_pct_rank1": 82.5,
    "flat_rank1": 107.0,

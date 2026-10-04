@@ -66,10 +66,26 @@ def _dec(tp: Any, v: Any) -> Any:
     return v
 
 
+def _norm_specs(v: Any) -> dict[str, tuple[int, ...]]:
+    """CharacterBuild.specs is skill key -> tuple of chosen 0-based option indices. Older saves hold a bare
+    int, a list, or junk: keep the ints, drop the rest (out-of-range options are ignored by the engine)."""
+    out: dict[str, tuple[int, ...]] = {}
+    if not isinstance(v, dict):
+        return out
+    for k, x in v.items():
+        items = x if isinstance(x, (list, tuple)) else [x]
+        ints = tuple(dict.fromkeys(int(i) for i in items if isinstance(i, (int, float)) and not isinstance(i, bool)))
+        if ints:
+            out[str(k)] = ints
+    return out
+
+
 def from_dict(cls: type, d: dict) -> Any:
     """Inverse of to_dict for dataclass `cls`. Missing keys fall back to field defaults."""
     hints = _hints(cls)
     kwargs = {}
+    if cls is models.CharacterBuild and "specs" in d:
+        d = {**d, "specs": _norm_specs(d["specs"])}
     for f in dataclasses.fields(cls):
         if f.name in d:
             kwargs[f.name] = _dec(hints[f.name], d[f.name])

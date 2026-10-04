@@ -92,7 +92,7 @@ export function Markdown({ source }: { source: string }) {
           case "h":
             if (b.level === 1) return null; // the page supplies the title
             return b.level === 2 ? (
-              <h3 key={i} className="mt-5 border-l-4 border-gold pl-2.5 text-[17px] font-semibold text-foreground first:mt-0">
+              <h3 key={i} className="mt-5 border-b border-[var(--metal-lo)] pb-1 text-[17px] font-bold text-gold first:mt-0">
                 {inline(b.text)}
               </h3>
             ) : (

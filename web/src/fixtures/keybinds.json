@@ -4,33 +4,31 @@
    {
     "key_label": "1",
     "stack": [
+     "wish-of-concentration",
+     "fire-wall",
      "element-enhancement",
-     "delayed-explosion",
-     "blaze",
      "winters-shackles"
     ]
    },
    {
     "key_label": "2",
     "stack": [
-     "frost-burst",
-     "firestorm",
      "frost",
-     "glacial-smite"
+     "delayed-explosion"
     ]
    },
    {
     "key_label": "3",
     "stack": [
-     "assault-bombardment",
-     "fire-wall",
-     "flame-arrow"
+     "blaze",
+     "frost-burst"
     ]
    },
    {
     "key_label": "4",
     "stack": [
-     "flame-scattershot"
+     "firestorm",
+     "flame-arrow"
     ]
    },
    {
@@ -50,6 +48,12 @@
     "stack": [
      "hellfire"
     ]
+   },
+   {
+    "key_label": "8",
+    "stack": [
+     "defiance"
+    ]
    }
   ],
   "macros": [
@@ -64,7 +68,7 @@
      },
      {
       "index": 2,
-      "key_label": "2",
+      "key_label": "4",
       "delay_ms": 10
      },
      {
@@ -79,22 +83,12 @@
      },
      {
       "index": 5,
-      "key_label": "1",
+      "key_label": "3",
       "delay_ms": 10
      },
      {
       "index": 6,
-      "key_label": "4",
-      "delay_ms": 10
-     },
-     {
-      "index": 7,
-      "key_label": "1",
-      "delay_ms": 10
-     },
-     {
-      "index": 8,
-      "key_label": "5",
+      "key_label": "2",
       "delay_ms": 10
      }
     ]
@@ -105,12 +99,12 @@
     "entries": [
      {
       "index": 1,
-      "key_label": "2",
+      "key_label": "4",
       "delay_ms": 10
      },
      {
       "index": 2,
-      "key_label": "1",
+      "key_label": "3",
       "delay_ms": 10
      },
      {
@@ -125,7 +119,7 @@
      },
      {
       "index": 5,
-      "key_label": "2",
+      "key_label": "1",
       "delay_ms": 10
      },
      {
@@ -135,11 +129,6 @@
      },
      {
       "index": 7,
-      "key_label": "2",
-      "delay_ms": 10
-     },
-     {
-      "index": 8,
       "key_label": "4",
       "delay_ms": 10
      }
@@ -164,85 +153,920 @@
    {
     "gkey": "G2",
     "mstate": "M1",
-    "sends": "7",
-    "purpose": "Hellfire",
+    "sends": "6",
+    "purpose": "Bittercold Wind (press by hand)",
     "risk": "lowest_known"
    },
    {
     "gkey": "G2",
     "mstate": "M2",
-    "sends": "2",
-    "purpose": "Frost Burst > Winter's Shackles",
+    "sends": "6",
+    "purpose": "Bittercold Wind (press by hand)",
     "risk": "lowest_known"
    },
    {
     "gkey": "G3",
     "mstate": "M1",
-    "sends": "-",
-    "purpose": "Defiance: skill not on your bar, put it on key - and bind it",
-    "risk": "caution"
+    "sends": "7",
+    "purpose": "Hellfire (press by hand)",
+    "risk": "lowest_known"
    },
    {
     "gkey": "G3",
     "mstate": "M2",
-    "sends": "0",
-    "purpose": "Defiance: skill not on your bar, put it on key 0 and bind it",
-    "risk": "caution"
+    "sends": "7",
+    "purpose": "Hellfire (press by hand)",
+    "risk": "lowest_known"
    },
    {
     "gkey": "G4",
     "mstate": "M1",
-    "sends": "1",
-    "purpose": "Element Enhancement > Wish of Concentration > Delayed Explosion",
-    "risk": "lowest_known"
+    "sends": "8",
+    "purpose": "Defiance: not on your bar, put it on free key 8 and bind it",
+    "risk": "caution"
    },
    {
     "gkey": "G4",
     "mstate": "M2",
     "sends": "3",
-    "purpose": "Fire Wall > Cold Storm",
+    "purpose": "Blaze > Frost Burst",
     "risk": "lowest_known"
    },
    {
     "gkey": "G5",
     "mstate": "M1",
-    "sends": "8",
-    "purpose": "Steel Barrier: skill not on your bar, put it on key 8 and bind it",
-    "risk": "caution"
+    "sends": "1",
+    "purpose": "Wish of Concentration > Fire Wall > Element Enhancement > Winter's Shackles",
+    "risk": "lowest_known"
    },
    {
     "gkey": "G5",
     "mstate": "M2",
-    "sends": "6",
-    "purpose": "Bittercold Wind",
-    "risk": "lowest_known"
+    "sends": "8",
+    "purpose": "Defiance: not on your bar, put it on free key 8 and bind it",
+    "risk": "caution"
    }
   ],
   "macro_dps": {
-   "Boss loop": 2442.6456149137557,
-   "AoE loop": 5779.102176589249
+   "Boss loop": 8383.680956056322,
+   "AoE loop": 15231.48537816368
   },
   "ideal_dps": {
-   "boss_180": 3429.220995769603,
-   "aoe_pack": 10899.771976770553
+   "boss_180": 10806.81491202136,
+   "aoe_pack": 35983.936218216106
   },
   "manual_every_s": {
-   "bittercold-wind": 15.443999999999996,
-   "hellfire": 43.886
+   "bittercold-wind": 15.443999999999999,
+   "hellfire": 43.652
   },
   "warnings": [
-   "aoe_pack: 'flame-scattershot' requires status 'element_enhancement', which a macro cannot express; dropped",
-   "slot 1: not on your bar, assign element-enhancement, delayed-explosion, blaze, winters-shackles there",
-   "slot 2: not on your bar, assign frost-burst, firestorm, frost, glacial-smite there",
-   "slot 3: not on your bar, assign assault-bombardment, fire-wall, flame-arrow there",
-   "slot 4: not on your bar, assign flame-scattershot there",
+   "boss_180: 'cold-storm' requires status 'fire_wall_dot', which a macro cannot express; dropped",
+   "aoe_pack: 'element-enhancement' requires status 'wish_of_concentration', which a macro cannot express; dropped",
+   "aoe_pack: 'ice-chain' requires status 'frost', which a macro cannot express; dropped",
+   "slot 1: not on your bar, assign wish-of-concentration, winters-shackles, frost, fire-wall there",
+   "slot 2: not on your bar, assign element-enhancement, delayed-explosion there",
+   "slot 3: not on your bar, assign blaze, frost-burst there",
+   "slot 4: not on your bar, assign firestorm, flame-arrow there",
    "slot 5: not on your bar, assign ice-chain there",
    "slot 6: not on your bar, assign bittercold-wind there",
    "slot 7: not on your bar, assign hellfire there",
-   "Boss loop: macro DPS 2443 is below 95% of ideal 3429 (71%); some presses stay manual",
-   "AoE loop: macro DPS 5779 is below 95% of ideal 10900 (53%); some presses stay manual",
+   "Boss loop: macro DPS 8384 is below 95% of ideal 10807 (78%); some presses stay manual",
+   "AoE loop: macro DPS 15231 is below 95% of ideal 35984 (42%); some presses stay manual",
    "assumes a held macro presses chain follow-up skills; unverified, test in game"
+  ],
+  "hybrid_dps": {
+   "Boss loop": 10732.570071098524,
+   "AoE loop": 30329.091184340323
+  },
+  "slot_notes": {
+   "1": "Cooldown skills in rotation-priority order. A press fires the first one ready: Wish of Concentration (60 s), then Fire Wall (60 s), then Element Enhancement (only while its status is up, 60 s), then Winter's Shackles (45 s).",
+   "2": "Burst and buff cooldowns, most valuable first. A press fires the first one ready: Frost (30 s), then Delayed Explosion (30 s).",
+   "3": "Spenders that only work while a status is up (for example Fire Mark). Skipped when it is not. A press fires the first one ready: Blaze (only while Fire Mark is up, 5 s), then Frost Burst (only while Frost is up, 10 s).",
+   "4": "Short-cooldown rotational damage, best first. A press fires the first one ready: Firestorm (5 s), then Flame Arrow (no cooldown, always ready, so last).",
+   "5": "Filler. It has no cooldown, so it is always ready and must be the bottom row.",
+   "6": "Pressed by hand, so it is never in a macro. It is tagged manual in the game data.",
+   "7": "Pressed by hand, so it is never in a macro. It is a charge skill: you hold the key to charge it.",
+   "8": "Not part of the rotation: kept on a free key for a G-key."
+  },
+  "macro_advice": {
+   "Boss loop": "The macro alone reaches only 78% of ideal (8384 of 10807 DPS). Use a hybrid: hold the macro for the rotation and press Bittercold Wind about every 15 s, Hellfire about every 44 s by hand, which reaches about 99% of ideal. Pressing the whole rotation by hand beats the macro by 29%.",
+   "AoE loop": "The macro alone reaches only 42% of ideal (15231 of 35984 DPS). Use a hybrid: hold the macro for the rotation and press Bittercold Wind about every 15 s, Hellfire about every 44 s by hand, which reaches about 84% of ideal. Pressing the whole rotation by hand beats the macro by 136%."
+  },
+  "rotation": {
+   "boss_180": {
+    "scenario": "boss_180",
+    "scenario_name": "Single-target boss",
+    "duration_s": 180,
+    "dps": 10806.81491202136,
+    "priority": [
+     {
+      "skill_key": "bittercold-wind",
+      "name": "Bittercold Wind",
+      "icon_key": "bittercold-wind",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 12,
+      "damage_share_pct": 24.6
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 34,
+      "damage_share_pct": 43.3
+     },
+     {
+      "skill_key": "wish-of-concentration",
+      "name": "Wish of Concentration",
+      "icon_key": "wish-of-concentration",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 4,
+      "damage_share_pct": 0.0
+     },
+     {
+      "skill_key": "hellfire",
+      "name": "Hellfire",
+      "icon_key": "hellfire",
+      "charge_level": 3,
+      "require_status": null,
+      "casts": 4,
+      "damage_share_pct": 9.2
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 32,
+      "damage_share_pct": 9.0
+     },
+     {
+      "skill_key": "winters-shackles",
+      "name": "Winter's Shackles",
+      "icon_key": "winters-shackles",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 4,
+      "damage_share_pct": 0.9
+     },
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 5,
+      "damage_share_pct": 0.9
+     },
+     {
+      "skill_key": "frost",
+      "name": "Frost",
+      "icon_key": "frost",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 6,
+      "damage_share_pct": 0.8
+     },
+     {
+      "skill_key": "fire-wall",
+      "name": "Fire Wall",
+      "icon_key": "fire-wall",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 3,
+      "damage_share_pct": 4.4
+     },
+     {
+      "skill_key": "flame-arrow",
+      "name": "Flame Arrow",
+      "icon_key": "flame-arrow",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 33,
+      "damage_share_pct": 3.1
+     }
+    ],
+    "opener": [
+     {
+      "skill_key": "bittercold-wind",
+      "name": "Bittercold Wind",
+      "icon_key": "bittercold-wind",
+      "charge_level": 0,
+      "t_s": 0.0
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "t_s": 0.9
+     },
+     {
+      "skill_key": "wish-of-concentration",
+      "name": "Wish of Concentration",
+      "icon_key": "wish-of-concentration",
+      "charge_level": 0,
+      "t_s": 2.3
+     },
+     {
+      "skill_key": "hellfire",
+      "name": "Hellfire",
+      "icon_key": "hellfire",
+      "charge_level": 3,
+      "t_s": 3.3
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "t_s": 6.2
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "t_s": 7.6
+     },
+     {
+      "skill_key": "winters-shackles",
+      "name": "Winter's Shackles",
+      "icon_key": "winters-shackles",
+      "charge_level": 0,
+      "t_s": 8.6
+     },
+     {
+      "skill_key": "frost",
+      "name": "Frost",
+      "icon_key": "frost",
+      "charge_level": 0,
+      "t_s": 9.5
+     },
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "t_s": 10.4
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "t_s": 11.4
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "t_s": 12.8
+     },
+     {
+      "skill_key": "fire-wall",
+      "name": "Fire Wall",
+      "icon_key": "fire-wall",
+      "charge_level": 0,
+      "t_s": 13.7
+     }
+    ],
+    "core": [
+     {
+      "skill_key": "bittercold-wind",
+      "name": "Bittercold Wind",
+      "icon_key": "bittercold-wind",
+      "charge_level": 0,
+      "cooldown_s": 15.0,
+      "casts": 12,
+      "cast_every_s": 15.4,
+      "damage_share_pct": 24.6,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 15 s)."
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "cooldown_s": 5.0,
+      "casts": 34,
+      "cast_every_s": 5.1,
+      "damage_share_pct": 43.3,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 5 s)."
+     },
+     {
+      "skill_key": "wish-of-concentration",
+      "name": "Wish of Concentration",
+      "icon_key": "wish-of-concentration",
+      "charge_level": 0,
+      "cooldown_s": 60.0,
+      "casts": 4,
+      "cast_every_s": 59.1,
+      "damage_share_pct": 0.0,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 60 s, no damage of its own)."
+     },
+     {
+      "skill_key": "hellfire",
+      "name": "Hellfire",
+      "icon_key": "hellfire",
+      "charge_level": 3,
+      "cooldown_s": 45.0,
+      "casts": 4,
+      "cast_every_s": 43.7,
+      "damage_share_pct": 9.2,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 45 s, fully charged (level 3))."
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "cooldown_s": 5.0,
+      "casts": 32,
+      "cast_every_s": 5.1,
+      "damage_share_pct": 9.0,
+      "rule": "when_status",
+      "status": "fire_mark",
+      "text": "Use when Fire Mark is up (cooldown 5 s)."
+     },
+     {
+      "skill_key": "winters-shackles",
+      "name": "Winter's Shackles",
+      "icon_key": "winters-shackles",
+      "charge_level": 0,
+      "cooldown_s": 45.0,
+      "casts": 4,
+      "cast_every_s": 43.7,
+      "damage_share_pct": 0.9,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 45 s)."
+     },
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "cooldown_s": 10.0,
+      "casts": 5,
+      "cast_every_s": 31.3,
+      "damage_share_pct": 0.9,
+      "rule": "when_status",
+      "status": "frost",
+      "text": "Use when Frost is up (cooldown 10 s)."
+     },
+     {
+      "skill_key": "frost",
+      "name": "Frost",
+      "icon_key": "frost",
+      "charge_level": 0,
+      "cooldown_s": 30.0,
+      "casts": 6,
+      "cast_every_s": 30.0,
+      "damage_share_pct": 0.8,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 30 s)."
+     },
+     {
+      "skill_key": "fire-wall",
+      "name": "Fire Wall",
+      "icon_key": "fire-wall",
+      "charge_level": 0,
+      "cooldown_s": 60.0,
+      "casts": 3,
+      "cast_every_s": 59.1,
+      "damage_share_pct": 4.4,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 60 s)."
+     }
+    ],
+    "chains": [
+     {
+      "skills": [
+       "flame-arrow",
+       "burst",
+       "pyroclasm"
+      ],
+      "names": [
+       "Flame Arrow",
+       "Burst",
+       "Pyroclasm"
+      ],
+      "icon_keys": [
+       "flame-arrow",
+       "burst",
+       "pyroclasm"
+      ],
+      "completed": 11,
+      "text": "Flame Arrow → Burst → Pyroclasm: keep pressing (followed through 11 times in this fight)."
+     }
+    ],
+    "filler": {
+     "skills": [
+      {
+       "skill_key": "flame-arrow",
+       "name": "Flame Arrow",
+       "icon_key": "flame-arrow",
+       "charge_level": 0,
+       "casts": 33,
+       "damage_share_pct": 3.1,
+       "role": "main"
+      }
+     ],
+     "text": "When nothing else is ready, press Flame Arrow."
+    },
+    "skip": [
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "casts": 5,
+      "reason": "rarely cast: 5 times where its cooldown would allow about 18"
+     },
+     {
+      "skill_key": "assault-bombardment",
+      "name": "Assault Bombardment",
+      "icon_key": "assault-bombardment",
+      "charge_level": 0,
+      "casts": 0,
+      "reason": "never cast: not one of your equipped stigmas"
+     },
+     {
+      "skill_key": "cold-storm",
+      "name": "Cold Storm",
+      "icon_key": "cold-storm",
+      "charge_level": 0,
+      "casts": 0,
+      "reason": "never cast: needs Embers (Fire Wall), which was up 17% of the fight"
+     }
+    ]
+   },
+   "aoe_pack": {
+    "scenario": "aoe_pack",
+    "scenario_name": "AoE pack (4)",
+    "duration_s": 30,
+    "dps": 35983.936218216106,
+    "priority": [
+     {
+      "skill_key": "element-enhancement",
+      "name": "Element Enhancement",
+      "icon_key": "element-enhancement",
+      "charge_level": 0,
+      "require_status": "wish_of_concentration",
+      "casts": 1,
+      "damage_share_pct": 0.0
+     },
+     {
+      "skill_key": "wish-of-concentration",
+      "name": "Wish of Concentration",
+      "icon_key": "wish-of-concentration",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 1,
+      "damage_share_pct": 0.0
+     },
+     {
+      "skill_key": "bittercold-wind",
+      "name": "Bittercold Wind",
+      "icon_key": "bittercold-wind",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 2,
+      "damage_share_pct": 39.5
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 6,
+      "damage_share_pct": 15.6
+     },
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 1,
+      "damage_share_pct": 1.6
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 5,
+      "damage_share_pct": 3.0
+     },
+     {
+      "skill_key": "frost",
+      "name": "Frost",
+      "icon_key": "frost",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 1,
+      "damage_share_pct": 1.2
+     },
+     {
+      "skill_key": "ice-chain",
+      "name": "Ice Chain",
+      "icon_key": "ice-chain",
+      "charge_level": 0,
+      "require_status": "frost",
+      "casts": 1,
+      "damage_share_pct": 0.9
+     },
+     {
+      "skill_key": "hellfire",
+      "name": "Hellfire",
+      "icon_key": "hellfire",
+      "charge_level": 3,
+      "require_status": null,
+      "casts": 1,
+      "damage_share_pct": 20.8
+     },
+     {
+      "skill_key": "delayed-explosion",
+      "name": "Delayed Explosion",
+      "icon_key": "delayed-explosion",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 1,
+      "damage_share_pct": 0.5
+     },
+     {
+      "skill_key": "fire-wall",
+      "name": "Fire Wall",
+      "icon_key": "fire-wall",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 1,
+      "damage_share_pct": 14.5
+     },
+     {
+      "skill_key": "winters-shackles",
+      "name": "Winter's Shackles",
+      "icon_key": "winters-shackles",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 1,
+      "damage_share_pct": 1.3
+     },
+     {
+      "skill_key": "flame-arrow",
+      "name": "Flame Arrow",
+      "icon_key": "flame-arrow",
+      "charge_level": 0,
+      "require_status": null,
+      "casts": 2,
+      "damage_share_pct": 0.3
+     }
+    ],
+    "opener": [
+     {
+      "skill_key": "wish-of-concentration",
+      "name": "Wish of Concentration",
+      "icon_key": "wish-of-concentration",
+      "charge_level": 0,
+      "t_s": 0.0
+     },
+     {
+      "skill_key": "element-enhancement",
+      "name": "Element Enhancement",
+      "icon_key": "element-enhancement",
+      "charge_level": 0,
+      "t_s": 0.9
+     },
+     {
+      "skill_key": "bittercold-wind",
+      "name": "Bittercold Wind",
+      "icon_key": "bittercold-wind",
+      "charge_level": 0,
+      "t_s": 1.9
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "t_s": 2.8
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "t_s": 4.2
+     },
+     {
+      "skill_key": "frost",
+      "name": "Frost",
+      "icon_key": "frost",
+      "charge_level": 0,
+      "t_s": 5.1
+     },
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "t_s": 6.1
+     },
+     {
+      "skill_key": "ice-chain",
+      "name": "Ice Chain",
+      "icon_key": "ice-chain",
+      "charge_level": 0,
+      "t_s": 7.0
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "t_s": 8.0
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "t_s": 9.4
+     },
+     {
+      "skill_key": "hellfire",
+      "name": "Hellfire",
+      "icon_key": "hellfire",
+      "charge_level": 3,
+      "t_s": 10.3
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "t_s": 13.2
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "t_s": 14.6
+     },
+     {
+      "skill_key": "delayed-explosion",
+      "name": "Delayed Explosion",
+      "icon_key": "delayed-explosion",
+      "charge_level": 0,
+      "t_s": 15.6
+     }
+    ],
+    "core": [
+     {
+      "skill_key": "element-enhancement",
+      "name": "Element Enhancement",
+      "icon_key": "element-enhancement",
+      "charge_level": 0,
+      "cooldown_s": 60.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 0.0,
+      "rule": "when_status",
+      "status": "wish_of_concentration",
+      "text": "Use when Wish of Concentration is up (cooldown 60 s)."
+     },
+     {
+      "skill_key": "wish-of-concentration",
+      "name": "Wish of Concentration",
+      "icon_key": "wish-of-concentration",
+      "charge_level": 0,
+      "cooldown_s": 60.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 0.0,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 60 s, no damage of its own)."
+     },
+     {
+      "skill_key": "bittercold-wind",
+      "name": "Bittercold Wind",
+      "icon_key": "bittercold-wind",
+      "charge_level": 0,
+      "cooldown_s": 15.0,
+      "casts": 2,
+      "cast_every_s": 14.6,
+      "damage_share_pct": 39.5,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 15 s)."
+     },
+     {
+      "skill_key": "firestorm",
+      "name": "Firestorm",
+      "icon_key": "firestorm",
+      "charge_level": 0,
+      "cooldown_s": 5.0,
+      "casts": 6,
+      "cast_every_s": 5.1,
+      "damage_share_pct": 15.6,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 5 s)."
+     },
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "cooldown_s": 10.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 1.6,
+      "rule": "when_status",
+      "status": "frost",
+      "text": "Use when Frost is up (cooldown 10 s)."
+     },
+     {
+      "skill_key": "blaze",
+      "name": "Blaze",
+      "icon_key": "blaze",
+      "charge_level": 0,
+      "cooldown_s": 5.0,
+      "casts": 5,
+      "cast_every_s": 5.2,
+      "damage_share_pct": 3.0,
+      "rule": "when_status",
+      "status": "fire_mark",
+      "text": "Use when Fire Mark is up (cooldown 5 s)."
+     },
+     {
+      "skill_key": "frost",
+      "name": "Frost",
+      "icon_key": "frost",
+      "charge_level": 0,
+      "cooldown_s": 30.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 1.2,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 30 s)."
+     },
+     {
+      "skill_key": "hellfire",
+      "name": "Hellfire",
+      "icon_key": "hellfire",
+      "charge_level": 3,
+      "cooldown_s": 45.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 20.8,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 45 s, fully charged (level 3))."
+     },
+     {
+      "skill_key": "delayed-explosion",
+      "name": "Delayed Explosion",
+      "icon_key": "delayed-explosion",
+      "charge_level": 0,
+      "cooldown_s": 30.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 0.5,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 30 s)."
+     },
+     {
+      "skill_key": "fire-wall",
+      "name": "Fire Wall",
+      "icon_key": "fire-wall",
+      "charge_level": 0,
+      "cooldown_s": 60.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 14.5,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 60 s)."
+     },
+     {
+      "skill_key": "winters-shackles",
+      "name": "Winter's Shackles",
+      "icon_key": "winters-shackles",
+      "charge_level": 0,
+      "cooldown_s": 45.0,
+      "casts": 1,
+      "cast_every_s": null,
+      "damage_share_pct": 1.3,
+      "rule": "on_cooldown",
+      "status": null,
+      "text": "Use on cooldown (every 45 s)."
+     }
+    ],
+    "chains": [
+     {
+      "skills": [
+       "flame-arrow",
+       "burst",
+       "pyroclasm"
+      ],
+      "names": [
+       "Flame Arrow",
+       "Burst",
+       "Pyroclasm"
+      ],
+      "icon_keys": [
+       "flame-arrow",
+       "burst",
+       "pyroclasm"
+      ],
+      "completed": 1,
+      "text": "Flame Arrow → Burst → Pyroclasm: keep pressing (followed through 1 times in this fight)."
+     }
+    ],
+    "filler": {
+     "skills": [
+      {
+       "skill_key": "ice-chain",
+       "name": "Ice Chain",
+       "icon_key": "ice-chain",
+       "charge_level": 0,
+       "casts": 1,
+       "damage_share_pct": 0.9,
+       "role": "main"
+      },
+      {
+       "skill_key": "flame-arrow",
+       "name": "Flame Arrow",
+       "icon_key": "flame-arrow",
+       "charge_level": 0,
+       "casts": 2,
+       "damage_share_pct": 0.3,
+       "role": "mana"
+      }
+     ],
+     "text": "When nothing else is ready, press Ice Chain. Fall back to Flame Arrow when Ice Chain cannot be cast (usually low mana)."
+    },
+    "skip": [
+     {
+      "skill_key": "frost-burst",
+      "name": "Frost Burst",
+      "icon_key": "frost-burst",
+      "charge_level": 0,
+      "casts": 1,
+      "reason": "rarely cast: 1 times where its cooldown would allow about 3"
+     },
+     {
+      "skill_key": "glacial-smite",
+      "name": "Glacial Smite",
+      "icon_key": "glacial-smite",
+      "charge_level": 0,
+      "casts": 0,
+      "reason": "never cast: not one of your equipped stigmas"
+     }
+    ]
+   }
+  },
+  "thumbs": [
+   [
+    "Side button 1",
+    "7",
+    "Hellfire"
+   ],
+   [
+    "Side button 2",
+    "8",
+    "Defiance: not on your bar, put it on free key 8 and bind it"
+   ],
+   [
+    "Side button 3",
+    "dodge key",
+    "Dodge: the dodge key from Key Settings"
+   ]
   ]
  },
- "instructions_markdown": "# Aion 2 keybind setup sheet\n\nThe app never sends input to the game. You type this in once. Every number below is a model estimate, not a measurement.\n\n## 1. Hotbar slots (stacked skills)\n\nA slot holds up to 4 skills; one press fires the first usable one, top row first.\n\n| Slot key | Skills (top row first) |\n|---|---|\n| 1 | Element Enhancement > Delayed Explosion > Blaze > Winter's Shackles |\n| 2 | Frost Burst > Firestorm > Frost > Glacial Smite |\n| 3 | Assault Bombardment > Fire Wall > Flame Arrow |\n| 4 | Flame Scattershot |\n| 5 | Ice Chain |\n| 6 | Bittercold Wind |\n| 7 | Hellfire |\n\n## 2. In-game macros\n\nSkill window (K) > Macro: create each macro below, one numbered entry per line, with the delay shown. Then Settings > Key Settings > General > Gameplay > Macro: bind Macro 1 and Macro 2 to the hotkeys. A macro runs only while its key is held down and walks its entries in order, skipping unusable ones.\n\n### Boss loop (hotkey F9)\n\n1. press slot 1, delay 10 ms\n2. press slot 2, delay 10 ms\n3. press slot 1, delay 10 ms\n4. press slot 3, delay 10 ms\n5. press slot 1, delay 10 ms\n6. press slot 4, delay 10 ms\n7. press slot 1, delay 10 ms\n8. press slot 5, delay 10 ms\n\nEstimated macro DPS 2443 vs ideal 3429 (71%).\n\n### AoE loop (hotkey F10)\n\n1. press slot 2, delay 10 ms\n2. press slot 1, delay 10 ms\n3. press slot 2, delay 10 ms\n4. press slot 3, delay 10 ms\n5. press slot 2, delay 10 ms\n6. press slot 5, delay 10 ms\n7. press slot 2, delay 10 ms\n8. press slot 4, delay 10 ms\n\nEstimated macro DPS 5779 vs ideal 10900 (53%).\n\nPress by hand (not in any macro):\n\n- Bittercold Wind (slot 6): about every 15 s\n- Hellfire (slot 7): about every 44 s\n\n## 3. Logitech G915 G-keys (onboard memory)\n\n| G-key | Mode | Sends | Purpose | Risk |\n|---|---|---|---|---|\n| G1 | M1 | F9 | Hold = in-game macro 'Boss loop' (Key Settings > Macro 1 = F9); send as a held key | lowest_known |\n| G1 | M2 | F10 | Hold = in-game macro 'AoE loop' (Key Settings > Macro 2 = F10); send as a held key | lowest_known |\n| G2 | M1 | 7 | Hellfire | lowest_known |\n| G2 | M2 | 2 | Frost Burst > Winter's Shackles | lowest_known |\n| G3 | M1 | - | Defiance: skill not on your bar, put it on key - and bind it | caution |\n| G3 | M2 | 0 | Defiance: skill not on your bar, put it on key 0 and bind it | caution |\n| G4 | M1 | 1 | Element Enhancement > Wish of Concentration > Delayed Explosion | lowest_known |\n| G4 | M2 | 3 | Fire Wall > Cold Storm | lowest_known |\n| G5 | M1 | 8 | Steel Barrier: skill not on your bar, put it on key 8 and bind it | caution |\n| G5 | M2 | 6 | Bittercold Wind | lowest_known |\n\nM1 is the boss layout, M2 is AoE and leveling, M3 stays free. Each G-key sends one plain key.\n\n### G HUB steps\n\n1. Open G HUB, select the keyboard, switch to Onboard Memory Mode.\n2. Assignments > open the **Keys** tab (single keystroke), not Macro. Never use MR on-the-fly recording: it records a timed macro.\n3. Assign each G-key above in M1 and M2. G1 must send its key as a held key (down on press, up on release), or the in-game macro runs once instead of looping.\n4. Save to the keyboard. Close G HUB completely, including the tray icon.\n5. Open Task Manager and confirm no `lghub` processes remain (`lghub_agent`, `lghub_updater`). End them if present.\n6. In game, optionally turn off quickslot long-press input and aim target hold (unverified tip).\n7. Launch the game. Test once: hold G1 and watch whether the macro keeps looping; if not, press the hotkey directly.\n\n## 4. G900 (optional)\n\nSame rules: onboard memory, each button sends ONE plain key, no macros. Spare buttons: 4 side buttons (2 per side), 2 DPI buttons if you give up DPI switching, wheel tilt left and right.\n\n- Side button 1: Hellfire -> key 7\n- Side button 2: Defiance -> your dodge key from Key Settings\n- Side button 3: Dodge -> your dodge key from Key Settings\n\nA 1:1 remap is not a macro, but no source confirms that distinction. Risk label: lowest_known.\n\n## 5. Risk and open questions\n\n- No official statement exists for key remapping on onboard memory. The risk is lowest known, not zero, and unverified.\n- Hardware or software macros (G HUB macros, scripting, AHK) are against the rules; this plan uses none.\n- Overlay and screen readers are not covered by any source found: unverified.\n- Whether a held macro triggers chain follow-ups, and the real entry limit per macro, are unverified: test in game.\n\n## Warnings\n\n- aoe_pack: 'flame-scattershot' requires status 'element_enhancement', which a macro cannot express; dropped\n- slot 1: not on your bar, assign element-enhancement, delayed-explosion, blaze, winters-shackles there\n- slot 2: not on your bar, assign frost-burst, firestorm, frost, glacial-smite there\n- slot 3: not on your bar, assign assault-bombardment, fire-wall, flame-arrow there\n- slot 4: not on your bar, assign flame-scattershot there\n- slot 5: not on your bar, assign ice-chain there\n- slot 6: not on your bar, assign bittercold-wind there\n- slot 7: not on your bar, assign hellfire there\n- Boss loop: macro DPS 2443 is below 95% of ideal 3429 (71%); some presses stay manual\n- AoE loop: macro DPS 5779 is below 95% of ideal 10900 (53%); some presses stay manual\n- assumes a held macro presses chain follow-up skills; unverified, test in game\n"
+ "instructions_markdown": "# Aion 2 keybind setup sheet\n\nThe app never sends input to the game. You type this in once. Every number below is a model estimate, not a measurement.\n\n## 1. Your rotation in plain words\n\n### Single-target boss\n\n**Opener** (in this order): Bittercold Wind > Firestorm > Wish of Concentration (2 s) > Hellfire (3 s) > Firestorm (6 s) > Blaze (8 s) > Winter's Shackles (9 s) > Frost (10 s) > Frost Burst (10 s) > Firestorm (11 s) > Blaze (13 s) > Fire Wall (14 s)\n\n**Core cooldowns** (priority order):\n\n- Bittercold Wind (25% of damage): Use on cooldown (every 15 s).\n- Firestorm (43% of damage): Use on cooldown (every 5 s).\n- Wish of Concentration: Use on cooldown (every 60 s, no damage of its own).\n- Hellfire (9% of damage): Use on cooldown (every 45 s, fully charged (level 3)).\n- Blaze (9% of damage): Use when Fire Mark is up (cooldown 5 s).\n- Winter's Shackles (1% of damage): Use on cooldown (every 45 s).\n- Frost Burst (1% of damage): Use when Frost is up (cooldown 10 s).\n- Frost (1% of damage): Use on cooldown (every 30 s).\n- Fire Wall (4% of damage): Use on cooldown (every 60 s).\n\n**Chain**: Flame Arrow → Burst → Pyroclasm: keep pressing (followed through 11 times in this fight).\n\n**Filler**: When nothing else is ready, press Flame Arrow.\n\n**Left out**: Frost Burst (rarely cast: 5 times where its cooldown would allow about 18); Assault Bombardment (never cast: not one of your equipped stigmas); Cold Storm (never cast: needs Embers (Fire Wall), which was up 17% of the fight)\n\n### AoE pack (4)\n\n**Opener** (in this order): Wish of Concentration > Element Enhancement > Bittercold Wind (2 s) > Firestorm (3 s) > Blaze (4 s) > Frost (5 s) > Frost Burst (6 s) > Ice Chain (7 s) > Firestorm (8 s) > Blaze (9 s) > Hellfire (10 s) > Firestorm (13 s) > Blaze (15 s) > Delayed Explosion (16 s)\n\n**Core cooldowns** (priority order):\n\n- Element Enhancement: Use when Wish of Concentration is up (cooldown 60 s).\n- Wish of Concentration: Use on cooldown (every 60 s, no damage of its own).\n- Bittercold Wind (40% of damage): Use on cooldown (every 15 s).\n- Firestorm (16% of damage): Use on cooldown (every 5 s).\n- Frost Burst (2% of damage): Use when Frost is up (cooldown 10 s).\n- Blaze (3% of damage): Use when Fire Mark is up (cooldown 5 s).\n- Frost (1% of damage): Use on cooldown (every 30 s).\n- Hellfire (21% of damage): Use on cooldown (every 45 s, fully charged (level 3)).\n- Delayed Explosion (0% of damage): Use on cooldown (every 30 s).\n- Fire Wall (14% of damage): Use on cooldown (every 60 s).\n- Winter's Shackles (1% of damage): Use on cooldown (every 45 s).\n\n**Chain**: Flame Arrow → Burst → Pyroclasm: keep pressing (followed through 1 times in this fight).\n\n**Filler**: When nothing else is ready, press Ice Chain. Fall back to Flame Arrow when Ice Chain cannot be cast (usually low mana).\n\n**Left out**: Frost Burst (rarely cast: 1 times where its cooldown would allow about 3); Glacial Smite (never cast: not one of your equipped stigmas)\n\n## 2. Hotbar slots (stacked skills)\n\nA slot holds up to 4 skills. One press fires the usable skill **lowest in the stack**: the BOTTOM cell is priority 0 and fires first (confirmed by Global and Korean guides, 2026-10). To reorder in game, click a skill, then click another cell in that column to swap them. Each stack below is listed from the bottom cell up; a skill with no cooldown always goes in the TOP cell so it never blocks the others.\n\n| Slot key | Bottom cell (fires first) → top cell | Why |\n|---|---|---|\n| 1 | Wish of Concentration → Fire Wall → Element Enhancement → Winter's Shackles | Cooldown skills in rotation-priority order. A press fires the first one ready: Wish of Concentration (60 s), then Fire Wall (60 s), then Element Enhancement (only while its status is up, 60 s), then Winter's Shackles (45 s). |\n| 2 | Frost → Delayed Explosion | Burst and buff cooldowns, most valuable first. A press fires the first one ready: Frost (30 s), then Delayed Explosion (30 s). |\n| 3 | Blaze → Frost Burst | Spenders that only work while a status is up (for example Fire Mark). Skipped when it is not. A press fires the first one ready: Blaze (only while Fire Mark is up, 5 s), then Frost Burst (only while Frost is up, 10 s). |\n| 4 | Firestorm → Flame Arrow | Short-cooldown rotational damage, best first. A press fires the first one ready: Firestorm (5 s), then Flame Arrow (no cooldown, always ready, so last). |\n| 5 | Ice Chain | Filler. It has no cooldown, so it is always ready and must be the bottom row. |\n| 6 | Bittercold Wind | Pressed by hand, so it is never in a macro. It is tagged manual in the game data. |\n| 7 | Hellfire | Pressed by hand, so it is never in a macro. It is a charge skill: you hold the key to charge it. |\n| 8 | Defiance | Not part of the rotation: kept on a free key for a G-key. |\n\n## 3. In-game macros\n\nSkill window (K) > Macro: create each macro below, one numbered entry per line, with the delay shown. Then Settings > Key Settings > General > Gameplay > Macro: bind Macro 1 and Macro 2 to the hotkeys. A macro runs only while its key is held down and walks its entries in order, skipping unusable ones.\n\n### Boss loop (hotkey F9)\n\n1. press slot 1 (Wish of Concentration > Fire Wall > Element Enhancement > Winter's Shackles), delay 10 ms\n2. press slot 4 (Firestorm > Flame Arrow), delay 10 ms\n3. press slot 1 (Wish of Concentration > Fire Wall > Element Enhancement > Winter's Shackles), delay 10 ms\n4. press slot 3 (Blaze > Frost Burst), delay 10 ms\n5. press slot 3 (Blaze > Frost Burst), delay 10 ms\n6. press slot 2 (Frost > Delayed Explosion), delay 10 ms\n\nEstimated macro DPS 8384 vs ideal 10807 (78%).\nMacro plus your hand presses (section 4): 10733 DPS (99%).\n\nThe macro alone reaches only 78% of ideal (8384 of 10807 DPS). Use a hybrid: hold the macro for the rotation and press Bittercold Wind about every 15 s, Hellfire about every 44 s by hand, which reaches about 99% of ideal. Pressing the whole rotation by hand beats the macro by 29%.\n\n### AoE loop (hotkey F10)\n\n1. press slot 4 (Firestorm > Flame Arrow), delay 10 ms\n2. press slot 3 (Blaze > Frost Burst), delay 10 ms\n3. press slot 2 (Frost > Delayed Explosion), delay 10 ms\n4. press slot 3 (Blaze > Frost Burst), delay 10 ms\n5. press slot 1 (Wish of Concentration > Fire Wall > Element Enhancement > Winter's Shackles), delay 10 ms\n6. press slot 5 (Ice Chain), delay 10 ms\n7. press slot 4 (Firestorm > Flame Arrow), delay 10 ms\n\nEstimated macro DPS 15231 vs ideal 35984 (42%).\nMacro plus your hand presses (section 4): 30329 DPS (84%).\n\nThe macro alone reaches only 42% of ideal (15231 of 35984 DPS). Use a hybrid: hold the macro for the rotation and press Bittercold Wind about every 15 s, Hellfire about every 44 s by hand, which reaches about 84% of ideal. Pressing the whole rotation by hand beats the macro by 136%.\n\n## 4. Manual presses\n\nPress these by hand while the macro key is held (the macro never contains them):\n\n- Bittercold Wind (slot 6): about every 15 s\n- Hellfire (slot 7): about every 44 s\n\n## 5. Logitech G915 G-keys and G900 (onboard memory)\n\n| G-key | Mode | Sends | Skills on that key | Risk |\n|---|---|---|---|---|\n| G1 | M1 | F9 | Hold = in-game macro 'Boss loop' (Key Settings > Macro 1 = F9); send as a held key | lowest_known |\n| G1 | M2 | F10 | Hold = in-game macro 'AoE loop' (Key Settings > Macro 2 = F10); send as a held key | lowest_known |\n| G2 | M1 | 6 | Bittercold Wind (press by hand) | lowest_known |\n| G2 | M2 | 6 | Bittercold Wind (press by hand) | lowest_known |\n| G3 | M1 | 7 | Hellfire (press by hand) | lowest_known |\n| G3 | M2 | 7 | Hellfire (press by hand) | lowest_known |\n| G4 | M1 | 8 | Defiance: not on your bar, put it on free key 8 and bind it | caution |\n| G4 | M2 | 3 | Blaze > Frost Burst | lowest_known |\n| G5 | M1 | 1 | Wish of Concentration > Fire Wall > Element Enhancement > Winter's Shackles | lowest_known |\n| G5 | M2 | 8 | Defiance: not on your bar, put it on free key 8 and bind it | caution |\n\nM1 is the boss layout, M2 is AoE and leveling, M3 stays free. Each G-key sends one plain key. Every row names the skills stacked on the key it sends; a skill that was not on your bar is put on a free key and says so.\n\n### G HUB steps\n\n1. Open G HUB, select the keyboard, switch to Onboard Memory Mode.\n2. Assignments > open the **Keys** tab (single keystroke), not Macro. Never use MR on-the-fly recording: it records a timed macro.\n3. Assign each G-key above in M1 and M2. G1 must send its key as a held key (down on press, up on release), or the in-game macro runs once instead of looping.\n4. Save to the keyboard. Close G HUB completely, including the tray icon.\n5. Open Task Manager and confirm no `lghub` processes remain (`lghub_agent`, `lghub_updater`). End them if present.\n6. In game, optionally turn off quickslot long-press input and aim target hold (unverified tip).\n7. Launch the game. Test once: hold G1 and watch whether the macro keeps looping; if not, press the hotkey directly.\n\n### G900 (optional)\n\nSame rules: onboard memory, each button sends ONE plain key, no macros. Spare buttons: 4 side buttons (2 per side), 2 DPI buttons if you give up DPI switching, wheel tilt left and right.\n\n- Side button 1: sends 7 (Hellfire)\n- Side button 2: sends 8 (Defiance: not on your bar, put it on free key 8 and bind it)\n- Side button 3: sends dodge key (Dodge: the dodge key from Key Settings)\n\nA 1:1 remap is not a macro, but no source confirms that distinction. Risk label: lowest_known.\n\n### Risk and open questions\n\n- No official statement exists for key remapping on onboard memory. The risk is lowest known, not zero, and unverified.\n- Hardware or software macros (G HUB macros, scripting, AHK) are against the rules; this plan uses none.\n- Overlay and screen readers are not covered by any source found: unverified.\n- Whether a held macro triggers chain follow-ups, and the real entry limit per macro, are unverified: test in game.\n\n## Warnings\n\n- boss_180: 'cold-storm' requires status 'fire_wall_dot', which a macro cannot express; dropped\n- aoe_pack: 'element-enhancement' requires status 'wish_of_concentration', which a macro cannot express; dropped\n- aoe_pack: 'ice-chain' requires status 'frost', which a macro cannot express; dropped\n- slot 1: not on your bar, assign wish-of-concentration, winters-shackles, frost, fire-wall there\n- slot 2: not on your bar, assign element-enhancement, delayed-explosion there\n- slot 3: not on your bar, assign blaze, frost-burst there\n- slot 4: not on your bar, assign firestorm, flame-arrow there\n- slot 5: not on your bar, assign ice-chain there\n- slot 6: not on your bar, assign bittercold-wind there\n- slot 7: not on your bar, assign hellfire there\n- Boss loop: macro DPS 8384 is below 95% of ideal 10807 (78%); some presses stay manual\n- AoE loop: macro DPS 15231 is below 95% of ideal 35984 (42%); some presses stay manual\n- assumes a held macro presses chain follow-up skills; unverified, test in game\n"
 }

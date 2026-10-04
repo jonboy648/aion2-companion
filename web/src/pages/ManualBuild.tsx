@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { ClassEmblem } from "@/components/game/ClassEmblem";
+import { FactionEmblem } from "@/components/game/Ornaments";
+import { useCharacterFaction, type Faction } from "@/components/game/faction";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { BuildResults, ProgressPanel } from "@/features/build/BuildResults";
 import { ROLE_LABEL } from "@/features/build/helpers";
 import { STAT_FIELDS, buildFromForm, initialForm, type ManualForm } from "@/features/build/manualBuild";
+import { UnspentPoints } from "@/features/build/UnspentPointsInput";
+import { applyPoints, POINTS_DEBOUNCE_MS, usePoints } from "@/features/build/unspentPoints";
 import { useClassData } from "@/features/build/useClassData";
 import { cn } from "@/lib/utils";
 import { compare, listClasses } from "@/engine/api";
@@ -24,12 +29,16 @@ export function ManualBuild() {
   const data = useClassData(classKey);
   const levelCap = data.gd?.level_caps.global ?? FALLBACK_LEVEL_CAP;
 
+  const [race, setRace] = useState<"" | Faction>("");
+  useCharacterFaction(race || null);
   const [form, setForm] = useState<ManualForm>(() => initialForm(classKey));
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const [cmp, setCmp] = useState<CompareResult | null>(null);
   const [resultClass, setResultClass] = useState(classKey);
+  const [points, setPoints] = usePoints("aion2c:unspent:manual");
+  const solvedPoints = useRef("");
   const run = useRef(0);
   const levelEdited = useRef(false);
 
@@ -49,19 +58,25 @@ export function ManualBuild() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    await solve();
+  }
+
+  async function solve() {
     const built = buildFromForm(form, levelCap);
     if ("errors" in built) {
       setErrors(built.errors);
       return;
     }
+    const build = applyPoints(built.build, points);
+    solvedPoints.current = `${points.skill}|${points.stigma}`;
     setErrors([]);
     setBusy(true);
     setCmp(null);
     setMessage("Starting...");
     const id = ++run.current;
     try {
-      storeActiveBuild(built.build);
-      const result = await compare(built.build, null, (m) => id === run.current && setMessage(m));
+      storeActiveBuild(build);
+      const result = await compare(build, null, (m) => id === run.current && setMessage(m));
       if (id !== run.current) return;
       setCmp(result);
       setResultClass(form.classKey);
@@ -71,6 +86,15 @@ export function ManualBuild() {
       if (id === run.current) setBusy(false);
     }
   }
+
+  // changing the points re-runs an existing result (debounced); the first run is the submit button
+  const solveRef = useRef(solve);
+  solveRef.current = solve;
+  useEffect(() => {
+    if (!cmp || `${points.skill}|${points.stigma}` === solvedPoints.current) return;
+    const t = window.setTimeout(() => void solveRef.current(), POINTS_DEBOUNCE_MS);
+    return () => window.clearTimeout(t);
+  }, [points.skill, points.stigma]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const role = classes.data?.find((c) => c.key === classKey)?.role;
   const basic = STAT_FIELDS.filter((f) => !f.advanced);
@@ -83,12 +107,23 @@ export function ManualBuild() {
 
       <div className="mb-5 flex flex-wrap gap-2" role="group" aria-label="Class">
         {classes.data?.map((c) => (
-          <Button key={c.key} size="sm" variant={c.key === classKey ? "default" : "secondary"} aria-pressed={c.key === classKey} onClick={() => setParams({ class: c.key })}>
+          <Button key={c.key} size="sm" className="gap-1.5 pl-1.5" variant={c.key === classKey ? "default" : "secondary"} aria-pressed={c.key === classKey} onClick={() => setParams({ class: c.key })}>
+            <ClassEmblem classKey={c.key} size={22} />
             {c.name}
           </Button>
         ))}
         {classes.loading && <span className="text-sm text-dim">Loading classes...</span>}
         {role && <span className="self-center text-xs text-dim">{ROLE_LABEL[role]}</span>}
+      </div>
+
+      <div className="mb-5 flex flex-wrap items-center gap-2" role="group" aria-label="Race">
+        <span className="text-sm text-dim">Race (sets the colour theme)</span>
+        {(["elyos", "asmodian"] as const).map((r) => (
+          <Button key={r} size="sm" className="gap-1.5 capitalize" variant={race === r ? "default" : "secondary"} aria-pressed={race === r} onClick={() => setRace(race === r ? "" : r)}>
+            <FactionEmblem faction={r} size={18} />
+            {r}
+          </Button>
+        ))}
       </div>
 
       <form onSubmit={onSubmit} noValidate>
@@ -124,6 +159,9 @@ export function ManualBuild() {
                 ))}
               </div>
             </details>
+            <div className="mt-4">
+              <UnspentPoints value={points} onChange={setPoints} />
+            </div>
             {errors.length > 0 && (
               <ul role="alert" className="mt-3 list-disc space-y-0.5 pl-5 text-sm text-error">
                 {errors.map((e) => (

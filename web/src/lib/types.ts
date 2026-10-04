@@ -31,6 +31,8 @@ export interface RankData {
 export interface Specialization {
   rank_required: number | null;
   text: string;
+  /** parsed spec effects (engine SpecEffect), see models.py */
+  effects: Record<string, unknown>[];
 }
 
 export interface Skill {
@@ -54,6 +56,10 @@ export interface Skill {
   description: string;
   tags: string[];
   specializations: Specialization[];
+  /** 0 = deals no HP damage (the simulator values it at zero); default 1 */
+  hp_dmg_coeff: number;
+  /** datamine stagger gauge damage, information only */
+  stagger_gauge: number | null;
 }
 
 export interface Status {
@@ -67,6 +73,10 @@ export interface Status {
   source_skill: string | null;
   tick_ratio_pct: Num;
   tick_s: Num;
+  /** live-stat changes while the status is active (self statuses) */
+  stat_mods: { stat: string; value: Num }[];
+  /** explicit aura flag; duration 0 behaves the same */
+  permanent: boolean;
 }
 
 export interface StatusTrigger {
@@ -75,6 +85,14 @@ export interface StatusTrigger {
   chance: number;
   source_skill: string;
   confidence: Confidence;
+  event: string;
+  on_skills: string[];
+  on_status: string | null;
+  proc_skill: string | null;
+  reset_skill: string | null;
+  window_s: number;
+  /** fires only while this status is active */
+  requires_status: string | null;
 }
 
 export interface ChargeLevel {
@@ -95,6 +113,8 @@ export interface SkillRule {
   mp_restore: number;
   confidence: Confidence;
   note: string;
+  /** [owner skill key, 0-based option]: this skill only exists while that specialty option is chosen */
+  requires_spec: [string, number] | null;
 }
 
 export interface Link {
@@ -185,6 +205,9 @@ export interface GameData {
   daevanion: Record<string, DaevanionBoard>;
   recipes: Recipe[];
   class_key: string;
+  /** rank each specialization slot unlocks at */
+  spec_slot_ranks: Num[];
+  specs_parsed: boolean;
 }
 
 export interface Stats {
@@ -218,6 +241,8 @@ export interface CharacterBuild {
   skill_points: number | null;
   stigma_points: number | null;
   class_key: string;
+  /** Arcana / Soul Binding rank bonuses entered by the user (skill key -> +ranks); Daevanion nodes are separate. */
+  bonus_ranks: Record<string, number>;
 }
 
 export interface Scenario {
@@ -305,6 +330,78 @@ export interface FullBuild {
   stat_gains: StatGain[];
   warnings: string[];
   variants: BuildVariant[];
+  /** engine/rotation.py explain_rotation of `result`: plain-English opener, core, chains, filler, skip. */
+  rotation_explained: RotationExplained;
+  /** equipped specialty options with the DPS each adds (leave-one-out), best first */
+  spec_picks: SpecPick[];
+}
+
+export interface SpecPick {
+  skill_key: string;
+  option: number;
+  text: string;
+  dps_gain_pct: number;
+  confidence: string;
+}
+
+export interface RotationSkill {
+  skill_key: string;
+  name: string;
+  /** same as skill_key: the icon_urls() key */
+  icon_key: string;
+  charge_level: number;
+}
+
+export interface RotationOpenerStep extends RotationSkill {
+  t_s: number;
+}
+
+export interface RotationPriorityEntry extends RotationSkill {
+  require_status: string | null;
+  casts: number;
+  damage_share_pct: number;
+}
+
+export interface RotationCore extends RotationSkill {
+  cooldown_s: number;
+  casts: number;
+  cast_every_s: number | null;
+  damage_share_pct: number;
+  rule: "on_cooldown" | "when_status" | "hold_for_buff";
+  status: string | null;
+  text: string;
+}
+
+export interface RotationChain {
+  skills: string[];
+  names: string[];
+  icon_keys: string[];
+  completed: number;
+  text: string;
+}
+
+export interface RotationFiller {
+  skills: (RotationSkill & { casts: number; damage_share_pct: number; role: "main" | "mana" | "backup" })[];
+  text: string;
+}
+
+export interface RotationSkip extends RotationSkill {
+  casts: number;
+  reason: string;
+}
+
+export interface RotationExplained {
+  scenario: string;
+  scenario_name: string;
+  duration_s: number;
+  dps: number;
+  /** the priority list with never-cast entries dropped */
+  priority: RotationPriorityEntry[];
+  opener: RotationOpenerStep[];
+  core: RotationCore[];
+  chains: RotationChain[];
+  filler: RotationFiller;
+  skip: RotationSkip[];
 }
 
 /** webapi.compare() result. */
@@ -345,6 +442,16 @@ export interface KeybindPlan {
   ideal_dps: Record<string, number>;
   manual_every_s: Record<string, number>;
   warnings: string[];
+  /** macro name -> DPS of the macro plus hand-pressed manual skills */
+  hybrid_dps: Record<string, number>;
+  /** slot label -> why that stack is ordered the way it is */
+  slot_notes: Record<string, string>;
+  /** macro name -> plain-English verdict (hybrid advice when the macro is under 85% of ideal) */
+  macro_advice: Record<string, string>;
+  /** scenario key -> explain_rotation output */
+  rotation: Record<string, RotationExplained>;
+  /** G900 side buttons: [button, sends, description] */
+  thumbs: [string, string, string][];
 }
 
 export interface SkillBar {
@@ -440,3 +547,59 @@ export interface ArmoryRaw {
 }
 
 export type ProgressFn = (message: string) => void;
+
+// ---- gear (aion2c.webapi.gear_upgrades / max_potential) ----
+
+/** A resolved item from engine/items.json. `icon` is a CDN url (hotlinked) or null. */
+export interface GearPiece {
+  slot: string;
+  id: number;
+  name: string;
+  grade: string;
+  il: number;
+  enchant: number;
+  max_enchant: number;
+  icon: string | null;
+  source: string | null;
+  reachable: boolean;
+}
+
+export interface GearUpgrade {
+  slot: string;
+  /** null when the slot is empty */
+  from: GearPiece | null;
+  to: GearPiece;
+  kind: "item" | "enchant";
+  dps_gain_pct: number;
+  dps_after: number;
+  source: string;
+  reachable: boolean;
+  icon: string | null;
+}
+
+export interface GearUpgradesResult {
+  equipped: GearPiece[];
+  upgrades: GearUpgrade[];
+  notes: string[];
+  assumptions: string[];
+}
+
+export interface MaxPotentialResult {
+  class_key: string;
+  playstyle: PlaystyleKey;
+  gear: (GearPiece & { gain_pct: number })[];
+  build: {
+    stigmas: { key: string; name: string }[];
+    specialties: { skill: string; text: string; dps_gain_pct: number }[];
+    daevanion_nodes: number;
+    ranks: { key: string; name: string; rank: number }[];
+  };
+  dps: number;
+  dps_without_gear: number;
+  gear_gain_pct: number;
+  /** null when no build was passed */
+  current_dps: number | null;
+  gain_vs_current_pct: number | null;
+  notes: string[];
+  assumptions: string[];
+}

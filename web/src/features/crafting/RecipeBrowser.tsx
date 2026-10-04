@@ -22,7 +22,7 @@ function RecipeCard({
   return (
     <li
       className={cn(
-        "rounded-lg border bg-surface p-3.5 transition-colors",
+        "ornate border-border-soft p-3.5 transition-colors",
         inList ? "border-gold-lo bg-surface2" : "border-border-soft hover:border-border",
       )}
     >
@@ -58,7 +58,7 @@ function RecipeCard({
             aria-label={`${recipe.name} quantity`}
             value={qty}
             onChange={(e) => onQty(clampQty(Number(e.target.value.replace(/\D/g, ""))))}
-            className="h-8 w-14 rounded-md border border-border bg-bg text-center text-sm tabular-nums outline-none focus:border-gold"
+            className="h-8 w-14 game-input text-center text-sm tabular-nums "
           />
           <Button variant={inList ? "secondary" : "default"} size="icon" className="size-8" aria-label={`More ${recipe.name}`} disabled={qty >= MAX_QTY} onClick={() => onQty(qty + 1)}>
             <Plus />
@@ -114,7 +114,7 @@ export function RecipeBrowser({
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-2">
-        <label className="flex min-w-[200px] flex-1 items-center gap-2 rounded-md border border-border bg-surface px-2.5 focus-within:border-gold">
+        <label className="flex min-w-[200px] flex-1 items-center gap-2 game-input px-2.5 focus-within:border-gold">
           <Search aria-hidden className="size-4 text-faint" />
           <input
             value={q}

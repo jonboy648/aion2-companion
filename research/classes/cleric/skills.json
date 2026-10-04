@@ -18009,7 +18009,7 @@
   "client_type": "Passive",
   "unlock_level": 9,
   "max_skill_level": 40,
-  "cooldown_s": 0.0,
+  "cooldown_s": 1.0,
   "cooldown_s_at_max_level": null,
   "cast_time_s": 0,
   "cost": {
@@ -18037,7 +18037,7 @@
     "level": 1,
     "dmg_min": 71.0,
     "dmg_max": 71.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18052,7 +18052,7 @@
     "level": 2,
     "dmg_min": 95.0,
     "dmg_max": 95.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18067,7 +18067,7 @@
     "level": 3,
     "dmg_min": 126.0,
     "dmg_max": 126.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18082,7 +18082,7 @@
     "level": 4,
     "dmg_min": 163.0,
     "dmg_max": 163.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18097,7 +18097,7 @@
     "level": 5,
     "dmg_min": 194.0,
     "dmg_max": 194.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18112,7 +18112,7 @@
     "level": 6,
     "dmg_min": 225.0,
     "dmg_max": 225.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18127,7 +18127,7 @@
     "level": 7,
     "dmg_min": 256.0,
     "dmg_max": 256.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18142,7 +18142,7 @@
     "level": 8,
     "dmg_min": 287.0,
     "dmg_max": 287.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18157,7 +18157,7 @@
     "level": 9,
     "dmg_min": 324.0,
     "dmg_max": 324.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18172,7 +18172,7 @@
     "level": 10,
     "dmg_min": 355.0,
     "dmg_max": 355.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18187,7 +18187,7 @@
     "level": 11,
     "dmg_min": 378.0,
     "dmg_max": 378.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18202,7 +18202,7 @@
     "level": 12,
     "dmg_min": 394.0,
     "dmg_max": 394.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18217,7 +18217,7 @@
     "level": 13,
     "dmg_min": 417.0,
     "dmg_max": 417.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18232,7 +18232,7 @@
     "level": 14,
     "dmg_min": 439.0,
     "dmg_max": 439.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18247,7 +18247,7 @@
     "level": 15,
     "dmg_min": 462.0,
     "dmg_max": 462.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18262,7 +18262,7 @@
     "level": 16,
     "dmg_min": 485.0,
     "dmg_max": 485.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18277,7 +18277,7 @@
     "level": 17,
     "dmg_min": 501.0,
     "dmg_max": 501.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18292,7 +18292,7 @@
     "level": 18,
     "dmg_min": 517.0,
     "dmg_max": 517.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18307,7 +18307,7 @@
     "level": 19,
     "dmg_min": 534.0,
     "dmg_max": 534.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18322,7 +18322,7 @@
     "level": 20,
     "dmg_min": 550.0,
     "dmg_max": 550.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18337,7 +18337,7 @@
     "level": 21,
     "dmg_min": 567.0,
     "dmg_max": 567.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18352,7 +18352,7 @@
     "level": 22,
     "dmg_min": 583.0,
     "dmg_max": 583.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18367,7 +18367,7 @@
     "level": 23,
     "dmg_min": 599.0,
     "dmg_max": 599.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18382,7 +18382,7 @@
     "level": 24,
     "dmg_min": 616.0,
     "dmg_max": 616.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18397,7 +18397,7 @@
     "level": 25,
     "dmg_min": 632.0,
     "dmg_max": 632.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18412,7 +18412,7 @@
     "level": 26,
     "dmg_min": 648.0,
     "dmg_max": 648.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18427,7 +18427,7 @@
     "level": 27,
     "dmg_min": 665.0,
     "dmg_max": 665.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18442,7 +18442,7 @@
     "level": 28,
     "dmg_min": 681.0,
     "dmg_max": 681.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18457,7 +18457,7 @@
     "level": 29,
     "dmg_min": 698.0,
     "dmg_max": 698.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18472,7 +18472,7 @@
     "level": 30,
     "dmg_min": 714.0,
     "dmg_max": 714.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18487,7 +18487,7 @@
     "level": 31,
     "dmg_min": 730.0,
     "dmg_max": 730.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18502,7 +18502,7 @@
     "level": 32,
     "dmg_min": 747.0,
     "dmg_max": 747.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18517,7 +18517,7 @@
     "level": 33,
     "dmg_min": 763.0,
     "dmg_max": 763.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18532,7 +18532,7 @@
     "level": 34,
     "dmg_min": 779.0,
     "dmg_max": 779.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18547,7 +18547,7 @@
     "level": 35,
     "dmg_min": 796.0,
     "dmg_max": 796.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18562,7 +18562,7 @@
     "level": 36,
     "dmg_min": 812.0,
     "dmg_max": 812.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18577,7 +18577,7 @@
     "level": 37,
     "dmg_min": 829.0,
     "dmg_max": 829.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18592,7 +18592,7 @@
     "level": 38,
     "dmg_min": 845.0,
     "dmg_max": 845.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18607,7 +18607,7 @@
     "level": 39,
     "dmg_min": 861.0,
     "dmg_max": 861.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {
@@ -18622,7 +18622,7 @@
     "level": 40,
     "dmg_min": 878.0,
     "dmg_max": 878.0,
-    "cooldown_s": 0,
+    "cooldown_s": 1,
     "cost_mp": 0,
     "cast_time_s": 0,
     "tokens": {

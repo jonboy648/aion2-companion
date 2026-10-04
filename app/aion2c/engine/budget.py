@@ -3,6 +3,8 @@ from dataclasses import replace
 
 from aion2c.data.loader import allowed_skills
 from aion2c.engine.simulator import simulate  # noqa: F401  (patch target)
+from aion2c.specs import available_options
+from aion2c.engine.specialties import _matters
 from aion2c.models import (
     SKILL_POINT_COST,
     STIGMA_POINT_COST,
@@ -57,19 +59,38 @@ def _pool(gd, build, skills, costs, region_cap_key, points, ranks, base, priorit
     cur = {s.key: effective_rank(gd, replace(build, skill_ranks=ranks), s) for s in skills}
     cur_dps = base
 
+    by_key = {s.key: s for s in skills}
+    memo: dict[tuple, float] = {}
+
     def dps_at(key: str, rank: int) -> float:
-        b = replace(build, skill_ranks={**ranks, key: rank})
-        return simulate(gd, b, priority, scenario, cfg).dps
+        """DPS with `key` at `rank`, equipping the best single specialty option that rank has unlocked (so the
+        rank 8/12/16 breakpoints carry their value; the optimizer re-chooses every option properly later)."""
+        rk = {**ranks, key: rank}
+        # Memo: after a purchase, the "old" side of the next step is exactly the "new" side just simulated.
+        mk = (key, tuple(sorted(rk.items())))
+        hit = memo.get(mk)
+        if hit is not None:
+            return hit
+        b = replace(build, skill_ranks=rk)
+        sk = by_key[key]
+        best = simulate(gd, b, priority, scenario, cfg).dps
+        for i in available_options(gd, sk, rank):
+            if _matters(sk, i):
+                d = simulate(gd, replace(b, specs={**b.specs, key: (i,)}), priority, scenario, cfg).dps
+                best = max(best, d)
+        memo[mk] = best
+        return best
 
     def value(key: str) -> tuple[float, float] | None:
         r = cur[key]
         if r >= cap_of[key]:
             return None
         cost = costs[r]  # costs[i] = price of rank i+1
-        new = dps_at(key, r + 1)
-        return (new - cur_dps) / cost, new
+        old, new = dps_at(key, r), dps_at(key, r + 1)  # same specialty convention on both sides
+        return (new - old) / cost, cur_dps + (new - old)
 
     cache = {s.key: value(s.key) for s in skills}
+    fresh = set(cache)  # keys whose cached value was computed against the current ranks/cur_dps
     left = points
     while True:
         best_key, best = None, None
@@ -81,6 +102,12 @@ def _pool(gd, build, skills, costs, region_cap_key, points, ranks, base, priorit
                 best_key, best = s.key, v
         if best_key is None:
             return
+        if best_key not in fresh:
+            # Lazy greedy: a cached value predates later upgrades (buffs/chains interact), so
+            # re-simulate the leader before buying; buying on a stale value could lose DPS.
+            cache[best_key] = value(best_key)
+            fresh.add(best_key)
+            continue
         left -= costs[cur[best_key]]
         cur[best_key] += 1
         ranks[best_key] = cur[best_key]
@@ -88,6 +115,7 @@ def _pool(gd, build, skills, costs, region_cap_key, points, ranks, base, priorit
         log.append((best_key, cur[best_key], gain_pct))
         cur_dps = best[1]
         cache[best_key] = value(best_key)
+        fresh = {best_key}  # every other cached value is now stale
 
 
 def allocate_points(

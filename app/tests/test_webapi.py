@@ -79,6 +79,15 @@ def test_compare_and_follow_ups(imported):
     # keybinds
     kb = js(webapi.keybinds(build, {"boss_180": fb["priority"], "aoe_pack": cmp_["aoe"]["priority"]}, {}, None, 10))
     assert kb["plan"]["stacks"] and "# Aion 2 keybind setup sheet" in kb["instructions_markdown"]
+    plan = kb["plan"]
+    assert {"hybrid_dps", "slot_notes", "macro_advice", "rotation", "thumbs"} <= set(plan)
+    assert set(plan["slot_notes"]) == {s["key_label"] for s in plan["stacks"]}
+    # rotation_explained rides on every FullBuild and matches that build's own sim
+    for f in (fb, one):
+        rx = f["rotation_explained"]
+        assert rx["scenario"] == f["playstyle"]["scenario"]["key"] and rx["opener"] and rx["core"]
+        cast = {k for k, v in f["result"]["per_skill"].items() if v["casts"]}
+        assert {e["skill_key"] for e in rx["priority"]} <= cast
     # daevanion suggest (points-limited)
     sug = js(webapi.daevanion_suggest(build, 5))
     assert sug["spent"] <= 5 and len(sug["path"]) == len(sug["nodes"])
@@ -95,7 +104,7 @@ def test_second_class_flow():
     fb = js(webapi.optimize(build, "boss", None))
     assert fb["result"]["dps"] > 0 and fb["build"]["class_key"] == "assassin"
     kb = js(webapi.keybinds(build, {"boss_180": fb["priority"]}, {}, None, 10))
-    assert kb["plan"]["stacks"]
+    assert kb["plan"]["stacks"] and fb["rotation_explained"]["opener"]
 
 
 @pytest.mark.parametrize("key", ["sorcerer", "assassin"])

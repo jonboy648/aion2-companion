@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LoaderCircle, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { trackPicked } from "@/lib/analytics";
 import { ARMORY_REGIONS, search } from "@/lib/armory";
 import type { ArmoryRegion, ArmorySearchHit } from "@/lib/types";
 import { characterPath, hitToRecent, saveRecent } from "./helpers";
@@ -21,6 +22,7 @@ export function SearchBox() {
 
   function open(h: ArmorySearchHit) {
     saveRecent(hitToRecent(h));
+    trackPicked(h.name, h.serverName);
     nav(characterPath({ region: h.region, serverId: h.serverId ?? 0, name: h.name }));
   }
 
@@ -58,7 +60,7 @@ export function SearchBox() {
           aria-label="Region"
           value={region}
           onChange={(e) => setRegion(e.target.value as ArmoryRegion | "")}
-          className="h-12 rounded-md border border-input bg-bg/70 px-3 text-sm outline-none focus-visible:border-gold sm:w-44"
+          className="h-12 game-input px-3 text-sm  sm:w-44"
         >
           <option value="">Auto (all regions)</option>
           {ARMORY_REGIONS.map((r) => (

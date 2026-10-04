@@ -397,7 +397,52 @@
  },
  "element_overrides": {},
  "kind_overrides": {
-  "elemental-fusion-16300001": "charge_tier"
+  "elemental-fusion-16300001": "charge_tier",
+  "dimensional-control": "proc",
+  "spirit-momentum": "proc",
+  "elemental-replenishment": "proc",
+  "extract-vitality": "proc",
+  "magic-backflow": "proc",
+  "fire-spirit-rage-burst": "proc",
+  "fire-spirit-rage-burst-16151200": "proc",
+  "fire-spirit-rage-burst-16151300": "proc",
+  "fire-spirit-rage-burst-16151400": "proc",
+  "water-spirit-ice-chain": "proc",
+  "water-spirit-ice-chain-16152200": "proc",
+  "water-spirit-ice-chain-16152300": "proc",
+  "water-spirit-ice-chain-16152400": "proc",
+  "earth-spirit-taunt": "proc",
+  "earth-spirit-taunt-16153200": "proc",
+  "earth-spirit-taunt-16153300": "proc",
+  "earth-spirit-taunt-16153400": "proc",
+  "wind-spirit-gale": "proc",
+  "wind-spirit-gale-16154200": "proc",
+  "wind-spirit-gale-16154300": "proc",
+  "wind-spirit-gale-16154400": "proc",
+  "ancient-spirit-break": "proc",
+  "fire-spirit-basic-attack": "proc",
+  "water-spirit-basic-attack": "proc",
+  "wind-spirit-basic-attack": "proc",
+  "earth-spirit-basic-attack": "proc",
+  "ancient-spirit-basic-attack": "proc",
+  "fire-spirit-flame-explosion": "proc",
+  "water-spirit-water-bomb": "proc",
+  "wind-spirit-malicious-whirlwind": "proc",
+  "earth-spirit-headbutt": "proc",
+  "ancient-spirit-destruction": "proc",
+  "fire-spirit-summon-meteor": "proc",
+  "water-spirit-glacier-harpoon": "proc",
+  "wind-spirit-storm": "proc",
+  "earth-spirit-colossal-stalk": "proc",
+  "ancient-spirit-magnetic-storm": "proc",
+  "fire-spirit-leaping-slam": "proc",
+  "water-spirit-discharge-chill": "proc",
+  "water-spirit-enhanced-discharge-chill": "proc",
+  "wind-spirit-falling-wind": "proc",
+  "wind-spirit-enhanced-falling-wind": "proc",
+  "earth-spirit-tackle": "proc",
+  "earth-spirit-enhanced-tackle": "proc",
+  "ancient-spirit-plasma-cannon": "proc"
  },
  "resource_systems": {
   "mp": {
@@ -486,7 +531,7 @@
    "dmg_mult": {
     "value": 1.1,
     "confidence": "confirmed",
-    "source": "description: increases damage taken from the Spirit by 10%; spec rank 5 +15% more, Aug 2026 balance 20->25% (gegebase)"
+    "source": "description: increases damage taken from the Spirit by 10%; spec rank 5 +15% more, Aug 2026 balance 20->25% (gegebase); applied to ALL modelled damage because the simulator has no per-source split (spirit auto-attacks and joint hits are not simulated)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -619,8 +664,8 @@
    "on": "self",
    "duration_s": {
     "value": 0.0,
-    "confidence": "unknown",
-    "source": "no duration stated; persists until Elemental Fusion is used"
+    "confidence": "estimated",
+    "source": "no duration in the text: the status stays until Elemental Fusion removes it (duration 0 = permanent in the engine)"
    },
    "dmg_mult": {
     "value": 1.0,
@@ -652,7 +697,8 @@
     "value": 0.25,
     "confidence": "confirmed",
     "source": "Elemental Fusion spec rank 16: 25% chance to regain Four Elements"
-   }
+   },
+   "permanent": true
   },
   "spirit_summoned": {
    "key": "spirit_summoned",
@@ -729,7 +775,8 @@
     "value": 2.0,
     "confidence": "confirmed",
     "source": "\"Each skill level increases the Spirit stats by 2%\" (Attack/Defense etc. per element)"
-   }
+   },
+   "permanent": true
   },
   "spirit_protection_buff": {
    "key": "spirit_protection_buff",
@@ -819,9 +866,9 @@
     "source": "se token effect_value02:time = 10"
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "+20% PvE Damage Boost (confirmed text); treated as a x1.2 multiplier, real stat bucket unknown; spec 20 +25% more"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "the +20% PvE Damage Boost is carried by stat_mods (additive bucket)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -853,7 +900,17 @@
     "value": 20.0,
     "confidence": "confirmed",
     "source": "abe 1619000013"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump (Game client 18.09.2026) token abe:1619000011:value02:divide100 = 20 (PvE Damage Boost, caster and Spirit); mapped to the dmg_boost_pct bucket (estimated mapping)"
+     }
+    }
+   ]
   },
   "spirit_momentum_buff": {
    "key": "spirit_momentum_buff",
@@ -903,7 +960,17 @@
      "confidence": "confirmed",
      "source": "token"
     }
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "combat_speed_pct",
+     "value": {
+      "value": 30.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump (Game client 18.09.2026) token divide100 = 30 (Combat Speed); Spell Action Speed +30% and Magic Attack Bonus have no live-stat field"
+     }
+    }
+   ]
   },
   "flame_blessing_buff": {
    "key": "flame_blessing_buff",
@@ -916,21 +983,21 @@
    },
    "dmg_mult": {
     "value": 1.0,
-    "confidence": "estimated",
-    "source": "proc buff: extra hit, not a multiplier"
+    "confidence": "confirmed",
+    "source": "proc buff: damage is the tick, not a multiplier"
    },
    "elements": [],
    "mp_min_pct": null,
    "source_skill": "flame-blessing",
    "tick_ratio_pct": {
-    "value": 0.0,
-    "confidence": "unknown",
-    "source": "tick ATK ratio unknown; client gives flat per-tick values only (see tick_flat)"
+    "value": 20.5,
+    "confidence": "estimated",
+    "source": "50% proc chance x 41% ATK per landed attack (Metaroad 41% ATK, token abe:1637000041 = 50%); one expected proc per 1 s internal cooldown = upper bound (needs an attack every second); the flat +234 (rank 1) is dropped because ticks carry a ratio only"
    },
    "tick_s": {
     "value": 1.0,
-    "confidence": "unknown",
-    "source": "tick interval not stated"
+    "confidence": "confirmed",
+    "source": "token abe:1637000011:value03:time = 1 (Cooldown: 1s)"
    },
    "proc_chance": {
     "value": 0.5,
@@ -1099,16 +1166,297 @@
     "source": "tick interval not stated"
    },
    "note": "Stagger gauge damage per skill is in skills.json coefficients.stagger_gauge_damage"
+  },
+  "spirit_strike_aura": {
+   "key": "spirit_strike_aura",
+   "name": "Spirit Strike (passive aura)",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "passive: always on (duration 0 = permanent aura)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct damage multiplier; effect carried by stat_mods / ticks"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "spirit-strike",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 15.0,
+      "confidence": "estimated",
+      "source": "aion2.app client dump (Game client 18.09.2026) token abe:1671000011 (PvE Damage Boost) rank 1/5/10/15/20/25/40 = 6/10/15/20/25/30/45; value read at rank 10 (budget.BASE_RANK_CAP, the rank skill points reach); a status cannot scale with rank"
+     }
+    }
+   ]
+  },
+  "spirit_strike_extra": {
+   "key": "spirit_strike_extra",
+   "name": "Spirit Strike x1.5 (Spirit's Benediction specialty 2)",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "estimated",
+    "source": "specialty text gives no duration; held from the first Benediction cast"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct damage multiplier; effect carried by stat_mods / ticks"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "enhance-spirits-benediction",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 7.5,
+      "confidence": "estimated",
+      "source": "Benediction specialty 'x1.5 [Spirit Strike] Damage Boost effect': +50% of the 15% modelled at rank 10"
+     }
+    }
+   ],
+   "permanent": true
+  },
+  "benediction_spec20": {
+   "key": "benediction_spec20",
+   "name": "Spirit's Benediction +25% PvE Damage Boost (specialty 4)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump (Game client 18.09.2026) token se:1619000011:effect_value02:time = 10 (same 10 s as the buff)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct damage multiplier; effect carried by stat_mods / ticks"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "enhance-spirits-benediction",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 25.0,
+      "confidence": "confirmed",
+      "source": "specialty text: +25% PvE Damage Boost (caster and Spirit)"
+     }
+    }
+   ]
+  },
+  "corrode_spec_amp": {
+   "key": "corrode_spec_amp",
+   "name": "Corrode +15% damage taken from Spirit (specialty 1)",
+   "on": "target",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump (Game client 18.09.2026) token se:1615000013:effect_value02:time = 20 (Corrode duration)"
+   },
+   "dmg_mult": {
+    "value": 1.1364,
+    "confidence": "estimated",
+    "source": "specialty text '+15% extra damage taken from Spirit': read as additive with the base 10% (1.25 / 1.10 on top of corrode_debuff)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "jointstrike-corrode",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "assault_terror_attack": {
+   "key": "assault_terror_attack",
+   "name": "Assault Terror +20% Attack (specialty 1)",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "specialty text: +20% caster's Attack for 5s"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct damage multiplier; effect carried by stat_mods / ticks"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "assault-terror",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "specialty text '+20% caster's Attack' read as the Attack increase bucket"
+     }
+    }
+   ]
+  },
+  "flame_blessing_crit": {
+   "key": "flame_blessing_crit",
+   "name": "Flame Blessing +100 Critical Hit (specialty 2)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "estimated",
+    "source": "assumed to last as long as the Flame Blessing buff (rank 1: 10 s)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct damage multiplier; effect carried by stat_mods / ticks"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "flame-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 6.667,
+      "confidence": "estimated",
+      "source": "+100 Critical Hit rating at 80% per 1200 points (engine-wide estimate)"
+     }
+    }
+   ]
+  },
+  "flame_blessing_critdmg": {
+   "key": "flame_blessing_critdmg",
+   "name": "Flame Blessing +10% Critical Damage Boost (specialty 3)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "estimated",
+    "source": "assumed to last as long as the Flame Blessing buff (rank 1: 10 s)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct damage multiplier; effect carried by stat_mods / ticks"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "flame-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "estimated",
+      "source": "specialty text: +10% Critical Damage Boost"
+     }
+    }
+   ]
   }
  },
  "triggers": [
   {
    "status_key": "four_elements",
    "on_element": "none",
-   "chance": 1.0,
-   "source_skill": "summon-fire-spirit",
+   "chance": 0.25,
+   "source_skill": "elemental-fusion",
    "confidence": "estimated",
-   "note": "every Spirit skill activation adds 1 stack (all five spirit types); element field unused. Whether Jointstrike joint hits count is unknown."
+   "event": "cast",
+   "on_skills": [
+    "summon-fire-spirit",
+    "summon-water-spirit",
+    "summon-wind-spirit",
+    "summon-earth-spirit"
+   ],
+   "note": "each summon cast makes the Spirit use its skill once = one element; 4 elements = Four Elements, modelled as a 0.25 accumulator per summon cast (fires on every 4th). Ancient Spirit grants the status directly (rule). Spirit auto-attack skill uses (15/15/10/10% per attack) are not simulated (attack rate unknown), so this is a lower bound. The old trigger fired on every skill with element 'none' (all Jointstrikes, wind, ancient): 93 Fusion casts per 180 s."
+  },
+  {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "dimensional-control",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [
+    "summon-fire-spirit",
+    "summon-water-spirit",
+    "summon-wind-spirit",
+    "summon-earth-spirit",
+    "summon-ancient-spirit"
+   ],
+   "proc_skill": "dimensional-control",
+   "note": "Dimensional Control 'is triggered briefly each time a Spirit uses its skill' (client text): a free proc per modelled Spirit skill use (summon casts), no longer a castable spam skill"
   }
  ],
  "rules": {
@@ -1247,50 +1595,10 @@
    "consumes": [],
    "chain_next": null,
    "chain_window_s": 3.0,
-   "charge_levels": [
-    {
-     "level": 1,
-     "charge_s": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "charge time not in any source"
-     },
-     "dmg_mult": {
-      "value": 1.0,
-      "confidence": "unknown",
-      "source": "charge tier 1 multiplier unknown"
-     }
-    },
-    {
-     "level": 2,
-     "charge_s": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "charge time not in any source"
-     },
-     "dmg_mult": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "charge tier 2 multiplier unknown"
-     }
-    },
-    {
-     "level": 3,
-     "charge_s": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "charge time not in any source"
-     },
-     "dmg_mult": {
-      "value": 3.0,
-      "confidence": "confirmed",
-      "source": "spec rank 5: up to 200% more damage at full charge = x3.0"
-     }
-    }
-   ],
+   "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "Stigma. 100% ATK + 573 x5 hits, 50 stagger. Spec 5 turns it into a Charge Skill (Lv.1/Lv.2/Max rows exist in Metaroad, cd 60s, 200 MP). Spec 20 resets Jointstrike: Curse and Corrode cooldowns on first hit. Keep charge release manual.",
+   "note": "Stigma. 100% ATK + 573 x5 hits, 50 stagger. Spec 5 turns it into a Charge Skill (Lv.1/Lv.2/Max rows exist in Metaroad, cd 60s, 200 MP). Spec 20 resets Jointstrike: Curse and Corrode cooldowns on first hit. Keep charge release manual. | charge tiers removed from the base rule: the x3.0 tier (up to +200%) only exists with the 'Changes to Charge Skill' specialty and its charge time is unknown",
    "joint_attack": "spirit joint hits (see joint_attacks)"
   },
   "elemental-fusion": {
@@ -1305,50 +1613,10 @@
    ],
    "chain_next": null,
    "chain_window_s": 3.0,
-   "charge_levels": [
-    {
-     "level": 1,
-     "charge_s": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "charge time not in any source"
-     },
-     "dmg_mult": {
-      "value": 1.0,
-      "confidence": "unknown",
-      "source": "Lv.1 multiplier unknown"
-     }
-    },
-    {
-     "level": 2,
-     "charge_s": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "charge time not in any source"
-     },
-     "dmg_mult": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "Lv.2 multiplier unknown"
-     }
-    },
-    {
-     "level": 3,
-     "charge_s": {
-      "value": null,
-      "confidence": "unknown",
-      "source": "charge time not in any source"
-     },
-     "dmg_mult": {
-      "value": 3.0,
-      "confidence": "confirmed",
-      "source": "spec rank 12: up to 200% more damage = x3.0"
-     }
-    }
-   ],
+   "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "331.8% ATK + 1075 (rank 1; 7694 flat at rank 40). Usable only with Four Elements; using it removes the status. Spec 8 AoE variant, spec 16 25% chance to regain Four Elements. PvE damage +20% in Sep 2026 balance (gegebase). Do not cast into invulnerability."
+   "note": "331.8% ATK + 1075 (rank 1; 7694 flat at rank 40). Usable only with Four Elements; using it removes the status. Spec 8 AoE variant, spec 16 25% chance to regain Four Elements. PvE damage +20% in Sep 2026 balance (gegebase). Do not cast into invulnerability. | charge tiers removed from the base rule: the x3.0 tier (up to +200%) only exists with the 'Changes to Charge Skill' specialty and its charge time is unknown"
   },
   "elemental-fusion-16300001": {
    "skill_key": "elemental-fusion-16300001",
@@ -1733,7 +2001,9 @@
   },
   "spirit-strike": {
    "skill_key": "spirit-strike",
-   "applies": [],
+   "applies": [
+    "spirit_strike_aura"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -1742,7 +2012,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "passive: PvE damage boost 6% (rank 1) rising to 45% (rank 40) for caster AND Spirit; Perfect chance 0.4% -> 16%. Jul 2026 patch buffed (gegebase). Best passive investment."
+   "note": "passive: PvE damage boost 6% (rank 1) rising to 45% (rank 40) for caster AND Spirit; Perfect chance 0.4% -> 16%. Jul 2026 patch buffed (gegebase). Best passive investment. | aura status spirit_strike_aura carries the PvE Damage Boost"
   },
   "spirits-descent": {
    "skill_key": "spirits-descent",
@@ -3797,6 +4067,428 @@
    },
    "confidence": "confirmed",
    "source": "aion2.app client dump (Game client 18.09.2026), fetched 2026-10-03 (per-rank token_values; unlabelled keys, see NOTES.md token legend)"
+  }
+ },
+ "specialization_effects": {
+  "cold-shock": {
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.1,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +2% Attack per Earth Tremor landed, up to 5 stacks = +10% Attack; the stack duration is not in any source (token abe:1603004011 = 2% per stack)",
+     "cond": "unmodeled",
+     "note": "+2% Attack per Earth Tremor landed, up to 5 stacks = +10% Attack; the stack duration is not in any source (token abe:1603004011 = 2% per stack)"
+    }
+   ]
+  },
+  "summon-fire-spirit": {
+   "1": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.2,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +20% Fire Spirit Critical Hit damage: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+20% Fire Spirit Critical Hit damage: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "2": [
+    {
+     "kind": "extra_hits",
+     "value": 0.1,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "4": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.2,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +20% Fire Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+20% Fire Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ]
+  },
+  "summon-water-spirit": {
+   "1": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.1,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +10% Water Spirit Attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+10% Water Spirit Attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "2": [
+    {
+     "kind": "extra_hits",
+     "value": 0.1,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "4": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.2,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +20% Water Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+20% Water Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ]
+  },
+  "summon-wind-spirit": {
+   "1": [
+    {
+     "kind": "crit_chance_add",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +20% Wind Spirit Critical Hit: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+20% Wind Spirit Critical Hit: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "2": [
+    {
+     "kind": "extra_hits",
+     "value": 0.1,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "enemy Attack Speed -30% for 10 s (5% chance): defensive, no damage effect on a dummy",
+     "note": "enemy attack speed debuff"
+    }
+   ],
+   "4": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.2,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +20% Wind Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+20% Wind Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ]
+  },
+  "summon-earth-spirit": {
+   "2": [
+    {
+     "kind": "extra_hits",
+     "value": 0.1,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+10% chance of an extra Spirit skill use per attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "4": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.2,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +20% Earth Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+20% Earth Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ]
+  },
+  "jointstrike-curse": {
+   "0": [
+    {
+     "kind": "duration_add_s",
+     "value": 2.0,
+     "confidence": "confirmed",
+     "source": "specialty text +2s Curse duration (the Curse DoT tick ratio is unknown, so no damage yet)"
+    }
+   ],
+   "4": [
+    {
+     "kind": "ignore_block",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "Block/Evasion do not matter against a PvE dummy",
+     "note": "PvE: no effect"
+    },
+    {
+     "kind": "force_crit",
+     "value": 1.0,
+     "confidence": "confirmed",
+     "source": "specialty text: lands as a Critical Hit"
+    }
+   ]
+  },
+  "jointstrike-corrode": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "value": 20.0,
+     "confidence": "estimated",
+     "source": "specialty text +15% extra damage taken from Spirit: status corrode_spec_amp, applied with every Corrode cast",
+     "status_key": "corrode_spec_amp"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "enemy Combat Speed -20% for 10 s: no damage effect"
+    }
+   ],
+   "3": [
+    {
+     "kind": "duration_add_s",
+     "value": 10.0,
+     "confidence": "confirmed",
+     "source": "specialty text +10s Corrode effect duration (20 s -> 30 s)"
+    }
+   ]
+  },
+  "command-proxy": {
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "x1.5 Spirit Protection (defensive)"
+    }
+   ]
+  },
+  "enhance-spirits-benediction": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "x1.5 Spirit Strike Damage Boost: +7.5% PvE Damage Boost held from the first cast (status spirit_strike_extra)",
+     "status_key": "spirit_strike_extra"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "x1.5 Spirit Communion activation chance and healing: no damage effect"
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": 10.0,
+     "confidence": "confirmed",
+     "source": "specialty text +25% PvE Damage Boost for caster and Spirit (status benediction_spec20, 10 s like the buff)",
+     "status_key": "benediction_spec20"
+    }
+   ]
+  },
+  "jointstrike-destructive-attack": {
+   "0": [
+    {
+     "kind": "dmg_mult",
+     "value": 3.0,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); Changes to Charge Skill, up to +200% damage at full charge; charge time and the Lv.1/Lv.2 tiers are not in any source, so it is not simulated",
+     "cond": "unmodeled",
+     "note": "Changes to Charge Skill, up to +200% damage at full charge; charge time and the Lv.1/Lv.2 tiers are not in any source, so it is not simulated"
+    }
+   ],
+   "2": [
+    {
+     "kind": "force_crit",
+     "value": 1.0,
+     "confidence": "estimated",
+     "source": "text 'Critical Hit on hit' read as every hit being a Critical Hit (same wording class as the Curse specialty 'lands as a Critical Hit')"
+    }
+   ],
+   "3": [
+    {
+     "kind": "reset_skill",
+     "value": 1.0,
+     "confidence": "estimated",
+     "source": "text: reset Jointstrike: Curse and Corrode cooldowns on the first hit; once per cast",
+     "skill_key": "jointstrike-curse"
+    },
+    {
+     "kind": "reset_skill",
+     "value": 1.0,
+     "confidence": "estimated",
+     "source": "same text, second target",
+     "skill_key": "jointstrike-corrode"
+    }
+   ]
+  },
+  "summon-ancient-spirit": {
+   "0": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.1,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +10% Ancient Spirit Attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+10% Ancient Spirit Attack: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "1": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.5,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); x1.5 Spirit's Descent activation chance and damage for 30 s: the Descent proc is not simulated",
+     "cond": "unmodeled",
+     "note": "x1.5 Spirit's Descent activation chance and damage for 30 s: the Descent proc is not simulated"
+    }
+   ],
+   "2": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.4,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); Ancient Spirit skill after 5 basic attacks instead of 7 (x1.4 skill rate): Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "Ancient Spirit skill after 5 basic attacks instead of 7 (x1.4 skill rate): Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ],
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "value": 1.2,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); +20% Ancient Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)",
+     "cond": "unmodeled",
+     "note": "+20% Ancient Spirit Stats: Spirit auto-attacks and Spirit stats are not simulated (spirit attack rate is not in any source)"
+    }
+   ]
+  },
+  "elemental-fusion": {
+   "0": [
+    {
+     "kind": "unknown",
+     "value": null,
+     "confidence": "unknown",
+     "source": "not in the client dump: 'Changes to AoE Skill': the number of targets is not in the dump (aoe_targets_add unknown)",
+     "note": "'Changes to AoE Skill': the number of targets is not in the dump (aoe_targets_add unknown)"
+    }
+   ],
+   "1": [
+    {
+     "kind": "unknown",
+     "value": null,
+     "confidence": "unknown",
+     "source": "not in the client dump: 'Extra damage after 3s on hit': delay 3 s is token se:1630002013 but the damage value is missing",
+     "note": "'Extra damage after 3s on hit': delay 3 s is token se:1630002013 but the damage value is missing"
+    }
+   ],
+   "2": [
+    {
+     "kind": "unknown",
+     "value": null,
+     "confidence": "unknown",
+     "source": "not in the client dump: '+10 all Element Boost': unit and stat bucket unknown (token abe:1630000071 = 10)",
+     "note": "'+10 all Element Boost': unit and stat bucket unknown (token abe:1630000071 = 10)"
+    }
+   ],
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "value": 3.0,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); Changes to Charge Skill, up to +200% damage; charge time and lower tiers unknown",
+     "cond": "unmodeled",
+     "note": "Changes to Charge Skill, up to +200% damage; charge time and lower tiers unknown"
+    }
+   ],
+   "4": [
+    {
+     "kind": "adds_status",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); 25% chance to regain Four Elements: the simulator removes the status after the cast effects run, so a regain would be lost",
+     "cond": "unmodeled",
+     "note": "25% chance to regain Four Elements: the simulator removes the status after the cast effects run, so a regain would be lost",
+     "status_key": "four_elements",
+     "chance": 0.25
+    }
+   ]
+  },
+  "dimensional-control": {
+   "1": [
+    {
+     "kind": "unknown",
+     "value": null,
+     "confidence": "unknown",
+     "source": "not in the client dump: 'Extra damage after 3s on hit': delay 3 s is token se:1633002014 but the damage value is missing",
+     "note": "'Extra damage after 3s on hit': delay 3 s is token se:1633002014 but the damage value is missing"
+    }
+   ]
+  },
+  "kaisinels-power": {
+   "3": [
+    {
+     "kind": "no_dps",
+     "value": 0.0,
+     "confidence": "estimated",
+     "source": "+15% Status Effect Chance: no damage effect"
+    }
+   ]
+  },
+  "flame-blessing": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "value": 10.0,
+     "confidence": "estimated",
+     "source": "+100 Critical Hit while the buff is up (tokens abe:1637000022/033 = 100): rating at 80%/1200",
+     "status_key": "flame_blessing_crit"
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": 10.0,
+     "confidence": "estimated",
+     "source": "+10% Critical Damage Boost while the buff is up",
+     "status_key": "flame_blessing_critdmg"
+    }
+   ],
+   "3": [
+    {
+     "kind": "cooldown_mult",
+     "value": 0.5,
+     "confidence": "estimated",
+     "source": "specialty text (client dump); -50% extra damage cooldown (1 s -> 0.5 s): the proc is limited by the attack rate (about one attack per second), not by the cooldown, so the gain is not simulated",
+     "cond": "unmodeled",
+     "note": "-50% extra damage cooldown (1 s -> 0.5 s): the proc is limited by the attack rate (about one attack per second), not by the cooldown, so the gain is not simulated"
+    }
+   ]
+  },
+  "assault-terror": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "value": 5.0,
+     "confidence": "confirmed",
+     "source": "specialty text +20% caster's Attack for 5s",
+     "status_key": "assault_terror_attack"
+    }
+   ]
   }
  }
 }

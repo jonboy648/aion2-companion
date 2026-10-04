@@ -214,9 +214,9 @@
     "source": "Gale Arrow token se:1411000711 time = 10 at every rank (aion2.app client dump 2026-09-18); spec rank 8 +5s"
    },
    "dmg_mult": {
-    "value": 1.07,
-    "confidence": "estimated",
-    "source": "PvE Damage Boost +7% (tokens abe:1411000711/712 = 7, PvP 3.5). Damage Boost is an additive bucket, so 1.07 overstates when other boosts are present. Combat Speed +7% is in stat_effects"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no separate multiplier: the +7% Combat Speed and +7% PvE Damage Boost are stat_mods (from stat_effects). The old 1.07 here double counted the PvE Damage Boost."
    },
    "elements": [],
    "mp_min_pct": null,
@@ -270,9 +270,9 @@
     "source": "token se:1431000011 time per rank: 10 s at rank 1, 14.5 at 10, 20 at 20 (global cap), 30 at 40 (aion2.app client dump 2026-09-18); value is rank 20"
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "+20% Attack (token abe:1431000011 = 20). Treated as a damage multiplier like the Sorcerer Element Enhancement; the real bucket is the Attack stat, so 1.2 overstates"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no separate multiplier: +20% Attack is a stat_mod (attack_increase_pct, token abe:1431000011 = 20). The old 1.2 here double counted it."
    },
    "elements": [],
    "mp_min_pct": null,
@@ -338,9 +338,9 @@
    "mp_min_pct": null,
    "source_skill": "drill-dart",
    "tick_ratio_pct": {
-    "value": null,
-    "confidence": "unknown",
-    "source": "ATK ratio hidden (\"—\" on Metaroad); client has FLAT tick 43 at rank 1 up to 952 at rank 40 (token se_abe_dmg SkillUIDotMin/MaxDmg:tick), the Status model only holds ratio ticks"
+    "value": 45.0,
+    "confidence": "estimated",
+    "source": "DERIVED, not published (Metaroad shows a dash). Client flat tick is 0.384-0.390x the Drill Dart hit flat at ranks 1/10/20/40 (43/112, 322/829, 581/1491, 952/2444), so tick ratio = 0.39 x 115.5% = 45.0% ATK. Same assumptions and rank understatement as crimson_flames"
    },
    "tick_s": {
     "value": 1.0,
@@ -368,9 +368,9 @@
    "mp_min_pct": null,
    "source_skill": "griffon-arrow",
    "tick_ratio_pct": {
-    "value": null,
-    "confidence": "unknown",
-    "source": "ATK ratio hidden (\"—\"); client FLAT tick 482 at rank 1 up to 2056 at rank 40 (token se_abe_dmg ...:tick)"
+    "value": 85.5,
+    "confidence": "estimated",
+    "source": "DERIVED, not published (Metaroad shows a dash). Client flat tick (se_abe_dmg ...:tick) is exactly 0.50x the Griffon Arrow hit flat at ranks 1/10/20/40 (482/964, 985/1971, 1351/2702, 2056/4112), so tick ratio = 0.50 x 171% = 85.5% ATK. Assumes the DoT shares the hit's ratio:flat proportion; the flat part is not carried (Status holds a ratio only) and the ratio is rank-independent here, so high ranks are understated"
    },
    "tick_s": {
     "value": 1.0,
@@ -713,9 +713,118 @@
     "confidence": "unknown",
     "source": "no tick interval stated for this effect"
    }
+  },
+  "bow_double_chance": {
+   "key": "bow_double_chance",
+   "name": "Bow of Blessing specialty: +7% Double Chance",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "own buff duration at rank 20 (token se:1422000011:effect_value02:time: 10 s at rank 1, 20 s at rank 20)"
+   },
+   "dmg_mult": {
+    "value": 1.07,
+    "confidence": "estimated",
+    "source": "token abe:1422004015:value02:divide100 = 7 (% Double Chance). Double = chance to deal double damage (engine SMITE_BONUS 1.0), so +7% -> x1.07 off-boss; the 0.7 boss factor of damage.py is ignored here"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "bow-of-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "unused"
+   },
+   "stat_mods": []
+  },
+  "vaizel_focused_eye": {
+   "key": "vaizel_focused_eye",
+   "name": "Vaizel's Authority specialty: x1.5 Focused Eye",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "own buff duration at rank 20 (token se:1431000011:effect_value02:time)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "vaizels-authority",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "unused"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "estimated",
+      "source": "text 'x1.5 [Focused Eye] effect': the extra half of Focused Eye's PvE Damage Boost = 0.5 x 20% at passive rank 20 (token abe:1474000013 = 1 at rank 1, 20 at rank 20). Scales with the passive's rank. The Double Chance part (0.2 -> 4%) is not a status stat and is not simulated"
+     }
+    }
+   ]
+  },
+  "supporting_fire_chance": {
+   "key": "supporting_fire_chance",
+   "name": "Supporting Fire specialty: +25% activation chance",
+   "on": "self",
+   "duration_s": {
+    "value": 15.0,
+    "confidence": "confirmed",
+    "source": "token se:1438000011:effect_value02:time = 15 (own orb duration; the +15s duration option adds to it)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage carried by ticks"
+   },
+   "elements": [
+    "wind"
+   ],
+   "mp_min_pct": null,
+   "source_skill": "supporting-fire",
+   "tick_ratio_pct": {
+    "value": 10.8,
+    "confidence": "confirmed",
+    "source": "extra 25% activation x 43.2% ATK per 0.5 s shot: tokens abe:1438000011:value02:divide100 = 25, value03:time = 0.5, ratio 43.2% (description). The flat 243-682 per shot is not carried by an ATK-ratio tick"
+   },
+   "tick_s": {
+    "value": 0.5,
+    "confidence": "confirmed",
+    "source": "token abe:1438000011:value03:time = 0.5 (Firing Cooldown)"
+   },
+   "stat_mods": []
   }
  },
- "triggers": [],
+ "triggers": [
+  {
+   "status_key": "",
+   "on_element": "none",
+   "confidence": "confirmed",
+   "chance": 0.5,
+   "source_skill": "hunters-soul",
+   "event": "crit",
+   "proc_skill": "hunters-soul",
+   "note": "Hunter's Soul: 50% chance on a Critical Hit (token abe:1480000011:value02:divide100 = 50), 53.8% ATK + 344..1316 flat (se_dmg:1480000711), Cooldown 1s (value03:time = 1)"
+  }
+ ],
  "rules": {
   "snipe": {
    "skill_key": "snipe",
@@ -1373,15 +1482,6 @@
   },
   {
    "status": "bow_of_blessing",
-   "stat": "Critical Damage Boost",
-   "value": 20,
-   "unit": "%",
-   "applies_to": "all",
-   "confidence": "confirmed",
-   "source": "spec rank 15, token abe:1422003014 = 20"
-  },
-  {
-   "status": "bow_of_blessing",
    "stat": "Double Chance",
    "value": 7,
    "unit": "%",
@@ -1694,6 +1794,222 @@
    "flat_rank_40": 1316.0,
    "note": "x1.5 with Vaizel spec rank 15",
    "flat_source": "aion2.app client dump 2026-09-18 token se_dmg:1480000711:SkillUIMinDmgsum"
+  }
+ ],
+ "korea_only_ids": [
+  14210000,
+  14240000,
+  14250000,
+  14290000,
+  14300000,
+  14320000
+ ],
+ "korea_only_note": "Eye of Rapid Burst, Afterimage, Hunters Resolve_active, Arrow of Space-time, Dust Arrow, Impact Kick: no unlock level, no stigma, listed only on the KR/TW client v110 (aion2hub 12-skill KR/TW list). Without this gate the optimizer cast them for free damage. Rapid Fire/Spiral Arrow/Tempest Arrow/Shackling Arrow/Guerilla Strike/Lightning Arrow stay global: community guides use the Snipe chain on global content and they are chain children.",
+ "specialization_effects": {
+  "rapid-fire": {
+   "3": [
+    {
+     "kind": "cdr_skill_s",
+     "value": {
+      "value": 3.0,
+      "confidence": "estimated",
+      "source": "text '-1s [Deadshot] cooldown on hit' x 3 hits (datamine: Rapid Fire = 3 hits); per-hit reading is a guess"
+     },
+     "skill_key": "deadshot"
+    }
+   ]
+  },
+  "drill-dart": {
+   "1": [
+    {
+     "kind": "duration_add_s",
+     "value": {
+      "value": 2.0,
+      "confidence": "confirmed",
+      "source": "text '+2s Bleed duration'; Bleed tick damage itself is unknown to the engine (ATK ratio hidden), so this is worth 0 until it is known"
+     },
+     "note": "Bleed +2s"
+    }
+   ]
+  },
+  "snare-shot": {
+   "4": [
+    {
+     "kind": "duration_add_s",
+     "value": {
+      "value": 2.0,
+      "confidence": "confirmed",
+      "source": "text '+2s Slow and Root duration': lengthens Slow (5 s), which gates the Burst Arrow / Explosive Arrow bonus"
+     },
+     "note": "Slow +2s"
+    }
+   ]
+  },
+  "gale-arrow": {
+   "3": [
+    {
+     "kind": "unknown",
+     "note": "text gives no amounts for the extra Combat Speed / PvE Damage Boost when fewer targets are hit"
+    }
+   ]
+  },
+  "illusory-arrow": {
+   "1": [
+    {
+     "kind": "unknown",
+     "note": "'Changes to AoE Skill': target count not in any source"
+    }
+   ]
+  },
+  "bow-of-blessing": {
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "text '+7% Double Chance for the duration', token abe:1422004015 = 7"
+     },
+     "status_key": "bow_double_chance"
+    }
+   ]
+  },
+  "supporting-fire": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 15.0,
+      "confidence": "confirmed",
+      "source": "text '+25% activation chance' (orb 25% -> 50%), token abe:1438000011:value02:divide100 = 25"
+     },
+     "status_key": "supporting_fire_chance"
+    }
+   ]
+  },
+  "explosive-arrow-14360000": {
+   "1": [
+    {
+     "kind": "dmg_mult",
+     "value": {
+      "value": 1.1,
+      "confidence": "estimated",
+      "source": "text '+10% additional damage to targets afflicted with Slow or Root'; gated on Slow only (Root also counts in game)"
+     },
+     "requires_status": "slow"
+    }
+   ],
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "value": {
+      "value": 1.2,
+      "confidence": "estimated",
+      "source": "text '+20% additional damage to targets afflicted with Slow or Root'; gated on Slow only (Root also counts in game)"
+     },
+     "requires_status": "slow"
+    }
+   ]
+  },
+  "vaizels-authority": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "text 'x1.5 [Focused Eye] effect for the duration'"
+     },
+     "status_key": "vaizel_focused_eye"
+    }
+   ],
+   "2": [
+    {
+     "kind": "dmg_mult",
+     "value": {
+      "value": 1.5,
+      "confidence": "estimated",
+      "source": "text \"x1.5 [Hunter's Soul] effect for the duration\": read as x1.5 proc damage while Vaizel's Authority is up"
+     },
+     "skill_key": "hunters-soul",
+     "requires_status": "vaizels_authority"
+    }
+   ],
+   "3": [
+    {
+     "kind": "cdr_all_s",
+     "value": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "text '50% chance to reduce all skill cooldowns by 1s on Critical Hit for the duration'"
+     },
+     "chance": 0.5,
+     "trigger": "crit",
+     "requires_status": "@own",
+     "cond": "unmodeled",
+     "note": "the engine fires crit specialty effects only from the OWNER's own hits (Vaizel has none), so this cannot be simulated: listed, warns when chosen"
+    }
+   ]
+  },
+  "mother-natures-breath": {
+   "1": [
+    {
+     "kind": "no_dps",
+     "value": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "Vigilant Eye = Max HP + Evasion (defensive passive)"
+     }
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "value": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "Unyielding Resolve = ailment/impact resist (defensive passive)"
+     }
+    }
+   ]
+  }
+ },
+ "deferred_triggers": [
+  {
+   "status_key": "",
+   "on_element": "none",
+   "confidence": "confirmed",
+   "chance": 0.25,
+   "source_skill": "melee-fire",
+   "event": "cast",
+   "proc_skill": "melee-fire",
+   "on_skills": [
+    "snipe",
+    "rapid-fire",
+    "spiral-arrow",
+    "tempest-arrow",
+    "tempest-shot",
+    "deadshot",
+    "drill-dart",
+    "burst-arrow",
+    "gale-arrow",
+    "marking-shot",
+    "suppressing-arrow",
+    "snare-shot",
+    "shackling-arrow",
+    "griffon-arrow",
+    "explosion-trap",
+    "ambush-kick",
+    "illusory-arrow",
+    "sealing-arrow",
+    "ensnaring-trap",
+    "arrow-storm",
+    "assault-smite",
+    "explosive-arrow-14360000",
+    "guerilla-strike",
+    "lightning-arrow"
+   ],
+   "note": "Melee Fire: 25% per landed attack (token abe:1478000012:value02:divide100 = 25), 26.4% ATK + 148 flat, Cooldown 1s; evaluated once per cast, the proc skill's own 1 s cooldown caps it. DEFERRED (not in 'triggers'): enabling it adds ~7 s (+45%) to optimize_full_build boss at level 45, which already sits near the 30 s limit under load. Move it into 'triggers' when the simulator gets cheaper (about +4% DPS)."
   }
  ]
 }

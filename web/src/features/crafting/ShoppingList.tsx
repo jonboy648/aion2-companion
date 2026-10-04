@@ -75,9 +75,9 @@ export function ShoppingList({
               aria-valuemax={items.length}
               aria-valuenow={done}
               aria-label="Materials gathered"
-              className="mt-1.5 h-2 overflow-hidden rounded-full bg-surface3"
+              className="xp-bar xp-bar-sm mt-1.5"
             >
-              <div className="h-full rounded-full bg-ok transition-[width]" style={{ width: `${pct}%` }} />
+              <div className="xp-fill" style={{ width: `${pct}%` }} />
             </div>
           </div>
 

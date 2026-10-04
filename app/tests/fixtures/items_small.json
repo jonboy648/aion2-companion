@@ -1,0 +1,1154 @@
+{
+ "schema": 1,
+ "items": [
+  {
+   "id": 110520003,
+   "name": "Ludra's Grimoire",
+   "slot": "weapon",
+   "grade": "Unique",
+   "il": 102,
+   "equip_level": 45,
+   "class_lock": [
+    "Sorcerer"
+   ],
+   "max_enchant": 15,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 525.0,
+     "min": 473.0,
+     "slope": 11.6
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 100.0
+    },
+    {
+     "id": "Critical",
+     "v": 100.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "STR",
+     "v": 32.0,
+     "min": 22.0
+    },
+    {
+     "id": "AGI",
+     "v": 32.0,
+     "min": 22.0
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 51.0,
+     "min": 38.0
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 98.0,
+     "min": 79.0
+    },
+    {
+     "id": "Critical",
+     "v": 75.0,
+     "min": 59.0
+    },
+    {
+     "id": "HPMax",
+     "v": 418.0,
+     "min": 357.0
+    },
+    {
+     "id": "MPMax",
+     "v": 211.0,
+     "min": 177.0
+    },
+    {
+     "id": "CombatSpeed",
+     "v": 13.0,
+     "min": 11.2
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 9.6,
+     "min": 8.3
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 25.6,
+     "min": 22.2
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "Block",
+     "v": 62.0,
+     "min": 48.0
+    },
+    {
+     "id": "AmplifyAllDamage",
+     "v": 7.3,
+     "min": 6.3
+    },
+    {
+     "id": "AmplifyWeaponDamage",
+     "v": 9.6,
+     "min": 8.3
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 3,
+   "mana_slots": 4,
+   "god_slots": 1,
+   "sources": [
+    "Reward Chest",
+    "Sanctuary"
+   ],
+   "max_exceed": 5,
+   "slope_known": true
+  },
+  {
+   "id": 110540035,
+   "name": "Liberator Spellbook",
+   "slot": "weapon",
+   "grade": "Epic",
+   "il": 39,
+   "equip_level": 1,
+   "class_lock": [
+    "Sorcerer"
+   ],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 198.0,
+     "min": 178.0,
+     "slope": 4.4
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 100.0
+    },
+    {
+     "id": "Critical",
+     "v": 100.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "STR",
+     "v": 14.0,
+     "min": 14.0
+    },
+    {
+     "id": "MPMax",
+     "v": 49.0,
+     "min": 49.0
+    },
+    {
+     "id": "Block",
+     "v": 20.0,
+     "min": 20.0
+    }
+   ],
+   "sub_random": false,
+   "sub_count": 0,
+   "mana_slots": 3,
+   "god_slots": 1,
+   "sources": [
+    "Quest"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 110540053,
+   "name": "Lunatic Spellbook",
+   "slot": "weapon",
+   "grade": "Epic",
+   "il": 45,
+   "equip_level": 45,
+   "class_lock": [
+    "Sorcerer"
+   ],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 229.0,
+     "min": 206.0,
+     "slope": 5.1
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 100.0
+    },
+    {
+     "id": "Critical",
+     "v": 100.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "STR",
+     "v": 23.0,
+     "min": 14.0
+    },
+    {
+     "id": "AGI",
+     "v": 23.0,
+     "min": 14.0
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 36.0,
+     "min": 25.0
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 65.0,
+     "min": 50.0
+    },
+    {
+     "id": "Critical",
+     "v": 50.0,
+     "min": 37.0
+    },
+    {
+     "id": "HPMax",
+     "v": 266.0,
+     "min": 225.0
+    },
+    {
+     "id": "MPMax",
+     "v": 136.0,
+     "min": 112.0
+    },
+    {
+     "id": "CombatSpeed",
+     "v": 8.2,
+     "min": 7.1
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 6.1,
+     "min": 5.3
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 16.2,
+     "min": 14.0
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 68.0,
+     "min": 53.0
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 68.0,
+     "min": 53.0
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 68.0,
+     "min": 53.0
+    },
+    {
+     "id": "Block",
+     "v": 40.0,
+     "min": 29.0
+    },
+    {
+     "id": "AmplifyAllDamage",
+     "v": 4.6,
+     "min": 4.0
+    },
+    {
+     "id": "AmplifyWeaponDamage",
+     "v": 6.1,
+     "min": 5.3
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 3,
+   "mana_slots": 3,
+   "god_slots": 1,
+   "sources": [
+    "Reward Chest",
+    "Sanctuary"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 110530045,
+   "name": "Splendent Wise Dragon Lord Spellbook",
+   "slot": "weapon",
+   "grade": "Unique",
+   "il": 102,
+   "equip_level": 45,
+   "class_lock": [
+    "Sorcerer"
+   ],
+   "max_enchant": 15,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 525.0,
+     "min": 473.0,
+     "slope": 11.6
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 100.0
+    },
+    {
+     "id": "Critical",
+     "v": 100.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "STR",
+     "v": 32.0,
+     "min": 22.0
+    },
+    {
+     "id": "AGI",
+     "v": 32.0,
+     "min": 22.0
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 51.0,
+     "min": 38.0
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 98.0,
+     "min": 79.0
+    },
+    {
+     "id": "Critical",
+     "v": 75.0,
+     "min": 59.0
+    },
+    {
+     "id": "HPMax",
+     "v": 418.0,
+     "min": 357.0
+    },
+    {
+     "id": "MPMax",
+     "v": 211.0,
+     "min": 177.0
+    },
+    {
+     "id": "CombatSpeed",
+     "v": 13.0,
+     "min": 11.2
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 9.6,
+     "min": 8.3
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 25.6,
+     "min": 22.2
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "Block",
+     "v": 62.0,
+     "min": 48.0
+    },
+    {
+     "id": "AmplifyAllDamage",
+     "v": 7.3,
+     "min": 6.3
+    },
+    {
+     "id": "AmplifyWeaponDamage",
+     "v": 9.6,
+     "min": 8.3
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 5,
+   "mana_slots": 4,
+   "god_slots": 1,
+   "sources": [
+    "Crafting"
+   ],
+   "max_exceed": 5,
+   "slope_known": true
+  },
+  {
+   "id": 110120003,
+   "name": "Ludra's Blade of Extinction",
+   "slot": "weapon",
+   "grade": "Unique",
+   "il": 102,
+   "equip_level": 45,
+   "class_lock": [
+    "Gladiator"
+   ],
+   "max_enchant": 15,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 604.0,
+     "min": 446.0,
+     "slope": 11.6
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 100.0
+    },
+    {
+     "id": "Critical",
+     "v": 150.0
+    },
+    {
+     "id": "Block",
+     "v": 150.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "STR",
+     "v": 32.0,
+     "min": 22.0
+    },
+    {
+     "id": "AGI",
+     "v": 32.0,
+     "min": 22.0
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 51.0,
+     "min": 38.0
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 98.0,
+     "min": 79.0
+    },
+    {
+     "id": "Critical",
+     "v": 75.0,
+     "min": 59.0
+    },
+    {
+     "id": "HPMax",
+     "v": 418.0,
+     "min": 357.0
+    },
+    {
+     "id": "MPMax",
+     "v": 211.0,
+     "min": 177.0
+    },
+    {
+     "id": "CombatSpeed",
+     "v": 13.0,
+     "min": 11.2
+    },
+    {
+     "id": "AdditionalHitRate",
+     "v": 9.6,
+     "min": 8.3
+    },
+    {
+     "id": "AbnormalAccuracy",
+     "v": 25.6,
+     "min": 22.2
+    },
+    {
+     "id": "CriticalAddDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "FrontAttackDamage",
+     "v": 102.0,
+     "min": 83.0
+    },
+    {
+     "id": "Block",
+     "v": 62.0,
+     "min": 48.0
+    },
+    {
+     "id": "AmplifyAllDamage",
+     "v": 7.3,
+     "min": 6.3
+    },
+    {
+     "id": "AmplifyWeaponDamage",
+     "v": 9.6,
+     "min": 8.3
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 3,
+   "mana_slots": 4,
+   "god_slots": 1,
+   "sources": [
+    "Reward Chest",
+    "Sanctuary"
+   ],
+   "max_exceed": 5,
+   "slope_known": true
+  },
+  {
+   "id": 115040035,
+   "name": "Liberator Guard",
+   "slot": "offhand",
+   "grade": "Epic",
+   "il": 39,
+   "equip_level": 1,
+   "class_lock": [],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 79.0,
+     "slope": 4.4
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 50.0
+    },
+    {
+     "id": "Critical",
+     "v": 50.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "MPMax",
+     "v": 37.0,
+     "min": 37.0
+    },
+    {
+     "id": "BackAttackDamage",
+     "v": 14.0,
+     "min": 14.0
+    },
+    {
+     "id": "Block",
+     "v": 16.0,
+     "min": 16.0
+    }
+   ],
+   "sub_random": false,
+   "sub_count": 0,
+   "mana_slots": 3,
+   "god_slots": 1,
+   "sources": [
+    "Quest"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 210140035,
+   "name": "Liberator Breastplate",
+   "slot": "torso",
+   "grade": "Epic",
+   "il": 38,
+   "equip_level": 1,
+   "class_lock": [],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "ArmorDefense",
+     "v": 277.0,
+     "slope": 10.9
+    },
+    {
+     "id": "HPMax",
+     "v": 152.0,
+     "slope": 9.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "ArmorDefense",
+     "v": 50.0,
+     "min": 50.0
+    },
+    {
+     "id": "MPMax",
+     "v": 31.0,
+     "min": 31.0
+    },
+    {
+     "id": "MPRegen",
+     "v": 10.0,
+     "min": 10.0
+    }
+   ],
+   "sub_random": false,
+   "sub_count": 0,
+   "mana_slots": 3,
+   "god_slots": 0,
+   "sources": [
+    "Quest"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 210130040,
+   "name": "Splendent Wise Dragon Lord Breastplate",
+   "slot": "torso",
+   "grade": "Unique",
+   "il": 102,
+   "equip_level": 45,
+   "class_lock": [],
+   "max_enchant": 15,
+   "main": [
+    {
+     "id": "ArmorDefense",
+     "v": 756.0,
+     "slope": 29.6667
+    },
+    {
+     "id": "HPMax",
+     "v": 408.0,
+     "slope": 24.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "DEX",
+     "v": 21.0,
+     "min": 12.0
+    },
+    {
+     "id": "CON",
+     "v": 29.0,
+     "min": 19.0
+    },
+    {
+     "id": "WIS",
+     "v": 17.0,
+     "min": 9.0
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 33.0,
+     "min": 23.0
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 326.0,
+     "min": 277.0
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 61.0,
+     "min": 47.0
+    },
+    {
+     "id": "ArmorEvasion",
+     "v": 38.0,
+     "min": 27.0
+    },
+    {
+     "id": "Critical",
+     "v": 47.0,
+     "min": 35.0
+    },
+    {
+     "id": "CriticalResist",
+     "v": 63.0,
+     "min": 49.0
+    },
+    {
+     "id": "HPMax",
+     "v": 253.0,
+     "min": 214.0
+    },
+    {
+     "id": "MPMax",
+     "v": 129.0,
+     "min": 106.0
+    },
+    {
+     "id": "DefenseRatio",
+     "v": 3.9,
+     "min": 3.3
+    },
+    {
+     "id": "AbnormalResistance",
+     "v": 8.3,
+     "min": 7.1
+    },
+    {
+     "id": "MPRegen",
+     "v": 36.0,
+     "min": 25.0
+    },
+    {
+     "id": "HPRegen",
+     "v": 63.0,
+     "min": 49.0
+    },
+    {
+     "id": "CriticalDamageDefense",
+     "v": 335.0,
+     "min": 285.0
+    },
+    {
+     "id": "BackAttackDefense",
+     "v": 335.0,
+     "min": 285.0
+    },
+    {
+     "id": "FrontAttackDefense",
+     "v": 335.0,
+     "min": 285.0
+    },
+    {
+     "id": "Block",
+     "v": 39.0,
+     "min": 28.0
+    },
+    {
+     "id": "AmplifyAllDamage",
+     "v": 6.6,
+     "min": 5.7
+    },
+    {
+     "id": "Restoration",
+     "v": 2.9,
+     "min": 2.5
+    },
+    {
+     "id": "Perfect",
+     "v": 5.8,
+     "min": 5.0
+    },
+    {
+     "id": "DecreaseWeaponDamage",
+     "v": 9.6,
+     "min": 8.3
+    },
+    {
+     "id": "HardHitResist",
+     "v": 3.9,
+     "min": 3.3
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 5,
+   "mana_slots": 4,
+   "god_slots": 0,
+   "sources": [
+    "Crafting"
+   ],
+   "max_exceed": 5,
+   "slope_known": true
+  },
+  {
+   "id": 215250001,
+   "name": "Noble Belt",
+   "slot": "belt",
+   "grade": "Rare",
+   "il": 13,
+   "equip_level": 1,
+   "class_lock": [],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "HPMax",
+     "v": 100.0,
+     "slope": 50.0
+    },
+    {
+     "id": "HpPotionRate",
+     "v": 10.0
+    }
+   ],
+   "subs": [],
+   "sub_random": false,
+   "sub_count": 0,
+   "mana_slots": 0,
+   "god_slots": 0,
+   "sources": [
+    "Quest"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 215230001,
+   "name": "Noble Belt",
+   "slot": "belt",
+   "grade": "Unique",
+   "il": 65,
+   "equip_level": 1,
+   "class_lock": [],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "ArmorDefense",
+     "v": 500.0,
+     "slope": 30.0
+    },
+    {
+     "id": "HPMax",
+     "v": 1100.0,
+     "slope": 50.0
+    },
+    {
+     "id": "HpPotionRate",
+     "v": 30.0
+    },
+    {
+     "id": "Restoration",
+     "v": 5.0
+    }
+   ],
+   "subs": [],
+   "sub_random": false,
+   "sub_count": 0,
+   "mana_slots": 0,
+   "god_slots": 0,
+   "sources": [
+    "Substance Morph"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 310140024,
+   "name": "Silent Necklace",
+   "slot": "necklace",
+   "grade": "Epic",
+   "il": 38,
+   "equip_level": 35,
+   "class_lock": [],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 58.0,
+     "slope": 2.1
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 138.0,
+     "slope": 5.4
+    }
+   ],
+   "subs": [
+    {
+     "id": "STR",
+     "v": 14.0,
+     "min": 6.0
+    },
+    {
+     "id": "INT",
+     "v": 17.0,
+     "min": 9.0
+    },
+    {
+     "id": "AGI",
+     "v": 14.0,
+     "min": 6.0
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 25.0,
+     "min": 16.0
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 224.0,
+     "min": 189.0
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 44.0,
+     "min": 32.0
+    },
+    {
+     "id": "ArmorEvasion",
+     "v": 29.0,
+     "min": 19.0
+    },
+    {
+     "id": "Critical",
+     "v": 35.0,
+     "min": 24.0
+    },
+    {
+     "id": "CriticalResist",
+     "v": 46.0,
+     "min": 34.0
+    },
+    {
+     "id": "HPMax",
+     "v": 175.0,
+     "min": 146.0
+    },
+    {
+     "id": "MPMax",
+     "v": 90.0,
+     "min": 72.0
+    },
+    {
+     "id": "CombatSpeed",
+     "v": 2.6,
+     "min": 2.2
+    },
+    {
+     "id": "MPRegen",
+     "v": 27.0,
+     "min": 17.0
+    },
+    {
+     "id": "HPRegen",
+     "v": 46.0,
+     "min": 34.0
+    },
+    {
+     "id": "FPMax",
+     "v": 209.0,
+     "min": 182.0
+    },
+    {
+     "id": "Block",
+     "v": 29.0,
+     "min": 19.0
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 3,
+   "mana_slots": 3,
+   "god_slots": 0,
+   "sources": [
+    "Reward Chest",
+    "Expedition",
+    "Quest"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 310130040,
+   "name": "Splendent Wise Dragon Lord Necklace",
+   "slot": "necklace",
+   "grade": "Unique",
+   "il": 102,
+   "equip_level": 45,
+   "class_lock": [],
+   "max_enchant": 15,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 158.0,
+     "slope": 5.7333
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 378.0,
+     "slope": 14.5333
+    }
+   ],
+   "subs": [
+    {
+     "id": "STR",
+     "v": 20.0,
+     "min": 11.0
+    },
+    {
+     "id": "INT",
+     "v": 24.0,
+     "min": 15.0
+    },
+    {
+     "id": "AGI",
+     "v": 20.0,
+     "min": 11.0
+    },
+    {
+     "id": "WeaponFixingDamage",
+     "v": 38.0,
+     "min": 27.0
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 378.0,
+     "min": 323.0
+    },
+    {
+     "id": "WeaponAccuracy",
+     "v": 70.0,
+     "min": 55.0
+    },
+    {
+     "id": "ArmorEvasion",
+     "v": 44.0,
+     "min": 32.0
+    },
+    {
+     "id": "Critical",
+     "v": 54.0,
+     "min": 41.0
+    },
+    {
+     "id": "CriticalResist",
+     "v": 74.0,
+     "min": 58.0
+    },
+    {
+     "id": "HPMax",
+     "v": 293.0,
+     "min": 249.0
+    },
+    {
+     "id": "MPMax",
+     "v": 150.0,
+     "min": 124.0
+    },
+    {
+     "id": "CombatSpeed",
+     "v": 4.4,
+     "min": 3.7
+    },
+    {
+     "id": "MPRegen",
+     "v": 40.0,
+     "min": 29.0
+    },
+    {
+     "id": "HPRegen",
+     "v": 74.0,
+     "min": 58.0
+    },
+    {
+     "id": "FPMax",
+     "v": 357.0,
+     "min": 311.0
+    },
+    {
+     "id": "Block",
+     "v": 45.0,
+     "min": 33.0
+    }
+   ],
+   "sub_random": true,
+   "sub_count": 5,
+   "mana_slots": 4,
+   "god_slots": 0,
+   "sources": [
+    "Crafting"
+   ],
+   "max_exceed": 5,
+   "slope_known": true
+  },
+  {
+   "id": 311050001,
+   "name": "Revelation Amulet",
+   "slot": "amulet",
+   "grade": "Rare",
+   "il": 13,
+   "equip_level": 1,
+   "class_lock": [],
+   "max_enchant": 10,
+   "main": [
+    {
+     "id": "DefensePierce",
+     "v": 100.0,
+     "slope": 30.0
+    },
+    {
+     "id": "AmplifyWeaponDamage",
+     "v": 5.0
+    }
+   ],
+   "subs": [],
+   "sub_random": false,
+   "sub_count": 0,
+   "mana_slots": 0,
+   "god_slots": 0,
+   "sources": [
+    "Quest"
+   ],
+   "slope_known": true
+  },
+  {
+   "id": 310460006,
+   "name": "Old Mercenary Commander Bracelet",
+   "slot": "bracelet",
+   "grade": "Common",
+   "il": 14,
+   "equip_level": 1,
+   "class_lock": [],
+   "max_enchant": 5,
+   "main": [
+    {
+     "id": "WeaponFixingDamage",
+     "v": 17.0,
+     "slope": 1.0
+    },
+    {
+     "id": "ArmorDefense",
+     "v": 41.0,
+     "slope": 2.0
+    }
+   ],
+   "subs": [
+    {
+     "id": "HPMax",
+     "v": 23.0,
+     "min": 23.0
+    }
+   ],
+   "sub_random": false,
+   "sub_count": 0,
+   "mana_slots": 1,
+   "god_slots": 0,
+   "sources": [
+    "Crafting",
+    "Quest"
+   ],
+   "slope_known": true
+  }
+ ]
+}

@@ -1,17 +1,18 @@
 import type { CharacterBuild, Stats } from "@/lib/types";
 
+/** Mirrors aion2c.models.BASELINE_L45_STATS (typical level-45 profile; crit 15% is an estimate). */
 export const DEFAULT_STATS: Stats = {
   attack: 1000,
-  attack_increase_pct: 0,
+  attack_increase_pct: 1.6,
   weapon_dmg_pct: 0,
   dmg_boost_pct: 0,
   pve_dmg_pct: 0,
   boss_dmg_pct: 0,
-  crit_chance_pct: 3,
+  crit_chance_pct: 15,
   crit_dmg_pct: 50,
   smite_pct: 0,
-  combat_speed_pct: 0,
-  cdr_pct: 0,
+  combat_speed_pct: 3.8,
+  cdr_pct: 0.1,
   max_mp: 2000,
   mp_regen_per_s: 20,
   target_defense: 0,
@@ -87,6 +88,7 @@ export function buildFromForm(form: ManualForm, levelCap: number): { build: Char
       skill_points: null,
       stigma_points: null,
       class_key: form.classKey,
+      bonus_ranks: {},
     },
   };
 }

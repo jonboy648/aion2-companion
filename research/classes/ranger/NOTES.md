@@ -62,3 +62,7 @@ All files were run through the app's own `aion2c.data.build_gamedata.assemble(..
 | https://www.inven.co.kr/board/aion2/6450/19498 (+ 13828 fetched, not used) | KR cancel / macro notes, opener | 2026-09-06 |
 | https://aion2.plaync.com/en-us/api/gameinfo/classes?lang=en-US&region=eu | class id 4 = Ranger | live |
 | research/tmp/classes.json, research/armory_samples | prior Inven summary, armory skill-id proof | project files |
+
+## 2026-10-03 update (data fixes)
+- Bleed and Crimson Flames tick ratio were null, so the sim dealt zero DoT damage. Now DERIVED estimates (45.0% and 85.5% ATK; client flat tick is a constant fraction of the hit flat at every rank). Low confidence, rank-independent. Boss DPS at default stats rose roughly 20% and Griffon Arrow became the top stigma pick.
+- Still missing: Deadshot charge times, Bow of Blessing spec "Attack from Critical Hit", Explosive Arrow stigma ATK ratio, Concentrated Fire / Rooting Eye / Melee Fire not wired (engine cannot gate a proc on a target status).

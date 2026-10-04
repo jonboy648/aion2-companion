@@ -64,7 +64,8 @@ optimizer plus simulator run on it (4 playstyles and the 4 community rotations).
 - Lunge Stance: Metaroad lists ratio 40.8% + flat 248, but the text is a pure buff and the client has no damage token. Kept in `coefficients` with a note, unconfirmed.
 - Not modelled by the engine, so not in the data as behaviour: Stamina costs/restores; Block/Parry events (Focused Block, Experienced Counterstrike are approximated by a rule); Knockdown gating of
   Overhead Slam / Aerial Snare (needs an OR of "Knockdown or Rage Burst window", `requires` is AND; bosses are exempt per guides, the client text says 7% chance vs Incapacitated Immunity: unresolved conflict);
-  spec effects (cooldown cuts on crit, -1 s all cooldowns, Overhead Slam cancel); Menace stack counting; Lunge Stance Combat Speed.
+  Overhead Slam cancel. (Status 2026-10-03, tests/test_proc_gladiator.py: Menace stacking = hits/5 per cast, Rending Blow 50 MP on crit, Lunge Stance spec 20 cooldown cut and the Rage Burst gate on Overhead Slam ARE modelled and tested; only the 7% base chance vs immune bosses is not.)
+- ENGINE GAP (not editable here): `damage.hit_damage_ex` counts one hit per cast, but client text is per hit (Rending Blow 2, Overhead Slam 2, Mocking Blade 3, Rage Burst 5 hits). These skills are undercounted by their hit count; fix = multiply raw by max(1, skill.hits).
 - Region split: aion2hub lists 17 skills as KR/TW-only (not verified on Global): Rupture Strike, Wrathful Strike, Frenzied Wave, Blade Dance, Intimidating Roar, Reckless Strike, Ankle Smash, Rush, Doom Advent,
   Wrath Burst, Madness Blow, Forced Fall, Smashing Blow, Upward Strike, Destructive Rush, Unsheathing Rush, Equip Gladiator Weapon (19 entries carry `kr_tw_only_per_aion2hub: true` because of the duplicate names).
   `build_gamedata.KR_ONLY_IDS` is the Sorcerer id set, so the builder currently tags every Gladiator skill global+korea; it needs the Gladiator ids added (app change, not done here).

@@ -85,7 +85,8 @@ def test_level_14_vs_45(engine, build, results):
     b14 = replace(build, level=14)
     r14 = engine.optimize(b14, sc)
     best45, best14 = results["boss_180"].options[0], r14.options[0]
-    assert best14.priority != best45.priority
+    # level 45 adds no better skill than level 14 once Wish/Frost Burst/Blaze are up, so compare outcomes, not lists
+    assert best14.result.dps < best45.result.dps
     assert any(e.skill_key == "hellfire" for e in best14.priority.entries)
     assert "grace_of_enhancement" not in best14.result.status_uptime
     assert "grace_of_enhancement" in best45.result.status_uptime

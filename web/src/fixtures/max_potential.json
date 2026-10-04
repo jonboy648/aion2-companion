@@ -1,0 +1,347 @@
+{
+ "class_key": "sorcerer",
+ "playstyle": "boss",
+ "gear": [
+  {
+   "slot": "weapon",
+   "id": 110530012,
+   "name": "Fallen Ancient God Spellbook",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_WP_MB_0078_T05.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 28.80829361507422
+  },
+  {
+   "slot": "offhand",
+   "id": 115030012,
+   "name": "Fallen Ancient God Guard",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Weapon_Guarder_R_011.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 18.661183201571816
+  },
+  {
+   "slot": "helmet",
+   "id": 210330012,
+   "name": "Fallen Ancient God Helm",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Helmet.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 1.0427463619535615
+  },
+  {
+   "slot": "shoulder",
+   "id": 210430012,
+   "name": "Fallen Ancient God Pauldrons",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Shoulder.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 0.9057836412059039
+  },
+  {
+   "slot": "torso",
+   "id": 210130012,
+   "name": "Fallen Ancient God Breastplate",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Torso.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 4.885201442518827
+  },
+  {
+   "slot": "legs",
+   "id": 210230012,
+   "name": "Fallen Ancient God Greaves",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Pants.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 1.0909266039093701
+  },
+  {
+   "slot": "gloves",
+   "id": 210530012,
+   "name": "Fallen Ancient God Gloves",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Gloves.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 0.7728203724166827
+  },
+  {
+   "slot": "boots",
+   "id": 210630012,
+   "name": "Fallen Ancient God Boots",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Boots.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 0.9538481421092371
+  },
+  {
+   "slot": "cape",
+   "id": 210730012,
+   "name": "Fallen Ancient God Cloak",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Cape.png",
+   "source": "Looted from monsters",
+   "reachable": true,
+   "gain_pct": 0.9057836412059039
+  },
+  {
+   "slot": "belt",
+   "id": 215230001,
+   "name": "Noble Belt",
+   "grade": "Unique",
+   "il": 65,
+   "enchant": 10,
+   "max_enchant": 10,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Belt_C_022.png",
+   "source": "Substance Morph",
+   "reachable": true,
+   "gain_pct": 0.0
+  },
+  {
+   "slot": "necklace",
+   "id": 310130012,
+   "name": "Fallen Ancient God Ruby Necklace",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_NL_0009.png",
+   "source": null,
+   "reachable": true,
+   "gain_pct": 7.1232116289817515
+  },
+  {
+   "slot": "earring1",
+   "id": 310230012,
+   "name": "Fallen Ancient God Diamond Earrings",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
+   "source": null,
+   "reachable": true,
+   "gain_pct": 6.369421229665617
+  },
+  {
+   "slot": "earring2",
+   "id": 310230012,
+   "name": "Fallen Ancient God Diamond Earrings",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
+   "source": null,
+   "reachable": true,
+   "gain_pct": 6.369421229665617
+  },
+  {
+   "slot": "ring1",
+   "id": 310330012,
+   "name": "Fallen Ancient God Sapphire Ring",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
+   "source": null,
+   "reachable": true,
+   "gain_pct": 5.49544882387929
+  },
+  {
+   "slot": "ring2",
+   "id": 310330012,
+   "name": "Fallen Ancient God Sapphire Ring",
+   "grade": "Unique",
+   "il": 46,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
+   "source": null,
+   "reachable": true,
+   "gain_pct": 5.49544882387929
+  },
+  {
+   "slot": "bracelet1",
+   "id": 310430046,
+   "name": "Ascension Bracelet",
+   "grade": "Unique",
+   "il": 51,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
+   "source": "Ascension",
+   "reachable": true,
+   "gain_pct": 4.551311743593844
+  },
+  {
+   "slot": "bracelet2",
+   "id": 310430046,
+   "name": "Ascension Bracelet",
+   "grade": "Unique",
+   "il": 51,
+   "enchant": 15,
+   "max_enchant": 15,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
+   "source": "Ascension",
+   "reachable": true,
+   "gain_pct": 4.551311743593844
+  },
+  {
+   "slot": "amulet",
+   "id": 311030001,
+   "name": "Revelation Amulet",
+   "grade": "Unique",
+   "il": 65,
+   "enchant": 10,
+   "max_enchant": 10,
+   "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Item_Craft_Conversion_Crystal_L_lv5_01.png",
+   "source": "Substance Morph",
+   "reachable": true,
+   "gain_pct": 7.236755560171959
+  }
+ ],
+ "build": {
+  "stigmas": [
+   {
+    "key": "assault-bombardment",
+    "name": "Assault Bombardment"
+   },
+   {
+    "key": "cold-storm",
+    "name": "Cold Storm"
+   },
+   {
+    "key": "element-enhancement",
+    "name": "Element Enhancement"
+   },
+   {
+    "key": "fire-wall",
+    "name": "Fire Wall"
+   }
+  ],
+  "specialties": [
+   {
+    "skill": "Bittercold Wind",
+    "text": "+1s [Bittercold Wind] summon duration",
+    "dps_gain_pct": 14.294443217410425
+   }
+  ],
+  "daevanion_nodes": 380,
+  "ranks": [
+   {
+    "key": "flame-arrow",
+    "name": "Flame Arrow",
+    "rank": 10
+   },
+   {
+    "key": "flame-scattershot",
+    "name": "Flame Scattershot",
+    "rank": 10
+   },
+   {
+    "key": "firestorm",
+    "name": "Firestorm",
+    "rank": 9
+   },
+   {
+    "key": "blaze",
+    "name": "Blaze",
+    "rank": 9
+   },
+   {
+    "key": "winters-shackles",
+    "name": "Winter's Shackles",
+    "rank": 9
+   },
+   {
+    "key": "wish-of-concentration",
+    "name": "Wish of Concentration",
+    "rank": 9
+   },
+   {
+    "key": "robe-of-flame",
+    "name": "Robe of Flame",
+    "rank": 8
+   },
+   {
+    "key": "bittercold-wind",
+    "name": "Bittercold Wind",
+    "rank": 7
+   },
+   {
+    "key": "frost",
+    "name": "Frost",
+    "rank": 7
+   },
+   {
+    "key": "element-enhancement",
+    "name": "Element Enhancement",
+    "rank": 7
+   },
+   {
+    "key": "fire-mark",
+    "name": "Fire Mark",
+    "rank": 6
+   },
+   {
+    "key": "robe-of-earth",
+    "name": "Robe of Earth",
+    "rank": 6
+   }
+  ]
+ },
+ "dps": 32989.59749180822,
+ "dps_without_gear": 4902.903637468899,
+ "gear_gain_pct": 232.60996265684497,
+ "current_dps": 8240.683239414895,
+ "gain_vs_current_pct": 170.77471484551435,
+ "notes": [
+  "upper bound: best sub-stat lines on every item, all at max enchant (success odds and costs unknown)",
+  "gear limited to item level <= 85",
+  "rating conversions assumed: 100 crit rating = 1%"
+ ],
+ "assumptions": [
+  "Rating conversions are guesses: 100 crit rating = 1% crit chance and 100 crit damage = 1% (the armory only gives raw ratings).",
+  "Random sub-stat lines are not public, so an item you own is scored at the expected value of its pool.",
+  "Only Attack, Defense and HP scale with enchant (a linear fit); Exceed is not modelled.",
+  "Your imported stats are assumed to already include the equipped gear, so upgrades are relative to what you wear now.",
+  "Max potential is an upper bound: best sub-stat lines on every item, max enchant everywhere, every Daevanion point spent. Success odds and material costs are not included."
+ ]
+}

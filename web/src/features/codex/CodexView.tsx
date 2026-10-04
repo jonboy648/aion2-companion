@@ -141,7 +141,7 @@ function SkillCard({ skill, icon, onOpen }: { skill: Skill; icon: string | null 
   return (
     <button
       onClick={onOpen}
-      className="flex h-full w-full items-start gap-3 rounded-lg border border-border-soft bg-card p-3 text-left transition-colors hover:border-gold-lo hover:bg-surface2 focus-visible:border-gold"
+      className="flex h-full w-full items-start gap-3 ornate p-3 text-left transition-colors hover:border-gold-lo hover:bg-surface2 focus-visible:border-gold"
     >
       <SkillIcon url={icon} name={skill.name} size={48} />
       <span className="min-w-0 flex-1">

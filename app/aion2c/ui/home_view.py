@@ -4,7 +4,7 @@ import os
 import urllib.request
 from dataclasses import replace
 
-from PySide6.QtCore import QObject, QRect, QRectF, QRunnable, QSize, Qt, QThreadPool, Signal
+from PySide6.QtCore import QObject, QRect, QRectF, QRunnable, QSize, Qt, QThreadPool, QTimer, Signal
 from PySide6.QtGui import QColor, QPainter, QPainterPath, QPen, QPixmap
 from PySide6.QtWidgets import (
     QComboBox,
@@ -438,7 +438,7 @@ class HomeView(LiveBound, QWidget):
         state.dataChanged.connect(self._on_data)
         self._refresh_hero()
 
-        scroll = QScrollArea()
+        self.scroll = scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setFrameShape(QFrame.Shape.NoFrame)
         scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -921,6 +921,9 @@ class HomeView(LiveBound, QWidget):
         self.full = self.fulls[key]
         self.chosen_build = self.full.build
         self._render(self.full)
+        # The cards render below the fold; without this, View looked like it did nothing.
+        # Deferred so the new cards are laid out before scrolling to them.
+        QTimer.singleShot(0, lambda: self.scroll.verticalScrollBar().setValue(self.detail_host.y()))
 
     # results ------------------------------------------------------------------------------------------
     def _clear(self) -> None:

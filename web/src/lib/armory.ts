@@ -105,3 +105,34 @@ export async function fetchCharacter(characterId: string, serverId: number | str
   }
   return { info, equipment, daevanion };
 }
+
+export interface ArmoryIcon {
+  icon: string | null;
+  name: string;
+  grade: string;
+}
+export interface ArmoryExtras {
+  /** equipped slot name ("MainHand") -> official icon URL (hotlinked from NCSoft's CDN) */
+  gearIcons: Record<string, string>;
+  pet: ArmoryIcon | null;
+  wing: ArmoryIcon | null;
+  wingSkin: ArmoryIcon | null;
+}
+
+const asIcon = (o: unknown, fallbackGrade = ""): ArmoryIcon | null => {
+  if (!o || typeof o !== "object") return null;
+  const r = o as Record<string, unknown>;
+  if (typeof r.name !== "string" || !r.name) return null;
+  return { icon: typeof r.icon === "string" ? r.icon : null, name: r.name, grade: typeof r.grade === "string" ? r.grade : fallbackGrade };
+};
+
+/** What the engine summary drops: per-slot gear icon URLs and the pet / wings, read straight from the raw armory payload. */
+export function armoryExtras(raw: ArmoryRaw): ArmoryExtras {
+  const eq = (raw.equipment ?? {}) as { equipment?: { equipmentList?: Record<string, unknown>[] }; petwing?: Record<string, unknown> };
+  const gearIcons: Record<string, string> = {};
+  for (const e of eq.equipment?.equipmentList ?? []) {
+    if (typeof e.slotPosName === "string" && typeof e.icon === "string") gearIcons[e.slotPosName] = e.icon;
+  }
+  const pw = eq.petwing ?? {};
+  return { gearIcons, pet: asIcon(pw.pet, "Epic"), wing: asIcon(pw.wing), wingSkin: asIcon(pw.wingSkin) };
+}

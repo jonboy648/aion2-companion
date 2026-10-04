@@ -3,7 +3,7 @@
  * Calls are strictly serial (Python is single-threaded); the main thread matches replies by request id.
  * Wire format: args in as structured clone, result out as a JSON string (webapi already returns JSON-safe data).
  */
-import { PROGRESS_METHODS, PY_NAME, classKeyFor } from "./protocol";
+import { GEAR_METHODS, PROGRESS_METHODS, PY_NAME, classKeyFor } from "./protocol";
 import type { FromWorker, InitConfig, ToWorker } from "./protocol";
 
 interface PyProxy {
@@ -36,6 +36,9 @@ def _register(key, gd_text, icons_text):
     if icons_text:
         _w.register_icons(key, json.loads(icons_text))
 
+def _register_items(text):
+    _w.register_items(json.loads(text))
+
 def _class_of(raw_json, base_json):
     raw = json.loads(raw_json)
     base = json.loads(base_json) if base_json else None
@@ -52,6 +55,7 @@ def _call(name, args_json, has_progress, progress):
 let booted: Promise<PyodideLike> | null = null;
 let manifestClasses: string[] = [];
 const loaded = new Set<string>();
+let itemsLoaded: Promise<void> | null = null;
 let say: (m: string) => void = () => {};
 
 async function fetchOk(url: string): Promise<Response> {
@@ -96,6 +100,19 @@ async function ensureClass(py: PyodideLike, cfg: InitConfig, key: string | null)
   loaded.add(key);
 }
 
+/** items.json is only fetched when a gear function is first called; a failed fetch is retried next call. */
+function ensureItems(py: PyodideLike, cfg: InitConfig): Promise<void> {
+  itemsLoaded ??= (async () => {
+    say("Loading the item database...");
+    const text = await fetchOk(`${cfg.base}engine/items.json`).then((r) => r.text());
+    py.globals.get("_register_items")(text);
+  })();
+  itemsLoaded.catch(() => {
+    itemsLoaded = null;
+  });
+  return itemsLoaded;
+}
+
 async function handle(msg: ToWorker): Promise<string> {
   const { id, method, args, config } = msg;
   say = (m) => ctx.postMessage({ id, type: "progress", message: m });
@@ -108,6 +125,7 @@ async function handle(msg: ToWorker): Promise<string> {
     key = py.globals.get("_class_of")(JSON.stringify(args[0]), JSON.stringify(args[1] ?? null)) as string;
   }
   await ensureClass(py, config, key);
+  if (GEAR_METHODS.has(method)) await ensureItems(py, config);
   // roadmap(classKey, region, build?) and friends all take plain JSON args
   const hasProgress = PROGRESS_METHODS.has(method);
   const progress = (m: string) => ctx.postMessage({ id, type: "progress", message: String(m) });

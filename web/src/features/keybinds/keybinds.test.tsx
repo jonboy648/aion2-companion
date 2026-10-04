@@ -22,7 +22,9 @@ describe("macro efficiency", () => {
   it("matches macro DPS to the ideal of its scenario", () => {
     const plan = keybindsFx.plan as unknown as KeybindPlan;
     const e = macroEfficiency(plan, plan.macros[0])!;
-    expect(e.pct).toBeCloseTo((2442.6456 / 3429.221) * 100, 1);
+    const scen = plan.macros[0].name === "Boss loop" ? "boss_180" : "aoe_pack";
+    expect(e.pct).toBeCloseTo((plan.macro_dps[plan.macros[0].name] / plan.ideal_dps[scen]) * 100, 1);
+    expect(plan.hybrid_dps[plan.macros[0].name]).toBeGreaterThanOrEqual(plan.macro_dps[plan.macros[0].name]);
   });
   it("flags the per-slot layout hints", () => {
     expect(isSlotHint("slot 1: not on your bar, assign x there")).toBe(true);
@@ -42,5 +44,8 @@ describe("KeybindsPage (mock engine)", () => {
     expect(await screen.findByRole("region", { name: "Boss loop" }, { timeout: 4000 })).toBeInTheDocument();
     expect(await screen.findByRole("button", { name: /Download \.md/ })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /^Key 1:/ })).toBeInTheDocument();
+    expect((await screen.findAllByTestId("macro-advice")).length).toBeGreaterThan(0);
+    expect(screen.getAllByTestId("hybrid-line").length).toBeGreaterThan(0);
+    expect(screen.getByRole("region", { name: "Core priorities" })).toBeInTheDocument();
   });
 });

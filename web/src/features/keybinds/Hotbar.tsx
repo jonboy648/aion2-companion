@@ -132,6 +132,7 @@ export function SlotEditor({
   level,
   onPin,
   onUnpin,
+  note,
 }: {
   gd: GameData | null;
   icons: IconUrls;
@@ -142,6 +143,8 @@ export function SlotEditor({
   level: number;
   onPin: (skillKey: string) => void;
   onUnpin: () => void;
+  /** engine slot_notes entry: why this stack is ordered this way */
+  note?: string;
 }) {
   const [q, setQ] = useState("");
   const pickable = useMemo(() => {
@@ -155,7 +158,7 @@ export function SlotEditor({
   const pinnedElsewhere = (key: string) => Object.entries(pins).find(([l, s]) => s === key && l !== label)?.[0];
 
   return (
-    <div className="rounded-lg border border-border-soft bg-surface p-4">
+    <div className="ornate p-4">
       <div className="flex flex-wrap items-center gap-2">
         <span className="grid size-8 place-items-center rounded-md border border-gold-lo bg-gold/10 text-sm font-semibold text-gold">{label}</span>
         <h3 className="text-[15px] font-semibold">Key {label}</h3>
@@ -167,20 +170,29 @@ export function SlotEditor({
         )}
       </div>
 
-      <ol className="mt-3 space-y-1.5">
+      {/* Drawn like the in-game column: the BOTTOM cell is priority 0 and fires first. */}
+      <ol className="mt-3 flex flex-col-reverse gap-1.5">
         {stack.length === 0 && <li className="text-sm text-faint">Nothing planned here. Pin a skill below to keep it on this key.</li>}
         {stack.map((s, i) => (
           <li key={s} className="flex items-center gap-2.5 text-sm">
-            <span className="w-4 text-right text-xs text-faint">{i + 1}</span>
+            <span className="w-4 text-right text-xs text-faint">{i}</span>
             <SkillIcon url={icons[s]} name={nameOf(gd, s)} size={32} />
             <span className="font-medium">{nameOf(gd, s)}</span>
-            <span className="text-xs text-faint">{i === 0 ? "fires first when usable" : i === stack.length - 1 && stack.length > 1 ? "fallback" : ""}</span>
+            <span className="text-xs text-faint">
+              {i === 0 ? "bottom cell: fires first when usable" : i === stack.length - 1 && stack.length > 1 ? "top cell: last resort" : ""}
+            </span>
           </li>
         ))}
       </ol>
 
+      {note && (
+        <p className="mt-3 text-xs text-dim" data-testid="slot-note">
+          {note}
+        </p>
+      )}
+
       <div className="mt-4 border-t border-border-soft pt-3">
-        <label className="flex items-center gap-2 rounded-md border border-border bg-bg px-2.5 text-sm focus-within:border-gold">
+        <label className="flex items-center gap-2 game-input px-2.5 text-sm focus-within:border-gold">
           <Search aria-hidden className="size-4 text-faint" />
           <input
             value={q}

@@ -1,39 +1,19 @@
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { IconFrame, type Rarity } from "@/components/game/IconFrame";
 
 interface Props {
   name: string;
   url?: string | null;
   size?: number;
   className?: string;
+  rarity?: Rarity;
+  /** kept for older call sites; the rarity frame replaces the ring */
   ring?: string;
 }
 
 /**
- * Official skill icon, hotlinked from NCSoft's CDN (never hosted by us). Falls back to the skill's
- * initials in a gold-ringed tile when the URL is missing or fails to load.
+ * Official skill icon, hotlinked from NCSoft's CDN (never hosted by us), in an inventory-style rarity frame.
+ * Falls back to the skill's initials when the URL is missing or fails to load.
  */
-export function SkillIcon({ name, url, size = 40, className, ring }: Props) {
-  const [failed, setFailed] = useState(false);
-  const initials = name
-    .split(/[\s-]+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase())
-    .join("");
-  return (
-    <span
-      className={cn("inline-flex shrink-0 items-center justify-center overflow-hidden rounded-md border bg-surface3", className)}
-      style={{ width: size, height: size, borderColor: ring ?? "var(--border)" }}
-      title={name}
-    >
-      {url && !failed ? (
-        <img src={url} alt={name} width={size} height={size} loading="eager" decoding="async" onError={() => setFailed(true)} className="size-full object-cover" />
-      ) : (
-        <span aria-label={name} className="text-[11px] font-semibold text-gold-lo" style={{ fontSize: Math.max(10, size / 3.2) }}>
-          {initials}
-        </span>
-      )}
-    </span>
-  );
+export function SkillIcon({ name, url, size = 40, className, rarity, ring }: Props) {
+  return <IconFrame name={name} url={url} size={size} className={className} rarity={rarity ?? (ring ? "unique" : "epic")} eager />;
 }

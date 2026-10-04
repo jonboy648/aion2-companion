@@ -8,12 +8,12 @@ import { cn } from "@/lib/utils";
  */
 export function AuroraBackground({ className, children, ...props }: React.ComponentProps<"section">) {
   return (
-    <section className={cn("relative isolate overflow-hidden rounded-xl border border-border-soft bg-surface", className)} {...props}>
+    <section className={cn("ornate ornate-lg relative isolate overflow-hidden", className)} {...props}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="aurora-blob motion-safe:animate-[aurora-drift_18s_ease-in-out_infinite]" style={{ left: "-10%", top: "-40%", background: "rgba(224,180,88,0.20)" }} />
-        <div className="aurora-blob motion-safe:animate-[aurora-drift_24s_ease-in-out_infinite_reverse]" style={{ right: "-8%", top: "-20%", background: "rgba(76,195,232,0.14)" }} />
-        <div className="aurora-blob motion-safe:animate-[aurora-drift_30s_ease-in-out_infinite]" style={{ left: "35%", bottom: "-60%", background: "rgba(74,90,200,0.25)" }} />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--surface)_100%)]" />
+        <div className="aurora-blob motion-safe:animate-[aurora-drift_18s_ease-in-out_infinite]" style={{ left: "-10%", top: "-40%", background: "rgb(var(--ether-2) / 0.22)" }} />
+        <div className="aurora-blob motion-safe:animate-[aurora-drift_24s_ease-in-out_infinite_reverse]" style={{ right: "-8%", top: "-20%", background: "rgb(var(--ether) / 0.22)" }} />
+        <div className="aurora-blob motion-safe:animate-[aurora-drift_30s_ease-in-out_infinite]" style={{ left: "35%", bottom: "-60%", background: "rgb(var(--ether) / 0.16)" }} />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--surface)_95%)]" />
       </div>
       {children}
     </section>

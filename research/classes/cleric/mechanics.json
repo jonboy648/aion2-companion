@@ -18,7 +18,8 @@
   "discharge": "none"
  },
  "kind_overrides": {
-  "earths-blessing": "system"
+  "earths-blessing": "system",
+  "empyrean-lords-grace": "proc"
  },
  "icon_prefix_aliases": {
   "bolt-level-": "bolt.png",
@@ -513,9 +514,9 @@
     "source": "dump: 10 s at rank 1 rising +0.5 s per rank (rank 16 = 17.5 s, rank 20 = 20 s, rank 25 = 22.5 s); rank 16 used as the typical target (Kaeria/Inven raise it to 16-20). Per-rank list in duration_by_rank"
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "description \"Increases Attack by 20% for 10s\" (token 20, constant across ranks); treated as a damage multiplier, real stat bucket unknown. Spec rank 5: +20% PvE Damage Boost (additive bucket); spec 10: x1.5 Empyrean Lord's Grace effect; spec 15: x1.5 Earth's Grace effect; spec 20: +15% additional Attack, none modeled"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "the +20% Attack is a stat_mod (attack_increase_pct), no extra multiplier"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -587,7 +588,17 @@
      "source": "Metaroad datamine page 2026-10-03"
     }
    ],
-   "note": "Cooldown 60 s in the dump; KR/TW patch history says it was 90 s until 2026-09-04 (gegebase). Pressed by hand on cooldown (Kaeria, Inven)."
+   "note": "Cooldown 60 s in the dump; KR/TW patch history says it was 90 s until 2026-09-04 (gegebase). Pressed by hand on cooldown (Kaeria, Inven).",
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "aion2.app client dump 2026-09-18 (Game client 18.09.2026) token abe:1743000011 value02:divide100 = 20 (description 'Increases Attack by 20% for 10s'); constant across ranks. Bucket (Attack Increase) is the estimate"
+     }
+    }
+   ]
   },
   "light_of_protection": {
    "key": "light_of_protection",
@@ -599,9 +610,9 @@
     "source": "toggle skill (cooldown 5 s, no duration): modeled as an always-on passive while the stigma is equipped, via mp_min_pct 0 and source_skill"
    },
    "dmg_mult": {
-    "value": 1.18,
-    "confidence": "estimated",
-    "source": "PvE Damage Boost and PvE Damage Tolerance +10.5% at rank 1, +0.5% per rank (rank 16 = 18%, rank 20 = 20%); rank 16 used, applied as a damage multiplier. Real stat bucket unknown. Does not stack with the Chanter Undefeated Mantra; the higher level wins, ties go to the Chanter"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "the PvE Damage Boost is a stat_mod (dmg_boost_pct), no extra multiplier"
    },
    "elements": [],
    "mp_min_pct": 0.0,
@@ -648,7 +659,17 @@
     "source": "aion2.app client dump 2026-09-18 (Game client 18.09.2026) token abe:1741000111 value02; index = rank-1"
    },
    "stacking_group": "chanter_mantra",
-   "note": "Also affects nearby party members. With a Chanter in the party the Chanter buff replaces it (Metaroad description, Kaeria)."
+   "note": "Also affects nearby party members. With a Chanter in the party the Chanter buff replaces it (Metaroad description, Kaeria).",
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 18.0,
+      "confidence": "estimated",
+      "source": "aion2.app client dump 2026-09-18 (Game client 18.09.2026) token abe:1741000111 value02:divide100: PvE Damage Boost 10.5% at rank 1, +0.5% per rank; rank 16 = 18% used as the typical rank (rank 20 = 20%)"
+     }
+    }
+   ]
   },
   "noble_aura": {
    "key": "noble_aura",
@@ -815,9 +836,313 @@
     "source": "no tick interval known"
    },
    "note": "Root stigma: 75% chance (token 75) on players, 100% on NPC targets. Assault Mark has a 30% chance, duration not shown."
+  },
+  "chain_of_torment_amp": {
+   "key": "chain_of_torment_amp",
+   "name": "Chain of Torment specialty 4 (stronger tolerance reduction)",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "same 10 s as the base debuff (token se:1707000013 effect_value02:time)"
+   },
+   "dmg_mult": {
+    "value": 1.0952,
+    "confidence": "estimated",
+    "source": "text '+10% PvE Damage Tolerance reduction': read as +10 points on the 5% base (15% total). Base is modelled as x1.05, so this extra factor is 1.15/1.05. If the text means 'replaces 5% with 10%' the factor is 1.10/1.05 = 1.048"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick damage"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [],
+   "note": "Chain of Torment specialty option 4 (rank 12)"
+  },
+  "ep_forced_crit": {
+   "key": "ep_forced_crit",
+   "name": "Earth Punishment specialty 1 (Condemnation lands as a Critical Hit)",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (Game client 18.09.2026) token se:1740000012 effect_value02:time = 10 s: same window as the Earth Punishment DoT"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier of its own: the effect is carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick damage"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [],
+   "note": "Window marker only. The forced-crit damage gain is a dmg_mult on Condemnation gated on this status (engine force_crit cannot be conditional); the Condemnation cooldown reset in this window is a reset_skill gated on it."
+  },
+  "ep_double_chance": {
+   "key": "ep_double_chance",
+   "name": "Earth's Blessing: +10% Double Chance",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "same window as Earth's Blessing / Earth Punishment (10 s)"
+   },
+   "dmg_mult": {
+    "value": 1.085,
+    "confidence": "estimated",
+    "source": "+10% Double Chance (Smite/Double = chance to deal double damage). Expected gain +10% x boss resist 0.7 = +7% on a boss, +10% off-boss; midpoint 1.085 used. STATUS_STAT_FIELDS has no smite stat"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick damage"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [],
+   "note": "Earth Punishment specialty rank 10 (caster half only; the party +5% is not counted)"
+  },
+  "ep_attack_def": {
+   "key": "ep_attack_def",
+   "name": "Earth's Blessing: +10% Attack and Defense",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "same window as Earth's Blessing / Earth Punishment (10 s)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier of its own: the effect is carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick damage"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "specialty text '+10% Attack and Defense to caster' (rank 15); Defense is not simulated"
+     }
+    }
+   ],
+   "note": "Earth Punishment specialty rank 15 (caster half only)"
+  },
+  "prayer_pve_boost": {
+   "key": "prayer_pve_boost",
+   "name": "Prayer of Amplification: +20% PvE Damage Boost",
+   "on": "self",
+   "duration_s": {
+    "value": 17.5,
+    "confidence": "estimated",
+    "source": "own duration of Prayer of Amplification (rank 16 value, 10 s at rank 1 +0.5 s per rank)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier of its own: the effect is carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick damage"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "specialty text '+20% PvE Damage Boost and +10% PvP Damage Boost' (rank 5); token abe:1743001012 value02:divide100 = 20"
+     }
+    }
+   ],
+   "note": "Prayer of Amplification specialty rank 5"
+  },
+  "prayer_earths_grace": {
+   "key": "prayer_earths_grace",
+   "name": "Prayer of Amplification: x1.5 Earth's Grace",
+   "on": "self",
+   "duration_s": {
+    "value": 17.5,
+    "confidence": "estimated",
+    "source": "own duration of Prayer of Amplification (rank 16 value)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier of its own: the effect is carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick damage"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 5.25,
+      "confidence": "confirmed",
+      "source": "Earth's Grace gives +10.5% Critical Damage Boost (token abe:1778000011 value02:divide100 = 10.5); x1.5 adds half again = +5.25. The base 10.5% is already in the character's stats"
+     }
+    }
+   ],
+   "note": "Prayer of Amplification specialty rank 15"
+  },
+  "vod_crit_resist": {
+   "key": "vod_crit_resist",
+   "name": "Voice of Doom: -200 Critical Hit Resist",
+   "on": "target",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "confirmed",
+    "source": "aion2.app client dump 2026-09-18 (Game client 18.09.2026) token se:1730000013 effect_value02:time = 20 s (the debuff lasts as long as the DoT)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier of its own: the effect is carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no tick damage"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 13.33,
+      "confidence": "estimated",
+      "source": "-200 target Critical Hit Resist = +200 on the crit gap, converted at 80%/1200 points like Critical Hit rating elsewhere (estimated); token abe:1730003014 value02:noneabs = 200"
+     }
+    }
+   ],
+   "note": "Voice of Doom specialty rank 15. Modelled as a self stat mod although the debuff sits on the target (crit chance gap)"
+  },
+  "noble_aura_fast": {
+   "key": "noble_aura_fast",
+   "name": "Noble Aura: -1s Aura attack cooldown",
+   "on": "self",
+   "duration_s": {
+    "value": 300.0,
+    "confidence": "confirmed",
+    "source": "same 300 s as Noble Aura (token se:1744000011 effect_value02:time)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier of its own: the effect is carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 88.0,
+    "confidence": "estimated",
+    "source": "same 88% ATK ratio per aura attack as noble_aura (Metaroad rank 1)"
+   },
+   "tick_s": {
+    "value": 2.0,
+    "confidence": "confirmed",
+    "source": "a second aura-attack stream on the base 2 s cooldown: base + this stream = one attack per 1 s, i.e. '-1s Aura attack cooldown' (2 s -> 1 s)"
+   },
+   "stat_mods": [],
+   "note": "Noble Aura specialty rank 20: models the halved attack interval as a second tick stream (the simulator has no tick-interval effect). Flat damage per tick is not simulated (engine limitation, same as the base aura)"
   }
  },
- "triggers": [],
+ "triggers": [
+  {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "empyrean-lords-grace",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [
+    "earths-retribution",
+    "thunder-and-lightning",
+    "discharge",
+    "judgment-thunder",
+    "divine-punishment",
+    "bolt",
+    "chain-of-torment",
+    "debilitating-mark",
+    "condemnation",
+    "earth-punishment",
+    "voice-of-doom",
+    "power-burst",
+    "root",
+    "assault-mark",
+    "lightning-strike-scattershot"
+   ],
+   "proc_skill": "empyrean-lords-grace",
+   "window_s": 0.0
+  }
+ ],
  "rules": {
   "earths-retribution": {
    "skill_key": "earths-retribution",
@@ -1271,5 +1596,395 @@
    "effect": "heal caster and party within 40 m for 384-461 HP (rank 1)",
    "note": "sustain only"
   }
- ]
+ ],
+ "triggers_note": "Empyrean Lord's Grace (passive, lvl 9): 'deals 71-71 extra damage on landing an attack, Cooldown: 1s' (dump token abe:1773000011 value03:time = 1; ratio 42% ATK + flat per rank). Modelled as a PROC skill fired once per damaging cast, throttled by its own 1 s cooldown (set on the skill rows). Per-hit (multi-hit skills) is not counted; a 4-hit Bolt would still proc once per second at most.",
+ "specialization_effects": {
+  "thunder-and-lightning": {
+   "0": [],
+   "1": [],
+   "2": [],
+   "3": [],
+   "4": []
+  },
+  "discharge": {
+   "0": [],
+   "1": [],
+   "2": [],
+   "3": [],
+   "4": []
+  },
+  "divine-punishment": {
+   "0": [],
+   "1": [],
+   "2": [],
+   "3": [],
+   "4": []
+  },
+  "judgment-thunder": {
+   "0": [
+    {
+     "kind": "mp_cost_mult",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text '-20% MP consumed'",
+     "value": 0.8
+    },
+    {
+     "kind": "mp_cost_mult",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text '-20% MP consumed' (the option is shared by the chain: Divine Punishment also costs 120 MP)",
+     "value": 0.8,
+     "skill_key": "divine-punishment"
+    }
+   ],
+   "1": [
+    {
+     "kind": "dmg_mult",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text 'up to 12% more damage when less targets are hit'; 'up to' scaled linearly with targets hit",
+     "value": 1.12,
+     "cond": "less_targets"
+    },
+    {
+     "kind": "dmg_mult",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text (shared with the chain child)",
+     "value": 1.12,
+     "cond": "less_targets",
+     "skill_key": "divine-punishment"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "specialty text: no damage-race effect (CC, healing, defence, accuracy or a PvP/party-only stat)",
+     "value": 0,
+     "note": "-10% enemy Combat Speed 5s (token se:1705003013 time=5, abe:100000111 value02=10): slows the boss, no damage for the Cleric"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "specialty text: no damage-race effect (CC, healing, defence, accuracy or a PvP/party-only stat)",
+     "value": 0,
+     "note": "10% Root 2s (token se:1705004013 effect_value05=10, time=2): CC"
+    }
+   ],
+   "4": [
+    {
+     "kind": "extra_hits",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text 'Activates [Divine Punishment] 1 extra time' (token se:1705000013): the extra activation is one more full Divine Punishment hit per cast, free of MP",
+     "value": 1,
+     "skill_key": "divine-punishment"
+    }
+   ]
+  },
+  "bolt": {
+   "0": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "specialty text: no damage-race effect (CC, healing, defence, accuracy or a PvP/party-only stat)",
+     "value": 0,
+     "note": "30% Stun 3s when fully charged (token se:1706001313 effect_value02:time=3, effect_value05=30): CC"
+    }
+   ],
+   "1": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "specialty text: no damage-race effect (CC, healing, defence, accuracy or a PvP/party-only stat)",
+     "value": 0,
+     "note": "+300 Skill Accuracy: PvE dummy has no parry/evasion in the model"
+    }
+   ],
+   "2": [
+    {
+     "kind": "cast_speed_pct",
+     "confidence": "estimated",
+     "source": "token se:1706001313 effect_value05:divide100 = 30 (text '+30% Skill Speed'); read as animation + charge speed of Bolt (charge time itself is unknown)",
+     "value": 30
+    }
+   ],
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text 'up to +20% damage when less targets hit' (couga: +20% single target); scaled linearly",
+     "value": 1.2,
+     "cond": "less_targets"
+    }
+   ],
+   "4": [
+    {
+     "kind": "force_crit",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text 'Critical Hit on hit'; couga54 Cleric guide: 'guaranteed crit at rank 20'",
+     "value": 1
+    }
+   ]
+  },
+  "chain-of-torment": {
+   "1": [
+    {
+     "kind": "duration_add_s",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text '+3s Damage over Time' (the 10 s debuff window that gates Condemnation and carries the damage-taken bonus)",
+     "value": 3
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text '+10% PvE Damage Tolerance reduction' (see status chain_of_torment_amp)",
+     "value": 10,
+     "status_key": "chain_of_torment_amp"
+    }
+   ],
+   "4": [
+    {
+     "kind": "ignore_block",
+     "confidence": "estimated",
+     "source": "Block/Evasion do not matter against a PvE dummy",
+     "value": 0,
+     "note": "PvE: no effect"
+    },
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "text 'reduces Damage over Time interval by 50%': would double the tick count, but no source gives the tick ratio (only the flat tick, 173..3819), see tick_flat_by_rank",
+     "value": null,
+     "note": "needs the DoT tick ATK ratio"
+    }
+   ]
+  },
+  "debilitating-mark": {
+   "1": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "specialty text: no damage-race effect (CC, healing, defence, accuracy or a PvP/party-only stat)",
+     "value": 0,
+     "note": "-15% target Defense for the DoT (token abe:1708002014 value02:divide100abs = 15): the model has no defense-shred stat and target_defense defaults to 0"
+    }
+   ],
+   "4": [
+    {
+     "kind": "ignore_block",
+     "confidence": "estimated",
+     "source": "Block/Evasion do not matter against a PvE dummy",
+     "value": 0,
+     "note": "PvE: no effect"
+    },
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "text 'reduces Damage over Time interval by 50%': needs the DoT tick ATK ratio (only the flat tick 74..2801 is known)",
+     "value": null,
+     "note": "needs the DoT tick ATK ratio"
+    }
+   ]
+  },
+  "condemnation": {
+   "3": [
+    {
+     "kind": "reset_skill",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text 'Resets cooldown on landing a Critical Hit with [Condemnation]'",
+     "value": 1,
+     "skill_key": "condemnation",
+     "trigger": "crit"
+    },
+    {
+     "kind": "reset_skill",
+     "confidence": "estimated",
+     "source": "Earth Punishment specialty 1 forces Condemnation to crit while the DoT is up, so with this option every cast resets the cooldown in that window (couga: 'forced crit + reset on crit = no cooldown')",
+     "value": 1,
+     "skill_key": "condemnation",
+     "requires_status": "ep_forced_crit",
+     "note": "gated on the Earth Punishment forced-crit window; the crit-event reset above covers the rest of the time"
+    }
+   ]
+  },
+  "lightning-strike-scattershot": {
+   "4": [
+    {
+     "kind": "cdr_all_s",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text '-1s all skill cooldowns on hit' x 4 hits (hits = 4 from Metaroad); applied once per cast. The skill is stagger-only (needs_stagger), so the sim never casts it",
+     "value": 4
+    }
+   ]
+  },
+  "earth-punishment": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text '[Condemnation] lands as a Critical Hit on targets afflicted with [Earth Punishment]'; window = the 10 s DoT",
+     "value": 10,
+     "status_key": "ep_forced_crit"
+    },
+    {
+     "kind": "dmg_mult",
+     "confidence": "estimated",
+     "source": "forced crit gain on Condemnation: (1+cd*0.75)/(1+p*cd*0.75) at crit damage 50%, crit chance p = 30%, boss crit factor 0.75 = 1.24; build-dependent (a crit-rich build gains less). engine force_crit cannot be gated on a status",
+     "value": 1.24,
+     "skill_key": "condemnation",
+     "requires_status": "ep_forced_crit"
+    }
+   ],
+   "1": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text '+10% Double Chance to caster ... from [Earth's Blessing]' (token abe:1740002711 value02:divide100 = 10)",
+     "value": 10,
+     "status_key": "ep_double_chance"
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text '+10% Attack and Defense to caster ... from [Earth's Blessing]'",
+     "value": 10,
+     "status_key": "ep_attack_def"
+    }
+   ],
+   "3": [
+    {
+     "kind": "duration_add_s",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text '+10s [Earth Punishment] and [Earth's Blessing] duration'",
+     "value": 10
+    }
+   ]
+  },
+  "power-burst": {
+   "1": [
+    {
+     "kind": "force_crit",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text 'Critical Hit on hit'",
+     "value": 1
+    }
+   ]
+  },
+  "voice-of-doom": {
+   "2": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text '-200 Critical Hit Resist for duration' (token abe:1730003014 value02:noneabs = 200), 20 s like the DoT",
+     "value": 20,
+     "status_key": "vod_crit_resist"
+    }
+   ],
+   "3": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "text '-50% Damage over Time intervals': needs the DoT tick ATK ratio (only the flat tick 2862..9066 is known)",
+     "value": null,
+     "note": "needs the DoT tick ATK ratio"
+    }
+   ]
+  },
+  "divine-aura": {
+   "1": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "text 'Changes to AoE Skill': target count not in the datamine (couga: up to 4 mobs); the aura tick ratio and interval are unknown anyway",
+     "value": null,
+     "note": "aura tick damage unknown"
+    }
+   ],
+   "2": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "text '+50% [Divine Aura] attacking speed': the base attack interval is not published (aion2.app: 'periodically'), so the gain cannot be computed",
+     "value": null,
+     "note": "aura tick interval unknown"
+    }
+   ]
+  },
+  "prayer-of-amplification": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text '+20% PvE Damage Boost and +10% PvP Damage Boost' (rank 5): own-duration status with dmg_boost_pct +20 (PvP half not simulated)",
+     "value": 17.5,
+     "status_key": "prayer_pve_boost"
+    }
+   ],
+   "1": [
+    {
+     "kind": "dmg_mult",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text 'x1.5 [Empyrean Lord's Grace] effect for the duration': the ELG proc damage is x1.5 while Prayer is up (its +crit/+double stat part is not counted)",
+     "value": 1.5,
+     "skill_key": "empyrean-lords-grace",
+     "requires_status": "prayer_of_amplification"
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "confidence": "confirmed",
+     "source": "aion2.app client dump 2026-09-18 text 'x1.5 [Earth's Grace] effect for the duration': Earth's Grace = +10.5% Critical Damage Boost, so x1.5 adds +5.25%",
+     "value": 17.5,
+     "status_key": "prayer_earths_grace"
+    }
+   ]
+  },
+  "light-of-protection": {
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "confidence": "estimated",
+     "source": "text '+10% Perfect Chance': community fit +1% Perfect = ~0.10% damage (data_contract.md S1/S2) -> +1.0%. Not applied: LoP is an always-on status in the sim and the Perfect stat has no live-stat field",
+     "value": 1.01,
+     "cond": "unmodeled"
+    }
+   ]
+  },
+  "salvation": {
+   "3": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "specialty text: no damage-race effect (CC, healing, defence, accuracy or a PvP/party-only stat)",
+     "value": 0,
+     "note": "Triggers Salvation when afflicted with Impact-type status: defensive"
+    }
+   ]
+  },
+  "noble-aura": {
+   "0": [
+    {
+     "kind": "crit_chance_add",
+     "confidence": "estimated",
+     "source": "text '+200 Aura Critical Hit' (rating 200 at 80%/1200 points = 13.3%). Applies to the cast hit only; aura ticks use the character's crit chance",
+     "value": 13.33
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "aion2.app client dump 2026-09-18 text '-1s Aura attack cooldown' (base 'Aura Attack Cooldown: 2s'): a second tick stream halves the interval (status noble_aura_fast)",
+     "value": 300,
+     "status_key": "noble_aura_fast"
+    }
+   ]
+  }
+ },
+ "specialization_effects_note": "Overrides for options the generic text parser gets wrong or cannot value. Options not listed use the parser. Chain children (Thunder and Lightning, Discharge, Divine Punishment) list the parent's options in the client; the parents carry the effects and the children are empty. Cleric options unlock at rank 8/8/8/12/16 (actives) and 5/10/15/20 (stigmas); spec_slot_ranks keeps the engine default 8/12/20."
 }

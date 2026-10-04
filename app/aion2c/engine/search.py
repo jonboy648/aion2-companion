@@ -9,8 +9,9 @@ import random
 
 from aion2c.data.loader import allowed_skills
 from aion2c.engine.community import compare
+from aion2c.engine.damage import hp_damage_coeff, per_hit_multiplier
 from aion2c.engine.explain import explain_ranked
-from aion2c.engine.simulator import simulate  # noqa: F401  (patch target)
+from aion2c.engine.simulator import simulate, stigma_gates, window_castable  # noqa: F401  (simulate is a patch target)
 from aion2c.models import (
     CharacterBuild,
     GameData,
@@ -24,28 +25,46 @@ from aion2c.models import (
     SimResult,
     Skill,
     SkillKind,
-    effective_rank,
+    total_rank,
 )
 
 _CASTABLE_KINDS = (SkillKind.ACTIVE, SkillKind.STIGMA)
 
 
 def _deals_damage_or_applies(gd: GameData, s: Skill) -> bool:
-    if (s.atk_ratio_pct.value or 0) > 0:
-        return True
-    if any((r.flat_min.value or 0) > 0 or (r.flat_max.value or 0) > 0 for r in s.ranks):
-        return True
     rule = gd.rules.get(s.key)
+    if hp_damage_coeff(s) > 0:  # stagger-only skills deal no HP damage
+        if (s.atk_ratio_pct.value or 0) > 0:
+            return True
+        if any((r.flat_min.value or 0) > 0 or (r.flat_max.value or 0) > 0 for r in s.ranks):
+            return True
     return bool(rule and rule.applies)
+
+
+def _stagger_possible(gd: GameData) -> bool:
+    """Does any skill apply a 'staggered' status? Without one, Staggered-target skills can never be cast."""
+    return any("staggered" in r.applies for r in gd.rules.values())
+
+
+def is_castable_here(gd: GameData, build: CharacterBuild, s: Skill, gates: dict[str, str] | None = None) -> bool:
+    """Region/level/stigma gate shared with the simulator: stigmas (and same-named hidden duplicates) need
+    build.stigmas, PROC skills only count while a trigger window is open (simulator.window_castable)."""
+    gate = (gates if gates is not None else stigma_gates(gd)).get(s.key)
+    if gate is not None and gate not in build.stigmas:
+        return False
+    if "needs_stagger" in s.tags and not _stagger_possible(gd):
+        return False
+    if s.kind == SkillKind.PROC:
+        return window_castable(gd, s.key)
+    return s.kind in _CASTABLE_KINDS
 
 
 def candidate_skills(gd: GameData, build: CharacterBuild) -> list[PriorityEntry]:
     """Castable skills for this build; charge skills get one entry per level."""
     out: list[PriorityEntry] = []
+    gates = stigma_gates(gd)
     for s in allowed_skills(gd, build.region, build.show_kr):
-        if s.kind not in _CASTABLE_KINDS:
-            continue
-        if s.kind == SkillKind.STIGMA and s.key not in build.stigmas:
+        if not is_castable_here(gd, build, s, gates):
             continue
         if s.unlock_level is not None and s.unlock_level > build.level:
             continue
@@ -66,22 +85,57 @@ def _num(n) -> float:
     return float(n.value) if n is not None and n.value is not None else 0.0
 
 
+# Rough damage-equivalent weight of one point of each live stat a buff can carry (ordering only: the simulator,
+# not this table, decides what a buff is actually worth). crit: base crit damage is +50%, so a crit-chance point
+# is worth about half a point of damage; CDR and combat speed shorten the rotation roughly 1:1 and 1:2.
+_MOD_WEIGHT = {
+    "attack_increase_pct": 1.0, "dmg_boost_pct": 1.0, "combat_speed_pct": 1.0,
+    "cdr_pct": 0.5, "crit_chance_pct": 0.5, "crit_dmg_pct": 0.3,
+}
+PROC_ENABLER_VALUE = 1.05  # a skill that opens a proc window must be cast early or the proc skill never fires
+
+
+def _proc_window_statuses(gd: GameData) -> set[str]:
+    """Statuses a PROC skill needs (rule.requires) that some trigger or skill can open."""
+    need = {r for s in gd.skills.values() if s.kind == SkillKind.PROC
+            for r in (gd.rules[s.key].requires if s.key in gd.rules else ())}
+    return need
+
+
 def _is_buff(gd: GameData, key: str) -> float:
-    """Best self-buff multiplier a skill applies (0.0 when it applies none)."""
+    """Best self-buff value of a skill as a multiplier-like number (0.0 when it applies no buff).
+
+    A buff is any self status that carries a damage multiplier, live stat mods (attack, damage boost, crit,
+    combat speed, CDR), is a permanent aura, enables a PROC skill's trigger window, or ticks damage while it is up (self proc buffs). Stat-mod buffs used to
+    count as zero because their dmg_mult is 1.0, so they sorted last in every seed and never fired."""
     rule = gd.rules.get(key)
     best = 0.0
-    if rule:
-        for sk in rule.applies:
-            st = gd.statuses.get(sk)
-            if st and st.on == "self" and _num(st.dmg_mult) > 1.0:
-                best = max(best, _num(st.dmg_mult))
+    if not rule:
+        return best
+    windows = _proc_window_statuses(gd)
+    for sk in rule.applies:
+        st = gd.statuses.get(sk)
+        if not st or st.on != "self":
+            continue
+        mult = _num(st.dmg_mult)
+        val = mult if mult > 1.0 else 0.0
+        if st.stat_mods:
+            mods = sum(_MOD_WEIGHT.get(m.stat, 0.0) * _num(m.value) / 100 for m in st.stat_mods)
+            val = max(val, 1.0) * (1 + mods) if val else 1.0 + max(mods, 1e-6)
+        if sk in windows:
+            val = max(val, PROC_ENABLER_VALUE)
+        if _num(st.tick_ratio_pct) > 0:  # a self proc/tick buff (Flame Blessing): its value is the ticks it opens
+            val = max(val, 1.0 + 1e-6)
+        if not val and (st.permanent or _num(st.duration_s) == 0.0) and st.mp_min_pct is None:
+            val = 1.0 + 1e-6  # permanent aura
+        best = max(best, val)
     return best
 
 
 def _skill_numbers(gd: GameData, build: CharacterBuild, scenario: Scenario, e: PriorityEntry):
     """(damage per cast estimate, lock_s incl. charge, cooldown_s) for a candidate entry."""
     s = gd.skills[e.skill_key]
-    rank = effective_rank(gd, build, s)
+    rank = total_rank(gd, build, s)
     rd = s.ranks[rank - 1] if s.ranks else None
     fmin, fmax = (_num(rd.flat_min), _num(rd.flat_max)) if rd else (0.0, 0.0)
     cd = _num(rd.cooldown_s) if rd else 0.0
@@ -94,7 +148,7 @@ def _skill_numbers(gd: GameData, build: CharacterBuild, scenario: Scenario, e: P
         cmult, charge_s = _num(lv.dmg_mult) or 1.0, _num(lv.charge_s)
     st = build.stats
     base = st.attack * (1 + st.attack_increase_pct / 100) * (1 + st.weapon_dmg_pct / 100)
-    dmg = (base * _num(s.atk_ratio_pct) / 100 * cmult + flat) * min(scenario.n_targets, s.aoe_targets)
+    dmg = (base * _num(s.atk_ratio_pct) / 100 * cmult + flat) * per_hit_multiplier(s) * min(scenario.n_targets, s.aoe_targets)
     lock = (_num(s.anim_lock_s) or 1.0) / (1 + st.combat_speed_pct / 100) + charge_s
     return dmg, max(lock, 0.05), cd
 
@@ -235,6 +289,26 @@ def optimize(
                     break
             if sims >= limit:
                 break
+
+    # Polish: the local search is stochastic and budget-bound, and a small buff (Wish of Concentration, +0.7%) can fall
+    # out of the winner. Try each buff at the front of the best priority (inserted, or moved there); keep what helps.
+    buff_entries = [e for e in _highest_level_entries(cands) if _is_buff(gd, e.skill_key)]
+    for _ in range(len(buff_entries)):
+        best_e = max(order, key=lambda e: cache[e].dps)
+        improved_any = False
+        for be in buff_entries:
+            if best_e and best_e[0].skill_key == be.skill_key:
+                continue
+            trial = (be,) + tuple(x for x in best_e if x.skill_key != be.skill_key)
+            if trial in cache:
+                continue
+            res = simulate(gd, build, Priority(trial), scenario, cfg)
+            cache[trial] = res
+            order.append(trial)
+            if res.dps > cache[best_e].dps * (1 + 1e-9):
+                best_e, improved_any = trial, True
+        if not improved_any:
+            break
 
     pos = {e: i for i, e in enumerate(order)}
     ranked = sorted(order, key=lambda e: (-cache[e].dps, len(e), pos[e]))

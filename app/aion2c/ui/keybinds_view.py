@@ -182,7 +182,7 @@ class KeybindsScreen(LiveBound, QWidget):
 
         # generated plan
         self.macro_cards = CardList()
-        self.stacks = _table(["Slot", "Stack (fires first to last)"], (70,))
+        self.stacks = _table(["Slot", "Stack: bottom cell (fires first) → top cell"], (70,))
         self.gkeys = _table(["G-key", "Mode", "Sends", "Purpose", "Risk"], (70, 70, 80, 220))
         self.dps = _table(["Plan", "Macro DPS", "Ideal DPS"], (180, 110))
         self.manual = QListWidget()

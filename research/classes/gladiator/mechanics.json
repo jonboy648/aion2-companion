@@ -1,5 +1,25 @@
 {
-  "korea_only_ids": [11000000, 11030000, 11040000, 11060000, 11090000, 11140000, 11180000, 11210000, 11230000, 11300037, 11310000, 11320000, 11330000, 11350000, 11370000, 11420000, 11440000, 11460000, 11470000],
+ "korea_only_ids": [
+  11000000,
+  11030000,
+  11040000,
+  11060000,
+  11090000,
+  11140000,
+  11180000,
+  11210000,
+  11230000,
+  11300037,
+  11310000,
+  11320000,
+  11330000,
+  11350000,
+  11370000,
+  11420000,
+  11440000,
+  11460000,
+  11470000
+ ],
  "_comment": "Hand-authored Gladiator sim mechanics. Every Num carries confidence. Keys are validated against built skills at build time. Statuses model timed/conditional effects only; always-on passives (Attack Preparation, Identify Weakness, Impact Hit, Survival Stance...) are NOT statuses because imported gear stats already include them. Sources: aion2.app client dump 2026-09-18 (tokens), Metaroad 2026-10-03, couga54 guide 2026-10-03, Inven Gladiator guide 2026-09-05.",
  "icon_prefix_aliases": {},
  "skill_tags": {
@@ -168,9 +188,9 @@
     "source": "Ruinous Blow client token effect_value02:time = 20 s, all ranks (aion2.app client dump 2026-09-18); guide: \"+20% PvE damage for 20s\""
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "client tokens: PvE Damage Boost +20% (also PvP +10%, Critical Hit +100, Status Effect Chance +15%, all rank-independent); the PvE Damage Boost bucket is treated as a final multiplier, which overstates it"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "PvE Damage Boost and Critical Hit are in stat_mods (additive bucket); status chance and PvP half not simulated"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -184,7 +204,25 @@
     "value": 1.0,
     "confidence": "confirmed",
     "source": "not a damage-over-time status"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20,
+      "confidence": "confirmed",
+      "source": "token se_abe:1110000711:1110000711:value02:divide100 = 20 (PvE Damage Boost), all ranks; additive Damage Boost bucket, not a final multiplier"
+     }
+    },
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 6.667,
+      "confidence": "estimated",
+      "source": "token se_abe:1110000711:1110000712:value02 = 100 Critical Hit rating; Critical Hit rating converted at 80%/1200 points (estimated, same as the Ranger stat_effects rule)"
+     }
+    }
+   ]
   },
   "rage_burst_buff": {
    "key": "rage_burst_buff",
@@ -196,9 +234,9 @@
     "source": "Rage Burst client token = 10 s (aion2.app client dump 2026-09-18)"
    },
    "dmg_mult": {
-    "value": 1.1,
-    "confidence": "estimated",
-    "source": "client token: PvE Damage Boost +10% (PvP +5%), rank-independent; spec 20 raises it; bucket treated as a final multiplier"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "PvE Damage Boost is in stat_mods (additive bucket)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -212,7 +250,17 @@
     "value": 1.0,
     "confidence": "confirmed",
     "source": "not a damage-over-time status"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10,
+      "confidence": "confirmed",
+      "source": "token abe:1139000811:value02:divide100 = 10 PvE Damage Boost (PvP 5), rank-independent; additive bucket"
+     }
+    }
+   ]
   },
   "wounded": {
    "key": "wounded",
@@ -277,12 +325,12 @@
    "duration_s": {
     "value": 14.5,
     "confidence": "estimated",
-    "source": "client token: 10 s at rank 1, 14.5 s at rank 10, 20 s at rank 20, 22.5 s at rank 25; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks"
+    "source": "client token: 10 s at rank 1, 14.5 s at rank 10, 20 s at rank 20, 22.5 s at rank 25; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks; spec 5/15/20 effects are specialization_effects"
    },
    "dmg_mult": {
     "value": 1.0,
-    "confidence": "estimated",
-    "source": "Combat Speed +20% (client token) is a speed stat the sim cannot take from a status; spec 5 +5% Double Chance, spec 20: 50% chance on Critical Hit to cut all cooldowns by 1 s are not modelled"
+    "confidence": "confirmed",
+    "source": "Combat Speed +20% is in stat_mods"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -296,7 +344,17 @@
     "value": 1.0,
     "confidence": "confirmed",
     "source": "not a damage-over-time status"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "combat_speed_pct",
+     "value": {
+      "value": 20,
+      "confidence": "confirmed",
+      "source": "token abe:1140000011:value02:divide100 = 20 Combat Speed, all ranks (aion2.app client dump 2026-09-18)"
+     }
+    }
+   ]
   },
   "zikels_blessing": {
    "key": "zikels_blessing",
@@ -308,9 +366,9 @@
     "source": "client token: 10 s at rank 1, 14.5 s at rank 10, 20 s at rank 20, 22.5 s at rank 25; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks"
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "client token: Attack +20% and Accuracy +100; spec 10 adds PvE Damage Boost +10% / PvP +5%. +20% Attack lives in the Attack bucket, not a final multiplier, so 1.2 overstates it"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "Attack +20% is in stat_mods (Attack bucket)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -324,7 +382,17 @@
     "value": 1.0,
     "confidence": "confirmed",
     "source": "not a damage-over-time status"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 20,
+      "confidence": "confirmed",
+      "source": "token se_abe:1125000011:1125000011:value02:divide100 = 20 (Attack +20%), all ranks; Accuracy +100 not simulated"
+     }
+    }
+   ]
   },
   "experienced_counterstrike": {
    "key": "experienced_counterstrike",
@@ -336,9 +404,9 @@
     "source": "client token = 20 s at every rank (aion2.app client dump 2026-09-18); the buff is also given to party members"
    },
    "dmg_mult": {
-    "value": 1.09,
-    "confidence": "estimated",
-    "source": "client token PvE Damage Boost: 5.4% rank 1, 9% rank 10, 13% rank 20, 21% rank 40; rank 10 used as the typical skill-point rank (guides: skills reach 10 from skill points); see per_level tokens for other ranks; only on Block, so uptime depends on blocking; does not stack with Templar Fury"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "PvE Damage Boost is in stat_mods (additive bucket)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -352,7 +420,17 @@
     "value": 1.0,
     "confidence": "confirmed",
     "source": "not a damage-over-time status"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 9,
+      "confidence": "estimated",
+      "source": "token abe:1178000711:value02:divide100: 5.4 r1, 9 r10, 13 r20; rank 10 assumed; only after a Block (party buff), uptime depends on blocking"
+     }
+    }
+   ]
   },
   "murderous_burst_crit": {
    "key": "murderous_burst_crit",
@@ -361,12 +439,12 @@
    "duration_s": {
     "value": 3.0,
     "confidence": "confirmed",
-    "source": "client token = 3 s (aion2.app client dump 2026-09-18)"
+    "source": "client token se:1180000711/1180001012 effect_value02:time = 3 s"
    },
    "dmg_mult": {
-    "value": null,
-    "confidence": "unknown",
-    "source": "Critical Damage Boost +5.5% rank 1 / +10% rank 10 / +25% rank 40 only multiplies critical hits; the share of crits is not known here"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "Critical Damage Boost is in stat_mods"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -380,7 +458,17 @@
     "value": 1.0,
     "confidence": "confirmed",
     "source": "not a damage-over-time status"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 10,
+      "confidence": "estimated",
+      "source": "token abe:1180000811:value02:divide100 = Critical Damage Boost 5.5 r1, 10 r10, 15 r20; rank 10 assumed"
+     }
+    }
+   ]
   },
   "wave_armor_dot": {
    "key": "wave_armor_dot",
@@ -394,7 +482,7 @@
    "dmg_mult": {
     "value": 1.0,
     "confidence": "estimated",
-    "source": "DoT around the caster; no multiplier on other skills (spec 10/15 multiply passives x1.5 for the duration, not modelled)"
+    "source": "DoT around the caster; no multiplier on other skills (spec 10/15 x1.5 of passives need passive uptime: listed as unknown)"
    },
    "elements": [],
    "mp_min_pct": null,
@@ -521,6 +609,245 @@
     "confidence": "confirmed",
     "source": "not a damage-over-time status"
    }
+  },
+  "overhead_slam_open": {
+   "key": "overhead_slam_open",
+   "name": "Overhead Slam open (Rage Burst)",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "Rage Burst text: \"Triggers [Overhead Slam] on the target for 10s on hit\"; token se:1139000711:effect_value02:time = 10"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "rage-burst",
+   "stat_mods": [],
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "spec_upward_chain": {
+   "key": "spec_upward_chain",
+   "name": "Overhead Slam spec: Upward Strike chain",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "estimated",
+    "source": "chain window (3 s) used by every chain in this file; gate for the rank-8 option \"Adds [Upward Strike] Chain Skill\""
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "overhead-slam",
+   "stat_mods": [],
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "spec_leaping_prepare": {
+   "key": "spec_leaping_prepare",
+   "name": "Leaping Slam spec: Prepare for Battle",
+   "on": "self",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "token se:1119001711:effect_value02:time = 3"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "leaping-slam",
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20,
+      "confidence": "confirmed",
+      "source": "token abe:1119004711:value02:divide100 = 20 PvE Damage Boost (PvP 10 = abe:1119004712)"
+     }
+    }
+   ],
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "spec_zikels_pve": {
+   "key": "spec_zikels_pve",
+   "name": "Zikel's Blessing spec: PvE Damage Boost",
+   "on": "self",
+   "duration_s": {
+    "value": 14.5,
+    "confidence": "estimated",
+    "source": "for the duration of Zikel's Blessing (rank 10: 14.5 s)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "zikels-blessing",
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10,
+      "confidence": "confirmed",
+      "source": "token abe:1125002014:value02:divide100 = 10 PvE Damage Boost (PvP 5 = abe:1125002015)"
+     }
+    }
+   ],
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "spec_rage_burst_pve": {
+   "key": "spec_rage_burst_pve",
+   "name": "Rage Burst spec: extra PvE Damage Boost",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "token se:1139000811:effect_value02:time = 10"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "rage-burst",
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10,
+      "confidence": "confirmed",
+      "source": "specialty text \"+10% PvE Damage Boost increase\" (on top of the base +10%)"
+     }
+    }
+   ],
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "spec_lunge_double": {
+   "key": "spec_lunge_double",
+   "name": "Lunge Stance spec: Double Chance",
+   "on": "self",
+   "duration_s": {
+    "value": 14.5,
+    "confidence": "estimated",
+    "source": "for the duration of Lunge Stance (rank 10: 14.5 s)"
+   },
+   "dmg_mult": {
+    "value": 1.05,
+    "confidence": "estimated",
+    "source": "specialty text \"+5% Double Chance\": Double = chance to deal double damage, so +5% expected damage (estimated; the engine's boss smite factor 0.7 would give 1.035); StatMod has no smite field"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "lunge-stance",
+   "stat_mods": [],
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
+  },
+  "spec_lunge_idweak": {
+   "key": "spec_lunge_idweak",
+   "name": "Lunge Stance spec: Identify Weakness x1.5",
+   "on": "self",
+   "duration_s": {
+    "value": 14.5,
+    "confidence": "estimated",
+    "source": "for the duration of Lunge Stance (rank 10: 14.5 s)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "damage effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "lunge-stance",
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 6.333,
+      "confidence": "estimated",
+      "source": "x1.5 of Identify Weakness (token abe:1174000011 = Critical Hit rating 100 r1, 190 r10, 290 r20; rank 10 assumed) adds +50% = 95 rating; Critical Hit rating converted at 80%/1200 points (estimated, same as the Ranger stat_effects rule)"
+     }
+    }
+   ],
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "not a damage-over-time status"
+   }
   }
  },
  "triggers": [
@@ -529,7 +856,90 @@
    "on_element": "none",
    "chance": 0.2,
    "source_skill": "murderous-burst",
-   "confidence": "estimated"
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [
+    "keen-strike",
+    "rupture-strike",
+    "wrathful-strike",
+    "ruinous-blow",
+    "upward-strike",
+    "aerial-snare",
+    "wrath-burst",
+    "forced-fall-11370000",
+    "ankle-smash",
+    "wrath-wave",
+    "lifestealing-blade",
+    "assault-strike",
+    "blade-toss",
+    "forced-restraint",
+    "fracturing-rush",
+    "destructive-rush",
+    "unsheathing-rush"
+   ],
+   "proc_skill": "murderous-burst",
+   "window_s": 3.0
+  },
+  {
+   "status_key": "murderous_burst_crit",
+   "on_element": "none",
+   "chance": 0.4,
+   "source_skill": "murderous-burst",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [
+    "rending-blow",
+    "smashing-blow",
+    "crushing-wave",
+    "frenzied-wave",
+    "blade-dance",
+    "reckless-strike",
+    "overhead-slam",
+    "leaping-slam",
+    "ankle-slice",
+    "rush-strike"
+   ],
+   "proc_skill": "murderous-burst",
+   "window_s": 3.0
+  },
+  {
+   "status_key": "murderous_burst_crit",
+   "on_element": "none",
+   "chance": 0.6,
+   "source_skill": "murderous-burst",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [
+    "mocking-blade"
+   ],
+   "proc_skill": "murderous-burst",
+   "window_s": 3.0
+  },
+  {
+   "status_key": "murderous_burst_crit",
+   "on_element": "none",
+   "chance": 0.8,
+   "source_skill": "murderous-burst",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [
+    "sword-aura-rampage"
+   ],
+   "proc_skill": "murderous-burst",
+   "window_s": 3.0
+  },
+  {
+   "status_key": "murderous_burst_crit",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "murderous-burst",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [
+    "rage-burst"
+   ],
+   "proc_skill": "murderous-burst",
+   "window_s": 3.0
   }
  ],
  "rules": {
@@ -669,27 +1079,31 @@
    "skill_key": "overhead-slam",
    "applies": [],
    "apply_chance": 1.0,
-   "requires": [],
+   "requires": [
+    "overhead_slam_open"
+   ],
    "consumes": [],
    "chain_next": "upward-strike",
    "chain_window_s": 3.0,
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "chain only with the rank-8 spec \"Adds [Upward Strike] Chain Skill\" (the sim ignores specs); needs a Knockdown target except on bosses (client text: 7% chance to trigger vs Incapacitated Immunity, guides: bosses exempt) so no requires"
+   "note": "client text: damage only to a target afflicted with Knockdown; 7% chance to trigger vs Incapacitated Immunity (bosses). Modelled as castable only while Rage Burst's 10 s window is open (overhead_slam_open). Not modelled: the 7% base chance, Knockdown from Mocking Blade (bosses are immune; the sim cannot tell). Chain to Upward Strike only with the rank-8 option (spec_upward_chain status)"
   },
   "upward-strike": {
    "skill_key": "upward-strike",
    "applies": [],
    "apply_chance": 1.0,
-   "requires": [],
+   "requires": [
+    "spec_upward_chain"
+   ],
    "consumes": [],
    "chain_next": null,
    "chain_window_s": 3.0,
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "spec-gated chain child of Overhead Slam; 0.5 s cooldown"
+   "note": "chain child of Overhead Slam, castable only with the rank-8 option \"Adds [Upward Strike] Chain Skill\"; 0.5 s cooldown"
   },
   "ruinous-blow": {
    "skill_key": "ruinous-blow",
@@ -710,7 +1124,8 @@
    "skill_key": "rage-burst",
    "applies": [
     "rage_burst_buff",
-    "wounded"
+    "wounded",
+    "overhead_slam_open"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -720,7 +1135,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "Wounded 10 s + caster PvE Damage Boost +10% for 10 s; also opens Overhead Slam on the target for 10 s (client text); costs 100 MP"
+   "note": "Wounded 10 s + caster PvE Damage Boost +10% for 10 s; text: \"Triggers [Overhead Slam] on the target for 10s on hit\" = overhead_slam_open status (Overhead Slam needs a Knockdown target; bosses are Incapacitated-immune so only this window or its 7% base chance opens it); costs 100 MP"
   },
   "lunge-stance": {
    "skill_key": "lunge-stance",
@@ -902,5 +1317,205 @@
    "confidence": "confirmed",
    "note": "Impact-type Resist +50%"
   }
- }
+ },
+ "_triggers_note": "Murderous Burst (client text): each landed attack gives a Menace stack for 3 s; at 5 stacks it is removed and deals 78% ATK + 539 (rank 1) to up to 4 enemies within 5m and gives Critical Damage Boost for 3 s. One trigger per hit-count group, chance = hits per cast / 5 (a stack per hit instance is an assumption: the text says \"landing an attack\"). Crit events are not needed; the proc is fired per cast accumulation.",
+ "specialization_effects": {
+  "keen-strike": {
+   "4": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "Adds [Reckless Strike] (124% x2, restores 150 MP) after Wrathful Strike: a chain addition cannot be gated without stalling the Keen Strike slot; not simulated",
+     "note": "Adds [Reckless Strike] (124% x2, restores 150 MP) after Wrathful Strike: a chain addition cannot be gated without stalling the Keen Strike slot; not simulated"
+    }
+   ]
+  },
+  "armor-of-balance": {
+   "1": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "Blood Absorption is lifesteal: no damage effect",
+     "value": 0.0,
+     "note": "Blood Absorption is lifesteal: no damage effect"
+    }
+   ],
+   "2": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "Protection Armor is block healing: no damage effect",
+     "value": 0.0,
+     "note": "Protection Armor is block healing: no damage effect"
+    }
+   ]
+  },
+  "overhead-slam": {
+   "2": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "gate for the Upward Strike chain (status spec_upward_chain, 3 s chain window)",
+     "value": 3.0,
+     "status_key": "spec_upward_chain",
+     "note": "Adds [Upward Strike] Chain Skill (171.7% ATK x1 at rank 1, cooldown 0.5 s)"
+    }
+   ]
+  },
+  "leaping-slam": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "confidence": "confirmed",
+     "source": "token se:1119001711:effect_value02:time = 3; PvE Damage Boost +20% = abe:1119004711",
+     "value": 3.0,
+     "status_key": "spec_leaping_prepare",
+     "note": "Prepare for Battle effect on the caster for 3s"
+    }
+   ],
+   "1": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "50% chance to trigger Ankle Slice (150% x2): no effect kind casts another skill; Leaping Slam is a hand-pressed skill",
+     "note": "50% chance to trigger Ankle Slice (150% x2): no effect kind casts another skill; Leaping Slam is a hand-pressed skill"
+    }
+   ],
+   "2": [
+    {
+     "kind": "reset_skill",
+     "confidence": "confirmed",
+     "source": "specialty text: resets cooldown on defeating an enemy",
+     "value": 1,
+     "skill_key": "leaping-slam",
+     "trigger": "kill",
+     "note": "kills are not modelled (training-dummy fight)"
+    }
+   ],
+   "4": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "AoE conversion: no target count in any source",
+     "note": "AoE conversion: no target count in any source"
+    }
+   ]
+  },
+  "ankle-slice": {
+   "4": [
+    {
+     "kind": "reset_skill",
+     "confidence": "confirmed",
+     "source": "specialty text: 25% chance on Block",
+     "value": 1,
+     "chance": 0.25,
+     "skill_key": "ankle-slice",
+     "cond": "unmodeled",
+     "note": "needs Block events"
+    }
+   ]
+  },
+  "wrath-wave": {
+   "1": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "enemy Attack debuff",
+     "value": 0.0,
+     "note": "enemy Attack debuff"
+    }
+   ]
+  },
+  "zikels-blessing": {
+   "1": [
+    {
+     "kind": "adds_status",
+     "confidence": "confirmed",
+     "source": "token abe:1125002014 = 10 PvE Damage Boost; lasts for the buff duration",
+     "value": 5.0,
+     "status_key": "spec_zikels_pve",
+     "note": "+10% PvE Damage Boost (and +5% PvP) for the duration"
+    }
+   ],
+   "3": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "Status Effect Chance only matters for CC procs",
+     "value": 0.0,
+     "note": "Status Effect Chance only matters for CC procs"
+    }
+   ]
+  },
+  "rage-burst": {
+   "1": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "enemy Attack debuff (Wounded)",
+     "value": 0.0,
+     "note": "enemy Attack debuff (Wounded)"
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "confidence": "confirmed",
+     "source": "specialty text +10% PvE Damage Boost increase; token se:1139000811 time = 10",
+     "value": 10.0,
+     "status_key": "spec_rage_burst_pve"
+    }
+   ]
+  },
+  "lunge-stance": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "+5% Double Chance (smite) as +5% expected damage, see status note",
+     "value": 14.5,
+     "status_key": "spec_lunge_double"
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "confidence": "estimated",
+     "source": "x1.5 Identify Weakness = +95 Critical Hit rating at passive rank 10",
+     "value": 14.5,
+     "status_key": "spec_lunge_idweak"
+    }
+   ]
+  },
+  "tenaciousness": {
+   "3": [
+    {
+     "kind": "no_dps",
+     "confidence": "estimated",
+     "source": "trigger condition on being afflicted: defensive",
+     "value": 0.0,
+     "note": "trigger condition on being afflicted: defensive"
+    }
+   ]
+  },
+  "wave-armor": {
+   "1": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "x1.5 Experienced Counterstrike (+4.5% PvE Damage Boost): only while the block buff is up, uptime not modelled",
+     "note": "x1.5 Experienced Counterstrike (+4.5% PvE Damage Boost): only while the block buff is up, uptime not modelled"
+    }
+   ],
+   "2": [
+    {
+     "kind": "unknown",
+     "confidence": "unknown",
+     "source": "x1.5 Murderous Burst effect: burst damage vs crit window split not stated",
+     "note": "x1.5 Murderous Burst effect: burst damage vs crit window split not stated"
+    }
+   ]
+  }
+ },
+ "_specialization_note": "Overrides only where the generic parser (aion2c/specparse.py) is wrong or cannot decode the text; all other options use the parser result (cooldown cuts, MP, crit restores/resets, +targets, damage when more/less targets, Skill Speed). Slot ranks use the engine default 8/12/20 (sources disagree: 8/12/16)."
 }

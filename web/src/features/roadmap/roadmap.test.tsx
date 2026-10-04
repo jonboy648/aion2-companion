@@ -40,5 +40,8 @@ describe("RoadmapPage (mock engine)", () => {
     );
     expect(await screen.findByText(/Your current band/i, {}, { timeout: 4000 })).toBeInTheDocument();
     expect(screen.getByText(/Next unlock/i)).toBeInTheDocument();
+    // same journey as the guide: chapter headings link into it
+    expect(screen.getAllByRole("link", { name: "Open guide chapter" })[0]).toHaveAttribute("href", expect.stringContaining("/guide?chapter="));
+    expect(screen.getByRole("navigation", { name: "Your journey" })).toBeInTheDocument();
   });
 });

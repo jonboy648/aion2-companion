@@ -178,7 +178,7 @@ export function SkillDrawer({ skill, gd, icons, onClose, onSelect }: Props) {
               <h3 className="mb-1.5 text-xs font-medium uppercase tracking-wide text-faint">Specializations</h3>
               <ul className="space-y-1.5">
                 {skill.specializations.map((s, i) => (
-                  <li key={i} className="rounded-md border border-border-soft bg-surface2 px-2.5 py-1.5">
+                  <li key={i} className="frame px-2.5 py-1.5">
                     {s.rank_required != null && <Badge tone="info" className="mr-2">Rank {s.rank_required}</Badge>}
                     <span className="text-dim">{s.text}</span>
                   </li>

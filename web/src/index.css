@@ -1,31 +1,46 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./components/game/game.css";
 
 /* Theme tokens come from D:\Aion2\DESIGN.md (dark navy + gold). The site is dark-only. */
+/* ---- theme tokens. Three faction themes selected by <html data-faction>: neutral (default), asmodian, elyos ---- */
 :root {
-  --bg: #0b1020;
-  --surface: #111831;
-  --surface2: #172040;
-  --surface3: #1f2a52;
-  --border: #2a3563;
-  --border-soft: #1c2547;
-  --text: #e8ebf6;
-  --text-dim: #a3adcc;
-  --text-faint: #6b7699;
+  --bg: #0a1224;
+  --surface: #101a35;
+  --surface2: #16234a;
+  --surface3: #1f2f60;
+  --border: #3a4c88;
+  --border-soft: #243459;
+  --text: #eaeefa;
+  --text-dim: #aeb8d6;
+  --text-faint: #98a3c8;
   --gold: #e0b458;
   --gold-hi: #f2cf7e;
   --gold-lo: #b98d35;
   --gold-ink: #1a1405;
-  --cyan: #4cc3e8;
+  --cyan: #5fd0f0;
   --ok: #4cc38a;
   --warn: #e8a33d;
-  --error: #ef5f6b;
+  --error: #ef6f78;
   --confirmed: #4cc38a;
   --estimated: #e69500;
-  --unknown: #808aa8;
-  --radius: 0.625rem; /* md 10px; sm 6, lg 14 derived below */
+  --unknown: #8f99b8;
+  --radius: 0.625rem;
 
-  /* shadcn/ui semantic variables, mapped onto the tokens above */
+  /* decorative metal (frames, ornaments): bright gold, never used for text */
+  --metal-hi: #f7dd96;
+  --metal: #d9a840;
+  --metal-lo: #8a6420;
+  /* ether glow colour (rgb triplet so we can alpha it) */
+  --ether: 76 195 232;
+  --ether-2: 224 180 88;
+  --page-glow-a: rgb(76 195 232 / 0.16);
+  --page-glow-b: rgb(224 180 88 / 0.07);
+  --panel-top: rgb(255 255 255 / 0.035);
+  --panel-shade: rgb(0 0 0 / 0.28);
+  --noise-blend: screen;
+  --noise-opacity: 0.05;
+
   --background: var(--bg);
   --foreground: var(--text);
   --card: var(--surface);
@@ -44,6 +59,58 @@
   --input: var(--border);
   --ring: var(--gold);
   color-scheme: dark;
+}
+
+/* Asmodian: violet-black surfaces, bronze-gold frames, red ether */
+:root[data-faction="asmodian"] {
+  --bg: #0e0810;
+  --surface: #1a0f22;
+  --surface2: #27152f;
+  --surface3: #361b3f;
+  --border: #7a4a58;
+  --border-soft: #3b2238;
+  --text: #f5ecf1;
+  --text-dim: #cdb7c8;
+  --text-faint: #a28aa0;
+  --gold: #e3b062;
+  --gold-hi: #f4cb86;
+  --gold-lo: #bd8b44;
+  --gold-ink: #1c0f05;
+  --cyan: #ff8794;
+  --error: #ff7b86;
+  --metal-hi: #f1cd8b;
+  --metal: #c98f4a;
+  --metal-lo: #7a4b24;
+  --ether: 226 52 76;
+  --ether-2: 189 120 220;
+  --page-glow-a: rgb(214 40 70 / 0.20);
+  --page-glow-b: rgb(140 60 200 / 0.10);
+}
+
+/* Elyos: midnight-blue surfaces, white-gold frames, sky-blue ether (dark, same contrast level as the others) */
+:root[data-faction="elyos"] {
+  --bg: #070d1f;
+  --surface: #0e1a37;
+  --surface2: #162850;
+  --surface3: #203768;
+  --border: #7088b8;
+  --border-soft: #26396a;
+  --text: #f2f6ff;
+  --text-dim: #b7c4e6;
+  --text-faint: #9cabd8;
+  --gold: #f0dba2;
+  --gold-hi: #fff2c8;
+  --gold-lo: #cbb06a;
+  --gold-ink: #1b1604;
+  --cyan: #8fd6ff;
+  --error: #ff9099;
+  --metal-hi: #fff4d2;
+  --metal: #e6cf96;
+  --metal-lo: #9c8650;
+  --ether: 125 205 255;
+  --ether-2: 255 240 200;
+  --page-glow-a: rgb(110 190 255 / 0.22);
+  --page-glow-b: rgb(255 238 190 / 0.07);
 }
 
 @theme inline {
@@ -89,26 +156,7 @@
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
+  --font-display: "Cinzel", "Trajan Pro", "Palatino Linotype", Georgia, serif;
   --font-sans: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
 }
 
-@layer base {
-  * {
-    border-color: var(--border-soft);
-  }
-  html {
-    background: var(--bg);
-  }
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-size: 14px;
-    min-height: 100vh;
-  }
-  a {
-    color: var(--cyan);
-  }
-  :focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 2px;
-  }
-}

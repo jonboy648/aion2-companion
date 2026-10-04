@@ -14,8 +14,12 @@ def build():
 
 
 @pytest.fixture(autouse=True)
-def _fake(fake_sim):
+def _fake(fake_sim, monkeypatch):
     fake_sim("aion2c.engine.advisor.simulate")
+    # marginal_stats also re-optimises the rotation (real search, real simulator): off for the fake-sim tests,
+    # which check the finite-difference arithmetic; tests/test_mechanics_core.py covers the re-optimised path.
+    from aion2c.models import OptimizeResult
+    monkeypatch.setattr("aion2c.engine.advisor.optimize", lambda gd, b, sc, *a, **k: OptimizeResult(sc, (), ()))
 
 
 def gain(gains, stat):

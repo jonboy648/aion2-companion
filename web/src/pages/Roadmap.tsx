@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { AlertTriangle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { AlertTriangle, BookOpen } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { roadmap } from "@/engine/api";
 import { ClassSelect } from "@/features/keybinds/ClassSelect";
 import { useToolsClass } from "@/features/keybinds/useToolsClass";
+import { JourneyStrip } from "@/features/guide/Journey";
 import { Timeline } from "@/features/roadmap/Timeline";
 import { groupByLevel, KIND_LABEL, progress } from "@/features/roadmap/levels";
 import type { Region, RoadmapItem } from "@/lib/types";
@@ -79,7 +81,7 @@ export function RoadmapPage() {
               max={cap}
               value={level}
               onChange={(e) => setLevel(Math.max(1, Math.min(cap, Math.floor(Number(e.target.value) || 1))))}
-              className="h-9 w-20 rounded-md border border-border bg-surface2 px-2.5 text-sm text-foreground outline-none focus:border-gold"
+              className="h-9 w-20 game-input px-2.5 text-sm text-foreground "
             />
           </label>
           <div role="group" aria-label="Region" className="inline-flex rounded-md border border-border p-0.5 text-sm">
@@ -97,6 +99,16 @@ export function RoadmapPage() {
           </div>
         </div>
       </PageHeader>
+
+      <div className="mb-5 space-y-3">
+        <JourneyStrip level={level} />
+        <p className="flex items-center gap-2 text-sm text-dim">
+          <BookOpen aria-hidden className="size-4 shrink-0 text-gold" />
+          <span>
+            New here? The <Link to="/guide" className="text-cyan">new player guide</Link> explains each stretch, what to focus on and when you are done.
+          </span>
+        </p>
+      </div>
 
       {err && (
         <div role="alert" className="mb-4 flex items-start gap-2.5 rounded-lg border border-error/40 bg-error/10 px-3.5 py-3 text-sm">
@@ -131,9 +143,9 @@ export function RoadmapPage() {
               aria-valuemin={1}
               aria-valuemax={cap}
               aria-valuenow={level}
-              className="h-2.5 overflow-hidden rounded-full bg-surface3"
+              className="xp-bar"
             >
-              <div className="h-full rounded-full bg-gradient-to-r from-gold-lo to-gold-hi" style={{ width: `${(Math.min(level, cap) / cap) * 100}%` }} />
+              <div className="xp-fill" style={{ width: `${(Math.min(level, cap) / cap) * 100}%` }} />
             </div>
             <div role="group" aria-label="Show" className="flex flex-wrap gap-1.5 pt-1">
               {KINDS.map((k) => (
@@ -158,7 +170,7 @@ export function RoadmapPage() {
       {!items && !err && (
         <div className="space-y-3" aria-busy="true" aria-label="Loading road map">
           {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="h-20 animate-pulse rounded-lg border border-border-soft bg-surface" />
+            <div key={i} className="h-20 animate-pulse ornate" />
           ))}
         </div>
       )}

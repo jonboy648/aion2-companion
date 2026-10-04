@@ -8,15 +8,17 @@ import argparse
 import json
 import re
 import shutil
+from dataclasses import replace
 from datetime import datetime, timezone
 from pathlib import Path
 
 from aion2c.models import (
     CommunityRotation, DaevanionBoard, DaevanionEffect, DaevanionNode, GameData, Link, Num,
     RankData, Recipe, RecipeMaterial, RoadmapItem, Skill, SkillKind, SkillRule, Specialization,
-    Status, StatusTrigger,
+    StatMod, Status, StatusTrigger,
 )
 from aion2c.serde import from_dict, to_dict
+from aion2c.specparse import finalize_gamedata
 
 from aion2c.data.loader import class_dir
 
@@ -26,7 +28,10 @@ REPO = Path(__file__).resolve().parents[3]  # D:\Aion2
 DUMP_DATE = "2026-09-18"
 DUMP_SRC = f"aion2.app client dump {DUMP_DATE}"
 # data_contract 1.7: verified only on the KR/TW client, may not exist at global launch
-KR_ONLY_IDS = frozenset({15000000, 15020000, 15030000, 15100000, 15180000, 15250000, 15270000,
+# Burst (15030000) and Pyroclasm (15250000) were removed 2026-10-03: Global sources (sportskeeda,
+# shugo.gg, 2026-10-02) confirm the Flame Arrow > Burst > Pyroclasm chain on Global. The armory skill
+# list never shows chain children, so it can't confirm or refute the rest of this list.
+KR_ONLY_IDS = frozenset({15000000, 15020000, 15100000, 15180000, 15270000,
                          15290000, 15330000, 15340000, 15350000, 15380000})
 CATEGORY_KIND = {"active": SkillKind.ACTIVE, "passive": SkillKind.PASSIVE, "stigma": SkillKind.STIGMA,
                  "system_passive": SkillKind.SYSTEM, "basic_dodge": SkillKind.DODGE,
@@ -153,6 +158,48 @@ def _tags(raw: dict) -> tuple[str, ...]:
     return tuple(dict.fromkeys(parts))
 
 
+def _stagger_gauge(raw: dict) -> float | None:
+    """Datamine `coefficients.stagger_gauge_damage` ("2", "20-35") as a number (range -> upper bound)."""
+    v = (raw.get("coefficients") or {}).get("stagger_gauge_damage")
+    nums = re.findall(r"\d+(?:\.\d+)?", str(v)) if v is not None else []
+    return float(nums[-1]) if nums else None
+
+
+def _stagger_only(raw: dict, desc: str) -> bool:
+    """Damage is stagger gauge only: the text names no damage besides 'Stagger Gauge Damage' and no ratio/flat."""
+    if (raw.get("coefficients") or {}).get("atk_ratio_pct_rank1"):
+        return False
+    if any(pl.get("dmg_min") or pl.get("dmg_max") for pl in raw.get("per_level") or []):
+        return False
+    return not re.search(r"damage", re.sub(r"Stagger Gauge Damage", "", desc, flags=re.I), re.I)
+
+
+def stat_effects_to_mods(mech: dict) -> tuple[dict[str, list[StatMod]], list[str]]:
+    """mechanics.json `stat_effects` (status, stat, value, unit, applies_to) -> StatMods per status key.
+    Only applies_to == "all" entries whose stat is a live Stats field are converted; the rest are returned as
+    skipped notes (never dropped silently)."""
+    named = {"Combat Speed": "combat_speed_pct", "Cooldown Reduction": "cdr_pct", "Critical Damage Boost": "crit_dmg_pct",
+             "PvE Damage Boost": "dmg_boost_pct", "Damage Boost": "dmg_boost_pct", "Attack": "attack_increase_pct"}
+    out: dict[str, list[StatMod]] = {}
+    skipped: list[str] = []
+    for e in mech.get("stat_effects", []):
+        what = f"{e.get('status')}: {e.get('stat')} {e.get('value')}{e.get('unit', '')}"
+        if e.get("applies_to") != "all":
+            skipped.append(f"{what} (applies_to {e.get('applies_to')}: skill-specific, not modelled)")
+            continue
+        conf, src = e.get("confidence", "estimated"), e.get("source", "mechanics.json stat_effects")
+        stat, val = e.get("stat"), e.get("value")
+        if stat in named and e.get("unit") == "%":
+            out.setdefault(e["status"], []).append(StatMod(named[stat], Num(float(val), conf, src)))
+        elif stat == "Critical Hit" and e.get("unit") == "flat":
+            # rating -> % : crit chance caps at 80% at a 1,200 gap (sorcerer_builds_and_dps.md S1/S3), read linear
+            out.setdefault(e["status"], []).append(StatMod("crit_chance_pct", Num(
+                float(val) * 80.0 / 1200.0, "estimated", f"{src}; rating converted at 80%/1200 points (estimated)")))
+        else:
+            skipped.append(f"{what} (no live-stat conversion)")
+    return out, skipped
+
+
 def build_skills(raw_skills: list[dict], keys: list[str], links: tuple[Link, ...], mech: dict,
                  icon_files: dict[str, str]) -> dict[str, Skill]:
     child_kind: dict[str, str] = {}
@@ -190,6 +237,8 @@ def build_skills(raw_skills: list[dict], keys: list[str], links: tuple[Link, ...
         hits = re.search(r"\((\d+) hits?\)", desc)
         aoe = re.search(r"up to (\d+) enemies", desc)
         sid = raw.get("skill_id")
+        stagger = _stagger_gauge(raw)
+        tags_extra = ("stagger_only",) if stagger is not None and _stagger_only(raw, desc) else ()
         if sid is not None:
             icon = icon_files.get(key)
         else:  # id-less children share a parent's icon, e.g. charge tiers (mechanics.icon_prefix_aliases)
@@ -202,9 +251,11 @@ def build_skills(raw_skills: list[dict], keys: list[str], links: tuple[Link, ...
             atk_ratio_pct=_num_ratio(raw, has_attack), ranks=ranks, range_m=raw.get("range_m"),
             aoe_targets=int(aoe.group(1)) if aoe else 1, hits=int(hits.group(1)) if hits else 1,
             anim_lock_s=anim_long if key in long_skills else anim_default, icon=icon,
-            description=desc, tags=tuple(dict.fromkeys(_tags(raw) + tuple(mech.get("skill_tags", {}).get(key, ())))),
+            description=desc,
+            tags=tuple(dict.fromkeys(_tags(raw) + tuple(mech.get("skill_tags", {}).get(key, ())) + tags_extra)),
             specializations=tuple(Specialization(s.get("unlock_level"), s["text"])
-                                  for s in raw.get("specializations") or []))
+                                  for s in raw.get("specializations") or []),
+            hp_dmg_coeff=0.0 if tags_extra else 1.0, stagger_gauge=stagger)
     return skills
 
 
@@ -233,7 +284,8 @@ def build_recipes(path: Path) -> tuple[Recipe, ...]:
     for r in json.loads(path.read_text(encoding="utf-8"))["recipes"]:
         o = r["output"]
         out.append(Recipe(
-            id=r["id"], name=r["name"], profession=r["profession"], level=r.get("level"),
+            # research notes like "Armorsmithing (aion2hub label: Tailoring)" stay out of what users see
+            id=r["id"], name=r["name"], profession=r["profession"].split(" (aion2hub label")[0], level=r.get("level"),
             output_item=o["item"], output_qty=o["qty"], item_level=o.get("item_level"), grade=o.get("grade"),
             materials=tuple(RecipeMaterial(m["item"], m["qty"], m.get("source")) for m in r["materials"]),
             base_materials=tuple(RecipeMaterial(m["item"], m["qty"]) for m in r.get("base_materials_expanded") or []),
@@ -249,8 +301,17 @@ def _validate(gd: GameData) -> None:
         if bad:
             raise ValueError(f"rule {key} references unknown keys {bad}")
     for t in gd.triggers:
-        if t.status_key not in st or t.source_skill not in sk:
+        refs = [k for k in (t.proc_skill, t.reset_skill, *t.on_skills) if k]
+        if ((t.status_key or not (t.proc_skill or t.reset_skill)) and t.status_key not in st) or t.source_skill not in sk                 or any(k not in sk for k in refs) or (t.on_status and t.on_status not in st):
             raise ValueError(f"trigger {t} references unknown keys")
+    for s_ in sk.values():
+        for sp in s_.specializations:
+            for e in sp.effects:
+                bad = [k for k in (e.skill_key, e.on_skill) if k and k not in sk]
+                bad += [k for k in (e.status_key,) if k and k not in st]
+                bad += [k for k in (e.requires_status,) if k and k != "@own" and k not in st]
+                if bad:
+                    raise ValueError(f"specialty effect of {s_.key} references unknown keys {bad}")
     for s in st.values():
         if s.source_skill is not None and s.source_skill not in sk:
             raise ValueError(f"status {s.key} source_skill {s.source_skill} unknown")
@@ -286,6 +347,12 @@ def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: 
         daevanion=build_daevanion(srcs.daevanion, skills),
         recipes=build_recipes(srcs.crafting),
         class_key=class_key)
+    mods, _skipped = stat_effects_to_mods(mech)
+    for sk_key, ms in mods.items():
+        if sk_key in gd.statuses:
+            st = gd.statuses[sk_key]
+            gd.statuses[sk_key] = replace(st, stat_mods=st.stat_mods + tuple(ms))
+    gd = finalize_gamedata(gd, mech.get("specialization_effects") or {}, mech.get("spec_slot_ranks"))
     _validate(gd)
     return gd
 

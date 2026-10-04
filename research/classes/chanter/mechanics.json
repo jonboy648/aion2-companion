@@ -1,5 +1,5 @@
 {
- "_comment": "Chanter hand-authored sim mechanics, same schema as aion2c/data/src/mechanics.json. Every Num carries confidence + source. Values at RANK 1 unless stated. Global client dump 2026-09-18; KR patch differences listed in NOTES.md.",
+ "_comment": "Chanter hand-authored sim mechanics, same schema as aion2c/data/src/mechanics.json. Every Num carries confidence + source. Values at RANK 1 unless stated. Global client dump 2026-09-18; KR patch differences listed in NOTES.md. 2026-10-03 mechanics pass: hand-maintained from here on (build_mech.py is superseded): stat-mod statuses, Dark Crush window triggers, Wind's Promise crit proc, specialization_effects.",
  "anim_lock": {
   "default": {
    "value": 1.0,
@@ -79,7 +79,7 @@
    "cc",
    "debuff",
    "conditional-stun",
-   "stagger"
+   "stagger-gauge"
   ],
   "wave-blow-18080037": [
    "proc",
@@ -111,7 +111,7 @@
    "damage",
    "mobility",
    "debuff",
-   "stagger"
+   "stagger-gauge"
   ],
   "focused-defense": [
    "manual",
@@ -156,13 +156,13 @@
    "damage",
    "cc",
    "mobility",
-   "stagger"
+   "stagger-gauge"
   ],
   "obliterate": [
    "damage",
    "aoe",
    "cc",
-   "stagger"
+   "stagger-gauge"
   ],
   "ensnaring-mark": [
    "damage",
@@ -189,7 +189,7 @@
    "mobility",
    "buff",
    "opens-dark-crush",
-   "stagger"
+   "stagger-gauge"
   ],
   "gust-rampage": [
    "damage",
@@ -218,7 +218,7 @@
    "damage",
    "chain",
    "mobility",
-   "stagger"
+   "stagger-gauge"
   ],
   "crushing-strike": [
    "damage",
@@ -470,62 +470,6 @@
     "source": "no tick"
    }
   },
-  "dark_crush_ready": {
-   "key": "dark_crush_ready",
-   "name": "Dark Crush ready (2 s)",
-   "on": "self",
-   "duration_s": {
-    "value": 2.0,
-    "confidence": "confirmed",
-    "source": "Impactful Crush and Spinning Strike: '[Dark Crush] becomes available for 2s on skill use' (aion2.app client dump 2026-09-18, Metaroad)"
-   },
-   "dmg_mult": {
-    "value": 1.0,
-    "confidence": "estimated",
-    "source": "no damage amplification modelled; enabling/gating status"
-   },
-   "elements": [],
-   "mp_min_pct": null,
-   "source_skill": null,
-   "tick_ratio_pct": {
-    "value": 0.0,
-    "confidence": "unknown",
-    "source": "no damage tick"
-   },
-   "tick_s": {
-    "value": 1.0,
-    "confidence": "unknown",
-    "source": "no tick"
-   }
-  },
-  "dark_crush_ready_3s": {
-   "key": "dark_crush_ready_3s",
-   "name": "Dark Crush ready (3 s)",
-   "on": "self",
-   "duration_s": {
-    "value": 3.0,
-    "confidence": "confirmed",
-    "source": "Ensnaring Mark and Marchutan's Wrath: '[Dark Crush] becomes available for 3s' (aion2.app client dump 2026-09-18); KR patch lowered Marchutan's from 7s to 3s (aion2hub Aug 26 2026 patch notes (Korea))"
-   },
-   "dmg_mult": {
-    "value": 1.0,
-    "confidence": "estimated",
-    "source": "no damage amplification modelled; enabling/gating status"
-   },
-   "elements": [],
-   "mp_min_pct": null,
-   "source_skill": null,
-   "tick_ratio_pct": {
-    "value": 0.0,
-    "confidence": "unknown",
-    "source": "no damage tick"
-   },
-   "tick_s": {
-    "value": 1.0,
-    "confidence": "unknown",
-    "source": "no tick"
-   }
-  },
   "spinning_strike_crit": {
    "key": "spinning_strike_crit",
    "name": "Spinning Strike Crit Damage",
@@ -533,26 +477,36 @@
    "duration_s": {
     "value": 30.0,
     "confidence": "confirmed",
-    "source": "+15% Critical Damage Boost for 30s, stacks 2 (aion2.app client dump 2026-09-18)"
+    "source": "+15% Critical Damage Boost for 30s, stacks 2 (se:1829000711 time 30; aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens))"
    },
    "dmg_mult": {
-    "value": null,
-    "confidence": "unknown",
-    "source": "+15% crit damage boost per stack (x2 stacks = +30%); converts to damage only with crit chance, not a flat multiplier"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
    },
    "elements": [],
    "mp_min_pct": null,
    "source_skill": "spinning-strike",
    "tick_ratio_pct": {
     "value": 0.0,
-    "confidence": "unknown",
+    "confidence": "confirmed",
     "source": "no damage tick"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
     "source": "no tick"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 30.0,
+      "confidence": "estimated",
+      "source": "+15% per stack (token abe:1829000711 = 15) x 2 stacks; both stacks up needs the cooldown (30 s, -5 s spec) <= the 30 s duration; one stack = 15"
+     }
+    }
+   ]
   },
   "protection_circle": {
    "key": "protection_circle",
@@ -756,55 +710,83 @@
    "on": "self",
    "duration_s": {
     "value": 0.0,
-    "confidence": "estimated",
-    "source": "toggle skill, no duration (party aura)"
+    "confidence": "confirmed",
+    "source": "toggle skill: permanent once cast (client text has no duration)"
    },
    "dmg_mult": {
-    "value": 1.105,
-    "confidence": "estimated",
-    "source": "+10.5% PvE Damage Boost at rank 1 (22.5% at rank 25) (aion2.app client dump 2026-09-18); treated as a damage multiplier, real bucket unknown; party-wide"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
    },
    "elements": [],
    "mp_min_pct": null,
    "source_skill": "undefeated-mantra",
    "tick_ratio_pct": {
     "value": 0.0,
-    "confidence": "unknown",
+    "confidence": "confirmed",
     "source": "no damage tick"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
     "source": "no tick"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 18.0,
+      "confidence": "estimated",
+      "source": "PvE Damage Boost token abe:1819000111: 10.5 (rank 1), 15 (10), 18 (16), 20 (20), 22.5 (25); rank 16 used (armory Mantra 15-17, couga says max it). Additive bucket. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
+     }
+    }
+   ]
   },
   "power_of_the_storm": {
    "key": "power_of_the_storm",
    "name": "Power of the Storm",
    "on": "self",
    "duration_s": {
-    "value": 10.0,
-    "confidence": "confirmed",
-    "source": "+20% Combat Speed and -20% cooldowns for 10s at rank 1, 22.5s at rank 25 (aion2.app client dump 2026-09-18); party gets +20% speed and -10% cooldowns"
+    "value": 17.5,
+    "confidence": "estimated",
+    "source": "duration token se:1825000011:time: 10 s (rank 1), 14.5 (10), 17.5 (16), 20 (20), 22.5 (25); rank 16 used. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
    },
    "dmg_mult": {
     "value": 1.0,
-    "confidence": "estimated",
-    "source": "speed/cooldown buff: feed Stats combat_speed_pct and cdr_pct (+20% each) instead of a multiplier; spec rank 20 adds +20% caster Attack"
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
    },
    "elements": [],
    "mp_min_pct": null,
    "source_skill": "power-of-the-storm",
    "tick_ratio_pct": {
     "value": 0.0,
-    "confidence": "unknown",
+    "confidence": "confirmed",
     "source": "no damage tick"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
     "source": "no tick"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "combat_speed_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "+20% Combat Speed (token abe:1825000011 = 20, flat across ranks); party gets +20%. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
+     }
+    },
+    {
+     "stat": "cdr_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "-20% skill cooldowns (token abe:1825000012 = 20); party gets -10%. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
+     }
+    }
+   ]
   },
   "impeding_authority": {
    "key": "impeding_authority",
@@ -896,27 +878,37 @@
    "on": "self",
    "duration_s": {
     "value": 0.0,
-    "confidence": "estimated",
-    "source": "passive, no duration"
+    "confidence": "confirmed",
+    "source": "passive: always on"
    },
    "dmg_mult": {
-    "value": 1.055,
-    "confidence": "estimated",
-    "source": "+5.5% PvE Damage Boost at rank 1 (25% at rank 40), also +2% Defense, +100 Accuracy (aion2.app client dump 2026-09-18); rank scaling is large, app should pick by rank"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
    },
    "elements": [],
    "mp_min_pct": null,
    "source_skill": "attack-preparation",
    "tick_ratio_pct": {
     "value": 0.0,
-    "confidence": "unknown",
+    "confidence": "confirmed",
     "source": "no damage tick"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
     "source": "no tick"
-   }
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "estimated",
+      "source": "PvE Damage Boost token abe:1875000011: 5.5 (rank 1), 10 (10), 13 (16), 15 (20); rank 10 used (BASE_RANK_CAP). Armory stats may already include passives. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
+     }
+    }
+   ]
   },
   "earths_promise_debuff": {
    "key": "earths_promise_debuff",
@@ -925,19 +917,19 @@
    "duration_s": {
     "value": 5.0,
     "confidence": "confirmed",
-    "source": "-5.4% PvE Damage Tolerance (rank 1) to -21% (rank 40) for 5s per hit, internal cooldown 10s (aion2.app client dump 2026-09-18)"
+    "source": "5 s per application (token se:1878000111), internal cooldown 10 s (abe:1878000011) -> triggered with chance 0.1 per cast so uptime ~50%"
    },
    "dmg_mult": {
-    "value": 1.054,
+    "value": 1.114,
     "confidence": "estimated",
-    "source": "tolerance reduction treated as +damage taken; real bucket unknown; KR patch cut the effect to 9/13/17% (Aug 26)"
+    "source": "PvE Damage Tolerance -% token abe:1878000111: 5.4 (rank 1), 9 (10), 11.4 (16), 13 (20): rank 16 read as +11.4% damage taken (tolerance bucket unknown). KR patch cut it to 9/13/17%. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
    },
    "elements": [],
    "mp_min_pct": null,
    "source_skill": "earths-promise",
    "tick_ratio_pct": {
     "value": 0.0,
-    "confidence": "unknown",
+    "confidence": "confirmed",
     "source": "no damage tick"
    },
    "tick_s": {
@@ -1032,24 +1024,430 @@
   },
   "winds_promise_crit": {
    "key": "winds_promise_crit",
-   "name": "Wind's Promise",
+   "name": "Wind's Promise (Crit Damage)",
    "on": "self",
    "duration_s": {
     "value": 0.0,
-    "confidence": "estimated",
-    "source": "passive, no duration"
+    "confidence": "confirmed",
+    "source": "passive: always on"
    },
    "dmg_mult": {
-    "value": null,
-    "confidence": "unknown",
-    "source": "+5.7% Crit Damage Boost (rank 1) to 33% (rank 40) plus 50% chance on crit for 554 flat extra damage, 1s cooldown (aion2.app client dump 2026-09-18); crit conversion needed"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
    },
    "elements": [],
-   "mp_min_pct": null,
+   "mp_min_pct": 0.0,
    "source_skill": "winds-promise",
    "tick_ratio_pct": {
     "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
     "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 12.0,
+      "confidence": "estimated",
+      "source": "Critical Damage Boost token abe:1880000012: 5.7 (rank 1), 12 (10), 16.2 (16), 19 (20); rank 10 used. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
+     }
+    }
+   ]
+  },
+  "inspiring_spell_crit": {
+   "key": "inspiring_spell_crit",
+   "name": "Inspiring Spell (Critical Hit)",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "passive: always on"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "inspiring-spell",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 12.667,
+      "confidence": "estimated",
+      "source": "+190 Critical Hit at rank 10 (token abe:1874000011: 100 at rank 1, 190 at 10, 250 at 16); rating -> % at 80%/1200 points (estimated, models.STAT_MAP_NOTES). Perfect Chance +5% (abe:1874000012) not modelled. aion2.app client dump 2026-09-18 (research/classes/chanter/skills.json per_level tokens)"
+     }
+    }
+   ]
+  },
+  "dark_crush_window": {
+   "key": "dark_crush_window",
+   "name": "Dark Crush ready",
+   "on": "self",
+   "duration_s": {
+    "value": 2.0,
+    "confidence": "confirmed",
+    "source": "length is set per opener by the trigger window_s: 2 s after Impactful Crush / Spinning Strike (token se:1810000711), 3 s after Ensnaring Mark / Marchutan's Wrath (se:1810000811)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "gating status: no multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "spec_undefeated_crit": {
+   "key": "spec_undefeated_crit",
+   "name": "Undefeated Mantra specialty: +100 Critical Hit",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "permanent once the toggle is cast"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "undefeated-mantra",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 6.667,
+      "confidence": "estimated",
+      "source": "+100 Critical Hit (spec text, token abe:1819001115 = 100); rating -> % at 80%/1200 points (estimated, models.STAT_MAP_NOTES)"
+     }
+    }
+   ]
+  },
+  "spec_undefeated_critdmg": {
+   "key": "spec_undefeated_critdmg",
+   "name": "Undefeated Mantra specialty: +5% Crit Damage",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "permanent once the toggle is cast"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "undefeated-mantra",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 5.0,
+      "confidence": "confirmed",
+      "source": "+5% Critical Damage Boost (spec text, token abe:1819003117 = 5)"
+     }
+    }
+   ]
+  },
+  "spec_undefeated_double": {
+   "key": "spec_undefeated_double",
+   "name": "Undefeated Mantra specialty: +5% Double Chance",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "permanent once the toggle is cast"
+   },
+   "dmg_mult": {
+    "value": 1.05,
+    "confidence": "estimated",
+    "source": "Double Chance = Smite (KO text) = chance of double damage: +5% smite = x(1+0.05*SMITE_BONUS 1.0) on a 0% smite base; x1.035 on a boss (0.7 factor). Stats.smite_pct is not a StatMod field."
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "undefeated-mantra",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "spec_pots_crit": {
+   "key": "spec_pots_crit",
+   "name": "Power of the Storm specialty: +200 Critical Hit",
+   "on": "self",
+   "duration_s": {
+    "value": 17.5,
+    "confidence": "estimated",
+    "source": "same as the buff (rank 16)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "power-of-the-storm",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 13.333,
+      "confidence": "estimated",
+      "source": "+200 Critical Hit (token abe:1825003014 = 200); rating -> % at 80%/1200 points (estimated, models.STAT_MAP_NOTES)"
+     }
+    }
+   ]
+  },
+  "spec_pots_attack": {
+   "key": "spec_pots_attack",
+   "name": "Power of the Storm specialty: +20% Attack",
+   "on": "self",
+   "duration_s": {
+    "value": 17.5,
+    "confidence": "estimated",
+    "source": "same as the buff (rank 16)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "power-of-the-storm",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "+20% caster Attack (token abe:1825004015 = 20; party member +10%)"
+     }
+    }
+   ]
+  },
+  "spec_guardian_windspromise": {
+   "key": "spec_guardian_windspromise",
+   "name": "Guardian Blessing specialty: x1.5 Wind's Promise",
+   "on": "self",
+   "duration_s": {
+    "value": 300.0,
+    "confidence": "confirmed",
+    "source": "Guardian Blessing lasts 300 s (se:1842000011)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no direct multiplier; effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "guardian-blessing",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_dmg_pct",
+     "value": {
+      "value": 6.0,
+      "confidence": "estimated",
+      "source": "x1.5 of Wind's Promise crit damage (12% at rank 10) = +6%; the proc damage x1.5 is not modelled"
+     }
+    }
+   ]
+  },
+  "spec_storm_chain_marker": {
+   "key": "spec_storm_chain_marker",
+   "name": "Specialty proc marker: storm-chain",
+   "on": "self",
+   "duration_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "marker only: its application fires the proc skill through a status trigger"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "marker, no multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "spec_piercing_strike_marker": {
+   "key": "spec_piercing_strike_marker",
+   "name": "Specialty proc marker: piercing-strike",
+   "on": "self",
+   "duration_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "marker only: its application fires the proc skill through a status trigger"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "marker, no multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "spec_surging_strike_marker": {
+   "key": "spec_surging_strike_marker",
+   "name": "Specialty proc marker: surging-strike",
+   "on": "self",
+   "duration_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "marker only: its application fires the proc skill through a status trigger"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "marker, no multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": "no tick"
+   }
+  },
+  "spec_heat_wave_blow_marker": {
+   "key": "spec_heat_wave_blow_marker",
+   "name": "Specialty proc marker: heat-wave-blow",
+   "on": "self",
+   "duration_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "marker only: its application fires the proc skill through a status trigger"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "marker, no multiplier"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
     "source": "no damage tick"
    },
    "tick_s": {
@@ -1070,9 +1468,107 @@
   {
    "status_key": "earths_promise_debuff",
    "on_element": "none",
-   "chance": 1.0,
+   "chance": 0.1,
    "source_skill": "earths-promise",
-   "confidence": "confirmed"
+   "confidence": "estimated",
+   "note": "applies on a landed attack with a 10 s internal cooldown and a 5 s duration: chance 0.1 per cast = one application per ~10 casts (~1 s each) = ~50% uptime"
+  },
+  {
+   "status_key": "dark_crush_window",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "impactful-crush",
+   "confidence": "confirmed",
+   "event": "cast",
+   "on_skills": [
+    "impactful-crush"
+   ],
+   "window_s": 2.0
+  },
+  {
+   "status_key": "dark_crush_window",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "spinning-strike",
+   "confidence": "confirmed",
+   "event": "cast",
+   "on_skills": [
+    "spinning-strike"
+   ],
+   "window_s": 2.0
+  },
+  {
+   "status_key": "dark_crush_window",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "ensnaring-mark",
+   "confidence": "confirmed",
+   "event": "cast",
+   "on_skills": [
+    "ensnaring-mark"
+   ],
+   "window_s": 3.0
+  },
+  {
+   "status_key": "dark_crush_window",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "marchutans-wrath",
+   "confidence": "confirmed",
+   "event": "cast",
+   "on_skills": [
+    "marchutans-wrath"
+   ],
+   "window_s": 3.0
+  },
+  {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 0.5,
+   "source_skill": "winds-promise",
+   "confidence": "confirmed",
+   "event": "crit",
+   "proc_skill": "winds-promise"
+  },
+  {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "onslaught",
+   "confidence": "estimated",
+   "event": "status",
+   "on_status": "spec_storm_chain_marker",
+   "proc_skill": "storm-chain"
+  },
+  {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "dark-crush",
+   "confidence": "estimated",
+   "event": "status",
+   "on_status": "spec_piercing_strike_marker",
+   "proc_skill": "piercing-strike"
+  },
+  {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "tremor-crush",
+   "confidence": "estimated",
+   "event": "status",
+   "on_status": "spec_surging_strike_marker",
+   "proc_skill": "surging-strike"
+  },
+  {
+   "status_key": "",
+   "on_element": "none",
+   "chance": 1.0,
+   "source_skill": "rushing-smash",
+   "confidence": "estimated",
+   "event": "status",
+   "on_status": "spec_heat_wave_blow_marker",
+   "proc_skill": "heat-wave-blow"
   }
  ],
  "rules": {
@@ -1157,10 +1653,9 @@
   "impactful-crush": {
    "skill_key": "impactful-crush",
    "applies": [
-    "stun",
-    "dark_crush_ready"
+    "stun"
    ],
-   "apply_chance": 0.6,
+   "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
    "chain_next": null,
@@ -1168,7 +1663,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "60% Stun 3s on players, 100% on NPC targets (so use chance 1.0 vs mobs/bosses unless immune), aion2.app client dump 2026-09-18. Opens Dark Crush for 2s. apply_chance covers Stun only; dark_crush_ready is always applied"
+   "note": "Stun 3 s: 60% on players, 100% on NPC targets (client text) -> 1.0; boss Incapacitated Immunity is not modelled. Opens Dark Crush for 2 s through a cast trigger (see triggers)."
   },
   "crushing-blow": {
    "skill_key": "crushing-blow",
@@ -1270,14 +1765,16 @@
    "skill_key": "dark-crush",
    "applies": [],
    "apply_chance": 1.0,
-   "requires": [],
+   "requires": [
+    "dark_crush_window"
+   ],
    "consumes": [],
    "chain_next": null,
    "chain_window_s": 3.0,
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "usable only inside a Dark Crush window: dark_crush_ready (2 s, from Impactful Crush / Spinning Strike) OR dark_crush_ready_3s (3 s, from Ensnaring Mark / Marchutan's Wrath). Schema has AND-only 'requires', so no requires is listed: engine must treat the two statuses as OR. 5 s cooldown, removed at spec rank 16. Chain spec rank 12 adds Piercing Strike. KR rework 2026-08-26: usable 'when using a ranged skill' (aion2hub Aug 26 2026 patch notes (Korea))"
+   "note": "usable only while dark_crush_window is open (2 s after Impactful Crush / Spinning Strike, 3 s after Ensnaring Mark / Marchutan's Wrath; tokens se:1810000711 / se:1810000811). Opened by cast triggers so one AND-only `requires` is enough. 5 s cooldown, removed by spec rank 16. Piercing Strike chain (spec rank 12) is a trigger proc."
   },
   "piercing-strike": {
    "skill_key": "piercing-strike",
@@ -1467,10 +1964,9 @@
   "ensnaring-mark": {
    "skill_key": "ensnaring-mark",
    "applies": [
-    "seal",
-    "dark_crush_ready_3s"
+    "seal"
    ],
-   "apply_chance": 0.5,
+   "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
    "chain_next": null,
@@ -1478,7 +1974,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "50% Seal 5s (100% on NPC); Dark Crush ready 3s always applied"
+   "note": "Seal 5 s: 50% on players, 100% on NPC targets (client text). Opens Dark Crush for 3 s through a cast trigger."
   },
   "impeding-authority": {
    "skill_key": "impeding-authority",
@@ -1513,8 +2009,7 @@
   "spinning-strike": {
    "skill_key": "spinning-strike",
    "applies": [
-    "spinning_strike_crit",
-    "dark_crush_ready"
+    "spinning_strike_crit"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -1524,7 +2019,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "20 m AoE, MP 250, cd 30 s in global dump. KR Aug 26 patch: cd 15 s, MP 100, +30% speed (aion2hub Aug 26 2026 patch notes (Korea)); global client not updated. Opens Dark Crush 2 s; crit damage +15% x2 stacks 30 s"
+   "note": "20 m AoE, MP 250, cd 30 s in global dump. KR Aug 26 patch: cd 15 s, MP 100, +30% speed (aion2hub Aug 26 2026 patch notes (Korea)); global client not updated. Opens Dark Crush 2 s; crit damage +15% x2 stacks 30 s | Dark Crush window is opened by a cast trigger, not by `applies`."
   },
   "gust-rampage": {
    "skill_key": "gust-rampage",
@@ -1543,9 +2038,7 @@
   },
   "marchutans-wrath": {
    "skill_key": "marchutans-wrath",
-   "applies": [
-    "dark_crush_ready_3s"
-   ],
+   "applies": [],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -1554,7 +2047,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "confirmed",
-   "note": "Dark Crush ready 3s; spec rank 10 50% Stun, rank 15 -70% Incoming Heal and Potion Recovery on target (PvP)"
+   "note": "Dark Crush ready 3s; spec rank 10 50% Stun, rank 15 -70% Incoming Heal and Potion Recovery on target (PvP) | Opens Dark Crush for 3 s through a cast trigger."
   },
   "guardian-blessing": {
    "skill_key": "guardian-blessing",
@@ -1646,7 +2139,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "passive proc: 146 flat extra damage (rank 1) vs targets Staggered OR Impact-type, 1 s cooldown; AND-only requires lists staggered only"
+   "note": "passive proc: 146 flat extra damage (rank 1) vs targets Staggered OR Impact-type, 1 s cooldown; AND-only requires lists staggered only | auto-gated by the 'afflicted with Stagger' text (needs_stagger): never fires until a stagger window exists; internal cooldown 1 s in skills.json"
   },
   "winds-promise": {
    "skill_key": "winds-promise",
@@ -1661,7 +2154,7 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "passive proc on crit, see status"
+   "note": "passive proc on crit: 50% chance, 554 flat at rank 1 (token se_dmg:1880000111), internal cooldown 1 s (token abe:1880000011 value03 = 1; applied as the skill cooldown in skills.json per_level)"
   },
   "attack-preparation": {
    "skill_key": "attack-preparation",
@@ -1716,6 +2209,195 @@
    "mp_restore": 0.0,
    "confidence": "unknown",
    "note": "Metaroad charge tier row, no ratios"
+  }
+ },
+ "specialization_effects": {
+  "onslaught": {
+   "4": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "Adds [Storm Chain] (199 flat + 180 MP at rank 1) as the 4th chain skill, one proc per Onslaught cast: the chain press is approximated by a free proc (no animation lock)"
+     },
+     "status_key": "spec_storm_chain_marker"
+    }
+   ]
+  },
+  "dark-crush": {
+   "2": [
+    {
+     "kind": "force_crit",
+     "value": {
+      "value": 1,
+      "confidence": "confirmed",
+      "source": "KO text (guaranteed Critical Hit on hit)"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "Adds [Piercing Strike] (336 flat, 5 stagger) as the 2nd chain skill: the chain press is approximated by a free proc (no animation lock)"
+     },
+     "status_key": "spec_piercing_strike_marker"
+    }
+   ]
+  },
+  "tremor-crush": {
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 1.0,
+      "confidence": "estimated",
+      "source": "Adds [Surging Strike] (338 flat): the chain press is approximated by a free proc (no animation lock)"
+     },
+     "status_key": "spec_surging_strike_marker"
+    }
+   ]
+  },
+  "rushing-smash": {
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 1.0,
+      "confidence": "confirmed",
+      "source": "50% chance to trigger [Heat Wave Blow] on hit (spec text); its own 10 s cooldown applies"
+     },
+     "status_key": "spec_heat_wave_blow_marker",
+     "chance": 0.5
+    }
+   ],
+   "3": [
+    {
+     "kind": "reset_skill",
+     "value": {
+      "value": 1,
+      "confidence": "confirmed",
+      "source": "Resets cooldown on defeating an enemy (KO text)"
+     },
+     "skill_key": "rushing-smash",
+     "trigger": "kill"
+    }
+   ]
+  },
+  "fracturing-blow": {
+   "2": [
+    {
+     "kind": "force_crit",
+     "value": {
+      "value": 1,
+      "confidence": "confirmed",
+      "source": "KO text (guaranteed Critical Hit on hit)"
+     }
+    }
+   ],
+   "3": [
+    {
+     "kind": "dmg_mult",
+     "value": {
+      "value": 1.3,
+      "confidence": "confirmed",
+      "source": "+30% additional damage to Impact-type status targets (spec text)"
+     },
+     "cond": "unmodeled",
+     "note": "needs the Impact-type status set, which is not modelled"
+    }
+   ]
+  },
+  "obliterate": {
+   "2": [
+    {
+     "kind": "force_crit",
+     "value": {
+      "value": 1,
+      "confidence": "confirmed",
+      "source": "KO text (guaranteed Critical Hit on hit)"
+     }
+    }
+   ]
+  },
+  "undefeated-mantra": {
+   "0": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "spec +100 Critical Hit for the toggle"
+     },
+     "status_key": "spec_undefeated_crit"
+    }
+   ],
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 0.0,
+      "confidence": "confirmed",
+      "source": "spec +5% Critical Damage Boost for the toggle"
+     },
+     "status_key": "spec_undefeated_critdmg"
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 0.0,
+      "confidence": "estimated",
+      "source": "spec +5% Double Chance for the toggle"
+     },
+     "status_key": "spec_undefeated_double"
+    }
+   ]
+  },
+  "power-of-the-storm": {
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 17.5,
+      "confidence": "estimated",
+      "source": "spec +200 Critical Hit during the buff"
+     },
+     "status_key": "spec_pots_crit"
+    }
+   ],
+   "3": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 17.5,
+      "confidence": "estimated",
+      "source": "spec +20% Attack during the buff"
+     },
+     "status_key": "spec_pots_attack"
+    }
+   ]
+  },
+  "guardian-blessing": {
+   "1": [],
+   "2": [
+    {
+     "kind": "adds_status",
+     "value": {
+      "value": 300.0,
+      "confidence": "estimated",
+      "source": "spec x1.5 Wind's Promise during the buff"
+     },
+     "status_key": "spec_guardian_windspromise"
+    }
+   ]
+  },
+  "sprint-mantra": {
+   "3": []
   }
  }
 }

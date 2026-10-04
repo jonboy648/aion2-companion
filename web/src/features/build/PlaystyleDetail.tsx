@@ -1,3 +1,5 @@
+import { RotationPlan } from "./RotationPlan";
+import { SectionTitle } from "@/components/game/SectionTitle";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,7 +35,7 @@ function StigmaList({ picks, data }: { picks: [string, number][]; data: ClassDat
   return (
     <ul className="grid gap-2 sm:grid-cols-2">
       {picks.map(([key, gain]) => (
-        <li key={key} className="flex items-center gap-3 rounded-md border border-border-soft bg-surface2 p-2.5">
+        <li key={key} className="flex items-center gap-3 frame p-2.5">
           <SkillIcon name={skillName(data.gd?.skills, key)} url={data.icons[key]} size={44} ring="var(--gold-lo)" />
           <span className="min-w-0 flex-1">
             <span className="block truncate text-sm font-medium">{skillName(data.gd?.skills, key)}</span>
@@ -47,7 +49,7 @@ function StigmaList({ picks, data }: { picks: [string, number][]; data: ClassDat
 
 function VariantCard({ v, applied, data, onUse }: { v: BuildVariant; applied: boolean; data: ClassData; onUse: () => void }) {
   return (
-    <li className="flex flex-col gap-2 rounded-md border border-border-soft bg-surface2 p-3">
+    <li className="flex flex-col gap-2 frame p-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="text-sm font-semibold">{v.label}</span>
         <Badge tone={v.dps_delta_pct < -0.05 ? "warn" : "ok"}>{Math.abs(v.dps_delta_pct) < 0.05 ? "No DPS cost" : `${fmtPct(v.dps_delta_pct)} DPS`}</Badge>
@@ -68,6 +70,74 @@ function VariantCard({ v, applied, data, onUse }: { v: BuildVariant; applied: bo
   );
 }
 
+export interface RankBuy {
+  key: string;
+  from: number;
+  to: number;
+  gain: number;
+  /** points spent on this skill (engine cost tables: SKILL_POINT_COST / STIGMA_POINT_COST) */
+  cost: number;
+  stigma: boolean;
+}
+
+const SKILL_COST = [0, 1, 1, 1, 2, 2, 2, 4, 4, 4]; // index = rank - 1
+const STIGMA_COST = [...Array(5).fill(1), ...Array(5).fill(2), ...Array(5).fill(4), ...Array(5).fill(8)];
+
+/** rank_log (purchase order, one row per rank) grouped by skill: ranks bought, summed DPS gain %, points spent. */
+export function groupRankLog(log: [string, number, number][], isStigma: (key: string) => boolean = () => false): RankBuy[] {
+  const out = new Map<string, RankBuy>();
+  for (const [key, rank, gain] of log) {
+    const stigma = isStigma(key);
+    const cost = (stigma ? STIGMA_COST : SKILL_COST)[rank - 1] ?? 0;
+    const cur = out.get(key);
+    if (cur) {
+      cur.from = Math.min(cur.from, rank - 1);
+      cur.to = Math.max(cur.to, rank);
+      cur.gain += gain;
+      cur.cost += cost;
+    } else out.set(key, { key, from: rank - 1, to: rank, gain, cost, stigma });
+  }
+  return [...out.values()].sort((a, b) => b.gain - a.gain);
+}
+
+function SkillPoints({ fb, data, rankedSkills }: { fb: FullBuild; data: ClassData; rankedSkills: number }) {
+  const entered = fb.build.skill_points ?? 0;
+  const stigEntered = fb.build.stigma_points ?? 0;
+  if (fb.rank_log.length === 0) {
+    return (
+      <p className="text-sm text-dim">
+        {entered > 0 || stigEntered > 0
+          ? "Nothing is worth buying with your points: every skill is already at its best rank for this playstyle."
+          : `Enter your unspent skill points above to see where to spend them. Until then your ${rankedSkills} ranked skills are used as imported.`}
+      </p>
+    );
+  }
+  const buys = groupRankLog(fb.rank_log, (k) => data.gd?.skills[k]?.kind === "stigma");
+  const sum = (stigma: boolean) => buys.filter((b) => b.stigma === stigma).reduce((n, b) => n + b.cost, 0);
+  return (
+    <div className="space-y-2" data-testid="rank-log">
+      <p className="text-sm font-medium">Spend your {entered || stigEntered} points:</p>
+      <ul className="space-y-1.5 text-sm">
+        {buys.map((b) => (
+          <li key={b.key} className="flex items-center gap-2">
+            <SkillIcon name={skillName(data.gd?.skills, b.key)} url={data.icons[b.key]} size={26} />
+            <span className="flex-1">{skillName(data.gd?.skills, b.key)}</span>
+            <span className="tabular-nums text-dim">
+              rank {b.from} → {b.to}
+            </span>
+            <span className="w-24 text-right tabular-nums text-ok">{fmtPct(b.gain)} DPS</span>
+          </li>
+        ))}
+      </ul>
+      <p className="text-xs text-dim">
+        {sum(false) > 0 && `Uses ${sum(false)} of ${entered} skill points.`}
+        {sum(false) > 0 && sum(true) > 0 && " "}
+        {sum(true) > 0 && `Uses ${sum(true)} of ${stigEntered} stigma points.`}
+      </p>
+    </div>
+  );
+}
+
 /** One playstyle's full recommendation: stigmas, skill points, Daevanion, rotation, trade-offs, stat upgrades. */
 export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
   const [showWarnings, setShowWarnings] = useState(false);
@@ -80,13 +150,12 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
 
   return (
     <div className="space-y-4" data-testid="playstyle-detail">
-      <div className="flex flex-wrap items-end justify-between gap-3 border-l-4 border-gold pl-3">
-        <div>
-          <h2 className="text-xl font-semibold">{fb.playstyle.name} plan</h2>
-          <p className="text-sm text-dim">{fb.playstyle.description}</p>
-        </div>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <SectionTitle className="mb-0 min-w-0 flex-1 basis-64" caption={fb.playstyle.description}>
+          {fb.playstyle.name} plan
+        </SectionTitle>
         <div className="text-right">
-          <div className="text-3xl font-semibold tabular-nums text-gold">~{fmtDps(dps)}</div>
+          <div className="font-display text-3xl font-bold tabular-nums text-gold">~{fmtDps(dps)}</div>
           <div className="flex items-center justify-end gap-2 text-xs text-dim">
             estimated DPS
             <Badge tone={CONF_TONE[fb.result.confidence]}>{fb.result.confidence}</Badge>
@@ -100,25 +169,7 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         </Section>
         <div className="grid gap-4">
           <Section title="Skill points">
-            {fb.rank_log.length > 0 ? (
-              <ul className="space-y-1.5 text-sm">
-                {fb.rank_log.map(([key, rank, gain]) => (
-                  <li key={`${key}-${rank}`} className="flex items-center gap-2">
-                    <SkillIcon name={skillName(data.gd?.skills, key)} url={data.icons[key]} size={26} />
-                    <span className="flex-1">
-                      {skillName(data.gd?.skills, key)} to rank <strong>{rank}</strong>
-                    </span>
-                    <span className="text-ok">+{fmtDps(gain)} DPS</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-dim">
-                {fb.build.skill_points == null
-                  ? `No spare skill points to place: your ${rankedSkills} ranked skills are used as imported.`
-                  : "No better skill rank found with your points."}
-              </p>
-            )}
+            <SkillPoints fb={fb} data={data} rankedSkills={rankedSkills} />
           </Section>
           <Section title="Daevanion">
             <p className="text-sm text-dim">
@@ -129,13 +180,16 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         </div>
       </div>
 
-      <Section title="Rotation" hint="Cast order the simulator found best. Charged skills show the level to hold.">
-        <ol className="grid gap-2 lg:grid-cols-2">
+      <Section title="Rotation" hint={fb.rotation_explained?.core ? `How to play it: ${fb.rotation_explained.scenario_name.toLowerCase()}, ${Math.round(fb.rotation_explained.duration_s)} s simulated. Charged skills show the level to hold.` : "Cast order the simulator found best. Charged skills show the level to hold."}>
+        {fb.rotation_explained?.core ? (
+          <RotationPlan rot={fb.rotation_explained} icons={data.icons} />
+        ) : (
+          <ol className="grid gap-2 lg:grid-cols-2">
           {rows.map((r, i) => {
             const name = skillName(data.gd?.skills, r.skillKey);
             const skill = data.gd?.skills[r.skillKey];
             return (
-              <li key={`${r.skillKey}-${i}`} className="flex items-center gap-3 rounded-md border border-border-soft bg-surface2 p-2.5">
+              <li key={`${r.skillKey}-${i}`} className="flex items-center gap-3 frame p-2.5">
                 <span className="w-5 shrink-0 text-center text-sm font-semibold text-faint">{i + 1}</span>
                 <SkillIcon name={name} url={data.icons[r.skillKey]} size={52} ring="var(--gold-lo)" />
                 <span className="min-w-0 flex-1">
@@ -150,6 +204,7 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
             );
           })}
         </ol>
+        )}
       </Section>
 
       {variants.length > 0 && (
@@ -166,7 +221,7 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         <Section title="Next stat upgrades" hint="DPS gained per small step, best first.">
           <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {fb.stat_gains.map((g) => (
-              <li key={g.stat} className="flex items-center justify-between gap-2 rounded-md border border-border-soft bg-surface2 px-3 py-2 text-sm">
+              <li key={g.stat} className="flex items-center justify-between gap-2 frame px-3 py-2 text-sm">
                 <span>
                   {statLabel(g.stat)} <span className="text-dim">{statDelta(g.stat, g.delta)}</span>
                 </span>

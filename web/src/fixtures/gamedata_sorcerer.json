@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
- "data_version": "2026-10-03+aion2app-2026-09-18",
- "built_at": "2026-10-03T18:00:42+00:00",
+ "data_version": "2026-10-04+aion2app-2026-09-18",
+ "built_at": "2026-10-04T00:43:07+00:00",
  "level_caps": {
   "global": 45,
   "korea": 50
@@ -77,7 +77,9 @@
     "passive",
     "magic"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "dodge": {
    "key": "dodge",
@@ -136,7 +138,9 @@
     "active",
     "manual"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "flame-scattershot": {
    "key": "flame-scattershot",
@@ -242,30 +246,123 @@
     "magic",
     "fire",
     "attack",
-    "debuff"
+    "debuff",
+    "needs_stagger"
    ],
    "specializations": [
     {
      "rank_required": 8,
-     "text": "Absorbs —% HP"
+     "text": "Absorbs —% HP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Absorbs —% HP"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Restores 120 MP"
+     "text": "Restores 120 MP",
+     "effects": [
+      {
+       "kind": "resource_restore",
+       "value": {
+        "value": 120.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Changes to mobile skill"
+     "text": "Changes to mobile skill",
+     "effects": [
+      {
+       "kind": "mobile",
+       "value": {
+        "value": 0.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no DPS effect"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "Multi-Hit on hit"
+     "text": "Multi-Hit on hit",
+     "effects": [
+      {
+       "kind": "extra_hits",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": "Multi-Hit damage is not in any source"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Multi-Hit on hit"
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "-1s all skill cooldowns on hit"
+     "text": "-1s all skill cooldowns on hit",
+     "effects": [
+      {
+       "kind": "cdr_all_s",
+       "value": {
+        "value": 1.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); applied once per cast (per-hit scaling unknown)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "firebomb": {
    "key": "firebomb",
@@ -325,7 +422,9 @@
     "fire",
     "attack"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "burst": {
    "key": "burst",
@@ -337,6 +436,7 @@
    "unlock_level": 1,
    "max_rank": 40,
    "regions": [
+    "global",
     "korea"
    ],
    "atk_ratio_pct": {
@@ -435,25 +535,117 @@
    "specializations": [
     {
      "rank_required": null,
-     "text": "+20% MP restored"
+     "text": "+20% MP restored",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Absorbs —% HP"
+     "text": "Absorbs —% HP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+50% Multi-Hit on hit"
+     "text": "+50% Multi-Hit on hit",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]"
+     "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Reset [Blaze] cooldown on landing [Pyroclasm]"
+     "text": "Reset [Blaze] cooldown on landing [Pyroclasm]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "firestorm": {
    "key": "firestorm",
@@ -564,25 +756,117 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "-50% MP Cost"
+     "text": "-50% MP Cost",
+     "effects": [
+      {
+       "kind": "mp_cost_mult",
+       "value": {
+        "value": 0.5,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "+20% Skill Speed"
+     "text": "+20% Skill Speed",
+     "effects": [
+      {
+       "kind": "cast_speed_pct",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); Skill Speed read as animation + charge speed of this skill"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "-60% Incoming Heal for 5s on hit"
+     "text": "-60% Incoming Heal for 5s on hit",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "-60% Incoming Heal for 5s on hit"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "-2s [Hellfire] cooldown per fireball"
+     "text": "-2s [Hellfire] cooldown per fireball",
+     "effects": [
+      {
+       "kind": "cdr_skill_s",
+       "value": {
+        "value": 10.0,
+        "confidence": "estimated",
+        "source": "text '-2s [Hellfire] cooldown per fireball' x 5 fireballs (description: 5 hits)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "hellfire",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "2 s per fireball, 5 fireballs per cast"
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "+15% damage per fireball, up to +75%"
+     "text": "+15% damage per fireball, up to +75%",
+     "effects": [
+      {
+       "kind": "dmg_mult",
+       "value": {
+        "value": 1.45,
+        "confidence": "estimated",
+        "source": "text '+15% damage per fireball, up to +75%': 5 fireballs reach +75% on the last, mean +45%"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "mean over the 5 fireballs"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 5.0
   },
   "blaze": {
    "key": "blaze",
@@ -694,25 +978,117 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "Absorbs —% HP"
+     "text": "Absorbs —% HP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Absorbs —% HP"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "+50% MP restored"
+     "text": "+50% MP restored",
+     "effects": [
+      {
+       "kind": "resource_restore",
+       "value": {
+        "value": 50.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "pct",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "% of the skill's own MP restore"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Delayed Damage after 3s"
+     "text": "Delayed Damage after 3s",
+     "effects": [
+      {
+       "kind": "unknown",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": ""
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no value in the text"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "Multi-Hit on hit"
+     "text": "Multi-Hit on hit",
+     "effects": [
+      {
+       "kind": "extra_hits",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": "Multi-Hit damage is not in any source"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Multi-Hit on hit"
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "-3s [Wish of Concentration] cooldown on hit"
+     "text": "-3s [Wish of Concentration] cooldown on hit",
+     "effects": [
+      {
+       "kind": "cdr_skill_s",
+       "value": {
+        "value": 3.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); applied once per cast"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "wish-of-concentration",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 7.0
   },
   "hellfire": {
    "key": "hellfire",
@@ -826,25 +1202,133 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "+30% Skill Speed"
+     "text": "+30% Skill Speed",
+     "effects": [
+      {
+       "kind": "cast_speed_pct",
+       "value": {
+        "value": 30.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); Skill Speed read as animation + charge speed of this skill"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Fire Damage over Time for 10s on hit"
+     "text": "Fire Damage over Time for 10s on hit",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 10.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "spec_hellfire_1_dot",
+       "requires_status": null,
+       "note": "tick damage not in the text"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Changes to mobile skill"
+     "text": "Changes to mobile skill",
+     "effects": [
+      {
+       "kind": "mobile",
+       "value": {
+        "value": 0.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no DPS effect"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "Ignores Block and Evasion and lands as Multi-Hit"
+     "text": "Ignores Block and Evasion and lands as Multi-Hit",
+     "effects": [
+      {
+       "kind": "ignore_block",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); Block/Evasion do not matter against a PvE dummy"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "PvE: no effect"
+      },
+      {
+       "kind": "extra_hits",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": "Multi-Hit damage is not in any source"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "lands as Multi-Hit"
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "-15s cooldown"
+     "text": "-15s cooldown",
+     "effects": [
+      {
+       "kind": "cooldown_add_s",
+       "value": {
+        "value": -15.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 35.0
   },
   "cold-snap": {
    "key": "cold-snap",
@@ -900,9 +1384,12 @@
    "icon": "cold-snap.png",
    "description": "Deals ?-? Water damage to a Stagger target within 20m.",
    "tags": [
-    "mobile"
+    "mobile",
+    "needs_stagger"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "ice-chain": {
    "key": "ice-chain",
@@ -1014,25 +1501,165 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "-20% MP Cost"
+     "text": "-20% MP Cost",
+     "effects": [
+      {
+       "kind": "mp_cost_mult",
+       "value": {
+        "value": 0.8,
+        "confidence": "confirmed",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      },
+      {
+       "kind": "mp_cost_mult",
+       "value": {
+        "value": 0.8,
+        "confidence": "confirmed",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "cold-wave",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "chain member"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "+20% Skill Speed"
+     "text": "+20% Skill Speed",
+     "effects": [
+      {
+       "kind": "cast_speed_pct",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      },
+      {
+       "kind": "cast_speed_pct",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "cold-wave",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "chain member"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Deals up to 12% more damage when less targets are hit"
+     "text": "Deals up to 12% more damage when less targets are hit",
+     "effects": [
+      {
+       "kind": "dmg_mult",
+       "value": {
+        "value": 1.12,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "less_targets",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "'up to' 12%, scaled by targets hit"
+      },
+      {
+       "kind": "dmg_mult",
+       "value": {
+        "value": 1.12,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "less_targets",
+       "skill_key": "cold-wave",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "chain member"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "-1s [Winter's Shackles] cooldown on hit"
+     "text": "-1s [Winter's Shackles] cooldown on hit",
+     "effects": [
+      {
+       "kind": "cdr_skill_s",
+       "value": {
+        "value": 1.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); applied once per cast"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "winters-shackles",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "5% chance to inflict Frost for 2s on landing [Cold Wave]"
+     "text": "5% chance to inflict Frost for 2s on landing [Cold Wave]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "5% chance to inflict Frost for 2s on landing [Cold Wave]"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 2.0
   },
   "cold-wave": {
    "key": "cold-wave",
@@ -1143,25 +1770,117 @@
    "specializations": [
     {
      "rank_required": null,
-     "text": "-20% MP Cost"
+     "text": "-20% MP Cost",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+20% Skill Speed"
+     "text": "+20% Skill Speed",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Deals up to 12% more damage when less targets are hit"
+     "text": "Deals up to 12% more damage when less targets are hit",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "-1s [Winter's Shackles] cooldown on hit"
+     "text": "-1s [Winter's Shackles] cooldown on hit",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "5% chance to inflict Frost for 2s on landing [Cold Wave]"
+     "text": "5% chance to inflict Frost for 2s on landing [Cold Wave]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Ice Chain chain's specialty set (datamine lists the same options); modelled on Ice Chain"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 2.0
   },
   "winters-shackles": {
    "key": "winters-shackles",
@@ -1274,25 +1993,149 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "Changes to mobile skill"
+     "text": "Changes to mobile skill",
+     "effects": [
+      {
+       "kind": "mobile",
+       "value": {
+        "value": 0.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no DPS effect"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "30% chance to inflict Frost for 3s on landing [Winter's Shackles]"
+     "text": "30% chance to inflict Frost for 3s on landing [Winter's Shackles]",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 3.0,
+        "confidence": "confirmed",
+        "source": "text '30% chance to inflict Frost for 3s'"
+       },
+       "chance": 0.3,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "frost",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]"
+     "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 5.0,
+        "confidence": "confirmed",
+        "source": "token se:1511003711:effect_value02:time = 5, abe:1511003011 = +20% PvE"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "ws_boost",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "Adds [Winter's Illusion] Chain Skill"
+     "text": "Adds [Winter's Illusion] Chain Skill",
+     "effects": [
+      {
+       "kind": "dmg_mult",
+       "value": {
+        "value": 2.3,
+        "confidence": "estimated",
+        "source": "Winter's Illusion = 1.30x a Winter's Shackles hit (188.5/145 ATK%, 357/275 flat, both 1.30): the chain cast adds 1.30 hits"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "chain skill added at rank 12"
+      },
+      {
+       "kind": "anim_add_s",
+       "value": {
+        "value": 1.0,
+        "confidence": "estimated",
+        "source": "the added chain cast has its own ~1 s animation lock"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      },
+      {
+       "kind": "mp_cost_mult",
+       "value": {
+        "value": 2.0,
+        "confidence": "confirmed",
+        "source": "Winter's Illusion costs 200 MP, the same as Winter's Shackles"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "-15s [Winter's Shackles] cooldown"
+     "text": "-15s [Winter's Shackles] cooldown",
+     "effects": [
+      {
+       "kind": "cooldown_add_s",
+       "value": {
+        "value": -15.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "glacial-smite": {
    "key": "glacial-smite",
@@ -1403,21 +2246,111 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "Up to +20% damage when more targets hit"
+     "text": "Up to +20% damage when more targets hit",
+     "effects": [
+      {
+       "kind": "dmg_mult",
+       "value": {
+        "value": 1.2,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); 'up to': scaled linearly with the targets hit"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "more_targets",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "-30s cooldown"
+     "text": "-30s cooldown",
+     "effects": [
+      {
+       "kind": "cooldown_add_s",
+       "value": {
+        "value": -30.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "50% chance to inflict Frost for 3s"
+     "text": "50% chance to inflict Frost for 3s",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 3.0,
+        "confidence": "confirmed",
+        "source": "text '50% chance to inflict Frost for 3s'"
+       },
+       "chance": 0.5,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "frost",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "Ignores Block and Evasion and lands as Multi-Hit"
+     "text": "Ignores Block and Evasion and lands as Multi-Hit",
+     "effects": [
+      {
+       "kind": "ignore_block",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); Block/Evasion do not matter against a PvE dummy"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "PvE: no effect"
+      },
+      {
+       "kind": "extra_hits",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": "Multi-Hit damage is not in any source"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "lands as Multi-Hit"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 20.0
   },
   "soul-freeze": {
    "key": "soul-freeze",
@@ -1528,21 +2461,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "50% chance to inflict Root for 5s"
+     "text": "50% chance to inflict Root for 5s",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "50% chance to inflict Root for 5s"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "-1,000 Stamina"
+     "text": "-1,000 Stamina",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "-1,000 Stamina"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "+2s Seal duration"
+     "text": "+2s Seal duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+2s Seal duration"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "+25% Seal chance"
+     "text": "+25% Seal chance",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+25% Seal chance"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 20.0
   },
   "curse-tree": {
    "key": "curse-tree",
@@ -1652,21 +2659,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "Increases number of hits required to remove Polymorph"
+     "text": "Increases number of hits required to remove Polymorph",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Increases number of hits required to remove Polymorph"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "-200 Block, Evasion for 10s when Polymorph ends"
+     "text": "-200 Block, Evasion for 10s when Polymorph ends",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "-200 Block, Evasion for 10s when Polymorph ends"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "-20% Impact-type Resist for 10s when Polymorph ends"
+     "text": "-20% Impact-type Resist for 10s when Polymorph ends",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "-20% Impact-type Resist for 10s when Polymorph ends"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "Inflicts debuff even if Polymorph is removed through attacks"
+     "text": "Inflicts debuff even if Polymorph is removed through attacks",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Inflicts debuff even if Polymorph is removed through attacks"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "frost": {
    "key": "frost",
@@ -1777,25 +2858,117 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "Restores 200 MP"
+     "text": "Restores 200 MP",
+     "effects": [
+      {
+       "kind": "resource_restore",
+       "value": {
+        "value": 200.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "-5s cooldown"
+     "text": "-5s cooldown",
+     "effects": [
+      {
+       "kind": "cooldown_add_s",
+       "value": {
+        "value": -5.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Reset [Frost Burst] cooldown on landing Frost"
+     "text": "Reset [Frost Burst] cooldown on landing Frost",
+     "effects": [
+      {
+       "kind": "reset_skill",
+       "value": {
+        "value": 1.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); reset once per cast of the landed skill"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "frost-burst",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "+25% PC target Frost Chance"
+     "text": "+25% PC target Frost Chance",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+25% PC target Frost Chance"
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "+1s Frost duration"
+     "text": "+1s Frost duration",
+     "effects": [
+      {
+       "kind": "duration_add_s",
+       "value": {
+        "value": 1.0,
+        "confidence": "confirmed",
+        "source": "text '+1s Frost duration'"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 10.0
   },
   "steel-barrier": {
    "key": "steel-barrier",
@@ -1909,21 +3082,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "+10% Move Speed"
+     "text": "+10% Move Speed",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+10% Move Speed"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "HP Regen at fixed intervals"
+     "text": "HP Regen at fixed intervals",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "HP Regen at fixed intervals"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "+10% PvE Damage Tolerance increase and +5% PvP Damage Tolerance increase"
+     "text": "+10% PvE Damage Tolerance increase and +5% PvP Damage Tolerance increase",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+10% PvE Damage Tolerance increase and +5% PvP Damage Tolerance increase"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "-15s cooldown"
+     "text": "-15s cooldown",
+     "effects": [
+      {
+       "kind": "cooldown_add_s",
+       "value": {
+        "value": -15.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "vaizels-wisdom": {
    "key": "vaizels-wisdom",
@@ -1982,7 +3229,9 @@
     "magic",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "cold-storm": {
    "key": "cold-storm",
@@ -2094,21 +3343,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "Enhanced Frostbite - Grants extra damage when landing an attack"
+     "text": "Enhanced Frostbite - Grants extra damage when landing an attack",
+     "effects": [
+      {
+       "kind": "unknown",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": ""
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no value in the text"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "30% chance to inflict Root for 2s"
+     "text": "30% chance to inflict Root for 2s",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "30% chance to inflict Root for 2s"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "+3s [Cold Storm] summoning duration"
+     "text": "+3s [Cold Storm] summoning duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+3 s storm: the 160% ATK hit is not periodic; Frostbite tick damage is flat and not modelled"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "+10s Frostbite duration"
+     "text": "+10s Frostbite duration",
+     "effects": [
+      {
+       "kind": "duration_add_s",
+       "value": {
+        "value": 10.0,
+        "confidence": "confirmed",
+        "source": "text '+10s Frostbite duration'"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 20.0
   },
   "flame-arrow": {
    "key": "flame-arrow",
@@ -2219,25 +3542,117 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "+20% MP restored"
+     "text": "+20% MP restored",
+     "effects": [
+      {
+       "kind": "resource_restore",
+       "value": {
+        "value": 20.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "pct",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "% of the skill's own MP restore"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Absorbs —% HP"
+     "text": "Absorbs —% HP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Absorbs —% HP"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "+50% Multi-Hit on hit"
+     "text": "+50% Multi-Hit on hit",
+     "effects": [
+      {
+       "kind": "extra_hits",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": "Multi-Hit damage is not in any source"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+50% Multi-Hit on hit"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]"
+     "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 10.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": "pyroclasm",
+       "status_key": "spec_flame-arrow_3_elem",
+       "requires_status": null,
+       "note": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]"
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "Reset [Blaze] cooldown on landing [Pyroclasm]"
+     "text": "Reset [Blaze] cooldown on landing [Pyroclasm]",
+     "effects": [
+      {
+       "kind": "reset_skill",
+       "value": {
+        "value": 1.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); reset once per cast of the landed skill"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "blaze",
+       "on_skill": "pyroclasm",
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "frost-burst": {
    "key": "frost-burst",
@@ -2348,25 +3763,133 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "Absorbs —% HP"
+     "text": "Absorbs —% HP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Absorbs —% HP"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Changes to mobile skill"
+     "text": "Changes to mobile skill",
+     "effects": [
+      {
+       "kind": "mobile",
+       "value": {
+        "value": 0.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no DPS effect"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "75% chance to Knock Back 2m"
+     "text": "75% chance to Knock Back 2m",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "75% chance to Knock Back 2m"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "Ignores Block and Evasion and lands as a Critical Hit"
+     "text": "Ignores Block and Evasion and lands as a Critical Hit",
+     "effects": [
+      {
+       "kind": "ignore_block",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); Block/Evasion do not matter against a PvE dummy"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "PvE: no effect"
+      },
+      {
+       "kind": "force_crit",
+       "value": {
+        "value": 1.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "50% chance to reset cooldown"
+     "text": "50% chance to reset cooldown",
+     "effects": [
+      {
+       "kind": "reset_skill",
+       "value": {
+        "value": 1.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 0.5,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "frost-burst",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 7.0
   },
   "frost-burst-15220037": {
    "key": "frost-burst-15220037",
@@ -2424,7 +3947,9 @@
    "tags": [
     "passive"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "arctic-armor": {
    "key": "arctic-armor",
@@ -2536,21 +4061,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "+20% Impact-type Resist"
+     "text": "+20% Impact-type Resist",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+20% Impact-type Resist"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "x1.5 [Absorb Essence] effect"
+     "text": "x1.5 [Absorb Essence] effect",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "x1.5 Absorb Essence MP restore during a 10 s defensive buff; MP sustain / defence only: not part of the damage race"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "x1.5 [Robe of Cold] effect"
+     "text": "x1.5 [Robe of Cold] effect",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "x1.5 Robe of Cold effect (Slow on the attacker); defence only"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "+20% PvE Damage Tolerance increase and +10% PvP Damage Tolerance increase"
+     "text": "+20% PvE Damage Tolerance increase and +10% PvP Damage Tolerance increase",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+20% PvE Damage Tolerance increase and +10% PvP Damage Tolerance increase"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "defiance": {
    "key": "defiance",
@@ -2663,25 +4262,117 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "Adds [Curse: Old Tree] Chain Skill"
+     "text": "Adds [Curse: Old Tree] Chain Skill",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Adds [Curse: Old Tree] Chain Skill"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Restores 1000 Stamina on using [Defiance]"
+     "text": "Restores 1000 Stamina on using [Defiance]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Restores 1000 Stamina on using [Defiance]"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Restores 20% HP on using [Defiance]"
+     "text": "Restores 20% HP on using [Defiance]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Restores 20% HP on using [Defiance]"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "+2s Tenacity duration"
+     "text": "+2s Tenacity duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+2s Tenacity duration"
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "+50% PvE Damage Tolerance and +25% PvP Damage Tolerance for Tenacity duration"
+     "text": "+50% PvE Damage Tolerance and +25% PvP Damage Tolerance for Tenacity duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+50% PvE Damage Tolerance and +25% PvP Damage Tolerance for Tenacity duration"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "pyroclasm": {
    "key": "pyroclasm",
@@ -2693,6 +4384,7 @@
    "unlock_level": 1,
    "max_rank": 40,
    "regions": [
+    "global",
     "korea"
    ],
    "atk_ratio_pct": {
@@ -2791,25 +4483,117 @@
    "specializations": [
     {
      "rank_required": null,
-     "text": "+20% MP restored"
+     "text": "+20% MP restored",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Absorbs —% HP"
+     "text": "Absorbs —% HP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+50% Multi-Hit on hit"
+     "text": "+50% Multi-Hit on hit",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]"
+     "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Reset [Blaze] cooldown on landing [Pyroclasm]"
+     "text": "Reset [Blaze] cooldown on landing [Pyroclasm]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Flame Arrow chain's specialty set (datamine lists the same options); modelled on Flame Arrow"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "summon-flame": {
    "key": "summon-flame",
@@ -2870,7 +4654,9 @@
     "attack",
     "debuff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "bittercold-wind": {
    "key": "bittercold-wind",
@@ -2982,25 +4768,133 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "+1s [Bittercold Wind] summon duration"
+     "text": "+1s [Bittercold Wind] summon duration",
+     "effects": [
+      {
+       "kind": "extra_hits",
+       "value": {
+        "value": 3.5,
+        "confidence": "estimated",
+        "source": "text '+1s summon duration': the wind lasts 2 s for 7 hits; hits assumed evenly spread (3.5/s)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Changes to mobile skill"
+     "text": "Changes to mobile skill",
+     "effects": [
+      {
+       "kind": "mobile",
+       "value": {
+        "value": 0.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no DPS effect"
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "Pull effect"
+     "text": "Pull effect",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Pull effect"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "Ignores Block and Evasion and lands as a Critical Hit"
+     "text": "Ignores Block and Evasion and lands as a Critical Hit",
+     "effects": [
+      {
+       "kind": "ignore_block",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); Block/Evasion do not matter against a PvE dummy"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "PvE: no effect"
+      },
+      {
+       "kind": "force_crit",
+       "value": {
+        "value": 1.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "-1s [Frost] cooldown on hit"
+     "text": "-1s [Frost] cooldown on hit",
+     "effects": [
+      {
+       "kind": "cdr_skill_s",
+       "value": {
+        "value": 1.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); applied once per cast"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": "frost",
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 10.0
   },
   "illusion": {
    "key": "illusion",
@@ -3059,7 +4953,9 @@
     "magic",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "lumiels-space": {
    "key": "lumiels-space",
@@ -3168,21 +5064,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "Up to +20% damage when more targets hit"
+     "text": "Up to +20% damage when more targets hit",
+     "effects": [
+      {
+       "kind": "dmg_mult",
+       "value": {
+        "value": 1.2,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); 'up to': scaled linearly with the targets hit"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "more_targets",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "Adds [The Depths] Chain Skill"
+     "text": "Adds [The Depths] Chain Skill",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Adds [The Depths] Chain Skill"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "+1s [The Depths] Knockdown duration"
+     "text": "+1s [The Depths] Knockdown duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+1s [The Depths] Knockdown duration"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "-30s [Lumiel's Space] cooldown"
+     "text": "-30s [Lumiel's Space] cooldown",
+     "effects": [
+      {
+       "kind": "cooldown_add_s",
+       "value": {
+        "value": -30.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "wish-of-concentration": {
    "key": "wish-of-concentration",
@@ -3294,25 +5264,117 @@
    "specializations": [
     {
      "rank_required": 8,
-     "text": "Reduces MP Cost by 10%"
+     "text": "Reduces MP Cost by 10%",
+     "effects": [
+      {
+       "kind": "mp_cost_mult",
+       "value": {
+        "value": 0.9,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "+10% additional Attack"
+     "text": "+10% additional Attack",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "text '+10% additional Attack' (lasts the buff)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "wish_atk_plus",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 8,
-     "text": "+500 Max MP"
+     "text": "+500 Max MP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+500 Max MP while the buff is up: max MP is not a status stat"
+      }
+     ]
     },
     {
      "rank_required": 12,
-     "text": "+10% Combat Speed"
+     "text": "+10% Combat Speed",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "text '+10% Combat Speed' (lasts the buff)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "wish_combat_speed",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 16,
-     "text": "-10s all skill cooldowns"
+     "text": "-10s all skill cooldowns",
+     "effects": [
+      {
+       "kind": "cdr_all_s",
+       "value": {
+        "value": 10.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); taken off every other skill once per cast of this skill"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "delayed-explosion": {
    "key": "delayed-explosion",
@@ -3425,21 +5487,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "Restores 200 MP"
+     "text": "Restores 200 MP",
+     "effects": [
+      {
+       "kind": "resource_restore",
+       "value": {
+        "value": 200.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "-10s [Delayed Explosion] cooldown"
+     "text": "-10s [Delayed Explosion] cooldown",
+     "effects": [
+      {
+       "kind": "cooldown_add_s",
+       "value": {
+        "value": -10.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "Changes to AoE Skill"
+     "text": "Changes to AoE Skill",
+     "effects": [
+      {
+       "kind": "aoe_targets_add",
+       "value": {
+        "value": 3.0,
+        "confidence": "estimated",
+        "source": "text 'Changes to AoE Skill'; class AoE skills hit up to 4 targets, assumed the same (no value in the text)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "+10% additional Damage Taken"
+     "text": "+10% additional Damage Taken",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 4.0,
+        "confidence": "confirmed",
+        "source": "text '+10% additional Damage Taken'"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "de_plus",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "winters-illusion": {
    "key": "winters-illusion",
@@ -3549,25 +5685,117 @@
    "specializations": [
     {
      "rank_required": null,
-     "text": "Changes to mobile skill"
+     "text": "Changes to mobile skill",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "30% chance to inflict Frost for 3s on landing [Winter's Shackles]"
+     "text": "30% chance to inflict Frost for 3s on landing [Winter's Shackles]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]"
+     "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Adds [Winter's Illusion] Chain Skill"
+     "text": "Adds [Winter's Illusion] Chain Skill",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "-15s [Winter's Shackles] cooldown"
+     "text": "-15s [Winter's Shackles] cooldown",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Winter's Shackles chain's specialty set (datamine lists the same options); modelled on Winter's Shackles"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "curse-old-tree": {
    "key": "curse-old-tree",
@@ -3675,25 +5903,117 @@
    "specializations": [
     {
      "rank_required": null,
-     "text": "Adds [Curse: Old Tree] Chain Skill"
+     "text": "Adds [Curse: Old Tree] Chain Skill",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Restores 1000 Stamina on using [Defiance]"
+     "text": "Restores 1000 Stamina on using [Defiance]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Restores 20% HP on using [Defiance]"
+     "text": "Restores 20% HP on using [Defiance]",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+2s Tenacity duration"
+     "text": "+2s Tenacity duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+50% PvE Damage Tolerance and +25% PvP Damage Tolerance for Tenacity duration"
+     "text": "+50% PvE Damage Tolerance and +25% PvP Damage Tolerance for Tenacity duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Defiance chain's specialty set (datamine lists the same options); modelled on Defiance"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "magic-energy-blast": {
    "key": "magic-energy-blast",
@@ -3750,9 +6070,12 @@
    "tags": [
     "active",
     "magic",
-    "attack"
+    "attack",
+    "needs_stagger"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "divine-burst": {
    "key": "divine-burst",
@@ -3863,21 +6186,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "+20% Skill Speed"
+     "text": "+20% Skill Speed",
+     "effects": [
+      {
+       "kind": "cast_speed_pct",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); Skill Speed read as animation + charge speed of this skill"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "Absorbs —% HP"
+     "text": "Absorbs —% HP",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Absorbs —% HP"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "75% chance to inflict Knock Back"
+     "text": "75% chance to inflict Knock Back",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "75% chance to inflict Knock Back"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "Inflict Stun for 3s after Knock Back"
+     "text": "Inflict Stun for 3s after Knock Back",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Inflict Stun for 3s after Knock Back"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": 50.0
   },
   "lumiels-authority": {
    "key": "lumiels-authority",
@@ -3935,7 +6332,9 @@
     "active",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "fire-wall": {
    "key": "fire-wall",
@@ -4046,21 +6445,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "Enhanced Embers - Grants extra damage when landing an attack"
+     "text": "Enhanced Embers - Grants extra damage when landing an attack",
+     "effects": [
+      {
+       "kind": "unknown",
+       "value": {
+        "value": null,
+        "confidence": "unknown",
+        "source": ""
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "no value in the text"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "+2m wall width"
+     "text": "+2m wall width",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+2m wall width"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "+2s [Fire Wall] summoning duration"
+     "text": "+2s [Fire Wall] summoning duration",
+     "effects": [
+      {
+       "kind": "extra_hits",
+       "value": {
+        "value": 3.3333333333333335,
+        "confidence": "estimated",
+        "source": "text '+2s summoning duration': the wall lasts 3 s for 5 hits; hits assumed evenly spread (1.67/s)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+3.33 hits"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "+10s Embers duration"
+     "text": "+10s Embers duration",
+     "effects": [
+      {
+       "kind": "duration_add_s",
+       "value": {
+        "value": 10.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); added to every status this skill applies"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "element-enhancement": {
    "key": "element-enhancement",
@@ -4173,21 +6646,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "+200 Accuracy"
+     "text": "+200 Accuracy",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+200 Accuracy"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "x1.5 [Robe of Flame] effect"
+     "text": "x1.5 [Robe of Flame] effect",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "text 'x1.5 [Robe of Flame] effect'"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "ee_robe_of_flame",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "x1.5 [Grace of Enhancement] effect"
+     "text": "x1.5 [Grace of Enhancement] effect",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "text 'x1.5 [Grace of Enhancement] effect'"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "ee_grace",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "+10% additional Fire and Water Attack"
+     "text": "+10% additional Fire and Water Attack",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 20.0,
+        "confidence": "estimated",
+        "source": "text '+10% additional Fire and Water Attack'"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "ee_plus",
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "hibernation": {
    "key": "hibernation",
@@ -4298,21 +6845,95 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "+100% Incoming Heal"
+     "text": "+100% Incoming Heal",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+100% Incoming Heal"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "Restores 5% Max HP every 1s for the duration"
+     "text": "Restores 5% Max HP every 1s for the duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "Restores 5% Max HP every 1s for the duration"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "+2s duration"
+     "text": "+2s duration",
+     "effects": [
+      {
+       "kind": "duration_add_s",
+       "value": {
+        "value": 2.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); added to every status this skill applies"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": ""
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "Triggers when afflicted with Impact-type status"
+     "text": "Triggers when afflicted with Impact-type status",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "triggers on Impact-type status: defence only"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "remove-hibernation": {
    "key": "remove-hibernation",
@@ -4372,7 +6993,9 @@
     "magic",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "assault-bombardment": {
    "key": "assault-bombardment",
@@ -4483,28 +7106,102 @@
    "specializations": [
     {
      "rank_required": 5,
-     "text": "+20% Attack for 5s on hit"
+     "text": "+20% Attack for 5s on hit",
+     "effects": [
+      {
+       "kind": "adds_status",
+       "value": {
+        "value": 5.0,
+        "confidence": "confirmed",
+        "source": "specialty text from the client dump (research skills specializations[])"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": "spec_assault-bombardment_0_buff",
+       "requires_status": null,
+       "note": "+20% Attack for 5s on hit"
+      }
+     ]
     },
     {
      "rank_required": 10,
-     "text": "500 MP damage on hit"
+     "text": "500 MP damage on hit",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "500 MP damage on hit"
+      }
+     ]
     },
     {
      "rank_required": 15,
-     "text": "+10m range"
+     "text": "+10m range",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+10m range"
+      }
+     ]
     },
     {
      "rank_required": 20,
-     "text": "+20% Frost Chance"
+     "text": "+20% Frost Chance",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "specialty text from the client dump (research skills specializations[]); crowd control / defence / healing / mobility: no damage-race effect"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "+20% Frost Chance"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "fire-mark": {
    "key": "fire-mark",
    "skill_id": 15710000,
    "name": "Fire Mark",
    "name_kr": "불의 표식",
-   "kind": "passive",
+   "kind": "proc",
    "element": "fire",
    "unlock_level": 1,
    "max_rank": 40,
@@ -4604,7 +7301,9 @@
     "attack",
     "debuff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "robe-of-earth": {
    "key": "robe-of-earth",
@@ -4710,7 +7409,9 @@
     "magic",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "cold-snap-15730000": {
    "key": "cold-snap-15730000",
@@ -4815,9 +7516,12 @@
     "active",
     "magic",
     "water",
-    "attack"
+    "attack",
+    "needs_stagger"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "robe-of-flame": {
    "key": "robe-of-flame",
@@ -4923,7 +7627,9 @@
     "magic",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "robe-of-cold": {
    "key": "robe-of-cold",
@@ -5029,7 +7735,9 @@
     "magic",
     "debuff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "absorb-essence": {
    "key": "absorb-essence",
@@ -5135,7 +7843,9 @@
     "magic",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "grace-of-resistance": {
    "key": "grace-of-resistance",
@@ -5241,7 +7951,9 @@
     "magic",
     "attack"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "grace-of-enhancement": {
    "key": "grace-of-enhancement",
@@ -5348,7 +8060,9 @@
     "attack",
     "buff"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "revitalization-contract": {
    "key": "revitalization-contract",
@@ -5455,7 +8169,9 @@
     "buff",
     "heal"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "vitality-evaporation": {
    "key": "vitality-evaporation",
@@ -5561,7 +8277,9 @@
     "magic",
     "attack"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "the-depths": {
    "key": "the-depths",
@@ -5599,25 +8317,117 @@
    "specializations": [
     {
      "rank_required": null,
-     "text": "Up to +20% damage when more targets hit"
+     "text": "Up to +20% damage when more targets hit",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "Adds [The Depths] Chain Skill"
+     "text": "Adds [The Depths] Chain Skill",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "+1s [The Depths] Knockdown duration"
+     "text": "+1s [The Depths] Knockdown duration",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "-30s [Lumiel's Space] cooldown"
+     "text": "-30s [Lumiel's Space] cooldown",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+      }
+     ]
     },
     {
      "rank_required": null,
-     "text": "x2 Airborne Chance on Slow or Root targets"
+     "text": "x2 Airborne Chance on Slow or Root targets",
+     "effects": [
+      {
+       "kind": "no_dps",
+       "value": {
+        "value": 0.0,
+        "confidence": "estimated",
+        "source": "datamine specialty text (aion2.app/db/skills/<id>, research sorcerer_skills.json)"
+       },
+       "chance": 1.0,
+       "trigger": "cast",
+       "cond": "",
+       "skill_key": null,
+       "on_skill": null,
+       "status_key": null,
+       "requires_status": null,
+       "note": "shares the Lumiel's Space chain's specialty set (datamine lists the same options); modelled on Lumiel's Space"
+      }
+     ]
     }
-   ]
+   ],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "flame-zone": {
    "key": "flame-zone",
@@ -5654,7 +8464,9 @@
     "fire",
     "attack"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "hellfire-level-1": {
    "key": "hellfire-level-1",
@@ -5715,7 +8527,9 @@
     "fire",
     "attack"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "hellfire-level-2": {
    "key": "hellfire-level-2",
@@ -5776,7 +8590,9 @@
     "fire",
     "attack"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   },
   "hellfire-max": {
    "key": "hellfire-max",
@@ -5837,10 +8653,115 @@
     "fire",
     "attack"
    ],
-   "specializations": []
+   "specializations": [],
+   "hp_dmg_coeff": 1.0,
+   "stagger_gauge": null
   }
  },
  "statuses": {
+  "spec_hellfire_1_dot": {
+   "key": "spec_hellfire_1_dot",
+   "name": "Hellfire specialty 2",
+   "on": "target",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "specialty text from the client dump (research skills specializations[])"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "specialty status: damage effect carried by stat_mods/ticks"
+   },
+   "elements": [
+    "fire"
+   ],
+   "mp_min_pct": null,
+   "source_skill": "hellfire",
+   "tick_ratio_pct": {
+    "value": null,
+    "confidence": "unknown",
+    "source": "DoT tick damage is not in the specialty text"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "assumed 1 s tick (not in the text)"
+   },
+   "stat_mods": [],
+   "permanent": false
+  },
+  "spec_flame-arrow_3_elem": {
+   "key": "spec_flame-arrow_3_elem",
+   "name": "Flame Arrow specialty 4",
+   "on": "self",
+   "duration_s": {
+    "value": 10.0,
+    "confidence": "confirmed",
+    "source": "specialty text from the client dump (research skills specializations[])"
+   },
+   "dmg_mult": {
+    "value": 1.05,
+    "confidence": "estimated",
+    "source": "additive Damage Boost bucket approximated as a multiplier"
+   },
+   "elements": [
+    "fire"
+   ],
+   "mp_min_pct": null,
+   "source_skill": "flame-arrow",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": ""
+   },
+   "stat_mods": [],
+   "permanent": false
+  },
+  "spec_assault-bombardment_0_buff": {
+   "key": "spec_assault-bombardment_0_buff",
+   "name": "Assault Bombardment specialty 1",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "specialty text from the client dump (research skills specializations[])"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "specialty status: damage effect carried by stat_mods/ticks"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "assault-bombardment",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "unknown",
+    "source": ""
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "specialty text from the client dump (research skills specializations[]); 'Attack' read as the attack_increase_pct bucket"
+     }
+    }
+   ],
+   "permanent": false
+  },
   "fire_mark": {
    "key": "fire_mark",
    "name": "Fire Mark",
@@ -5863,22 +8784,24 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
-   }
+    "source": "tick interval unknown until verified against in-game tooltips"
+   },
+   "stat_mods": [],
+   "permanent": false
   },
   "element_enhancement": {
    "key": "element_enhancement",
    "name": "Element Enhancement",
    "on": "self",
    "duration_s": {
-    "value": 15.0,
+    "value": 20.0,
     "confidence": "estimated",
-    "source": "dump: 10 s at rank 1 rising to 22.5 s at rank 40 (client tokens); single value 15 s ~ rank 15-16 used (PLAN default 15 s)"
+    "source": "datamine token se:1540000011:effect_value02:time: 10 s rank 1, 17 s rank 15, 20 s rank 20 (global cap), 22.5 s rank 25; rank-20 value used (was 15 s, a PLAN default)"
    },
    "dmg_mult": {
     "value": 1.2,
@@ -5894,13 +8817,15 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
-   }
+    "source": "tick interval unknown until verified against in-game tooltips"
+   },
+   "stat_mods": [],
+   "permanent": false
   },
   "delayed_explosion": {
    "key": "delayed_explosion",
@@ -5908,8 +8833,8 @@
    "on": "target",
    "duration_s": {
     "value": 4.0,
-    "confidence": "estimated",
-    "source": "dump: damage taken from caster +15% during the 4 s delay (cd 30 s); Inven KR live disagrees: 20 s / +25%"
+    "confidence": "confirmed",
+    "source": "datamine token se:1532000011:effect_value02:time = 4 at every rank, cooldown 30 s, description +15% (aion2.app 15320000); Inven KR live says 20 s / +25% (older/other build)"
    },
    "dmg_mult": {
     "value": 1.15,
@@ -5922,13 +8847,15 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
-   }
+    "source": "tick interval unknown until verified against in-game tooltips"
+   },
+   "stat_mods": [],
+   "permanent": false
   },
   "grace_of_enhancement": {
    "key": "grace_of_enhancement",
@@ -5940,9 +8867,9 @@
     "source": "passive, no duration"
    },
    "dmg_mult": {
-    "value": 1.2,
-    "confidence": "estimated",
-    "source": "+20% PvE Damage Boost while MP >= threshold (dump). MP threshold conflicts: 25% (dump, Fextralife) vs 50% (S6, S7 guides). Also 50% chance for an extra 18% ATK + 106 hit, not modelled"
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: the +20% PvE Damage Boost is a dmg_boost_pct stat mod (additive bucket). MP threshold conflicts: 25% (dump, Fextralife) vs 50% (S6, S7 guides); rank-invariant 20% (token abe:1578000011:value02:divide100)"
    },
    "elements": [],
    "mp_min_pct": 25.0,
@@ -5950,13 +8877,24 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
-   }
+    "source": "tick interval unknown until verified against in-game tooltips"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "datamine token abe:1578000011:value02:divide100 = 20 at ranks 1 and 20 (+10% PvP half not simulated)"
+     }
+    }
+   ],
+   "permanent": false
   },
   "fire_wall_dot": {
    "key": "fire_wall_dot",
@@ -5986,7 +8924,9 @@
     "value": 1.0,
     "confidence": "estimated",
     "source": "'every 1s' in description"
-   }
+   },
+   "stat_mods": [],
+   "permanent": false
   },
   "cold_storm_dot": {
    "key": "cold_storm_dot",
@@ -6016,7 +8956,9 @@
     "value": 1.0,
     "confidence": "estimated",
     "source": "'every 1s' in description"
-   }
+   },
+   "stat_mods": [],
+   "permanent": false
   },
   "firestorm_dot": {
    "key": "firestorm_dot",
@@ -6025,7 +8967,7 @@
    "duration_s": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "placeholder per PLAN: dump shows 5 hits of flat damage and no DoT; not attached to any rule until Jon's tooltip"
+    "source": "placeholder per PLAN: dump shows 5 hits of flat damage and no DoT; not attached to any rule until verified against in-game tooltips"
    },
    "dmg_mult": {
     "value": 1.0,
@@ -6040,19 +8982,428 @@
    "tick_ratio_pct": {
     "value": 0.0,
     "confidence": "unknown",
-    "source": "tick ratio unknown until Jon's tooltips"
+    "source": "tick ratio unknown until verified against in-game tooltips"
    },
    "tick_s": {
     "value": 1.0,
     "confidence": "unknown",
-    "source": "tick interval unknown until Jon's tooltips"
-   }
+    "source": "tick interval unknown until verified against in-game tooltips"
+   },
+   "stat_mods": [],
+   "permanent": false
+  },
+  "wish_of_concentration": {
+   "key": "wish_of_concentration",
+   "name": "Wish of Concentration",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "datamine token se:1531000011:effect_value02:time: 10 s rank 1, 20 s rank 20 (global cap), 30 s rank 40; rank-20 value used"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "datamine token se_abe:1531000011:1531000012:value02:divide100 = 10 at ranks 1 and 40 (Attack +10%); Accuracy +100 not simulated"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "wish_atk_plus": {
+   "key": "wish_atk_plus",
+   "name": "Wish of Concentration specialty: +10% additional Attack",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "datamine token se:1531000011:effect_value02:time: 10 s rank 1, 20 s rank 20 (global cap), 30 s rank 40; rank-20 value used"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "attack_increase_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "specialty text '+10% additional Attack' (aion2.app skill 15310000, level 8 option)"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "wish_combat_speed": {
+   "key": "wish_combat_speed",
+   "name": "Wish of Concentration specialty: +10% Combat Speed",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "datamine token se:1531000011:effect_value02:time: 10 s rank 1, 20 s rank 20 (global cap), 30 s rank 40; rank-20 value used"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "combat_speed_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "confirmed",
+      "source": "specialty text '+10% Combat Speed' (aion2.app skill 15310000, level 12 option); lasts the buff duration"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "ee_plus": {
+   "key": "ee_plus",
+   "name": "Element Enhancement specialty: +10% additional Fire and Water Attack",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "lasts the Element Enhancement duration (rank-20 value)"
+   },
+   "dmg_mult": {
+    "value": 1.0833333333333335,
+    "confidence": "estimated",
+    "source": "+10% additional on top of +20% in the same Attack bucket: 1.30 / 1.20 (estimated: bucket additivity assumed)"
+   },
+   "elements": [
+    "fire",
+    "water"
+   ],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [],
+   "permanent": false
+  },
+  "ee_robe_of_flame": {
+   "key": "ee_robe_of_flame",
+   "name": "Element Enhancement specialty: x1.5 Robe of Flame",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "lasts the Element Enhancement duration (rank-20 value)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "estimated",
+      "source": "x1.5 of Robe of Flame's +20% PvE Damage Boost at rank 20 (datamine token abe:1574000011) = +10%"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "ee_grace": {
+   "key": "ee_grace",
+   "name": "Element Enhancement specialty: x1.5 Grace of Enhancement",
+   "on": "self",
+   "duration_s": {
+    "value": 20.0,
+    "confidence": "estimated",
+    "source": "lasts the Element Enhancement duration (rank-20 value)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 10.0,
+      "confidence": "estimated",
+      "source": "x1.5 of Grace of Enhancement's +20% PvE Damage Boost (token abe:1578000011) = +10%; assumes MP stays above the Grace threshold"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "de_plus": {
+   "key": "de_plus",
+   "name": "Delayed Explosion specialty: +10% additional Damage Taken",
+   "on": "target",
+   "duration_s": {
+    "value": 4.0,
+    "confidence": "confirmed",
+    "source": "same 4 s window as Delayed Explosion (token se:1532000011:effect_value02:time)"
+   },
+   "dmg_mult": {
+    "value": 1.0869565217391306,
+    "confidence": "estimated",
+    "source": "+10% additional Damage Taken on top of +15% in one bucket: 1.25 / 1.15 (estimated: bucket additivity assumed)"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [],
+   "permanent": false
+  },
+  "ws_boost": {
+   "key": "ws_boost",
+   "name": "Winter's Shackles specialty: +20% PvE Damage Boost",
+   "on": "self",
+   "duration_s": {
+    "value": 5.0,
+    "confidence": "confirmed",
+    "source": "token se:1511003711:effect_value02:time = 5"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "confirmed",
+      "source": "token abe:1511003011:value02:divide100 = 20 (PvE half; the +10% PvP half is not simulated)"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "frost": {
+   "key": "frost",
+   "name": "Frost",
+   "on": "target",
+   "duration_s": {
+    "value": 3.0,
+    "confidence": "confirmed",
+    "source": "token se:1515000012:effect_value02:time = 3 (Frost skill; +1 s with its specialty 5)"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "Frost itself adds no multiplier; Frost Burst requires it ('Selects a target afflicted with Frost')"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": null,
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [],
+   "permanent": false
+  },
+  "robe_of_earth": {
+   "key": "robe_of_earth",
+   "name": "Robe of Earth",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "passive aura: duration 0 = permanent while MP >= threshold"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": 50.0,
+   "source_skill": "robe-of-earth",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "crit_chance_pct",
+     "value": {
+      "value": 13.333333333333334,
+      "confidence": "estimated",
+      "source": "Critical Hit +200 at rank 20 (datamine token abe:1572000012:value02: 105 rank 1, 200 rank 20, 300 rank 40) converted at 80% / 1200 points (estimated); Max MP +45% and Natural MP Regen are not status stats"
+     }
+    }
+   ],
+   "permanent": false
+  },
+  "robe_of_flame": {
+   "key": "robe_of_flame",
+   "name": "Robe of Flame",
+   "on": "self",
+   "duration_s": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "passive aura: permanent"
+   },
+   "dmg_mult": {
+    "value": 1.0,
+    "confidence": "confirmed",
+    "source": "no multiplier: effect carried by stat_mods"
+   },
+   "elements": [],
+   "mp_min_pct": null,
+   "source_skill": "robe-of-flame",
+   "tick_ratio_pct": {
+    "value": 0.0,
+    "confidence": "confirmed",
+    "source": "no damage tick"
+   },
+   "tick_s": {
+    "value": 1.0,
+    "confidence": "estimated",
+    "source": "unused (no tick)"
+   },
+   "stat_mods": [
+    {
+     "stat": "dmg_boost_pct",
+     "value": {
+      "value": 20.0,
+      "confidence": "estimated",
+      "source": "PvE Damage Boost +20% at rank 20 (datamine token abe:1574000011:value02:divide100: 1 rank 1, 20 rank 20, 40 rank 40); Double Chance 4% is not a status stat"
+     }
+    }
+   ],
+   "permanent": false
   }
  },
  "rules": {
   "flame-arrow": {
    "skill_key": "flame-arrow",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -6061,11 +9412,14 @@
    "charge_levels": [],
    "mp_restore": 100.0,
    "confidence": "estimated",
-   "note": "chain 1/3, restores 100 MP (dump description); chain confirmed in client"
+   "note": "chain 1/3, restores 100 MP (dump description); chain confirmed in client; every Fire attack inflicts Fire Mark for 5 s (description)",
+   "requires_spec": null
   },
   "burst": {
    "skill_key": "burst",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -6074,11 +9428,14 @@
    "charge_levels": [],
    "mp_restore": 100.0,
    "confidence": "estimated",
-   "note": "chain 2/3, restores 100 MP (dump description)"
+   "note": "chain 2/3, restores 100 MP (dump description); every Fire attack inflicts Fire Mark for 5 s (description)",
+   "requires_spec": null
   },
   "pyroclasm": {
    "skill_key": "pyroclasm",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -6087,11 +9444,14 @@
    "charge_levels": [],
    "mp_restore": 120.0,
    "confidence": "estimated",
-   "note": "chain 3/3, restores 120 MP (dump description)"
+   "note": "chain 3/3, restores 120 MP (dump description); every Fire attack inflicts Fire Mark for 5 s (description)",
+   "requires_spec": null
   },
   "blaze": {
    "skill_key": "blaze",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [
     "fire_mark"
@@ -6102,7 +9462,8 @@
    "charge_levels": [],
    "mp_restore": 100.0,
    "confidence": "estimated",
-   "note": "needs Fire Mark on target; restores 100 MP (dump description); Fire Mark not consumed (unknown)"
+   "note": "needs Fire Mark on target; restores 100 MP (dump description); Fire Mark not consumed (unknown); every Fire attack inflicts Fire Mark for 5 s (description)",
+   "requires_spec": null
   },
   "element-enhancement": {
    "skill_key": "element-enhancement",
@@ -6117,12 +9478,14 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": ""
+   "note": "",
+   "requires_spec": null
   },
   "delayed-explosion": {
    "skill_key": "delayed-explosion",
    "applies": [
-    "delayed_explosion"
+    "delayed_explosion",
+    "fire_mark"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -6132,12 +9495,14 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": ""
+   "note": "every Fire attack inflicts Fire Mark for 5 s (description)",
+   "requires_spec": null
   },
   "fire-wall": {
    "skill_key": "fire-wall",
    "applies": [
-    "fire_wall_dot"
+    "fire_wall_dot",
+    "fire_mark"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -6147,7 +9512,8 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Embers DoT: tick damage unknown until Jon's tooltip"
+   "note": "Embers DoT: tick damage unknown until verified against in-game tooltips; every Fire attack inflicts Fire Mark for 5 s (description)",
+   "requires_spec": null
   },
   "cold-storm": {
    "skill_key": "cold-storm",
@@ -6162,11 +9528,14 @@
    "charge_levels": [],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "Frostbite DoT: tick damage unknown until Jon's tooltip"
+   "note": "Frostbite DoT: tick damage unknown until verified against in-game tooltips",
+   "requires_spec": null
   },
   "hellfire": {
    "skill_key": "hellfire",
-   "applies": [],
+   "applies": [
+    "fire_mark"
+   ],
    "apply_chance": 1.0,
    "requires": [],
    "consumes": [],
@@ -6215,7 +9584,104 @@
    ],
    "mp_restore": 0.0,
    "confidence": "estimated",
-   "note": "charge timing and per-level multipliers are estimates"
+   "note": "charge timing and per-level multipliers are estimates; every Fire attack inflicts Fire Mark for 5 s (description)",
+   "requires_spec": null
+  },
+  "wish-of-concentration": {
+   "skill_key": "wish-of-concentration",
+   "applies": [
+    "wish_of_concentration"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Attack +10% for 10-30 s by rank (datamine); specialties add Attack/Combat Speed statuses",
+   "requires_spec": null
+  },
+  "frost": {
+   "skill_key": "frost",
+   "applies": [
+    "frost"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Frost lands 100% on NPC targets (description); a boss with Incapacitated Immunity would not take it",
+   "requires_spec": null
+  },
+  "assault-bombardment": {
+   "skill_key": "assault-bombardment",
+   "applies": [
+    "frost"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "100% chance to land Frost on NPC targets (description)",
+   "requires_spec": null
+  },
+  "frost-burst": {
+   "skill_key": "frost-burst",
+   "applies": [],
+   "apply_chance": 1.0,
+   "requires": [
+    "frost"
+   ],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "confirmed",
+   "note": "'Selects a target afflicted with Frost' (description). The 7% 'Incapacitated Immunity' proc (child 15220037) is not modelled: it replaces Frost on immune bosses",
+   "requires_spec": null
+  },
+  "divine-burst": {
+   "skill_key": "divine-burst",
+   "applies": [
+    "fire_mark"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Fire attack applies Fire Mark",
+   "requires_spec": null
+  },
+  "firestorm": {
+   "skill_key": "firestorm",
+   "applies": [
+    "fire_mark"
+   ],
+   "apply_chance": 1.0,
+   "requires": [],
+   "consumes": [],
+   "chain_next": null,
+   "chain_window_s": 3.0,
+   "charge_levels": [],
+   "mp_restore": 0.0,
+   "confidence": "estimated",
+   "note": "Fire attack applies Fire Mark; 5 fireballs per cast",
+   "requires_spec": null
   }
  },
  "triggers": [
@@ -6224,7 +9690,28 @@
    "on_element": "fire",
    "chance": 0.2,
    "source_skill": "fire-mark",
-   "confidence": "estimated"
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [],
+   "on_status": null,
+   "proc_skill": null,
+   "reset_skill": null,
+   "window_s": 0.0,
+   "requires_status": null
+  },
+  {
+   "status_key": "",
+   "on_element": "fire",
+   "chance": 0.2,
+   "source_skill": "fire-mark",
+   "confidence": "estimated",
+   "event": "cast",
+   "on_skills": [],
+   "on_status": null,
+   "proc_skill": "fire-mark",
+   "reset_skill": null,
+   "window_s": 0.0,
+   "requires_status": null
   }
  ],
  "links": [
@@ -6305,6 +9792,12 @@
    "child_key": "blaze",
    "kind": "condition",
    "confidence": "estimated"
+  },
+  {
+   "parent_key": "frost",
+   "child_key": "frost-burst",
+   "kind": "condition",
+   "confidence": "confirmed"
   }
  ],
  "community": [
@@ -11286,5 +14779,23 @@
    "source_url": "https://aion2hub.com/tools/crafting-calculator/ebony-dragon-lord-orb-110630103"
   }
  ],
- "class_key": "sorcerer"
+ "class_key": "sorcerer",
+ "spec_slot_ranks": [
+  {
+   "value": 8.0,
+   "confidence": "estimated",
+   "source": "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; allthings.how says 8/12/16 (research/mastery_stigma.md)"
+  },
+  {
+   "value": 12.0,
+   "confidence": "estimated",
+   "source": "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; allthings.how says 8/12/16 (research/mastery_stigma.md)"
+  },
+  {
+   "value": 20.0,
+   "confidence": "estimated",
+   "source": "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; allthings.how says 8/12/16 (research/mastery_stigma.md)"
+  }
+ ],
+ "specs_parsed": true
 }
