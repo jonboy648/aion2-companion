@@ -1,0 +1,14 @@
+.build-dashboard { min-width: 0; letter-spacing: 0; }
+.build-dashboard section, .build-dashboard aside, .build-dashboard [role="tabpanel"] { min-width: 0; }
+.build-dashboard .dashboard-tabs-list { flex-wrap: wrap; }
+.build-dashboard .dashboard-metrics { order: -1; }
+.build-dashboard .dashboard-metric-value { font-size: 22px; }
+.build-dashboard .frame { border-radius: 6px; }
+.build-dashboard li, .build-dashboard p { overflow-wrap: anywhere; }
+.build-damage { border: 1px solid var(--gold-lo); border-radius: 8px; padding: 16px; }
+.build-dashboard aside .grid { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 400px) {
+  .build-dashboard [role="tablist"][aria-label="Playstyles"] { gap: 8px; }
+  .build-dashboard [role="tablist"][aria-label="Playstyles"] button { padding: 10px; }
+  .build-dashboard .build-damage { padding: 10px; }
+}

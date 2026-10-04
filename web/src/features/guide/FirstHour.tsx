@@ -25,26 +25,22 @@ export function FirstHour({ classKey, onPick }: { classKey: string | null; onPic
     <div className="space-y-6">
       <div>
         <h3 className="mb-1 text-base font-semibold">1. Pick a class</h3>
-        <p className="mb-3 text-sm text-dim">You choose once at character creation. Both factions get the same eight classes. Pick the playstyle you enjoy; selecting a card below also shows that class's unlocks in the chapters.</p>
-        <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <p className="mb-4 text-sm text-dim">Both factions share these eight classes. Choose the role you enjoy.</p>
+        <ul className="guide-classes">
           {CLASS_BLURBS.map((c) => {
             const Icon = ICON[c.key] ?? Sparkles;
             const on = classKey === c.key;
             return (
               <li key={c.key}>
-                <div className={cn("flex h-full flex-col rounded-lg border p-3", on ? "border-gold bg-gold/10" : "border-border-soft bg-surface")}>
-                  <button type="button" aria-pressed={on} onClick={() => onPick(c.key)} className="flex items-center gap-2.5 text-left">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-lg border border-gold-lo/60 bg-gold/10 text-gold">
-                      <Icon aria-hidden className="size-5" />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block font-semibold">{c.name}</span>
-                      <span className="block text-xs text-dim">{c.role}</span>
-                    </span>
-                    <span className={cn("ml-auto shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium", DIFF_TONE[c.difficulty])}>{c.difficulty}</span>
+                <div className={cn("guide-class", on && "guide-class-selected")}>
+                  <button type="button" aria-pressed={on} onClick={() => onPick(c.key)} className="guide-class-pick">
+                    <img src={`/brand/classes/${c.key}-320.webp`} alt="" width={320} height={320} loading="lazy" className="guide-class-art" />
+                    <span className="guide-class-title"><Icon aria-hidden className="size-4" /><span>{c.name}</span></span>
+                    <span className="guide-class-role">{c.role}</span>
+                    <span className="guide-class-description">{c.line}</span>
+                    <span className={cn("guide-class-difficulty", DIFF_TONE[c.difficulty])}>{c.difficulty}</span>
                   </button>
-                  <p className="mt-2 flex-1 text-xs text-dim">{c.line}</p>
-                  <Link to={`/codex/${c.key}`} className="mt-2 text-xs text-cyan">
+                  <Link to={`/codex/${c.key}`} className="guide-class-skills">
                     See {c.name} skills
                   </Link>
                 </div>

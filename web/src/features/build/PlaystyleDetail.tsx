@@ -1,9 +1,11 @@
 import { RotationPlan } from "./RotationPlan";
 import { SectionTitle } from "@/components/game/SectionTitle";
 import { useState } from "react";
+import AdvancedStats from "@/components/ui/advanced-stats";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { BuildDamage } from "./BuildDamage";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { BuildVariant, Confidence, FullBuild } from "@/lib/types";
 import type { ClassData } from "./useClassData";
 import { SkillIcon } from "./SkillIcon";
@@ -21,17 +23,15 @@ interface Props {
 
 function Section({ title, hint, children, className }: { title: string; hint?: string; children: React.ReactNode; className?: string }) {
   return (
-    <Card className={className}>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        {hint && <CardDescription>{hint}</CardDescription>}
-      </CardHeader>
-      <CardContent>{children}</CardContent>
-    </Card>
+    <section className={className}>
+      <h3 className="mb-2 text-base font-semibold">{title}</h3>
+      {hint && <p className="mb-3 text-xs text-dim">{hint}</p>}
+      {children}
+    </section>
   );
 }
 
-function StigmaList({ picks, data }: { picks: [string, number][]; data: ClassData }) {
+function StigmaList({ picks, data, aggregateOnly = false }: { picks: [string, number][]; data: ClassData; aggregateOnly?: boolean }) {
   return (
     <ul className="grid gap-2 sm:grid-cols-2">
       {picks.map(([key, gain]) => (
@@ -39,7 +39,7 @@ function StigmaList({ picks, data }: { picks: [string, number][]; data: ClassDat
           <SkillIcon name={skillName(data.gd?.skills, key)} url={data.icons[key]} size={44} ring="var(--gold-lo)" />
           <span className="min-w-0 flex-1">
             <span className="block truncate text-sm font-medium">{skillName(data.gd?.skills, key)}</span>
-            <span className={gain > 0 ? "text-xs text-ok" : "text-xs text-faint"}>{gain > 0 ? `${fmtPct(gain)} DPS` : "No DPS (utility slot)"}</span>
+            {!aggregateOnly && <span className={gain > 0 ? "text-xs text-ok" : "text-xs text-faint"}>{gain > 0 ? `${fmtPct(gain)} DPS` : "No DPS (utility slot)"}</span>}
           </span>
         </li>
       ))}
@@ -55,8 +55,8 @@ function VariantCard({ v, applied, data, onUse }: { v: BuildVariant; applied: bo
         <Badge tone={v.dps_delta_pct < -0.05 ? "warn" : "ok"}>{Math.abs(v.dps_delta_pct) < 0.05 ? "No DPS cost" : `${fmtPct(v.dps_delta_pct)} DPS`}</Badge>
       </div>
       <p className="text-xs text-dim">{v.gives}</p>
-      <div className="flex items-center justify-between gap-2">
-        <span className="flex gap-1.5">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="flex flex-wrap gap-1.5">
           {v.stigma_picks.map(([k]) => (
             <SkillIcon key={k} name={skillName(data.gd?.skills, k)} url={data.icons[k]} size={28} />
           ))}
@@ -119,9 +119,9 @@ function SkillPoints({ fb, data, rankedSkills }: { fb: FullBuild; data: ClassDat
       <p className="text-sm font-medium">Spend your {entered || stigEntered} points:</p>
       <ul className="space-y-1.5 text-sm">
         {buys.map((b) => (
-          <li key={b.key} className="flex items-center gap-2">
+          <li key={b.key} className="flex flex-wrap items-center gap-2">
             <SkillIcon name={skillName(data.gd?.skills, b.key)} url={data.icons[b.key]} size={26} />
-            <span className="flex-1">{skillName(data.gd?.skills, b.key)}</span>
+            <span className="min-w-0 flex-1">{skillName(data.gd?.skills, b.key)}</span>
             <span className="tabular-nums text-dim">
               rank {b.from} → {b.to}
             </span>
@@ -163,23 +163,40 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Section title="Stigmas" hint={applied ? `Variant applied: ${applied.label}` : "Best set for this playstyle, with each pick's DPS gain."}>
-          <StigmaList picks={picks} data={data} />
+      <AdvancedStats metrics={[
+        { key: "dps", label: "Estimated DPS", value: fmtDps(dps), hint: applied?.label ?? "Max-DPS build" },
+        { key: "duration", label: "Duration", value: `${fb.playstyle.scenario.duration_s} s` },
+        { key: "targets", label: "Targets", value: String(fb.playstyle.scenario.n_targets), hint: fb.playstyle.scenario.boss ? "Boss target" : "Non-boss targets" },
+        { key: "confidence", label: "Model confidence", value: fb.result.confidence },
+      ]} supporting={<div className="space-y-5">
+        <Section title={applied ? "Selected variant" : "Top stigma changes"} hint={applied ? `Variant applied: ${applied.label}` : "Individual stigma experiments; gains are not additive."}>
+          {applied ? <p className="text-sm text-dim">{applied.gives}</p> : <StigmaList picks={[...picks].filter(([, gain]) => gain > 0).sort((a, b) => b[1] - a[1]).slice(0, 3)} data={data} />}
         </Section>
-        <div className="grid gap-4">
-          <Section title="Skill points">
-            <SkillPoints fb={fb} data={data} rankedSkills={rankedSkills} />
-          </Section>
-          <Section title="Daevanion">
-            <p className="text-sm text-dim">
-              Best path opens <strong className="text-foreground">{fb.daevanion_path.length}</strong> nodes for about{" "}
-              <strong className="text-ok">{fmtPct(fb.daevanion_gain_pct)}</strong> DPS.
-            </p>
-          </Section>
-        </div>
+        {applied && <p className="text-xs text-dim">Detailed simulation is unavailable for this variant. Rotation, skill points, Daevanion and stat gains below describe the unchanged max-DPS build.</p>}
+        <Section title="Skill points">
+          <SkillPoints fb={fb} data={data} rankedSkills={rankedSkills} />
+        </Section>
+        <Section title="Daevanion">
+          <p className="text-sm text-dim">Max-DPS path: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated DPS gain.</p>
+        </Section>
+      </div>} main={<Tabs defaultValue="overview">
+      <TabsList aria-label="Build details">
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="rotation">Rotation</TabsTrigger>
+        <TabsTrigger value="tradeoffs">Trade-offs</TabsTrigger>
+        <TabsTrigger value="stats">Stat gains</TabsTrigger>
+      </TabsList>
+      <TabsContent value="overview">
+      {!applied && <BuildDamage fb={fb} data={data} />}
+      <div className="mt-5">
+        <Section title="Stigmas" hint={applied ? `Variant applied: ${applied.label}` : "Best set for this playstyle, with each pick's DPS gain."}>
+          <StigmaList picks={picks} data={data} aggregateOnly={!!applied} />
+        </Section>
       </div>
-
+      </TabsContent>
+      <TabsContent value="rotation">
+      {applied && <p className="mb-3 text-xs text-dim">Max-DPS build rotation</p>}
+      <p className="mb-3 text-xs text-dim">Opening sequence and cast-start priorities; not a complete damage timeline.</p>
       <Section title="Rotation" hint={fb.rotation_explained?.core ? `How to play it: ${fb.rotation_explained.scenario_name.toLowerCase()}, ${Math.round(fb.rotation_explained.duration_s)} s simulated. Charged skills show the level to hold.` : "Cast order the simulator found best. Charged skills show the level to hold."}>
         {fb.rotation_explained?.core ? (
           <RotationPlan rot={fb.rotation_explained} icons={data.icons} />
@@ -206,7 +223,8 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         </ol>
         )}
       </Section>
-
+      </TabsContent>
+      <TabsContent value="tradeoffs">
       {variants.length > 0 && (
         <Section title="Trade-offs" hint="Swap a stigma for utility and see what it costs.">
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -216,7 +234,9 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
           </ul>
         </Section>
       )}
-
+      </TabsContent>
+      <TabsContent value="stats">
+      {applied && <p className="mb-3 text-xs text-dim">Max-DPS build stat experiments</p>}
       {fb.stat_gains.length > 0 && (
         <Section title="Next stat upgrades" hint="DPS gained per small step, best first.">
           <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -231,7 +251,9 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
           </ul>
         </Section>
       )}
-
+      {fb.stat_gains.length === 0 && <p className="text-sm text-dim">Stat gains unavailable.</p>}
+      </TabsContent>
+      </Tabs>} />
       {fb.warnings.length > 0 && (
         <div className="text-xs text-dim">
           <button type="button" className="text-cyan underline-offset-2 hover:underline" onClick={() => setShowWarnings((s) => !s)} aria-expanded={showWarnings}>

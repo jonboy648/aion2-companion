@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
-import { LoaderCircle } from "lucide-react";
+import { useId, useMemo, useState } from "react";
+import { PrismFluxLoader } from "@/components/ui/prism-flux-loader";
+import "./build-dashboard.css";
 import type { CompareResult, PlaystyleKey } from "@/lib/types";
 import type { ClassData } from "./useClassData";
 import { PlaystyleStrip } from "./PlaystyleStrip";
@@ -11,9 +12,9 @@ export function ProgressPanel({ title, message, steps }: { title: string; messag
   return (
     <div role="status" aria-live="polite" className="ornate p-5" data-testid="progress">
       <div className="flex items-center gap-3">
-        <LoaderCircle className="size-5 animate-spin text-gold motion-reduce:animate-none" />
-        <div>
-          <div className="font-display font-bold tracking-wide">{title}</div>
+        <PrismFluxLoader size={30} label={null} className="shrink-0 text-gold" />
+        <div className="min-w-0">
+          <div className="font-display font-bold">{title}</div>
           <div className="text-sm text-dim">{message}</div>
         </div>
       </div>
@@ -30,6 +31,7 @@ export function ProgressPanel({ title, message, steps }: { title: string; messag
 
 /** Playstyle comparison strip + the selected playstyle's detail cards, with per-playstyle trade-off variants. */
 export function BuildResults({ cmp, data, selected: picked, onSelect }: { cmp: CompareResult; data: ClassData; selected?: PlaystyleKey; onSelect?: (k: PlaystyleKey) => void }) {
+  const panelId = useId();
   const first = PLAYSTYLE_ORDER.find((k) => cmp[k]) ?? "boss";
   const [own, setOwn] = useState<PlaystyleKey>(first);
   const selected = picked ?? own; // controlled when the page shares the playstyle with the gear card
@@ -39,6 +41,7 @@ export function BuildResults({ cmp, data, selected: picked, onSelect }: { cmp: C
   };
   const [variants, setVariants] = useState<Partial<Record<PlaystyleKey, string>>>({});
   const fb = cmp[selected] ?? cmp[first];
+  const dpsOverrides = Object.fromEntries(PLAYSTYLE_ORDER.map(k => [k, cmp[k]?.variants.find(v => v.key === variants[k])?.dps ?? cmp[k]?.result.dps]));
 
   const overrides = useMemo(() => {
     const out: Partial<Record<PlaystyleKey, string[]>> = {};
@@ -52,9 +55,11 @@ export function BuildResults({ cmp, data, selected: picked, onSelect }: { cmp: C
 
   if (!fb) return null;
   return (
-    <>
-      <PlaystyleStrip cmp={cmp} data={data} selected={fb.playstyle.key} onSelect={setSelected} overrides={overrides} />
-      <PlaystyleDetail fb={fb} data={data} variantKey={variants[fb.playstyle.key] ?? "max"} onVariant={(key) => setVariants((s) => ({ ...s, [fb.playstyle.key]: key }))} />
-    </>
+    <div className="build-dashboard">
+      <PlaystyleStrip cmp={cmp} data={data} selected={fb.playstyle.key} onSelect={setSelected} overrides={overrides} dpsOverrides={dpsOverrides} panelId={panelId} />
+      <div role="tabpanel" id={panelId} aria-labelledby={`${panelId}-${fb.playstyle.key}`}>
+        <PlaystyleDetail fb={fb} data={data} variantKey={variants[fb.playstyle.key] ?? "max"} onVariant={(key) => setVariants((s) => ({ ...s, [fb.playstyle.key]: key }))} />
+      </div>
+    </div>
   );
 }
