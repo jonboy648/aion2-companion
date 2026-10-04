@@ -49,7 +49,7 @@ beforeEach(() => _resetRateLimit());
 
 test("parseInfo keeps only public fields and rejects non-characters", () => {
   const c = parseInfo(new TextEncoder().encode(info()));
-  assert.deepEqual(c, { name: "DarthThot", characterId: CID, serverId: 2103, className: "Sorcerer", serverName: "Triniel", level: 45, combatPower: 38507 });
+  assert.deepEqual(c, { name: "DarthThot", characterId: CID, serverId: 2103, className: "Sorcerer", serverName: "Triniel", level: 45, combatPower: 38507, itemLevel: null });
   for (const bad of ["{}", "not json", info({ characterName: "" }), info({ characterId: "x" }), info({ serverId: 0 })]) {
     assert.equal(parseInfo(new TextEncoder().encode(bad)), null, bad);
   }
@@ -145,3 +145,42 @@ test("POST /board/dps is only accepted from the site's own origin", async () => 
   assert.equal(r.status, 403);
   assert.equal(rows(env)[0].max_dps, null);
 });
+
+const withIL = (v, o = {}) => JSON.stringify({ profile: { characterId: CID, characterName: "DarthThot", className: "Sorcerer", serverId: 2103, serverName: "Triniel", characterLevel: 45, combatPower: 38507, ...o }, stat: { statList: [{ type: "Might", value: 14 }, { type: "ItemLevel", name: "x", value: v }] } });
+
+test("item level (gear score) is read from the armory's own stat list", () => {
+  assert.equal(parseInfo(new TextEncoder().encode(withIL(738))).itemLevel, 738);
+  for (const bad of [-1, 99999, "738", null, 7.5]) assert.equal(parseInfo(new TextEncoder().encode(withIL(bad))).itemLevel, null, String(bad));
+});
+
+test("item level is recorded, updated, ranked by sort=gear and returned on every board", async () => {
+  const env = mkEnv();
+  await lookup(env, withIL(700));
+  await lookup(env, withIL(738)); // same character again: updated
+  const seed = (name, il) =>
+    env.STATS.db.prepare("INSERT INTO board (region, server_id, character_id, name, class_name, server_name, level, combat_power, item_level, first_seen, last_seen) VALUES ('nae', 1, ?1, ?2, 'Cleric', 'S', 45, 100, ?3, 1, 1)").run(`id-${name}-12345`, name, il);
+  seed("Low", 500);
+  seed("High", 900);
+  seed("None", null);
+  const rowsOf = async (qs) => (await (await board(env, qs)).json()).rows;
+  assert.equal(rows(env).find((r) => r.name === "DarthThot").item_level, 738);
+  assert.deepEqual((await rowsOf("?sort=gear")).map((r) => [r.name, r.item_level]), [["High", 900], ["DarthThot", 738], ["Low", 500]]);
+  assert.ok((await rowsOf("?sort=power")).every((r) => "item_level" in r));
+  assert.deepEqual((await rowsOf("?sort=gear&class=sorcerer")).map((r) => r.name), ["DarthThot"]);
+});
+
+test("a database without the item_level column keeps recording and serving (gear board empty until migrated)", async () => {
+  const d = new DatabaseSync(":memory:");
+  d.exec(`CREATE TABLE board (region TEXT NOT NULL, server_id INTEGER NOT NULL, character_id TEXT NOT NULL, name TEXT NOT NULL, class_name TEXT NOT NULL,
+    server_name TEXT NOT NULL DEFAULT '', level INTEGER, combat_power INTEGER, max_dps INTEGER, max_dps_ts INTEGER, first_seen INTEGER NOT NULL,
+    last_seen INTEGER NOT NULL, lookups INTEGER NOT NULL DEFAULT 1, PRIMARY KEY (region, server_id, character_id));`);
+  const stmt = (sql, args = []) => ({ bind: (...a) => stmt(sql, a), run: async () => ({ meta: { changes: Number(d.prepare(sql).run(...args).changes) } }), all: async () => ({ results: d.prepare(sql).all(...args).map((r) => ({ ...r })) }) });
+  const env = { ...baseEnv, STATS: { prepare: (sql) => stmt(sql), batch: async () => [] } };
+  await lookup(env, withIL(738));
+  assert.equal(d.prepare("SELECT COUNT(*) AS n FROM board").get().n, 1, "recorded through the legacy statement");
+  const recent = await (await board(env, "?sort=recent")).json();
+  assert.equal(recent.rows.length, 1);
+  assert.equal(recent.rows[0].item_level, null);
+  assert.deepEqual((await (await board(env, "?sort=gear")).json()).rows, []);
+});
+

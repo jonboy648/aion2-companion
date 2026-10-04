@@ -6,7 +6,7 @@ import { Board } from "./Board";
 
 const row = (o: Partial<BoardRow> = {}): BoardRow => ({
   name: "DarthThot", class_name: "Sorcerer", server_name: "Triniel", region: "nae", server_id: 2103,
-  level: 45, combat_power: 38507, max_dps: 15000, last_seen: Date.now() - 5 * 60_000, ...o,
+  level: 45, combat_power: 38507, item_level: 738, max_dps: 15000, last_seen: Date.now() - 5 * 60_000, ...o,
 });
 
 let fetchMock: ReturnType<typeof vi.fn>;
@@ -70,6 +70,17 @@ describe("Board page", () => {
     fireEvent.click(screen.getByRole("tab", { name: "Top max-potential DPS" }));
     expect(await screen.findByText(/Nobody has calculated/)).toBeTruthy();
     expect(screen.getByText(/not verified/)).toBeTruthy();
+  });
+
+  it("has a Top Gear Score tab ranked by item level, and shows item level on the other lists", async () => {
+    at();
+    await screen.findByRole("link", { name: "DarthThot" });
+    expect(screen.getByText(/Sorcerer · Lv 45 · Triniel · NA East · IL 738/)).toBeTruthy(); // gear score on the recent list
+    fireEvent.click(screen.getByRole("tab", { name: "Top Gear Score" }));
+    expect(await screen.findByText("738")).toBeTruthy(); // the ranked number
+    expect(screen.getByText(/item level \(IL\)/)).toBeTruthy();
+    expect(fetchMock.mock.calls.some((c) => new URL(c[0]).searchParams.get("sort") === "gear")).toBe(true);
+    expect(screen.queryByText(/· IL 738/)).toBeNull(); // not repeated under the name when it is the ranked number
   });
 
   it("says so when the board cannot load", async () => {

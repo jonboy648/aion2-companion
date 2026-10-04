@@ -4,7 +4,7 @@
  * max-potential DPS estimate, which the Worker clamps and only attaches to a character it has already seen.
  */
 
-export type BoardSort = "recent" | "power" | "dps";
+export type BoardSort = "recent" | "power" | "gear" | "dps";
 
 export interface BoardRow {
   name: string;
@@ -14,6 +14,8 @@ export interface BoardRow {
   server_id: number;
   level: number | null;
   combat_power: number | null;
+  /** the armory's item level ("gear score"); null until the proxy has recorded it */
+  item_level: number | null;
   max_dps: number | null;
   /** unix ms of the latest lookup */
   last_seen: number;

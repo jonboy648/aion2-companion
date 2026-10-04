@@ -4,7 +4,7 @@ import { GameTabs } from "@/components/game";
 import { PageHeader } from "@/components/PageHeader";
 import { ago, fetchBoard, REGION_LABEL, type BoardRow, type BoardSort } from "@/lib/board";
 
-type View = "recent" | "power" | "dps";
+type View = "recent" | "power" | "gear" | "dps";
 
 const CLASSES = ["Gladiator", "Templar", "Assassin", "Ranger", "Sorcerer", "Spiritmaster", "Cleric", "Chanter"];
 
@@ -22,10 +22,11 @@ function Row({ r, rank, view }: { r: BoardRow; rank: number; view: View }) {
         <div className="text-xs text-dim">
           {r.class_name}
           {r.level ? ` · Lv ${r.level}` : ""} · {r.server_name || "server " + r.server_id} · {REGION_LABEL[r.region] ?? r.region}
+          {view !== "gear" && r.item_level != null ? ` · IL ${r.item_level}` : ""}
         </div>
       </td>
       <td className="py-2 text-right tabular-nums">
-        {view === "recent" ? <span className="text-dim">{ago(r.last_seen)}</span> : <span className="text-gold">{num(view === "power" ? r.combat_power : r.max_dps)}</span>}
+        {view === "recent" ? <span className="text-dim">{ago(r.last_seen)}</span> : <span className="text-gold">{num(view === "power" ? r.combat_power : view === "gear" ? r.item_level : r.max_dps)}</span>}
       </td>
     </tr>
   );
@@ -61,6 +62,7 @@ export function Board() {
         tabs={[
           { key: "recent", label: "Recent" },
           { key: "power", label: "Top Combat Power" },
+          { key: "gear", label: "Top Gear Score" },
           { key: "dps", label: "Top max-potential DPS" },
         ]}
       />
@@ -75,6 +77,7 @@ export function Board() {
           </select>
         </label>
       )}
+      {view === "gear" && <p className="mt-3 text-xs text-dim">Gear score is the character's item level (IL), read from the official armory.</p>}
       {view === "dps" && (
         <p className="mt-3 text-xs text-dim">
           Max-potential DPS is the site's estimate for the boss playstyle with obtainable gear, computed in each visitor's browser. It is not verified and is only comparable within a class.
@@ -86,7 +89,7 @@ export function Board() {
         ) : rows === null ? (
           <p className="text-sm text-dim">Loading...</p>
         ) : rows.length === 0 ? (
-          <p className="text-sm text-dim">{view === "dps" ? "Nobody has calculated their max potential yet. Open a character and press Calculate max potential." : "Nothing here yet."}</p>
+          <p className="text-sm text-dim">{view === "dps" ? "Nobody has calculated their max potential yet. Open a character and press Calculate max potential." : view === "gear" ? "No gear scores recorded yet. They appear as characters are looked up." : "Nothing here yet."}</p>
         ) : (
           <table className="w-full text-sm">
             <tbody>

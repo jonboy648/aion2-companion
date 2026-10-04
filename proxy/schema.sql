@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS board (
   server_name  TEXT    NOT NULL DEFAULT '',
   level        INTEGER,
   combat_power INTEGER,
+  item_level   INTEGER,   -- the armory's ItemLevel stat ("gear score"), read by the Worker like combat_power
   max_dps      INTEGER,
   max_dps_ts   INTEGER,
   first_seen   INTEGER NOT NULL,
@@ -44,4 +45,5 @@ CREATE TABLE IF NOT EXISTS board (
 );
 CREATE INDEX IF NOT EXISTS idx_board_seen  ON board (last_seen);
 CREATE INDEX IF NOT EXISTS idx_board_power ON board (combat_power);
+CREATE INDEX IF NOT EXISTS idx_board_item_level ON board (item_level);
 CREATE INDEX IF NOT EXISTS idx_board_dps   ON board (max_dps);

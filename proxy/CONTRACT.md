@@ -130,13 +130,13 @@ request. Nothing about the visitor is stored. Repeat lookups update the row and 
 recorded and `GET /board` answers `503 {"error":"board_unavailable"}`.
 
 ### GET /board
-Query: `sort` = `recent` (default, newest lookups) | `power` (Combat Power) | `dps` (max-potential estimate, only rows
+Query: `sort` = `recent` (default, newest lookups) | `power` (Combat Power) | `gear` (item level, the "gear score") | `dps` (max-potential estimate, only rows
 that have one); optional `class` (name, case-insensitive, `[A-Za-z' -]{1,24}`); `limit` 1-50 (default 25). Public,
 read-only, own rate-limit bucket, `Cache-Control: public, max-age=30`. Bad param: `400 {"error":"bad_request","param"}`.
 ```json
 { "sort": "power", "generated_at": 1760000000000,
   "rows": [ {"name":"DarthThot","class_name":"Sorcerer","server_name":"Triniel","region":"nae","server_id":2103,
-             "level":45,"combat_power":38507,"max_dps":15000,"last_seen":1760000000000} ] }
+             "level":45,"combat_power":38507,"item_level":738,"max_dps":15000,"last_seen":1760000000000} ] }
 ```
 The internal `character_id` is never returned.
 
@@ -146,3 +146,7 @@ number: the site's max-potential DPS estimate for the boss playstyle with obtain
 own rate limit. Updates a row the Worker already created (`404 {"error":"unknown_character"}` otherwise); `dps` must be
 1..1,000,000 (rounded), so a forged or out-of-range value changes nothing. The board labels it an unverified estimate.
 `204` on success.
+
+`item_level` is the armory's own `ItemLevel` stat from `/info`, recorded by the Worker like Combat Power (null for characters
+recorded before it existed, until they are looked up again). Existing databases need `proxy/migrations/2026-10-04-board-item-level.sql`
+once; until then the Worker keeps working and `sort=gear` returns an empty list.
