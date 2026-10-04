@@ -13,4 +13,4 @@ ALLOWED_ORIGINS = "https://becomecube.com,https://www.becomecube.com,http://loca
 [[d1_databases]]
 binding = "STATS"
 database_name = "aion2-stats"
-database_id = "REPLACE_WITH_DATABASE_ID_FROM_wrangler_d1_create"
+database_id = "7c311b25-a47f-400a-a620-56862b411d92"

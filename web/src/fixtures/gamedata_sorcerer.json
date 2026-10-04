@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "data_version": "2026-10-04+aion2app-2026-09-18",
- "built_at": "2026-10-04T00:43:07+00:00",
+ "built_at": "2026-10-04T00:49:21+00:00",
  "level_caps": {
   "global": 45,
   "korea": 50
@@ -1671,6 +1671,7 @@
    "unlock_level": 1,
    "max_rank": 40,
    "regions": [
+    "global",
     "korea"
    ],
    "atk_ratio_pct": {
@@ -5587,6 +5588,7 @@
    "unlock_level": 8,
    "max_rank": 40,
    "regions": [
+    "global",
     "korea"
    ],
    "atk_ratio_pct": {
@@ -5807,6 +5809,7 @@
    "unlock_level": 22,
    "max_rank": 40,
    "regions": [
+    "global",
     "korea"
    ],
    "atk_ratio_pct": {

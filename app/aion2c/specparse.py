@@ -292,11 +292,32 @@ def finalize_gamedata(gd: GameData, overrides: dict | None = None,
             tags = tags + ("needs_stagger",)
         skills[k] = replace(s, specializations=tuple(specs), tags=tags)
     statuses = {**new_statuses, **gd.statuses}
+    rules = _gate_spec_chains(gd.rules, skills, names)
     slots = tuple(Num(float(r["value"] if isinstance(r, dict) else r),
                       r.get("confidence", "estimated") if isinstance(r, dict) else "estimated",
                       r.get("source", "mechanics.json spec_slot_ranks") if isinstance(r, dict) else "mechanics.json spec_slot_ranks")
                   for r in slot_ranks) if slot_ranks else gd.spec_slot_ranks
-    return replace(gd, skills=skills, statuses=statuses, spec_slot_ranks=slots, specs_parsed=True)
+    return replace(gd, skills=skills, statuses=statuses, rules=rules, spec_slot_ranks=slots, specs_parsed=True)
+
+
+_ADDS_CHAIN_RE = re.compile(r"Adds \[(.+?)\] Chain Skill")
+
+
+def _gate_spec_chains(rules: dict, skills: dict, names: dict) -> dict:
+    """A chain follow-up that a specialty 'Adds [X] Chain Skill' only exists while that option is chosen:
+    set requires_spec=(owner, option) on X's rule. The owner is the root skill, not a chain child that carries a
+    copy of its text (Rapid Fire / Spiral Arrow copy Snipe's options)."""
+    gate: dict[str, tuple[str, int]] = {}
+    for k, s in skills.items():
+        for i, sp in enumerate(s.specializations):
+            m = _ADDS_CHAIN_RE.search(sp.text)
+            child = names.get(_norm_name(m.group(1))) if m else None
+            if child is None or child not in rules:
+                continue
+            if child not in gate or (skills[gate[child][0]].kind == SkillKind.CHAIN and s.kind != SkillKind.CHAIN):
+                gate[child] = (k, i)
+    return {k: (replace(r, requires_spec=gate[k]) if k in gate and r.requires_spec is None else r)
+            for k, r in rules.items()}
 
 
 def spec_coverage(gd: GameData) -> dict[str, int]:

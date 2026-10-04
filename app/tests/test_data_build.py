@@ -90,7 +90,7 @@ def test_region_tags(shipped):
     assert "firebomb" not in {s.key for s in allowed_skills(shipped, "global", False)}
     assert "firebomb" in {s.key for s in allowed_skills(shipped, "global", True)}
     kr_only = [k for k, s in shipped.skills.items() if s.regions == frozenset({"korea"})]
-    assert len(kr_only) == 10  # Burst and Pyroclasm confirmed on Global 2026-10-03 (research/open_questions.md)
+    assert len(kr_only) == 7  # Burst, Pyroclasm, Cold Wave, Winter's Illusion, Curse: Old Tree are on Global (open_questions Q3b)
     assert {"burst", "pyroclasm"}.isdisjoint(kr_only)
 
 

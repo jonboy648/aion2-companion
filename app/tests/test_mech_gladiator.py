@@ -88,9 +88,10 @@ def test_stagger_only_skills_are_gated(gd):
 
 
 def test_murderous_burst_fires_every_five_hits(gd):
-    """Rending Blow is 2 hits: 10 casts in 10 s = 20 hits = 4 bursts (text: burst at 5 Menace stacks)."""
+    """Rending Blow chains into Smashing Blow on Global; both are 2 hits: 10 casts in 10 s = 20 hits = 4 bursts
+    (text: burst at 5 Menace stacks)."""
     res = _sim(gd, _build(), ["rending-blow"], 10)
-    casts = res.per_skill["rending-blow"].casts
+    casts = res.per_skill["rending-blow"].casts + res.per_skill["smashing-blow"].casts
     assert casts == 10
     assert res.per_skill["murderous-burst"].casts == casts * 2 // 5 == 4
     # burst = 78% ATK + 539 at rank 1 (datamine), 1 target, no crit/boost/defense: 3000*0.78 + 539
@@ -122,8 +123,9 @@ def test_lunge_stance_is_a_combat_speed_status(gd):
     assert [(m.stat, m.value.value) for m in st.stat_mods] == [("combat_speed_pct", 20)]
     assert st.dmg_mult.value == 1.0  # no double count with the stat mod
     b = _build(skill_ranks={"lunge-stance": 10}, stigmas=("lunge-stance",))
-    base = _sim(gd, replace(b, stigmas=()), ["rending-blow"], 10).per_skill["rending-blow"].casts
-    buffed = _sim(gd, b, ["lunge-stance", "rending-blow"], 10).per_skill["rending-blow"].casts
+    chain = ("rending-blow", "smashing-blow")  # Rending Blow chains into Smashing Blow on Global
+    base = sum(_sim(gd, replace(b, stigmas=()), ["rending-blow"], 10).per_skill[k].casts for k in chain)
+    buffed = sum(_sim(gd, b, ["lunge-stance", "rending-blow"], 10).per_skill[k].casts for k in chain)
     # lock 1.0 s -> round(1000/1.2) = 833 ms once the buff is up; casts at 1.0 + 0.833k < 10
     assert base == 10 and buffed == 11
 

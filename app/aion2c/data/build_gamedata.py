@@ -31,8 +31,10 @@ DUMP_SRC = f"aion2.app client dump {DUMP_DATE}"
 # Burst (15030000) and Pyroclasm (15250000) were removed 2026-10-03: Global sources (sportskeeda,
 # shugo.gg, 2026-10-02) confirm the Flame Arrow > Burst > Pyroclasm chain on Global. The armory skill
 # list never shows chain children, so it can't confirm or refute the rest of this list.
-KR_ONLY_IDS = frozenset({15000000, 15020000, 15100000, 15180000, 15270000,
-                         15290000, 15330000, 15340000, 15350000, 15380000})
+# Cold Wave (15100000), Winter's Illusion (15330000) and Curse: Old Tree (15340000) removed 2026-10-03: same wrong
+# source as Burst/Pyroclasm (open_questions Q3b: shugo.gg lists them on Global; Curse: Old Tree is the weakest evidence).
+KR_ONLY_IDS = frozenset({15000000, 15020000, 15180000, 15270000,
+                         15290000, 15350000, 15380000})
 CATEGORY_KIND = {"active": SkillKind.ACTIVE, "passive": SkillKind.PASSIVE, "stigma": SkillKind.STIGMA,
                  "system_passive": SkillKind.SYSTEM, "basic_dodge": SkillKind.DODGE,
                  "passive_proc": SkillKind.PROC}

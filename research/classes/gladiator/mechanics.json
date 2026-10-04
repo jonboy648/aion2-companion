@@ -1,24 +1,10 @@
 {
  "korea_only_ids": [
-  11000000,
-  11030000,
-  11040000,
-  11060000,
-  11090000,
   11140000,
-  11180000,
-  11210000,
   11230000,
-  11300037,
   11310000,
-  11320000,
   11330000,
-  11350000,
-  11370000,
-  11420000,
-  11440000,
-  11460000,
-  11470000
+  11350000
  ],
  "_comment": "Hand-authored Gladiator sim mechanics. Every Num carries confidence. Keys are validated against built skills at build time. Statuses model timed/conditional effects only; always-on passives (Attack Preparation, Identify Weakness, Impact Hit, Survival Stance...) are NOT statuses because imported gear stats already include them. Sources: aion2.app client dump 2026-09-18 (tokens), Metaroad 2026-10-03, couga54 guide 2026-10-03, Inven Gladiator guide 2026-09-05.",
  "icon_prefix_aliases": {},
