@@ -25,9 +25,12 @@ function Stat({ label, value, testId }: { label: string; value: string; testId?:
 
 /** What a fully geared build of this class reaches, versus the imported character. Computed on demand (slow). */
 export function MaxPotentialPanel({ result, busy, error, onRun, classLabel }: Props) {
+  const now = result?.with_current_gear ?? null;
+  // both are full searches, so they compare directly; without a character, fall back to the engine's own gap
+  const gap = result ? (now && now.dps > 0 ? (result.dps / now.dps - 1) * 100 : result.gain_vs_current_pct) : null;
   return (
     <OrnateCard className="mb-6 p-4 sm:p-5" data-testid="max-potential">
-      <SectionTitle as="h2" caption={`Best-in-slot gear, every Daevanion point and the best stigmas for a ${classLabel}: an upper bound, not a promise.`}>
+      <SectionTitle as="h2" caption={`What your gear allows today, and the ceiling with best-in-slot gear and every Daevanion point for a ${classLabel}. The ceiling is an upper bound, not a promise.`}>
         Max potential
       </SectionTitle>
       {!result && (
@@ -45,11 +48,18 @@ export function MaxPotentialPanel({ result, busy, error, onRun, classLabel }: Pr
       )}
       {result && (
         <>
-          <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="mb-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {now && <Stat label="Best with your gear" value={`~${fmtDps(now.dps)} DPS`} testId="with-current" />}
             <Stat label="Fully geared" value={`~${fmtDps(result.dps)} DPS`} />
-            <Stat label="Gap vs you" value={result.gain_vs_current_pct != null ? fmtGain(result.gain_vs_current_pct) : "n/a"} testId="gap" />
+            <Stat label={now ? "Ceiling vs best now" : "Gap vs you"} value={gap != null ? fmtGain(gap) : "n/a"} testId="gap" />
             <Stat label="From gear alone" value={fmtGain(result.gear_gain_pct)} />
           </div>
+          {now && (
+            <p className="mb-4 text-xs text-dim" data-testid="with-current-note">
+              Best with your gear: your current gear and the {now.daevanion_nodes} Daevanion nodes you have opened, with stigmas, skill ranks and specialties chosen for you
+              ({now.stigmas.map((s) => s.name).join(", ")}). The playstyle cards above also assume every Daevanion point is spent, so they read higher than this.
+            </p>
+          )}
           <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-faint">Best in slot</h3>
           <ul className="grid gap-2 sm:grid-cols-2">
             {result.gear.map((g) => (

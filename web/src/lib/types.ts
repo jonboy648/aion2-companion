@@ -600,6 +600,8 @@ export interface MaxPotentialResult {
   /** null when no build was passed */
   current_dps: number | null;
   gain_vs_current_pct: number | null;
+  /** best for the character's CURRENT gear and already-opened Daevanion nodes; null when no build was passed */
+  with_current_gear: { dps: number; stigmas: { key: string; name: string }[]; daevanion_nodes: number } | null;
   notes: string[];
   assumptions: string[];
 }

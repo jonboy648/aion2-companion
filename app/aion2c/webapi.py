@@ -313,7 +313,8 @@ def max_potential(class_key: str, playstyle: str, reachable_only: bool = True, b
                   raw_armory: dict | None = None) -> dict:
     """Best-in-slot gear (target enchant) + the engine's full build for the class, and the gap to `build` if given.
     -> {class_key, playstyle, gear: [per-slot BIS], build: {stigmas, specialties, daevanion_nodes, ranks},
-        dps, dps_without_gear, gear_gain_pct, gain_vs_current_pct|None, current_dps|None, notes, assumptions}"""
+        dps, dps_without_gear, gear_gain_pct, gain_vs_current_pct|None, current_dps|None,
+        with_current_gear|None {dps, stigmas, daevanion_nodes} (current gear + the Daevanion nodes already opened), notes, assumptions}"""
     gd = _gd(class_key)
     items = _items()
     b = _build(build) if build else None
@@ -340,15 +341,24 @@ def max_potential(class_key: str, playstyle: str, reachable_only: bool = True, b
         "ranks": [{"key": k, "name": name(k), "rank": n} for k, n in ranks],
     }
     current = gain = None
+    with_current = None
     if b is not None:
         # same heuristic priority on both sides, so the gap is not an artefact of two different rotation searches
         current = gear_mod._Scorer(gd, b, playstyle).dps(b.stats)
         top = gear_mod._Scorer(gd, fb.build, playstyle).dps(fb.build.stats)
         gain = (top / current - 1) * 100 if current > 0 else None
+        cf = mp.current_full
+        if cf is not None:
+            # same kind of number as `dps` (a full rotation search), so the two can be compared directly
+            with_current = {
+                "dps": cf.result.dps,
+                "stigmas": [{"key": k, "name": name(k)} for k in cf.build.stigmas],
+                "daevanion_nodes": len(cf.build.daevanion_nodes),
+            }
     return {
         "class_key": class_key, "playstyle": playstyle, "gear": gear, "build": summary,
         "dps": fb.result.dps, "dps_without_gear": mp.dps_without_gear,
         "gear_gain_pct": (mp.dps_with_gear / mp.dps_without_gear - 1) * 100 if mp.dps_without_gear > 0 else 0.0,
-        "current_dps": current, "gain_vs_current_pct": gain,
+        "current_dps": current, "gain_vs_current_pct": gain, "with_current_gear": with_current,
         "notes": list(mp.notes), "assumptions": list(GEAR_ASSUMPTIONS),
     }

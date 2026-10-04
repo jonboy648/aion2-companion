@@ -74,8 +74,15 @@ def test_max_potential_shape_and_gap(raw, build):
     assert out["current_dps"] > 0 and out["gain_vs_current_pct"] is not None
     assert out["build"]["daevanion_nodes"] >= 84 and "stigmas" in out["build"]
     assert out["assumptions"] and out["notes"]
+    # the realistic tier: current gear + only the Daevanion nodes already opened, so below the all-points ceiling
+    now = out["with_current_gear"]
+    assert now["daevanion_nodes"] == len(build["daevanion_nodes"]) == 84
+    assert out["build"]["daevanion_nodes"] > now["daevanion_nodes"]  # the ceiling opens far more
+    assert 0 < now["dps"] < out["dps"]
+    assert len(now["stigmas"]) == 4 and all(k["name"] for k in now["stigmas"])
 
 
 def test_max_potential_without_build():
     out = js(webapi.max_potential("sorcerer", "boss"))
     assert out["gain_vs_current_pct"] is None and out["current_dps"] is None and out["gear"]
+    assert out["with_current_gear"] is None  # no character: nothing "current" to report

@@ -332,6 +332,28 @@
  "gear_gain_pct": 232.60996265684497,
  "current_dps": 8240.683239414895,
  "gain_vs_current_pct": 170.77471484551435,
+ "with_current_gear": {
+  "dps": 12352.459927873822,
+  "stigmas": [
+   {
+    "key": "assault-bombardment",
+    "name": "Assault Bombardment"
+   },
+   {
+    "key": "fire-wall",
+    "name": "Fire Wall"
+   },
+   {
+    "key": "cold-storm",
+    "name": "Cold Storm"
+   },
+   {
+    "key": "curse-tree",
+    "name": "Curse: Tree"
+   }
+  ],
+  "daevanion_nodes": 84
+ },
  "notes": [
   "upper bound: best sub-stat lines on every item, all at max enchant (success odds and costs unknown)",
   "gear limited to item level <= 85",

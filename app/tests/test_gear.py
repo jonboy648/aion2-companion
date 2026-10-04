@@ -180,20 +180,32 @@ def test_upgrade_path_stops_when_nothing_helps(items, patched):
 # ---- max potential -----------------------------------------------------------------------------------------
 
 def test_max_potential_uses_bis_and_optimizer(items, patched, monkeypatch):
-    got = {}
+    calls = []
 
     def fake_full(gd, b, style, dp, cfg, budget, progress):
-        got["build"], got["style"] = b, style
-        return "FULL"
+        calls.append({"build": b, "style": style, "points": dp})
+        return "FULL" if dp is None else "NOW"
 
     monkeypatch.setattr(gear, "optimize_full_build", fake_full)
     mp = gear.max_potential(None, "sorcerer", "boss", build(attack=100), items=items)
-    assert mp.full == "FULL" and got["style"] == "boss"
+    assert mp.full == "FULL" and calls[0]["style"] == "boss"
     assert mp.gear["weapon"].item["id"] == LUNATIC
     assert mp.dps_with_gear > mp.dps_without_gear
-    assert got["build"].stats.attack == pytest.approx(100 + mp.gear_stats.attack)
+    # the ceiling: best-in-slot gear stats on top, and no limit on Daevanion points
+    assert calls[0]["points"] is None
+    assert calls[0]["build"].stats.attack == pytest.approx(100 + mp.gear_stats.attack)
+    # the realistic tier: the character's own gear stats, and zero NEW Daevanion points (opened nodes are kept)
+    assert mp.current_full == "NOW" and calls[1]["points"] == 0
+    assert calls[1]["build"].stats.attack == 100
     assert all(r.reachable for r in mp.gear.values())
     assert mp.notes
+
+
+def test_max_potential_without_a_build_has_no_current_tier(items, patched, monkeypatch):
+    calls = []
+    monkeypatch.setattr(gear, "optimize_full_build", lambda gd, b, style, dp, cfg, budget, progress: calls.append(dp) or "FULL")
+    mp = gear.max_potential(None, "sorcerer", "boss", None, items=items)
+    assert mp.current_full is None and calls == [None]  # a class with no character: only the ceiling
 
 
 # ---- armory ------------------------------------------------------------------------------------------------

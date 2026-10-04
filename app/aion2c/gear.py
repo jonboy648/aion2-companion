@@ -363,14 +363,19 @@ class MaxPotential:
     dps_without_gear: float
     dps_with_gear: float
     notes: tuple[str, ...] = field(default_factory=tuple)
+    # build_optimizer.FullBuild for the CURRENT gear and the Daevanion nodes already opened (None when no build was given)
+    current_full: object | None = None
 
 
 def max_potential(gd: GameData, class_key: str, playstyle: str, build: CharacterBuild | None = None,
                   equipped: list[dict] | None = None, reachable_only: bool = True,
                   items: dict[int, dict] | None = None, cfg=SimConfig(),
                   budget: SearchBudget = SearchBudget(max_candidates=200), progress=None) -> MaxPotential:
-    """BIS gear at max enchant + the engine's full build (every Daevanion point, max ranks, best stigmas/specs)."""
+    """BIS gear at max enchant + the engine's full build (every Daevanion point, max ranks, best stigmas/specs).
+    With a `build` it also returns `current_full`: the best that character's CURRENT gear and already-opened Daevanion
+    nodes allow (daevanion_points=0: nothing new is opened; stigmas, ranks and specialties are still optimised)."""
     items = items if items is not None else load_items()
+    given = build is not None
     build = replace(build or default_build(class_key), class_key=class_key)
     top = bis(gd, class_key, playstyle, build, equipped, reachable_only, items, cfg=cfg, top=1)
     gear = {s: r[0] for s, r in top.items() if r}
@@ -382,10 +387,11 @@ def max_potential(gd: GameData, class_key: str, playstyle: str, build: Character
         delta = add_stats(delta, item_delta(r.item, r.enchant, "best", w))
     geared = replace(build, stats=add_stats(base, delta))
     full = optimize_full_build(gd, geared, playstyle, None, cfg, budget, progress)
+    current_full = optimize_full_build(gd, build, playstyle, 0, cfg, budget, progress) if given else None
     notes = ["upper bound: best sub-stat lines on every item, all at max enchant (success odds and costs unknown)",
              f"gear limited to item level <= {REACHABLE_IL}" if reachable_only else "includes unreleased item levels",
              f"rating conversions assumed: {CRIT_RATING_PER_PCT:g} crit rating = 1%"]
-    return MaxPotential(playstyle, gear, delta, geared, full, sc.dps(base), sc.dps(geared.stats), tuple(notes))
+    return MaxPotential(playstyle, gear, delta, geared, full, sc.dps(base), sc.dps(geared.stats), tuple(notes), current_full)
 
 
 # ---- armory ------------------------------------------------------------------------------------------------

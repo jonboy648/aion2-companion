@@ -7,6 +7,7 @@ import rawFx from "@/fixtures/armory_raw.json";
 import type { ArmoryRaw, GearUpgradesResult, ImportResult, MaxPotentialResult } from "@/lib/types";
 import { GEAR_METHODS, PY_NAME, classKeyFor } from "@/engine/protocol";
 import { GearSection } from "./GearSection";
+import { MaxPotentialPanel } from "./MaxPotentialPanel";
 import { fmtGain, moveText, sources } from "./logic";
 
 const imp = importFx as unknown as ImportResult;
@@ -31,7 +32,8 @@ describe("gear fixtures (real webapi output)", () => {
   });
   it("max_potential shape", () => {
     const r = maxFx as unknown as MaxPotentialResult;
-    expect(Object.keys(r).sort()).toEqual(["assumptions", "build", "class_key", "current_dps", "dps", "dps_without_gear", "gain_vs_current_pct", "gear", "gear_gain_pct", "notes", "playstyle"]);
+    expect(Object.keys(r).sort()).toEqual(["assumptions", "build", "class_key", "current_dps", "dps", "dps_without_gear", "gain_vs_current_pct", "gear", "gear_gain_pct", "notes", "playstyle", "with_current_gear"]);
+    expect(Object.keys(r.with_current_gear!).sort()).toEqual(["daevanion_nodes", "dps", "stigmas"]);
     expect(Object.keys(r.build).sort()).toEqual(["daevanion_nodes", "ranks", "specialties", "stigmas"]);
     expect(r.gear.every((g) => typeof g.gain_pct === "number" && g.enchant === g.max_enchant)).toBe(true);
     expect(r.assumptions.length).toBeGreaterThan(3);
@@ -90,4 +92,32 @@ describe("GearSection (mock engine)", () => {
     const { container } = render(<GearSection imp={imp} raw={null} playstyle="boss" onPlaystyle={() => {}} />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  describe("max potential tiers", () => {
+    const result = maxFx as unknown as MaxPotentialResult;
+    const panel = (r: MaxPotentialResult) => render(<MaxPotentialPanel result={r} busy={false} error={null} onRun={() => {}} classLabel="Sorcerer" />);
+
+    it("shows what the current gear and opened Daevanion allow, next to the ceiling, with a like-for-like gap", () => {
+      const now = result.with_current_gear!;
+      expect(now.daevanion_nodes).toBe(84);
+      panel(result);
+      expect(screen.getByTestId("with-current").textContent).toMatch(/DPS$/);
+      const gap = (result.dps / now.dps - 1) * 100;
+      expect(screen.getByTestId("gap").textContent).toBe(fmtGain(gap));
+      expect(screen.getByText("Ceiling vs best now")).toBeInTheDocument();
+      const note = screen.getByTestId("with-current-note").textContent!;
+      expect(note).toContain("84 Daevanion nodes you have opened");
+      expect(note).toContain("every Daevanion point"); // says why the playstyle cards read higher
+      expect(now.dps).toBeLessThan(result.dps);
+    });
+
+    it("falls back to the engine's own gap when there is no character", () => {
+      panel({ ...result, with_current_gear: null });
+      expect(screen.queryByTestId("with-current")).toBeNull();
+      expect(screen.queryByTestId("with-current-note")).toBeNull();
+      expect(screen.getByText("Gap vs you")).toBeInTheDocument();
+      expect(screen.getByTestId("gap").textContent).toBe(fmtGain(result.gain_vs_current_pct!));
+    });
+  });
 });
+
