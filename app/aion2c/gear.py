@@ -201,6 +201,36 @@ def item_lines(item: dict, enchant: int, rolls: str = "expected", weights: dict 
     return out
 
 
+def item_parts(item: dict, enchant: int, exceed: int = 0) -> dict[str, dict[str, float]]:
+    """The same totals as `item_lines(..., rolls="expected")` split by origin: `main`, `enchant`, `exceed`, `fixed`
+    (sub lines the item always has) and `rolled` (random sub lines at their expected value; the armory does not
+    publish the real rolls). A weapon's main attack stays a range here (`WeaponFixingDamage` = max,
+    `WeaponMinDamage` = min) because the stat sheet shows Max and Min Attack."""
+    main: dict[str, float] = {}
+    for st in item["main"]:
+        if st["id"] == "WeaponFixingDamage" and "min" in st:
+            main["WeaponDamage"], main["WeaponMinDamage"] = st["v"], st["min"]
+        else:
+            main[st["id"]] = main.get(st["id"], 0.0) + st["v"]
+    ranged = "WeaponDamage" in main
+    ench = enchant_bonus(item, enchant)
+    exc = exceed_lines(item, exceed)
+    out = {"main": main, "enchant": {}, "exceed": {}, "fixed": {}, "rolled": {}}
+    for part, lines in (("enchant", ench), ("exceed", exc)):
+        for sid, v in lines.items():
+            if ranged and sid == "WeaponFixingDamage":  # the weapon's own enchant raises both ends of the range
+                out[part]["WeaponDamage"] = out[part]["WeaponMinDamage"] = v
+            else:
+                out[part][sid] = out[part].get(sid, 0.0) + v
+    if not item["sub_random"]:
+        for s in item["subs"]:
+            out["fixed"][s["id"]] = out["fixed"].get(s["id"], 0.0) + s["v"]
+    elif item["subs"] and item["sub_count"]:
+        for s, p in zip(item["subs"], pool_inclusion(item["subs"], item["sub_count"])):
+            out["rolled"][s["id"]] = out["rolled"].get(s["id"], 0.0) + p * _mid(s)
+    return out
+
+
 def lines_to_delta(lines: dict[str, float]) -> tuple[Stats, dict[str, float]]:
     d = {n: 0.0 for n in _STAT_FIELDS}
     ignored: dict[str, float] = {}

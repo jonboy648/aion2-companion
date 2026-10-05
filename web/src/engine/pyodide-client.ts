@@ -7,7 +7,7 @@ import { PROGRESS_METHODS } from "./protocol";
 import type { FromWorker, InitConfig, Method, ToWorker } from "./protocol";
 import type {
   ArmoryRaw, CharacterBuild, ClassInfo, CompareResult, DaevanionSuggestion, FullBuild, GameData, IconUrls,
-  GearUpgradesResult, ImportResult, KeybindsResult, MaxPotentialResult, PlaystyleKey, Priority, ProgressFn, RecipeMaterial, Region, RoadmapItem,
+  GearUpgradesResult, ImportResult, KeybindsResult, MaxPotentialResult, PlaystyleKey, Priority, ProgressFn, RecipeMaterial, Region, RoadmapItem, StatSheet,
   SkillBar, StatGain,
 } from "@/lib/types";
 
@@ -210,6 +210,7 @@ export function createPyodideClient(opts: ClientOptions = {}) {
       call<GearUpgradesResult>("gearUpgrades", [rawArmory, build, playstyle, steps, reachableOnly]),
     maxPotential: (classKey: string, playstyle: PlaystyleKey, reachableOnly?: boolean, build?: CharacterBuild | null, rawArmory?: ArmoryRaw | null) =>
       call<MaxPotentialResult>("maxPotential", [classKey, playstyle, reachableOnly, build, rawArmory]),
+    statSheet: (rawArmory: ArmoryRaw, calibrate?: boolean) => call<StatSheet>("statSheet", [rawArmory, calibrate]),
     /** Test/debug hook. */
     dispose: () => failAll(new Error("Engine disposed")),
   };

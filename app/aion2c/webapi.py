@@ -15,7 +15,7 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
-from aion2c import armory, crafting, daevanion as dae, serde
+from aion2c import armory, crafting, daevanion as dae, serde, statsheet
 from aion2c import roadmap as roadmap_mod
 from aion2c.classes import CLASSES, DEFAULT_CLASS, class_info
 from aion2c.data.loader import CLASSES_DIR, default_path, load_gamedata
@@ -369,3 +369,12 @@ def max_potential(class_key: str, playstyle: str, reachable_only: bool = True, b
         "current_dps": current, "gain_vs_current_pct": gain, "with_current_gear": with_current,
         "notes": list(mp.notes), "assumptions": list(GEAR_ASSUMPTIONS),
     }
+
+
+def stat_sheet(raw_armory: dict, calibrate: bool = True) -> dict:
+    """The character's full stat sheet with a per-source breakdown, rebuilt from the armory download.
+    -> {class_name, level, categories: [{key, name, stats: [{key, name, unit, value, sources: [{group, label, value,
+    est?}], armory?, applies_to?, capped?}]}], groups, armory_check, points, notes, unparsed, not_included}.
+    `calibrate` fills the gap between our known sources and the armory's own attribute totals with an estimated
+    "Not exposed" source, so the derived and ratio passes start from the real points."""
+    return statsheet.compute(raw_armory, _items(), calibrate=calibrate)

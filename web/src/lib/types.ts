@@ -619,3 +619,67 @@ export interface MaxPotentialResult {
   notes: string[];
   assumptions: string[];
 }
+
+// ---- stat sheet (aion2c.webapi.stat_sheet) ---------------------------------------------------------------
+
+export type StatSourceGroup = "base" | "gear" | "arcana" | "daevanion" | "wings" | "titles" | "armory" | "derived" | "ratio";
+
+export interface StatSource {
+  group: StatSourceGroup;
+  label: string;
+  value: number;
+  /** an expected value or a gap-fill, not a number read from the armory */
+  est?: boolean;
+}
+
+export interface StatArmoryCheck {
+  value: number;
+  /** what our known sources add up to (attributes only) */
+  known?: number;
+  /** known - armory for attributes, ours - armory for the derived part */
+  diff: number;
+  ok: boolean;
+  basis: "attribute total" | "derived part only";
+}
+
+export interface StatRow {
+  key: string;
+  name: string;
+  /** "%" or "" */
+  unit: string;
+  value: number;
+  sources: StatSource[];
+  armory?: StatArmoryCheck;
+  /** Amp Ratio lines: which base stats they scale and by how much */
+  applies_to?: { key: string; name: string; base: number; add: number }[];
+  capped?: boolean;
+}
+
+export interface StatCategory {
+  key: string;
+  name: string;
+  stats: StatRow[];
+}
+
+export interface StatSheet {
+  class_name: string | null;
+  level: number;
+  categories: StatCategory[];
+  groups: { key: StatSourceGroup; name: string }[];
+  armory_check: {
+    attributes: { key: string; name: string; armory: number; ours: number; diff: number; ok: boolean }[];
+    derived: { primary: string; key: string; name: string; text: string; armory: number; from_armory_points: number | null; ok: boolean }[];
+    summary: {
+      attributes: number;
+      attributes_ok: number;
+      attributes_nonzero: number;
+      attributes_nonzero_ok: number;
+      derived: number;
+      derived_ok: number;
+    };
+  };
+  points: Record<string, number>;
+  notes: string[];
+  unparsed: string[];
+  not_included: string[];
+}

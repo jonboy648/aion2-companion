@@ -57,6 +57,7 @@ def main() -> None:
     dump("icon_urls_sorcerer.json", webapi.icon_urls("sorcerer"))
     dump("gear_upgrades.json", webapi.gear_upgrades(raw, build, "boss", 10, True))
     dump("max_potential.json", webapi.max_potential("sorcerer", "boss", True, build, raw))
+    dump("stat_sheet.json", webapi.stat_sheet(raw))
     # armory mock inputs (public armory JSON, no art): what lib/armory.ts mock mode serves
     dump("armory_search.json", {"list": [{
         "characterId": raw["info"]["profile"]["characterId"], "name": "DarthThot", "race": 2, "pcId": 28,
