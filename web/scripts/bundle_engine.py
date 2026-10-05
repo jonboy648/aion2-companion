@@ -27,7 +27,7 @@ MODULES = (
     "aion2c.engine", "aion2c.engine.advisor", "aion2c.engine.budget", "aion2c.engine.build_optimizer",
     "aion2c.engine.community", "aion2c.engine.damage", "aion2c.engine.explain", "aion2c.engine.facade",
     "aion2c.engine.next_skills", "aion2c.engine.rotation", "aion2c.engine.search", "aion2c.engine.simulator",
-    "aion2c.engine.specialties", "aion2c.specs", "aion2c.specparse",
+    "aion2c.engine.specialties", "aion2c.engine.rank_values", "aion2c.specs", "aion2c.specparse",
     "aion2c.keybinds", "aion2c.keybinds.export", "aion2c.keybinds.gkeys", "aion2c.keybinds.layout",
     "aion2c.keybinds.macro",
 )

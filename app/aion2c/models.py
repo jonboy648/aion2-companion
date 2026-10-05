@@ -145,6 +145,18 @@ class StatMod:
 
 
 @dataclass(frozen=True)
+class RankScale:
+    """A status value that follows the rank of the skill that applies it (client anchor points, linear between).
+
+    `target` is "duration" or a StatMod stat; `anchors` are (rank, value) pairs in ascending rank order, clamped
+    outside; `at_rank` is the rank the status's own (single) value in the data is stated at."""
+    skill: str
+    target: str
+    anchors: tuple[tuple[float, float], ...]
+    at_rank: int
+
+
+@dataclass(frozen=True)
 class Status:
     key: str
     name: str
@@ -159,6 +171,7 @@ class Status:
     stat_mods: tuple[StatMod, ...] = ()  # live-stat changes while active (self statuses)
     permanent: bool = False  # explicit aura flag; duration_s.value == 0 behaves the same
     tick_flat_ranks: tuple[Num, ...] = ()  # flat damage added to each tick, per rank (index 0 = rank 1) of the skill that applies it
+    rank_scales: tuple[RankScale, ...] = ()  # the value above re-valued at the build's own skill rank (engine/rank_values.py)
 
 
 @dataclass(frozen=True)

@@ -33,7 +33,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_WP_MB_0078_T05.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 29.000776552447462
+   "gain_pct": 28.965038600800508
   },
   {
    "slot": "offhand",
@@ -66,7 +66,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Weapon_Guarder_R_011.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 18.770166033097357
+   "gain_pct": 18.7540070563446
   },
   {
    "slot": "helmet",
@@ -99,7 +99,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Helmet.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 2.1927755415788397
+   "gain_pct": 2.190896737024728
   },
   {
    "slot": "shoulder",
@@ -132,7 +132,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Shoulder.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 2.834071159227669
+   "gain_pct": 2.836477550261085
   },
   {
    "slot": "torso",
@@ -165,7 +165,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Torso.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 4.90468481240609
+   "gain_pct": 4.903559135453928
   },
   {
    "slot": "legs",
@@ -198,7 +198,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Pants.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 1.1173898689621709
+   "gain_pct": 1.1154485076741771
   },
   {
    "slot": "gloves",
@@ -231,7 +231,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Gloves.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.7918264386584717
+   "gain_pct": 0.7904588672981827
   },
   {
    "slot": "boots",
@@ -264,7 +264,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Boots.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 0.977028945276226
+   "gain_pct": 0.9753345048398199
   },
   {
    "slot": "cape",
@@ -297,7 +297,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Equip_AR_L_0008_T05_Cape.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 1.834058511838954
+   "gain_pct": 1.8324324042163331
   },
   {
    "slot": "belt",
@@ -358,7 +358,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_NL_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 7.927296630826297
+   "gain_pct": 7.924240813392203
   },
   {
    "slot": "earring1",
@@ -391,7 +391,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 7.068131892321494
+   "gain_pct": 7.065189853908205
   },
   {
    "slot": "earring2",
@@ -424,7 +424,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_ER_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 7.068131892321494
+   "gain_pct": 7.065189853908205
   },
   {
    "slot": "ring1",
@@ -457,7 +457,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 6.089213411363703
+   "gain_pct": 6.086644076298309
   },
   {
    "slot": "ring2",
@@ -490,7 +490,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png",
    "source": null,
    "reachable": true,
-   "gain_pct": 6.089213411363703
+   "gain_pct": 6.086644076298309
   },
   {
    "slot": "bracelet1",
@@ -523,7 +523,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
    "source": "Ascension",
    "reachable": true,
-   "gain_pct": 4.596564367179279
+   "gain_pct": 4.587374149011758
   },
   {
    "slot": "bracelet2",
@@ -556,7 +556,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png",
    "source": "Ascension",
    "reachable": true,
-   "gain_pct": 4.596564367179279
+   "gain_pct": 4.587374149011758
   },
   {
    "slot": "amulet",
@@ -584,7 +584,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Item_Craft_Conversion_Crystal_L_lv5_01.png",
    "source": "Substance Morph",
    "reachable": true,
-   "gain_pct": 7.310516117797428
+   "gain_pct": 7.295408867881337
   }
  ],
  "build": {
@@ -598,8 +598,8 @@
     "name": "Fire Wall"
    },
    {
-    "key": "assault-bombardment",
-    "name": "Assault Bombardment"
+    "key": "soul-freeze",
+    "name": "Soul Freeze"
    },
    {
     "key": "cold-storm",
@@ -608,9 +608,39 @@
   ],
   "specialties": [
    {
+    "skill": "Firestorm",
+    "text": "-50% MP Cost",
+    "dps_gain_pct": 19.473077382552862
+   },
+   {
+    "skill": "Firestorm",
+    "text": "-2s [Hellfire] cooldown per fireball",
+    "dps_gain_pct": 16.759210822403414
+   },
+   {
     "skill": "Bittercold Wind",
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 12.737040191192994
+    "dps_gain_pct": 9.373603033896249
+   },
+   {
+    "skill": "Hellfire",
+    "text": "+30% Skill Speed",
+    "dps_gain_pct": 3.387039357315924
+   },
+   {
+    "skill": "Wish of Concentration",
+    "text": "+10% additional Attack",
+    "dps_gain_pct": 2.2413012111657915
+   },
+   {
+    "skill": "Flame Arrow",
+    "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
+    "dps_gain_pct": 1.8912383847834446
+   },
+   {
+    "skill": "Wish of Concentration",
+    "text": "+10% Combat Speed",
+    "dps_gain_pct": 0.8144381601491446
    }
   ],
   "daevanion_nodes": 380,
@@ -677,13 +707,13 @@
    }
   ]
  },
- "dps": 39246.81268616921,
- "dps_without_gear": 5626.164088980773,
- "gear_gain_pct": 259.80877232189783,
- "current_dps": 9049.938482146305,
- "gain_vs_current_pct": 193.6026894143649,
+ "dps": 45235.471025457766,
+ "dps_without_gear": 5445.213645809239,
+ "gear_gain_pct": 258.6327490520469,
+ "current_dps": 8769.050928356353,
+ "gain_vs_current_pct": 255.8055755553503,
  "with_current_gear": {
-  "dps": 14290.133527437642,
+  "dps": 15097.400376113934,
   "stigmas": [
    {
     "key": "fire-wall",

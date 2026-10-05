@@ -4490,5 +4490,36 @@
     }
    ]
   }
+ },
+ "rank_scales": {
+  "flame_blessing_buff": [
+   {
+    "skill": "flame-blessing",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 1
+   }
+  ]
  }
 }

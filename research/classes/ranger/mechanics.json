@@ -2011,5 +2011,123 @@
    ],
    "note": "Melee Fire: 25% per landed attack (token abe:1478000012:value02:divide100 = 25), 26.4% ATK + 148 flat, Cooldown 1s; evaluated once per cast, the proc skill's own 1 s cooldown caps it. DEFERRED (not in 'triggers'): enabling it adds ~7 s (+45%) to optimize_full_build boss at level 45, which already sits near the 30 s limit under load. Move it into 'triggers' when the simulator gets cheaper (about +4% DPS)."
   }
- ]
+ ],
+ "rank_scales": {
+  "vaizels_authority": [
+   {
+    "skill": "vaizels-authority",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "bow_of_blessing": [
+   {
+    "skill": "bow-of-blessing",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "spec_bow-of-blessing_2_buff": [
+   {
+    "skill": "bow-of-blessing",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "bow_double_chance": [
+   {
+    "skill": "bow-of-blessing",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ]
+ }
 }

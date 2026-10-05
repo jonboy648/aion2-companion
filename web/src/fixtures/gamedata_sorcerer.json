@@ -8693,7 +8693,8 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "spec_flame-arrow_3_elem": {
    "key": "spec_flame-arrow_3_elem",
@@ -8726,7 +8727,8 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "spec_assault-bombardment_0_buff": {
    "key": "spec_assault-bombardment_0_buff",
@@ -8766,7 +8768,8 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "fire_mark": {
    "key": "fire_mark",
@@ -8799,7 +8802,8 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "element_enhancement": {
    "key": "element_enhancement",
@@ -8833,7 +8837,36 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": [
+    {
+     "skill": "element-enhancement",
+     "target": "duration",
+     "anchors": [
+      [
+       1.0,
+       10.0
+      ],
+      [
+       10.0,
+       14.5
+      ],
+      [
+       16.0,
+       17.5
+      ],
+      [
+       20.0,
+       20.0
+      ],
+      [
+       25.0,
+       22.5
+      ]
+     ],
+     "at_rank": 20
+    }
+   ]
   },
   "delayed_explosion": {
    "key": "delayed_explosion",
@@ -8864,7 +8897,8 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "grace_of_enhancement": {
    "key": "grace_of_enhancement",
@@ -8904,7 +8938,8 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "fire_wall_dot": {
    "key": "fire_wall_dot",
@@ -9063,7 +9098,8 @@
      "confidence": "confirmed",
      "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
     }
-   ]
+   ],
+   "rank_scales": []
   },
   "cold_storm_dot": {
    "key": "cold_storm_dot",
@@ -9222,7 +9258,8 @@
      "confidence": "confirmed",
      "source": "client export 2026-10-04 (SkillAbnormalEffectLv)"
     }
-   ]
+   ],
+   "rank_scales": []
   },
   "firestorm_dot": {
    "key": "firestorm_dot",
@@ -9255,7 +9292,8 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "wish_of_concentration": {
    "key": "wish_of_concentration",
@@ -9295,7 +9333,36 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": [
+    {
+     "skill": "wish-of-concentration",
+     "target": "duration",
+     "anchors": [
+      [
+       1.0,
+       10.0
+      ],
+      [
+       10.0,
+       14.5
+      ],
+      [
+       16.0,
+       17.5
+      ],
+      [
+       20.0,
+       20.0
+      ],
+      [
+       25.0,
+       22.5
+      ]
+     ],
+     "at_rank": 20
+    }
+   ]
   },
   "wish_atk_plus": {
    "key": "wish_atk_plus",
@@ -9335,7 +9402,36 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": [
+    {
+     "skill": "wish-of-concentration",
+     "target": "duration",
+     "anchors": [
+      [
+       1.0,
+       10.0
+      ],
+      [
+       10.0,
+       14.5
+      ],
+      [
+       16.0,
+       17.5
+      ],
+      [
+       20.0,
+       20.0
+      ],
+      [
+       25.0,
+       22.5
+      ]
+     ],
+     "at_rank": 20
+    }
+   ]
   },
   "wish_combat_speed": {
    "key": "wish_combat_speed",
@@ -9375,7 +9471,36 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": [
+    {
+     "skill": "wish-of-concentration",
+     "target": "duration",
+     "anchors": [
+      [
+       1.0,
+       10.0
+      ],
+      [
+       10.0,
+       14.5
+      ],
+      [
+       16.0,
+       17.5
+      ],
+      [
+       20.0,
+       20.0
+      ],
+      [
+       25.0,
+       22.5
+      ]
+     ],
+     "at_rank": 20
+    }
+   ]
   },
   "ee_plus": {
    "key": "ee_plus",
@@ -9409,7 +9534,36 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": [
+    {
+     "skill": "element-enhancement",
+     "target": "duration",
+     "anchors": [
+      [
+       1.0,
+       10.0
+      ],
+      [
+       10.0,
+       14.5
+      ],
+      [
+       16.0,
+       17.5
+      ],
+      [
+       20.0,
+       20.0
+      ],
+      [
+       25.0,
+       22.5
+      ]
+     ],
+     "at_rank": 20
+    }
+   ]
   },
   "ee_robe_of_flame": {
    "key": "ee_robe_of_flame",
@@ -9449,7 +9603,8 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "ee_grace": {
    "key": "ee_grace",
@@ -9489,7 +9644,36 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": [
+    {
+     "skill": "element-enhancement",
+     "target": "duration",
+     "anchors": [
+      [
+       1.0,
+       10.0
+      ],
+      [
+       10.0,
+       14.5
+      ],
+      [
+       16.0,
+       17.5
+      ],
+      [
+       20.0,
+       20.0
+      ],
+      [
+       25.0,
+       22.5
+      ]
+     ],
+     "at_rank": 20
+    }
+   ]
   },
   "de_plus": {
    "key": "de_plus",
@@ -9520,7 +9704,8 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "ws_boost": {
    "key": "ws_boost",
@@ -9560,7 +9745,8 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "frost": {
    "key": "frost",
@@ -9591,7 +9777,8 @@
    },
    "stat_mods": [],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "robe_of_earth": {
    "key": "robe_of_earth",
@@ -9631,7 +9818,8 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   },
   "robe_of_flame": {
    "key": "robe_of_flame",
@@ -9671,7 +9859,8 @@
     }
    ],
    "permanent": false,
-   "tick_flat_ranks": []
+   "tick_flat_ranks": [],
+   "rank_scales": []
   }
  },
  "rules": {

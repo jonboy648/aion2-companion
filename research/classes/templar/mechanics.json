@@ -1983,5 +1983,165 @@
    "confidence": "estimated",
    "source": "couga54 Templar guide (Oct 2026, SolAshur build): 'the third slot opens at 20' (Annihilate). Stigmas show one pick per tier 5/10/15 instead; one list per class cannot express both"
   }
- ]
+ ],
+ "rank_scales": {
+  "battlefield_banner": [
+   {
+    "skill": "battlefield-banner",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "banner_weapon_dmg": [
+   {
+    "skill": "battlefield-banner",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "second_skin": [
+   {
+    "skill": "second-skin",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "armor_of_balance": [
+   {
+    "skill": "armor-of-balance",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "insulting_roar_buff": [
+   {
+    "skill": "insulting-roar",
+    "target": "attack_increase_pct",
+    "anchors": [
+     [
+      1,
+      5.5
+     ],
+     [
+      20,
+      15.0
+     ],
+     [
+      40,
+      25.0
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "fury_buff": [
+   {
+    "skill": "fury",
+    "target": "dmg_boost_pct",
+    "anchors": [
+     [
+      1,
+      5.5
+     ],
+     [
+      20,
+      15.0
+     ],
+     [
+      40,
+      25.0
+     ]
+    ],
+    "at_rank": 20
+   }
+  ]
+ }
 }

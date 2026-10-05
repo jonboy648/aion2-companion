@@ -136,7 +136,8 @@ def test_hand_empyrean_lords_grace_proc(gd):
 def test_hand_prayer_is_attack_increase_stat(gd):
     """Earth's Retribution 48.3% x ATK + 50: 533 base, (1200 x 0.483 + 50) = 629.6 under Prayer's +20% Attack."""
     base = run(gd, ["earths-retribution"])
-    buffed = run(gd, ["prayer-of-amplification", "earths-retribution"], stigmas=("prayer-of-amplification",))
+    buffed = run(gd, ["prayer-of-amplification", "earths-retribution"], stigmas=("prayer-of-amplification",),
+                 ranks={"prayer-of-amplification": 16})  # 17.5 s is its rank-16 duration
     assert base.casts[0].damage == pytest.approx(533.0)
     er = next(c for c in buffed.casts if c.skill_key == "earths-retribution")
     assert er.damage == pytest.approx(1200 * 0.483 + 50)

@@ -201,7 +201,7 @@ def test_winters_illusion_equals_1_3_shackles_hits(gd):
 
 
 def test_wish_of_concentration_buff_is_simulated(gd):
-    res = run(gd, "wish-of-concentration", "flame-arrow")
+    res = run(gd, "wish-of-concentration", "flame-arrow", ranks={"wish-of-concentration": 20})  # 20 s at rank 20
     assert res.status_uptime["wish_of_concentration"] == pytest.approx(20 / 60, abs=0.02)
     no_wish = run(gd, "flame-arrow")
     assert res.dps / no_wish.dps > 1.0

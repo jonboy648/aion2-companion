@@ -14,7 +14,7 @@ from pathlib import Path
 
 from aion2c.models import (
     CommunityRotation, DaevanionBoard, DaevanionEffect, DaevanionNode, GameData, Link, Num,
-    RankData, Recipe, RecipeMaterial, RoadmapItem, Skill, SkillKind, SkillRule, Specialization,
+    RankData, RankScale, Recipe, RecipeMaterial, RoadmapItem, Skill, SkillKind, SkillRule, Specialization,
     StatMod, Status, StatusTrigger,
 )
 from aion2c.serde import from_dict, to_dict
@@ -425,6 +425,21 @@ def _validate(gd: GameData) -> None:
             raise ValueError(f"community rotation {c.key} names unknown skills {missing}")
 
 
+def apply_rank_scales(gd: GameData, mech: dict) -> GameData:
+    """mechanics.json `rank_scales` {status key: [{skill, target, anchors, at_rank}]} -> Status.rank_scales.
+    Applied after finalize_gamedata because some of the statuses (spec_*_buff) are only created there."""
+    table = mech.get("rank_scales") or {}
+    statuses = dict(gd.statuses)
+    for key, rows in table.items():
+        if key not in statuses:
+            raise ValueError(f"rank_scales names unknown status {key}")
+        bad = [r["skill"] for r in rows if r["skill"] not in gd.skills]
+        if bad:
+            raise ValueError(f"rank_scales of {key} name unknown skills {bad}")
+        statuses[key] = replace(statuses[key], rank_scales=tuple(from_dict(RankScale, r) for r in rows))
+    return replace(gd, statuses=statuses)
+
+
 def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: str,
              dump_date: str = DUMP_DATE, class_key: str = "sorcerer") -> GameData:
     """Pure in-memory build (no file writes). update.py passes freshly parsed skills here."""
@@ -460,6 +475,7 @@ def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: 
             st = gd.statuses[sk_key]
             gd.statuses[sk_key] = replace(st, stat_mods=st.stat_mods + tuple(ms))
     gd = finalize_gamedata(gd, mech.get("specialization_effects") or {}, mech.get("spec_slot_ranks"))
+    gd = apply_rank_scales(gd, mech)
     _validate(gd)
     return gd
 

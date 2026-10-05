@@ -156,7 +156,7 @@ def test_winds_promise_crit_proc(gd):
 def test_force_crit_option_ratio(gd):
     """Dark Crush option 3 (guaranteed crit). Stats: 0% crit + Inspiring Spell 190 rating (+12.667%), crit damage
     50 + Wind's Promise 12 = 62%, boss crit factor 0.75: per-cast ratio (1 + .62*.75)/(1 + .12667*.62*.75)."""
-    b = build(gd, skill_ranks=RANKS)
+    b = build(gd, skill_ranks={**RANKS, "winds-promise": 10})  # the 12 crit damage below is its rank-10 value
     pri = P("impactful-crush", "dark-crush", "onslaught")
     a = simulate(gd, b, pri, BOSS).per_skill["dark-crush"]
     f = simulate(gd, replace(b, specs={"dark-crush": (2,)}), pri, BOSS).per_skill["dark-crush"]

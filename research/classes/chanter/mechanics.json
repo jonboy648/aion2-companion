@@ -2399,5 +2399,115 @@
   "sprint-mantra": {
    "3": []
   }
+ },
+ "rank_scales": {
+  "undefeated_mantra": [
+   {
+    "skill": "undefeated-mantra",
+    "target": "dmg_boost_pct",
+    "anchors": [
+     [
+      1,
+      10.5
+     ],
+     [
+      10,
+      15.0
+     ],
+     [
+      16,
+      18.0
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 16
+   }
+  ],
+  "power_of_the_storm": [
+   {
+    "skill": "power-of-the-storm",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 16
+   }
+  ],
+  "attack_preparation": [
+   {
+    "skill": "attack-preparation",
+    "target": "dmg_boost_pct",
+    "anchors": [
+     [
+      1,
+      5.5
+     ],
+     [
+      10,
+      10.0
+     ],
+     [
+      16,
+      13.0
+     ],
+     [
+      20,
+      15.0
+     ]
+    ],
+    "at_rank": 10
+   }
+  ],
+  "winds_promise_crit": [
+   {
+    "skill": "winds-promise",
+    "target": "crit_dmg_pct",
+    "anchors": [
+     [
+      1,
+      5.7
+     ],
+     [
+      10,
+      12.0
+     ],
+     [
+      16,
+      16.2
+     ],
+     [
+      20,
+      19.0
+     ]
+    ],
+    "at_rank": 10
+   }
+  ]
  }
 }

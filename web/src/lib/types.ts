@@ -79,6 +79,8 @@ export interface Status {
   permanent: boolean;
   /** flat damage added to each tick, per rank of the applying skill (index 0 = rank 1) */
   tick_flat_ranks: Num[];
+  /** the value above re-valued at the build's own rank of a skill (client anchor points, linear between) */
+  rank_scales: { skill: string; target: string; anchors: [number, number][]; at_rank: number }[];
 }
 
 export interface StatusTrigger {
