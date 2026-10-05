@@ -1,0 +1,2852 @@
+{
+ "class_name": "Sorcerer",
+ "level": 44,
+ "categories": [
+  {
+   "key": "attributes",
+   "name": "Attributes",
+   "stats": [
+    {
+     "key": "STR",
+     "name": "Might",
+     "unit": "",
+     "value": 14.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "MainHand: Liberator Spellbook",
+       "value": 14.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 0.639,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 0.5751,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 0.4171,
+       "est": true
+      },
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": -1.6312,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 14.0,
+      "known": 15.6312,
+      "diff": 1.6312,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "DEX",
+     "name": "Dexterity",
+     "unit": "",
+     "value": 1.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 1.2124,
+       "est": true
+      },
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": -0.2124,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 1.0,
+      "known": 1.2124,
+      "diff": 0.2124,
+      "ok": true,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "INT",
+     "name": "Intelligence",
+     "unit": "",
+     "value": 0.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 0.8308,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 0.703,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 0.6416,
+       "est": true
+      },
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": -2.1753,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 0.0,
+      "known": 2.1753,
+      "diff": 2.1753,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "CON",
+     "name": "Constitution",
+     "unit": "",
+     "value": 0.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 1.758,
+       "est": true
+      },
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": -1.758,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 0.0,
+      "known": 1.758,
+      "diff": 1.758,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "AGI",
+     "name": "Precision",
+     "unit": "",
+     "value": 0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 0.639,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 0.5751,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 0.4171,
+       "est": true
+      },
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": -1.6312,
+       "est": true
+      }
+     ],
+     "capped": true,
+     "armory": {
+      "value": 0.0,
+      "known": 1.6312,
+      "diff": 1.6312,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "WIS",
+     "name": "Willpower",
+     "unit": "",
+     "value": 0.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 1.2124,
+       "est": true
+      },
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": -1.2124,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 0.0,
+      "known": 1.2124,
+      "diff": 1.2124,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    }
+   ]
+  },
+  {
+   "key": "deity",
+   "name": "Deity (Conqueror) points",
+   "stats": [
+    {
+     "key": "Justice",
+     "name": "Justice [Nezekan]",
+     "unit": "",
+     "value": 37.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 37.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 37.0,
+      "known": 0,
+      "diff": -37.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Freedom",
+     "name": "Freedom [Vaizel]",
+     "unit": "",
+     "value": 20.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 20.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 20.0,
+      "known": 0,
+      "diff": -20.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Illusion",
+     "name": "Illusion [Kaisinel]",
+     "unit": "",
+     "value": 1.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 1.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 1.0,
+      "known": 0,
+      "diff": -1.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Life",
+     "name": "Life [Yustiel]",
+     "unit": "",
+     "value": 3.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 3.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 3.0,
+      "known": 0,
+      "diff": -3.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Time",
+     "name": "Time [Siel]",
+     "unit": "",
+     "value": 38.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 38.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 38.0,
+      "known": 0,
+      "diff": -38.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Destruction",
+     "name": "Destruction [Zikel]",
+     "unit": "",
+     "value": 2.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 2.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 2.0,
+      "known": 0,
+      "diff": -2.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Death",
+     "name": "Death [Triniel]",
+     "unit": "",
+     "value": 28.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 28.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 28.0,
+      "known": 0,
+      "diff": -28.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Wisdom",
+     "name": "Wisdom [Lumiel]",
+     "unit": "",
+     "value": 1.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 1.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 1.0,
+      "known": 0,
+      "diff": -1.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Destiny",
+     "name": "Destiny [Marchutan]",
+     "unit": "",
+     "value": 3.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 3.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 3.0,
+      "known": 0,
+      "diff": -3.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    },
+    {
+     "key": "Space",
+     "name": "Space [Israphel]",
+     "unit": "",
+     "value": 11.0,
+     "sources": [
+      {
+       "group": "armory",
+       "label": "Armory total minus the sources above (hidden sources and roll error)",
+       "value": 11.0,
+       "est": true
+      }
+     ],
+     "armory": {
+      "value": 11.0,
+      "known": 0,
+      "diff": -11.0,
+      "ok": false,
+      "basis": "attribute total"
+     }
+    }
+   ]
+  },
+  {
+   "key": "attack",
+   "name": "Attack",
+   "stats": [
+    {
+     "key": "FixingDamage",
+     "name": "Attack Bonus",
+     "unit": "",
+     "value": 87.0,
+     "sources": [
+      {
+       "group": "base",
+       "label": "Base stats, level 44",
+       "value": 60
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 18.0
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Vaizel",
+       "value": 6.0
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Triniel",
+       "value": 3.0
+      }
+     ]
+    },
+    {
+     "key": "WeaponFixingDamage",
+     "name": "Attack",
+     "unit": "",
+     "value": 320.5197,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 79.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: Silent Necklace",
+       "value": 58.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring1: Liberator Earrings",
+       "value": 55.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: Brave Warrior Earrings",
+       "value": 42.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring1: Avenger Ring",
+       "value": 33.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: Incomplete Test Subject Ring",
+       "value": 25.0
+      },
+      {
+       "group": "gear",
+       "label": "Bracelet1: Old Mercenary Commander Bracelet",
+       "value": 17.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 3.7602,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 3.2099,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 2.6703,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 1.8792,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "WeaponDamage",
+     "name": "Max Attack",
+     "unit": "",
+     "value": 571.7635,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "MainHand: Liberator Spellbook",
+       "value": 198
+      },
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 79.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: Silent Necklace",
+       "value": 58.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring1: Liberator Earrings",
+       "value": 55.0
+      },
+      {
+       "group": "gear",
+       "label": "MainHand: enchant +10",
+       "value": 44
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: Brave Warrior Earrings",
+       "value": 42.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring1: Avenger Ring",
+       "value": 33.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: Incomplete Test Subject Ring",
+       "value": 25.0
+      },
+      {
+       "group": "gear",
+       "label": "Bracelet1: Old Mercenary Commander Bracelet",
+       "value": 17.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 3.7602,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 3.2099,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 2.6703,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 1.8792,
+       "est": true
+      },
+      {
+       "group": "ratio",
+       "label": "Attack increase 1.64328% of 562.52",
+       "value": 9.2438
+      }
+     ]
+    },
+    {
+     "key": "WeaponMinDamage",
+     "name": "Min Attack",
+     "unit": "",
+     "value": 551.4349,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "MainHand: Liberator Spellbook",
+       "value": 178
+      },
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 79.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: Silent Necklace",
+       "value": 58.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring1: Liberator Earrings",
+       "value": 55.0
+      },
+      {
+       "group": "gear",
+       "label": "MainHand: enchant +10",
+       "value": 44
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: Brave Warrior Earrings",
+       "value": 42.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring1: Avenger Ring",
+       "value": 33.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: Incomplete Test Subject Ring",
+       "value": 25.0
+      },
+      {
+       "group": "gear",
+       "label": "Bracelet1: Old Mercenary Commander Bracelet",
+       "value": 17.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 3.7602,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 3.2099,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 2.6703,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 1.8792,
+       "est": true
+      },
+      {
+       "group": "ratio",
+       "label": "Attack increase 1.64328% of 542.52",
+       "value": 8.9151
+      }
+     ]
+    },
+    {
+     "key": "DefensePierce",
+     "name": "Penetration",
+     "unit": "",
+     "value": 420.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Amulet: enchant +10",
+       "value": 300.0
+      },
+      {
+       "group": "gear",
+       "label": "Amulet: Revelation Amulet",
+       "value": 100.0
+      },
+      {
+       "group": "titles",
+       "label": "Title collection: Celebrity",
+       "value": 20.0
+      }
+     ]
+    },
+    {
+     "key": "IgnoreDefense",
+     "name": "Penetration Rate",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "CriticalAddDamage",
+     "name": "Critical Attack",
+     "unit": "",
+     "value": 30.0,
+     "sources": [
+      {
+       "group": "titles",
+       "label": "Title (Attack): Celebrity",
+       "value": 30.0
+      }
+     ]
+    },
+    {
+     "key": "BackAttackDamage",
+     "name": "Back Attack",
+     "unit": "",
+     "value": 14.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 14.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "boost",
+   "name": "Damage boosts",
+   "stats": [
+    {
+     "key": "AmplifyAllDamage",
+     "name": "Damage Boost",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "AmplifyWeaponDamage",
+     "name": "Weapon Damage Boost",
+     "unit": "%",
+     "value": 5.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Amulet: Revelation Amulet",
+       "value": 5.0
+      }
+     ]
+    },
+    {
+     "key": "AmplifyCriticalDamage",
+     "name": "Critical Damage Boost",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    }
+   ]
+  },
+  {
+   "key": "hits",
+   "name": "Critical and special hits",
+   "stats": [
+    {
+     "key": "Critical",
+     "name": "Critical Hit",
+     "unit": "",
+     "value": 202.356,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "MainHand: Liberator Spellbook",
+       "value": 100.0
+      },
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 50.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 5.411,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 4.5856,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 3.7753,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 3.0723,
+       "est": true
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 25.0
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Vaizel",
+       "value": 5.0
+      },
+      {
+       "group": "ratio",
+       "label": "Critical Hit increase 2.8% of 196.844",
+       "value": 5.5116
+      }
+     ]
+    },
+    {
+     "key": "AdditionalHitRate",
+     "name": "Multi-hit Chance",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "Perfect",
+     "name": "Perfect Chance",
+     "unit": "%",
+     "value": 3.7,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Justice [Nezekan] 37",
+       "value": 3.7
+      }
+     ],
+     "armory": {
+      "value": 3.7,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    },
+    {
+     "key": "HardHit",
+     "name": "Double Chance",
+     "unit": "%",
+     "value": 0.1433,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 0.0433,
+       "est": true
+      },
+      {
+       "group": "derived",
+       "label": "Wisdom [Lumiel] 1",
+       "value": 0.1
+      }
+     ],
+     "armory": {
+      "value": 0.1,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    },
+    {
+     "key": "IronWall",
+     "name": "Endurance",
+     "unit": "%",
+     "value": 0.3641,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 0.0641,
+       "est": true
+      },
+      {
+       "group": "derived",
+       "label": "Destiny [Marchutan] 3",
+       "value": 0.3
+      }
+     ],
+     "armory": {
+      "value": 0.3,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    }
+   ]
+  },
+  {
+   "key": "pve",
+   "name": "PvE and boss",
+   "stats": [
+    {
+     "key": "PvEAddDamage",
+     "name": "PvE Attack",
+     "unit": "",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "PvEAmplifyDamage",
+     "name": "PvE Damage Boost",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "BossNpcAddDamage",
+     "name": "Boss Attack",
+     "unit": "",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "BossNpcDefense",
+     "name": "Boss Defense",
+     "unit": "",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "BossNpcAmplifyDamage",
+     "name": "Boss Damage Boost",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "BossNpcDecreaseDamage",
+     "name": "Boss Damage Tolerance",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    }
+   ]
+  },
+  {
+   "key": "speed",
+   "name": "Speed and cooldown",
+   "stats": [
+    {
+     "key": "CombatSpeed",
+     "name": "Combat Speed",
+     "unit": "%",
+     "value": 6.9527,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 0.1527,
+       "est": true
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 3.0
+      },
+      {
+       "group": "derived",
+       "label": "Time [Siel] 38",
+       "value": 3.8
+      }
+     ],
+     "armory": {
+      "value": 3.8,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    },
+    {
+     "key": "CooldownTotal",
+     "name": "Cooldown reduction (total)",
+     "unit": "%",
+     "value": 3.1,
+     "sources": [
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 3.0
+      },
+      {
+       "group": "derived",
+       "label": "Illusion [Kaisinel] 1",
+       "value": 0.1
+      }
+     ]
+    },
+    {
+     "key": "CoolTimeDecrease",
+     "name": "Cooldown Reduction",
+     "unit": "%",
+     "value": 3.0,
+     "sources": [
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 3.0
+      }
+     ]
+    },
+    {
+     "key": "CoolTimeIncrease",
+     "name": "Cooldown",
+     "unit": "%",
+     "value": -0.1,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Illusion [Kaisinel] 1",
+       "value": -0.1
+      }
+     ],
+     "armory": {
+      "value": -0.1,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    },
+    {
+     "key": "MPUseIncrease",
+     "name": "MP Cost",
+     "unit": "%",
+     "value": -0.1,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Wisdom [Lumiel] 1",
+       "value": -0.1
+      }
+     ],
+     "armory": {
+      "value": -0.1,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    }
+   ]
+  },
+  {
+   "key": "defense",
+   "name": "Defense and tolerance",
+   "stats": [
+    {
+     "key": "ArmorDefense",
+     "name": "Defense",
+     "unit": "",
+     "value": 2423.4477,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Torso: Liberator Breastplate",
+       "value": 277.0
+      },
+      {
+       "group": "gear",
+       "label": "Pants: Liberator Greaves",
+       "value": 231.0
+      },
+      {
+       "group": "gear",
+       "label": "Cape: Liberator Cloak",
+       "value": 195.0
+      },
+      {
+       "group": "gear",
+       "label": "Gloves: Liberator Gloves",
+       "value": 190.0
+      },
+      {
+       "group": "gear",
+       "label": "Boots: Liberator Boots",
+       "value": 190.0
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: Faith Helm",
+       "value": 179.0
+      },
+      {
+       "group": "gear",
+       "label": "Shoulder: Avenger Pauldrons",
+       "value": 174.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: Silent Necklace",
+       "value": 138.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring1: Liberator Earrings",
+       "value": 131.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: Brave Warrior Earrings",
+       "value": 100.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring1: Avenger Ring",
+       "value": 80.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: Incomplete Test Subject Ring",
+       "value": 60.0
+      },
+      {
+       "group": "gear",
+       "label": "Torso: Liberator Breastplate",
+       "value": 50.0
+      },
+      {
+       "group": "gear",
+       "label": "Pants: Liberator Greaves",
+       "value": 42.0
+      },
+      {
+       "group": "gear",
+       "label": "Bracelet1: Old Mercenary Commander Bracelet",
+       "value": 41.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 37.8773,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Shoulder: Avenger Pauldrons",
+       "value": 32.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 31.3657,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Gloves: Liberator Gloves",
+       "value": 30.0
+      },
+      {
+       "group": "gear",
+       "label": "Boots: Liberator Boots",
+       "value": 30.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring1: Avenger Ring",
+       "value": 29.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 25.2302,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Cape: Liberator Cloak",
+       "value": 22.0
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 21.5063,
+       "est": true
+      },
+      {
+       "group": "ratio",
+       "label": "Defense increase 3.7% of 2336.98",
+       "value": 86.4682
+      }
+     ]
+    },
+    {
+     "key": "Defense",
+     "name": "Defense Bonus",
+     "unit": "",
+     "value": 1070.0,
+     "sources": [
+      {
+       "group": "base",
+       "label": "Base stats, level 44",
+       "value": 440
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 240.0
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Vaizel",
+       "value": 60.0
+      },
+      {
+       "group": "wings",
+       "label": "Wings: Superior Daeva Wings",
+       "value": 100
+      },
+      {
+       "group": "titles",
+       "label": "Title (Defense): Severer of Cursed Bonds",
+       "value": 200.0
+      },
+      {
+       "group": "titles",
+       "label": "Title collection: Severer of Cursed Bonds",
+       "value": 20.0
+      },
+      {
+       "group": "titles",
+       "label": "Title collection: Altgard Cartographer",
+       "value": 10.0
+      }
+     ]
+    },
+    {
+     "key": "DecreaseDamage",
+     "name": "Damage Tolerance",
+     "unit": "%",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "DecreaseCriticalDamage",
+     "name": "Critical Damage Tolerance",
+     "unit": "%",
+     "value": 1.5,
+     "sources": [
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Vaizel",
+       "value": 1.5
+      }
+     ]
+    },
+    {
+     "key": "CriticalDamageDefense",
+     "name": "Critical Damage Defense",
+     "unit": "",
+     "value": 26.0478,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 26.0478,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "BackAttackDefense",
+     "name": "Back Defense",
+     "unit": "",
+     "value": 21.9559,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 21.9559,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "FrontAttackDefense",
+     "name": "Front Defense",
+     "unit": "",
+     "value": 21.9559,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 21.9559,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "DecreaseWeaponDamage",
+     "name": "Weapon Damage Tolerance",
+     "unit": "%",
+     "value": 0.1523,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 0.1523,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "PerfectResist",
+     "name": "Perfect Resist",
+     "unit": "%",
+     "value": 0.2798,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 0.0798,
+       "est": true
+      },
+      {
+       "group": "derived",
+       "label": "Destruction [Zikel] 2",
+       "value": 0.2
+      }
+     ],
+     "armory": {
+      "value": 0.2,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    },
+    {
+     "key": "HardHitResist",
+     "name": "Double Resist",
+     "unit": "%",
+     "value": 3.8,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Time [Siel] 38",
+       "value": 3.8
+      }
+     ],
+     "armory": {
+      "value": 3.8,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    },
+    {
+     "key": "IgnoreIronWall",
+     "name": "Endurance Penetration",
+     "unit": "%",
+     "value": 0.1,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Illusion [Kaisinel] 1",
+       "value": 0.1
+      }
+     ],
+     "armory": {
+      "value": 0.1,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    },
+    {
+     "key": "IgnoreRestoration",
+     "name": "Regeneration Penetration",
+     "unit": "%",
+     "value": 2.8,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Death [Triniel] 28",
+       "value": 2.8
+      }
+     ],
+     "armory": {
+      "value": 2.8,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    }
+   ]
+  },
+  {
+   "key": "avoid",
+   "name": "Accuracy, evasion and block",
+   "stats": [
+    {
+     "key": "WeaponAccuracy",
+     "name": "Accuracy",
+     "unit": "",
+     "value": 188.4615,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "MainHand: Liberator Spellbook",
+       "value": 100.0
+      },
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 50.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring1: Liberator Earrings",
+       "value": 13.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 6.9702,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 5.9613,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 4.7882,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 4.0465,
+       "est": true
+      },
+      {
+       "group": "ratio",
+       "label": "Accuracy increase 2% of 184.766",
+       "value": 3.6953
+      }
+     ]
+    },
+    {
+     "key": "Accuracy",
+     "name": "Accuracy Bonus",
+     "unit": "",
+     "value": 25.5,
+     "sources": [
+      {
+       "group": "wings",
+       "label": "Wings: Superior Daeva Wings",
+       "value": 25
+      },
+      {
+       "group": "ratio",
+       "label": "Accuracy increase 2% of 25",
+       "value": 0.5
+      }
+     ]
+    },
+    {
+     "key": "ArmorEvasion",
+     "name": "Evasion",
+     "unit": "",
+     "value": 13.9268,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 4.4022,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 3.5768,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 3.0387,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 2.6227,
+       "est": true
+      },
+      {
+       "group": "ratio",
+       "label": "Evasion increase 2.1% of 13.6404",
+       "value": 0.2864
+      }
+     ]
+    },
+    {
+     "key": "Evasion",
+     "name": "Evasion Bonus",
+     "unit": "",
+     "value": 0,
+     "sources": []
+    },
+    {
+     "key": "Block",
+     "name": "Block",
+     "unit": "",
+     "value": 55.9299,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "MainHand: Liberator Spellbook",
+       "value": 20.0
+      },
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 16.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 6.369,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 5.1748,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 4.6113,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 3.1115,
+       "est": true
+      },
+      {
+       "group": "ratio",
+       "label": "Block increase 1.2% of 55.2667",
+       "value": 0.6632
+      }
+     ]
+    },
+    {
+     "key": "CriticalResist",
+     "name": "Critical Hit Resist",
+     "unit": "",
+     "value": 77.1064,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 10.615,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 8.8901,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 7.5458,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 4.9784,
+       "est": true
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 35.0
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Vaizel",
+       "value": 10.0
+      },
+      {
+       "group": "ratio",
+       "label": "Critical Hit Resist increase 0.1% of 77.0293",
+       "value": 0.077
+      }
+     ]
+    },
+    {
+     "key": "BlockPierce",
+     "name": "Block Penetration",
+     "unit": "",
+     "value": 40.0,
+     "sources": [
+      {
+       "group": "titles",
+       "label": "Title (Attack): Celebrity",
+       "value": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "amp",
+   "name": "Amp Ratio",
+   "stats": [
+    {
+     "key": "DamageRatio",
+     "name": "Attack increase",
+     "unit": "%",
+     "value": 1.6433,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 0.0433,
+       "est": true
+      },
+      {
+       "group": "derived",
+       "label": "Might 14",
+       "value": 1.4
+      },
+      {
+       "group": "derived",
+       "label": "Destruction [Zikel] 2",
+       "value": 0.2
+      }
+     ],
+     "armory": {
+      "value": 1.6,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "WeaponDamage",
+       "base": 562.5197,
+       "add": 9.2438,
+       "name": "Max Attack"
+      },
+      {
+       "key": "WeaponMinDamage",
+       "base": 542.5197,
+       "add": 8.9151,
+       "name": "Min Attack"
+      }
+     ]
+    },
+    {
+     "key": "DefenseRatio",
+     "name": "Defense increase",
+     "unit": "%",
+     "value": 3.7,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Justice [Nezekan] 37",
+       "value": 3.7
+      }
+     ],
+     "armory": {
+      "value": 3.7,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "ArmorDefense",
+       "base": 2336.9794,
+       "add": 86.4682,
+       "name": "Defense"
+      }
+     ]
+    },
+    {
+     "key": "MaxHPRatio",
+     "name": "HP increase",
+     "unit": "%",
+     "value": 0.3,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Life [Yustiel] 3",
+       "value": 0.3
+      }
+     ],
+     "armory": {
+      "value": 0.3,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "HPMax",
+       "base": 7308.255,
+       "add": 21.9248,
+       "name": "HP"
+      }
+     ]
+    },
+    {
+     "key": "MaxMPRatio",
+     "name": "MP increase",
+     "unit": "%",
+     "value": 0.3,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Destiny [Marchutan] 3",
+       "value": 0.3
+      }
+     ],
+     "armory": {
+      "value": 0.3,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "MPMax",
+       "base": 975.1356,
+       "add": 2.9254,
+       "name": "MP"
+      }
+     ]
+    },
+    {
+     "key": "AccuracyRatio",
+     "name": "Accuracy increase",
+     "unit": "%",
+     "value": 2.0,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Freedom [Vaizel] 20",
+       "value": 2.0
+      }
+     ],
+     "armory": {
+      "value": 2.0,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "WeaponAccuracy",
+       "base": 184.7662,
+       "add": 3.6953,
+       "name": "Accuracy"
+      },
+      {
+       "key": "Accuracy",
+       "base": 25,
+       "add": 0.5,
+       "name": "Accuracy Bonus"
+      }
+     ]
+    },
+    {
+     "key": "EvasionRatio",
+     "name": "Evasion increase",
+     "unit": "%",
+     "value": 2.1,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Freedom [Vaizel] 20",
+       "value": 2.0
+      },
+      {
+       "group": "derived",
+       "label": "Dexterity 1",
+       "value": 0.1
+      }
+     ],
+     "armory": {
+      "value": 2.1,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "ArmorEvasion",
+       "base": 13.6404,
+       "add": 0.2864,
+       "name": "Evasion"
+      },
+      {
+       "key": "Evasion",
+       "base": 0,
+       "add": 0.0,
+       "name": "Evasion Bonus"
+      }
+     ]
+    },
+    {
+     "key": "CriticalRatio",
+     "name": "Critical Hit increase",
+     "unit": "%",
+     "value": 2.8,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Death [Triniel] 28",
+       "value": 2.8
+      }
+     ],
+     "armory": {
+      "value": 2.8,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "Critical",
+       "base": 196.8443,
+       "add": 5.5116,
+       "name": "Critical Hit"
+      }
+     ]
+    },
+    {
+     "key": "CriticalResistRatio",
+     "name": "Critical Hit Resist increase",
+     "unit": "%",
+     "value": 0.1,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Dexterity 1",
+       "value": 0.1
+      }
+     ],
+     "armory": {
+      "value": 0.1,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "CriticalResist",
+       "base": 77.0293,
+       "add": 0.077,
+       "name": "Critical Hit Resist"
+      }
+     ]
+    },
+    {
+     "key": "BlockRatio",
+     "name": "Block increase",
+     "unit": "%",
+     "value": 1.2,
+     "sources": [
+      {
+       "group": "derived",
+       "label": "Space [Israphel] 11",
+       "value": 1.1
+      },
+      {
+       "group": "derived",
+       "label": "Dexterity 1",
+       "value": 0.1
+      }
+     ],
+     "armory": {
+      "value": 1.2,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     },
+     "applies_to": [
+      {
+       "key": "Block",
+       "base": 55.2667,
+       "add": 0.6632,
+       "name": "Block"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "resource",
+   "name": "HP, MP and recovery",
+   "stats": [
+    {
+     "key": "HPMax",
+     "name": "HP",
+     "unit": "",
+     "value": 7330.1798,
+     "sources": [
+      {
+       "group": "base",
+       "label": "Base stats, level 44",
+       "value": 4593
+      },
+      {
+       "group": "gear",
+       "label": "Torso: Liberator Breastplate",
+       "value": 152.0
+      },
+      {
+       "group": "gear",
+       "label": "Pants: Liberator Greaves",
+       "value": 114.0
+      },
+      {
+       "group": "gear",
+       "label": "Belt: Noble Belt",
+       "value": 100.0
+      },
+      {
+       "group": "gear",
+       "label": "Belt: enchant +2",
+       "value": 100.0
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: Faith Helm",
+       "value": 83.0
+      },
+      {
+       "group": "gear",
+       "label": "Shoulder: Avenger Pauldrons",
+       "value": 80.0
+      },
+      {
+       "group": "gear",
+       "label": "Cape: Liberator Cloak",
+       "value": 80.0
+      },
+      {
+       "group": "gear",
+       "label": "Gloves: Liberator Gloves",
+       "value": 78.0
+      },
+      {
+       "group": "gear",
+       "label": "Boots: Liberator Boots",
+       "value": 78.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 42.5928,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 35.1622,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 29.7641,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Bracelet1: Old Mercenary Commander Bracelet",
+       "value": 23.0
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 19.7359,
+       "est": true
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 1000.0
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Vaizel",
+       "value": 300.0
+      },
+      {
+       "group": "wings",
+       "label": "Wings: Superior Daeva Wings",
+       "value": 400
+      },
+      {
+       "group": "ratio",
+       "label": "HP increase 0.3% of 7308.25",
+       "value": 21.9248
+      }
+     ]
+    },
+    {
+     "key": "MPMax",
+     "name": "MP",
+     "unit": "",
+     "value": 978.061,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "MainHand: Liberator Spellbook",
+       "value": 49.0
+      },
+      {
+       "group": "gear",
+       "label": "SubHand: Liberator Guard",
+       "value": 37.0
+      },
+      {
+       "group": "gear",
+       "label": "Torso: Liberator Breastplate",
+       "value": 31.0
+      },
+      {
+       "group": "gear",
+       "label": "Pants: Liberator Greaves",
+       "value": 26.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring1: Liberator Earrings",
+       "value": 25.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 21.4954,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Shoulder: Avenger Pauldrons",
+       "value": 20.0
+      },
+      {
+       "group": "gear",
+       "label": "Gloves: Liberator Gloves",
+       "value": 19.0
+      },
+      {
+       "group": "gear",
+       "label": "Boots: Liberator Boots",
+       "value": 19.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring1: Avenger Ring",
+       "value": 19.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 18.0455,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 15.3711,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Cape: Liberator Cloak",
+       "value": 15.0
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 10.2236,
+       "est": true
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Nezekan",
+       "value": 400.0
+      },
+      {
+       "group": "daevanion",
+       "label": "Daevanion: Vaizel",
+       "value": 50.0
+      },
+      {
+       "group": "wings",
+       "label": "Wings: Superior Daeva Wings",
+       "value": 200
+      },
+      {
+       "group": "ratio",
+       "label": "MP increase 0.3% of 975.136",
+       "value": 2.9254
+      }
+     ]
+    },
+    {
+     "key": "HPRegen",
+     "name": "Natural HP Regen",
+     "unit": "",
+     "value": 34.2717,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 11.6466,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 9.754,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 7.8927,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 4.9784,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "MPRegen",
+     "name": "Natural MP Regen",
+     "unit": "",
+     "value": 80.079,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Torso: Liberator Breastplate",
+       "value": 10.0
+      },
+      {
+       "group": "gear",
+       "label": "Pants: Liberator Greaves",
+       "value": 9.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring1: Liberator Earrings",
+       "value": 8.0
+      },
+      {
+       "group": "gear",
+       "label": "Shoulder: Avenger Pauldrons",
+       "value": 7.0
+      },
+      {
+       "group": "gear",
+       "label": "Gloves: Liberator Gloves",
+       "value": 7.0
+      },
+      {
+       "group": "gear",
+       "label": "Boots: Liberator Boots",
+       "value": 7.0
+      },
+      {
+       "group": "gear",
+       "label": "Ring1: Avenger Ring",
+       "value": 7.0
+      },
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 6.4056,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Cape: Liberator Cloak",
+       "value": 6.0
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 5.3865,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 4.531,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 2.7559,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "SPMax",
+     "name": "Stamina",
+     "unit": "",
+     "value": 155.0,
+     "sources": [
+      {
+       "group": "titles",
+       "label": "Title (Etc): Altgard Cartographer",
+       "value": 155.0
+      }
+     ]
+    },
+    {
+     "key": "FPMax",
+     "name": "Flight Power",
+     "unit": "",
+     "value": 589.2406,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Necklace: random lines",
+       "value": 35.8936,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 29.5837,
+       "est": true
+      },
+      {
+       "group": "gear",
+       "label": "Ring2: random lines",
+       "value": 23.7633,
+       "est": true
+      },
+      {
+       "group": "wings",
+       "label": "Wings: Superior Daeva Wings",
+       "value": 500
+      }
+     ]
+    },
+    {
+     "key": "Restoration",
+     "name": "Regeneration",
+     "unit": "%",
+     "value": 1.8,
+     "sources": [
+      {
+       "group": "titles",
+       "label": "Title (Defense): Severer of Cursed Bonds",
+       "value": 1.5
+      },
+      {
+       "group": "derived",
+       "label": "Life [Yustiel] 3",
+       "value": 0.3
+      }
+     ],
+     "armory": {
+      "value": 0.3,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    }
+   ]
+  },
+  {
+   "key": "move",
+   "name": "Movement",
+   "stats": [
+    {
+     "key": "MoveSpeed",
+     "name": "Move Speed",
+     "unit": "%",
+     "value": 1.3166,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Earring2: random lines",
+       "value": 0.2166,
+       "est": true
+      },
+      {
+       "group": "derived",
+       "label": "Space [Israphel] 11",
+       "value": 1.1
+      }
+     ],
+     "armory": {
+      "value": 1.1,
+      "diff": 0.0,
+      "ok": true,
+      "basis": "derived part only"
+     }
+    }
+   ]
+  },
+  {
+   "key": "status",
+   "name": "Status effects and other resists",
+   "stats": [
+    {
+     "key": "AbnormalResistance",
+     "name": "Status Effect Resist",
+     "unit": "%",
+     "value": 0.3341,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 0.3341,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "FrontAttackCriticalResist",
+     "name": "Front Attack Critical Hit Resist",
+     "unit": "",
+     "value": 40,
+     "sources": [
+      {
+       "group": "wings",
+       "label": "Wings: Superior Daeva Wings",
+       "value": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "other",
+   "name": "Other",
+   "stats": [
+    {
+     "key": "AmplifyHpHealGet",
+     "name": "Incoming Heal",
+     "unit": "%",
+     "value": 0.9294,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Helmet: random lines",
+       "value": 0.9294,
+       "est": true
+      }
+     ]
+    },
+    {
+     "key": "HpPotionRate",
+     "name": "HP Potion Recovery increase",
+     "unit": "%",
+     "value": 10.0,
+     "sources": [
+      {
+       "group": "gear",
+       "label": "Belt: Noble Belt",
+       "value": 10.0
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "key": "base",
+   "name": "Base (level)"
+  },
+  {
+   "key": "gear",
+   "name": "Gear"
+  },
+  {
+   "key": "arcana",
+   "name": "Arcana"
+  },
+  {
+   "key": "daevanion",
+   "name": "Daevanion"
+  },
+  {
+   "key": "wings",
+   "name": "Wings"
+  },
+  {
+   "key": "titles",
+   "name": "Titles"
+  },
+  {
+   "key": "armory",
+   "name": "Not exposed (armory total)"
+  },
+  {
+   "key": "derived",
+   "name": "Derived from attributes"
+  },
+  {
+   "key": "ratio",
+   "name": "Amp Ratio"
+  }
+ ],
+ "armory_check": {
+  "attributes": [
+   {
+    "key": "STR",
+    "name": "Might",
+    "armory": 14.0,
+    "ours": 15.6312,
+    "diff": 1.6312,
+    "ok": false
+   },
+   {
+    "key": "DEX",
+    "name": "Dexterity",
+    "armory": 1.0,
+    "ours": 1.2124,
+    "diff": 0.2124,
+    "ok": true
+   },
+   {
+    "key": "INT",
+    "name": "Intelligence",
+    "armory": 0.0,
+    "ours": 2.1753,
+    "diff": 2.1753,
+    "ok": false
+   },
+   {
+    "key": "CON",
+    "name": "Constitution",
+    "armory": 0.0,
+    "ours": 1.758,
+    "diff": 1.758,
+    "ok": false
+   },
+   {
+    "key": "AGI",
+    "name": "Precision",
+    "armory": 0.0,
+    "ours": 1.6312,
+    "diff": 1.6312,
+    "ok": false
+   },
+   {
+    "key": "WIS",
+    "name": "Willpower",
+    "armory": 0.0,
+    "ours": 1.2124,
+    "diff": 1.2124,
+    "ok": false
+   },
+   {
+    "key": "Justice",
+    "name": "Justice [Nezekan]",
+    "armory": 37.0,
+    "ours": 0,
+    "diff": -37.0,
+    "ok": false
+   },
+   {
+    "key": "Freedom",
+    "name": "Freedom [Vaizel]",
+    "armory": 20.0,
+    "ours": 0,
+    "diff": -20.0,
+    "ok": false
+   },
+   {
+    "key": "Illusion",
+    "name": "Illusion [Kaisinel]",
+    "armory": 1.0,
+    "ours": 0,
+    "diff": -1.0,
+    "ok": false
+   },
+   {
+    "key": "Life",
+    "name": "Life [Yustiel]",
+    "armory": 3.0,
+    "ours": 0,
+    "diff": -3.0,
+    "ok": false
+   },
+   {
+    "key": "Time",
+    "name": "Time [Siel]",
+    "armory": 38.0,
+    "ours": 0,
+    "diff": -38.0,
+    "ok": false
+   },
+   {
+    "key": "Destruction",
+    "name": "Destruction [Zikel]",
+    "armory": 2.0,
+    "ours": 0,
+    "diff": -2.0,
+    "ok": false
+   },
+   {
+    "key": "Death",
+    "name": "Death [Triniel]",
+    "armory": 28.0,
+    "ours": 0,
+    "diff": -28.0,
+    "ok": false
+   },
+   {
+    "key": "Wisdom",
+    "name": "Wisdom [Lumiel]",
+    "armory": 1.0,
+    "ours": 0,
+    "diff": -1.0,
+    "ok": false
+   },
+   {
+    "key": "Destiny",
+    "name": "Destiny [Marchutan]",
+    "armory": 3.0,
+    "ours": 0,
+    "diff": -3.0,
+    "ok": false
+   },
+   {
+    "key": "Space",
+    "name": "Space [Israphel]",
+    "armory": 11.0,
+    "ours": 0,
+    "diff": -11.0,
+    "ok": false
+   }
+  ],
+  "derived": [
+   {
+    "primary": "STR",
+    "key": "DamageRatio",
+    "name": "Attack increase",
+    "text": "Attack increase +1.4%",
+    "armory": 1.4,
+    "from_armory_points": 1.4,
+    "ok": true
+   },
+   {
+    "primary": "DEX",
+    "key": "EvasionRatio",
+    "name": "Evasion increase",
+    "text": "Evasion increase +0.1%",
+    "armory": 0.1,
+    "from_armory_points": 0.1,
+    "ok": true
+   },
+   {
+    "primary": "DEX",
+    "key": "BlockRatio",
+    "name": "Block increase",
+    "text": "Block increase +0.1%",
+    "armory": 0.1,
+    "from_armory_points": 0.1,
+    "ok": true
+   },
+   {
+    "primary": "DEX",
+    "key": "CriticalResistRatio",
+    "name": "Critical Hit Resist increase",
+    "text": "Critical Hit Resist increase +0.1%",
+    "armory": 0.1,
+    "from_armory_points": 0.1,
+    "ok": true
+   },
+   {
+    "primary": "Justice",
+    "key": "DefenseRatio",
+    "name": "Defense increase",
+    "text": "Defense increase +3.7%",
+    "armory": 3.7,
+    "from_armory_points": 3.7,
+    "ok": true
+   },
+   {
+    "primary": "Justice",
+    "key": "Perfect",
+    "name": "Perfect Chance",
+    "text": "Perfect Chance +3.7%",
+    "armory": 3.7,
+    "from_armory_points": 3.7,
+    "ok": true
+   },
+   {
+    "primary": "Freedom",
+    "key": "AccuracyRatio",
+    "name": "Accuracy increase",
+    "text": "Accuracy increase +2%",
+    "armory": 2.0,
+    "from_armory_points": 2.0,
+    "ok": true
+   },
+   {
+    "primary": "Freedom",
+    "key": "EvasionRatio",
+    "name": "Evasion increase",
+    "text": "Evasion increase +2%",
+    "armory": 2.0,
+    "from_armory_points": 2.0,
+    "ok": true
+   },
+   {
+    "primary": "Illusion",
+    "key": "CoolTimeIncrease",
+    "name": "Cooldown",
+    "text": "Cooldown -0.1%",
+    "armory": -0.1,
+    "from_armory_points": -0.1,
+    "ok": true
+   },
+   {
+    "primary": "Illusion",
+    "key": "IgnoreIronWall",
+    "name": "Endurance Penetration",
+    "text": "Endurance Penetration +0.1%",
+    "armory": 0.1,
+    "from_armory_points": 0.1,
+    "ok": true
+   },
+   {
+    "primary": "Life",
+    "key": "MaxHPRatio",
+    "name": "HP increase",
+    "text": "HP increase +0.3%",
+    "armory": 0.3,
+    "from_armory_points": 0.3,
+    "ok": true
+   },
+   {
+    "primary": "Life",
+    "key": "Restoration",
+    "name": "Regeneration",
+    "text": "Regeneration +0.3%",
+    "armory": 0.3,
+    "from_armory_points": 0.3,
+    "ok": true
+   },
+   {
+    "primary": "Time",
+    "key": "CombatSpeed",
+    "name": "Combat Speed",
+    "text": "Combat Speed +3.8%",
+    "armory": 3.8,
+    "from_armory_points": 3.8,
+    "ok": true
+   },
+   {
+    "primary": "Time",
+    "key": "HardHitResist",
+    "name": "Double Resist",
+    "text": "Double Resist +3.8%",
+    "armory": 3.8,
+    "from_armory_points": 3.8,
+    "ok": true
+   },
+   {
+    "primary": "Destruction",
+    "key": "DamageRatio",
+    "name": "Attack increase",
+    "text": "Attack increase +0.2%",
+    "armory": 0.2,
+    "from_armory_points": 0.2,
+    "ok": true
+   },
+   {
+    "primary": "Destruction",
+    "key": "PerfectResist",
+    "name": "Perfect Resist",
+    "text": "Perfect Resist +0.2%",
+    "armory": 0.2,
+    "from_armory_points": 0.2,
+    "ok": true
+   },
+   {
+    "primary": "Death",
+    "key": "CriticalRatio",
+    "name": "Critical Hit increase",
+    "text": "Critical Hit increase +2.8%",
+    "armory": 2.8,
+    "from_armory_points": 2.8,
+    "ok": true
+   },
+   {
+    "primary": "Death",
+    "key": "IgnoreRestoration",
+    "name": "Regeneration Penetration",
+    "text": "Regeneration Penetration +2.8%",
+    "armory": 2.8,
+    "from_armory_points": 2.8,
+    "ok": true
+   },
+   {
+    "primary": "Wisdom",
+    "key": "MPUseIncrease",
+    "name": "MP Cost",
+    "text": "MP Cost -0.1%",
+    "armory": -0.1,
+    "from_armory_points": -0.1,
+    "ok": true
+   },
+   {
+    "primary": "Wisdom",
+    "key": "HardHit",
+    "name": "Double Chance",
+    "text": "Double Chance +0.1%",
+    "armory": 0.1,
+    "from_armory_points": 0.1,
+    "ok": true
+   },
+   {
+    "primary": "Destiny",
+    "key": "MaxMPRatio",
+    "name": "MP increase",
+    "text": "MP increase +0.3%",
+    "armory": 0.3,
+    "from_armory_points": 0.3,
+    "ok": true
+   },
+   {
+    "primary": "Destiny",
+    "key": "IronWall",
+    "name": "Endurance",
+    "text": "Endurance +0.3%",
+    "armory": 0.3,
+    "from_armory_points": 0.3,
+    "ok": true
+   },
+   {
+    "primary": "Space",
+    "key": "MoveSpeed",
+    "name": "Move Speed",
+    "text": "Move Speed +1.1%",
+    "armory": 1.1,
+    "from_armory_points": 1.1,
+    "ok": true
+   },
+   {
+    "primary": "Space",
+    "key": "BlockRatio",
+    "name": "Block increase",
+    "text": "Block increase +1.1%",
+    "armory": 1.1,
+    "from_armory_points": 1.1,
+    "ok": true
+   }
+  ],
+  "summary": {
+   "attributes": 16,
+   "attributes_ok": 1,
+   "attributes_nonzero": 16,
+   "attributes_nonzero_ok": 1,
+   "derived": 24,
+   "derived_ok": 24
+  }
+ },
+ "points": {
+  "STR": 14,
+  "DEX": 1,
+  "Justice": 37,
+  "Freedom": 20,
+  "Illusion": 1,
+  "Life": 3,
+  "Time": 38,
+  "Destruction": 2,
+  "Death": 28,
+  "Wisdom": 1,
+  "Destiny": 3,
+  "Space": 11
+ },
+ "notes": [],
+ "unparsed": [],
+ "not_included": [
+  "Random sub-stat lines are not public: each is scored at its expected value (marked estimated).",
+  "Magic stones, god stones, soulbind and Philosopher's Stone lines are not in the armory data.",
+  "Pets, skin collections, monolith, pantheon and title collections are not exposed, so the deity points they give are missing. This is the main reason the Conqueror (deity) stats differ from the armory.",
+  "Arcana cards are only counted when the armory lists them as equipment."
+ ],
+ "engine_stats": {
+  "attack": 552.5197,
+  "attack_increase_pct": 1.6433,
+  "weapon_dmg_pct": 5.0,
+  "dmg_boost_pct": 0,
+  "crit_chance_pct": 2.0236,
+  "crit_dmg_pct": 50.0,
+  "smite_pct": 0.1433,
+  "combat_speed_pct": 3.9527,
+  "cdr_pct": 0.1,
+  "penetration": 420.0,
+  "max_mp": 978.061
+ }
+}

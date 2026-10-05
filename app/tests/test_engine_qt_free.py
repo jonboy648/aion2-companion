@@ -48,3 +48,31 @@ def test_bundled_sources_never_mention_pyside6():
         if not p.is_file():
             p = p.with_suffix("") / "__init__.py"
         assert "PySide6" not in p.read_text(encoding="utf-8"), p
+
+
+def test_engine_fingerprint_follows_engine_code(tmp_path, monkeypatch):
+    """manifest engine_version (the browser result-cache key) must change when a bundled engine module changes."""
+    import shutil
+
+    spec = importlib.util.spec_from_file_location("bundle_engine_fp", BUNDLE_SCRIPT)
+    be = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(be)
+    assert be.fingerprint([("a.py", b"x = 1")]) != be.fingerprint([("a.py", b"x = 2")])
+    assert be.fingerprint([("a.py", b"x"), ("b.py", b"y")]) == be.fingerprint([("b.py", b"y"), ("a.py", b"x")])
+    # a scratch copy of the bundled sources, so the real tree is never touched
+    app, pkg = tmp_path / "app", tmp_path / "app" / "aion2c"
+    for m in be.MODULES:
+        src = be.module_file(m)
+        dst = app / src.relative_to(be.APP)
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(src, dst)
+    (pkg / "data").mkdir(exist_ok=True)
+    for d in be.PY_DATA:
+        shutil.copy(be.PKG / "data" / d, pkg / "data" / d)
+    monkeypatch.setattr(be, "APP", app)
+    monkeypatch.setattr(be, "PKG", pkg)
+    before = be.engine_fingerprint()
+    assert before == be.engine_fingerprint()
+    damage = pkg / "engine" / "damage.py"
+    damage.write_text(damage.read_text(encoding="utf-8") + "\n# changed\n", encoding="utf-8")
+    assert be.engine_fingerprint() != before

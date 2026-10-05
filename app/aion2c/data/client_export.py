@@ -537,6 +537,63 @@ def write_skill_details(table_dir: Path, research_dir: Path, icons_dir: Path, ou
     return data
 
 
+# ---- progression (levels, rank acquisition gates, stigma unlock) ----------------------------------------------------------
+PROGRESSION_PATH = bg.SRC_DIR.parent / "client_progression.json"  # next to stat_sheet.json: bundled for the web
+PROGRESSION_MAX_LEVEL = 50  # Global 45, Korea 50; the table runs further but nothing we model does
+
+
+def build_progression(table_dir: Path) -> dict:
+    """Derived level/acquisition facts (research/progression_connections_2026-10-05.md). Keys are client skill ids, so no
+    raw row ids or strings are stored. `levels[i]` = cumulative [skill points, stigma points, stigma slots, Daevanion
+    crystals] at character level i+1 (one Exp row, NOT a running sum). `ranks[skill_id]` = character level needed to buy
+    rank 1, 2, ... (paid ranks only run to Mastery 10 / Stigma 20); `stigma` lists the ids bought with stigma points."""
+    exp = {r["Level"]: r for r in _rows(table_dir, "Exp") if r["Level"] <= PROGRESSION_MAX_LEVEL}
+    levels = []
+    for lv in sorted(exp):
+        r = exp[lv]
+        crystal = next((x["Value"] for x in r["DaevanionPointMap"] if x["Key"] == "EDaevanionPointType::DaevanionCrystal"), 0)
+        levels.append([r["BonusSkillPoint"], r["BonusStigmaPoint"], r["StigmaSkillContextSlotMax"], crystal])
+    by: dict[int, dict[int, dict]] = defaultdict(dict)
+    stigma, gates = set(), set()
+    for r in _rows(table_dir, "SkillAcquireData"):
+        sid = r["SkillId"]["Value"]
+        by[sid][r["SkillLevel"]] = r
+        if r["AcquireType"].endswith("Stigma"):
+            stigma.add(sid)
+            if r["NeedAscensionGrade"].endswith("AscensionGrade_3"):
+                gates.add(r["NeedCharacterLevel"])
+    ranks = {}
+    for sid, rs in by.items():
+        n = max(rs)
+        if sorted(rs) != list(range(1, n + 1)):
+            continue  # a gap in the ranks: do not guess
+        ranks[str(sid)] = [rs[i]["NeedCharacterLevel"] for i in range(1, n + 1)]
+    slots = sorted(r["UnlockSkillLv"] for r in _rows(table_dir, "SpecializedSkillSlot")
+                   if r["SkillAcquireType"].endswith("Mastery") and r["bUserEditSlot"])
+    cls_name = {v: k for k, v in CLIENT_CLASS.items()}
+    board_currency: dict[str, dict[str, str]] = defaultdict(dict)
+    for r in _rows(table_dir, "DaevanionBoard"):
+        ck = cls_name.get(r["Class"].split("::")[-1])
+        if ck:
+            board_currency[ck][str(r["NeedLevel"])] = "battle" if r["CostPointType"].endswith("BattleCrystal") else "daevanion"
+    gs = _rows(table_dir, "GlobalSetting")[0]
+    return {"schema": 1, "source": SOURCE, "client_version": None,
+            "note": "Global export; client version unverified. Level rows are cumulative totals.",
+            "levels": levels,
+            "stigma_unlock": {"ascension_grade": 3, "level": min(gates),
+                              "quests": [gs["stigma_unlock_condition_quest_light"], gs["stigma_unlock_condition_quest_dark"]]},
+            "mastery_slot_levels": slots,
+            "board_currency": {ck: board_currency[ck] for ck in sorted(board_currency)},
+            "stigma": sorted(stigma), "ranks": ranks}
+
+
+def write_progression(table_dir: Path, out: Path = PROGRESSION_PATH) -> dict:
+    data = build_progression(table_dir)
+    out.write_text(json.dumps(data, separators=(",", ":"), sort_keys=True), encoding="utf-8")
+    print(f"wrote {out} ({out.stat().st_size} bytes)", file=sys.stderr)
+    return data
+
+
 def check_class(gd, entries: dict, unmatched: dict) -> dict:
     """Drift check of one class: every skill with client numbers must carry exactly them in the built gamedata `gd`
     (ratio, hits, flat damage on every rank the client has). Not compared: ranks the client table lacks, and the top end of
@@ -605,6 +662,7 @@ def main() -> None:
               f"{', '.join(c['unmatched']) or '-'}", file=sys.stderr)
     print(f"wrote {a.out} ({a.out.stat().st_size // 1024} KiB)", file=sys.stderr)
     write_skill_details(export_dir(), a.research, a.icons)
+    write_progression(export_dir())
 
 
 if __name__ == "__main__":

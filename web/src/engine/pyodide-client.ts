@@ -2,12 +2,12 @@
  * Main-thread client for the Pyodide worker. Implements the same EngineApi shape as api.ts' mock
  * (declared structurally here so api.ts can import this file without a cycle).
  */
-import { cacheGet, cacheKey, cacheSet, defaultStore } from "./cache";
+import { cacheGet, cacheKey, cacheSet, cacheVersion, defaultStore } from "./cache";
 import { PROGRESS_METHODS } from "./protocol";
 import type { FromWorker, InitConfig, Method, ToWorker } from "./protocol";
 import type {
   ArmoryRaw, CharacterBuild, ClassInfo, CompareResult, DaevanionSuggestion, FullBuild, GameData, IconUrls,
-  GearUpgradesResult, ImportResult, KeybindsResult, MaxPotentialResult, PlaystyleKey, Priority, ProgressFn, RecipeMaterial, Region, RoadmapItem,
+  GearUpgradesResult, ImportResult, KeybindsResult, MaxPotentialResult, PlaystyleKey, Priority, ProgressFn, RecipeMaterial, Region, RoadmapItem, StatSheet,
   SkillBar, StatGain,
 } from "@/lib/types";
 
@@ -75,7 +75,7 @@ export function createPyodideClient(opts: ClientOptions = {}) {
 
   const dataVersion = () =>
     (versionP ??= (opts.dataVersion ?? (() =>
-      fetch(`${base}engine/manifest.json`).then((r) => r.json() as Promise<{ data_version: string }>).then((m) => m.data_version)))()
+      fetch(`${base}engine/manifest.json`).then((r) => r.json() as Promise<{ data_version: string; engine_version?: string }>).then(cacheVersion)))()
       .catch((e) => {
         versionP = null;
         throw e;
@@ -210,6 +210,7 @@ export function createPyodideClient(opts: ClientOptions = {}) {
       call<GearUpgradesResult>("gearUpgrades", [rawArmory, build, playstyle, steps, reachableOnly]),
     maxPotential: (classKey: string, playstyle: PlaystyleKey, reachableOnly?: boolean, build?: CharacterBuild | null, rawArmory?: ArmoryRaw | null) =>
       call<MaxPotentialResult>("maxPotential", [classKey, playstyle, reachableOnly, build, rawArmory]),
+    statSheet: (rawArmory: ArmoryRaw, calibrate?: boolean) => call<StatSheet>("statSheet", [rawArmory, calibrate]),
     /** Test/debug hook. */
     dispose: () => failAll(new Error("Engine disposed")),
   };

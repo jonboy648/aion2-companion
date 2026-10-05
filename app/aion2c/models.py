@@ -30,14 +30,12 @@ class Num:
     source: str = ""
 
 
-# Specialty slots open at these skill ranks (mastery_stigma.md: skycoach.gg 2026-09-29 via aion2guide.org: "lvl 8 =
-# first three specialties + first slot; 12 = fourth specialty + second slot; 16 = fifth specialty; 20 = third
-# slot"). Options unlock per Specialization.rank_required (datamine unlock_level 8/8/8/12/16 on Sorcerer).
-# allthings.how reads the slots as 8/12/16 instead: unresolved, so this is `estimated` data, overridable per
-# class with mechanics.json "spec_slot_ranks".
+# Mastery specialty slots open at these skill ranks: client SpecializedSkillSlot UnlockSkillLv 8/12/20 (the three
+# user-editable Mastery slots; docs/adr/0003). Options unlock per Specialization.rank_required (8/8/8/12/16 on
+# Sorcerer), a different table (SpecializedSkillParts). Overridable per class with mechanics.json "spec_slot_ranks".
 SPEC_SLOT_RANKS = tuple(
-    Num(float(r), "estimated", "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; "
-        "allthings.how says 8/12/16 (research/mastery_stigma.md)")
+    Num(float(r), "confirmed", "client SpecializedSkillSlot UnlockSkillLv 8/12/20 (Mastery, bUserEditSlot); "
+        "docs/adr/0003")
     for r in (8, 12, 20)
 )
 
@@ -280,6 +278,9 @@ class DaevanionBoard:
     unlock_level: int
     nodes: dict[int, DaevanionNode]
     start_id: int
+    # Point type the board is paid in (client DaevanionBoard.CostPointType): "daevanion" (DaevanionCrystal) or
+    # "battle" (BattleCrystal, the Azphel board). daevanion_points never pays for a "battle" board.
+    currency: str = "daevanion"
 
 
 @dataclass(frozen=True)
@@ -330,6 +331,9 @@ class GameData:
 
 @dataclass(frozen=True)
 class Stats:
+    # `attack` = weapon attack BEFORE Amp Ratio: the midpoint of the sheet's Max/Min Attack (weapon range + flat Attack
+    # lines), without Attack Bonus (the engine adds opened Daevanion nodes' Attack Bonus itself) and without the
+    # `attack_increase_pct` / `weapon_dmg_pct` multipliers, which damage.py applies. The default 1000 is a placeholder.
     attack: float = 1000
     attack_increase_pct: float = 0
     weapon_dmg_pct: float = 0
@@ -363,7 +367,11 @@ def cooldown_scale(cdr_pct: float) -> float:
 # +3.8%, cooldown 0.1% come from the DarthThot armory sample (tests/fixtures/armory/info.json, level 44, attribute
 # bonuses only); crit chance 15% is an ESTIMATE (the same sample shows only +2.8% from attributes, gear adds the
 # rest; 10-20% is typical at 45), needed because crit-triggered procs (Heart Gore) never fire at 0% crit.
-BASELINE_L45_STATS = Stats(attack_increase_pct=1.6, combat_speed_pct=3.8, cdr_pct=0.1, crit_chance_pct=15.0)
+# Attack 550 and MP 1000 replace the Stats() placeholders (1000 / 2000) for manual builds: the three real level 44-45
+# stat sheets (tests/fixtures) have weapon attack 553 / 791 / 811 (midpoint of Max/Min Attack before Amp Ratio) and MP
+# 978 / 1861 / 1337, so 550 and 1000 are the low end of what a level-45 character has.
+BASELINE_L45_STATS = Stats(attack=550, attack_increase_pct=1.6, combat_speed_pct=3.8, cdr_pct=0.1, crit_chance_pct=15.0,
+                           max_mp=1000)
 
 
 @dataclass(frozen=True)
@@ -383,6 +391,9 @@ class CharacterBuild:
     # Rank bonuses entered by the user for sources the data cannot compute (Arcana / Soul Binding), skill key -> +ranks.
     # Added on top of skill-point ranks and Daevanion skill nodes, then clamped to the region cap (see total_rank).
     bonus_ranks: dict[str, int] = field(default_factory=dict)
+    # Stigma unlock (Ascension grade 3 + faction quest): True = unlocked, False = no stigma ranks bought, None = infer
+    # (progression.stigma_unlock: a held stigma rank proves it, otherwise the level gate, reported as inferred).
+    stigma_unlocked: bool | None = None
 
 
 @dataclass(frozen=True)

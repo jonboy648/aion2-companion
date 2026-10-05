@@ -47,7 +47,12 @@ export function PlaystyleStrip({ cmp, data, selected, onSelect, overrides, dpsOv
             <span className="font-display text-[15px] font-bold">{fb.playstyle.name}</span>
             <span>
               <span className="text-2xl font-semibold tabular-nums text-gold">~{fmtDps(dpsOverrides?.[k] ?? fb.result.dps)}</span>
-              <span className="ml-1 text-xs text-dim">DPS</span>
+              <span className="ml-1 text-xs text-dim">DPS best build</span>
+              {fb.current_dps != null && (
+                <span className="mt-0.5 block text-xs text-dim">
+                  <span className="font-semibold tabular-nums text-foreground">~{fmtDps(fb.current_dps)}</span> current build
+                </span>
+              )}
             </span>
             <span className="text-xs text-dim">{fb.playstyle.scenario.duration_s} s · {fb.playstyle.scenario.n_targets} targets · {fb.playstyle.scenario.boss ? "Boss" : "Non-boss"}</span>
             <span className="flex flex-wrap gap-1.5" aria-label="Stigmas">

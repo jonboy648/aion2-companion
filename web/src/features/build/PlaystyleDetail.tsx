@@ -156,17 +156,26 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         <SectionTitle className="mb-0 min-w-0 flex-1 basis-64" caption={fb.playstyle.description}>
           {fb.playstyle.name} plan
         </SectionTitle>
-        <div className="text-right">
-          <div className="font-display text-3xl font-bold tabular-nums text-gold">~{fmtDps(dps)}</div>
-          <div className="flex items-center justify-end gap-2 text-xs text-dim">
-            estimated DPS
-            <Badge tone={CONF_TONE[fb.result.confidence]}>{fb.result.confidence}</Badge>
+        <div className="flex items-end gap-5 text-right">
+          {fb.current_dps != null && (
+            <div data-testid="current-dps">
+              <div className="font-display text-2xl font-bold tabular-nums">~{fmtDps(fb.current_dps)}</div>
+              <div className="text-xs text-dim">Current build<br />as imported</div>
+            </div>
+          )}
+          <div data-testid="plan-dps">
+            <div className="font-display text-3xl font-bold tabular-nums text-gold">~{fmtDps(dps)}</div>
+            <div className="flex items-center justify-end gap-2 text-xs text-dim">
+              {fb.current_dps != null ? "Best build with your gear" : "estimated DPS"}
+              <Badge tone={CONF_TONE[fb.result.confidence]}>{fb.result.confidence}</Badge>
+            </div>
           </div>
         </div>
       </div>
 
       <AdvancedStats metrics={[
-        { key: "dps", label: "Estimated DPS", value: fmtDps(dps), hint: applied?.label ?? "Max-DPS build" },
+        { key: "dps", label: "Estimated DPS", value: fmtDps(dps), hint: applied?.label ?? "Best build with your gear" },
+        ...(fb.current_dps != null ? [{ key: "current", label: "Current build DPS", value: fmtDps(fb.current_dps), hint: "As imported, no changes" }] : []),
         { key: "duration", label: "Duration", value: `${fb.playstyle.scenario.duration_s} s` },
         { key: "targets", label: "Targets", value: String(fb.playstyle.scenario.n_targets), hint: fb.playstyle.scenario.boss ? "Boss target" : "Non-boss targets" },
         { key: "confidence", label: "Model confidence", value: fb.result.confidence },

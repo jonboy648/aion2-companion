@@ -173,6 +173,8 @@ export interface DaevanionBoard {
   /** node id (as a string) -> node */
   nodes: Record<string, DaevanionNode>;
   start_id: number;
+  /** Point type the board is paid in: DaevanionCrystal ("daevanion") or BattleCrystal ("battle", the Azphel board). */
+  currency: "daevanion" | "battle";
 }
 
 export interface RecipeMaterial {
@@ -253,6 +255,8 @@ export interface CharacterBuild {
   class_key: string;
   /** Arcana / Soul Binding rank bonuses entered by the user (skill key -> +ranks); Daevanion nodes are separate. */
   bonus_ranks: Record<string, number>;
+  /** Stigma unlock (Ascension grade 3 + faction quest): true = unlocked, false = none bought, null = infer (held ranks, else level 22; reported as inferred). */
+  stigma_unlocked: boolean | null;
 }
 
 export interface Scenario {
@@ -344,6 +348,9 @@ export interface FullBuild {
   rotation_explained: RotationExplained;
   /** equipped specialty options with the DPS each adds (leave-one-out), best first */
   spec_picks: SpecPick[];
+  /** DPS of the build exactly as given (its own stigmas, ranks, opened Daevanion nodes and stats, rotation searched);
+   *  `result.dps` is the plan after re-choosing stigmas, ranks and specialties. null when not computed. */
+  current_dps: number | null;
 }
 
 export interface SpecPick {
@@ -527,6 +534,8 @@ export interface DaevanionSuggestion {
   /** node ids, best first, cut at the point budget */
   path: number[];
   spent: number;
+  /** BattleCrystal spent on Azphel nodes (0 unless a battle budget was given). */
+  battle_spent: number;
   gain_pct: number;
   nodes: { id: number; board: string; name: string; cost: number }[];
 }
@@ -620,4 +629,70 @@ export interface MaxPotentialResult {
   with_current_gear: { dps: number; stigmas: { key: string; name: string }[]; daevanion_nodes: number } | null;
   notes: string[];
   assumptions: string[];
+}
+
+// ---- stat sheet (aion2c.webapi.stat_sheet) ---------------------------------------------------------------
+
+export type StatSourceGroup = "base" | "gear" | "arcana" | "daevanion" | "wings" | "titles" | "armory" | "derived" | "ratio";
+
+export interface StatSource {
+  group: StatSourceGroup;
+  label: string;
+  value: number;
+  /** an expected value or a gap-fill, not a number read from the armory */
+  est?: boolean;
+}
+
+export interface StatArmoryCheck {
+  value: number;
+  /** what our known sources add up to (attributes only) */
+  known?: number;
+  /** known - armory for attributes, ours - armory for the derived part */
+  diff: number;
+  ok: boolean;
+  basis: "attribute total" | "derived part only";
+}
+
+export interface StatRow {
+  key: string;
+  name: string;
+  /** "%" or "" */
+  unit: string;
+  value: number;
+  sources: StatSource[];
+  armory?: StatArmoryCheck;
+  /** Amp Ratio lines: which base stats they scale and by how much */
+  applies_to?: { key: string; name: string; base: number; add: number }[];
+  capped?: boolean;
+}
+
+export interface StatCategory {
+  key: string;
+  name: string;
+  stats: StatRow[];
+}
+
+export interface StatSheet {
+  class_name: string | null;
+  level: number;
+  categories: StatCategory[];
+  groups: { key: StatSourceGroup; name: string }[];
+  armory_check: {
+    attributes: { key: string; name: string; armory: number; ours: number; diff: number; ok: boolean }[];
+    derived: { primary: string; key: string; name: string; text: string; armory: number; from_armory_points: number | null; ok: boolean }[];
+    summary: {
+      attributes: number;
+      attributes_ok: number;
+      attributes_nonzero: number;
+      attributes_nonzero_ok: number;
+      derived: number;
+      derived_ok: number;
+    };
+  };
+  points: Record<string, number>;
+  notes: string[];
+  unparsed: string[];
+  not_included: string[];
+  /** the sheet as engine `Stats` fields (what import feeds the damage engine) */
+  engine_stats: Record<string, number>;
 }

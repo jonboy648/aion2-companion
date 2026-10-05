@@ -19,7 +19,7 @@ const K = {
   build: keysOf<Omit<T.CharacterBuild, "stigma_unlocked">>({
     name: true, region: true, level: true, skill_ranks: true, stigmas: true, specs: true, stats: true,
     show_kr: true, daevanion_nodes: true, skill_points: true, stigma_points: true, class_key: true,
-    bonus_ranks: true,
+    bonus_ranks: true, stigma_unlocked: true,
   }),
   stats: keysOf<T.Stats>({
     attack: true, attack_increase_pct: true, weapon_dmg_pct: true, dmg_boost_pct: true, pve_dmg_pct: true,
@@ -29,7 +29,7 @@ const K = {
   fullBuild: keysOf<T.FullBuild>({
     playstyle: true, build: true, stigma_picks: true, rank_log: true, daevanion_path: true,
     daevanion_gain_pct: true, priority: true, result: true, stat_gains: true, warnings: true, variants: true,
-    rotation_explained: true, spec_picks: true,
+    rotation_explained: true, spec_picks: true, current_dps: true,
   }),
   playstyle: keysOf<T.Playstyle>({ key: true, name: true, description: true, scenario: true }),
   scenario: keysOf<T.Scenario>({ key: true, name: true, duration_s: true, n_targets: true, boss: true }),
@@ -67,7 +67,7 @@ const K = {
     profile_image: true, race: true,
   }),
   gear: keysOf<T.GearItem>({ slot: true, name: true, enchant: true, exceed: true, grade: true }),
-  suggest: keysOf<T.DaevanionSuggestion>({ path: true, spent: true, gain_pct: true, nodes: true }),
+  suggest: keysOf<T.DaevanionSuggestion>({ path: true, spent: true, battle_spent: true, gain_pct: true, nodes: true }),
   gamedata: keysOf<T.GameData>({
     schema_version: true, data_version: true, built_at: true, level_caps: true, rank_caps: true, stigma_slots: true,
     skills: true, statuses: true, rules: true, triggers: true, links: true, community: true, roadmap: true,
@@ -91,7 +91,7 @@ const K = {
   }),
   link: keysOf<T.Link>({ parent_key: true, child_key: true, kind: true, confidence: true }),
   community: keysOf<T.CommunityRotation>({ key: true, source: true, scenario_key: true, priority: true, note: true }),
-  board: keysOf<T.DaevanionBoard>({ key: true, name: true, unlock_level: true, nodes: true, start_id: true }),
+  board: keysOf<T.DaevanionBoard>({ key: true, name: true, unlock_level: true, nodes: true, start_id: true, currency: true }),
   node: keysOf<T.DaevanionNode>({
     id: true, name: true, rarity: true, cost: true, node_type: true, effects: true, skill_key: true, adjacent: true, x: true, y: true,
   }),

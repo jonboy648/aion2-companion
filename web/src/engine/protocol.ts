@@ -15,6 +15,7 @@ export const PY_NAME = {
   iconUrls: "icon_urls",
   gearUpgrades: "gear_upgrades",
   maxPotential: "max_potential",
+  statSheet: "stat_sheet",
 } as const;
 
 export type Method = keyof typeof PY_NAME;
@@ -22,8 +23,9 @@ export type Method = keyof typeof PY_NAME;
 /** Methods that report progress (the trailing JS callback is wired to webapi's `progress=`). */
 export const PROGRESS_METHODS: ReadonlySet<Method> = new Set<Method>(["compare", "optimize"]);
 
-/** Methods that need engine/items.json (3.8 MB): fetched by the worker on the first such call only. */
-export const GEAR_METHODS: ReadonlySet<Method> = new Set<Method>(["gearUpgrades", "maxPotential"]);
+/** Methods that need engine/items.json (3.8 MB): fetched by the worker on the first such call only. Import is one: the
+ *  stat sheet (real attack, MP, crit...) is rebuilt from the item table. */
+export const GEAR_METHODS: ReadonlySet<Method> = new Set<Method>(["importCharacter", "gearUpgrades", "maxPotential", "statSheet"]);
 
 export interface InitConfig {
   /** Site base, e.g. "/" (import.meta.env.BASE_URL). Engine files live at `${base}engine/...`. */

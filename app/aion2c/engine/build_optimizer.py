@@ -6,11 +6,12 @@ tests can monkeypatch them on this module.
 import heapq
 from dataclasses import dataclass, replace
 
-from aion2c.daevanion import _relevant, is_pvp_only, selectable
+from aion2c.daevanion import take_path, _relevant, is_pvp_only, selectable
 from aion2c.data.loader import allowed_skills
 from aion2c.engine.advisor import marginal_stats
 from aion2c.engine.budget import allocate_points
 from aion2c.engine.search import _seeds, candidate_skills, optimize
+from aion2c.progression import legality_issues, level_budget, stigma_unlock
 from aion2c.engine.specialties import SpecPick, _matters, choose_specs, spec_picks
 from aion2c.engine.simulator import simulate
 from aion2c.models import (
@@ -53,17 +54,18 @@ PLAYSTYLES: tuple[Playstyle, ...] = (
     ),
 )
 
-STIGMA_UNLOCK_LEVELS = (22, 27, 32, 37)
 TOP_STAT_GAINS = 5
 
 
 def stigma_slots_at(gd: GameData, region: Region, level: int) -> int:
-    """Stigma slots open at `level`: roadmap stigma items for the region (else the 22/27/32/37
-    table), capped by gd.stigma_slots[region]."""
+    """Stigma slots open at `level`: roadmap stigma items for the region (else the client Exp table, 22/27/32/37 in
+    Global), capped by gd.stigma_slots[region]."""
     items = [r for r in gd.roadmap if r.kind == "stigma" and region in r.regions]
-    levels = sorted(r.level for r in items) if items else list(STIGMA_UNLOCK_LEVELS)
-    n = sum(1 for lv in levels if lv <= level)
-    return min(n, gd.stigma_slots.get(region, len(STIGMA_UNLOCK_LEVELS)))
+    if items:
+        n = sum(1 for lv in sorted(r.level for r in items) if lv <= level)
+    else:
+        n = level_budget(level).stigma_slots  # client Exp.StigmaSkillContextSlotMax
+    return min(n, gd.stigma_slots.get(region, 4))
 
 
 @dataclass(frozen=True)
@@ -145,14 +147,14 @@ def _planned_stigma_rank(gd, build, slots) -> int:
     pts = build.stigma_points or 0
     if pts <= 0 or slots <= 0:
         return 0
-    share, rank, spent = pts / slots, 1, 0
-    cap = min(gd.rank_caps[build.region]["stigma"], len(STIGMA_POINT_COST) + 1)
-    for cost in STIGMA_POINT_COST[:cap - 1]:
+    share, rank, spent = pts / slots, 0, 0  # rank r costs sum(STIGMA_POINT_COST[:r]): rank 1 is paid too
+    cap = min(gd.rank_caps[build.region]["stigma"], len(STIGMA_POINT_COST))
+    for cost in STIGMA_POINT_COST[:cap]:
         if spent + cost > share:
             break
         spent += cost
         rank += 1
-    return rank
+    return max(rank, 1)
 
 
 def _community_sets(gd, scenario, pool, slots) -> list[tuple[str, ...]]:
@@ -169,7 +171,7 @@ def _community_sets(gd, scenario, pool, slots) -> list[tuple[str, ...]]:
 JUDGE_CANDIDATES = 30  # rotation-search candidates in a set comparison (the final search uses 200)
 
 
-def _judge_sets(gd, build, scenario, cfg, budget, guide, sets, daevanion_points) -> tuple[str, ...]:
+def _judge_sets(gd, build, scenario, cfg, budget, guide, sets, daevanion_points, battle_points=None) -> tuple[str, ...]:
     """The best of `sets` by a short version of the whole plan (ranks bought, Daevanion planned, specialties chosen,
     a short rotation search): the quick score behind the stigma search cannot see what ranks, the Daevanion path and
     specialties add to a set, and a set can win the quick score and lose the plan. The first set wins ties."""
@@ -180,13 +182,8 @@ def _judge_sets(gd, build, scenario, cfg, budget, guide, sets, daevanion_points)
         heur = _heuristic_priority(gd, b, scenario, budget, guide)
         if b.skill_points or b.stigma_points:
             b = replace(b, skill_ranks=allocate_points(gd, b, heur, scenario, cfg, skip_core=True)[0])  # core ranks do not differ by set
-        cost = {n.id: n.cost for br in gd.daevanion.values() for n in br.nodes.values()}
-        take, spent = [], 0
-        for nid in plan_daevanion(gd, b, heur, scenario, cfg):
-            if daevanion_points is not None and spent + cost[nid] > daevanion_points:
-                break
-            take.append(nid)
-            spent += cost[nid]
+        take, _s, _bs = take_path(gd, plan_daevanion(gd, b, heur, scenario, cfg, bool(battle_points)),
+                                  daevanion_points, battle_points)
         b = replace(b, daevanion_nodes=frozenset(b.daevanion_nodes) | frozenset(take))
         b = replace(b, specs=choose_specs(gd, b, heur, scenario, cfg))
         return b, _fast_eval(gd, b, scenario, cfg, jb, (heur,))
@@ -381,7 +378,7 @@ def _variants(gd, base_in, fb_build, picks, sc, cfg, max_dps, final_budget=VARIA
             if drop in base_in.skill_ranks:
                 kept[drop] = base_in.skill_ranks[drop]
             left = vb.stigma_points - sum(
-                sum(STIGMA_POINT_COST[base_in.skill_ranks.get(k, 1):fb_build.skill_ranks.get(k, 1)])
+                sum(STIGMA_POINT_COST[base_in.skill_ranks.get(k, 0):fb_build.skill_ranks.get(k, 1)])
                 for k in chosen if k != drop)
             ranks, _log = allocate_points(gd, replace(vb, skill_ranks=kept, skill_points=0, stigma_points=max(left, 0)),
                                           _heuristic_priority(gd, vb, sc, VARIANT_BUDGET), sc, cfg)
@@ -390,6 +387,7 @@ def _variants(gd, base_in, fb_build, picks, sc, cfg, max_dps, final_budget=VARIA
             ranks, _log = allocate_points(gd, replace(vb, skill_ranks=dict(base_in.skill_ranks)),
                                           _heuristic_priority(gd, vb, sc, VARIANT_BUDGET), sc, cfg)
             vb = replace(vb, skill_ranks=ranks)
+        vb = with_auto_tiers(gd, vb)
         # Same search as the max build, so the delta compares like with like (no clamping).
         _d, pri, _r = _fast_eval(gd, vb, sc, cfg, final_budget)
         pending.append((tag, new, drop, vb, pri))
@@ -436,14 +434,31 @@ def _skill_node_gain(gd, build, priority, sc, cfg, key: str, base: float) -> flo
     return max(0.0, best)
 
 
-def plan_daevanion(gd, build, priority, sc, cfg) -> list[int]:
+def with_auto_tiers(gd: GameData, b: CharacterBuild) -> CharacterBuild:
+    """`b` with every equipped stigma's earned Parts tiers listed in `specs` (all options available at its total rank,
+    in tier order, also the ones worth nothing): the tiers are automatic, so the plan must name all of them."""
+    specs = {k: v for k, v in b.specs.items()
+             if k in b.stigmas or (k in gd.skills and gd.skills[k].kind != SkillKind.STIGMA)}  # no tiers of an unequipped stigma
+    for k in b.stigmas:
+        sk = gd.skills.get(k)
+        if sk is None or sk.kind != SkillKind.STIGMA:
+            continue
+        tiers = tuple(available_options(gd, sk, total_rank(gd, b, sk)))
+        if tiers:
+            specs[k] = tiers
+        else:
+            specs.pop(k, None)
+    return replace(b, specs=specs)
+
+
+def plan_daevanion(gd, build, priority, sc, cfg, battle: bool = False) -> list[int]:
     """Full ordered node path over boards unlocked at build.level (PvP-only nodes skipped).
 
     Gains are measured once per distinct effect signature (nodes with identical effects share one
     simulation), then nodes are ordered best gain-per-point first, reaching valuable nodes through
     their connecting path; zero-gain nodes follow, cheapest first, so the whole board is ordered.
     """
-    boards = [b for b in gd.daevanion.values() if b.unlock_level <= build.level]
+    boards = [b for b in gd.daevanion.values() if b.unlock_level <= build.level and (b.currency != "battle" or battle)]
     sel = set(build.daevanion_nodes)
     base = simulate(gd, build, priority, sc, cfg).dps
     sig_gain: dict[tuple, float] = {}
@@ -523,7 +538,8 @@ def plan_daevanion(gd, build, priority, sc, cfg) -> list[int]:
 PLAN_ROUNDS = 2  # planning passes: the seed rotation, then once more against the searched rotation
 
 
-def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progress, guide, say, prev=None) -> dict:
+def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progress, guide, say, prev=None,
+                     battle_points=None) -> dict:
     """One planning pass: stigmas, skill/stigma points, Daevanion, specialties, then the rotation search and a final
     specialty re-choice. `guide` is the searched rotation of the previous pass and `prev` that pass's plan (None for
     the first pass); a repeat pass keeps the core skill ranks and, while the stigma set is unchanged, the Daevanion
@@ -541,7 +557,7 @@ def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progre
         else:
             if progress:
                 progress("Comparing stigma sets")
-            if _judge_sets(gd, build, sc, cfg, budget, guide, [mine, theirs], daevanion_points) == theirs:
+            if _judge_sets(gd, build, sc, cfg, budget, guide, [mine, theirs], daevanion_points, battle_points) == theirs:
                 picks = plain
     b = replace(build, stigmas=tuple(k for k, _ in picks))
     heur = _heuristic_priority(gd, b, sc, budget, guide)
@@ -565,14 +581,10 @@ def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progre
     if prev and b.stigmas == prev["b"].stigmas:
         path = prev["path"]
     else:
-        path = plan_daevanion(gd, b, heur, sc, cfg)
-    cost = {n.id: n.cost for br in gd.daevanion.values() for n in br.nodes.values()}
-    take, spent = [], 0
-    for nid in path:
-        if daevanion_points is not None and spent + cost[nid] > daevanion_points:
-            break
-        take.append(nid)
-        spent += cost[nid]
+        path = plan_daevanion(gd, b, heur, sc, cfg, bool(battle_points))
+    # DaevanionCrystal boards are paid from daevanion_points (None = all), the Azphel BattleCrystal board only from
+    # battle_points (None = not planned; nodes the character already has stay)
+    take, _spent, _bspent = take_path(gd, path, daevanion_points, battle_points)
     dgain = 0.0
     if take:
         d0 = simulate(gd, b, heur, sc, cfg).dps
@@ -600,8 +612,21 @@ def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progre
     if chosen != b.specs:
         b = replace(b, specs=chosen)
         result = simulate(gd, b, priority, sc, cfg)
+    b = with_auto_tiers(gd, b)
     return dict(b=b, picks=picks, rank_log=rank_log, path=path, take=take, dgain=dgain, priority=priority,
                 result=result, budget=budget)
+
+
+def current_build_dps(gd: GameData, build: CharacterBuild, sc: Scenario, cfg: SimConfig = SimConfig(),
+                      budget: SearchBudget = SearchBudget(max_candidates=200)) -> float:
+    """DPS of `build` exactly as given (webapi puts it next to the plan as `current_dps`) (nothing is re-planned: stigmas, ranks, Daevanion nodes and stats stay), with the
+    rotation searched the same way the plan's final step does, so it is comparable with `FullBuild.result.dps`.
+    Specialty options are whatever the build already has (the armory does not list them, so an import has none)."""
+    budget = replace(budget, max_len=max(budget.max_len, len(candidate_skills(gd, build))))
+    opt = optimize(gd, build, sc, cfg, budget)
+    if opt.options:
+        return opt.options[0].result.dps
+    return simulate(gd, build, _heuristic_priority(gd, build, sc, budget), sc, cfg).dps
 
 
 def optimize_full_build(
@@ -612,6 +637,7 @@ def optimize_full_build(
     cfg: SimConfig = SimConfig(),
     budget: SearchBudget = SearchBudget(max_candidates=200),
     progress=None,
+    battle_points: int | None = None,
 ) -> FullBuild:
     style = next((p for p in PLAYSTYLES if p.key == playstyle_key), None)
     if style is None:
@@ -624,12 +650,20 @@ def optimize_full_build(
     # seed and +9% against the searched rotation). When the searched rotation has such a cast, the plan is redone once
     # against it (PLAN_ROUNDS passes at most: every pass repeats the rotation search); the better pass is kept.
     slots = stigma_slots_at(gd, build.region, build.level)
+    unlock = stigma_unlock(gd, build)
+    if not unlock.unlocked:
+        slots = 0  # no stigma can be bought or equipped before the unlock
+    elif build.stigma_points is not None:
+        # every stigma costs its rank-1 point: with a budget, only as many as the points (plus ranks already held) buy
+        held = sum(1 for k, r in build.skill_ranks.items()
+                   if r >= 1 and (sk := gd.skills.get(k)) is not None and sk.kind == SkillKind.STIGMA)
+        slots = min(slots, held + max(build.stigma_points, 0))
     guide: Priority | None = None
     best_pass = None
     prev_sig = None
     for rnd in range(PLAN_ROUNDS):
         plan = _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progress if rnd == 0 else None,
-                                guide, say if rnd == 0 else (lambda _m: None), best_pass if rnd else None)
+                                guide, say if rnd == 0 else (lambda _m: None), best_pass if rnd else None, battle_points)
         if best_pass is None or plan["result"].dps > best_pass["result"].dps * (1 + 1e-9):
             best_pass = plan
         sig = (plan["b"].stigmas, tuple(sorted(plan["b"].skill_ranks.items())),
@@ -647,10 +681,17 @@ def optimize_full_build(
 
     # 6. warnings
     warnings = list(dict.fromkeys(result.warnings))
+    warnings += legality_issues(gd, b)
+    if unlock.basis == "level":
+        warnings.append(f"Stigma unlock inferred from level {build.level} only (needs Ascension grade 3 and the faction "
+                        "quest): set stigma_unlocked to confirm.")
     if build.skill_points is None:
         warnings.append("Skill points not set: ranks as entered.")
     if daevanion_points is None and take:
         warnings.append("assumes all Daevanion points")
+    if battle_points is None and any(br.currency == "battle" and br.unlock_level <= b.level for br in gd.daevanion.values()):
+        warnings.append("Azphel board (BattleCrystal) not planned: no battle crystal budget set; nodes you already "
+                        "have on it are kept.")
     warnings.append("PvP is not modeled.")
     warnings.append("Utility value (defense, crowd control) is not simulated; variants only show the DPS cost.")
     say("Comparing trade-offs")
@@ -667,7 +708,7 @@ def optimize_full_build(
         # specialties were chosen against the seed priority; drop options the final rotation gets nothing from
         useful = {(p.skill_key, p.option) for p in sp if p.dps_gain_pct > 1e-9}
         kept = {k: tuple(i for i in opts if (k, i) in useful) for k, opts in b.specs.items()}
-        b = replace(b, specs={k: v for k, v in kept.items() if v})
+        b = with_auto_tiers(gd, replace(b, specs={k: v for k, v in kept.items() if v}))  # stigma tiers are never dropped
         sp = spec_picks(gd, b, priority, sc, cfg)
     if any(p.confidence == "unknown" for p in sp):
         warnings.append("A chosen specialty has an unknown value.")
@@ -677,10 +718,12 @@ def optimize_full_build(
     )
 
 
-def compare_playstyles(gd, build, daevanion_points=None, cfg=SimConfig(), progress=None) -> dict[str, FullBuild]:
+def compare_playstyles(gd, build, daevanion_points=None, cfg=SimConfig(), progress=None,
+                       battle_points=None) -> dict[str, FullBuild]:
     out = {}
     for p in PLAYSTYLES:
         if progress:
             progress(f"{p.name}...")
-        out[p.key] = optimize_full_build(gd, build, p.key, daevanion_points, cfg, progress=progress)
+        out[p.key] = optimize_full_build(gd, build, p.key, daevanion_points, cfg, progress=progress,
+                                         battle_points=battle_points)
     return out
