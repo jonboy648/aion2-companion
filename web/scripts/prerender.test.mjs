@@ -84,6 +84,14 @@ describe("prerender item database", () => {
     expect(sm.match(/<loc>/g).length).toBe(seo.routes.length + index.groups.length + cats.length + total);
     expect(sm).toContain("<loc>https://becomecube.com/items/110120003/</loc>");
     expect(sm).toContain("<loc>https://becomecube.com/gear-viewer/</loc>");
+    // item sets, and a consumable (a row of its category file, not a detail file) get real text too
+    const sets = readFileSync(join(dist, "items/sets/index.html"), "utf8");
+    expect(sets).toContain("Primal Vigor");
+    expect(sets).toContain("2 pieces: Increases PvE Attack by 60 when HP is 70% or more");
+    const potion = readFileSync(join(dist, "items/510116005/index.html"), "utf8");
+    expect(potion).toContain("<title>Wind Serum (Common Potions) | Become Cube</title>");
+    expect(potion).toContain("<h2>Description</h2><p>Instantly restores");
+    expect(sm).toContain("<loc>https://becomecube.com/items/sets/</loc>");
     expect(ms).toBeLessThan(30000);
   }, 60000);
 });

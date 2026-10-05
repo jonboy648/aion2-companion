@@ -69,38 +69,61 @@ export function itemRoutes(distDir, site = SEO.site) {
   const li = (href, text) => `<li><a href="${href}/">${esc(text)}</a></li>`;
   const routes = [];
   for (const g of index.groups) {
+    if (g.kind === "sets") {
+      const { sets } = readJson(join(distDir, "items/sets.json"));
+      routes.push({
+        path: `/items/${g.key}`,
+        title: `Aion 2 item sets and set bonuses | ${site.name}`,
+        h1: g.label,
+        description: `Aion 2 item sets with their 2 and 4 piece bonuses and the items in each set: ${sets.map((s) => s.name).join(", ")}.`.slice(0, 160),
+        intro: `${sets.length} Aion 2 item sets and what wearing 2 or 4 pieces gives you.`,
+        extra: sets
+          .map((s) => `<h2>${esc(s.name)}</h2><ul>${s.bonuses.map((b) => `<li>${b.pieces} pieces: ${esc(b.text)}</li>`).join("")}</ul><ul>${s.items.map((i) => li(`/items/${i.id}`, i.n)).join("")}</ul>`)
+          .join("") + `<p><a href="/items/">All item categories</a></p>`,
+      });
+      continue;
+    }
+    const gear = g.kind === "gear";
     const total = g.cats.reduce((n, c) => n + c.count, 0);
     routes.push({
       path: `/items/${g.key}`,
       title: `Aion 2 ${g.label.toLowerCase()}: ${total} items | ${site.name}`,
       h1: g.label,
-      description: `All ${total} Aion 2 ${g.label.toLowerCase()} by category (${g.cats.map((c) => c.label).join(", ")}) with grade, level and stats.`.slice(0, 160),
+      description: `All ${total} Aion 2 ${g.label.toLowerCase()} by category (${g.cats.map((c) => c.label).join(", ")}) with grade${gear ? ", level and stats" : " and description"}.`.slice(0, 160),
       intro: `${total} Aion 2 items in ${g.label.toLowerCase()}.`,
       extra: `<ul>${g.cats.map((c) => li(`/items/${c.key}`, `${c.label} (${c.count})`)).join("")}</ul><p><a href="/items/">All item categories</a></p>`,
     });
     for (const c of g.cats) {
-      const { items } = readJson(join(distDir, `items/detail/${c.key}.json`));
-      const list = Object.values(items);
+      // gear has a detail file; other items are rows of their category file, reshaped here to the same fields
+      const list = gear
+        ? Object.values(readJson(join(distDir, `items/detail/${c.key}.json`)).items)
+        : readJson(join(distDir, `items/cat/${c.key}.json`)).items.map((r) => ({ id: r.id, name: r.n, grade: r.g, equip_level: r.el, desc: r.d ?? "", main: [], subs: [], sources: [], class_lock: [] }));
       routes.push({
         path: `/items/${c.key}`,
-        title: `Aion 2 ${c.label} items: stats and grades | ${site.name}`,
+        title: `Aion 2 ${c.label} ${gear ? "items: stats and grades" : "list"} | ${site.name}`,
         h1: c.label,
-        description: `All ${c.count} Aion 2 ${c.label.toLowerCase()} items with grade, item level, required level and base stats. Open one for random stat ranges.`.slice(0, 160),
-        intro: `${c.count} ${c.label.toLowerCase()} items in ${g.label.toLowerCase()}.`,
-        extra: `<ul>${list.map((i) => li(`/items/${i.id}`, `${i.name} (${i.grade}, item level ${i.il})`)).join("")}</ul><p><a href="/items/${g.key}/">${esc(g.label)}</a></p>`,
+        description: (gear
+          ? `All ${c.count} Aion 2 ${c.label.toLowerCase()} items with grade, item level, required level and base stats. Open one for random stat ranges.`
+          : `All ${c.count} Aion 2 ${c.label.toLowerCase()} with grade, required level and what each one does.`
+        ).slice(0, 160),
+        intro: `${c.count} ${c.label.toLowerCase()} in ${g.label.toLowerCase()}.`,
+        extra: `<ul>${list.map((i) => li(`/items/${i.id}`, `${i.name} (${i.grade}${gear ? `, item level ${i.il}` : ""})`)).join("")}</ul><p><a href="/items/${g.key}/">${esc(g.label)}</a></p>`,
       });
       for (const i of list) {
         const main = i.main.map((s) => `${label(s.id)} ${rng(s.min, s.v)}`);
         const subs = i.subs.map((s) => `<li>${esc(label(s.id))}: ${rng(s.min, s.v)}</li>`).join("");
-        const facts = `${i.grade} ${c.label.toLowerCase()}, item level ${i.il}, needs level ${i.equip_level}${i.class_lock.length ? `, ${i.class_lock.join(", ")} only` : ""}.`;
+        const facts = gear
+          ? `${i.grade} ${c.label.toLowerCase()}, item level ${i.il}, needs level ${i.equip_level}${i.class_lock.length ? `, ${i.class_lock.join(", ")} only` : ""}.`
+          : `${i.grade} ${c.label.toLowerCase()}${i.equip_level > 1 ? `, needs level ${i.equip_level}` : ""}.`;
         routes.push({
           path: `/items/${i.id}`,
           title: `${i.name} (${i.grade} ${c.label}) | ${site.name}`,
           h1: i.name,
-          description: `${i.name}: ${facts} ${main.join(", ")}.`.slice(0, 160),
+          description: `${i.name}: ${facts} ${gear ? main.join(", ") : i.desc}`.trim().slice(0, 160),
           intro: facts,
           extra:
-            `<h2>Stats</h2><ul>${i.main.map((s) => `<li>${esc(label(s.id))}: ${rng(s.min, s.v)}</li>`).join("")}</ul>` +
+            (gear ? `<h2>Stats</h2><ul>${i.main.map((s) => `<li>${esc(label(s.id))}: ${rng(s.min, s.v)}</li>`).join("")}</ul>` : "") +
+            (!gear && i.desc ? `<h2>Description</h2><p>${esc(i.desc)}</p>` : "") +
             (i.max_enchant ? `<p>Max enchant +${i.max_enchant}.</p>` : "") +
             (subs ? `<h2>${i.sub_random ? "Random stats" : "Extra stats"}</h2><ul>${subs}</ul>` : "") +
             (i.sources.length ? `<h2>Where to get it</h2><p>${esc(i.sources.join(", "))}</p>` : "") +

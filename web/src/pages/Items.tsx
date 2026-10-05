@@ -4,7 +4,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { OrnateCard } from "@/components/game/OrnateCard";
 import { ItemDetailView } from "@/features/items/ItemDetailView";
 import { ItemList } from "@/features/items/ItemList";
-import { INDEX, TOTAL, resolveKey } from "@/features/items/logic";
+import { INDEX, OTHER_TOTAL, TOTAL, resolveKey } from "@/features/items/logic";
+import { SetsView } from "@/features/items/SetsView";
 import { cn } from "@/lib/utils";
 import { NotFoundPage } from "./NotFoundPage";
 
@@ -25,18 +26,21 @@ function Tree() {
               {g.label}
             </NavLink>
           </h2>
-          <ul className="mt-1.5 flex flex-wrap gap-1.5">
-            {g.cats.map((c) => (
-              <li key={c.key}>
-                <NavLink to={`/items/${c.key}`} className={chip}>
-                  {c.label} <span className="text-faint">{c.count}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          {g.kind === "sets" ? (
+            <p className="mt-1 text-xs text-faint">{g.count} sets with piece bonuses</p>
+          ) : (
+            <ul className="mt-1.5 flex flex-wrap gap-1.5">
+              {g.cats.map((c) => (
+                <li key={c.key}>
+                  <NavLink to={`/items/${c.key}`} className={chip}>
+                    {c.label} <span className="text-faint">{c.count}</span>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       ))}
-      <p className="text-xs text-dim">Consumables, misc items and item sets are not in our data yet.</p>
     </nav>
   );
 }
@@ -61,15 +65,18 @@ export function ItemsPage() {
   useEffect(() => {
     if (r.kind === "cat") document.title = `Aion 2 ${r.cat.label} items | Become Cube`;
     if (r.kind === "group") document.title = `Aion 2 ${r.group.label.toLowerCase()} | Become Cube`;
+    if (r.kind === "sets") document.title = "Aion 2 item sets and set bonuses | Become Cube";
   }, [r]);
 
   if (r.kind === "unknown") return <NotFoundPage />;
   if (r.kind === "item") return <ItemDetailView id={r.id} />;
-  const title = r.kind === "root" ? "Items" : r.kind === "group" ? r.group.label : r.cat.label;
+  const title = r.kind === "root" ? "Items" : r.kind === "sets" ? "Item sets" : r.kind === "group" ? r.group.label : r.cat.label;
   const caption =
     r.kind === "root"
-      ? `${TOTAL.toLocaleString("en-US")} pieces of equipment from the game client. Pick a category, or search them all.`
-      : r.kind === "group"
+      ? `${(TOTAL + OTHER_TOTAL).toLocaleString("en-US")} items from the game client: equipment, consumables, materials and sets. Pick a category, or search them all.`
+      : r.kind === "sets"
+        ? "Armor-style sets and their bonuses for wearing 2 or 4 pieces."
+        : r.kind === "group"
         ? `${r.group.cats.reduce((n, c) => n + c.count, 0).toLocaleString("en-US")} items in ${r.group.label.toLowerCase()}.`
         : `${r.cat.count.toLocaleString("en-US")} items. Click a column to sort, click an item for its stats and random stat ranges.`;
   return (
@@ -82,6 +89,8 @@ export function ItemsPage() {
       <Shell>
         {r.kind === "root" ? (
           <ItemList lazy caption="Search results across all items" />
+        ) : r.kind === "sets" ? (
+          <SetsView />
         ) : r.kind === "group" ? (
           <ItemList key={r.group.key} keys={r.group.cats.map((c) => c.key)} caption={`${r.group.label} items`} classFilter={r.group.key === "weapons"} />
         ) : (

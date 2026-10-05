@@ -70,6 +70,8 @@ def slim(item: dict) -> dict:
     row = {"id": item["id"], "n": item["name"], "g": item["grade"], "il": item["il"], "el": item["equip_level"]}
     if item.get("icon"):
         row["i"] = item["icon"]
+        if item.get("icon_alt"):
+            row["i2"] = item["icon_alt"]
     if item.get("class_lock"):
         row["c"] = item["class_lock"][0]
     row["m"] = m
@@ -85,22 +87,97 @@ def slim(item: dict) -> dict:
     return row
 
 
-def build(doc: dict) -> dict[str, object]:
-    """{relative path: JSON-able object} for the whole item database."""
+
+
+# Non-equipment items (items_other.json): group, key, label, client type, client categories (None = every other category of that type)
+OTHER_CATEGORIES = [
+    ("consumables", "potion", "Potions", "Usable", ("Potion",)),
+    ("consumables", "food", "Food and drink", "Usable", ("Food", "Drink")),
+    ("consumables", "scroll", "Scrolls", "Usable", ("Scroll", "TeleportScroll", "QuestScroll", "Polymorph", "PetPolymorph", "SetupKisk")),
+    ("consumables", "enhancement", "Stones and upgrades", "Usable",
+     ("MagicStone", "GetGodstone", "SealStone", "SoulAdd", "Surpass", "Succession", "Extension", "Rebirth")),
+    ("consumables", "box", "Boxes and packs", "Usable", ("RewardBox", "KinaBox", "GetArcana")),
+    ("consumables", "ticket", "Tickets and passes", "Usable",
+     ("AddContentsTicketCount", "AddContentsTicketTime", "BattlePass", "Subscribe", "MonolithAllClear", "SealAllClear",
+      "OccupationTerritoryAllClear", "GetPoint", "GetGameCash", "AscensionGrade", "CharacterSlotUnlock")),
+    ("consumables", "cosmetic", "Cosmetics and mounts", "Usable",
+     ("SkinShop", "GetWing", "Deco", "Customize", "VehicleSoul", "VehicleSoulCrystal", "GetSocialAction", "SkinExtraction")),
+    ("consumables", "title", "Titles", "Usable", ("GetTitle",)),
+    ("consumables", "usable-other", "Other consumables", "Usable", None),
+    ("misc", "material", "Crafting materials", "Misc", ("CraftResource", "GatherResource", "Material", "ArcanaMaterial", "CreateArcanaMaterial")),
+    ("misc", "conversion", "Conversion materials", "Misc", ("ConversionResource", "ConversionResource_Special", "Elevate", "SkinCombine")),
+    ("misc", "misc-other", "Other misc items", "Misc", None),
+    ("misc", "currency", "Currency", "Currency", None),
+]
+OTHER_KEYS = [k for _, k, *_ in OTHER_CATEGORIES]
+GROUPS = {**GROUPS, "consumables": "Consumables", "misc": "Misc", "sets": "Item sets"}
+OTHER_GROUPS = ("consumables", "misc")
+
+
+def other_category_of(item: dict) -> str:
+    fallback = None
+    for _, key, _, typ, cats in OTHER_CATEGORIES:
+        if typ != item["type"]:
+            continue
+        if cats is None:
+            fallback = key
+        elif item["cat"] in cats:
+            return key
+    if fallback is None:
+        raise ValueError(f"item {item['id']} ({item['type']}/{item['cat']}) has no category")
+    return fallback
+
+
+def slim_other(item: dict) -> dict:
+    row = {"id": item["id"], "n": item["n"], "g": item["g"], "el": item["lv"]}
+    if item.get("i"):
+        row["i"] = item["i"]
+    if item.get("d"):
+        row["d"] = item["d"]
+    return row
+
+
+def build_sets(doc: dict, categories: dict[int, str]) -> dict:
+    """sets.json: every set with its bonuses and member items (id, name, grade, icon, category)."""
+    items = {i["id"]: i for i in doc["items"]}
+    out = []
+    for key, s in doc.get("sets", {}).items():
+        members = []
+        for iid in s["items"]:
+            it = items[iid]
+            m = {"id": iid, "n": it["name"], "g": it["grade"], "cat": categories[iid]}
+            if it.get("icon"):
+                m["i"] = it["icon"]
+            members.append(m)
+        out.append({"key": key, "name": s["name"], "icon": s["icon"], "type": s["type"], "bonuses": s["bonuses"], "items": members})
+    return {"sets": out}
+
+
+def build(doc: dict, other: dict | None = None) -> dict[str, object]:
+    """{relative path: JSON-able object} for the whole item database. `other` is items_other.json (optional)."""
     by_cat: dict[str, list[dict]] = {k: [] for _, k, *_ in CATEGORIES}
+    cat_of_id: dict[int, str] = {}
     for it in sorted(doc["items"], key=lambda x: x["id"]):
         cat = category_of(it)
         if cat is None:
             raise ValueError(f"item {it['id']} ({it['slot']}, {it.get('class_lock')}) has no category")
         by_cat[cat].append(it)
+        cat_of_id[it["id"]] = cat
+    by_other: dict[str, list[dict]] = {k: [] for k in OTHER_KEYS}
+    for it in sorted((other or {}).get("items", []), key=lambda x: x["id"]):
+        if it["id"] in cat_of_id:
+            raise ValueError(f"item id {it['id']} is both gear and non-gear")
+        key = other_category_of(it)
+        by_other[key].append(it)
+        cat_of_id[it["id"]] = key
     files: dict[str, object] = {}
-    runs: list[list] = []  # [first id, last id, category] over the id-sorted list
-    for it in sorted(doc["items"], key=lambda x: x["id"]):
-        cat = category_of(it)
+    runs: list[list] = []  # [first id, last id, category] over every id, sorted
+    for iid in sorted(cat_of_id):
+        cat = cat_of_id[iid]
         if runs and runs[-1][2] == cat:
-            runs[-1][1] = it["id"]
+            runs[-1][1] = iid
         else:
-            runs.append([it["id"], it["id"], cat])
+            runs.append([iid, iid, cat])
     for _, key, *_ in CATEGORIES:
         items = by_cat[key]
         files[f"cat/{key}.json"] = {"cat": key, "items": [slim(i) for i in items]}
@@ -117,19 +194,25 @@ def build(doc: dict) -> dict[str, object]:
             "items": {str(i["id"]): {k: v for k, v in i.items() if k != "slope_known"} for i in items},
             "enchant": {"series": series, "odds": odds, "exceed": exceed},
         }
-    files["index.json"] = {
-        "schema": 1,
-        "source": doc.get("source", ""),
-        "groups": [{"key": g, "label": GROUPS[g], "cats": [
-            {"key": k, "label": label, "count": len(by_cat[k])} for gg, k, label, *_ in CATEGORIES if gg == g]} for g in GROUPS],
-        "runs": runs,
-    }
+    for key in OTHER_KEYS:  # no detail file: the rows already carry everything a non-gear item has
+        files[f"cat/{key}.json"] = {"cat": key, "kind": "misc", "items": [slim_other(i) for i in by_other[key]]}
+    groups = [{"key": g, "label": GROUPS[g], "kind": "gear", "cats": [
+        {"key": k, "label": label, "count": len(by_cat[k])} for gg, k, label, *_ in CATEGORIES if gg == g]} for g in GROUPS if g in
+        {c[0] for c in CATEGORIES}]
+    if other:
+        groups += [{"key": g, "label": GROUPS[g], "kind": "misc", "cats": [
+            {"key": k, "label": label, "count": len(by_other[k])} for gg, k, label, *_ in OTHER_CATEGORIES if gg == g]} for g in OTHER_GROUPS]
+    sets = build_sets(doc, cat_of_id)
+    if sets["sets"]:
+        files["sets.json"] = sets
+        groups.append({"key": "sets", "label": GROUPS["sets"], "kind": "sets", "cats": [], "count": len(sets["sets"])})
+    files["index.json"] = {"schema": 1, "source": doc.get("source", ""), "groups": groups, "runs": runs}
     return files
 
 
-def write(doc: dict, out: Path = OUT) -> dict[str, int]:
+def write(doc: dict, out: Path = OUT, other: dict | None = None) -> dict[str, int]:
     """Write every file under `out` (stale files removed); returns {path: bytes}."""
-    files = build(doc)
+    files = build(doc, other)
     sizes = {}
     for rel, obj in files.items():
         p = out / rel
@@ -144,10 +227,13 @@ def write(doc: dict, out: Path = OUT) -> dict[str, int]:
 
 def main() -> None:
     doc = json.loads((DATA / "items.json").read_text(encoding="utf-8"))
-    sizes = write(doc)
-    cat = sum(v for k, v in sizes.items() if k.startswith("cat/"))
-    det = sum(v for k, v in sizes.items() if k.startswith("detail/"))
-    print(f"itemdb: {len(doc['items'])} items, index {sizes['index.json']} B, cat/ {cat} B, detail/ {det} B -> {OUT}")
+    other_path = DATA / "items_other.json"
+    other = json.loads(other_path.read_text(encoding="utf-8")) if other_path.is_file() else None
+    sizes = write(doc, other=other)
+    total = lambda prefix: sum(v for k, v in sizes.items() if k.startswith(prefix))  # noqa: E731
+    n_other = len(other["items"]) if other else 0
+    print(f"itemdb: {len(doc['items'])} gear + {n_other} other items, index {sizes['index.json']} B, sets {sizes.get('sets.json', 0)} B, "
+          f"cat/ {total('cat/')} B, detail/ {total('detail/')} B -> {OUT}")
 
 
 if __name__ == "__main__":

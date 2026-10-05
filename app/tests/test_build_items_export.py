@@ -132,6 +132,19 @@ def test_icon_and_sources_are_carried_over_by_id(export):
     assert "icon" not in items[2] and items[2]["sources"] == []  # not in the client tables, nothing to carry
 
 
+def test_missing_icons_come_from_the_client_with_the_raw_name_as_fallback(export):
+    rows = json.loads((export / "Item.json").read_text(encoding="utf-8"))
+    rows["Properties"]["Data"][1]["IconRes"] = "Icon_GM_0026_T03_Helmet"  # armor: the CDN usually says Icon_Equip_AR_L_*
+    rows["Properties"]["Data"][2]["IconRes"] = "Icon_Arcana_Card_X"  # unchanged by the rule: no alternate
+    rows["Properties"]["Data"][2]["SetNames"] = ["SetA"]
+    (export / "Item.json").write_text(json.dumps(rows), encoding="utf-8")
+    items = {i["id"]: i for i in b.build_from_export(export, {1: {"id": 1, "icon": "Icon_Old"}})["items"]}
+    assert items[2]["icon"] == "Icon_Equip_AR_L_0026_T03_Helmet" and items[2]["icon_alt"] == "Icon_GM_0026_T03_Helmet"
+    assert items[3]["icon"] == "Icon_Arcana_Card_X" and "icon_alt" not in items[3]
+    assert items[3]["set"] == "SetA" and "set" not in items[2]
+    assert items[1]["icon"] == "Icon_Old" and "icon_alt" not in items[1]  # the endpoint's name is never second-guessed
+
+
 def test_export_loads_into_the_gear_engine(export):
     from aion2c import gear
     items = gear.attach_tables(b.build_from_export(export))

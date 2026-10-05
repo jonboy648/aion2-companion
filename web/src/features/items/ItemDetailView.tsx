@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { IconFrame, rarityOf } from "@/components/game/IconFrame";
 import { OrnateCard } from "@/components/game/OrnateCard";
-import { loadItem, type ItemPage } from "./data";
+import { loadItem, loadSets, type ItemPage } from "./data";
 import { GradeText } from "./ItemTable";
-import { atEnchant, catLabel, fmtNum, groupOfCat, iconUrl, statLabel, type EnchantTables, type ItemDetail, type Stat } from "./logic";
+import { atEnchant, catLabel, fmtNum, groupOfCat, iconUrl, statLabel, type EnchantTables, type ItemDetail, type ItemRow, type ItemSet, type Stat } from "./logic";
 
 const pct = (n: number) => `${fmtNum(n)}%`;
 
@@ -135,7 +135,7 @@ function RandomStats({ item }: { item: ItemDetail }) {
   );
 }
 
-export function ItemBody({ page }: { page: ItemPage }) {
+export function ItemBody({ page }: { page: Extract<ItemPage, { kind: "gear" }> }) {
   const { item, cat, enchant } = page;
   const group = groupOfCat(cat);
   const rows = mainRows(item, enchant);
@@ -157,7 +157,7 @@ export function ItemBody({ page }: { page: ItemPage }) {
         <div className="space-y-5">
           <OrnateCard className="p-4">
             <div className="flex items-center gap-3">
-              <IconFrame url={iconUrl(item.icon)} name={item.name} size={64} rarity={rarityOf(item.grade)} eager alt="" />
+              <IconFrame url={iconUrl(item.icon)} fallbackUrl={iconUrl(item.icon_alt)} name={item.name} size={64} rarity={rarityOf(item.grade)} eager alt="" />
               <div className="min-w-0">
                 <div className="text-sm">
                   <GradeText grade={item.grade} className="font-semibold" /> {catLabel(cat).toLowerCase()}
@@ -227,12 +227,84 @@ export function ItemBody({ page }: { page: ItemPage }) {
           </OrnateCard>
         </div>
         <div className="min-w-0 space-y-5">
+          {item.set && <SetCard setKey={item.set} />}
           <RandomStats item={item} />
           <EnchantTable item={item} enchant={enchant} />
           <ExceedTable item={item} enchant={enchant} />
         </div>
       </div>
     </>
+  );
+}
+
+function Crumbs({ cat }: { cat: string }) {
+  const group = groupOfCat(cat);
+  return (
+    <p className="mb-4 text-sm text-dim">
+      <Link to="/items">Items</Link>
+      {group && (
+        <>
+          {" / "}
+          <Link to={`/items/${group.key}`}>{group.label}</Link>
+        </>
+      )}
+      {" / "}
+      <Link to={`/items/${cat}`}>{catLabel(cat)}</Link>
+    </p>
+  );
+}
+
+/** Consumables, materials and currency: what the client tells us is a name, grade, level, icon and description. */
+export function MiscBody({ row, cat }: { row: ItemRow; cat: string }) {
+  return (
+    <>
+      <Crumbs cat={cat} />
+      <OrnateCard className="max-w-xl p-4">
+        <div className="flex items-center gap-3">
+          <IconFrame url={iconUrl(row.i)} name={row.n} size={64} rarity={rarityOf(row.g)} eager alt="" />
+          <div className="min-w-0">
+            <div className="text-sm">
+              <GradeText grade={row.g} className="font-semibold" /> {catLabel(cat).toLowerCase()}
+            </div>
+            <div className="text-xs text-dim">{row.el > 1 ? `Needs level ${row.el}` : "No level requirement"}</div>
+          </div>
+        </div>
+        <h2 className="mt-4 font-display text-lg font-semibold">Description</h2>
+        <p className="mt-1 whitespace-pre-line text-sm">{row.d || "No description in the client data."}</p>
+        {row.d?.includes("…") && <p className="mt-2 text-xs text-dim">… marks a number the client works out from skill tables, which we do not show yet.</p>}
+      </OrnateCard>
+    </>
+  );
+}
+
+/** The set an item belongs to, with its bonuses. */
+function SetCard({ setKey }: { setKey: string }) {
+  const [set, setSet] = useState<ItemSet | null | undefined>(undefined);
+  useEffect(() => {
+    let live = true;
+    loadSets().then(
+      (all) => live && setSet(all.find((s) => s.key === setKey) ?? null),
+      () => live && setSet(null),
+    );
+    return () => {
+      live = false;
+    };
+  }, [setKey]);
+  if (!set) return null;
+  return (
+    <OrnateCard className="p-4">
+      <h2 className="font-display text-lg font-semibold">Set: {set.name}</h2>
+      <ul className="mt-2 space-y-1 text-sm">
+        {set.bonuses.map((b) => (
+          <li key={b.pieces}>
+            <span className="font-semibold text-gold">{b.pieces} pieces</span> {b.text}
+          </li>
+        ))}
+      </ul>
+      <p className="mt-2 text-xs text-dim">
+        {set.items.length} items in this set. <Link to="/items/sets">All item sets</Link>
+      </p>
+    </OrnateCard>
   );
 }
 
@@ -250,18 +322,20 @@ export function ItemDetailView({ id }: { id: number }) {
     };
   }, [id]);
   const cur = state && state.id === id ? state : null;
+  const p = cur?.page;
+  const name = p ? (p.kind === "gear" ? p.item.name : p.row.n) : "";
   useEffect(() => {
-    if (cur?.page) document.title = `${cur.page.item.name} (${cur.page.item.grade} ${catLabel(cur.page.cat)}) | Become Cube`;
-  }, [cur]);
+    if (p) document.title = `${name} (${p.kind === "gear" ? p.item.grade : p.row.g} ${catLabel(p.cat)}) | Become Cube`;
+  }, [p, name]);
   return (
     <>
-      <PageHeader title={cur?.page ? cur.page.item.name : "Item"} />
+      <PageHeader title={p ? name : "Item"} />
       {!cur ? (
         <p className="text-sm text-dim">Loading item...</p>
       ) : cur.error ? (
         <p role="alert" className="text-sm text-warn">Could not load this item: {cur.error}</p>
       ) : cur.page ? (
-        <ItemBody page={cur.page} />
+        cur.page.kind === "gear" ? <ItemBody page={cur.page} /> : <MiscBody row={cur.page.row} cat={cur.page.cat} />
       ) : (
         <p className="text-sm text-dim">
           No item {id} in our data. <Link to="/items">Browse items</Link>

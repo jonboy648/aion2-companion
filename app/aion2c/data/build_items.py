@@ -297,6 +297,8 @@ def build_from_export(table_dir: Path, previous: dict[int, dict] | None = None) 
     extra = {r["Name"]: r["AdditionalStats"] for r in _rows(table_dir, "AdditionalStat")}
     previous = previous or {}
     items, used_effect, used_odds, used_exceed = [], set(), set(), set()
+    set_ids: dict[str, list[int]] = {}
+    from aion2c.data.build_item_extras import build_sets, equip_icon  # sibling module imports this one at top level
     for it in _rows(table_dir, "Item"):
         if it["ItemType"] != "EItemType::Equip":
             continue
@@ -315,8 +317,15 @@ def build_from_export(table_dir: Path, previous: dict[int, dict] | None = None) 
         }
         old = previous.get(iid, {})
         out["sources"] = list(old.get("sources") or [])
-        if old.get("icon"):
-            out["icon"] = old["icon"]
+        icon = old.get("icon") or equip_icon(it.get("IconRes", ""))  # the endpoint's name wins; the client's fills the gaps
+        if icon:
+            out["icon"] = icon
+            raw = it.get("IconRes", "")
+            if not old.get("icon") and raw not in ("", "None", icon):
+                out["icon_alt"] = raw  # the CDN names some of these Icon_Equip_*, some as the client table does; the page tries both
+        if it.get("SetNames"):
+            out["set"] = it["SetNames"][0]
+            set_ids.setdefault(it["SetNames"][0], []).append(iid)
         if xg != "None" and len(exceed.get(xg, [])) > 1:
             out["max_exceed"] = len(exceed[xg]) - 1
             out["exceed_group"] = xg
@@ -346,8 +355,11 @@ def build_from_export(table_dir: Path, previous: dict[int, dict] | None = None) 
                        for r in rows[1:]],
         }
     items.sort(key=lambda x: x["id"])
-    return {"schema": 1, "source": EXPORT_SOURCE, "items": items, "enchant_series": series, "enchant_odds": odds,
-            "exceed": ex_table}
+    doc = {"schema": 1, "source": EXPORT_SOURCE, "items": items, "enchant_series": series, "enchant_odds": odds,
+           "exceed": ex_table}
+    if (table_dir / "ItemSet.json").is_file() and (table_dir / "ItemSetEffect.json").is_file():
+        doc["sets"] = build_sets(table_dir, l10n, _rows(table_dir, "ItemSet"), set_ids)
+    return doc
 
 
 def write_items(doc: dict, out: Path = OUT) -> None:
@@ -364,8 +376,8 @@ def main(argv=None) -> None:
         doc = build_from_export(export_dir(), prev)
         write_items(doc)
         print("items:", len(doc["items"]))
-        from aion2c.data import build_itemdb
-        build_itemdb.main()  # keep web/public/items/ in step with items.json
+        from aion2c.data import build_item_extras
+        build_item_extras.main()  # items_other.json, then web/public/items/ in step with both files
         return
     if a.cmd == "itemdb":
         from aion2c.data import build_itemdb

@@ -6,10 +6,15 @@ export interface ItemRow {
   id: number;
   n: string;
   g: string;
-  il: number;
+  /** item level (equipment only) */
+  il?: number;
   el: number;
+  /** description (consumables, materials, currency) */
+  d?: string;
   /** CDN resource name */
   i?: string;
+  /** alternate icon name, tried when `i` does not load */
+  i2?: string;
   /** class lock (weapons) */
   c?: string;
   /** main stats {stat: value}; WeaponFixingDamage is the max attack */
@@ -47,10 +52,12 @@ export interface ItemDetail {
   god_slots: number;
   sources: string[];
   icon?: string;
+  icon_alt?: string;
   max_exceed?: number;
   enchant_group?: string;
   odds_group?: string;
   exceed_group?: string;
+  set?: string;
 }
 
 export interface EnchantTables {
@@ -67,20 +74,39 @@ export interface CatInfo {
 export interface GroupInfo {
   key: string;
   label: string;
+  /** gear = equipment (has stats, enchant tables); misc = consumables, materials, currency; sets = item sets */
+  kind: "gear" | "misc" | "sets";
   cats: CatInfo[];
+  /** sets group only */
+  count?: number;
 }
 
 export const INDEX = index as unknown as { source: string; groups: GroupInfo[]; runs: [number, number, string][] };
 export const CATS: CatInfo[] = INDEX.groups.flatMap((g) => g.cats);
-export const TOTAL = CATS.reduce((n, c) => n + c.count, 0);
+export const GEAR_KEYS: string[] = INDEX.groups.filter((g) => g.kind === "gear").flatMap((g) => g.cats.map((c) => c.key));
+export const TOTAL = CATS.filter((c) => GEAR_KEYS.includes(c.key)).reduce((n, c) => n + c.count, 0);
+export const OTHER_TOTAL = CATS.reduce((n, c) => n + c.count, 0) - TOTAL;
 
 export const catLabel = (key: string) => CATS.find((c) => c.key === key)?.label ?? key;
 export const groupOfCat = (key: string) => INDEX.groups.find((g) => g.cats.some((c) => c.key === key));
+export const isGearCat = (key: string) => GEAR_KEYS.includes(key);
+
+export interface ItemSet {
+  key: string;
+  name: string;
+  icon: string;
+  type: string;
+  bonuses: { pieces: number; name: string; text: string; stats?: Record<string, number> }[];
+  items: { id: number; n: string; g: string; i?: string; cat: string }[];
+}
 
 /** What a /items/:key URL segment means. */
-export function resolveKey(key: string | undefined): { kind: "root" } | { kind: "group"; group: GroupInfo } | { kind: "cat"; cat: CatInfo } | { kind: "item"; id: number } | { kind: "unknown" } {
+export function resolveKey(
+  key: string | undefined,
+): { kind: "root" } | { kind: "sets" } | { kind: "group"; group: GroupInfo } | { kind: "cat"; cat: CatInfo } | { kind: "item"; id: number } | { kind: "unknown" } {
   if (!key) return { kind: "root" };
   if (/^\d+$/.test(key)) return { kind: "item", id: Number(key) };
+  if (INDEX.groups.some((g) => g.key === key && g.kind === "sets")) return { kind: "sets" };
   const group = INDEX.groups.find((g) => g.key === key);
   if (group) return { kind: "group", group };
   const cat = CATS.find((c) => c.key === key);
@@ -104,7 +130,7 @@ export function catOfId(id: number, runs = INDEX.runs): string | null {
 export const ICON_CDN = "https://assets.playnccdn.com/static-aion2-gamedata/resources/";
 export const iconUrl = (name?: string) => (name ? `${ICON_CDN}${name}.png` : null);
 
-export const GRADES = ["Special", "Common", "Rare", "Unique", "Epic"] as const;
+export const GRADES = ["Special", "Common", "Rare", "Unique", "Epic", "Heroic"] as const;
 export const GRADE_RANK: Record<string, number> = Object.fromEntries(GRADES.map((g, i) => [g, i]));
 
 const LABELS: Record<string, string> = labels;
@@ -148,6 +174,7 @@ export const COLUMNS: Column[] = [
   { key: "critdmg", label: "Crit damage", get: roll("CriticalAddDamage"), stat: true, title: "Best the random line can roll" },
   { key: "speed", label: "Combat speed", get: roll("CombatSpeed"), stat: true, title: "Best the random line can roll (%)" },
   { key: "hitrate", label: "Hit rate", get: roll("AdditionalHitRate"), stat: true, title: "Best the random line can roll (%)" },
+  { key: "desc", label: "Description", get: (r) => r.d, text: true },
 ];
 for (const c of COLUMNS) if (!c.fmt) c.fmt = (r) => (typeof c.get(r) === "number" ? num(c.get(r) as number) : String(c.get(r) ?? ""));
 export const COLUMN = Object.fromEntries(COLUMNS.map((c) => [c.key, c])) as Record<string, Column>;
@@ -160,7 +187,7 @@ export function columnsFor(rows: ItemRow[]): string[] {
   const out = ["grade"];
   if (new Set(rows.map((r) => r.cat)).size > 1) out.push("cat");
   if (has("class")) out.push("class");
-  return [...out, ...["el", "il", "atk", "atkmin", "acc", "crit", "block", "def", "hp"].filter(has)];
+  return [...out, ...["el", "il", "atk", "atkmin", "acc", "crit", "block", "def", "hp", "desc"].filter(has)];
 }
 
 export interface Filters {
@@ -183,8 +210,8 @@ export function filterRows(rows: ItemRow[], f: Filters): ItemRow[] {
       (!f.grades.length || f.grades.includes(r.g)) &&
       (f.elMin === undefined || r.el >= f.elMin) &&
       (f.elMax === undefined || r.el <= f.elMax) &&
-      (f.ilMin === undefined || r.il >= f.ilMin) &&
-      (f.ilMax === undefined || r.il <= f.ilMax) &&
+      (f.ilMin === undefined || (r.il !== undefined && r.il >= f.ilMin)) &&
+      (f.ilMax === undefined || (r.il !== undefined && r.il <= f.ilMax)) &&
       (!f.cls || r.c === f.cls) &&
       (!f.cats?.length || f.cats.includes(r.cat)),
   );

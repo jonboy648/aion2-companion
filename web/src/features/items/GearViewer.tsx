@@ -10,6 +10,7 @@ import { ItemTable } from "./ItemTable";
 import {
   COLUMN,
   DEFAULT_COLUMNS,
+  GEAR_KEYS,
   INDEX,
   MAX_PINS,
   NO_FILTERS,
@@ -42,7 +43,7 @@ export function ComparePanel({ rows, onUnpin }: { rows: ItemRow[]; onUnpin: (id:
               {rows.map((r) => (
                 <th key={r.id} scope="col" className="min-w-[9rem] px-2 py-1.5 align-top">
                   <div className="flex items-start gap-2">
-                    <IconFrame url={iconUrl(r.i)} name={r.n} size={32} rarity={rarityOf(r.g)} alt="" />
+                    <IconFrame url={iconUrl(r.i)} fallbackUrl={iconUrl(r.i2)} name={r.n} size={32} rarity={rarityOf(r.g)} alt="" />
                     <Link to={`/items/${r.id}`} className="grade-text whitespace-normal text-sm font-medium" data-rarity={rarityOf(r.g)}>
                       {r.n}
                     </Link>
@@ -81,7 +82,7 @@ export function GearViewer() {
   const [sort, setSort] = useState<Sort>({ key: "il", dir: "desc" });
   const [cols, setCols] = useState<string[]>(DEFAULT_COLUMNS);
   const [type, setType] = useState("");
-  const { rows, error } = useRows(undefined);
+  const { rows, error } = useRows(GEAR_KEYS);
 
   const setPins = (next: number[]) => setParams(next.length ? { pin: next.join(",") } : {}, { replace: true });
   const cats = type.startsWith("g:") ? INDEX.groups.find((g) => g.key === type.slice(2))?.cats.map((c) => c.key) : type ? [type] : undefined;
@@ -108,7 +109,7 @@ export function GearViewer() {
                 Type
                 <select value={type} onChange={(e) => setType(e.target.value)} className="game-input mt-1 block h-9 px-2 text-sm text-foreground">
                   <option value="">All equipment</option>
-                  {INDEX.groups.map((g) => (
+                  {INDEX.groups.filter((g) => g.kind === "gear").map((g) => (
                     <optgroup key={g.key} label={g.label}>
                       <option value={`g:${g.key}`}>All {g.label.toLowerCase()}</option>
                       {g.cats.map((c) => (

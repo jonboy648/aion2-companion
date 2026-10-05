@@ -79,13 +79,19 @@ export function ItemTable({ rows, columns, sort, onSort, pins = [], onPin, capti
                   )}
                   <td className="px-2 py-1">
                     <Link to={`/items/${r.id}`} className="flex items-center gap-2 no-underline hover:underline">
-                      <IconFrame url={iconUrl(r.i)} name={r.n} size={28} rarity={rarityOf(r.g)} alt="" />
+                      <IconFrame url={iconUrl(r.i)} fallbackUrl={iconUrl(r.i2)} name={r.n} size={28} rarity={rarityOf(r.g)} alt="" />
                       <span className="grade-text font-medium" data-rarity={rarityOf(r.g)}>{r.n}</span>
                     </Link>
                   </td>
                   {cols.map((c) => (
                     <td key={c.key} className={cn("px-2 py-1", c.text ? "text-dim" : "text-right tabular-nums")}>
-                      {c.key === "grade" ? <GradeText grade={r.g} /> : (c.fmt?.(r) ?? "") || <span className="text-faint">-</span>}
+                      {c.key === "grade" ? (
+                        <GradeText grade={r.g} />
+                      ) : c.key === "desc" ? (
+                        <span className="block max-w-[26rem] truncate" title={r.d}>{r.d}</span>
+                      ) : (
+                        (c.fmt?.(r) ?? "") || <span className="text-faint">-</span>
+                      )}
                     </td>
                   ))}
                 </tr>

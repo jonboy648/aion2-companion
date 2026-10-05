@@ -4,10 +4,10 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ItemsPage } from "@/pages/Items";
-import { clearItemCache, loadCategories, loadCategory, loadItem } from "./data";
+import { clearItemCache, loadCategories, loadCategory, loadItem, loadSets } from "./data";
 import { GearViewer } from "./GearViewer";
 import {
-  CATS, COLUMN, INDEX, MAX_PINS, NO_FILTERS, TOTAL, atEnchant, catOfId, columnsFor, compare, filterRows, nextSort, parsePins, resolveKey, sortRows, statLabel, togglePin,
+  CATS, COLUMN, GEAR_KEYS, INDEX, MAX_PINS, NO_FILTERS, OTHER_TOTAL, TOTAL, atEnchant, catOfId, columnsFor, compare, filterRows, nextSort, parsePins, resolveKey, sortRows, statLabel, togglePin,
   type ItemRow,
 } from "./logic";
 
@@ -121,7 +121,9 @@ describe("derived helpers", () => {
 describe("the item index", () => {
   it("adds up, resolves keys and finds the category of every item id", () => {
     expect(TOTAL).toBe(3555);
-    expect(CATS.length).toBe(25);
+    expect(GEAR_KEYS.length).toBe(25);
+    expect(CATS.length).toBe(38);
+    expect(OTHER_TOTAL).toBe(5690);
     expect(resolveKey(undefined).kind).toBe("root");
     expect(resolveKey("weapons").kind).toBe("group");
     expect(resolveKey("greatsword").kind).toBe("cat");
@@ -133,7 +135,7 @@ describe("the item index", () => {
   });
   it("every id in every category file resolves back to that category", async () => {
     const rows = await loadCategories();
-    expect(rows.length).toBe(TOTAL);
+    expect(rows.length).toBe(TOTAL + OTHER_TOTAL);
     for (const r of rows) expect(catOfId(r.id), `${r.id} ${r.n}`).toBe(r.cat);
   });
 });
@@ -149,12 +151,23 @@ describe("data loading", () => {
     expect(fileFetch.mock.calls[0][0]).toMatch(/items\/cat\/belt\.json$/);
   });
   it("loads an item's detail with the enchant tables its group uses, and null for an unknown id", async () => {
-    const p = (await loadItem(110120003))!;
+    const p = (await loadItem(110120003))! as Extract<Awaited<ReturnType<typeof loadItem>>, { kind: "gear" }>;
+    expect(p.kind).toBe("gear");
     expect(p.cat).toBe("greatsword");
     expect(p.item.name).toBe("Ludra's Blade of Extinction");
     expect(p.enchant.series[p.item.enchant_group!]).toBeTruthy();
     expect(await loadItem(123)).toBeNull();
     expect(await loadItem(110120004)).toBeNull(); // inside a category's id range but not an item
+  });
+  it("loads a consumable as a row of its category (no detail file) and the item sets with their members", async () => {
+    const p = (await loadItem(510116005))!;
+    expect(p).toMatchObject({ kind: "misc", cat: "potion", row: { n: "Wind Serum", g: "Common" } });
+    expect(fileFetch.mock.calls.some((c) => /detail\/potion/.test(c[0]))).toBe(false);
+    const sets = await loadSets();
+    expect(sets.map((s) => s.name)).toEqual(["Primal Vigor", "Magic Armor"]);
+    expect(sets[0].bonuses.map((b) => b.pieces)).toEqual([2, 4]);
+    expect(sets[0].items.length).toBe(20);
+    for (const m of sets[0].items) expect(catOfId(m.id)).toBe("arcana");
   });
   it("does not cache a failed request", async () => {
     fileFetch.mockResolvedValueOnce({ ok: false, status: 500, json: async () => ({}) });
@@ -194,6 +207,32 @@ describe("pages", () => {
     expect(screen.getByText("Enchant +1 to +15")).toBeInTheDocument();
     expect(screen.getByText("Where to get it")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Compare in the gear viewer" })).toHaveAttribute("href", "/gear-viewer?pin=110120003");
+  });
+
+  it("shows the set an arcana item belongs to, with its bonuses", async () => {
+    at("/items/810130001");
+    await screen.findByRole("heading", { name: /Set: Primal Vigor/ });
+    expect(screen.getByText(/Increases PvE Attack by 150/)).toBeInTheDocument();
+  });
+
+  it("shows a consumable's description, and lists the item sets page", async () => {
+    at("/items/510116005");
+    await screen.findByRole("heading", { name: "Wind Serum" });
+    expect(screen.getByText(/Instantly restores/)).toBeInTheDocument();
+  });
+
+  it("the sets page lists every set with its bonuses and member icons", async () => {
+    at("/items/sets");
+    await screen.findByRole("heading", { name: "Magic Armor" });
+    expect(screen.getByText(/Restores 1,500 MP/)).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /.+/ }).filter((l) => /\/items\/8101\d+$/.test(l.getAttribute("href") ?? "")).length).toBeGreaterThan(5);
+  });
+
+  it("a consumable category lists descriptions and the gear viewer never offers non-gear types", async () => {
+    at("/items/potion");
+    await screen.findByText("Wind Serum");
+    expect(screen.getByRole("columnheader", { name: /Description/ })).toBeInTheDocument();
+    expect(screen.queryByRole("columnheader", { name: /^Attack/ })).toBeNull();
   });
 
   it("says so for an id we do not have", async () => {
