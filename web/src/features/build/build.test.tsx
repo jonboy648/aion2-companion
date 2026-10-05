@@ -135,17 +135,22 @@ describe("pages (mock engine)", () => {
     expect(screen.getByText("Next stat upgrades")).toBeInTheDocument();
   });
 
-  it("manual build runs the engine and shows results", async () => {
+  it("manual build blocks the fixed mock fixture when it violates the selected progression", async () => {
     at("/build?class=sorcerer");
     expect(screen.getByRole("heading", { level: 1, name: "Manual build" })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: /Find my best build/ }));
-    expect(await screen.findByTestId("playstyle-detail", undefined, { timeout: 5000 })).toBeInTheDocument();
+    const submit = screen.getByRole("button", { name: /Find my best build/ });
+    await waitFor(() => expect(submit).not.toBeDisabled());
+    fireEvent.click(submit);
+    expect(await screen.findByRole("alert", undefined, { timeout: 5000 })).toHaveTextContent("The returned plan is not valid");
+    expect(screen.queryByTestId("playstyle-detail")).toBeNull();
   });
 
   it("manual build rejects an invalid level", async () => {
     at("/build");
-    fireEvent.change(screen.getByLabelText(/Level/), { target: { value: "0" } });
-    fireEvent.click(screen.getByRole("button", { name: /Find my best build/ }));
+    fireEvent.change(screen.getByLabelText("Level (1 to 45)"), { target: { value: "0" } });
+    const submit = screen.getByRole("button", { name: /Find my best build/ });
+    await waitFor(() => expect(submit).not.toBeDisabled());
+    fireEvent.click(submit);
     expect(await screen.findByRole("alert")).toHaveTextContent(/Level must be/);
   });
 });

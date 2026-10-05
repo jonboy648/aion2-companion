@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AlertTriangle, Loader2, RotateCcw } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useActiveBuild } from "@/features/keybinds/activeBuild";
+import { readPlannedBuild, useActiveBuild } from "@/features/keybinds/activeBuild";
 import { Hotbar, SlotEditor } from "@/features/keybinds/Hotbar";
 import { RotationPlan } from "@/features/build/RotationPlan";
 import { MacroPanel } from "@/features/keybinds/MacroPanel";
@@ -24,7 +24,8 @@ function Banner({ tone, children }: { tone: "info" | "warn" | "error"; children:
 export function KeybindsPage() {
   const active = useActiveBuild();
   const build = active.build;
-  const kb = useKeybindPlan(build);
+  const planned = useMemo(() => readPlannedBuild(build), [build]);
+  const kb = useKeybindPlan(build, planned);
   const [selected, setSelected] = useState("1");
 
   const header = (
@@ -34,6 +35,7 @@ export function KeybindsPage() {
           <Badge tone="gold">{build.name || "Unnamed"}</Badge>
           <Badge>{build.class_key}</Badge>
           <Badge>Lv {build.level}</Badge>
+          {planned && <Badge tone="gold">{planned.playstyle}</Badge>}
           {active.source === "demo" && <Badge tone="warn">demo character</Badge>}
         </div>
       )}
@@ -67,6 +69,7 @@ export function KeybindsPage() {
 
   const result = kb.result;
   const plan = result?.plan;
+  const rotation = plan?.rotation?.[planned?.scenario ?? "boss_180"];
   const stacks = plan?.stacks ?? [];
   const stackOf = (label: string) => stacks.find((s) => s.key_label === label)?.stack ?? (kb.pins[label] ? [kb.pins[label]] : []);
   const hasSlotHints = (plan?.warnings ?? []).some(isSlotHint);
@@ -112,9 +115,7 @@ export function KeybindsPage() {
               <CardHeader>
                 <CardTitle>Hotbar</CardTitle>
                 <CardDescription>
-                  Each key holds up to 4 stacked skills, drawn as in game: one press fires the usable skill in the lowest cell (the bottom cell is
-                  priority 0). To reorder in game, click a skill, then click another cell in the column to swap them. Select a key to pin the skill you
-                  already keep there, and the planner builds around it.
+                  Fixed and contextual slot restrictions are not fully verified. This is a suggested layout, not an imported in-game hotbar.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -127,6 +128,8 @@ export function KeybindsPage() {
                   pinnedSkill={kb.pins[selected]}
                   pins={kb.pins}
                   level={build.level}
+                  region={build.region}
+                  stigmas={build.stigmas}
                   onPin={(s) => kb.pin(selected, s)}
                   onUnpin={() => kb.unpin(selected)}
                   note={plan.slot_notes?.[selected]}
@@ -144,14 +147,14 @@ export function KeybindsPage() {
               </CardContent>
             </Card>
 
-            {plan.rotation?.boss_180?.core && (
+            {rotation?.core && (
               <Card>
                 <CardHeader>
                   <CardTitle>Rotation</CardTitle>
-                  <CardDescription>What the stacks and macros below are trying to do, step by step (single-target boss).</CardDescription>
+                  <CardDescription>{planned ? `The selected ${planned.playstyle} plan.` : "Single-target boss rotation."}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <RotationPlan rot={plan.rotation.boss_180} icons={kb.icons} />
+                  <RotationPlan rot={rotation} icons={kb.icons} />
                 </CardContent>
               </Card>
             )}
@@ -159,7 +162,7 @@ export function KeybindsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Macros</CardTitle>
-                <CardDescription>Two in-game macros built from the stacks above, with their estimated damage against pressing every skill perfectly by hand.</CardDescription>
+                <CardDescription>In-game macros for {planned ? `your selected ${planned.playstyle} plan` : "boss and AoE"}, compared with the modeled hand rotation.</CardDescription>
               </CardHeader>
               <CardContent>
                 <MacroPanel

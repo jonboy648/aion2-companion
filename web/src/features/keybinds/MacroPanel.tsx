@@ -1,14 +1,17 @@
 import { Badge } from "@/components/ui/badge";
 import type { GameData, IconUrls, KeybindPlan, MacroPlan } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { DELAY_MAX, DELAY_MIN, HOTKEY_CHOICES, type Hotkeys } from "./useKeybindPlan";
+import { DELAY_MAX, DELAY_MIN, HOTKEY_CHOICES } from "./useKeybindPlan";
 import { SkillIcon } from "./SkillIcon";
 
 /** macro name -> (scenario key, hotkeys field) as the engine defines them. */
 export const MACRO_META = {
   "Boss loop": { scenario: "boss_180", hotkey: "boss" as const, label: "Boss, single target" },
   "AoE loop": { scenario: "aoe_pack", hotkey: "aoe" as const, label: "AoE pack" },
+  "Leveling loop": { scenario: "level_pull", hotkey: "leveling" as const, label: "Leveling pull" },
 };
+
+export type MacroHotkey = (typeof MACRO_META)[keyof typeof MACRO_META]["hotkey"];
 
 export function macroEfficiency(plan: KeybindPlan, m: MacroPlan): { macro: number; ideal: number; pct: number } | null {
   const meta = MACRO_META[m.name as keyof typeof MACRO_META];
@@ -54,7 +57,7 @@ export function MacroPanel({
   plan: KeybindPlan;
   gd: GameData | null;
   icons: IconUrls;
-  onHotkey: (which: keyof Hotkeys, key: string) => void;
+  onHotkey: (which: MacroHotkey, key: string) => void;
   delayMs: number;
   onDelay: (n: number) => void;
 }) {

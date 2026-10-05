@@ -53,7 +53,7 @@ export interface EngineApi {
   compare(build: CharacterBuild, daevanionPoints?: number | null, onProgress?: ProgressFn): Promise<CompareResult>;
   optimize(build: CharacterBuild, playstyleKey: PlaystyleKey, daevanionPoints?: number | null, onProgress?: ProgressFn): Promise<FullBuild>;
   marginal(build: CharacterBuild, priority: Priority, scenarioKey: string): Promise<StatGain[]>;
-  /** priorities: {scenario_key: Priority} (boss_180, aoe_pack). hotkeys e.g. {boss: "F9", aoe: "F10"}. */
+  /** priorities: {scenario_key: Priority} (boss_180, aoe_pack, level_pull). hotkeys may include leveling. */
   keybinds(
     build: CharacterBuild,
     priorities: Record<string, Priority>,

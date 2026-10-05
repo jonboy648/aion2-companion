@@ -108,6 +108,8 @@ function SkillPoints({ fb, data, rankedSkills }: { fb: FullBuild; data: ClassDat
       <p className="text-sm text-dim">
         {entered > 0 || stigEntered > 0
           ? "Nothing is worth buying with your points: every skill is already at its best rank for this playstyle."
+          : fb.build.stigma_unlocked !== undefined && fb.build.stigma_unlocked !== null
+          ? "No paid ranks available within this level's budget."
           : `Enter your unspent skill points above to see where to spend them. Until then your ${rankedSkills} ranked skills are used as imported.`}
       </p>
     );

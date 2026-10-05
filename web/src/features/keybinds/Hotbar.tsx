@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Pin, PinOff, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { GameData, IconUrls, SlotStack } from "@/lib/types";
+import type { GameData, IconUrls, Region, SlotStack } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { SkillIcon } from "./SkillIcon";
 
@@ -40,27 +40,38 @@ function KeyCap({
       aria-pressed={selected}
       aria-label={`Key ${label}: ${filled ? stack.map((s) => nameOf(gd, s)).join(", then ") : "empty"}`}
       className={cn(
-        "relative flex min-h-[88px] flex-col items-center gap-1 rounded-lg border p-1.5 pt-5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan",
+        "flex h-[164px] w-[46px] shrink-0 flex-col items-center gap-1 rounded-md border p-1 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan",
         selected ? "border-gold bg-surface3 shadow-[0_0_0_1px_var(--gold)]" : "border-border bg-surface2 hover:border-gold-lo hover:bg-surface3",
         !filled && !selected && "border-dashed bg-surface/60",
       )}
     >
-      <span className="absolute left-1.5 top-1 text-[11px] font-semibold tracking-wide text-gold">{label}</span>
-      {pinned && <Pin aria-hidden className="absolute right-1.5 top-1 size-3 text-cyan" />}
-      {filled ? (
-        <span className="grid grid-cols-2 gap-0.5">
-          {stack.slice(0, 4).map((s, i) => (
-            <span key={s} className="relative" title={`${i + 1}. ${nameOf(gd, s)}`}>
-              <SkillIcon url={icons[s]} name={nameOf(gd, s)} size={26} />
-              <span className="absolute -bottom-0.5 -right-0.5 grid size-3.5 place-items-center rounded-full bg-bg/90 text-[9px] leading-none text-dim">
-                {i + 1}
+      <span className="flex h-4 w-full items-center justify-between text-[11px] font-semibold text-gold">
+        {label}
+        {pinned && <Pin aria-hidden className="size-3 text-cyan" />}
+      </span>
+      <span className="grid w-full gap-0.5" style={{ gridTemplateRows: "repeat(4, 32px)" }}>
+        {[3, 2, 1, 0].map((priority) => {
+          const skill = stack[priority];
+          return (
+            <span
+              key={priority}
+              data-priority={priority}
+              data-skill={skill ?? ""}
+              title={`Priority ${priority}: ${skill ? nameOf(gd, skill) : "empty"}`}
+              className={cn(
+                "relative grid h-8 w-full place-items-center rounded-sm border",
+                skill ? "border-border-soft bg-surface" : "border-dashed border-border-soft/60 bg-surface/40",
+                priority === 0 && skill && "border-gold-lo",
+              )}
+            >
+              {skill && <SkillIcon url={icons[skill]} name={nameOf(gd, skill)} size={28} rarity="common" />}
+              <span aria-hidden className={cn("absolute bottom-0 right-0 bg-surface/90 px-0.5 text-[8px] leading-tight", priority === 0 ? "text-gold" : "text-faint")}>
+                {priority}
               </span>
             </span>
-          ))}
-        </span>
-      ) : (
-        <span className="mt-2 text-[11px] text-faint">empty</span>
-      )}
+          );
+        })}
+      </span>
     </button>
   );
 }
@@ -85,28 +96,26 @@ export function Hotbar({
   const [showLetters, setShowLetters] = useState(false);
   const rows = showLetters || letterUsed ? KEY_ROWS : KEY_ROWS.slice(0, 1);
   return (
-    <div>
-      <div className="space-y-2">
-        {rows.map((row, r) => (
-          <div
-            key={r}
-            style={{ "--n": row.length } as React.CSSProperties}
-            className="grid grid-cols-4 gap-2 sm:grid-cols-6 lg:[grid-template-columns:repeat(var(--n),minmax(0,1fr))]"
-          >
-            {row.map((label) => (
-              <KeyCap
-                key={label}
-                label={label}
-                stack={byLabel[label] ?? (pins[label] ? [pins[label]] : [])}
-                pinned={label in pins}
-                selected={selected === label}
-                icons={icons}
-                gd={gd}
-                onClick={() => onSelect(label)}
-              />
-            ))}
-          </div>
-        ))}
+    <div className="min-w-0 max-w-full">
+      <div role="region" aria-label="Quickslot keys" tabIndex={0} className="max-w-full overflow-x-auto overscroll-x-contain pb-2 focus-visible:outline-2 focus-visible:outline-cyan">
+        <div className="flex w-max gap-3 p-1">
+          {rows.map((row, r) => (
+            <div key={r} className="flex shrink-0 gap-1.5">
+              {row.map((label) => (
+                <KeyCap
+                  key={label}
+                  label={label}
+                  stack={byLabel[label] ?? (pins[label] ? [pins[label]] : [])}
+                  pinned={label in pins}
+                  selected={selected === label}
+                  icons={icons}
+                  gd={gd}
+                  onClick={() => onSelect(label)}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       {!letterUsed && (
         <button
@@ -130,6 +139,8 @@ export function SlotEditor({
   pinnedSkill,
   pins,
   level,
+  region = "global",
+  stigmas,
   onPin,
   onUnpin,
   note,
@@ -141,6 +152,9 @@ export function SlotEditor({
   pinnedSkill: string | undefined;
   pins: Record<string, string>;
   level: number;
+  region?: Region;
+  /** Equipped stigmas, when the caller has the active build available. */
+  stigmas?: readonly string[];
   onPin: (skillKey: string) => void;
   onUnpin: () => void;
   /** engine slot_notes entry: why this stack is ordered this way */
@@ -152,9 +166,11 @@ export function SlotEditor({
     const needle = q.trim().toLowerCase();
     return Object.values(gd.skills)
       .filter((s) => (s.kind === "active" || s.kind === "stigma" || s.kind === "dodge") && (s.unlock_level ?? 0) <= level)
+      .filter((s) => s.regions.includes(region))
+      .filter((s) => s.kind !== "stigma" || stigmas === undefined || stigmas.includes(s.key))
       .filter((s) => !needle || s.name.toLowerCase().includes(needle))
       .sort((a, b) => a.name.localeCompare(b.name));
-  }, [gd, q, level]);
+  }, [gd, q, level, region, stigmas]);
   const pinnedElsewhere = (key: string) => Object.entries(pins).find(([l, s]) => s === key && l !== label)?.[0];
 
   return (

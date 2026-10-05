@@ -6,9 +6,18 @@
  */
 import { useEffect, useState } from "react";
 import { isMockEngine } from "@/engine/api";
-import type { CharacterBuild } from "@/lib/types";
+import type { CharacterBuild, FullBuild, PlaystyleKey, Priority } from "@/lib/types";
 
 export const ACTIVE_BUILD_KEY = "aion2c.activeBuild.v1";
+const PLAN_KEY = "aion2c.activeKeybindPlan.v1";
+export const MACRO_SCENARIOS = ["boss_180", "aoe_pack", "level_pull"] as const;
+export type MacroScenario = typeof MACRO_SCENARIOS[number];
+export interface PlannedBuild {
+  buildHash: string;
+  playstyle: PlaystyleKey;
+  scenario: MacroScenario;
+  priority: Priority;
+}
 
 export function readActiveBuild(): CharacterBuild | null {
   try {
@@ -24,9 +33,30 @@ export function readActiveBuild(): CharacterBuild | null {
 export function storeActiveBuild(b: CharacterBuild): void {
   try {
     localStorage.setItem(ACTIVE_BUILD_KEY, JSON.stringify(b));
+    localStorage.removeItem(PLAN_KEY);
   } catch {
     /* storage blocked: the page still works for this visit */
   }
+}
+
+/** Carry the chosen plan's priority; a later import must not inherit it. */
+export function storePlannedBuild(plan: FullBuild): void {
+  const scenario = plan.playstyle.scenario.key;
+  if (!MACRO_SCENARIOS.includes(scenario as MacroScenario)) throw new Error("This scenario has no supported macro model yet.");
+  const build = { ...plan.build, skill_points: 0, stigma_points: 0 };
+  storeActiveBuild(build);
+  saveJson(PLAN_KEY, { buildHash: hashBuild(build), playstyle: plan.playstyle.key, scenario, priority: plan.priority });
+}
+
+export function readPlannedBuild(build: CharacterBuild | null): PlannedBuild | null {
+  if (!build) return null;
+  const plan = loadJson<PlannedBuild | null>(PLAN_KEY, null);
+  if (!plan || plan.buildHash !== hashBuild(build) || !MACRO_SCENARIOS.includes(plan.scenario)
+    || !["boss", "aoe", "leveling"].includes(plan.playstyle)
+    || !Array.isArray(plan.priority?.entries) || typeof plan.priority.label !== "string"
+    || plan.priority.entries.some((entry) => !entry || typeof entry.skill_key !== "string" || !Number.isInteger(entry.charge_level)
+      || !(entry.require_status === null || typeof entry.require_status === "string"))) return null;
+  return plan;
 }
 
 export interface ActiveBuild {
