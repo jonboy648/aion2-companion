@@ -1,0 +1,60 @@
+markers:
+- category: location
+  subtype: teleport
+  id: cf1988f3-8daa-5940-be66-2d98835e55ed
+  name: Dawn Legion Forward Base
+  x: 1988.1
+  y: 2215.7
+  indexInSubtype: 0
+- category: location
+  subtype: dungeonEntrance
+  id: a809fea7-d8d4-5e5e-b5c0-25dc1649343c
+  name: Clione Lake Cave Entrance
+  x: 1949.9
+  y: 2479.0
+  indexInSubtype: 0
+- category: quest
+  subtype: questHero
+  id: 9b6c5eb4-3f7e-5dbf-adc1-5c20f2aca1a8
+  name: The Approaching Dawn
+  x: 2042.8
+  y: 2212.6
+  level: 2
+  questId: HQ1101010
+  indexInSubtype: 0
+- category: quest
+  subtype: questHero
+  id: 7b22cb65-20e5-5ad7-a353-745dd8edc9d0
+  name: Lost Supplies
+  x: 1994.7
+  y: 2203.1
+  level: 3
+  questId: HQ1101012
+  indexInSubtype: 1
+- category: quest
+  subtype: questHero
+  id: be35768c-dcb3-574d-bf74-99d2a6c6220a
+  name: The Power in the Lake
+  x: 1932.6
+  y: 2487.7
+  level: 5
+  questId: HQ1101020
+  indexInSubtype: 2
+- category: quest
+  subtype: questHero
+  id: b5b1f825-2126-546e-b940-7f73973712c2
+  name: Drakana Heist
+  x: 2027.7
+  y: 2488.7
+  level: 8
+  questId: HQ1101050
+  indexInSubtype: 3
+- category: quest
+  subtype: questHero
+  id: cae213d7-2f01-5fe8-a90c-ffc11b37dbfe
+  name: Brigade Base Neutralization
+  x: 1990.4
+  y: 2189.8
+  level: 9
+  questId: HQ1101070
+  indexInSubtype: 4

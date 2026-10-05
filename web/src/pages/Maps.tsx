@@ -8,7 +8,7 @@ interface MapSite {
   note: string;
 }
 
-/** Community maps we link to. We host and copy no map art or marker data; each site's content is theirs. */
+/** Additional community maps; separate from the locally hosted interactive map. */
 export const MAP_SITES: MapSite[] = [
   {
     name: "AION2 Hub maps",
@@ -28,7 +28,8 @@ export const MAP_SITES: MapSite[] = [
 export function Maps() {
   return (
     <>
-      <PageHeader title="Maps" caption="Unofficial community maps. We link to them and do not host or copy any map art." />
+      <PageHeader title="Maps" caption="Explore zones, find locations, and share party pins." />
+      <a href="/map/" className="inline-flex items-center gap-2 rounded-md border border-gold/40 bg-surface px-4 py-3 mb-6 text-gold hover:bg-surface2">Open interactive map <span aria-hidden="true">↗</span></a>
       <PartyMap />
       <ul className="space-y-3">
         {MAP_SITES.map((s) => (

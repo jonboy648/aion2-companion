@@ -13,7 +13,7 @@ describe("Maps page", () => {
       expect(a.getAttribute("target")).toBe("_blank");
       expect(a.getAttribute("rel")).toContain("noopener");
     }
-    expect(screen.getByText(/do not host or copy any map art/)).toBeTruthy();
+    expect(screen.getByRole("link", { name: /Open interactive map/ })).toHaveAttribute("href", "/map/");
   });
 
   it("is reachable at /maps and from the footer, not the top nav", () => {

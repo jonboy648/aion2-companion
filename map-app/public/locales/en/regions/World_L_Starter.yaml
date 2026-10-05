@@ -1,0 +1,36 @@
+MigzatuBrigadeBase:
+  description: Migzatu Brigade Base
+  name: Migzatu Brigade Base
+MigzatuBrigadeSupplyDepot:
+  description: Migzatu Brigade Supply Depot
+  name: Migzatu Brigade Supply Depot
+RedCanyon:
+  description: Red Canyon
+  name: Red Canyon
+IshtarCastle:
+  description: Ishtar Castle
+  name: Ishtar Castle
+District2SuranaResearchCenter:
+  description: District 2 Surana Research Center
+  name: District 2 Surana Research Center
+District2CentralAdministrationOffice:
+  description: District 2 Central Administration Office
+  name: District 2 Central Administration Office
+LacrimaCliff:
+  description: Lacrima Cliff
+  name: Lacrima Cliff
+Poeta:
+  description: Poeta
+  name: Poeta
+DaminuForest:
+  description: Daminu Forest
+  name: Daminu Forest
+ClioneLake:
+  description: Clione Lake
+  name: Clione Lake
+PhoenixSkyIsland:
+  description: Phoenix Sky Island
+  name: Phoenix Sky Island
+DawnLegionForwardBase:
+  description: Dawn Legion Forward Base
+  name: Dawn Legion Forward Base

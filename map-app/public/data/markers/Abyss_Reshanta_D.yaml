@@ -1,0 +1,1979 @@
+markers:
+- category: boss
+  subtype: bossElite
+  id: 7ff537eb-5883-5b35-9ce5-5888fad7f319
+  name: Undying Guard
+  x: 596.1
+  y: 945.3
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 0
+- category: boss
+  subtype: bossElite
+  id: d0e4a609-5b01-547b-b85e-a84f87fde990
+  name: Undying Guard
+  x: 602.7
+  y: 925.8
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 1
+- category: boss
+  subtype: bossElite
+  id: a83e863d-f38d-5688-9f49-968a86003818
+  name: Undying Guard
+  x: 569.2
+  y: 974.8
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 2
+- category: boss
+  subtype: bossElite
+  id: c5d925cc-a465-5a75-9de5-8331ce427762
+  name: Undying Guard
+  x: 561.3
+  y: 958.3
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 3
+- category: boss
+  subtype: bossElite
+  id: 8a69924e-b793-51a4-b039-434d7e61d4dc
+  name: Undying Guard
+  x: 540.7
+  y: 940.8
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 4
+- category: boss
+  subtype: bossElite
+  id: a679d0a0-6711-5cbc-b26e-09c12b94ad9f
+  name: Undying Guard
+  x: 598.4
+  y: 911.3
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 5
+- category: boss
+  subtype: bossElite
+  id: 9d1acb5a-2cf3-52cc-9735-d72d3a052424
+  name: Undying Guard
+  x: 542.9
+  y: 920.1
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 6
+- category: boss
+  subtype: bossElite
+  id: ce13d7c3-0171-50a8-aace-3ff6fce04deb
+  name: Undying Guard
+  x: 531.2
+  y: 943.2
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 7
+- category: boss
+  subtype: bossElite
+  id: fb9bc014-b389-50ab-a621-87a5c55e258b
+  name: Undying Guard
+  x: 538.5
+  y: 954.5
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 8
+- category: boss
+  subtype: bossElite
+  id: 49820ab9-d08f-5846-ac49-51d684d15315
+  name: Undying Guard
+  x: 590.0
+  y: 971.8
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 9
+- category: boss
+  subtype: bossElite
+  id: dbdf7221-ff89-5796-930f-26ebdd0dfdc7
+  name: Undying Guard
+  x: 578.9
+  y: 911.1
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 10
+- category: boss
+  subtype: bossElite
+  id: 3e275566-1654-5c23-955f-07be401bc1dc
+  name: Undying Guard
+  x: 607.4
+  y: 938.2
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 11
+- category: boss
+  subtype: bossElite
+  id: a71401fc-1cce-584c-9bd3-f15407c38d42
+  name: Undying Guard
+  x: 592.0
+  y: 919.7
+  level: 47
+  npcId: 2600656
+  indexInSubtype: 12
+- category: boss
+  subtype: bossElite
+  id: 4a6ee304-3b74-5db0-8b06-15a68c49c466
+  name: Abyss Rusty Rotan
+  x: 593.2
+  y: 950.8
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 13
+- category: boss
+  subtype: bossElite
+  id: 24b3e2d7-1e4b-51b0-82e1-f15f5068b75c
+  name: Abyss Rusty Rotan
+  x: 592.7
+  y: 936.3
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 14
+- category: boss
+  subtype: bossElite
+  id: 2fc2e719-be45-5398-b8cf-7813b0fb4e82
+  name: Abyss Rusty Rotan
+  x: 609.9
+  y: 956.9
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 15
+- category: boss
+  subtype: bossElite
+  id: a922e7c7-23a6-5f37-840e-5f4b5f6e1f73
+  name: Abyss Rusty Rotan
+  x: 620.6
+  y: 939.5
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 16
+- category: boss
+  subtype: bossElite
+  id: dd41758a-23a6-508b-ad1c-66e7772de94f
+  name: Abyss Rusty Rotan
+  x: 548.7
+  y: 950.8
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 17
+- category: boss
+  subtype: bossElite
+  id: 9e4aa95f-690f-5ca5-a4d3-b7c8a3545915
+  name: Abyss Rusty Rotan
+  x: 536.8
+  y: 935.1
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 18
+- category: boss
+  subtype: bossElite
+  id: b6d71ad0-4a8a-54ad-a1c4-df092a4d1778
+  name: Abyss Rusty Rotan
+  x: 585.4
+  y: 961.0
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 19
+- category: boss
+  subtype: bossElite
+  id: 84b917c9-114e-5e44-a063-45e5e7cafd5f
+  name: Abyss Rusty Rotan
+  x: 558.0
+  y: 946.1
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 20
+- category: boss
+  subtype: bossElite
+  id: e5051121-0d67-5f23-862b-562c77a84e2b
+  name: Abyss Rusty Rotan
+  x: 554.6
+  y: 931.2
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 21
+- category: boss
+  subtype: bossElite
+  id: 99730eb3-382f-5353-b132-51f8a581ad81
+  name: Abyss Rusty Rotan
+  x: 576.2
+  y: 918.6
+  level: 46
+  npcId: 2600643
+  indexInSubtype: 22
+- category: boss
+  subtype: bossElite
+  id: 27f46be1-a746-5d9c-967b-fa4941853d33
+  name: Undying Guard
+  x: 811.3
+  y: 738.3
+  level: 47
+  npcId: 2600657
+  indexInSubtype: 23
+- category: boss
+  subtype: bossElite
+  id: 723aa4a0-8369-563e-929b-e82684078d1f
+  name: Undying Guard
+  x: 772.7
+  y: 712.5
+  level: 47
+  npcId: 2600657
+  indexInSubtype: 24
+- category: boss
+  subtype: bossElite
+  id: e35afaba-be83-561a-924f-8e0fb7fe354e
+  name: Undying Guard
+  x: 718.8
+  y: 745.1
+  level: 47
+  npcId: 2600657
+  indexInSubtype: 25
+- category: boss
+  subtype: bossElite
+  id: 3fdb3f50-8786-58d0-87e8-2a46e9e2fa9e
+  name: Undying Guard
+  x: 719.5
+  y: 737.4
+  level: 47
+  npcId: 2600657
+  indexInSubtype: 26
+- category: boss
+  subtype: bossElite
+  id: 60a29262-1b9a-5591-882b-f44a5a0bd4fc
+  name: Undying Guard
+  x: 757.5
+  y: 779.9
+  level: 47
+  npcId: 2600657
+  indexInSubtype: 27
+- category: boss
+  subtype: bossElite
+  id: 19b4979b-bc7e-5d5c-984e-2ee17e82875a
+  name: Abyss Rusty Rotan
+  x: 761.7
+  y: 736.4
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 28
+- category: boss
+  subtype: bossElite
+  id: 3d7b86cd-4571-507f-ad12-c8bdf709ad55
+  name: Abyss Rusty Rotan
+  x: 762.6
+  y: 718.8
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 29
+- category: boss
+  subtype: bossElite
+  id: 3c9b643c-e45d-56e8-a814-d38b239baf42
+  name: Abyss Rusty Rotan
+  x: 781.4
+  y: 728.2
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 30
+- category: boss
+  subtype: bossElite
+  id: 7a97dfd6-3116-5cb2-a4b5-77a739e1b186
+  name: Abyss Rusty Rotan
+  x: 749.0
+  y: 762.4
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 31
+- category: boss
+  subtype: bossElite
+  id: a35e7543-e33f-5196-9f0b-bc00a6553adc
+  name: Abyss Rusty Rotan
+  x: 737.7
+  y: 734.4
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 32
+- category: boss
+  subtype: bossElite
+  id: e9d35fb6-3085-52ad-b287-8fc38c52a698
+  name: Abyss Rusty Rotan
+  x: 771.3
+  y: 771.5
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 33
+- category: boss
+  subtype: bossElite
+  id: 007b9adb-2885-55b7-8b10-47c3a71d36f3
+  name: Abyss Rusty Rotan
+  x: 792.4
+  y: 752.4
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 34
+- category: boss
+  subtype: bossElite
+  id: c73669a1-90c1-5899-b243-f04c76e8cd31
+  name: Abyss Rusty Rotan
+  x: 809.0
+  y: 728.7
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 35
+- category: boss
+  subtype: bossElite
+  id: 2c057e7b-5fb4-517e-8c5b-12d7fa670237
+  name: Abyss Rusty Rotan
+  x: 801.6
+  y: 711.1
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 36
+- category: boss
+  subtype: bossElite
+  id: 7168c2e5-fdae-577e-9bfa-b6ea24df1dd9
+  name: Abyss Rusty Rotan
+  x: 783.8
+  y: 715.0
+  level: 46
+  npcId: 2600644
+  indexInSubtype: 37
+- category: boss
+  subtype: bossElite
+  id: b0d9f726-c446-51a9-8c77-17f79293cd86
+  name: Undying Guard
+  x: 690.2
+  y: 667.9
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 38
+- category: boss
+  subtype: bossElite
+  id: f76038d2-8fe9-55df-ab85-183fab40d3b7
+  name: Undying Guard
+  x: 684.8
+  y: 660.0
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 39
+- category: boss
+  subtype: bossElite
+  id: 1b6ea273-388c-5a03-9fea-491ab4c24931
+  name: Undying Guard
+  x: 730.5
+  y: 665.6
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 40
+- category: boss
+  subtype: bossElite
+  id: f9aed09a-39e7-5609-bc3d-5f509941fac0
+  name: Undying Guard
+  x: 737.4
+  y: 662.7
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 41
+- category: boss
+  subtype: bossElite
+  id: 201427ff-ca1b-5534-a90e-c6c90d2f4d1e
+  name: Undying Guard
+  x: 727.4
+  y: 637.8
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 42
+- category: boss
+  subtype: bossElite
+  id: 5577bc78-294a-5c57-9b56-c9b842e9b09f
+  name: Undying Guard
+  x: 720.5
+  y: 635.9
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 43
+- category: boss
+  subtype: bossElite
+  id: 3d6fe63a-10fa-5a53-87c6-d3d163aaf99e
+  name: Undying Guard
+  x: 689.2
+  y: 644.8
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 44
+- category: boss
+  subtype: bossElite
+  id: 8eac5537-38cd-5b1b-9029-865c3bd56e67
+  name: Undying Guard
+  x: 705.2
+  y: 675.6
+  level: 47
+  npcId: 2600658
+  indexInSubtype: 45
+- category: boss
+  subtype: bossElite
+  id: 5ae12cd1-590b-562a-8a5a-28e6c545c7a5
+  name: Undying Guard
+  x: 1465.3
+  y: 1141.7
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 46
+- category: boss
+  subtype: bossElite
+  id: c6e95161-c68b-5553-bacb-25df09b1ffd7
+  name: Undying Guard
+  x: 1524.2
+  y: 1170.3
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 47
+- category: boss
+  subtype: bossElite
+  id: 1c785517-9df8-556c-8092-740315922b50
+  name: Undying Guard
+  x: 1486.2
+  y: 1138.6
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 48
+- category: boss
+  subtype: bossElite
+  id: f4d2aca2-c8f4-52ca-b0cf-ce4937b599c5
+  name: Undying Guard
+  x: 1459.2
+  y: 1168.2
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 49
+- category: boss
+  subtype: bossElite
+  id: 4152d0a5-63fb-515c-ba6e-78a318bee442
+  name: Undying Guard
+  x: 1512.5
+  y: 1193.4
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 50
+- category: boss
+  subtype: bossElite
+  id: 00454e1d-8bca-59b9-be4c-d7afdec43519
+  name: Undying Guard
+  x: 1494.0
+  y: 1155.2
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 51
+- category: boss
+  subtype: bossElite
+  id: 8098931b-8a51-5d19-a7dc-1000215bef5b
+  name: Undying Guard
+  x: 1516.9
+  y: 1159.0
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 52
+- category: boss
+  subtype: bossElite
+  id: 49308061-7d11-5e77-82af-8cd2f4a1dc46
+  name: Undying Guard
+  x: 1463.4
+  y: 1193.8
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 53
+- category: boss
+  subtype: bossElite
+  id: 98930309-68f7-5a17-a9c5-d48a528d4b96
+  name: Undying Guard
+  x: 1452.7
+  y: 1187.7
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 54
+- category: boss
+  subtype: bossElite
+  id: 259b51c5-2a0b-514f-9f55-faa0ee87a178
+  name: Undying Guard
+  x: 1456.9
+  y: 1202.1
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 55
+- category: boss
+  subtype: bossElite
+  id: 6e2a235a-0d17-5f28-ba64-f7e28c27113d
+  name: Undying Guard
+  x: 1448.0
+  y: 1175.3
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 56
+- category: boss
+  subtype: bossElite
+  id: 3670d048-3a56-59b0-b86a-5affad3aaa40
+  name: Undying Guard
+  x: 1476.5
+  y: 1202.4
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 57
+- category: boss
+  subtype: bossElite
+  id: d2ba78b5-9f06-58fe-9143-fe040987f557
+  name: Undying Guard
+  x: 1514.7
+  y: 1172.7
+  level: 47
+  npcId: 2600676
+  indexInSubtype: 58
+- category: boss
+  subtype: bossElite
+  id: 7dac39e0-2a49-5b00-8d57-fe9f4d33cdc9
+  name: Abyss Rusty Rotan
+  x: 1434.8
+  y: 1174.0
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 59
+- category: boss
+  subtype: bossElite
+  id: 01fa9960-9666-5efc-b434-6da1fd825bb2
+  name: Abyss Rusty Rotan
+  x: 1445.4
+  y: 1156.6
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 60
+- category: boss
+  subtype: bossElite
+  id: 4cbcc57c-e829-5c33-ad97-a1503cc275f8
+  name: Abyss Rusty Rotan
+  x: 1462.1
+  y: 1162.7
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 61
+- category: boss
+  subtype: bossElite
+  id: e39b8c88-a1e5-5203-a989-290113427c90
+  name: Abyss Rusty Rotan
+  x: 1497.3
+  y: 1167.4
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 62
+- category: boss
+  subtype: bossElite
+  id: 4d09273c-390c-5c83-8074-9ac7b0f59d9f
+  name: Abyss Rusty Rotan
+  x: 1500.7
+  y: 1182.3
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 63
+- category: boss
+  subtype: bossElite
+  id: a574250a-c1c5-5d04-ae04-17f9db558608
+  name: Abyss Rusty Rotan
+  x: 1506.7
+  y: 1162.7
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 64
+- category: boss
+  subtype: bossElite
+  id: a8ac0569-8657-52c4-9f72-7127c6ad4a14
+  name: Abyss Rusty Rotan
+  x: 1518.5
+  y: 1178.4
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 65
+- category: boss
+  subtype: bossElite
+  id: 450fbb19-d273-54b2-a321-7171e33a6761
+  name: Abyss Rusty Rotan
+  x: 1470.0
+  y: 1152.5
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 66
+- category: boss
+  subtype: bossElite
+  id: cd966805-5702-571e-9ee8-dc20b2f0e83f
+  name: Abyss Rusty Rotan
+  x: 1462.6
+  y: 1177.2
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 67
+- category: boss
+  subtype: bossElite
+  id: 158dea24-7b9b-5560-9d4e-59fd1fdf794e
+  name: Abyss Rusty Rotan
+  x: 1479.2
+  y: 1194.9
+  level: 46
+  npcId: 2600663
+  indexInSubtype: 68
+- category: boss
+  subtype: bossElite
+  id: 536a23fd-ddd3-5bfd-a5ab-9f6b73a8b9eb
+  name: Undying Guard
+  x: 1297.8
+  y: 1333.6
+  level: 47
+  npcId: 2600677
+  indexInSubtype: 69
+- category: boss
+  subtype: bossElite
+  id: e6268cc2-30ca-5b50-a1d6-4db5d407393f
+  name: Undying Guard
+  x: 1335.9
+  y: 1376.1
+  level: 47
+  npcId: 2600677
+  indexInSubtype: 70
+- category: boss
+  subtype: bossElite
+  id: 207bc455-57b9-5744-af65-2ba3e283aa78
+  name: Undying Guard
+  x: 1336.5
+  y: 1368.4
+  level: 47
+  npcId: 2600677
+  indexInSubtype: 71
+- category: boss
+  subtype: bossElite
+  id: 464dd9b1-1f86-5936-a22f-a8891a202fe0
+  name: Undying Guard
+  x: 1244.0
+  y: 1375.2
+  level: 47
+  npcId: 2600677
+  indexInSubtype: 72
+- category: boss
+  subtype: bossElite
+  id: befd0b60-5f23-5761-a4ef-5c01ec5af99d
+  name: Undying Guard
+  x: 1282.7
+  y: 1401.0
+  level: 47
+  npcId: 2600677
+  indexInSubtype: 73
+- category: boss
+  subtype: bossElite
+  id: 8856eb27-b1f7-505d-ae5e-4a35b57cefc5
+  name: Abyss Rusty Rotan
+  x: 1317.7
+  y: 1379.1
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 74
+- category: boss
+  subtype: bossElite
+  id: b65a8503-bb00-5ab3-bb78-59c0a04093ab
+  name: Abyss Rusty Rotan
+  x: 1271.5
+  y: 1398.5
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 75
+- category: boss
+  subtype: bossElite
+  id: 51b13c07-b116-529f-a70b-d0fc092d494c
+  name: Abyss Rusty Rotan
+  x: 1306.4
+  y: 1351.1
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 76
+- category: boss
+  subtype: bossElite
+  id: 4ed499cf-37cc-5e34-9eb2-c949af41aa00
+  name: Abyss Rusty Rotan
+  x: 1292.8
+  y: 1394.6
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 77
+- category: boss
+  subtype: bossElite
+  id: c469715c-59a3-52ee-96fd-f68972ea96e3
+  name: Abyss Rusty Rotan
+  x: 1293.7
+  y: 1377.1
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 78
+- category: boss
+  subtype: bossElite
+  id: 101a4048-8e12-553f-8d28-8b415bc7f7b7
+  name: Abyss Rusty Rotan
+  x: 1284.0
+  y: 1342.0
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 79
+- category: boss
+  subtype: bossElite
+  id: 357303c3-548e-5ccf-b1df-b69d6d1dd931
+  name: Abyss Rusty Rotan
+  x: 1253.8
+  y: 1402.4
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 80
+- category: boss
+  subtype: bossElite
+  id: 295e8931-c976-5cbe-902c-c73238687d90
+  name: Abyss Rusty Rotan
+  x: 1274.0
+  y: 1385.3
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 81
+- category: boss
+  subtype: bossElite
+  id: 4b13d155-5faf-541d-8060-0f8b10ae7674
+  name: Abyss Rusty Rotan
+  x: 1246.3
+  y: 1384.8
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 82
+- category: boss
+  subtype: bossElite
+  id: 3c2c9f36-adc3-5087-a1af-8c6dad9e3006
+  name: Abyss Rusty Rotan
+  x: 1262.9
+  y: 1361.1
+  level: 46
+  npcId: 2600664
+  indexInSubtype: 83
+- category: boss
+  subtype: bossElite
+  id: 8e6ef6c2-e7e5-57fc-a313-b2adb1c0a333
+  name: Undying Guard
+  x: 1365.2
+  y: 1445.6
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 84
+- category: boss
+  subtype: bossElite
+  id: c5292e03-6729-56eb-90e6-600901d6a51b
+  name: Undying Guard
+  x: 1350.2
+  y: 1437.9
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 85
+- category: boss
+  subtype: bossElite
+  id: c4e58eaa-8fbe-5bf6-bc02-ae4f3ebf10fe
+  name: Undying Guard
+  x: 1318.0
+  y: 1450.8
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 86
+- category: boss
+  subtype: bossElite
+  id: 6b95df7f-fb61-5ef8-90e6-697163f4c403
+  name: Undying Guard
+  x: 1324.9
+  y: 1447.8
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 87
+- category: boss
+  subtype: bossElite
+  id: f52b5d4a-8285-5102-b9cd-e8a3954b4bc6
+  name: Undying Guard
+  x: 1366.2
+  y: 1468.7
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 88
+- category: boss
+  subtype: bossElite
+  id: e0c2282a-21b8-5ed1-a5de-08cd76ba73c3
+  name: Undying Guard
+  x: 1370.6
+  y: 1453.5
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 89
+- category: boss
+  subtype: bossElite
+  id: 86be84bd-42eb-534e-88d2-cf2ed7516d69
+  name: Undying Guard
+  x: 1327.9
+  y: 1475.7
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 90
+- category: boss
+  subtype: bossElite
+  id: 0f8c3f98-35c3-54ff-bcf8-dbdafec341ec
+  name: Undying Guard
+  x: 1334.9
+  y: 1477.6
+  level: 47
+  npcId: 2600678
+  indexInSubtype: 91
+- category: boss
+  subtype: bossElite
+  id: 88eb8df6-78d8-51de-bcd3-4ccd5f3c7da0
+  name: Undying Guard
+  x: 492.1
+  y: 1261.4
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 92
+- category: boss
+  subtype: bossElite
+  id: c6300154-047d-5c86-bbe3-36ff38240892
+  name: Undying Guard
+  x: 465.5
+  y: 1269.5
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 93
+- category: boss
+  subtype: bossElite
+  id: 04185258-742b-5635-9b4f-9dd3861b5ae9
+  name: Undying Guard
+  x: 460.1
+  y: 1227.9
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 94
+- category: boss
+  subtype: bossElite
+  id: 5f63da89-6269-55eb-b6aa-86afc6afadbf
+  name: Undying Guard
+  x: 469.6
+  y: 1225.8
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 95
+- category: boss
+  subtype: bossElite
+  id: ca15acae-d332-539f-bcbe-196b9e0b10b2
+  name: Undying Guard
+  x: 498.5
+  y: 1241.1
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 96
+- category: boss
+  subtype: bossElite
+  id: a57372fa-acd5-58a9-9b8a-179f75564fa9
+  name: Undying Guard
+  x: 504.2
+  y: 1254.9
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 97
+- category: boss
+  subtype: bossElite
+  id: 416e1d4d-ebe6-5edb-80a5-7ccec693a1d0
+  name: Undying Guard
+  x: 507.1
+  y: 1226.5
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 98
+- category: boss
+  subtype: bossElite
+  id: b80c4605-31c1-5e66-b348-7d72d77e7f18
+  name: Undying Guard
+  x: 498.9
+  y: 1220.0
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 99
+- category: boss
+  subtype: bossElite
+  id: ecca752c-7424-5fe2-afc9-5c2bc99d3ae4
+  name: Undying Guard
+  x: 449.6
+  y: 1218.9
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 100
+- category: boss
+  subtype: bossElite
+  id: b322c92e-2941-5305-9dfc-67ad2da33c8d
+  name: Undying Guard
+  x: 465.7
+  y: 1289.6
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 101
+- category: boss
+  subtype: bossElite
+  id: 952295b2-b2b0-5cd1-a1da-819828741985
+  name: Undying Guard
+  x: 457.7
+  y: 1252.5
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 102
+- category: boss
+  subtype: bossElite
+  id: d6cbc9ed-750d-54f6-a19e-881fdbc84914
+  name: Undying Guard
+  x: 476.0
+  y: 1223.0
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 103
+- category: boss
+  subtype: bossElite
+  id: b1588a43-3e29-51f8-8ef3-e1b91b64a9dc
+  name: Undying Guard
+  x: 475.0
+  y: 1273.7
+  level: 47
+  npcId: 2600616
+  indexInSubtype: 104
+- category: boss
+  subtype: bossElite
+  id: 0f553351-e6bb-5fcd-bd6b-0931dbddab8a
+  name: Abyss Rusty Rotan
+  x: 456.7
+  y: 1264.2
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 105
+- category: boss
+  subtype: bossElite
+  id: edc41669-ee9f-5317-9bc3-b70e844241fa
+  name: Abyss Rusty Rotan
+  x: 489.7
+  y: 1242.5
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 106
+- category: boss
+  subtype: bossElite
+  id: 3635bc10-0dca-5579-9f51-e74bafaabda5
+  name: Abyss Rusty Rotan
+  x: 454.5
+  y: 1283.1
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 107
+- category: boss
+  subtype: bossElite
+  id: 9b078b9e-19c0-57c3-af22-182ad58e9e35
+  name: Abyss Rusty Rotan
+  x: 508.6
+  y: 1243.2
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 108
+- category: boss
+  subtype: bossElite
+  id: 1badb614-9876-5a8f-889d-b1a6f4c86f51
+  name: Abyss Rusty Rotan
+  x: 492.9
+  y: 1228.1
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 109
+- category: boss
+  subtype: bossElite
+  id: f53c8cee-c809-5828-88cc-b0a87837c2da
+  name: Abyss Rusty Rotan
+  x: 450.6
+  y: 1227.7
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 110
+- category: boss
+  subtype: bossElite
+  id: 41c2509f-40fe-514c-ad65-f8f07987b64e
+  name: Abyss Rusty Rotan
+  x: 492.2
+  y: 1256.1
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 111
+- category: boss
+  subtype: bossElite
+  id: 165d5420-4212-57a8-9015-af92553082da
+  name: Abyss Rusty Rotan
+  x: 473.9
+  y: 1265.9
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 112
+- category: boss
+  subtype: bossElite
+  id: 792b2207-92b9-5c01-8b6d-12f4dddf8d5b
+  name: Abyss Rusty Rotan
+  x: 454.3
+  y: 1239.9
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 113
+- category: boss
+  subtype: bossElite
+  id: 562f66e5-5b87-521b-bd52-19cfa175d319
+  name: Abyss Rusty Rotan
+  x: 482.6
+  y: 1227.4
+  level: 46
+  npcId: 2600603
+  indexInSubtype: 114
+- category: boss
+  subtype: bossElite
+  id: 50d0226a-f1d4-5b91-8951-654fdde26d08
+  name: Undying Guard
+  x: 609.1
+  y: 1439.4
+  level: 47
+  npcId: 2600617
+  indexInSubtype: 115
+- category: boss
+  subtype: bossElite
+  id: 82073bca-fac2-5a74-9998-38475d0d2a25
+  name: Undying Guard
+  x: 642.5
+  y: 1503.9
+  level: 47
+  npcId: 2600617
+  indexInSubtype: 116
+- category: boss
+  subtype: bossElite
+  id: d9c6ec3a-090e-504f-889b-da0234c81128
+  name: Undying Guard
+  x: 614.1
+  y: 1480.1
+  level: 47
+  npcId: 2600617
+  indexInSubtype: 117
+- category: boss
+  subtype: bossElite
+  id: 0f901a0c-7814-5a60-923b-a095aabb2b64
+  name: Undying Guard
+  x: 619.9
+  y: 1479.9
+  level: 47
+  npcId: 2600617
+  indexInSubtype: 118
+- category: boss
+  subtype: bossElite
+  id: b4c92189-d779-5a76-a32c-90187685ac72
+  name: Undying Guard
+  x: 642.1
+  y: 1479.6
+  level: 47
+  npcId: 2600617
+  indexInSubtype: 119
+- category: boss
+  subtype: bossElite
+  id: 22845c02-4acb-5576-906a-1073a2b48e54
+  name: Abyss Rusty Rotan
+  x: 605.2
+  y: 1446.3
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 120
+- category: boss
+  subtype: bossElite
+  id: de3f6f22-7716-5fbe-9f53-1d842088329f
+  name: Abyss Rusty Rotan
+  x: 621.7
+  y: 1491.1
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 121
+- category: boss
+  subtype: bossElite
+  id: f4aefaf2-4258-5094-b072-bb2b38d3bf67
+  name: Abyss Rusty Rotan
+  x: 620.5
+  y: 1467.4
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 122
+- category: boss
+  subtype: bossElite
+  id: 24285eab-2a02-5fba-bf93-87c06fc873d0
+  name: Abyss Rusty Rotan
+  x: 645.1
+  y: 1479.0
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 123
+- category: boss
+  subtype: bossElite
+  id: e66bc791-46cc-5b08-9cdc-cf06178b9666
+  name: Abyss Rusty Rotan
+  x: 632.0
+  y: 1498.7
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 124
+- category: boss
+  subtype: bossElite
+  id: aa0c392d-8648-5e7c-abb6-c1a2cca37a70
+  name: Abyss Rusty Rotan
+  x: 643.1
+  y: 1451.1
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 125
+- category: boss
+  subtype: bossElite
+  id: f062669d-b8bb-5c2e-a74a-3738d79bd588
+  name: Abyss Rusty Rotan
+  x: 663.0
+  y: 1475.0
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 126
+- category: boss
+  subtype: bossElite
+  id: 0285501c-85a7-562f-842a-25e67ec66a60
+  name: Abyss Rusty Rotan
+  x: 660.3
+  y: 1451.8
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 127
+- category: boss
+  subtype: bossElite
+  id: 2088ee19-9a5f-5b88-aba1-e4240dd85569
+  name: Abyss Rusty Rotan
+  x: 631.7
+  y: 1444.6
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 128
+- category: boss
+  subtype: bossElite
+  id: 6ed18274-b8bc-5e92-9196-47a47c7fd54b
+  name: Abyss Rusty Rotan
+  x: 624.0
+  y: 1455.2
+  level: 46
+  npcId: 2600604
+  indexInSubtype: 129
+- category: boss
+  subtype: bossElite
+  id: ace4e186-af8a-5be6-ac9f-30380a014a9d
+  name: Undying Guard
+  x: 746.7
+  y: 1347.8
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 130
+- category: boss
+  subtype: bossElite
+  id: 7f67b4b5-49ad-52fc-afa5-c02939946852
+  name: Undying Guard
+  x: 758.6
+  y: 1350.0
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 131
+- category: boss
+  subtype: bossElite
+  id: 6ec65705-6cf8-5202-abbb-c12e0ed798b6
+  name: Undying Guard
+  x: 737.1
+  y: 1383.1
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 132
+- category: boss
+  subtype: bossElite
+  id: 7d9edd12-f2c4-5dcb-b5aa-bc62599591dd
+  name: Undying Guard
+  x: 741.6
+  y: 1395.2
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 133
+- category: boss
+  subtype: bossElite
+  id: c1363bda-c4e3-5af7-b007-3c32e5b0b744
+  name: Undying Guard
+  x: 760.2
+  y: 1390.8
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 134
+- category: boss
+  subtype: bossElite
+  id: a76b1177-bb46-5d58-a6a7-241b9baf3bd6
+  name: Undying Guard
+  x: 763.1
+  y: 1377.3
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 135
+- category: boss
+  subtype: bossElite
+  id: a30e49b1-9e02-5947-9061-2283c5ac0d1f
+  name: Undying Guard
+  x: 740.1
+  y: 1428.6
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 136
+- category: boss
+  subtype: bossElite
+  id: 92cf370f-8754-5601-a7b6-19a795ca782e
+  name: Undying Guard
+  x: 747.2
+  y: 1429.3
+  level: 47
+  npcId: 2600618
+  indexInSubtype: 137
+- category: boss
+  subtype: bossElite
+  id: 922cda95-c3b5-56c4-810f-345da6ffacab
+  name: Undying Guard
+  x: 1590.2
+  y: 819.2
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 138
+- category: boss
+  subtype: bossElite
+  id: 7a948df3-5932-5acc-b16a-998376089b86
+  name: Undying Guard
+  x: 1556.9
+  y: 888.7
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 139
+- category: boss
+  subtype: bossElite
+  id: 34fc4f03-e334-52e6-9594-06d81c4d9866
+  name: Undying Guard
+  x: 1598.1
+  y: 856.2
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 140
+- category: boss
+  subtype: bossElite
+  id: 2ab9cdef-c3e4-53a9-81f3-2cc2992c618a
+  name: Undying Guard
+  x: 1606.2
+  y: 889.9
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 141
+- category: boss
+  subtype: bossElite
+  id: ae35638b-29fc-5d90-ae41-b4f365af9912
+  name: Undying Guard
+  x: 1580.9
+  y: 835.0
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 142
+- category: boss
+  subtype: bossElite
+  id: 33d91042-6b91-5dd6-ad82-ef703eab7b00
+  name: Undying Guard
+  x: 1562.2
+  y: 849.3
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 143
+- category: boss
+  subtype: bossElite
+  id: d891b51b-7fd9-55fc-8210-a76e74a6a642
+  name: Undying Guard
+  x: 1548.8
+  y: 882.3
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 144
+- category: boss
+  subtype: bossElite
+  id: 0088bf58-822a-55e8-ab03-c042860f7411
+  name: Undying Guard
+  x: 1551.7
+  y: 853.8
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 145
+- category: boss
+  subtype: bossElite
+  id: f4399933-c1a7-5e64-bbc4-e4afc43399dd
+  name: Undying Guard
+  x: 1586.2
+  y: 883.0
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 146
+- category: boss
+  subtype: bossElite
+  id: be5b202a-c883-5100-b95a-f98c58d59e62
+  name: Undying Guard
+  x: 1590.4
+  y: 839.3
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 147
+- category: boss
+  subtype: bossElite
+  id: 42c43ee1-acaa-50a5-b350-666301ca2ab7
+  name: Undying Guard
+  x: 1579.8
+  y: 885.7
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 148
+- category: boss
+  subtype: bossElite
+  id: 4110a9aa-8da6-5bb6-a912-d63d659f7661
+  name: Undying Guard
+  x: 1595.8
+  y: 880.8
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 149
+- category: boss
+  subtype: bossElite
+  id: bf20c378-51b9-5254-b762-4286086422a5
+  name: Undying Guard
+  x: 1557.3
+  y: 867.7
+  level: 47
+  npcId: 2600636
+  indexInSubtype: 150
+- category: boss
+  subtype: bossElite
+  id: a752e644-5b42-56e9-9405-4bd276e9647c
+  name: Abyss Rusty Rotan
+  x: 1601.4
+  y: 825.6
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 151
+- category: boss
+  subtype: bossElite
+  id: c9210e28-a39b-5829-92b2-687eeb06249e
+  name: Abyss Rusty Rotan
+  x: 1563.2
+  y: 854.5
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 152
+- category: boss
+  subtype: bossElite
+  id: 1cb58e23-c082-5988-b2c5-330b66a7c3bb
+  name: Abyss Rusty Rotan
+  x: 1582.0
+  y: 842.8
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 153
+- category: boss
+  subtype: bossElite
+  id: 4aa2cebc-e424-5cc6-bf73-b505aad9ec99
+  name: Abyss Rusty Rotan
+  x: 1573.3
+  y: 881.3
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 154
+- category: boss
+  subtype: bossElite
+  id: bb5aa0c6-fc7f-5025-b0f4-d2fc0833c2f4
+  name: Abyss Rusty Rotan
+  x: 1563.0
+  y: 880.7
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 155
+- category: boss
+  subtype: bossElite
+  id: 4f628d5d-f6c2-5a6e-bb6e-197a5ab62e42
+  name: Abyss Rusty Rotan
+  x: 1599.2
+  y: 844.5
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 156
+- category: boss
+  subtype: bossElite
+  id: df933c33-3584-5a23-acac-98463b4a891d
+  name: Abyss Rusty Rotan
+  x: 1605.3
+  y: 881.1
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 157
+- category: boss
+  subtype: bossElite
+  id: dd88f261-3fcd-51eb-adc2-9cbaf5e8f79d
+  name: Abyss Rusty Rotan
+  x: 1601.6
+  y: 868.9
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 158
+- category: boss
+  subtype: bossElite
+  id: 969c4cf2-8adb-5ac6-b90f-b83623270a3c
+  name: Abyss Rusty Rotan
+  x: 1566.1
+  y: 866.2
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 159
+- category: boss
+  subtype: bossElite
+  id: 187073ac-c722-50f5-aeb9-08fbacb7424c
+  name: Abyss Rusty Rotan
+  x: 1547.3
+  y: 865.6
+  level: 46
+  npcId: 2600623
+  indexInSubtype: 160
+- category: boss
+  subtype: bossElite
+  id: d120547c-bb3e-5e8f-8002-78f239675908
+  name: Undying Guard
+  x: 1441.7
+  y: 628.7
+  level: 47
+  npcId: 2600637
+  indexInSubtype: 161
+- category: boss
+  subtype: bossElite
+  id: d4799fa8-e9a3-5e8c-a65c-37c1c15d0587
+  name: Undying Guard
+  x: 1446.8
+  y: 669.4
+  level: 47
+  npcId: 2600637
+  indexInSubtype: 162
+- category: boss
+  subtype: bossElite
+  id: b71867b0-17ff-5f6a-9229-4bdc51cae24c
+  name: Undying Guard
+  x: 1435.9
+  y: 628.8
+  level: 47
+  npcId: 2600637
+  indexInSubtype: 163
+- category: boss
+  subtype: bossElite
+  id: 2b1ce2e9-fed6-5ee6-8069-2ffa255a7a3b
+  name: Undying Guard
+  x: 1413.8
+  y: 629.2
+  level: 47
+  npcId: 2600637
+  indexInSubtype: 164
+- category: boss
+  subtype: bossElite
+  id: cc0e68eb-8a3d-504c-83cb-e0cbde7f9b9c
+  name: Undying Guard
+  x: 1413.4
+  y: 604.8
+  level: 47
+  npcId: 2600637
+  indexInSubtype: 165
+- category: boss
+  subtype: bossElite
+  id: 59ca0180-a89c-5251-afdb-c555290ceca6
+  name: Abyss Rusty Rotan
+  x: 1434.1
+  y: 617.6
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 166
+- category: boss
+  subtype: bossElite
+  id: 5f78ca87-9cdb-5af9-ae35-38286ae620e6
+  name: Abyss Rusty Rotan
+  x: 1412.8
+  y: 657.7
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 167
+- category: boss
+  subtype: bossElite
+  id: 8c96f448-b810-56e9-b7d5-c3de99272f18
+  name: Abyss Rusty Rotan
+  x: 1431.8
+  y: 653.6
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 168
+- category: boss
+  subtype: bossElite
+  id: cf8657f2-564a-5788-b2b1-a1896176476d
+  name: Abyss Rusty Rotan
+  x: 1424.1
+  y: 664.2
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 169
+- category: boss
+  subtype: bossElite
+  id: d162f69d-202e-565f-8a8c-c41795fa4fe2
+  name: Abyss Rusty Rotan
+  x: 1423.9
+  y: 610.1
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 170
+- category: boss
+  subtype: bossElite
+  id: af1eab37-0d47-5168-8698-c7c4b87853c2
+  name: Abyss Rusty Rotan
+  x: 1450.6
+  y: 662.5
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 171
+- category: boss
+  subtype: bossElite
+  id: a9db3254-ee72-568c-8fbb-4eb663a719dd
+  name: Abyss Rusty Rotan
+  x: 1435.4
+  y: 641.3
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 172
+- category: boss
+  subtype: bossElite
+  id: 076116c0-1b4a-512e-9baf-e0bb34f3bccf
+  name: Abyss Rusty Rotan
+  x: 1392.9
+  y: 633.7
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 173
+- category: boss
+  subtype: bossElite
+  id: 17e610e9-e358-5591-be64-e3d1cd2a19d9
+  name: Abyss Rusty Rotan
+  x: 1395.6
+  y: 657.0
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 174
+- category: boss
+  subtype: bossElite
+  id: 4e90ae4d-2222-5b39-a828-61d5b4df2e15
+  name: Abyss Rusty Rotan
+  x: 1410.8
+  y: 629.8
+  level: 46
+  npcId: 2600624
+  indexInSubtype: 175
+- category: boss
+  subtype: bossElite
+  id: 6a5c2fe4-6666-5cb3-9650-2f7718fa904d
+  name: Undying Guard
+  x: 1310.6
+  y: 684.0
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 176
+- category: boss
+  subtype: bossElite
+  id: cb8ec8c2-fbc7-57e7-96e6-5f90349dab1e
+  name: Undying Guard
+  x: 1317.8
+  y: 684.1
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 177
+- category: boss
+  subtype: bossElite
+  id: 992b2c27-909c-530d-afd5-b1e45cfec5a9
+  name: Undying Guard
+  x: 1314.2
+  y: 713.5
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 178
+- category: boss
+  subtype: bossElite
+  id: 8b47e101-7532-5ba0-beec-04b2cca1d683
+  name: Undying Guard
+  x: 1297.3
+  y: 758.7
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 179
+- category: boss
+  subtype: bossElite
+  id: f23d4d5f-9497-5195-afe4-3227cfa0879b
+  name: Undying Guard
+  x: 1292.8
+  y: 731.4
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 180
+- category: boss
+  subtype: bossElite
+  id: 8ede004d-f827-523f-9ac9-629f12bfc81f
+  name: Undying Guard
+  x: 1318.8
+  y: 725.7
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 181
+- category: boss
+  subtype: bossElite
+  id: fd37b91a-b70e-51a4-b8d4-2311c01d05ed
+  name: Undying Guard
+  x: 1295.6
+  y: 717.9
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 182
+- category: boss
+  subtype: bossElite
+  id: 16dbc798-72bd-5500-b97c-79d7dbf0af64
+  name: Undying Guard
+  x: 1309.2
+  y: 761.0
+  level: 47
+  npcId: 2600638
+  indexInSubtype: 183
+- category: location
+  subtype: teleport
+  id: 470a95b7-9e6f-56ad-a177-06821a31ae79
+  name: Krotan Fortress
+  x: 1024.4
+  y: 1662.0
+  indexInSubtype: 0
+- category: boss
+  subtype: bossElite
+  id: ca8c54b5-df16-5345-a58b-feca964935bd
+  name: Unavarun Nagarant Praetorian
+  x: 883.9
+  y: 961.2
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 184
+- category: boss
+  subtype: bossElite
+  id: 135f57a7-16cd-51a6-9099-81299b5d79ab
+  name: Unavarun Nagarant Praetorian
+  x: 901.1
+  y: 1007.8
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 185
+- category: boss
+  subtype: bossElite
+  id: 708c33bb-60e0-52d9-9d22-0cb834748c97
+  name: Unavarun Nagarant Praetorian
+  x: 960.8
+  y: 939.0
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 186
+- category: boss
+  subtype: bossElite
+  id: bca1a1dc-468f-57fa-ac29-bfccbcfdddd2
+  name: Unavarun Nagarant Praetorian
+  x: 944.1
+  y: 1023.6
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 187
+- category: boss
+  subtype: bossElite
+  id: decc48a6-960b-5462-98b7-0d5de031a2f9
+  name: Unavarun Nagarant Praetorian
+  x: 896.6
+  y: 978.4
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 188
+- category: boss
+  subtype: bossElite
+  id: db2eab17-f8dd-5f3c-a0b3-55342c1ab2ca
+  name: Unavarun Nagarant Praetorian
+  x: 925.6
+  y: 940.4
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 189
+- category: boss
+  subtype: bossElite
+  id: 16785702-6859-5192-a99f-ec6b4481ab71
+  name: Unavarun Nagarant Praetorian
+  x: 939.3
+  y: 991.9
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 190
+- category: boss
+  subtype: bossElite
+  id: 09a4cd0f-eeab-514d-9db2-b542e57c2bfa
+  name: Unavarun Nagarant Praetorian
+  x: 894.9
+  y: 943.3
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 191
+- category: boss
+  subtype: bossElite
+  id: 4e391d96-85da-5d63-93a6-d3e871f3879f
+  name: Unavarun Nagarant Praetorian
+  x: 864.6
+  y: 973.1
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 192
+- category: boss
+  subtype: bossElite
+  id: 6fc6b00e-6e02-5e76-a5f9-a7ef599ba380
+  name: Unavarun Nagarant Praetorian
+  x: 938.3
+  y: 975.7
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 193
+- category: boss
+  subtype: bossElite
+  id: d39d13cc-8410-5108-8a5b-93f1a32fdd3d
+  name: Unavarun Nagarant Praetorian
+  x: 926.6
+  y: 1036.6
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 194
+- category: boss
+  subtype: bossElite
+  id: 61a85e1d-235f-5eb5-ab2e-8a07d3122aa1
+  name: Unavarun Nagarant Praetorian
+  x: 912.7
+  y: 1027.9
+  level: 47
+  npcId: 2600692
+  indexInSubtype: 195
+- category: boss
+  subtype: bossElite
+  id: ab84cab3-7ec6-5daa-874f-c2bd43292c30
+  name: Abyss Swarm Colony
+  x: 946.2
+  y: 952.8
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 196
+- category: boss
+  subtype: bossElite
+  id: 84f1123d-8f32-54cd-b62e-e4252bbdb9f4
+  name: Abyss Swarm Colony
+  x: 879.9
+  y: 974.8
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 197
+- category: boss
+  subtype: bossElite
+  id: 8feaf37a-3859-58f4-819d-f952637d33b3
+  name: Abyss Swarm Colony
+  x: 917.7
+  y: 969.1
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 198
+- category: boss
+  subtype: bossElite
+  id: 583873de-7cfd-5f24-8956-34dd9ed8dde1
+  name: Abyss Swarm Colony
+  x: 874.5
+  y: 988.8
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 199
+- category: boss
+  subtype: bossElite
+  id: df439265-2b00-5aa3-8c43-ee33e1269402
+  name: Abyss Swarm Colony
+  x: 879.2
+  y: 943.2
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 200
+- category: boss
+  subtype: bossElite
+  id: e448d288-6652-53cc-8fed-f2b428fd5ece
+  name: Abyss Swarm Colony
+  x: 919.8
+  y: 989.0
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 201
+- category: boss
+  subtype: bossElite
+  id: 013d1992-ed45-58de-9f15-562220eed4b0
+  name: Abyss Swarm Colony
+  x: 891.4
+  y: 1009.3
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 202
+- category: boss
+  subtype: bossElite
+  id: b6417ee2-8e65-574e-b4ee-733be9984c4e
+  name: Abyss Swarm Colony
+  x: 895.7
+  y: 966.7
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 203
+- category: boss
+  subtype: bossElite
+  id: 178877a4-3ff6-515a-a7cc-a3df24d32cf7
+  name: Abyss Swarm Colony
+  x: 860.0
+  y: 961.0
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 204
+- category: boss
+  subtype: bossElite
+  id: fa93cc35-8692-5102-b8d6-9275e003cba5
+  name: Abyss Swarm Colony
+  x: 862.1
+  y: 949.8
+  level: 44
+  npcId: 2600682
+  indexInSubtype: 205
+- category: boss
+  subtype: bossElite
+  id: daf4f00d-3e96-5416-9143-16478eb657d1
+  name: Abyss Drana Giant Mutant
+  x: 1023.7
+  y: 1208.7
+  level: 46
+  npcId: 2600691
+  indexInSubtype: 206
+- category: boss
+  subtype: bossElite
+  id: 2382c732-2e2d-5023-9605-715d4daefa8f
+  name: Abyss Drana Giant Mutant
+  x: 1023.8
+  y: 1107.9
+  level: 46
+  npcId: 2600691
+  indexInSubtype: 207
+- category: boss
+  subtype: bossElite
+  id: bbd33166-9d28-5c7b-9598-844ab51eea3d
+  name: Abyss Drana Giant Mutant
+  x: 954.5
+  y: 1174.9
+  level: 46
+  npcId: 2600691
+  indexInSubtype: 208
+- category: boss
+  subtype: bossElite
+  id: 6e02e23d-d107-564c-8d73-af5a7e4b16c6
+  name: Abyss Drana Giant Mutant
+  x: 1027.0
+  y: 1085.6
+  level: 46
+  npcId: 2600691
+  indexInSubtype: 209
+- category: boss
+  subtype: bossElite
+  id: 6ad196ce-a267-5e30-a8f6-2d1483bee358
+  name: Abyss Drana Giant Mutant
+  x: 1055.4
+  y: 1119.2
+  level: 46
+  npcId: 2600691
+  indexInSubtype: 210
+- category: boss
+  subtype: bossElite
+  id: c3ca4e3e-d406-5824-84cd-8bb17b845fd9
+  name: Abyss Drana Giant Mutant
+  x: 1049.3
+  y: 1081.8
+  level: 46
+  npcId: 2600691
+  indexInSubtype: 211
+- category: location
+  subtype: teleport
+  id: 0b163c9a-fafb-5944-9b28-0359a938d81a
+  name: Dukysas Fortress
+  x: 1024.4
+  y: 454.6
+  indexInSubtype: 1
+- category: location
+  subtype: village
+  id: 32a1a182-83eb-564a-993c-bb0fdd4966d4
+  name: Dukysas Fortress
+  region: DukysasFortress
+  x: 1024.8
+  y: 555.5
+  indexInSubtype: 0
+- category: location
+  subtype: village
+  id: f2b1d6f0-2db3-54a5-bdd0-f297f25afa86
+  name: Krotan Fortress
+  region: KrotanFortress
+  x: 1025.3
+  y: 1553.8
+  indexInSubtype: 1
+- category: location
+  subtype: battlefield
+  id: 671a78b6-8b89-50a0-91bc-78cd66c39d11
+  name: Red Thorn Crown Isle
+  region: RedThornCrownIsle
+  x: 1024.0
+  y: 1024.0
+  indexInSubtype: 0
+- category: location
+  subtype: battlefield
+  id: fda29fc7-90a9-5fce-a304-bd5facad1367
+  name: La Miren Fortress Northern Remnants
+  region: LaMirenFortressNorthernRemnants
+  x: 603.5
+  y: 1327.3
+  indexInSubtype: 1
+- category: location
+  subtype: battlefield
+  id: 859eb768-d296-5b8e-a7e2-649d1ec6b2be
+  name: La Miren Fortress Southern Remnants
+  region: LaMirenFortressSouthernRemnants
+  x: 1456.8
+  y: 779.9
+  indexInSubtype: 2
+- category: location
+  subtype: battlefield
+  id: 6d3756cc-bd5a-53b5-923e-cd9aaaf9f44d
+  name: Fractured Southern Crash Site
+  region: FracturedSouthernCrashSite
+  x: 621.8
+  y: 779.7
+  indexInSubtype: 3
+- category: location
+  subtype: battlefield
+  id: c53ed801-d57e-5118-adce-4cb25a584190
+  name: Fractured Northern Crash Site
+  region: FracturedNorthernCrashSite
+  x: 1439.4
+  y: 1328.9
+  indexInSubtype: 4

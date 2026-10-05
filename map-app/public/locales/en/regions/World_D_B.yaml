@@ -1,0 +1,96 @@
+IralcigHighland:
+  description: Iralcig Highland
+  name: Iralcig Highland
+IralcigOutpost:
+  description: Iralcig Outpost
+  name: Iralcig Outpost
+FloatingTempleOfArkanisPlaza:
+  description: Floating Temple of Arkanis Plaza
+  name: Floating Temple of Arkanis Plaza
+FloatingTempleOfArkanisEntrance:
+  description: Floating Temple of Arkanis Entrance
+  name: Floating Temple of Arkanis Entrance
+AshenOutpost:
+  description: Ashen Outpost
+  name: Ashen Outpost
+CursedSnowfieldHideout:
+  description: Cursed Snowfield Hideout
+  name: Cursed Snowfield Hideout
+FallenTempleRuins:
+  description: Fallen Temple Ruins
+  name: Fallen Temple Ruins
+DestroyedFafniumSite:
+  description: Destroyed Fafnium Site
+  name: Destroyed Fafnium Site
+DharvataSurveillanceBase:
+  description: Dharvata Surveillance Base
+  name: Dharvata Surveillance Base
+DinakraSkyOutpost:
+  description: Dinakra Sky Outpost
+  name: Dinakra Sky Outpost
+ExecutionerSTower:
+  description: Executioner's Tower
+  name: Executioner's Tower
+EyeOfMuspel:
+  description: Eye of Muspel
+  name: Eye of Muspel
+FirePlaza:
+  description: Fire Plaza
+  name: Fire Plaza
+HalabanaCanyon:
+  description: Halabana Canyon
+  name: Halabana Canyon
+IceCanyonCampsite:
+  description: Ice Canyon Campsite
+  name: Ice Canyon Campsite
+AshenCampsite:
+  description: Ashen Campsite
+  name: Ashen Campsite
+HunterSHideout:
+  description: Hunter's Hideout
+  name: Hunter's Hideout
+IcecapRidge:
+  description: Icecap Ridge
+  name: Icecap Ridge
+FireTempleEntrance:
+  description: Fire Temple Entrance
+  name: Fire Temple Entrance
+KromedeSIsland:
+  description: Kromede's Island
+  name: Kromede's Island
+NephraSnowfield:
+  description: Nephra Snowfield
+  name: Nephra Snowfield
+Morheim:
+  description: Morheim
+  name: Morheim
+MuspelVolcanoZone:
+  description: Muspel Volcano Zone
+  name: Muspel Volcano Zone
+NephraSnowfieldOutpost:
+  description: Nephra Snowfield Outpost
+  name: Nephra Snowfield Outpost
+PatamorPlains:
+  description: Patamor Plains
+  name: Patamor Plains
+PatamorPlainsOutskirts:
+  description: Patamor Plains Outskirts
+  name: Patamor Plains Outskirts
+PatamorForestOutpost:
+  description: Patamor Forest Outpost
+  name: Patamor Forest Outpost
+PatamorVillage:
+  description: Patamor Village
+  name: Patamor Village
+SleetOutpost:
+  description: Sleet Outpost
+  name: Sleet Outpost
+FrostwindForwardBase:
+  description: Frostwind Forward Base
+  name: Frostwind Forward Base
+SnowshadeHideout:
+  description: Snowshade Hideout
+  name: Snowshade Hideout
+SearcherCampsite:
+  description: Searcher Campsite
+  name: Searcher Campsite

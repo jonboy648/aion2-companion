@@ -1,0 +1,81 @@
+lang: "en"
+siteTitle: "Interactive Map"
+
+ui:
+  confirm: "Confirm"
+  cancel: "Cancel"
+  close: "Close"
+  loading: "Loading..."
+  search: "Search"
+  noData: "No Data"
+  add: "Add"
+  delete: "Delete"
+  save: "Save"
+  edit: "Edit"
+  clear: "Clear"
+  confirmDelete: "Are you sure you want to delete this?"
+
+theme:
+  auto: "Auto (Change with Map)"
+  light: "Day Mode (Elyos)"
+  dark: "Night Mode (Asmodian)"
+  abyss: "Dawn Mode (Abyss)"
+
+menu:
+  home: "Home"
+  settings: "Settings"
+  maps: "Maps"
+  regions: "Regions"
+  markerTypes: "Marker Types"
+  showNamesOnPins: "Show names"
+  showAllMarkers: "Show all"
+  hideAllMarkers: "Hide all"
+  clearMarkerCompleted: "Clear completed"
+  clearMarkerCompletedBody: "Do you want to clear all completed marker in this map?"
+  expand: "Expand"
+  collapse: "Collapse"
+  showBorders: "Show region borders"
+  hideUserMarkers: "Hide custom markers"
+  switchTheme: "Switch theme"
+  showCategory: "Show all"
+  hideCategory: "Hide all"
+
+routes:
+  map: "Map"
+  crafting: "Crafting"
+  about: "About and credits"
+
+errors:
+  unknown: "An unknown error occurred."
+  network: "Network connection error."
+  notFound: "Resource not found."
+
+markerActions:
+  markCompleted: "Mark as completed"
+  markNotCompleted: "Completed"
+  userMarker: "Custom marker"
+  editUserMarker: "Edit custom marker"
+  createUserMarker: "Create custom marker"
+  name: "Name"
+  description: "Details"
+  local: "Local marker"
+  image: "Image"
+  search: "Search by pet, location name or description"
+  searchCount: "{{count}} search results"
+  position: "Coordinates"
+  inputPosition: "Jump to entered coordinates"
+  providedBy: "Provided by <emph>{{contributor}}</emph>"
+
+crafting:
+  select: "Select equipment to replace"
+  selectClick: "Click to select equipment"
+  sumType: "Subtotal: "
+  sumTotal: "Total: "
+  weaponOrArmor: "Weapon / Armor"
+  accessory: "Accessory"
+  clearAll: "Clear all"
+  unitPrice: "Unit price"
+
+race:
+  light: "Elyos"
+  dark: "Asmodian"

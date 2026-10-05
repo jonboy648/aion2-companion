@@ -1,0 +1,110 @@
+markers:
+- category: location
+  subtype: teleport
+  id: c83e0534-b98d-52f3-9c6b-fda906971c7d
+  name: Aldelle Village
+  x: 3398.4
+  y: 2546.9
+  indexInSubtype: 0
+- category: location
+  subtype: teleport
+  id: 3aced3ef-64ba-5f2e-9f23-6e95023ceb5f
+  name: Witch's Cabin
+  x: 3523.8
+  y: 2764.9
+  indexInSubtype: 1
+- category: location
+  subtype: teleport
+  id: 26a4c46d-e6bb-5110-b79f-3ca861d3ce9f
+  name: Abandoned Barracks Site
+  x: 3594.6
+  y: 2422.6
+  indexInSubtype: 2
+- category: location
+  subtype: dungeonEntrance
+  id: ecc512f6-065e-5b97-9613-398dcae71082
+  name: Tunapre Lake Cave Entrance
+  x: 3544.8
+  y: 2871.2
+  indexInSubtype: 0
+- category: quest
+  subtype: questHero
+  id: d303c482-69ed-5fd4-ad3d-df96e2451589
+  name: A Village in the Fog
+  x: 3377.9
+  y: 2536.4
+  level: 2
+  questId: HQ2101010
+  indexInSubtype: 0
+- category: quest
+  subtype: questHero
+  id: 1595158a-c95c-54b6-9c0f-3eb5277bf9bf
+  name: Prepare to Escape
+  x: 3395.4
+  y: 2544.6
+  level: 2
+  questId: HQ2101020
+  indexInSubtype: 1
+- category: quest
+  subtype: questHero
+  id: 56ee0030-8a02-5a25-9f59-a89b7aeaa55c
+  name: Shadow Forest
+  x: 3438.7
+  y: 2573.6
+  level: 3
+  questId: HQ2101030
+  indexInSubtype: 2
+- category: quest
+  subtype: questHero
+  id: e9f86d0e-f74b-59fc-a3fc-9062fdce338c
+  name: Isolated Lake
+  x: 3455.3
+  y: 2542.0
+  level: 4
+  questId: HQ2101040
+  indexInSubtype: 3
+- category: quest
+  subtype: questHero
+  id: 7c6c16c9-11c3-5099-a650-e82fb3ece2f9
+  name: The Being Beneath the Lake
+  x: 3534.2
+  y: 2774.4
+  level: 5
+  questId: HQ2101050
+  indexInSubtype: 4
+- category: quest
+  subtype: questHero
+  id: cb473df8-6d4c-5814-9d6a-fef55ee41908
+  name: Signs of a Crash Landing
+  x: 3421.2
+  y: 2520.1
+  level: 6
+  questId: HQ2101070
+  indexInSubtype: 5
+- category: quest
+  subtype: questHero
+  id: ce43c242-328d-5f39-b6f2-32a055b17649
+  name: Prison Compound Infiltration Plan
+  x: 3585.5
+  y: 2423.4
+  level: 7
+  questId: HQ2101080
+  indexInSubtype: 6
+- category: quest
+  subtype: questHero
+  id: a43bc973-859b-5dda-b721-1000733ff4cd
+  name: Brigade Prison Compound Infiltration Operation
+  x: 3445.2
+  y: 2312.2
+  level: 7
+  questId: HQ2101090
+  indexInSubtype: 7
+- category: quest
+  subtype: questHero
+  id: a9667a2d-6855-5de7-8846-331d47b194d3
+  name: The Longest Night
+  x: 3455.3
+  y: 2542.0
+  level: 9
+  questId: HQ2101100
+  indexInSubtype: 8

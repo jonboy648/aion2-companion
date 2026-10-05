@@ -1,0 +1,137 @@
+categories:
+  gathering:
+    name: Gathering
+  quest:
+    name: Quest
+  collection:
+    name: Collectables
+  creature:
+    name: Pet
+  location:
+    name: Location
+  boss:
+    name: Bosses
+subtypes:
+  battlefield:
+    description: Battlefield
+    name: Battlefield
+  creatureFeral:
+    description: Feral
+    name: Fera
+  creatureIntellect:
+    description: Intellect
+    name: Cogni
+  creatureNature:
+    description: Nature
+    name: Natura
+  creatureSpecial:
+    description: Special
+    name: Special
+  creatureTrans:
+    description: Trans
+    name: Varian
+  gatheringAria:
+    description: Aria
+    name: Aria
+  gatheringCoriolus:
+    description: Coriolus
+    name: Coriolus
+  gatheringCypri:
+    description: Cypri
+    name: Cypri
+  gatheringDiamondGemstone:
+    description: Diamond Gemstone
+    name: Diamond Gemstone
+  gatheringInina:
+    description: Inina
+    name: Inina
+  gatheringKukuru:
+    description: Kukuru
+    name: Kukuru
+  gatheringMela:
+    description: Mela
+    name: Mela
+  gatheringOdyle:
+    description: Odyle
+    name: Odyle
+  gatheringOrichalcumOre:
+    description: Orichalcum Ore
+    name: Orichalcum Ore
+  gatheringRubyGemstone:
+    description: Ruby Gemstone
+    name: Ruby Gemstone
+  gatheringSapphireGemstone:
+    description: Sapphire Gemstone
+    name: Sapphire Gemstone
+  gatheringTargena:
+    description: Targena
+    name: Targena
+  gatheringYggdrasilLog:
+    description: Yggdrasil Log
+    name: Yggdrasil Log
+  hiddenCube:
+    description: Hidden Cube
+    name: Hidden Cube
+  monolithMaterial:
+    description: Monolith
+    name: Monolith
+  occupation:
+    description: Occupation
+    name: Occupation
+  seal:
+    description: Seal
+    name: Seal
+  teleport:
+    description: Teleport Point
+    name: Kibelisk
+  village:
+    description: Village
+    name: Village
+  bossNamed:
+    description: Named Boss
+    name: Named Boss
+  bossElite:
+    description: Elite Monster
+    name: Elite Monster
+  dungeonEntrance:
+    description: Dungeon Entrance
+    name: Dungeon Entrance
+  rift:
+    description: Spacetime Rift
+    name: Spacetime Rift
+  questHero:
+    description: Hero Quest
+    name: Hero Quest
+  questDistrict:
+    description: District Quest
+    name: District Quest
+  questDuty:
+    description: Duty Quest
+    name: Duty Quest
+  questAscension:
+    description: Ascension Quest
+    name: Ascension Quest
+  gatheringAsvata:
+    description: Asvata
+    name: Asvata
+  gatheringAzpha:
+    description: Azpha
+    name: Azpha
+  gatheringCalendula:
+    description: Calendula
+    name: Calendula
+  gatheringConide:
+    description: Conide
+    name: Conide
+  gatheringMorfa:
+    description: Morfa
+    name: Morfa
+  gatheringOhkra:
+    description: Ohkra
+    name: Ohkra
+  gatheringPujery:
+    description: Pujery
+    name: Pujery
+  gatheringRaydam:
+    description: Raydam
+    name: Raydam

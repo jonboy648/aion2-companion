@@ -1,0 +1,93 @@
+DigunakaForwardBase:
+  description: Digunaka Forward Base
+  name: Digunaka Forward Base
+HiddenVeinOutpost:
+  description: Hidden Vein Outpost
+  name: Hidden Vein Outpost
+GoldenBranchStrongholdRuins:
+  description: Golden Branch Stronghold Ruins
+  name: Golden Branch Stronghold Ruins
+RogueSkyFortress:
+  description: Rogue Sky Fortress
+  name: Rogue Sky Fortress
+SuspiciousRuins:
+  description: Suspicious Ruins
+  name: Suspicious Ruins
+MysticSpringOfAnathe:
+  description: Mystic Spring of Anathe
+  name: Mystic Spring of Anathe
+TsenkaMerchantsOffice:
+  description: Tsenka Merchants Office
+  name: Tsenka Merchants Office
+TsenkaMerchantsVillage:
+  description: Tsenka Merchants' Village
+  name: Tsenka Merchants' Village
+ChlorisSSecretBase:
+  description: Chloris's Secret Base
+  name: Chloris's Secret Base
+CollapsedCliffFace:
+  description: Collapsed Cliff Face
+  name: Collapsed Cliff Face
+AbandonedObservatory:
+  description: Abandoned Observatory
+  name: Abandoned Observatory
+FracturedLand:
+  description: Fractured Land
+  name: Fractured Land
+RuinedLaboratory:
+  description: Ruined Laboratory
+  name: Ruined Laboratory
+EironHill:
+  description: Eiron Hill
+  name: Eiron Hill
+EironRefugeeCamp:
+  description: Eiron Refugee Camp
+  name: Eiron Refugee Camp
+Eltnen:
+  description: Eltnen
+  name: Eltnen
+EltnenBarrierTowerRuins:
+  description: Eltnen Barrier Tower Ruins
+  name: Eltnen Barrier Tower Ruins
+EasternDartasPlains:
+  description: Eastern Dartas Plains
+  name: Eastern Dartas Plains
+WesternDartasPlains:
+  description: Western Dartas Plains
+  name: Western Dartas Plains
+HernonThievesDen:
+  description: Hernon Thieves Den
+  name: Hernon Thieves Den
+HakranLaboratory:
+  description: Hakran Laboratory
+  name: Hakran Laboratory
+KuriulluValley:
+  description: Kuriullu Valley
+  name: Kuriullu Valley
+LepharistResearchCenterAnnex:
+  description: Lepharist Research Center Annex
+  name: Lepharist Research Center Annex
+LankusisHighland:
+  description: Lankusis Highland
+  name: Lankusis Highland
+LacephinVillage:
+  description: Lacephin Village
+  name: Lacephin Village
+RubereinHighland:
+  description: Ruberein Highland
+  name: Ruberein Highland
+RubereinRest:
+  description: Ruberein Rest
+  name: Ruberein Rest
+RuinsSurveyCampsite:
+  description: Ruins Survey Campsite
+  name: Ruins Survey Campsite
+SilentRemnants:
+  description: Silent Remnants
+  name: Silent Remnants
+MysticSpringObservatory:
+  description: Mystic Spring Observatory
+  name: Mystic Spring Observatory
+WitheredTraceSite:
+  description: Withered Trace Site
+  name: Withered Trace Site
