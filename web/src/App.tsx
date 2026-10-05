@@ -15,6 +15,7 @@ import { HomePage } from "@/pages/HomePage";
 import { KeybindsPage } from "@/pages/KeybindsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { RoadmapPage } from "@/pages/RoadmapPage";
+import { TimersPage } from "@/pages/Timers";
 
 /** Route table. Each page group is owned by one Wave 1 team; keep paths stable (they are shareable links). */
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="c/:region/:serverId/:name" element={<CharacterPage />} />
           <Route path="board" element={<Board />} />
           <Route path="maps" element={<Maps />} />
+          <Route path="timers" element={<TimersPage />} />
           <Route path="compare/:a?/:b?" element={<ComparePage />} />
           <Route path="guide" element={<GuidePage />} />
           <Route path="build" element={<BuildPage />} />

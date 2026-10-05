@@ -5,7 +5,7 @@ import classes from "@/fixtures/list_classes.json";
 import { DocumentMeta, metaFor } from "./DocumentMeta";
 import seo from "./routes.json";
 
-const FIXED = ["/", "/guide", "/build", "/daevanion", "/compare", "/codex", "/keybinds", "/crafting", "/roadmap", "/board", "/maps"];
+const FIXED = ["/", "/guide", "/build", "/daevanion", "/compare", "/codex", "/keybinds", "/crafting", "/roadmap", "/board", "/maps", "/timers"];
 
 describe("seo route table", () => {
   it("has a unique, well-formed entry for every fixed page and every class page", () => {

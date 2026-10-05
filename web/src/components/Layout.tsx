@@ -5,6 +5,7 @@ import { isMockEngine } from "@/engine/api";
 import { BrandCrest } from "@/components/ui/brand-crest";
 import "./site-footer.css";
 import { FactionThemeProvider, useFaction, type Faction } from "@/components/game/faction";
+import { TimerStrip } from "@/features/timers/TimerStrip";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -17,6 +18,7 @@ const NAV = [
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
   { to: "/roadmap", label: "Road Map" },
+  { to: "/timers", label: "Timers" },
 ];
 
 export const DISCLAIMER = "Fan project, not affiliated with NCSOFT. Game data and icons © NCSOFT.";
@@ -77,6 +79,7 @@ function Shell() {
             </span>
           )}
         </div>
+        <TimerStrip />
         <div aria-hidden className="h-px bg-gradient-to-r from-transparent via-[var(--metal)] to-transparent opacity-70" />
       </header>
       <main className="relative z-10 mx-auto w-full max-w-6xl flex-1 px-4 py-6">
@@ -91,7 +94,7 @@ function Shell() {
             </div>
             <nav aria-label="Footer build tools"><h2>Build & plan</h2><NavLink to="/build">Build by hand</NavLink><NavLink to="/compare">Compare builds</NavLink><NavLink to="/daevanion">Daevanion</NavLink><NavLink to="/keybinds">Keybinds</NavLink></nav>
             <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink></nav>
-            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink></nav>
+            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink><NavLink to="/timers">Timers</NavLink></nav>
           </div>
           <div className="site-footer-bottom"><p>{DISCLAIMER}</p><ThemePicker /></div>
           <details className="site-footer-privacy"><summary>Privacy</summary><p>{PRIVACY_NOTE}</p></details>

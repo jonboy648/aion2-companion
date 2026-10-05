@@ -83,6 +83,13 @@
    "intro": "Unofficial community maps. We link to them and do not host or copy any map art."
   },
   {
+   "path": "/timers",
+   "title": "Aion 2 event timers: rift, Shugo, bosses, resets",
+   "h1": "Timers",
+   "description": "Live Aion 2 countdowns for Spacetime Rift, Shugo Festival, Watcher Kaira, siege bosses, Nahma and daily and weekly reset, in your local time.",
+   "intro": "Live countdowns and upcoming times for Aion 2 events, in your own time zone, for Global, KR and TW."
+  },
+  {
    "path": "/codex/gladiator",
    "title": "Aion 2 Gladiator skills, stigmas and specialties",
    "h1": "Gladiator skills",
