@@ -46,6 +46,8 @@ test("normalizePath accepts site routes (normalized), rejects the rest", () => {
   assert.equal(normalizePath("/"), "/");
   assert.equal(normalizePath("/guide"), "/guide");
   assert.equal(normalizePath("/guide/"), "/guide");
+  assert.equal(normalizePath("/timers/"), "/timers");
+  assert.equal(normalizePath("/server-status"), "/server-status");
   assert.equal(normalizePath("/codex"), "/codex");
   assert.equal(normalizePath("/codex/assassin"), "/codex/:classKey");
   assert.equal(normalizePath("/compare"), "/compare");

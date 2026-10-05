@@ -7,7 +7,7 @@ export const MAX_KEYWORD = 32;
 /** Route patterns of the site (hash routes in web/src/App.tsx). /admin is deliberately not countable. */
 const PATH_PATTERNS = [
   [/^\/$/, "/"],
-  [/^\/(guide|build|daevanion|codex|keybinds|crafting|roadmap|board|maps)$/, null],
+  [/^\/(guide|build|daevanion|codex|keybinds|crafting|roadmap|board|maps|timers|server-status)$/, null],
   [/^\/codex\/[A-Za-z0-9_-]{1,40}$/, "/codex/:classKey"],
   [/^\/compare(\/[^/]{1,120}){0,2}$/, "/compare"],
   [/^\/c\/[a-z]{2,3}\/\d{1,6}\/[^/]{1,64}$/, "/c/:region/:serverId/:name"],
