@@ -60,9 +60,12 @@ void main() {
 }`;
 
 export async function createLivingGorge(host: HTMLElement) {
+  const canvas = host.ownerDocument.createElement("canvas");
+  const context = canvas.getContext("webgl2", { alpha: true, antialias: false, powerPreference: "low-power" });
+  if (!context) throw new Error("WebGL is unavailable");
   const texture = await new TextureLoader().loadAsync("/brand/scenes/emerald-gorge.png");
   let renderer: WebGLRenderer;
-  try { renderer = new WebGLRenderer({ alpha: true, antialias: false, powerPreference: "low-power" }); }
+  try { renderer = new WebGLRenderer({ canvas, context, alpha: true, antialias: false, powerPreference: "low-power" }); }
   catch (error) { texture.dispose(); throw error; }
   const scene = new Scene();
   const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
