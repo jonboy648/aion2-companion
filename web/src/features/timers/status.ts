@@ -1,7 +1,7 @@
 import { EVENTS, type EventId, type RegionKey } from "./data";
 import {
   currentOccurrence,
-  formatCountdown,
+  formatShort,
   nextBoss,
   nextBossOccurrences,
   nextOccurrences,
@@ -30,23 +30,23 @@ function untilNext(event: EventId, region: RegionKey, now: number): number {
 /** The four header-strip entries for a region at `now`. Pure; the strip only formats and renders this. */
 export function stripChips(region: RegionKey, now: number): Chip[] {
   const shugo = currentOccurrence("shugo", region, now);
-  const shugoText = shugo ? `ends ${formatCountdown(shugo.end - now)}` : formatCountdown(untilNext("shugo", region, now));
+  const shugoText = shugo ? `ends ${formatShort(shugo.end - now)}` : formatShort(untilNext("shugo", region, now));
 
   const rift = currentOccurrence("rift", region, now);
   const open = riftEntryOpen(region, now);
-  const riftIn = formatCountdown(untilNext("rift", region, now));
+  const riftIn = formatShort(untilNext("rift", region, now));
 
   const boss = nextBoss(region, now);
-  const bossName = EVENTS[boss.occurrence.event].short;
-  const bossIn = formatCountdown(boss.active ? boss.occurrence.end - now : boss.occurrence.start - now);
+  const bossName = EVENTS[boss.occurrence.event].name;
+  const bossIn = formatShort(boss.active ? boss.occurrence.end - now : boss.occurrence.start - now);
 
   return [
     { id: "shugo", label: "Shugo", text: shugoText, compact: shugoText, active: !!shugo, upcoming: nextOccurrences("shugo", region, now, 5) },
     {
       id: "rift",
       label: "Rift",
-      text: open ? `portal closes in ${formatCountdown(rift!.entryEnd! - now)}` : riftIn,
-      compact: open ? `portal ${formatCountdown(rift!.entryEnd! - now)}` : riftIn,
+      text: open ? `portal closes ${formatShort(rift!.entryEnd! - now)}` : riftIn,
+      compact: open ? `closes ${formatShort(rift!.entryEnd! - now)}` : riftIn,
       active: open,
       upcoming: nextOccurrences("rift", region, now, 5),
     },
@@ -58,6 +58,6 @@ export function stripChips(region: RegionKey, now: number): Chip[] {
       active: boss.active,
       upcoming: nextBossOccurrences(region, now, 5),
     },
-    { id: "daily", label: "Daily reset", text: formatCountdown(untilNext("daily", region, now)), compact: formatCountdown(untilNext("daily", region, now)), active: false, upcoming: nextOccurrences("daily", region, now, 5) },
+    { id: "daily", label: "Daily reset", text: formatShort(untilNext("daily", region, now)), compact: formatShort(untilNext("daily", region, now)), active: false, upcoming: nextOccurrences("daily", region, now, 5) },
   ];
 }

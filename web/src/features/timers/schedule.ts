@@ -155,6 +155,18 @@ export function formatCountdown(ms: number): string {
   return `${s}s`;
 }
 
+/** Header-strip countdown: minutes only once past a minute ("50m", "1h 50m", "23h 50m"), seconds under a minute ("21s"). */
+export function formatShort(ms: number): string {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const d = Math.floor(total / 86400);
+  const h = Math.floor((total % 86400) / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  if (d > 0) return `${d}d ${h}h`;
+  if (h > 0) return `${h}h ${String(m).padStart(2, "0")}m`;
+  if (m > 0) return `${m}m`;
+  return `${total}s`;
+}
+
 /** The rule in the region's own clock, e.g. "Every 3 h from 02:00" or "Mon, Thu, Sat at 21:00". */
 export function describeRule(event: EventId, region: RegionKey): string {
   const { rule } = TIMINGS[REGIONS[region].schedule][event];

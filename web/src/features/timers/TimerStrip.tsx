@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Clock } from "lucide-react";
-import { EVENTS, REGIONS } from "./data";
+import { ChevronDown, Clock, PartyPopper, Skull, Zap, type LucideIcon } from "lucide-react";
+import { EVENTS } from "./data";
 import { RegionTabs } from "./RegionTabs";
 import { stripChips, type Chip } from "./status";
 import { formatLocal, useNow, useRegion } from "./useTimers";
@@ -38,6 +38,13 @@ function Dropdown({ chip, now, anchorRight }: { chip: Chip; now: number; anchorR
   );
 }
 
+const ICON: Record<Chip["id"], { Icon: LucideIcon; tone: string }> = {
+  shugo: { Icon: PartyPopper, tone: "text-yellow-400/80" },
+  rift: { Icon: Zap, tone: "text-violet-400/80" },
+  boss: { Icon: Skull, tone: "text-red-400/80" },
+  daily: { Icon: Clock, tone: "text-sky-400/80" },
+};
+
 /** Live event countdowns under the site header. Placeholders until mounted so prerendered HTML matches. */
 export function TimerStrip() {
   const now = useNow();
@@ -68,16 +75,16 @@ export function TimerStrip() {
       ref={root}
       aria-label="Game timers"
       role="region"
-      className="relative mx-auto flex max-w-6xl items-center gap-x-4 gap-y-1 border-t border-[var(--border-soft)] px-4 py-1 text-xs"
+      className="relative mx-auto flex max-w-6xl items-center justify-center gap-x-1 border-t border-[var(--border-soft)] px-4 py-0.5 text-xs text-dim sm:gap-x-3"
     >
-      <Clock aria-hidden className="size-3.5 shrink-0 text-faint" />
       {ids.map((id, i) => {
         const chip = chips?.find((c) => c.id === id);
+        const { Icon, tone } = ICON[id];
         return (
           <div
             key={id}
-            // boss and daily are hidden on phones; the dropdown of the others links to /timers
-            className={cn("sm:relative", i >= 2 && "hidden sm:block")}
+            // boss and daily are hidden on phones; the dropdowns of the others link to /timers
+            className={cn("group sm:relative", i >= 2 && "hidden sm:block")}
             onPointerEnter={(e) => {
               pointer.current = e.pointerType;
               if (e.pointerType === "mouse" && chip) setOpen(id);
@@ -90,10 +97,11 @@ export function TimerStrip() {
               disabled={!chip}
               onPointerDown={(e) => (pointer.current = e.pointerType)}
               onClick={() => setOpen((o) => (pointer.current === "mouse" ? id : o === id ? null : id))}
-              className="flex items-baseline gap-1.5 whitespace-nowrap bg-transparent py-1 text-xs hover:text-gold"
+              className="flex items-center gap-1.5 whitespace-nowrap rounded bg-transparent px-2 py-1 text-xs text-dim transition-colors hover:bg-white/5 hover:text-text"
             >
-              <span className="text-dim">{chip?.label ?? { shugo: "Shugo", rift: "Rift", boss: "Boss", daily: "Daily reset" }[id]}</span>
-              <span className={cn("tabular-nums", chip?.active && "font-semibold text-ok")} aria-live="off">
+              <Icon aria-hidden className={cn("size-3.5 shrink-0", tone)} />
+              <span>{chip?.label ?? { shugo: "Shugo", rift: "Rift", boss: "Boss", daily: "Daily reset" }[id]}</span>
+              <span className={cn("font-semibold tabular-nums", chip?.active ? "text-ok" : "text-text")} aria-live="off">
                 {chip ? (
                   <>
                     <span className="sm:hidden">{chip.compact}</span>
@@ -103,15 +111,15 @@ export function TimerStrip() {
                   "--"
                 )}
               </span>
+              <ChevronDown
+                aria-hidden
+                className={cn("size-2.5 shrink-0 text-faint transition-transform duration-150", open === id && "-scale-y-100")}
+              />
             </button>
             {chip && now !== null && open === id && <Dropdown chip={chip} now={now} anchorRight={i >= 2} />}
           </div>
         );
       })}
-      <span className="ml-auto hidden text-faint sm:inline">{REGIONS[region].label}</span>
-      <Link to="/timers" className="ml-auto whitespace-nowrap py-1 text-xs sm:ml-0">
-        Timers
-      </Link>
     </div>
   );
 }
