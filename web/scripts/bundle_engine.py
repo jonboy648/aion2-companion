@@ -5,9 +5,10 @@ Writes into web/public/engine/:
   classes/<key>.json      app/aion2c/data/classes/<key>/gamedata.json
   icons/<key>.json        app/aion2c/data/classes/<key>/icon_names.json  ({skill_key: ICON_NAME}; names only)
   items.json              app/aion2c/data/items.json, minified; fetched lazily by the worker on the first gear call
-  manifest.json           {classes, data_version, built_at, modules}
+  manifest.json           {classes, data_version, engine_version, built_at, modules}
 No images are copied (icons are hotlinked from NCSoft's CDN). Run: python web/scripts/bundle_engine.py
 """
+import hashlib
 import json
 import sys
 import zipfile
@@ -69,6 +70,26 @@ def missing_imports() -> list[str]:
     return sorted(missing)
 
 
+def fingerprint(parts) -> str:
+    """Short content hash of [(name, bytes)]: names and bytes both count, order does not."""
+    h = hashlib.sha256()
+    for name, data in sorted(parts, key=lambda p: p[0]):
+        h.update(name.encode("utf-8") + b"\0" + hashlib.sha256(data).digest())
+    return h.hexdigest()[:12]
+
+
+def engine_fingerprint() -> str:
+    """Hash of everything the engine's results depend on besides the class data: the bundled python sources, the
+    packed data tables and the item table. The browser result cache keys on it (manifest.json `engine_version`), so a
+    deploy that changes engine code or items cannot serve results computed by the old code."""
+    parts = [(module_file(m).relative_to(APP).as_posix(), module_file(m).read_bytes()) for m in MODULES]
+    parts += [(f"data/{d}", (PKG / "data" / d).read_bytes()) for d in PY_DATA]
+    items = PKG / "data" / "items.json"
+    if items.is_file():
+        parts.append(("data/items.json", items.read_bytes()))
+    return fingerprint(parts)
+
+
 def build_zip(dest: Path) -> int:
     with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
         for m in MODULES:
@@ -110,6 +131,7 @@ def main() -> int:
         "classes": classes,
         "data_version": max(versions.values(), default=""),
         "data_versions": versions,
+        "engine_version": engine_fingerprint(),
         "built_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "modules": len(MODULES),
         "items": bool(items_size),

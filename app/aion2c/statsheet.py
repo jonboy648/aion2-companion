@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import math
 import re
+from dataclasses import replace
 from functools import lru_cache
 from pathlib import Path
 
@@ -285,6 +286,41 @@ def compare_armory(raw: dict, book: _Book, data: dict) -> dict:
                 "derived": len(lines), "derived_ok": sum(x["ok"] for x in lines)}}
 
 
+def engine_stats(book: _Book, pre_ratio: dict[str, float]) -> dict[str, float]:
+    """The sheet as `models.Stats` fields (the damage engine's inputs). Rules, one line each:
+    * `attack` = midpoint of Max/Min Attack BEFORE Amp Ratio: weapon range + every flat Attack line. The engine applies
+      `attack_increase_pct` (Amp Ratio "Attack increase") and `weapon_dmg_pct` itself, so Amp Ratio must not be in here.
+      Attack Bonus (`FixingDamage`: level base, wings, Daevanion) is NOT added: whether skill ratios multiply it is
+      unmeasured (research/stat_sheet_dps_calibration_2026-10-05.md 3.3), and the engine already adds the opened
+      Daevanion nodes' Attack Bonus itself (`daevanion.apply_stats`).
+    * Daevanion entries are left out of the fields `models.STAT_MAP` maps (combat speed, cooldown, damage boost, crit
+      damage, penetration): `daevanion.apply_stats` adds those per opened node, so counting them here would count them
+      twice. Fields it does not map (MP, crit rating, double chance, weapon damage, Amp Ratio) keep Daevanion.
+    * `crit_chance_pct` = Critical rating (Amp Ratio "Critical Hit increase" already scales it, as the client words it) /
+      CRIT_RATING_PER_PCT, a guessed conversion. `crit_dmg_pct` = 50 base + Critical Damage Boost.
+    * `cdr_pct` = Cooldown total, uncapped (the cap is applied where a cooldown is used).
+    * `max_mp` = MP. Not set: MP regen (unit unknown), PvE/Boss flat attack, target-side stats, Perfect, Multi-hit."""
+    def tot(stat: str, engine_adds_dae: bool = False) -> float:
+        return sum(e["value"] for e in book.by.get(stat, ()) if not (engine_adds_dae and e["group"] == "daevanion"))
+
+    mid = (pre_ratio["WeaponDamage"] + pre_ratio["WeaponMinDamage"]) / 2
+    cdr = tot("CoolTimeDecrease", True) - tot("CoolTimeIncrease", True)
+    out = {
+        "attack": mid,
+        "attack_increase_pct": tot("DamageRatio"),
+        "weapon_dmg_pct": tot("AmplifyWeaponDamage"),
+        "dmg_boost_pct": tot("AmplifyAllDamage", True),
+        "crit_chance_pct": tot("Critical") / gear.CRIT_RATING_PER_PCT,
+        "crit_dmg_pct": 50.0 + tot("AmplifyCriticalDamage", True),
+        "smite_pct": tot("HardHit"),
+        "combat_speed_pct": tot("CombatSpeed", True),
+        "cdr_pct": max(cdr, 0.0),
+        "penetration": tot("DefensePierce", True),
+        "max_mp": tot("MPMax"),
+    }
+    return {k: round(v, 4) for k, v in out.items()}
+
+
 def compute(raw: dict, items: dict[int, dict] | None = None, data: dict | None = None, calibrate: bool = True) -> dict:
     """raw = {"info", "equipment", "daevanion": {boardId: detail}} as import_character takes it."""
     data = data or load_data()
@@ -309,6 +345,7 @@ def compute(raw: dict, items: dict[int, dict] | None = None, data: dict | None =
     if calibrate:
         _calibrate(book, raw)
     pts = _derived(book, data)
+    pre_ratio = {t: book.total(t) for t in ("WeaponDamage", "WeaponMinDamage")}  # engine `attack` is pre-Amp Ratio
     applied = _ratio(book, data)
     for e in book.by.get("CoolTimeIncrease", ()):
         book.add("CooldownTotal", -e["value"], e["group"], e["label"], e.get("est", False))
@@ -363,4 +400,20 @@ def compute(raw: dict, items: dict[int, dict] | None = None, data: dict | None =
         "groups": [{"key": g, "name": GROUP_NAMES[g]} for g in GROUP_ORDER],
         "armory_check": check, "points": pts, "notes": notes, "unparsed": book.unparsed,
         "not_included": list(NOT_INCLUDED),
+        "engine_stats": engine_stats(book, pre_ratio),
     }
+
+
+STALE_NOTE = "Attack, crit damage and other gear stats are not in the public armory"
+
+
+def apply_to_build(build, raw: dict, notes: list[str], items: dict[int, dict] | None = None):
+    """Imported character -> `build` with the sheet's `engine_stats` in `build.stats` (replacing the placeholder attack
+    and MP and the armory-text percentages). Returns (build, notes); fields the sheet does not set (MP regen, PvE and
+    Boss damage, target defense) keep the incoming values."""
+    es = compute(raw, items)["engine_stats"]
+    notes = [n for n in notes if not n.startswith(STALE_NOTE)]
+    notes.append(f"Stats come from the rebuilt stat sheet: weapon attack {es['attack']:g} (before Amp Ratio), "
+                 f"MP {es['max_mp']:g}, crit {es['crit_chance_pct']:g}%, combat speed {es['combat_speed_pct']:g}%. "
+                 "Random gear lines are scored at their expected value, so these are estimates.")
+    return replace(build, stats=replace(build.stats, **es)), notes

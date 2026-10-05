@@ -150,7 +150,7 @@ export function plannerBuild(gd: GameData, level: number, nodes: Iterable<number
     specs: {},
     bonus_ranks: {},
     stats: {
-      attack: 1000,
+      attack: 550,
       attack_increase_pct: 0,
       weapon_dmg_pct: 0,
       dmg_boost_pct: 0,
@@ -161,7 +161,7 @@ export function plannerBuild(gd: GameData, level: number, nodes: Iterable<number
       smite_pct: 0,
       combat_speed_pct: 0,
       cdr_pct: 0,
-      max_mp: 2000,
+      max_mp: 1000,
       mp_regen_per_s: 20,
       target_defense: 0,
       penetration: 0,

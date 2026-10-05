@@ -20,7 +20,8 @@
   "spiritmaster": "2026-10-05+aion2app-2026-09-18",
   "templar": "2026-10-05+aion2app-2026-09-18"
  },
- "built_at": "2026-10-05T21:04:35+00:00",
+ "engine_version": "5a7386211e81",
+ "built_at": "2026-10-05T22:54:41+00:00",
  "modules": 35,
  "items": true
 }

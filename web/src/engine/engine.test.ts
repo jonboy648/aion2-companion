@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cacheGet, cacheKey, cacheSet, hash53, stableStringify, CACHE_PREFIX } from "./cache";
+import { cacheGet, cacheKey, cacheSet, cacheVersion, hash53, stableStringify, CACHE_PREFIX } from "./cache";
 import { classKeyFor } from "./protocol";
 import type { FromWorker, ToWorker } from "./protocol";
 import { createPyodideClient } from "./pyodide-client";
@@ -19,6 +19,15 @@ describe("cache", () => {
     expect(stableStringify({ a: 1, b: { d: [1, 2], c: null } })).toBe(stableStringify({ b: { c: null, d: [1, 2] }, a: 1 }));
     expect(hash53("x")).not.toBe(hash53("y"));
   });
+  it("changing engine_version (engine code) changes the cache key, same version keeps it", () => {
+    const b = { class_key: "sorcerer" };
+    const key = (engine_version?: string) => cacheKey(cacheVersion({ data_version: "d1", engine_version }), "compare", [b]);
+    expect(key("aaa")).not.toBe(key("bbb"));
+    expect(key("aaa")).toBe(key("aaa"));
+    expect(key("aaa")).not.toBe(key(undefined));
+    expect(key(undefined)).toBe(cacheKey("d1", "compare", [b])); // old manifests keep working
+  });
+
   it("trailing null/undefined args do not change the key; data_version and args do", () => {
     const b = { name: "x" };
     expect(cacheKey("v1", "compare", [b, null])).toBe(cacheKey("v1", "compare", [b]));

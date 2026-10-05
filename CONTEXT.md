@@ -71,3 +71,13 @@ _Avoid_: current DPS, realistic DPS
 **Ceiling**:
 The DPS build with best-in-slot obtainable gear at max enchant and Exceed and every Daevanion point spent; an upper bound, not a promise.
 _Avoid_: max DPS, fully geared (UI label only)
+
+### Damage numbers
+
+**Current build** / **Best build with your gear**:
+The two DPS figures on the character page. Current build is the character exactly as imported (its own stigmas, skill ranks, opened Daevanion nodes, real stats) with the rotation searched. Best build with your gear is the optimizer's plan for the same gear and stats: stigmas, ranks and specialties re-chosen, plus any unspent points the player typed in.
+_Avoid_: potential DPS, max DPS (max potential is the separate best-in-slot gear view)
+
+**Weapon attack** (the engine's `attack` input):
+The midpoint of the stat sheet's Max and Min Attack before Amp Ratio: the weapon's range plus every flat Attack line. It excludes Attack Bonus (the engine adds opened Daevanion nodes' Attack Bonus itself; the level and wing share is unmeasured and left out) and the Amp Ratio and weapon-boost multipliers, which the damage formula applies. See `docs/adr/0003-imported-characters-use-stat-sheet-stats.md`.
+_Avoid_: total attack, attack stat

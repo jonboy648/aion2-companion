@@ -111,6 +111,7 @@ def import_character(raw: dict, base_build: dict | None = None) -> dict:
     gd = _gd(ckey)
     base = replace(base, class_key=ckey)
     build, notes = armory.to_build(gd, raw, base)
+    build, notes = statsheet.apply_to_build(build, raw, notes, _items())
     summ = armory.summary(gd, raw)
     prof = (raw.get("info") or {}).get("profile") or {}
     profile = {
@@ -134,10 +135,13 @@ def import_character(raw: dict, base_build: dict | None = None) -> dict:
     }
 
 
-def _full_dict(gd: GameData, fb) -> dict:
-    """FullBuild dict plus `rotation_explained` (engine.rotation.explain_rotation of its own sim)."""
+def _full_dict(gd: GameData, fb, current: CharacterBuild | None = None) -> dict:
+    """FullBuild dict plus `rotation_explained` (engine.rotation.explain_rotation of its own sim) and `current_dps`:
+    the build as given (`current`, before any re-planning) with its rotation searched, next to `result.dps`, the
+    plan. See bo.current_build_dps."""
     d = serde.to_dict(fb)
     d["rotation_explained"] = explain_rotation(gd, fb.build, fb.priority, fb.result, fb.playstyle.scenario)
+    d["current_dps"] = None if current is None else bo.current_build_dps(gd, current, fb.playstyle.scenario, SimConfig())
     return d
 
 
@@ -146,14 +150,14 @@ def compare(build: dict, daevanion_points: int | None = None, progress=None) -> 
     b = _build(build)
     gd = _gd(b.class_key)
     out = bo.compare_playstyles(gd, b, daevanion_points, SimConfig(), progress)
-    return {k: _full_dict(gd, fb) for k, fb in out.items()}
+    return {k: _full_dict(gd, fb, b) for k, fb in out.items()}
 
 
 def optimize(build: dict, playstyle_key: str, daevanion_points: int | None = None, progress=None) -> dict:
     b = _build(build)
     gd = _gd(b.class_key)
     fb = bo.optimize_full_build(gd, b, playstyle_key, daevanion_points, progress=progress)
-    return _full_dict(gd, fb)
+    return _full_dict(gd, fb, b)
 
 
 def marginal(build: dict, priority: dict, scenario_key: str) -> list[dict]:

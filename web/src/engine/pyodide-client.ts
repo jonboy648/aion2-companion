@@ -2,7 +2,7 @@
  * Main-thread client for the Pyodide worker. Implements the same EngineApi shape as api.ts' mock
  * (declared structurally here so api.ts can import this file without a cycle).
  */
-import { cacheGet, cacheKey, cacheSet, defaultStore } from "./cache";
+import { cacheGet, cacheKey, cacheSet, cacheVersion, defaultStore } from "./cache";
 import { PROGRESS_METHODS } from "./protocol";
 import type { FromWorker, InitConfig, Method, ToWorker } from "./protocol";
 import type {
@@ -75,7 +75,7 @@ export function createPyodideClient(opts: ClientOptions = {}) {
 
   const dataVersion = () =>
     (versionP ??= (opts.dataVersion ?? (() =>
-      fetch(`${base}engine/manifest.json`).then((r) => r.json() as Promise<{ data_version: string }>).then((m) => m.data_version)))()
+      fetch(`${base}engine/manifest.json`).then((r) => r.json() as Promise<{ data_version: string; engine_version?: string }>).then(cacheVersion)))()
       .catch((e) => {
         versionP = null;
         throw e;

@@ -46,7 +46,7 @@ describe("worker protocol", () => {
     expect(PY_NAME.maxPotential).toBe("max_potential");
     expect(classKeyFor("gearUpgrades", [raw, { class_key: "assassin" }, "boss"])).toBe("assassin");
     expect(classKeyFor("maxPotential", ["sorcerer", "boss"])).toBe("sorcerer");
-    expect([...GEAR_METHODS].sort()).toEqual(["gearUpgrades", "maxPotential", "statSheet"]);
+    expect([...GEAR_METHODS].sort()).toEqual(["gearUpgrades", "importCharacter", "maxPotential", "statSheet"]);
     expect(GEAR_METHODS.has("compare")).toBe(false);
   });
 });

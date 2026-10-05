@@ -604,6 +604,18 @@ def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progre
                 result=result, budget=budget)
 
 
+def current_build_dps(gd: GameData, build: CharacterBuild, sc: Scenario, cfg: SimConfig = SimConfig(),
+                      budget: SearchBudget = SearchBudget(max_candidates=200)) -> float:
+    """DPS of `build` exactly as given (webapi puts it next to the plan as `current_dps`) (nothing is re-planned: stigmas, ranks, Daevanion nodes and stats stay), with the
+    rotation searched the same way the plan's final step does, so it is comparable with `FullBuild.result.dps`.
+    Specialty options are whatever the build already has (the armory does not list them, so an import has none)."""
+    budget = replace(budget, max_len=max(budget.max_len, len(candidate_skills(gd, build))))
+    opt = optimize(gd, build, sc, cfg, budget)
+    if opt.options:
+        return opt.options[0].result.dps
+    return simulate(gd, build, _heuristic_priority(gd, build, sc, budget), sc, cfg).dps
+
+
 def optimize_full_build(
     gd: GameData,
     build: CharacterBuild,

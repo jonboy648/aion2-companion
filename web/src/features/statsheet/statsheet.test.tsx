@@ -13,7 +13,7 @@ const rows = new Map<string, StatRow>(sheet.categories.flatMap((c) => c.stats).m
 
 describe("stat sheet fixture (real webapi.stat_sheet output)", () => {
   it("has the shape types.ts promises", () => {
-    expect(Object.keys(sheet).sort()).toEqual(["armory_check", "categories", "class_name", "groups", "level", "not_included", "notes", "points", "unparsed"]);
+    expect(Object.keys(sheet).sort()).toEqual(["armory_check", "categories", "class_name", "engine_stats", "groups", "level", "not_included", "notes", "points", "unparsed"]);
     const r = rows.get("WeaponDamage")!;
     expect(Object.keys(r).sort()).toEqual(["key", "name", "sources", "unit", "value"]);
     expect(Object.keys(r.sources[0]).sort()).toEqual(["group", "label", "value"]);

@@ -29,7 +29,7 @@ const K = {
   fullBuild: keysOf<T.FullBuild>({
     playstyle: true, build: true, stigma_picks: true, rank_log: true, daevanion_path: true,
     daevanion_gain_pct: true, priority: true, result: true, stat_gains: true, warnings: true, variants: true,
-    rotation_explained: true, spec_picks: true,
+    rotation_explained: true, spec_picks: true, current_dps: true,
   }),
   playstyle: keysOf<T.Playstyle>({ key: true, name: true, description: true, scenario: true }),
   scenario: keysOf<T.Scenario>({ key: true, name: true, duration_s: true, n_targets: true, boss: true }),

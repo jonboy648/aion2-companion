@@ -107,8 +107,8 @@ export function CompareView({ a, b, onCopy }: { a: SideData; b: SideData; onCopy
   const stigmas = stigmaRows(A.stigmas, B.stigmas);
   const ranks = rankRows(A.build.skill_ranks, B.build.skill_ranks);
   const boards = boardRows(A.daevanion_summary.boards, B.daevanion_summary.boards);
-  const dpsA = a.cmp?.boss.result.dps ?? null;
-  const dpsB = b.cmp?.boss.result.dps ?? null;
+  const dpsA = a.cmp ? (a.cmp.boss.current_dps ?? a.cmp.boss.result.dps) : null;
+  const dpsB = b.cmp ? (b.cmp.boss.current_dps ?? b.cmp.boss.result.dps) : null;
   const gearWins = (s: Side) => gear.filter((r) => r.winner === s).length;
 
   const head = (s: Side, d: SideData) => (
@@ -139,7 +139,7 @@ export function CompareView({ a, b, onCopy }: { a: SideData; b: SideData; onCopy
         <Headline label="Level" a={A.profile.level} b={B.profile.level} fmt={String} />
         <Headline label="Combat power" a={A.profile.combat_power} b={B.profile.combat_power} fmt={fmtDps} />
         <Headline label="Item level" a={A.profile.item_level} b={B.profile.item_level} fmt={String} />
-        <Headline label="Boss DPS" a={dpsA} b={dpsB} fmt={fmtDps} estimated />
+        <Headline label="Boss DPS (current build)" a={dpsA} b={dpsB} fmt={fmtDps} estimated />
         {(dpsA == null || dpsB == null) && <p className="text-center text-xs text-dim">Estimating boss DPS with the engine...</p>}
       </Section>
 

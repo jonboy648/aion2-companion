@@ -342,6 +342,9 @@ export interface FullBuild {
   rotation_explained: RotationExplained;
   /** equipped specialty options with the DPS each adds (leave-one-out), best first */
   spec_picks: SpecPick[];
+  /** DPS of the build exactly as given (its own stigmas, ranks, opened Daevanion nodes and stats, rotation searched);
+   *  `result.dps` is the plan after re-choosing stigmas, ranks and specialties. null when not computed. */
+  current_dps: number | null;
 }
 
 export interface SpecPick {
@@ -682,4 +685,6 @@ export interface StatSheet {
   notes: string[];
   unparsed: string[];
   not_included: string[];
+  /** the sheet as engine `Stats` fields (what import feeds the damage engine) */
+  engine_stats: Record<string, number>;
 }

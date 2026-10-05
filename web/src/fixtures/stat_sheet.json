@@ -2835,5 +2835,18 @@
   "Magic stones, god stones, soulbind and Philosopher's Stone lines are not in the armory data.",
   "Pets, skin collections, monolith, pantheon and title collections are not exposed, so the deity points they give are missing. This is the main reason the Conqueror (deity) stats differ from the armory.",
   "Arcana cards are only counted when the armory lists them as equipment."
- ]
+ ],
+ "engine_stats": {
+  "attack": 552.5197,
+  "attack_increase_pct": 1.6433,
+  "weapon_dmg_pct": 5.0,
+  "dmg_boost_pct": 0,
+  "crit_chance_pct": 2.0236,
+  "crit_dmg_pct": 50.0,
+  "smite_pct": 0.1433,
+  "combat_speed_pct": 3.9527,
+  "cdr_pct": 0.1,
+  "penetration": 420.0,
+  "max_mp": 978.061
+ }
 }
