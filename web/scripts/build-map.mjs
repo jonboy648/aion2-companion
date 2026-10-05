@@ -19,7 +19,7 @@ run(process.execPath, [join(app, "node_modules/vite/bin/vite.js"), "build"], {
 mkdirSync(output, { recursive: true });
 cpSync(join(app, "dist"), output, { recursive: true });
 // Pages must serve the map shell, not the companion SPA, on direct nested visits.
-for (const route of ["about"]) {
+for (const route of ["about", "crafting"]) {
   mkdirSync(join(output, route), { recursive: true });
   copyFileSync(join(output, "index.html"), join(output, route, "index.html"));
 }
