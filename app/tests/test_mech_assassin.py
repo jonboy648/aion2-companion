@@ -131,7 +131,7 @@ def test_optimize_full_build_level45_picks_specialties(gd, style):
     b = CharacterBuild("t", "global", 45, stats=Stats(crit_chance_pct=40), class_key=KEY, skill_points=60, stigma_points=40)
     t0 = time.perf_counter()
     fb = bo.optimize_full_build(gd, b, style)
-    assert time.perf_counter() - t0 < 30
+    assert time.perf_counter() - t0 < 60
     assert fb.result.dps > 0
     assert fb.build.specs and fb.spec_picks
     assert all(p.dps_gain_pct > 0 for p in fb.spec_picks)

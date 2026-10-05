@@ -227,3 +227,86 @@ def test_buff_value_follows_the_build_rank():
     assert ee(1) == 10.0 and ee(20) == 20.0 and ee(10) == pytest.approx(14.5)
     assert rank_valued(sorc, CharacterBuild("t", "global", 45, skill_ranks={"element-enhancement": 7})) is \
         rank_valued(sorc, CharacterBuild("t", "global", 45, skill_ranks={"element-enhancement": 7}))  # cached
+
+
+# ---- (7) stigma set search: planned ranks, tier options, community sets ------------------------------
+from aion2c.engine import build_optimizer as bo_mod  # noqa: E402
+from aion2c.models import CommunityRotation  # noqa: E402
+
+
+def _many_stigmas(mini_gd, keys, tier_on=()):
+    """`keys` as stigmas (copies of 'strike'); those in `tier_on` get a rank-15 specialty option."""
+    sk = mini_gd.skills["strike"]
+    ranks = tuple(replace(sk.ranks[0], rank=i + 1) for i in range(20))
+    opt = Specialization(15, "tier", (SpecEffect("dmg_mult", C(1.5)),))
+    skills = dict(mini_gd.skills)
+    for k in keys:
+        skills[k] = replace(sk, key=k, name=k, kind=SkillKind.STIGMA, unlock_level=22, max_rank=20, ranks=ranks,
+                            specializations=(opt,) if k in tier_on else ())
+    return replace(mini_gd, skills=skills, specs_parsed=True)
+
+
+def test_planned_stigma_rank(mini_gd):
+    b = CharacterBuild("t", "global", 45)
+    assert bo_mod._planned_stigma_rank(mini_gd, b, 4) == 0  # no points to spend: ranks as entered
+    to10 = 4 * sum(STIGMA_POINT_COST[:9])
+    assert bo_mod._planned_stigma_rank(mini_gd, replace(b, stigma_points=to10), 4) == 10
+    assert bo_mod._planned_stigma_rank(mini_gd, replace(b, stigma_points=to10 - 1), 4) == 9
+    assert bo_mod._planned_stigma_rank(mini_gd, replace(b, stigma_points=10**6), 4) == 20  # the Global cap
+
+
+def _stigma_sim(bonus):
+    """100 flat plus `bonus(build)`. Patched into every module the stigma search simulates through."""
+    return lambda gd, build, priority, scenario, cfg=None, initial=None: fake_result(100.0 + bonus(build))
+
+
+def test_stigma_search_sees_a_tier_option_at_the_planned_rank(mini_gd, scen10, monkeypatch):
+    """Stigma 'tier' is worth +1000 only at rank 15 with its option equipped. Scored at the build's own rank 1 with
+    no options it is worth nothing and loses to a stigma worth +10; scored at its planned rank with the option it wins."""
+    gd = _many_stigmas(mini_gd, ["tier", "plain"], tier_on=("tier",))
+
+    def bonus(b):
+        r = b.skill_ranks.get("tier", 1)
+        tier = "tier" in b.stigmas and r >= 15 and b.specs.get("tier") == (0,)
+        return (10.0 if "plain" in b.stigmas else 0.0) + (1000.0 if tier else 0.0)
+
+    for mod in (bo_mod, spec_mod):
+        monkeypatch.setattr(mod, "simulate", _stigma_sim(bonus))
+    rest = (scen10, bo_mod.SimConfig(), SearchBudget(max_candidates=10), 1, None)
+    with_points = CharacterBuild("t", "global", 45, stigma_points=sum(STIGMA_POINT_COST[:14]))
+    assert [k for k, _ in bo_mod._optimize_stigmas(gd, with_points, *rest)] == ["tier"]
+    # nothing to spend: nothing is planned, so the stigma worth +10 right now stays the pick
+    assert [k for k, _ in bo_mod._optimize_stigmas(gd, CharacterBuild("t", "global", 45), *rest)] == ["plain"]
+
+
+def test_community_stigma_set_replaces_a_worse_search_result(mini_gd, scen10, monkeypatch):
+    """Worth +1000 only with a, b and c together: forward selection and single swaps starting from d and e cannot
+    get there, but the community set (a, b, c) scores it and replaces the search's result."""
+    gd = _many_stigmas(mini_gd, ["d", "e", "a", "b", "c"])
+    sim = _stigma_sim(lambda b: 1000.0 if {"a", "b", "c"} <= set(b.stigmas) else 0.0)
+    for mod in (bo_mod, spec_mod):
+        monkeypatch.setattr(mod, "simulate", sim)
+    monkeypatch.setattr(bo_mod, "_stigma_pool", lambda gd_, b: ["d", "e", "a", "b", "c"])
+    rest = (scen10, bo_mod.SimConfig(), SearchBudget(max_candidates=10), 3, None)
+    build = CharacterBuild("t", "global", 45)
+    alone = bo_mod._optimize_stigmas(gd, build, *rest)
+    assert sorted(k for k, _ in alone) != ["a", "b", "c"]  # the search alone is stuck
+    seeded = replace(gd, community=(CommunityRotation("r", "t", scen10.key, ("a", "b", "c"), ""),))
+    assert sorted(k for k, _ in bo_mod._optimize_stigmas(seeded, build, *rest)) == ["a", "b", "c"]
+
+
+def test_judge_sets_prefers_the_better_plan_and_the_first_on_ties(mini_gd, scen10, monkeypatch):
+    gd = _many_stigmas(mini_gd, ["a", "b"])
+    worth = {("a",): 100.0, ("b",): 150.0}
+    monkeypatch.setattr(bo_mod, "_fast_eval", lambda gd_, b, sc, cfg, bud, extra=(): (worth[b.stigmas], P("strike"), None))
+    monkeypatch.setattr(bo_mod, "allocate_points", lambda gd_, b, *a, **k: (dict(b.skill_ranks), []))
+    monkeypatch.setattr(bo_mod, "plan_daevanion", lambda *a, **k: [])
+    monkeypatch.setattr(bo_mod, "choose_specs", lambda *a, **k: {})
+    monkeypatch.setattr(bo_mod, "simulate", lambda gd_, b, p, s, c=None, initial=None: fake_result(worth[b.stigmas]))
+    build = CharacterBuild("t", "global", 45, stigma_points=10)
+    judge = lambda sets: bo_mod._judge_sets(gd, build, scen10, bo_mod.SimConfig(), SearchBudget(max_candidates=10),
+                                            None, sets, 0)
+    assert judge([("a",), ("b",)]) == ("b",)
+    assert judge([("b",), ("a",)]) == ("b",)
+    worth[("a",)] = 150.0
+    assert judge([("a",), ("b",)]) == ("a",) and judge([("b",), ("a",)]) == ("b",)

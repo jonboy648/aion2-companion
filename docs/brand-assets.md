@@ -1,5 +1,34 @@
 # Artwork And Card Shader Provenance
 
+## Current Home Preview (October 4, evening)
+
+Later refinement: Emerald Gorge is now the initial scene and remains selected
+for review. Its Three.js shader animates masked waterfall flow, fine spray and
+pool reflections in source-image coordinates. The whole-image zoom is removed.
+The original source PNG is unchanged. Rendering stops offscreen, on pause, and
+in hidden tabs; reduced-motion and unavailable WebGL use the original image.
+Home class cards use generated transparent character cutouts at their native
+1254x1254 resolution, with faction-coloured shader backgrounds. No upscaling.
+
+Jon supplied four original scenes, copied without modification from the local
+`assets/source-art` collection to `web/public/brand/scenes`: Moonlit Floating
+Gothic Sky City, Celestial Cathedral of Radiant Light, Mystical Waterfall Ruins
+in the Emerald Gorge, and Crimson Eclipse Over Ruined Gothic Citadel.
+The original files remain in source-art. The Home preview uses slow camera
+drift and crossfades, with a pause control and static reduced-motion mode.
+
+The class name strips reuse the earlier Paper Warp integration.
+`@paper-design/shaders` and `@paper-design/shaders-react` 0.0.81 are Apache-2.0;
+the package LICENSE and NOTICE are retained in `web/public/licenses/paper-design`.
+Rendering is lazy, pixel-capped, limited to eight desktop or two mobile canvases,
+paused for reduced motion, and unmounted while the document is hidden.
+The CSS gradient remains as the GPU/chunk-load fallback.
+
+The Ruixen Gradient Footer source was supplied directly by Jon in chat. It keeps
+the supplied rainbow stops and SVG reveal with our real site navigation.
+Reduced motion uses a static footer-local band. No demo subscription form or
+placeholder links are included.
+
 ## Original Artwork
 
 The restored-original preview uses three original generated images in

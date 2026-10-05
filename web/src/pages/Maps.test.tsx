@@ -25,6 +25,6 @@ describe("Maps page", () => {
     expect(screen.getByRole("heading", { name: "Maps" })).toBeTruthy();
     const footerLink = screen.getAllByRole("link", { name: "Maps" }).find((a) => a.getAttribute("href") === "/maps");
     expect(footerLink).toBeTruthy();
-    expect(footerLink!.closest("nav")).toBeNull(); // not in the main nav
+    expect(footerLink!.closest('nav[aria-label="Main"]')).toBeNull(); // not in the main nav
   });
 });

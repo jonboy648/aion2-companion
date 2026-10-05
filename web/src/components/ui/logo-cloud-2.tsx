@@ -1,4 +1,5 @@
-import { useState, type ComponentProps, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type ComponentProps, type CSSProperties, type ReactNode } from "react";
+import { FeatureShaderCard } from "./feature-shader-cards";
 import { Link } from "react-router-dom";
 import { PlusIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,6 +26,7 @@ export interface LogoCloudItem {
 type LogoCloudProps = ComponentProps<"div"> & {
   items: readonly LogoCloudItem[];
   loading?: boolean;
+  shaderCaptions?: boolean;
 };
 
 const cellStyles = [
@@ -39,26 +41,43 @@ const cellStyles = [
 ];
 
 /** The supplied LogoCloud divider layout, with class art in contained portrait windows. */
-export function LogoCloud({ items, loading = false, className, ...props }: LogoCloudProps) {
+export function LogoCloud({ items, loading = false, shaderCaptions = false, className, ...props }: LogoCloudProps) {
+  const [graphics, setGraphics] = useState({ enabled: false, animated: false, compact: true });
+  useEffect(() => {
+    if (!shaderCaptions || typeof window.matchMedia !== "function") return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const compact = window.matchMedia("(max-width: 639px)");
+    const update = () => setGraphics({ enabled: !document.hidden, animated: !reduced.matches && !document.hidden, compact: compact.matches });
+    update();
+    reduced.addEventListener("change", update);
+    compact.addEventListener("change", update);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      reduced.removeEventListener("change", update);
+      compact.removeEventListener("change", update);
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, [shaderCaptions]);
   return (
     <div className={cn("logo-cloud-2 relative grid grid-cols-2 border-x md:grid-cols-4", className)} role="list" aria-busy={loading} {...props}>
       <div className="logo-cloud-line pointer-events-none absolute -top-px left-1/2 w-screen -translate-x-1/2 border-t" aria-hidden="true" />
       {loading && items.length === 0 && Array.from({ length: 8 }, (_, index) => (
         <div key={index} className={cn("logo-cloud-cell logo-cloud-placeholder", cellStyles[index])} aria-hidden="true" />
       ))}
-      {items.map((item, index) => <LogoCard key={item.id} item={item} index={index} />)}
+      {items.map((item, index) => <LogoCard key={item.id} item={item} index={index} shaderCaptions={shaderCaptions} graphics={graphics} />)}
       <div className="logo-cloud-line pointer-events-none absolute -bottom-px left-1/2 w-screen -translate-x-1/2 border-b" aria-hidden="true" />
     </div>
   );
 }
 
-function LogoCard({ item, index }: { item: LogoCloudItem; index: number }) {
+function LogoCard({ item, index, shaderCaptions, graphics }: { item: LogoCloudItem; index: number; shaderCaptions: boolean; graphics: { enabled: boolean; animated: boolean; compact: boolean } }) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
   const { logo } = item;
   const failed = failedSrc === logo.src;
   return (
     <div className={cn("logo-cloud-cell relative bg-background", cellStyles[index % cellStyles.length])} role="listitem">
       <Link to={item.href} className="logo-cloud-link" aria-label={item.title}>
+        {shaderCaptions && <FeatureShaderCard index={index} enabled={graphics.enabled && index < (graphics.compact ? 2 : 8)} animated={graphics.animated} compact className="class-portrait-shader">{null}</FeatureShaderCard>}
         <span className="logo-cloud-media">
           {failed ? (
             <span className="logo-cloud-fallback" aria-hidden="true">{item.fallback}</span>
