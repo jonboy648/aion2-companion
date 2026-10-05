@@ -7,12 +7,20 @@ plan() pipeline: ideal rotation sims -> never-cast skills dropped -> several sta
 from __future__ import annotations
 
 import statistics
+from dataclasses import replace
 
 from aion2c.engine.rotation import cooldown_of, explain_rotation
 from aion2c.engine.simulator import simulate, simulate_macro  # noqa: F401  (patch targets)
 from aion2c.keybinds.gkeys import gkey_layout
-from aion2c.keybinds.layout import STYLES, is_manual, layout, manual_keys, slot_why
-from aion2c.keybinds.macro import build_macros, macro_slots, search_entries, seed_sequences
+from aion2c.keybinds.layout import STYLES, castable_bar, is_manual, layout, manual_keys, slot_why
+from aion2c.keybinds.macro import (
+    MACRO_DEFINITIONS,
+    build_macros,
+    macro_definitions,
+    macro_slots,
+    search_entries,
+    seed_sequences,
+)
 from aion2c.models import (
     SCENARIOS,
     CharacterBuild,
@@ -27,14 +35,14 @@ from aion2c.models import (
     SlotStack,
 )
 
-_MACRO_SCENARIO = {"Boss loop": "boss_180", "AoE loop": "aoe_pack"}
+_MACRO_SCENARIO = {name: scenario for name, scenario, _, _ in MACRO_DEFINITIONS}
 _DPS_FLOOR = 0.95
 HYBRID_BELOW = 0.85  # best macro under this share of ideal: recommend macro + hand presses
 SEARCH_BUDGET = 300  # simulations spent on stack partitions + entry sequences, per plan
 
 
 def _merged_priority(priorities: dict[str, Priority]) -> Priority:
-    """One hotbar serves both macros: boss order first, then skills only the other scenarios use."""
+    """One hotbar serves all macros: boss order first, then other scenarios' skills."""
     keys = [k for k in ("boss_180", "aoe_pack") if k in priorities] + [k for k in priorities if k not in ("boss_180", "aoe_pack")]
     seen: set[str] = set()
     entries: list[PriorityEntry] = []
@@ -71,8 +79,9 @@ def _design(gd, build, priorities, bar, hotkeys, delay_ms, cfg, ideal, by_key, b
     """Pick the best stack partition, then hill-climb each macro's entries. -> (stacks, {scenario: [labels]})."""
     manual = manual_keys(gd)
     merged = _merged_priority(priorities)
-    targets = [(n, k) for n, k in _MACRO_SCENARIO.items() if k in priorities and k in by_key]
-    hk = {"Boss loop": (hotkeys or {}).get("boss") or "F9", "AoE loop": (hotkeys or {}).get("aoe") or "F10"}
+    definitions = macro_definitions(list(priorities))
+    targets = [(n, k) for n, k, _, _ in definitions if k in priorities and k in by_key]
+    hk = {n: (hotkeys or {}).get(h) or default for n, _, h, default in definitions}
 
     def filler_of(stacks):
         for st in stacks:
@@ -88,15 +97,18 @@ def _design(gd, build, priorities, bar, hotkeys, delay_ms, cfg, ideal, by_key, b
         stacks, _ = layout(gd, build, merged, bar, cfg.auto_chain, style)
         if stacks in seen:
             continue
+        if best is not None and sims + len(targets) > budget:
+            break
         seen.append(stacks)
         score, seqs = 0.0, {}
         for name, scen in targets:
             slots = macro_slots(stacks, priorities[scen], manual)
             seq = seed_sequences(slots, filler_of(stacks))[0]
             seqs[scen] = seq
-            dps = _macro_dps(gd, build, stacks, name, hk[name], seq, delay_ms, by_key[scen], cfg)
-            sims += 1
-            score += dps / ideal[scen] if ideal.get(scen) else dps
+            if sims < budget:
+                dps = _macro_dps(gd, build, stacks, name, hk[name], seq, delay_ms, by_key[scen], cfg)
+                sims += 1
+                score += dps / ideal[scen] if ideal.get(scen) else dps
         if best is None or score > best[0] + 1e-9:
             best = (score, stacks, seqs)
     if best is None:
@@ -163,8 +175,22 @@ def plan(
         man = [k for k, v in res.per_skill.items() if v.casts > 0 and is_manual(gd, k) and v.damage > 0]
         return sorted(man, key=lambda k: -res.per_skill[k].damage)
 
-    hand = {"M1": hand_for("boss_180") or hand_for("aoe_pack"), "M2": hand_for("aoe_pack") or hand_for("boss_180")}
-    gkeys, extras, thumbs = gkey_layout(bar, stacks, macros, gd, hand)
+    # The existing G-key API has two modes. A single scenario's macro serves both.
+    mode_macros = macros if len(macros) != 1 else (macros[0], macros[0])
+    hand = {f"M{i + 1}": hand_for(_MACRO_SCENARIO[m.name]) for i, m in enumerate(mode_macros[:2])}
+    gkey_bar, _ = castable_bar(gd, build, bar)
+    # Tag preferences must not reintroduce unavailable skills into any planned bar.
+    available, _ = castable_bar(gd, build, SkillBar(slots={key: key for key in gd.skills}))
+    gkey_data = replace(gd, skills={
+        key: skill if key in available.slots else replace(
+            skill, tags=tuple(tag for tag in skill.tags if not tag.startswith(("gkey:", "thumb:"))),
+        )
+        for key, skill in gd.skills.items()
+    })
+    gkeys, extras, thumbs = gkey_layout(gkey_bar, stacks, mode_macros, gkey_data, hand)
+    if len(macros) == 1:
+        primary_hold = next(g.purpose for g in gkeys if g.gkey == "G1" and g.mstate == "M1")
+        gkeys = tuple(replace(g, purpose=primary_hold) if g.gkey == "G1" else g for g in gkeys)
     stacks = tuple(stacks) + tuple(extras)
 
     manual_every: dict[str, float] = {}
@@ -224,13 +250,19 @@ def plan(
 
 
 def _advice(gd, name, macro, hybrid, ideal, hands, every) -> str:
-    pct, hpct = macro / ideal * 100, hybrid / ideal * 100
-    if pct >= HYBRID_BELOW * 100:
-        return f"The macro alone reaches {pct:.0f}% of ideal: hold it and play. Estimates only."
     presses = ", ".join(
         f"{_name(gd, k)} about every {every[k]:.0f} s" if k in every else _name(gd, k) for k in hands
     )
-    beat = (ideal / macro - 1) * 100 if macro > 0 else 0.0
+    if macro <= 0:
+        out = "No measurable macro DPS was modeled for this rotation. "
+        if hands:
+            out += f"Press {presses} by hand"
+            out += f" for about {hybrid:.0f} DPS. " if hybrid > 0 else ". "
+        return out + f"Playing the whole rotation manually is estimated at {ideal:.0f} DPS. Estimates only."
+    pct, hpct = macro / ideal * 100, hybrid / ideal * 100
+    if pct >= HYBRID_BELOW * 100:
+        return f"The macro alone reaches {pct:.0f}% of ideal: hold it and play. Estimates only."
+    beat = (ideal / macro - 1) * 100
     out = f"The macro alone reaches only {pct:.0f}% of ideal ({macro:.0f} of {ideal:.0f} DPS). "
     if hands:
         out += (f"Use a hybrid: hold the macro for the rotation and press {presses} by hand, "
@@ -250,7 +282,7 @@ def _slot_notes(gd, build, stacks, merged: Priority, priorities, extras) -> dict
         if st.key_label in extra_labels:
             notes[st.key_label] = "Not part of the rotation: kept on a free key for a G-key."
         elif any(is_manual(gd, k) for k in st.stack):
-            notes[st.key_label] = slot_why(gd, build, st.stack[:1], gated)
+            notes[st.key_label] = slot_why(gd, build, st.stack, gated)
         elif not any(k in in_rot for k in st.stack):
             notes[st.key_label] = "Already on your bar; not part of the rotation, left as it was."
         else:
@@ -325,7 +357,8 @@ def instructions_markdown(plan: KeybindPlan, gd: GameData) -> str:
         "A slot holds up to 4 skills. One press fires the usable skill **lowest in the stack**: the BOTTOM cell is "
         "priority 0 and fires first (confirmed by Global and Korean guides, 2026-10). To reorder in game, click a "
         "skill, then click another cell in that column to swap them. Each stack below is listed from the bottom "
-        "cell up; a skill with no cooldown always goes in the TOP cell so it never blocks the others.",
+        "cell up; an always-ready filler with no cooldown goes in the TOP cell so it never blocks the others. "
+        "Explicit chain follow-ups go before their parent because they are usable only during its chain window.",
         "",
         "| Slot key | Bottom cell (fires first) → top cell | Why |",
         "|---|---|---|",
@@ -334,9 +367,10 @@ def instructions_markdown(plan: KeybindPlan, gd: GameData) -> str:
         L.append(f"| {st.key_label} | " + " → ".join(_name(gd, k) for k in st.stack) + f" | {plan.slot_notes.get(st.key_label, '')} |")
 
     L += ["", "## 3. In-game macros", ""]
+    macro_bindings = " and ".join(f"Macro {i}" for i in range(1, len(plan.macros) + 1)) or "each macro"
     L += [
         "Skill window (K) > Macro: create each macro below, one numbered entry per line, with the delay shown. "
-        "Then Settings > Key Settings > General > Gameplay > Macro: bind Macro 1 and Macro 2 to the hotkeys. "
+        f"Then Settings > Key Settings > General > Gameplay > Macro: bind {macro_bindings} to the hotkeys. "
         "A macro runs only while its key is held down and walks its entries in order, skipping unusable ones.",
         "",
     ]
@@ -375,9 +409,11 @@ def instructions_markdown(plan: KeybindPlan, gd: GameData) -> str:
     L += ["| G-key | Mode | Sends | Skills on that key | Risk |", "|---|---|---|---|---|"]
     for g in plan.gkeys:
         L.append(f"| {g.gkey} | {g.mstate} | {g.sends} | {g.purpose} | {g.risk} |")
+    modes = (f"M1 and M2 both hold the {plan.macros[0].name}, M3 stays free. " if len(plan.macros) == 1
+             else "M1 and M2 hold the first two macros above, M3 stays free. ")
     L += [
         "",
-        "M1 is the boss layout, M2 is AoE and leveling, M3 stays free. Each G-key sends one plain key. "
+        modes + "Each G-key sends one plain key. "
         "Every row names the skills stacked on the key it sends; a skill that was not on your bar is put on a free key and says so.",
         "",
         "### G HUB steps",

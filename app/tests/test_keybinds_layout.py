@@ -73,9 +73,11 @@ def test_empty_priority(sorc_gd, default_build, sorc_bar, n):
 
 def test_stacks_are_priority_groups(sorc_gd, default_build, sorc_bar):
     """Burst cooldowns share a slot, the 0-cooldown filler is last, no stack mixes a manual skill in."""
+    from dataclasses import replace
     from aion2c.keybinds.layout import is_manual, layout
 
-    stacks, _ = layout(sorc_gd, default_build, pr(*BIG), sorc_bar, style="roles")
+    build = replace(default_build, stigmas=("element-enhancement",))
+    stacks, _ = layout(sorc_gd, build, pr(*BIG), sorc_bar, style="roles")
     by = {k: s for s in stacks for k in s.stack}
     assert by["element-enhancement"].stack[0] == "element-enhancement"  # buff leads its group
     for s in stacks:

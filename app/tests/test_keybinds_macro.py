@@ -135,9 +135,12 @@ def test_gkey_count(sorc_gd, default_build, sorc_bar):
 
 
 def test_gkeys_never_point_at_unbound_key_and_name_the_key_skills(sorc_gd, default_build, sorc_bar):
+    from dataclasses import replace
+
     from aion2c.keybinds.gkeys import gkey_layout
 
-    stacks, _, macros = setup(sorc_gd, default_build, sorc_bar)
+    build = replace(default_build, stigmas=("element-enhancement", "steel-barrier"))
+    stacks, _, macros = setup(sorc_gd, build, sorc_bar)
     rows, extras, thumbs = gkey_layout(sorc_bar, stacks, macros, sorc_gd, {"M1": ["hellfire", "steel-barrier"], "M2": []})
     bound = {s.key_label: s.stack for s in (*stacks, *extras)}
     for a in rows:

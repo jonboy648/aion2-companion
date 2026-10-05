@@ -24,8 +24,10 @@ def test_plan_fields(sorc_gd, default_build, sorc_bar, fake_sim):
     assert set(p.ideal_dps) == {"boss_180", "aoe_pack"}
     assert p.ideal_dps["boss_180"] > 0
     assert p.manual_every_s["hellfire"] == 45.0
-    # G1 x2 + the derived G2..G5 rows (the 13-skill fixture has fewer M2 candidates than the shipped data)
-    assert len(p.gkeys) == 10 and len(p.macros) == 2 and p.stacks
+    # No stigmas are equipped; AoE does not inherit the boss-only Hellfire hand press.
+    assert len(p.gkeys) == 7 and len(p.macros) == 2 and p.stacks
+    assert not any("Steel Barrier" in row.purpose for row in p.gkeys)
+    assert not any("Hellfire" in row.purpose and "press by hand" in row.purpose for row in p.gkeys if row.mstate == "M2")
 
 
 def test_plan_warns_when_macro_slow(sorc_gd, default_build, sorc_bar, fake_sim, monkeypatch):

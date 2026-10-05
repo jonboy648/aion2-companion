@@ -16,10 +16,18 @@ from aion2c.models import MacroEntry, MacroPlan, Priority, SlotStack
 MAX_ENTRIES = 20
 
 # (macro name, scenario key, hotkeys key, default hotkey)
-_MACROS = (
+MACRO_DEFINITIONS = (
     ("Boss loop", "boss_180", "boss", "F9"),
     ("AoE loop", "aoe_pack", "aoe", "F10"),
+    ("Leveling loop", "level_pull", "leveling", "F11"),
 )
+
+
+def macro_definitions(scenarios: Sequence[str]) -> tuple[tuple[str, str, str, str], ...]:
+    """Emit only supplied scenarios; keep the legacy empty-plan placeholders."""
+    if not scenarios:
+        return MACRO_DEFINITIONS[:2]
+    return tuple(definition for definition in MACRO_DEFINITIONS if definition[1] in scenarios)
 
 
 def macro_slots(
@@ -98,6 +106,11 @@ def search_entries(
     Deterministic for a given `seed`; ties prefer the shorter macro."""
     if not slots:
         return [], 0.0, 0
+    allowed = set(slots)
+    seeds = [[lab for lab in seq if lab in allowed][:MAX_ENTRIES] for seq in seeds]
+    seeds = [seq for seq in seeds if seq] or [[slots[0]]]
+    if budget <= 0:
+        return list(seeds[0]), 0.0, 0
     rng = random.Random(seed)
     cache: dict[tuple[str, ...], float] = {}
 
@@ -110,6 +123,8 @@ def search_entries(
     best = list(seeds[0]) if seeds else [slots[0]]
     best_s = ev(best)
     for sd in seeds[1:]:
+        if len(cache) >= budget:
+            break
         s = ev(sd)
         if s > best_s + 1e-9:
             best, best_s = list(sd), s
@@ -142,11 +157,12 @@ def build_macros(
     hotkeys = hotkeys or {}
     sequences = sequences or {}
     plans: list[MacroPlan] = []
-    for name, scen_key, hk_key, default in _MACROS:
+    supplied = list(priorities or stacks_by_scenario or sequences)
+    for name, scen_key, hk_key, default in macro_definitions(supplied):
+        slots = macro_slots(stacks_by_scenario.get(scen_key, ()), priorities.get(scen_key), manual)
         if scen_key in sequences:
-            seq = list(sequences[scen_key])
+            seq = [lab for lab in sequences[scen_key] if lab in slots]
         else:
-            slots = macro_slots(stacks_by_scenario.get(scen_key, ()), priorities.get(scen_key), manual)
             seq = seed_sequences(slots)[0]
         plans.append(MacroPlan(name, hotkeys.get(hk_key) or default, _entries(seq, delay_ms)))
     return tuple(plans)
