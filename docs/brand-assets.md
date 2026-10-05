@@ -7,8 +7,8 @@ for review. Its Three.js shader animates masked waterfall flow, fine spray and
 pool reflections in source-image coordinates. The whole-image zoom is removed.
 The original source PNG is unchanged. Rendering stops offscreen, on pause, and
 in hidden tabs; reduced-motion and unavailable WebGL use the original image.
-The class srcsets now offer 1254px WebP images encoded at quality 92 directly
-from Jon's 1254x1254 originals, plus the existing 640px versions. No upscaling.
+Home class cards use generated transparent character cutouts at their native
+1254x1254 resolution, with faction-coloured shader backgrounds. No upscaling.
 
 Jon supplied four original scenes, copied without modification from the local
 `assets/source-art` collection to `web/public/brand/scenes`: Moonlit Floating
