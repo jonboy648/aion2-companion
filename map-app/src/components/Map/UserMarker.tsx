@@ -86,7 +86,7 @@ const UserMarkerInner: React.FC<{ marker: UserMarkerInstance }> = ({ marker }) =
         offset={[0, -iconSize / 2]}
         className="game-marker-tooltip"
       >
-        {t("common:markerActions.userMarker", "User Marker")}
+        {marker.name || t("common:markerActions.userMarker", "User Marker")}
       </Tooltip>
     </Marker>
   );

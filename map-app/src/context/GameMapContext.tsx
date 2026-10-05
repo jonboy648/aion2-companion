@@ -2,6 +2,7 @@ import type {GameMapMeta, MapsFile, MarkerTypeCategory, TypesFile} from "@/types
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {useYamlLoader} from "@/hooks/useYamlLoader.ts";
 import {getQueryParam, setQueryParam} from "@/utils/url.ts";
+import {decodePartyLink} from "@/utils/partyLink";
 
 type GameMapContextValue = {
   maps: GameMapMeta[];
@@ -56,7 +57,7 @@ export const GameMapProvider: React.FC<GameMapProviderProps> = ({children}: Game
   // Initialize selected map
   useEffect(() => {
     if (!maps || maps.length === 0) return;
-    const isIndexPage = window.location.pathname === "/";
+    const isIndexPage = window.location.pathname.replace(/\/$/, "") === import.meta.env.BASE_URL.replace(/\/$/, "");
 
     if (selectedMap) {
       if (isIndexPage) {
@@ -65,10 +66,11 @@ export const GameMapProvider: React.FC<GameMapProviderProps> = ({children}: Game
       return;
     }
 
-    const initialMapId = isIndexPage ? getQueryParam("map") : null;
+    const shared = isIndexPage ? decodePartyLink(getQueryParam("p"), maps) : null;
+    const initialMapId = shared?.zone ?? (isIndexPage ? getQueryParam("map") : null);
     if (initialMapId) {
       const matchedMap = maps.find((m) => m.name === initialMapId);
-      setSelectedMap(matchedMap);
+      setSelectedMap(matchedMap ?? maps[0]);
       return;
     }
     if (maps.length > 0 && !selectedMap) {

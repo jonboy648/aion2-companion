@@ -13,7 +13,6 @@ export default function TopNavbar() {
       </a>
       <nav aria-label="Map navigation">
         <Link to="/" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}>Map</Link>
-        <a href="/maps">Party pins</a>
         <Link to="/crafting/" activeProps={{ "aria-current": "page" }}>Crafting</Link>
         <Link to="/about/" activeProps={{ "aria-current": "page" }}>About & credits</Link>
       </nav>

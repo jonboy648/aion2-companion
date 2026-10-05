@@ -12,6 +12,7 @@ import {getStaticUrl} from "@/utils/url.ts";
 import {useUserMarkers} from "@/context/UserMarkersContext.tsx";
 import MarkerSearch from "@/components/Map/SideBar/MarkerSearch.tsx";
 import {useTheme} from "@/context/ThemeContext.tsx";
+import PartyLinkButton from "../PartyLinkButton";
 
 type LeftSidebarProps = {
   onSelectMarker?: (markerId: string) => void;
@@ -61,6 +62,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({onSelectMarker, onSelectPositi
         >
           <Logo/>
           <SelectMap/>
+          <PartyLinkButton/>
           <MarkerSearch onSelectMarker={onSelectMarker} onSelectPosition={onSelectPosition}/>
           <Accordion
             variant="shadow"
