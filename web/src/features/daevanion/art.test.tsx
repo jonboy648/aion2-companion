@@ -96,4 +96,26 @@ describe("BoardSvg game art", () => {
     expect(svg.querySelector('[data-art-role="frame"]')).toBeNull();
     expect(svg.querySelector('[data-node-id="2"]')!.getAttribute("data-state")).toBe("available");
   });
+
+  it("falls back when a skill icon fails to load", () => {
+    const skillBoard = { ...board, nodes: { ...board.nodes, "3": node(3, 10, 8, [2], { node_type: "skill", skill_key: "s" }) } } as unknown as DaevanionBoard;
+    const { container } = draw([], [3], { board: skillBoard, icons: { s: "/x.png" } });
+    const svg = container.querySelector('[data-testid="daevanion-board"]')!;
+    fireEvent.error(svg.querySelector('[data-node-id="3"] image[href="/x.png"]')!);
+    expect(svg.getAttribute("data-art")).toBe("fallback");
+  });
+
+  it("resets the fallback when the board or class changes", () => {
+    const props = { selected: new Set<number>(), available: new Set([2]), locked: false, icons: {}, focusId: null, onToggle: () => {}, onFocus: () => {} };
+    const { container, rerender } = render(<BoardSvg board={board} classKey="sorcerer" {...props} />);
+    const art = () => container.querySelector('[data-testid="daevanion-board"]')!.getAttribute("data-art");
+    fireEvent.error(container.querySelector('[data-art-role="frame"]')!);
+    expect(art()).toBe("fallback");
+    rerender(<BoardSvg board={{ ...board, key: "other" } as DaevanionBoard} classKey="sorcerer" {...props} />);
+    expect(art()).toBe("game");
+    fireEvent.error(container.querySelector('[data-art-role="frame"]')!);
+    expect(art()).toBe("fallback");
+    rerender(<BoardSvg board={{ ...board, key: "other" } as DaevanionBoard} classKey="cleric" {...props} />);
+    expect(art()).toBe("game");
+  });
 });

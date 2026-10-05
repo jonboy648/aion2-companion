@@ -29,9 +29,12 @@ interface Props {
 }
 
 export function BoardSvg({ board, selected, available, locked, icons, suggested, focusId, onToggle, onFocus, classKey }: Props) {
-  /** false once any game image fails to load: the board falls back to the drawn shapes */
-  const [artOk, setArtOk] = useState(true);
-  const onArtError = () => setArtOk(false);
+  /** the board+class whose game art failed to load; it falls back to the drawn shapes. Keyed so a
+   *  different board or class (or a remount) tries the art again instead of staying stuck. */
+  const artKey = `${board.key}|${classKey ?? ""}`;
+  const [failedKey, setFailedKey] = useState<string | null>(null);
+  const artOk = failedKey !== artKey;
+  const onArtError = () => setFailedKey(artKey);
   const nodes = useMemo(() => nodeList(board), [board]);
   const geom = useMemo(() => {
     const xs = nodes.map((n) => n.x);
@@ -311,7 +314,7 @@ function GameTile({ node, state, icon, focused, suggested, classKey, onArtError 
       />
       {node.node_type === "skill" && icon && (
         <g clipPath="url(#node-icon-clip)" opacity={state === "locked" ? 0.45 : 1}>
-          <image href={icon} x="-12" y="-12" width="24" height="24" preserveAspectRatio="xMidYMid slice" />
+          <image href={icon} x="-12" y="-12" width="24" height="24" preserveAspectRatio="xMidYMid slice" onError={onArtError} />
         </g>
       )}
       {focused && <rect x={-T - 4} y={-T - 4} width={TILE + 8} height={TILE + 8} rx={6} fill="none" stroke="#f2cf7e" strokeWidth={2.6} data-art-role="focus" />}
