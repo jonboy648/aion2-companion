@@ -15,6 +15,7 @@ from aion2c.engine.specialties import SpecPick, _matters, choose_specs, spec_pic
 from aion2c.engine.simulator import simulate
 from aion2c.models import (
     SCENARIOS,
+    STIGMA_POINT_COST,
     CharacterBuild,
     GameData,
     Priority,
@@ -81,10 +82,29 @@ class FullBuild:
     spec_picks: tuple[SpecPick, ...] = ()  # equipped specialty options with the DPS each adds (best first)
 
 
-def _heuristic_priority(gd, build, scenario, budget) -> Priority:
-    """Greedy seed priority from search (buffs first, then damage per lock-second)."""
+def _heuristic_priority(gd, build, scenario, budget, guide: Priority | None = None) -> Priority:
+    """Greedy seed priority from search (buffs first, then damage per lock-second).
+
+    With a `guide` (a rotation already searched for this character), the guide's entries that this build can cast go
+    first, in the guide's order, and the seed fills in the rest: casts gated on a status (`require_status`) exist only
+    in searched rotations, so a stigma or rank whose value comes from such a cast is invisible to the plain seed."""
     seeds = _seeds(gd, build, scenario, candidate_skills(gd, build), 64)  # untruncated: stigmas must not fall off the end
-    return Priority(seeds[0][1]) if seeds else Priority(())
+    base = Priority(seeds[0][1]) if seeds else Priority(())
+    if guide is None:
+        return base
+    ok = {e.skill_key for e in candidate_skills(gd, build)}
+    keep = tuple(e for e in guide.entries if e.skill_key in ok)
+    have = {e.skill_key for e in keep}
+    return Priority(keep + tuple(e for e in base.entries if e.skill_key not in have))
+
+
+def _stigma_pool(gd, build) -> list[str]:
+    """Stigmas this build can equip. One without an unlock level (and no tiers) is not in Global: the guides list
+    exactly 13 stigmas per class without them, so it is never offered."""
+    return [
+        s.key for s in allowed_skills(gd, build.region, build.show_kr)
+        if s.kind == SkillKind.STIGMA and s.unlock_level is not None and s.unlock_level <= build.level
+    ]
 
 
 def _front_variants(gd, build, scenario, budget, skip=frozenset(), base=None):
@@ -100,11 +120,11 @@ def _front_variants(gd, build, scenario, budget, skip=frozenset(), base=None):
     return out
 
 
-def _best_stigma_dps(gd, build, scenario, cfg, budget) -> float:
+def _best_stigma_dps(gd, build, scenario, cfg, budget, guide=None) -> float:
     """DPS of the best of: the greedy priority, and (for every equipped stigma the greedy priority never casts)
     that priority with the stigma forced to the front. Keeps the better, so a stigma is never judged by a
     priority that did not cast it."""
-    pri = _heuristic_priority(gd, build, scenario, budget)
+    pri = _heuristic_priority(gd, build, scenario, budget, guide)
     base = simulate(gd, build, pri, scenario, cfg)
     cast = {k for k, t in base.per_skill.items() if t.casts}
     best = base.dps
@@ -119,25 +139,23 @@ def _best_stigma_dps(gd, build, scenario, cfg, budget) -> float:
     return best
 
 
-def _optimize_stigmas(gd, build, scenario, cfg, budget, slots, progress):
-    """Greedy forward selection plus one swap pass. Returns [(key, gain_pct)] in pick order."""
-    pool = [
-        s.key for s in allowed_skills(gd, build.region, build.show_kr)
-        if s.kind == SkillKind.STIGMA and (s.unlock_level is None or s.unlock_level <= build.level)
-    ]
+def _optimize_stigmas(gd, build, scenario, cfg, budget, slots, progress, guide=None, start=()):
+    """Greedy forward selection plus swap passes. Returns [(key, gain_pct)] in pick order. With `start` (the picks of an
+    earlier pass) the forward selection is skipped and only the swaps run, scored against the `guide` rotation."""
+    pool = _stigma_pool(gd, build)
     cache: dict[tuple[str, ...], float] = {}
 
     def score(picks: tuple[str, ...]) -> float:
         key = tuple(sorted(picks))
         if key not in cache:
             b = replace(build, stigmas=key)
-            cache[key] = _best_stigma_dps(gd, b, scenario, cfg, budget)
+            cache[key] = _best_stigma_dps(gd, b, scenario, cfg, budget, guide)
         return cache[key]
 
-    picks: list[str] = []
+    picks: list[str] = list(start)
     gains: list[float] = []
-    cur = score(())
-    for slot in range(min(slots, len(pool))):
+    cur = score(tuple(picks)) if picks else score(())
+    for slot in range(0 if picks else min(slots, len(pool))):
         if progress:
             progress(f"Choosing stigma {slot + 1} of {slots}")
         rest = [k for k in pool if k not in picks]
@@ -235,10 +253,7 @@ def _fast_eval(gd, build, sc, cfg, budget=VARIANT_BUDGET, extra: tuple[Priority,
 def _variants(gd, base_in, fb_build, picks, sc, cfg, max_dps, final_budget=VARIANT_BUDGET,
               max_priority: Priority | None = None):
     """Returns (variants, improved_max) where improved_max is (dps, priority, result) or None."""
-    pool = [
-        s.key for s in allowed_skills(gd, fb_build.region, fb_build.show_kr)
-        if s.kind == SkillKind.STIGMA and (s.unlock_level is None or s.unlock_level <= fb_build.level)
-    ]
+    pool = _stigma_pool(gd, fb_build)
     chosen = [k for k, _ in picks]
     out = [BuildVariant("max", "Max DPS", "The highest simulated damage for this playstyle.",
                         fb_build, tuple(picks), max_dps, 0.0)]
@@ -269,7 +284,19 @@ def _variants(gd, base_in, fb_build, picks, sc, cfg, max_dps, final_budget=VARIA
                     best = (d, c, drop)
         _, new, drop = best
         vb = replace(fb_build, stigmas=swapped(new, drop))
-        if vb.skill_points or vb.stigma_points:
+        if vb.stigma_points:
+            # Core ranks stay as the max build bought them; only the stigma points are spent again, on what is left
+            # after the stigmas that stay keep what they were given (re-buying everything doubled the cost).
+            kept = {k: v for k, v in fb_build.skill_ranks.items() if k != drop}
+            if drop in base_in.skill_ranks:
+                kept[drop] = base_in.skill_ranks[drop]
+            left = vb.stigma_points - sum(
+                sum(STIGMA_POINT_COST[base_in.skill_ranks.get(k, 1):fb_build.skill_ranks.get(k, 1)])
+                for k in chosen if k != drop)
+            ranks, _log = allocate_points(gd, replace(vb, skill_ranks=kept, skill_points=0, stigma_points=max(left, 0)),
+                                          _heuristic_priority(gd, vb, sc, VARIANT_BUDGET), sc, cfg)
+            vb = replace(vb, skill_ranks=ranks)
+        elif vb.skill_points:
             ranks, _log = allocate_points(gd, replace(vb, skill_ranks=dict(base_in.skill_ranks)),
                                           _heuristic_priority(gd, vb, sc, VARIANT_BUDGET), sc, cfg)
             vb = replace(vb, skill_ranks=ranks)
@@ -403,37 +430,40 @@ def plan_daevanion(gd, build, priority, sc, cfg) -> list[int]:
     return path
 
 
-def optimize_full_build(
-    gd: GameData,
-    build: CharacterBuild,
-    playstyle_key: str,
-    daevanion_points: int | None = None,
-    cfg: SimConfig = SimConfig(),
-    budget: SearchBudget = SearchBudget(max_candidates=200),
-    progress=None,
-) -> FullBuild:
-    style = next((p for p in PLAYSTYLES if p.key == playstyle_key), None)
-    if style is None:
-        raise KeyError(f"unknown playstyle: {playstyle_key}")
-    sc = style.scenario
-    say = progress or (lambda _m: None)
+PLAN_ROUNDS = 2  # planning passes: the seed rotation, then once more against the searched rotation
 
+
+def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progress, guide, say, prev=None) -> dict:
+    """One planning pass: stigmas, skill/stigma points, Daevanion, specialties, then the rotation search and a final
+    specialty re-choice. `guide` is the searched rotation of the previous pass and `prev` that pass's plan (None for
+    the first pass); a repeat pass keeps the core skill ranks and, while the stigma set is unchanged, the Daevanion
+    path of `prev`, so it only redoes what a status-gated rotation can change."""
     # 1. stigmas
-    slots = stigma_slots_at(gd, build.region, build.level)
-    picks = _optimize_stigmas(gd, build, sc, cfg, budget, slots, progress) if slots else []
+    start = prev["b"].stigmas if prev else ()
+    picks = _optimize_stigmas(gd, build, sc, cfg, budget, slots, progress, guide, start) if slots else []
     b = replace(build, stigmas=tuple(k for k, _ in picks))
-    heur = _heuristic_priority(gd, b, sc, budget)
+    heur = _heuristic_priority(gd, b, sc, budget, guide)
 
     # 2. skill / stigma points
     rank_log: list[tuple[str, int, float]] = []
     if b.skill_points or b.stigma_points:
         say("Spending skill points")
-        ranks, rank_log = allocate_points(gd, b, heur, sc, cfg)
+        if prev:
+            core = {k: r for k, r in prev["b"].skill_ranks.items()
+                    if k in gd.skills and gd.skills[k].kind != SkillKind.STIGMA}
+            ranks, rank_log = allocate_points(gd, replace(b, skill_ranks={**b.skill_ranks, **core}), heur, sc, cfg,
+                                              skip_core=True)
+            rank_log = [e for e in prev["rank_log"] if e[0] in core] + rank_log
+        else:
+            ranks, rank_log = allocate_points(gd, b, heur, sc, cfg)
         b = replace(b, skill_ranks=ranks)
 
     # 3. Daevanion: full ordered path; None = assume every point is spent (max power)
     say("Planning Daevanion")
-    path = plan_daevanion(gd, b, heur, sc, cfg)
+    if prev and b.stigmas == prev["b"].stigmas:
+        path = prev["path"]
+    else:
+        path = plan_daevanion(gd, b, heur, sc, cfg)
     cost = {n.id: n.cost for br in gd.daevanion.values() for n in br.nodes.values()}
     take, spent = [], 0
     for nid in path:
@@ -468,6 +498,46 @@ def optimize_full_build(
     if chosen != b.specs:
         b = replace(b, specs=chosen)
         result = simulate(gd, b, priority, sc, cfg)
+    return dict(b=b, picks=picks, rank_log=rank_log, path=path, take=take, dgain=dgain, priority=priority,
+                result=result, budget=budget)
+
+
+def optimize_full_build(
+    gd: GameData,
+    build: CharacterBuild,
+    playstyle_key: str,
+    daevanion_points: int | None = None,
+    cfg: SimConfig = SimConfig(),
+    budget: SearchBudget = SearchBudget(max_candidates=200),
+    progress=None,
+) -> FullBuild:
+    style = next((p for p in PLAYSTYLES if p.key == playstyle_key), None)
+    if style is None:
+        raise KeyError(f"unknown playstyle: {playstyle_key}")
+    sc = style.scenario
+    say = progress or (lambda _m: None)
+
+    # Steps 1-4b plan the build against a rotation. The first pass can only use the greedy seed rotation, but the
+    # final rotation is searched, and casts gated on a status exist only there (a Corrode rank is worth 0% against the
+    # seed and +9% against the searched rotation). When the searched rotation has such a cast, the plan is redone once
+    # against it (PLAN_ROUNDS passes at most: every pass repeats the rotation search); the better pass is kept.
+    slots = stigma_slots_at(gd, build.region, build.level)
+    guide: Priority | None = None
+    best_pass = None
+    prev_sig = None
+    for rnd in range(PLAN_ROUNDS):
+        plan = _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progress if rnd == 0 else None,
+                                guide, say if rnd == 0 else (lambda _m: None), best_pass if rnd else None)
+        if best_pass is None or plan["result"].dps > best_pass["result"].dps * (1 + 1e-9):
+            best_pass = plan
+        sig = (plan["b"].stigmas, tuple(sorted(plan["b"].skill_ranks.items())),
+               tuple(sorted(plan["b"].specs.items())))
+        if sig == prev_sig or not any(e.require_status for e in plan["priority"].entries):
+            break  # stable, or the searched rotation has no status-gated cast the seed rotation could not see
+        prev_sig, guide = sig, plan["priority"]
+    plan = best_pass
+    b, picks, rank_log, path, take, dgain = plan["b"], plan["picks"], plan["rank_log"], plan["path"], plan["take"], plan["dgain"]
+    priority, result, budget = plan["priority"], plan["result"], plan["budget"]
 
     # 5. stats
     say("Ranking stat gains")

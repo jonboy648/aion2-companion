@@ -1607,5 +1607,181 @@
    "rank1_flat": 472,
    "rank1_source": "aion2.app client dump 2026-09-18 (the client table starts at rank 2)"
   }
+ },
+ "rank_scales": {
+  "element_enhancement": [
+   {
+    "skill": "element-enhancement",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "wish_of_concentration": [
+   {
+    "skill": "wish-of-concentration",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "wish_atk_plus": [
+   {
+    "skill": "wish-of-concentration",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "wish_combat_speed": [
+   {
+    "skill": "wish-of-concentration",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "ee_plus": [
+   {
+    "skill": "element-enhancement",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ],
+  "ee_grace": [
+   {
+    "skill": "element-enhancement",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 20
+   }
+  ]
  }
 }

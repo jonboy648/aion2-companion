@@ -1986,5 +1986,152 @@
    ]
   }
  },
- "specialization_effects_note": "Overrides for options the generic text parser gets wrong or cannot value. Options not listed use the parser. Chain children (Thunder and Lightning, Discharge, Divine Punishment) list the parent's options in the client; the parents carry the effects and the children are empty. Cleric options unlock at rank 8/8/8/12/16 (actives) and 5/10/15/20 (stigmas); spec_slot_ranks keeps the engine default 8/12/20."
+ "specialization_effects_note": "Overrides for options the generic text parser gets wrong or cannot value. Options not listed use the parser. Chain children (Thunder and Lightning, Discharge, Divine Punishment) list the parent's options in the client; the parents carry the effects and the children are empty. Cleric options unlock at rank 8/8/8/12/16 (actives) and 5/10/15/20 (stigmas); spec_slot_ranks keeps the engine default 8/12/20.",
+ "rank_scales": {
+  "light_of_protection": [
+   {
+    "skill": "light-of-protection",
+    "target": "dmg_boost_pct",
+    "anchors": [
+     [
+      1,
+      10.5
+     ],
+     [
+      10,
+      15.0
+     ],
+     [
+      16,
+      18.0
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 16
+   }
+  ],
+  "prayer_of_amplification": [
+   {
+    "skill": "prayer-of-amplification",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 16
+   }
+  ],
+  "prayer_pve_boost": [
+   {
+    "skill": "prayer-of-amplification",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 16
+   }
+  ],
+  "prayer_earths_grace": [
+   {
+    "skill": "prayer-of-amplification",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 16
+   }
+  ],
+  "spec_prayer-of-amplification_3_buff": [
+   {
+    "skill": "prayer-of-amplification",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 16
+   }
+  ]
+ }
 }

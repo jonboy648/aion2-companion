@@ -83,7 +83,7 @@ const K = {
   num: keysOf<T.Num>({ value: true, confidence: true, source: true }),
   status: keysOf<T.Status>({
     key: true, name: true, on: true, duration_s: true, dmg_mult: true, elements: true, mp_min_pct: true,
-    source_skill: true, tick_ratio_pct: true, tick_s: true, stat_mods: true, permanent: true, tick_flat_ranks: true,
+    source_skill: true, tick_ratio_pct: true, tick_s: true, stat_mods: true, permanent: true, tick_flat_ranks: true, rank_scales: true,
   }),
   rule: keysOf<T.SkillRule>({
     skill_key: true, applies: true, apply_chance: true, requires: true, consumes: true, chain_next: true,

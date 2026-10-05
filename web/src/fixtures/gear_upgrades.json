@@ -492,8 +492,8 @@
     "reachable": true
    },
    "kind": "item",
-   "dps_gain_pct": 3.9471447191633757,
-   "dps_after": 9407.152651031876,
+   "dps_gain_pct": 3.9318805748324026,
+   "dps_after": 9113.839538405557,
    "source": "Ascension",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png"
@@ -555,8 +555,8 @@
     "reachable": true
    },
    "kind": "item",
-   "dps_gain_pct": 3.1628747017567793,
-   "dps_after": 9704.689102387005,
+   "dps_gain_pct": 3.1510077053700236,
+   "dps_after": 9401.017324515775,
    "source": "Substance Morph",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Item_Craft_Conversion_Crystal_L_lv5_01.png"
@@ -618,8 +618,8 @@
     "reachable": true
    },
    "kind": "item",
-   "dps_gain_pct": 2.864187823855091,
-   "dps_after": 9982.649626000566,
+   "dps_gain_pct": 2.85388364451038,
+   "dps_after": 9669.311420357719,
    "source": "Ascension",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png"
@@ -681,8 +681,8 @@
     "reachable": true
    },
    "kind": "enchant",
-   "dps_gain_pct": 2.522828689783596,
-   "dps_after": 10234.494774765883,
+   "dps_gain_pct": 2.513903909801951,
+   "dps_after": 9912.388618205017,
    "source": "Enchanting",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Weapon_Guarder_C_028.png"
@@ -754,8 +754,8 @@
     "reachable": true
    },
    "kind": "enchant",
-   "dps_gain_pct": 2.4048221314371565,
-   "dps_after": 10480.616170150231,
+   "dps_gain_pct": 2.396523433734332,
+   "dps_after": 10149.941334283116,
    "source": "Enchanting",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png"
@@ -827,8 +827,8 @@
     "reachable": true
    },
    "kind": "enchant",
-   "dps_gain_pct": 2.3483485263519954,
-   "dps_after": 10726.737565534564,
+   "dps_gain_pct": 2.3404343754747536,
+   "dps_after": 10387.4940503612,
    "source": "Enchanting",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Acc_Bracelet_R_027.png"
@@ -895,8 +895,8 @@
     "reachable": true
    },
    "kind": "item",
-   "dps_gain_pct": 2.020095854257753,
-   "dps_after": 10943.427946393036,
+   "dps_gain_pct": 2.0142989244884335,
+   "dps_after": 10596.729231298925,
    "source": "Quest",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_WP_MB_0078_T05.png"
@@ -968,8 +968,8 @@
     "reachable": true
    },
    "kind": "enchant",
-   "dps_gain_pct": 1.3619660901631914,
-   "dps_after": 11092.473724124351,
+   "dps_gain_pct": 1.3575712083019997,
+   "dps_after": 10740.587376364761,
    "source": "Enchanting",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_WP_MB_0078_T05.png"
@@ -1036,8 +1036,8 @@
     "reachable": true
    },
    "kind": "item",
-   "dps_gain_pct": 1.2769159461432755,
-   "dps_after": 11234.115289929448,
+   "dps_gain_pct": 1.2731104929077253,
+   "dps_after": 10877.326921253183,
    "source": "unknown",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png"
@@ -1109,8 +1109,8 @@
     "reachable": true
    },
    "kind": "enchant",
-   "dps_gain_pct": 1.9399965165167288,
-   "dps_after": 11452.056735215554,
+   "dps_gain_pct": 1.9338983151927946,
+   "dps_after": 11087.68336332131,
    "source": "Enchanting",
    "reachable": true,
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_ACC_Ring_0009.png"

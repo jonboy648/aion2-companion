@@ -47,7 +47,7 @@ def cast_dmg(res, key, n=0):
 
 def run(gd, keys, specs=None, level=45, **stats):
     b = CharacterBuild("t", "global", level, class_key=KEY, specs=specs or {}, stats=Stats(**stats),
-                       skill_ranks={k: 20 for k in ("pummel", "judgment", "punishment", "annihilate")},
+                       skill_ranks={k: 20 for k in ("pummel", "judgment", "punishment", "annihilate", "fury")},
                        stigmas=("doom-shield",))
     return simulate(gd, b, P(*keys), SC1)
 

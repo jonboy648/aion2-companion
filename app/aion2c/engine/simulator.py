@@ -93,6 +93,7 @@ class _Info:
 
 class _Sim:
     def __init__(self, gd, build, scenario, cfg, initial):
+        gd = rank_valued(gd, build)  # buff durations/magnitudes at the build's own skill ranks
         self.gd, self.build, self.sc, self.cfg = gd, build, scenario, cfg
         self.stats = apply_stats(gd, build)
         self.D = round(scenario.duration_s * 1000)
@@ -796,4 +797,5 @@ def simulate_macro(
     return sim.finish()
 
 
+from aion2c.engine.rank_values import rank_valued  # noqa: E402
 from aion2c.daevanion import apply_stats  # noqa: E402,F401  (bottom on purpose, see docstring)

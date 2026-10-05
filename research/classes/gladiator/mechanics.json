@@ -1503,5 +1503,123 @@
    ]
   }
  },
- "_specialization_note": "Overrides only where the generic parser (aion2c/specparse.py) is wrong or cannot decode the text; all other options use the parser result (cooldown cuts, MP, crit restores/resets, +targets, damage when more/less targets, Skill Speed). Slot ranks use the engine default 8/12/20 (sources disagree: 8/12/16)."
+ "_specialization_note": "Overrides only where the generic parser (aion2c/specparse.py) is wrong or cannot decode the text; all other options use the parser result (cooldown cuts, MP, crit restores/resets, +targets, damage when more/less targets, Skill Speed). Slot ranks use the engine default 8/12/20 (sources disagree: 8/12/16).",
+ "rank_scales": {
+  "lunge_stance": [
+   {
+    "skill": "lunge-stance",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 10
+   }
+  ],
+  "zikels_blessing": [
+   {
+    "skill": "zikels-blessing",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 10
+   }
+  ],
+  "wave_armor_dot": [
+   {
+    "skill": "wave-armor",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 10
+   }
+  ],
+  "armor_of_balance": [
+   {
+    "skill": "armor-of-balance",
+    "target": "duration",
+    "anchors": [
+     [
+      1,
+      10.0
+     ],
+     [
+      10,
+      14.5
+     ],
+     [
+      16,
+      17.5
+     ],
+     [
+      20,
+      20.0
+     ],
+     [
+      25,
+      22.5
+     ]
+    ],
+    "at_rank": 10
+   }
+  ]
+ }
 }

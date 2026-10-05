@@ -40,7 +40,7 @@ def test_sorcerer_has_no_flame_blessing(gd):
 
 def test_wish_casts_and_adds_dps_when_ahead_of_fillers(gd):
     rest = ("hellfire", "blaze", "firestorm", "flame-arrow")
-    with_wish = simulate(gd, build(), P(WISH, *rest), BOSS)
+    with_wish = simulate(gd, build(skill_ranks={WISH: 20}), P(WISH, *rest), BOSS)  # Wish lasts 20 s at rank 20
     without = simulate(gd, build(), P(*rest), BOSS)
     assert casts(with_wish)[WISH] > 0
     assert "wish_of_concentration" in with_wish.status_uptime and with_wish.status_uptime["wish_of_concentration"] > 0.2
