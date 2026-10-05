@@ -90,6 +90,13 @@
    "intro": "Live countdowns and upcoming times for Aion 2 events, in your own time zone, for Global, KR and TW."
   },
   {
+   "path": "/checklist",
+   "title": "Aion 2 daily and weekly checklist with reset timers",
+   "h1": "Checklist",
+   "description": "Free Aion 2 daily and weekly checklist for every character. Ticks clear on the game reset, with live countdowns, counters and a shareable template.",
+   "intro": "Track Aion 2 dailies, weeklies and custom-interval tasks for each character. No account: it is saved in your browser and clears itself at the daily and weekly reset."
+  },
+  {
    "path": "/codex/gladiator",
    "title": "Aion 2 Gladiator skills, stigmas and specialties",
    "h1": "Gladiator skills",

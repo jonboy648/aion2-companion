@@ -19,6 +19,7 @@ const NAV = [
   { to: "/crafting", label: "Crafting" },
   { to: "/roadmap", label: "Road Map" },
   { to: "/timers", label: "Timers" },
+  { to: "/checklist", label: "Checklist" },
 ];
 
 export const DISCLAIMER = "Fan project, not affiliated with NCSOFT. Game data and icons © NCSOFT.";
@@ -94,7 +95,7 @@ function Shell() {
             </div>
             <nav aria-label="Footer build tools"><h2>Build & plan</h2><NavLink to="/build">Build by hand</NavLink><NavLink to="/compare">Compare builds</NavLink><NavLink to="/daevanion">Daevanion</NavLink><NavLink to="/keybinds">Keybinds</NavLink></nav>
             <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink></nav>
-            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink><NavLink to="/timers">Timers</NavLink></nav>
+            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink><NavLink to="/timers">Timers</NavLink><NavLink to="/checklist">Checklist</NavLink></nav>
           </div>
           <div className="site-footer-bottom"><p>{DISCLAIMER}</p><ThemePicker /></div>
           <details className="site-footer-privacy"><summary>Privacy</summary><p>{PRIVACY_NOTE}</p></details>
