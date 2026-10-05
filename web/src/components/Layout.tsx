@@ -14,6 +14,7 @@ const NAV = [
   { to: "/daevanion", label: "Daevanion" },
   { to: "/compare", label: "Compare" },
   { to: "/codex", label: "Codex" },
+  { to: "/map/", label: "Maps" },
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
   { to: "/roadmap", label: "Road Map" },
@@ -66,7 +67,7 @@ function Shell() {
           </NavLink>
           <nav aria-label="Main" className="flex flex-wrap gap-1.5">
             {NAV.map((n) => (
-              <NavLink key={n.to} to={n.to} end={n.end} className={cn("game-tab px-3 py-1.5 text-sm font-medium no-underline")}>
+              <NavLink key={n.to} to={n.to} end={n.end} reloadDocument={n.to === "/map/"} className={cn("game-tab px-3 py-1.5 text-sm font-medium no-underline")}>
                 {n.label}
               </NavLink>
             ))}

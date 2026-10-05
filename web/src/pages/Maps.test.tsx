@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import App from "@/App";
@@ -16,14 +16,15 @@ describe("Maps page", () => {
     expect(screen.getByRole("link", { name: /Open interactive map/ })).toHaveAttribute("href", "/map/");
   });
 
-  it("is reachable at /maps and from the footer, not the top nav", () => {
+  it("links directly to the interactive map from the top nav and keeps the footer directory", () => {
     render(
       <MemoryRouter initialEntries={["/maps"]}>
         <App />
       </MemoryRouter>,
     );
     expect(screen.getByRole("heading", { name: "Maps" })).toBeTruthy();
-    const footerLink = screen.getAllByRole("link", { name: "Maps" }).find((a) => a.getAttribute("href") === "/maps");
+    expect(within(screen.getByRole("navigation", { name: "Main" })).getByRole("link", { name: "Maps" })).toHaveAttribute("href", "/map/");
+    const footerLink = within(screen.getByRole("navigation", { name: "Footer community" })).getByRole("link", { name: "Maps" });
     expect(footerLink).toBeTruthy();
     expect(footerLink!.closest('nav[aria-label="Main"]')).toBeNull(); // not in the main nav
   });
