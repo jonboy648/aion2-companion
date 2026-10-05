@@ -178,3 +178,44 @@ allocations are rejected; they are not shown as legal plans. Integrate the
 engine-only patch, regenerate the web engine bundle, and verify levels 22/30/45
 with quests and earned rewards before release. Home and imported characters
 are not rewritten by this feature.
+
+## Guide layout and responsiveness pass
+
+Claude reviewed the direction before implementation. The existing ManualBuild
+and Codex class-guide flow now uses an explicit Calculate button for one selected
+playstyle, not a four-playstyle comparison after every input change. Local
+budgets, current core skills and the next unlock update without Python requests.
+The guide reads skills -> quickslots/macro -> full analysis, with combat stats,
+quest unlocks and earned rewards in a supporting settings column. The existing
+AdvancedStats layout, Hotbar, MacroPanel and full PlaystyleDetail are reused.
+
+Read-only guide data is loaded directly from the shipped class and icon JSON;
+icon names are resolved using the same official CDN template as webapi.icon_urls.
+This path is opt-in: imported-character consumers retain their engine API path.
+There is no new dependency, worker termination or frontend result cache.
+
+Previous plans remain visible but are marked Out of date after input/data changes.
+Their controls and exact-plan handoff are disabled until recalculation. Requests
+have generation guards and repeated submits cannot enqueue another search while
+the current request is pending. Non-DPS variants disable the original DPS macro;
+recalculating identical inputs resets both the variant and macro state together.
+
+Fresh verification: 456 tests in 59 web files pass; npm run build passes and
+generates 23 prerenders. Main JS is 654.55 KB (203.19 KB gzip), CSS 117.32 KB
+(22.07 KB gzip). Compared with the preceding planner checkpoint these add
+8.75/2.41 KB JS and 4.99/0.79 KB CSS (raw/gzip), not an origin/main baseline.
+Existing large-chunk and mixed static/dynamic fixture-import warnings remain.
+
+Real-browser Sorcerer level 1 calculates only Leveling, then renders that exact
+plan's key stacks and one F11 macro inline. Changing the level leaves the result
+marked Out of date with handoff disabled and Calculate available, without starting
+another search. At an effective 390px viewport the document is 378px wide;
+quickslots have a 347px scroll region around their 626px content. The chart's
+hidden tooltip is contained so desktop positions cannot widen the mobile page.
+Fresh Templar guide has no console warnings/errors, and its skill CDN images load.
+The browser's mobile screenshot capture showed compositor artifacts; mobile
+layout containment was checked through DOM bounds, not inferred from that image.
+
+Preview: http://127.0.0.1:5197/codex/templar and /build. No push. The matching
+progression, real-stats and cache-fingerprint integration remains pending; the
+levels 22/30/45 engine acceptance above is still required before release.

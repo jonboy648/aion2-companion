@@ -1,60 +1,62 @@
-import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useId, useRef, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Crosshair, Layers, Sparkles, Swords, Calculator, SlidersHorizontal } from "lucide-react";
 import { ClassEmblem } from "@/components/game/ClassEmblem";
 import { FactionEmblem } from "@/components/game/Ornaments";
 import { useCharacterFaction, type Faction } from "@/components/game/faction";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BuildResults, ProgressPanel } from "@/features/build/BuildResults";
+import AdvancedStats from "@/components/ui/advanced-stats";
+import { SingleBuildResults, ProgressPanel } from "@/features/build/BuildResults";
 import { ROLE_LABEL } from "@/features/build/helpers";
 import { STAT_FIELDS, buildFromForm, initialForm, type ManualForm } from "@/features/build/manualBuild";
-import { POINTS_DEBOUNCE_MS } from "@/features/build/unspentPoints";
 import { useClassData } from "@/features/build/useClassData";
-import { SkillIcon } from "@/features/codex/parts";
-import { ProgressionControls } from "@/features/progression/ProgressionControls";
-import { NO_EARNED_POINTS, levelBudget, prepareLevelBuild, progression, validateLevelPlan, validateLevelPriority, type EarnedPoints } from "@/features/progression/progression";
-import { compare, listClasses } from "@/engine/api";
+import { ProgressionControls, ProgressionSettings } from "@/features/progression/ProgressionControls";
+import { GuideSkills } from "@/features/progression/GuideSkills";
+import { GuideQuickslots } from "@/features/progression/GuideQuickslots";
+import { NO_EARNED_POINTS, levelBudget, prepareLevelBuild, validateLevelPlan, validateLevelPriority, type EarnedPoints } from "@/features/progression/progression";
+import { optimize, listClasses } from "@/engine/api";
 import { storePlannedBuild } from "@/features/keybinds/activeBuild";
 import { useAsync } from "@/hooks/useAsync";
-import type { CharacterBuild, CompareResult, FullBuild, GameData, PlaystyleKey } from "@/lib/types";
+import type { CharacterBuild, FullBuild, GameData, PlaystyleKey } from "@/lib/types";
+import "@/features/progression/planner.css";
 
-function comparisonIssues(result: CompareResult, input: CharacterBuild, budget: EarnedPoints,
+const STYLES = [
+  { key: "leveling", label: "Leveling", icon: Sparkles },
+  { key: "boss", label: "Boss", icon: Crosshair },
+  { key: "aoe", label: "AoE", icon: Layers },
+  { key: "burst", label: "Burst", icon: Swords },
+] as const;
+
+function planIssues(fb: FullBuild, input: CharacterBuild, selected: PlaystyleKey, budget: EarnedPoints,
   stigmaUnlocked: boolean, daevanionUnlocked: boolean, gd: GameData): string[] {
-  const issues: string[] = [];
-  for (const key of ["boss", "aoe", "leveling", "burst"] as const) {
-    const fb = result[key];
-    if (!fb || !Array.isArray(fb.variants)) {
-      issues.push(`${key}: the engine did not return a complete plan.`);
-      continue;
-    }
-    issues.push(...validateLevelPriority(fb.build, fb.priority, gd).map((issue) => `${key}: ${issue}`));
-    for (const plan of [fb.build, ...fb.variants.map((variant) => variant.build)]) {
-      if (plan.class_key !== input.class_key || plan.level !== input.level || plan.region !== input.region) {
-        issues.push(`${key}: the engine returned a different class, level or region.`);
-      }
-      if (Object.keys(plan.bonus_ranks).length !== Object.keys(input.bonus_ranks).length ||
-        Object.entries(plan.bonus_ranks).some(([skill, rank]) => input.bonus_ranks[skill] !== rank)) {
-        issues.push(`${key}: the engine assumed unprovided bonus ranks.`);
-      }
-      issues.push(...validateLevelPlan(plan, budget, stigmaUnlocked, gd).map((issue) => `${key}: ${issue}`));
-      if (!daevanionUnlocked && plan.daevanion_nodes.length) issues.push(`${key}: Daevanion requires its unlock quest.`);
-    }
-    if (!daevanionUnlocked && fb.daevanion_path.length) issues.push(`${key}: Daevanion requires its unlock quest.`);
+  if (!fb || !Array.isArray(fb.variants) || !fb.priority?.entries) return ["The engine did not return a complete plan."];
+  const issues = validateLevelPriority(fb.build, fb.priority, gd);
+  if (fb.playstyle.key !== selected) issues.push("The engine returned a different playstyle.");
+  for (const plan of [fb.build, ...fb.variants.map((variant) => variant.build)]) {
+    if (plan.class_key !== input.class_key || plan.level !== input.level || plan.region !== input.region)
+      issues.push("The engine returned a different class, level or region.");
+    if (Object.keys(plan.bonus_ranks).length !== Object.keys(input.bonus_ranks).length ||
+      Object.entries(plan.bonus_ranks).some(([skill, rank]) => input.bonus_ranks[skill] !== rank))
+      issues.push("The engine assumed unprovided bonus ranks.");
+    issues.push(...validateLevelPlan(plan, budget, stigmaUnlocked, gd));
+    if (!daevanionUnlocked && plan.daevanion_nodes.length) issues.push("Daevanion requires its unlock quest.");
   }
+  if (!daevanionUnlocked && fb.daevanion_path.length) issues.push("Daevanion requires its unlock quest.");
   return [...new Set(issues)];
 }
 
-/** /build?class=<key>: class picker + level/stats form -> the same playstyle results as an imported character. */
+/** Level previews are local; only an explicit submit requests one engine plan. */
 export function ManualBuild({ guideClass }: { guideClass?: string }) {
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
+  const formId = useId();
   const classes = useAsync(() => listClasses(), []);
   const classKey = guideClass ?? params.get("class") ?? "sorcerer";
-  const data = useClassData(classKey);
+  const data = useClassData(classKey, { staticData: true });
   const levelCap = Math.min(45, data.gd?.level_caps.global ?? 45);
   const ready = data.gd?.class_key === classKey;
-
   const [race, setRace] = useState<"" | Faction>("");
   useCharacterFaction(race || null);
   const [form, setForm] = useState<ManualForm>(() => ({ ...initialForm(classKey), level: "45" }));
@@ -63,206 +65,143 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
   const [daevanionUnlocked, setDaevanionUnlocked] = useState(false);
   const [selected, setSelected] = useState<PlaystyleKey>(guideClass ? "leveling" : "boss");
   const [busy, setBusy] = useState(false);
+  const [running, setRunning] = useState<{ key: string; label: string } | null>(null);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
-  const [comparison, setComparison] = useState<{ key: string; result: CompareResult } | null>(null);
-  const submitted = useRef(false);
+  const [plan, setPlan] = useState<{ id: number; key: string; gd: GameData; fb: FullBuild } | null>(null);
+  const [variant, setVariant] = useState<{ id: number; value: string } | null>(null);
   const run = useRef(0);
-  const timer = useRef<number | undefined>(undefined);
+  const inFlight = useRef(false);
+  const mounted = useRef(true);
   const inputKey = JSON.stringify({ classKey, level: form.level, stats: form.stats, earned,
-    stigmaUnlocked, daevanionUnlocked, race });
-  const cmp = ready && comparison?.key === inputKey ? comparison.result : null;
-
-  function invalidate() {
-    run.current++;
-    window.clearTimeout(timer.current);
-    setComparison(null);
-    setBusy(false);
-    setErrors([]);
-  }
+    stigmaUnlocked, daevanionUnlocked, race, selected });
+  const sameClass = plan?.fb.build.class_key === classKey;
+  const stale = plan?.key !== inputKey || plan?.gd !== data.gd || !ready;
+  const dpsVariant = variant?.id !== plan?.id || variant?.value === "max";
+  function invalidate() { run.current++; setErrors([]); }
+  useEffect(() => { run.current++; }, [inputKey, data.gd]);
+  useEffect(() => { setErrors([]); }, [classKey]);
+  useEffect(() => {
+    mounted.current = true;
+    return () => { mounted.current = false; run.current++; };
+  }, []);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    submitted.current = true;
-    await solve();
-  }
-
-  async function solve() {
+    if (inFlight.current) return;
     invalidate();
     const built = buildFromForm({ ...form, classKey }, levelCap);
-    if ("errors" in built) {
-      setErrors(built.errors);
-      return;
-    }
+    if ("errors" in built) { setErrors(built.errors); return; }
     const gd = data.gd;
-    if (!gd || gd.class_key !== classKey) {
-      setErrors(["Class progression data is not ready."]);
-      return;
-    }
-    setBusy(true);
-    setMessage("Starting...");
+    if (!gd || gd.class_key !== classKey) { setErrors(["Class progression data is not ready."]); return; }
     const id = ++run.current;
+    inFlight.current = true;
+    setBusy(true);
+    setRunning({ key: inputKey, label: STYLES.find((style) => style.key === selected)!.label });
+    setMessage("Starting...");
     try {
       const prepared = prepareLevelBuild(built.build, gd, earned, stigmaUnlocked, daevanionUnlocked);
-      const result = await compare(prepared.build, daevanionUnlocked ? prepared.daevanionPoints : 0,
+      const result = await optimize(prepared.build, selected, prepared.daevanionPoints,
         (m) => { if (id === run.current) setMessage(m); });
       if (id !== run.current) return;
       const spendable = { ...prepared.budget, daevanion: prepared.daevanionPoints,
         stigma: prepared.build.stigma_points ?? 0 };
-      const issues = comparisonIssues(result, prepared.build, spendable, stigmaUnlocked, daevanionUnlocked, gd);
-      if (issues.length) {
-        setErrors(["The returned plan is not valid for these progression inputs.", ...issues]);
-        return;
-      }
-      setComparison({ key: inputKey, result });
+      const issues = planIssues(result, prepared.build, selected, spendable, stigmaUnlocked, daevanionUnlocked, gd);
+      if (issues.length) { setErrors(["The returned plan is not valid for these progression inputs.", ...issues]); return; }
+      setPlan({ id, key: inputKey, gd, fb: result });
+      setVariant(null);
     } catch (err) {
       if (id === run.current) setErrors([err instanceof Error ? err.message : String(err)]);
     } finally {
-      if (id === run.current) setBusy(false);
+      inFlight.current = false;
+      if (mounted.current) setBusy(false);
     }
   }
-
-  // Handlers revoke runs immediately; the effect also covers route/data changes.
-  const solveRef = useRef(solve);
-  solveRef.current = solve;
-  useEffect(() => {
-    invalidate();
-    if (submitted.current && ready) timer.current = window.setTimeout(() => void solveRef.current(), POINTS_DEBOUNCE_MS);
-    return () => {
-      window.clearTimeout(timer.current);
-      run.current++;
-    };
-  }, [inputKey, data.gd]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  function usePlan(fb: FullBuild) {
-    if (!cmp) return;
+  const usePlan = (fb: FullBuild) => {
+    if (stale || busy) return;
     storePlannedBuild(fb);
     navigate("/keybinds");
-  }
-
-  const role = classes.data?.find((c) => c.key === classKey)?.role;
-  const basic = STAT_FIELDS.filter((f) => !f.advanced);
-  const advanced = STAT_FIELDS.filter((f) => f.advanced);
-  const previewLevel = levelBudget(Number(form.level))?.level;
-  const coreSkills = Object.entries(progression.classes[classKey]?.skills ?? {}).flatMap(([key, acquisition]) => {
-    const skill = data.gd?.skills[key];
-    const first = acquisition.ranks.find((rank) => rank.rank === 1);
-    return skill && ["active", "passive"].includes(skill.kind) && first && !first.unresolved &&
-      !first.ascensionGrade && first.requires.length === 0
-      ? [{ key, name: skill.name, unlockLevel: Math.max(acquisition.unlockLevel, first.characterLevel) }] : [];
-  }).sort((a, b) => a.unlockLevel - b.unlockLevel || a.name.localeCompare(b.name));
-  const available = previewLevel ? coreSkills.filter((skill) => skill.unlockLevel <= previewLevel) : [];
-  const upcoming = previewLevel && previewLevel < levelCap ? coreSkills.filter((skill) => skill.unlockLevel === previewLevel + 1) : [];
-  const skillLinks = (skills: typeof coreSkills) => skills.map((skill) => (
-    <li key={skill.key}>
-      <Link to={`/codex/${classKey}?skill=${encodeURIComponent(skill.key)}`} className="flex items-center gap-2 text-sm hover:text-cyan">
-        <SkillIcon url={data.icons[skill.key]} name={skill.name} size={24} />
-        <span>{skill.name}</span><span className="ml-auto shrink-0 text-xs text-faint">Lv {skill.unlockLevel}</span>
-      </Link>
-    </li>
-  ));
-  const setStat = (key: string, v: string) => {
-    invalidate();
-    setForm((f) => ({ ...f, stats: { ...f.stats, [key]: v } }));
   };
-
+  const info = classes.data?.find((c) => c.key === classKey);
+  const previewLevel = levelBudget(Number(form.level))?.level;
+  const settings = { level: form.level, levelCap,
+    onLevel: (level: string) => { invalidate(); setForm((f) => ({ ...f, level })); },
+    earned, onEarned: (points: EarnedPoints) => { invalidate(); setEarned(points); },
+    stigmaUnlocked, onStigmaUnlocked: (unlocked: boolean) => { invalidate(); setStigmaUnlocked(unlocked); },
+    daevanionUnlocked, onDaevanionUnlocked: (unlocked: boolean) => { invalidate(); setDaevanionUnlocked(unlocked); } };
+  const statField = (f: typeof STAT_FIELDS[number]) => (
+    <label key={f.key} className="block text-sm">
+      <span className="mb-1 block text-dim">{f.label}</span>
+      <Input type="number" inputMode="decimal" step={f.step} min={0} value={form.stats[f.key]} onChange={(e) => {
+        invalidate(); setForm((old) => ({ ...old, stats: { ...old.stats, [f.key]: e.target.value } }));
+      }} />
+    </label>
+  );
   return (
-    <>
-      {!guideClass && <PageHeader title="Manual build" caption="Class, level and combat stats" />}
-
-      <div className="mb-5 flex flex-wrap gap-2" role="group" aria-label="Class">
-        {classes.data?.map((c) => (
-          <Button key={c.key} size="sm" className="gap-1.5 pl-1.5" variant={c.key === classKey ? "default" : "secondary"} aria-pressed={c.key === classKey} onClick={() => {
+    <div className="level-planner">
+      {!guideClass && <PageHeader title="Manual build" caption="Your class, level and build plan" />}
+      <div className="planner-class-picker" role="group" aria-label="Class">
+        {classes.data?.map((c) => <button type="button" key={c.key} aria-pressed={c.key === classKey}
+          onClick={() => {
             if (c.key === classKey) return;
             invalidate();
-            if (guideClass) navigate(`/codex/${c.key}`);
+            if (guideClass) navigate("/codex/" + c.key);
             else setParams({ class: c.key });
-          }}>
-            <ClassEmblem classKey={c.key} size={22} />
-            {c.name}
-          </Button>
-        ))}
-        {classes.loading && <span className="text-sm text-dim">Loading classes...</span>}
-        {role && <span className="self-center text-xs text-dim">{ROLE_LABEL[role]}</span>}
+          }}><ClassEmblem classKey={c.key} size={28} /><span>{c.name}</span></button>)}
+        {classes.loading && <span role="status" className="text-sm text-dim">Loading classes...</span>}
       </div>
-
-      {!guideClass && <div className="mb-5 flex flex-wrap items-center gap-2" role="group" aria-label="Race">
-        <span className="text-sm text-dim">Race</span>
-        {(["elyos", "asmodian"] as const).map((r) => (
-          <Button key={r} size="sm" className="gap-1.5 capitalize" variant={race === r ? "default" : "secondary"} aria-pressed={race === r} onClick={() => { invalidate(); setRace(race === r ? "" : r); }}>
-            <FactionEmblem faction={r} size={18} />
-            {r}
-          </Button>
-        ))}
-      </div>}
-
-      {data.error && <p role="alert" className="mb-4 text-sm text-error">Could not load class data: {data.error}</p>}
-
-      <form onSubmit={onSubmit} noValidate>
-        <ProgressionControls level={form.level} levelCap={levelCap}
-          onLevel={(level) => { invalidate(); setForm((f) => ({ ...f, level })); }}
-          earned={earned} onEarned={(points) => { invalidate(); setEarned(points); }}
-          stigmaUnlocked={stigmaUnlocked} onStigmaUnlocked={(unlocked) => { invalidate(); setStigmaUnlocked(unlocked); }}
-          daevanionUnlocked={daevanionUnlocked} onDaevanionUnlocked={(unlocked) => { invalidate(); setDaevanionUnlocked(unlocked); }} />
-        {ready && previewLevel && <details className="mb-5 border-b border-border-soft pb-4">
-          <summary className="cursor-pointer text-sm text-cyan">Core skills ({available.length})</summary>
-          <ul aria-label={`Core skills at level ${previewLevel}`} className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-            {skillLinks(available)}
-          </ul>
-          {upcoming.length > 0 && <div className="mt-4">
-            <h3 className="text-xs font-medium text-dim">At level {previewLevel + 1}</h3>
-            <ul aria-label={`Core skills unlocking at level ${previewLevel + 1}`} className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-              {skillLinks(upcoming)}
-            </ul>
-          </div>}
-        </details>}
-        <details open={!guideClass} className="mb-5 border-b border-border-soft pb-4">
-          <summary className="mb-3 cursor-pointer text-sm text-cyan">Combat stats</summary>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {basic.map((f) => (
-              <label key={f.key} className="block text-sm">
-                <span className="mb-1 block text-dim">{f.label}</span>
-                <Input type="number" inputMode="decimal" step={f.step} min={0} value={form.stats[f.key]} onChange={(e) => setStat(f.key, e.target.value)} />
-              </label>
-            ))}
-          </div>
-          <details className="mt-4">
-            <summary className="cursor-pointer text-sm text-cyan">More stats</summary>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {advanced.map((f) => (
-                <label key={f.key} className="block text-sm">
-                  <span className="mb-1 block text-dim">{f.label}</span>
-                  <Input type="number" inputMode="decimal" step={f.step} min={0} value={form.stats[f.key]} onChange={(e) => setStat(f.key, e.target.value)} />
-                </label>
-              ))}
-            </div>
-          </details>
-        </details>
-        {errors.length > 3 ? (
-          <div role="alert" className="mt-3 text-sm text-error">
-            <p>{errors[0]}</p>
-            <details className="mt-2">
-              <summary className="cursor-pointer">Validation details ({errors.length - 1})</summary>
-              <ul className="mt-2 list-disc space-y-0.5 pl-5">
-                {errors.slice(1).map((error) => <li key={error}>{error}</li>)}
-              </ul>
-            </details>
-          </div>
-        ) : errors.length > 0 && (
-          <ul role="alert" className="mt-3 list-disc space-y-0.5 pl-5 text-sm text-error">
-            {errors.map((error) => <li key={error}>{error}</li>)}
-          </ul>
-        )}
-        <div className="my-5 flex flex-wrap items-center gap-3">
-          <Button type="submit" size="lg" disabled={busy || !ready}>
-            {busy ? "Optimizing..." : guideClass ? "Find class build" : "Find my best build"}
-          </Button>
-          {!ready && !data.error && <span role="status" className="text-xs text-dim">Loading class data...</span>}
+      <header className="planner-identity">
+        {info && <img src={import.meta.env.BASE_URL + "brand/classes/" + info.key + "-320.webp"} alt="" width={88} height={88} />}
+        <div><h2>{info?.name ?? classKey} {guideClass ? "class guide" : "build"}</h2>
+          <p>{info?.role && ROLE_LABEL[info.role]}<span className="mx-2 text-faint">/</span>Global</p></div>
+        <span className="planner-level-label">Level {previewLevel ?? "-"}</span>
+      </header>
+      <ProgressionControls {...settings} compact />
+      <div className="planner-toolbar">
+        <div role="group" aria-label="Playstyle" className="planner-playstyles">
+          {STYLES.map(({ key, label, icon: Icon }) => <button key={key} type="button" aria-pressed={selected === key}
+            onClick={() => { invalidate(); setSelected(key); }}><Icon size={16} aria-hidden /><span>{label}</span></button>)}
         </div>
-      </form>
-
-      {busy && <ProgressPanel title="Comparing playstyles" message={message} />}
-      {cmp && !busy && <BuildResults key={inputKey} cmp={cmp} data={data} selected={selected} onSelect={setSelected} onUsePlan={usePlan} />}
-    </>
+        <Button type="submit" form={formId} disabled={busy || !ready}><Calculator aria-hidden />{busy ? "Calculating..." : "Calculate plan"}</Button>
+      </div>
+      {data.error && <p role="alert" className="my-4 text-sm text-error">Could not load class data: {data.error}</p>}
+      {!ready && !data.error && <p role="status" className="my-4 text-sm text-dim">Loading class data...</p>}
+      <AdvancedStats className="planner-layout" main={<div className="planner-main">
+        {ready && previewLevel && data.gd && <GuideSkills gd={data.gd} icons={data.icons} level={previewLevel} />}
+        {busy && <div>
+          <ProgressPanel title={running?.key !== inputKey ? "Finishing previous calculation" : "Calculating " + running.label + " plan"} message={message} />
+          {running?.key !== inputKey && <p className="mt-2 text-xs text-dim">Inputs changed. Calculate again once this search finishes.</p>}
+        </div>}
+        {errors.length > 0 && <div role="alert" className="planner-errors">
+          <p>{errors[0]}</p>
+          {errors.length > 1 && <details><summary>Validation details ({errors.length - 1})</summary>
+            <ul className="mt-2 list-disc space-y-1 pl-5">{errors.slice(1).map((error) => <li key={error}>{error}</li>)}</ul></details>}
+        </div>}
+        {plan && sameClass && <section aria-label="Calculated build plan" className="planner-result">
+          <div className="planner-plan-heading"><h2>{plan.fb.playstyle.name} / Level {plan.fb.build.level}</h2>
+            {(stale || busy) && <span role="status">Out of date</span>}</div>
+          {(stale || busy) && <p className="mb-4 text-sm text-dim">Previous plan. Recalculate for the current inputs before using it.</p>}
+          {!dpsVariant && <p className="mb-4 text-sm text-dim">Select the DPS arrangement to use its quickslots and macro.</p>}
+          <GuideQuickslots fb={plan.fb} data={data} disabled={stale || busy || !dpsVariant} />
+          <div className="planner-analysis">
+            <SingleBuildResults key={plan.id} fb={plan.fb} data={data} onUsePlan={usePlan} disabled={stale || busy}
+              onVariantChange={(value) => setVariant({ id: plan.id, value })} />
+          </div>
+        </section>}
+      </div>} supporting={<form id={formId} onSubmit={onSubmit} noValidate className="planner-settings">
+        <h2><SlidersHorizontal size={17} aria-hidden />Build settings</h2>
+        <div className="planner-settings-section"><h3>Unlocked systems</h3><ProgressionSettings {...settings} /></div>
+        <div className="planner-settings-section"><h3>Combat stats</h3>
+          <div className="grid grid-cols-2 gap-3">{STAT_FIELDS.filter((f) => ["attack", "max_mp"].includes(f.key)).map(statField)}</div>
+          <details className="mt-4"><summary>More combat stats</summary>
+            <div className="mt-3 grid grid-cols-2 gap-3">{STAT_FIELDS.filter((f) => !["attack", "max_mp"].includes(f.key)).map(statField)}</div></details>
+        </div>
+        {!guideClass && <div className="planner-settings-section" role="group" aria-label="Race"><h3>Faction</h3>
+          <div className="flex flex-wrap gap-2">{(["elyos", "asmodian"] as const).map((r) => <Button key={r} type="button" size="sm" className="gap-1.5 capitalize"
+            variant={race === r ? "default" : "secondary"} aria-pressed={race === r} onClick={() => { invalidate(); setRace(race === r ? "" : r); }}>
+            <FactionEmblem faction={r} size={18} />{r}</Button>)}</div>
+        </div>}
+      </form>} />
+    </div>
   );
 }

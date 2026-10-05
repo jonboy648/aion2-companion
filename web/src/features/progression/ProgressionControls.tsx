@@ -11,6 +11,7 @@ interface Props {
   onStigmaUnlocked: (unlocked: boolean) => void;
   daevanionUnlocked: boolean;
   onDaevanionUnlocked: (unlocked: boolean) => void;
+  compact?: boolean;
 }
 
 export function ProgressionControls(p: Props) {
@@ -23,7 +24,7 @@ export function ProgressionControls(p: Props) {
     ["Daevanion points", budget ? budget.daevanion + p.earned.daevanion : null],
   ] as const;
   return (
-    <section aria-label="Progression budgets" className="mb-5 space-y-4 border-y border-border-soft py-4">
+    <section aria-label="Progression budgets" className="planner-budgets mb-5 space-y-4 border-y border-border-soft py-4">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <label className="flex shrink-0 items-center gap-3 text-sm">
           <span className="text-dim">Level (1 to {p.levelCap})</span>
@@ -40,6 +41,16 @@ export function ProgressionControls(p: Props) {
           <dd className="mt-1 text-xl font-semibold tabular-nums">{value ?? "-"}</dd>
         </div>)}
       </dl>
+      {!p.compact && <ProgressionSettings {...p} />}
+      <p className="text-xs text-faint">Global leveling baseline. Client version unverified; optional rewards are not assumed.</p>
+    </section>
+  );
+}
+
+export function ProgressionSettings(p: Props) {
+  const budget = levelBudget(Number(p.level));
+  return (
+    <div className="space-y-4">
       <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={p.stigmaUnlocked} disabled={!budget || budget.stigmaSlots === 0}
@@ -63,7 +74,6 @@ export function ProgressionControls(p: Props) {
         </div>
         <p className="mt-2 text-xs text-faint">Quest and dungeon rewards already earned, beyond the level totals. Gear and combat stats stay as entered.</p>
       </details>
-      <p className="text-xs text-faint">Global leveling baseline. Client version unverified; optional rewards are not assumed.</p>
-    </section>
+    </div>
   );
 }

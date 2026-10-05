@@ -75,3 +75,25 @@ export function BuildResults({ cmp, data, selected: picked, onSelect, onUsePlan 
     </div>
   );
 }
+
+/** A single requested plan, without fabricating comparison results for other playstyles. */
+export function SingleBuildResults({ fb, data, onUsePlan, onVariantChange, disabled = false }: {
+  fb: FullBuild; data: ClassData; onUsePlan: (plan: FullBuild) => void; onVariantChange?: (key: string) => void; disabled?: boolean;
+}) {
+  const [variant, setVariant] = useState("max");
+  const macroSupported = MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario);
+  return (
+    <div className="build-dashboard">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <Button variant="secondary" onClick={() => onUsePlan(fb)} disabled={disabled || variant !== "max" || !macroSupported}>
+          <Keyboard aria-hidden /> Send DPS plan to Keybinds
+        </Button>
+        {variant !== "max" && <span className="text-xs text-dim">Select the DPS arrangement to use its modeled rotation.</span>}
+        {!macroSupported && <span className="text-xs text-dim">Burst macros are not modeled yet.</span>}
+      </div>
+      <div inert={disabled} aria-disabled={disabled || undefined}>
+        <PlaystyleDetail fb={fb} data={data} variantKey={variant} onVariant={(key) => { setVariant(key); onVariantChange?.(key); }} />
+      </div>
+    </div>
+  );
+}

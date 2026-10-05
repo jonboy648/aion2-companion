@@ -138,7 +138,7 @@ describe("pages (mock engine)", () => {
   it("manual build blocks the fixed mock fixture when it violates the selected progression", async () => {
     at("/build?class=sorcerer");
     expect(screen.getByRole("heading", { level: 1, name: "Manual build" })).toBeInTheDocument();
-    const submit = screen.getByRole("button", { name: /Find my best build/ });
+    const submit = screen.getByRole("button", { name: "Calculate plan" });
     await waitFor(() => expect(submit).not.toBeDisabled());
     fireEvent.click(submit);
     expect(await screen.findByRole("alert", undefined, { timeout: 5000 })).toHaveTextContent("The returned plan is not valid");
@@ -148,7 +148,7 @@ describe("pages (mock engine)", () => {
   it("manual build rejects an invalid level", async () => {
     at("/build");
     fireEvent.change(screen.getByLabelText("Level (1 to 45)"), { target: { value: "0" } });
-    const submit = screen.getByRole("button", { name: /Find my best build/ });
+    const submit = screen.getByRole("button", { name: "Calculate plan" });
     await waitFor(() => expect(submit).not.toBeDisabled());
     fireEvent.click(submit);
     expect(await screen.findByRole("alert")).toHaveTextContent(/Level must be/);
