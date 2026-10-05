@@ -287,6 +287,11 @@ def apply_client_numbers(skills: dict[str, Skill], numbers: dict | None, class_k
         conf = lambda v: Num(float(v), "confirmed", f"{src} ({table})")  # noqa: E731
         tiers, lo_rank = (e.get("charge") or {}).get("tiers"), e["from_rank"]
         ranks = []
+        if not sk.ranks and lo_rank == 1:  # a placeholder with no table of its own (a Spirit's assault): the client rows are all of it
+            free = lambda why: Num(0.0, "confirmed", why)  # noqa: E731
+            ranks = [RankData(i + 1, conf(e["flat_min"][i]), conf(e["flat_max"][i]),
+                              free("fires with its Jointstrike cast; no cooldown row"), free("a Spirit skill costs no MP"))
+                     for i in range(len(e["flat_min"]))]
         for r in sk.ranks:
             i = r.rank - lo_rank
             if 0 <= i < len(e["flat_min"]):

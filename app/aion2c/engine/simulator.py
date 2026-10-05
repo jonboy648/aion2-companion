@@ -99,6 +99,7 @@ class _Sim:
         self.D = round(scenario.duration_s * 1000)
         self._unl: dict[str, bool] = {}
         self._ranks: dict[str, int] = {}
+        self._spirit_parent: dict[str, str] | None = None
         self.allowed = {s.key for s in allowed_skills(gd, build.region, build.show_kr)}
         self.warn: dict[str, None] = {}
         self.min_conf = 2
@@ -194,10 +195,18 @@ class _Sim:
         g = self.gate.get(key)
         return g is None or g in self.build.stigmas
 
+    def _spirit_owner(self, key: str) -> str | None:
+        if self._spirit_parent is None:
+            self._spirit_parent = {ln.child_key: ln.parent_key for ln in self.gd.links
+                                   if ln.kind == "proc" and ln.parent_key in self.gd.skills}
+        return self._spirit_parent.get(key)
+
     def _rank(self, key: str) -> int:
         r = self._ranks.get(key)
         if r is None:
-            r = self._ranks[key] = total_rank(self.gd, self.build, self.gd.skills[key])
+            sk = self.gd.skills[key]
+            parent = self._spirit_owner(key) if "spirit" in sk.tags else None  # a Spirit's skill plays at its caller's rank
+            r = self._ranks[key] = self._rank(parent) if parent else total_rank(self.gd, self.build, sk)
         return r
 
     # ---- specialties -------------------------------------------------------------------------
