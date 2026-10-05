@@ -150,3 +150,48 @@ own rate limit. Updates a row the Worker already created (`404 {"error":"unknown
 `item_level` is the armory's own `ItemLevel` stat from `/info`, recorded by the Worker like Combat Power (null for characters
 recorded before it existed, until they are looked up again). Existing databases need `proxy/migrations/2026-10-04-board-item-level.sql`
 once; until then the Worker keeps working and `sort=gear` returns an empty list.
+
+## Live server status (D1 tables `server_status`, `server_status_history`, `region_history`, `server_roster`, `status_meta`)
+Not an armory route: it reads two public sources, never the visitor. Needs the STATS D1 binding plus
+`migrations/2026-10-05-server-status.sql` (idempotent); without them the cron does nothing and `GET /status` answers
+`503 {"error":"status_unavailable"}`.
+
+### Cron (`scheduled`, `crons = ["*/5 * * * *"]` in wrangler.toml)
+- Fetches `https://dbaion2.ru/api/servers` (`{updated, servers:[{id, region, race, name, tags, cap, players, at, stale}]}`)
+  with `User-Agent: becomecube.com server-status (...)`. Every row is validated: id must be a Global id (Elyos `1RNN`, Asmodian
+  `2RNN`, R = 1 nae, 2 naw, 3 eu, 4 la, 5 as) and agree with the row's `region` and `race`; name `[letters digits space ' - .]{1,24}`;
+  `cap` 1..100000; `players` 0..100000; `tags & 7` (1 New, 2 Recommended, 4 Character creation blocked). Bad rows are dropped,
+  duplicates ignored. No usable row, a non-2xx, a timeout or bad JSON = upstream failure.
+- Success: upserts `server_status` (latest per `server_id`; servers no longer in the feed are deleted), appends
+  `server_status_history (server_id, ts, players)` and `region_history (region, ts, players)` for non-`stale` rows only
+  (a repeated stale count would draw a flat line that never happened), prunes history older than 30 days, sets
+  `status_meta.last_ok_at` / `feed_updated`.
+- Failure: all stored data is kept; only `status_meta.last_error_at` is set.
+- Roster: `GET aion2.plaync.com/en-us/api/gameinfo/servers?lang=en-US&region=<r>` for the five regions, at most once per 24 h
+  (`status_meta.roster_at`), validated the same way into `server_roster`. Used only for servers the feed does not list.
+
+### GET /status
+Optional `server=<4-digit id>` (any id of the pair) and `range=24h|7d|30d` (default `24h`, only with `server`). Public, own
+rate-limit bucket (60/min/IP), CORS as above, `Cache-Control: public, max-age=60` and the same 60 s Cache API entry
+(`X-Cache: HIT` on a cached answer). History slices are cached separately (24h 5 min, 7d/30d 1 h) so D1 reads stay far below
+the free tier. Bad `server`/`range`: `400 {"error":"bad_request","param"}`. No D1: `503`.
+```json
+{ "generated_at": 1760000000000, "last_ok_at": 1760000000000, "last_error_at": null, "feed_updated": 1760000000000,
+  "regions": [ {"region":"eu","servers":36,"reporting":36,"players":210000,"capacity":258000,"stale":false,"source_at":1760000000000} ],
+  "servers": [ {"id":1301,"region":"eu","race":1,"name":"Siel","tags":0,"capacity":7500,"players":6621,
+                "source_at":1760000000000,"stale":false,"fetched_at":1760000000000,"listed":true} ],
+  "history": { "24h": {"step_ms":300000,"ts":[0],"regions":{"nae":[null],"naw":[null],"eu":[6621],"la":[null],"as":[null]}},
+               "7d":  {"step_ms":3600000,"ts":[],"regions":{}}, "30d": {"step_ms":10800000,"ts":[],"regions":{}} } }
+```
+- `regions` always has all five codes in order. `players`/`capacity` sum only servers that report; `reporting` counts them;
+  `stale` is true when every reporting server of the region is stale; `source_at` is the newest upstream report time.
+- `servers`: one row per half (Elyos 1RNN / Asmodian 2RNN, pair = `id % 100` within a region). `listed:false` rows come from
+  the official roster: `players`, `capacity`, `source_at`, `fetched_at` are `null` (the site shows maintenance/offline).
+  `stale:true` means the upstream says the count is old (`source_at` tells how old); the numbers are still returned.
+- `history` is columnar: `ts[i]` (bucket start, unix ms) lines up with `regions.<code>[i]` (average players, `null` = no fresh
+  data). 24h = raw 5-minute points, 7d = hourly averages, 30d = 3-hourly averages.
+- `?server=<id>` returns `{generated_at, pair:[elyosId, asmodianId], range, step_ms, ts, elyos, asmodian}` instead.
+- Population is the upstream's own number (contributed by game clients) and is not verified by us.
+
+Deploy (Worker owner): `cd proxy && npx wrangler d1 execute aion2-stats --remote --file=migrations/2026-10-05-server-status.sql`,
+then `npx wrangler deploy` (publishes the cron trigger too). No new secrets.
