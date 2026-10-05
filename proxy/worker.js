@@ -1,6 +1,7 @@
 // Aion 2 armory proxy (Cloudflare Worker). Whitelisted armory GET routes plus owner analytics; see CONTRACT.md.
 // Secrets (set with `wrangler secret put`, optional): ADMIN_TOKEN, ADMIN_SALT. Optional D1 binding: STATS.
 import { adminStats, hasDb, logPicked, logSearch, logVisit, normalizePath, safeEqual, clean, MAX_KEYWORD } from "./stats.js";
+import { RANGES, buildStatus, pairHistory, regionHistory, runStatusCron, idInfo } from "./status.js";
 import { BOARD_SORTS, MAX_DPS, boardRows, recordDps, recordInfo } from "./board.js";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
@@ -190,6 +191,63 @@ async function handleBoardDps(request, env, cors) {
   }
 }
 
+
+const STATUS_TTL_S = 60;
+const HISTORY_TTL_S = { "24h": 300, "7d": 3600, "30d": 3600 }; // history rows are scanned from D1: keep reads rare (free tier)
+
+/** Cache a JSON-able value under a synthetic key for ttl seconds (no cache available: compute every time). */
+async function memo(cache, key, ttl, fn) {
+  const k = new Request(`https://cache.invalid/${key}`);
+  const hit = cache ? await cache.match(k) : undefined;
+  if (hit) return hit.json();
+  const v = await fn();
+  if (cache) await cache.put(k, new Response(JSON.stringify(v), { headers: { "Cache-Control": `public, max-age=${ttl}` } }));
+  return v;
+}
+
+/** GET /status[?server=<id>&range=24h|7d|30d]: latest server rows, region totals and region history. Public, cached ~60 s. */
+async function handleStatus(request, url, env, ctx, cors, deps) {
+  if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET, OPTIONS", ...cors });
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const retry = rateLimit(`status:${ip}`);
+  if (retry) return json({ error: "rate_limited" }, 429, { "Retry-After": String(retry), ...cors });
+  const rawServer = url.searchParams.get("server");
+  const server = rawServer === null ? null : /^\d{4}$/.test(rawServer) && idInfo(+rawServer) ? +rawServer : undefined;
+  if (server === undefined) return json({ error: "bad_request", param: "server" }, 400, cors);
+  const range = url.searchParams.get("range") ?? "24h";
+  if (!Object.hasOwn(RANGES, range)) return json({ error: "bad_request", param: "range" }, 400, cors);
+  if (!hasDb(env)) return json({ error: "status_unavailable" }, 503, cors);
+
+  const cache = deps.cache ?? (typeof caches !== "undefined" ? caches.default : null);
+  const key = new Request(`https://cache.invalid/status?server=${server ?? ""}&range=${server ? range : ""}`);
+  const hit = cache ? await cache.match(key) : undefined;
+  if (hit) {
+    const h = new Headers(hit.headers);
+    h.set("X-Cache", "HIT");
+    for (const [k, v] of Object.entries(cors)) h.set(k, v);
+    return new Response(hit.body, { status: 200, headers: h });
+  }
+  try {
+    const now = Date.now();
+    const db = env.STATS;
+    const body = server
+      ? { generated_at: now, ...(await memo(cache, `pair-${server}-${range}`, HISTORY_TTL_S[range], () => pairHistory(db, server, range, now))) }
+      : {
+          ...(await buildStatus(db, now)),
+          history: Object.fromEntries(await Promise.all(Object.keys(RANGES).map(async (r) => [r, await memo(cache, `region-history-${r}`, HISTORY_TTL_S[r], () => regionHistory(db, r, now))]))),
+        };
+    const res = json(body, 200, { "Cache-Control": `public, max-age=${STATUS_TTL_S}`, ...cors });
+    if (cache) {
+      const put = cache.put(key, res.clone());
+      if (ctx?.waitUntil) ctx.waitUntil(put);
+      else await put;
+    }
+    return res;
+  } catch {
+    return json({ error: "status_error" }, 500, cors);
+  }
+}
+
 /** GET /admin/stats with `Authorization: Bearer <ADMIN_TOKEN>`. */
 async function handleAdmin(request, env, cors) {
   if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET, OPTIONS", ...cors });
@@ -221,6 +279,7 @@ export async function handle(request, env, ctx, deps = {}) {
   if (url.pathname === "/admin/stats") return handleAdmin(request, env, cors);
   if (url.pathname === "/board") return handleBoard(request, url, env, cors);
   if (url.pathname === "/board/dps") return handleBoardDps(request, env, cors);
+  if (url.pathname === "/status") return handleStatus(request, url, env, ctx, cors, deps);
   if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET, OPTIONS", ...cors });
 
   const route = ROUTES[url.pathname];
@@ -317,5 +376,9 @@ export async function handle(request, env, ctx, deps = {}) {
 export default {
   fetch(request, env, ctx) {
     return handle(request, env, ctx);
+  },
+  // cron "*/5 * * * *" (wrangler.toml): refresh the live server status
+  scheduled(_event, env, ctx) {
+    ctx.waitUntil(runStatusCron(env));
   },
 };

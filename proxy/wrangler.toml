@@ -14,3 +14,8 @@ ALLOWED_ORIGINS = "https://becomecube.com,https://www.becomecube.com,http://loca
 binding = "STATS"
 database_name = "aion2-stats"
 database_id = "7c311b25-a47f-400a-a620-56862b411d92"
+
+# Live server status: every 5 minutes the Worker reads the dbaion2.ru feed (and the NCSOFT roster once a day) into D1.
+# DEPLOY: apply migrations/2026-10-05-server-status.sql to the remote database first, then `npx wrangler deploy`.
+[triggers]
+crons = ["*/5 * * * *"]

@@ -30,6 +30,7 @@ describe("app shell", () => {
     ["/crafting", "Crafting"],
     ["/roadmap", "Road map"],
     ["/timers", "Timers"],
+    ["/server-status", "Aion 2 Server Status"],
     ["/nope", "Page not found"],
   ])("route %s", (path, heading) => {
     at(path);

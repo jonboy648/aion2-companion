@@ -90,6 +90,13 @@
    "intro": "Live countdowns and upcoming times for Aion 2 events, in your own time zone, for Global, KR and TW."
   },
   {
+   "path": "/server-status",
+   "title": "Aion 2 server status: population and faction balance",
+   "h1": "Aion 2 Server Status",
+   "description": "Live Aion 2 server population: players online, Elyos and Asmodian balance, load per server and 24h, 7d and 30d history for every region.",
+   "intro": "Live player counts, faction balance and server load for Aion 2 Global servers in North America, Europe, South America and Asia."
+  },
+  {
    "path": "/codex/gladiator",
    "title": "Aion 2 Gladiator skills, stigmas and specialties",
    "h1": "Gladiator skills",
