@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import GradientBordersButton from "@/components/ui/gradient-borders-button";
 import "./ruixen-moon-chat.css";
+import { LivingGorge } from "./living-gorge";
 
 export const HOME_SCENES = [
   { src: "/brand/scenes/moonlit-city.png", name: "Moonlit Sky City" },
@@ -31,7 +32,7 @@ interface RuixenMoonChatProps {
 
 /** The supplied Moon Chat composition, with the real search supplied by its caller. */
 export default function RuixenMoonChat({ title, description, children, actions, recent }: RuixenMoonChatProps) {
-  const [scene, setScene] = useState(0);
+  const [scene, setScene] = useState(2);
   const [paused, setPaused] = useState(false);
   const [motionAllowed, setMotionAllowed] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -51,10 +52,10 @@ export default function RuixenMoonChat({ title, description, children, actions, 
     };
   }, []);
   useEffect(() => {
-    if (paused || !motionAllowed || !visible) return;
+    if (scene === 2 || paused || !motionAllowed || !visible) return;
     const timer = window.setInterval(() => setScene(current => (current + 1) % HOME_SCENES.length), 14000);
     return () => window.clearInterval(timer);
-  }, [paused, motionAllowed, visible]);
+  }, [scene, paused, motionAllowed, visible]);
   return (
     <section className="original-home-artwork moon-home" aria-label="Character lookup" data-motion={motionAllowed && !paused && visible ? "running" : "paused"}>
       <div className="original-home-scene" aria-hidden="true">
@@ -66,6 +67,7 @@ export default function RuixenMoonChat({ title, description, children, actions, 
             onLoad={() => setLoaded(previous => new Set(previous).add(index))}
             onError={() => setFailed(previous => new Set(previous).add(index))} />
         ))}
+        {scene === 2 && motionAllowed && <LivingGorge active={!paused && visible} />}
       </div>
       <div className="moon-home-content">
         <h1>{title}</h1>
@@ -93,10 +95,10 @@ export default function RuixenMoonChat({ title, description, children, actions, 
       <div className="home-scene-controls" aria-label="Background scenery">
         <span>{HOME_SCENES[scene].name}</span>
         <div role="group" aria-label="Choose scenery">
-          {HOME_SCENES.map((image, index) => <button key={image.src} type="button" aria-label={image.name} aria-pressed={scene === index} title={image.name} onClick={() => { setScene(index); setPaused(true); }} />)}
+          {HOME_SCENES.map((image, index) => <button key={image.src} type="button" aria-label={image.name} aria-pressed={scene === index} title={image.name} onClick={() => { setScene(index); setPaused(index !== 2); }} />)}
         </div>
-        <button type="button" aria-label={paused || !motionAllowed ? "Play background rotation" : "Pause background rotation"}
-          title={paused || !motionAllowed ? "Play background rotation" : "Pause background rotation"}
+        <button type="button" aria-label={paused || !motionAllowed ? "Play background animation" : "Pause background animation"}
+          title={paused || !motionAllowed ? "Play background animation" : "Pause background animation"}
           disabled={!motionAllowed} onClick={() => setPaused(value => !value)}>
           {paused || !motionAllowed ? <Play size={14} aria-hidden /> : <Pause size={14} aria-hidden />}
         </button>

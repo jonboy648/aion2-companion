@@ -13,15 +13,17 @@ function show(reduced = false) {
 describe("Home scenery", () => {
   it("switches scenes explicitly and pauses automatic rotation", () => {
     const { container } = show();
-    fireEvent.load(container.querySelectorAll(".home-rotating-scene")[2]);
-    fireEvent.click(screen.getByRole("button", { name: "Emerald Gorge" }));
-    expect(screen.getByRole("button", { name: "Emerald Gorge" })).toHaveAttribute("aria-pressed", "true");
-    expect(container.querySelector('[data-active="true"]')).toHaveAttribute("src", "/brand/scenes/emerald-gorge.png");
+    fireEvent.load(container.querySelectorAll(".home-rotating-scene")[1]);
+    fireEvent.click(screen.getByRole("button", { name: "Celestial Cathedral" }));
+    expect(screen.getByRole("button", { name: "Celestial Cathedral" })).toHaveAttribute("aria-pressed", "true");
+    expect(container.querySelector('[data-active="true"]')).toHaveAttribute("src", "/brand/scenes/celestial-cathedral.png");
     expect(container.querySelector(".moon-home")).toHaveAttribute("data-motion", "paused");
   });
   it("rotates on its interval and clears timers on unmount", () => {
     vi.useFakeTimers();
     const { unmount } = show();
+    fireEvent.click(screen.getByRole("button", { name: "Moonlit Sky City" }));
+    fireEvent.click(screen.getByRole("button", { name: "Play background animation" }));
     act(() => vi.advanceTimersByTime(14000));
     expect(screen.getByRole("button", { name: "Celestial Cathedral" })).toHaveAttribute("aria-pressed", "true");
     unmount();
@@ -31,8 +33,8 @@ describe("Home scenery", () => {
     vi.useFakeTimers();
     const { container } = show(true);
     act(() => vi.advanceTimersByTime(28000));
-    expect(screen.getByRole("button", { name: "Moonlit Sky City" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByRole("button", { name: "Play background rotation" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Emerald Gorge" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Play background animation" })).toBeDisabled();
     expect(container.querySelector(".moon-home")).toHaveAttribute("data-motion", "paused");
   });
 });

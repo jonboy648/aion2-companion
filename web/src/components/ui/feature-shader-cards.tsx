@@ -14,16 +14,26 @@ export interface Feature {
   href: string;
 }
 
-const palettes = [
-  ["#6b251e", "#cd743f", "#862c40", "#eab15f"],
-  ["#24372e", "#ac904e", "#516863", "#dcc48b"],
-  ["#321f40", "#8c6e9e", "#493258", "#d49bab"],
-  ["#203f29", "#7dad69", "#345c42", "#bfcc8c"],
-  ["#1a3b51", "#5d9fca", "#356e94", "#9dbacf"],
-  ["#164846", "#4cb9a6", "#3b668e", "#a0cbb6"],
-  ["#483927", "#ccb773", "#80704e", "#ece1b6"],
-  ["#593624", "#c69059", "#416e66", "#daaf7b"],
-];
+const defaultPalette = ["#101a35", "#5fd0f0", "#16234a", "#e0b458"];
+
+function useFactionPalette() {
+  const [colors, setColors] = useState(defaultPalette);
+  useEffect(() => {
+    const root = document.documentElement;
+    const update = () => {
+      const style = getComputedStyle(root);
+      const next = ["--surface", "--cyan", "--surface2", "--gold"].map(
+        (token, index) => style.getPropertyValue(token).trim() || defaultPalette[index],
+      );
+      setColors(previous => previous.every((color, index) => color === next[index]) ? previous : next);
+    };
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(root, { attributes: true, attributeFilter: ["data-faction", "class", "style"] });
+    return () => observer.disconnect();
+  }, []);
+  return colors;
+}
 
 function supportsWebGL() {
   if (typeof WebGL2RenderingContext === "undefined") return false;
@@ -55,7 +65,7 @@ interface CardProps {
 export function FeatureShaderCard({ children, index = 0, enabled = false, animated = false, compact = false, className }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [pixelLimit, setPixelLimit] = useState(32_000);
-  const colors = palettes[Math.abs(Math.trunc(index)) % palettes.length];
+  const colors = useFactionPalette();
   useEffect(() => {
     const el = ref.current;
     if (!el) return;

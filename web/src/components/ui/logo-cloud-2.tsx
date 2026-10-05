@@ -77,6 +77,7 @@ function LogoCard({ item, index, shaderCaptions, graphics }: { item: LogoCloudIt
   return (
     <div className={cn("logo-cloud-cell relative bg-background", cellStyles[index % cellStyles.length])} role="listitem">
       <Link to={item.href} className="logo-cloud-link" aria-label={item.title}>
+        {shaderCaptions && <FeatureShaderCard index={index} enabled={graphics.enabled && index < (graphics.compact ? 2 : 8)} animated={graphics.animated} compact className="class-portrait-shader">{null}</FeatureShaderCard>}
         <span className="logo-cloud-media">
           {failed ? (
             <span className="logo-cloud-fallback" aria-hidden="true">{item.fallback}</span>
@@ -96,11 +97,9 @@ function LogoCard({ item, index, shaderCaptions, graphics }: { item: LogoCloudIt
             />
           )}
         </span>
-        {shaderCaptions ? <FeatureShaderCard index={index} enabled={graphics.enabled && index < (graphics.compact ? 2 : 8)} animated={graphics.animated} compact className="class-caption-shader">
-          <span className="logo-cloud-caption"><span className="logo-cloud-title">{item.title}</span></span>
-        </FeatureShaderCard> : <span className="logo-cloud-caption">
+        <span className="logo-cloud-caption">
           <span className="logo-cloud-title">{item.title}</span>
-        </span>}
+        </span>
       </Link>
       {(index === 0 || index === 2 || index === 4) && (
         <PlusIcon className={cn("logo-cloud-intersection pointer-events-none absolute -right-[12.5px] -bottom-[12.5px] z-10 size-6", index === 4 && "md:hidden")} strokeWidth={1} aria-hidden="true" />

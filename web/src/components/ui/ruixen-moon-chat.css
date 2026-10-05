@@ -3,10 +3,10 @@
 .moon-home .original-home-scene img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
 .moon-home .original-home-scene .home-rotating-scene { position: absolute; inset: 0; opacity: 0; transition: opacity 1600ms ease; }
 .moon-home .original-home-scene .home-rotating-scene[data-active="true"] { opacity: 1; }
-.moon-home .original-home-scene .home-rotating-scene { transform: scale(1.04); transform-origin: 50% 42%; }
-.moon-home .home-rotating-scene[data-active="true"] { animation: home-scene-drift 17s ease-in-out both; }
-.moon-home[data-motion="paused"] .home-rotating-scene[data-active="true"] { animation-play-state: paused; }
-@keyframes home-scene-drift { from { transform: scale(1.04) translate3d(-.4%, .3%, 0); } to { transform: scale(1.10) translate3d(.4%, -.3%, 0); } }
+.moon-home .original-home-scene .home-rotating-scene { transform: none; }
+.moon-home .original-home-scene img[src*="emerald-gorge"] { object-position: 50% 70%; }
+.living-gorge { position: absolute; inset: 0; }
+.living-gorge-canvas { display: block; width: 100%; height: 100%; }
 .home-scene-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 0 8px 18px; color: #dce6e9; font: 12px/18px var(--font-sans); }
 .home-scene-controls > span { text-shadow: 0 1px 4px #000; }
 .home-scene-controls [role="group"] { display: flex; }

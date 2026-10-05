@@ -3,7 +3,6 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { trackHit } from "@/lib/analytics";
 import { isMockEngine } from "@/engine/api";
 import { BrandCrest } from "@/components/ui/brand-crest";
-import { RuixenGradientFooter } from "@/components/ui/ruixen-gradient-footer";
 import "./site-footer.css";
 import { FactionThemeProvider, useFaction, type Faction } from "@/components/game/faction";
 import { cn } from "@/lib/utils";
@@ -83,7 +82,7 @@ function Shell() {
       <main className="relative z-10 mx-auto w-full max-w-6xl flex-1 px-4 py-6">
         <Outlet />
       </main>
-      <RuixenGradientFooter gradientHeight="min(40vh, 360px)" className="site-footer">
+      <footer className="site-footer">
         <div className="site-footer-inner">
           <div className="site-footer-grid">
             <div>
@@ -97,7 +96,7 @@ function Shell() {
           <div className="site-footer-bottom"><p>{DISCLAIMER}</p><ThemePicker /></div>
           <details className="site-footer-privacy"><summary>Privacy</summary><p>{PRIVACY_NOTE}</p></details>
         </div>
-      </RuixenGradientFooter>
+      </footer>
     </div>
   );
 }

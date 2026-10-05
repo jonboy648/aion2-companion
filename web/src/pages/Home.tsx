@@ -11,10 +11,6 @@ import { listClasses } from "@/engine/api";
 import { ARMORY_REGIONS } from "@/lib/armory";
 
 const regionName = (code: string) => ARMORY_REGIONS.find((r) => r.code === code)?.name ?? code.toUpperCase();
-const CLASS_ART_POSITION: Record<string, string> = {
-  gladiator: "50% 0%", templar: "50% 0%", assassin: "50% 15%", ranger: "50% 5%",
-  sorcerer: "50% 10%", spiritmaster: "50% 10%", cleric: "50% 10%", chanter: "50% 12%",
-};
 const QUICK_ACTIONS: readonly MoonQuickAction[] = [
   { label: "Start here", href: "/guide", icon: <BookOpen className="size-4" />, featured: true },
   { label: "Build by hand", href: "/build", icon: <Wrench className="size-4" /> },
@@ -95,13 +91,11 @@ export function Home() {
             title: c.name,
             href: `/build?class=${c.key}`,
             logo: {
-              src: `/brand/classes/${c.key}-640.webp`,
-              srcSet: `/brand/classes/${c.key}-320.webp 320w, /brand/classes/${c.key}-640.webp 640w`,
-              sizes: "(max-width: 767px) 46vw, 260px",
-              objectPosition: CLASS_ART_POSITION[c.key] ?? "50% 0%",
+                src: `/brand/classes/${c.key}-cutout.png`,
+                objectPosition: "50% 100%",
               alt: "",
-              width: 640,
-              height: 640,
+              width: 1254,
+              height: 1254,
             },
             fallback: <ClassEmblem classKey={c.key} size={40} />,
           }))}

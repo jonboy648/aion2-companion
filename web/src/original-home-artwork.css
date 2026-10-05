@@ -15,7 +15,12 @@
 .home-class-cards .logo-cloud-link { height: auto; padding: 0; gap: 0; isolation: isolate; }
 .home-class-cards .logo-cloud-link::after { content: ''; position: absolute; inset: 0; border-radius: 7px; padding: 2px; background: radial-gradient(75% 100% at 50% 0%, rgb(189 56 222) 0%, rgb(56 189 248) 75%); opacity: .25; mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; pointer-events: none; transition: opacity 200ms; }
 .home-class-cards .logo-cloud-link:is(:hover, :focus-visible)::after { opacity: 1; }
-.home-class-cards .logo-cloud-media { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+.home-class-cards .logo-cloud-media { width: 100%; height: auto; aspect-ratio: 1; z-index: 1; background: transparent; }
+.home-class-cards .logo-cloud-image { object-fit: contain; object-position: center bottom; }
+.home-class-cards .class-portrait-shader { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 0; box-shadow: none; pointer-events: none; }
+.home-class-cards .class-portrait-shader::before, .home-class-cards .class-portrait-shader::after { display: none; }
+.home-class-cards .class-portrait-shader > .bg-black\/70 { background: rgb(0 0 0 / .4); }
+.home-class-cards .logo-cloud-caption { position: relative; z-index: 1; }
 .home-class-cards .logo-cloud-image { transition: transform 250ms, filter 250ms; }
 .home-class-cards .logo-cloud-link:hover .logo-cloud-image { transform: scale(1.035); }
 .home-class-cards .logo-cloud-caption { padding: 14px 16px; background: rgb(6 12 19 / .65); border-top: 1px solid color-mix(in srgb, var(--metal) 25%, transparent); }

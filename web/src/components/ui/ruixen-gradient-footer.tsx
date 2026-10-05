@@ -3,18 +3,17 @@
 // Ruixen Gradient Footer, supplied by Jon. Gradient inspired by Dia Browser.
 import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-type Stop = { offset: number; color: string };
+type Stop = { offset: number; color: string; opacity?: number };
 const VBW = 1271;
 const VBH = 599;
-const RUIXEN_STOPS: Stop[] = [
-  { offset: 0, color: "#340B05" },
-  { offset: 0.1827, color: "#0358F7" },
-  { offset: 0.2837, color: "#5092C7" },
-  { offset: 0.4135, color: "#E1ECFE" },
-  { offset: 0.5866, color: "#FFD400" },
-  { offset: 0.6827, color: "#FA3D1D" },
-  { offset: 0.8029, color: "#FD02F5" },
-  { offset: 1, color: "#FFC0FD00" },
+const THEME_STOPS: Stop[] = [
+  { offset: 0, color: "var(--bg)" },
+  { offset: 0.18, color: "var(--surface2)" },
+  { offset: 0.36, color: "var(--cyan)", opacity: 0.65 },
+  { offset: 0.5, color: "var(--metal-hi)", opacity: 0.7 },
+  { offset: 0.65, color: "var(--gold)", opacity: 0.45 },
+  { offset: 0.82, color: "var(--cyan)", opacity: 0.16 },
+  { offset: 1, color: "var(--cyan)", opacity: 0 },
 ];
 
 function bellHeights(n: number, peak: number, valley: number) {
@@ -39,7 +38,7 @@ export interface RuixenGradientFooterProps {
   style?: CSSProperties;
 }
 
-export function RuixenGradientFooter({ children, gradientHeight = "65vh", minReveal = 0.045, bars = 9, blur = 15, peak = 0.98, valley = 0.55, stops = RUIXEN_STOPS, className, style }: RuixenGradientFooterProps) {
+export function RuixenGradientFooter({ children, gradientHeight = "65vh", minReveal = 0.045, bars = 9, blur = 15, peak = 0.98, valley = 0.55, stops = THEME_STOPS, className, style }: RuixenGradientFooterProps) {
   const uid = useId().replace(/:/g, "");
   const bandRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(minReveal);
@@ -88,7 +87,7 @@ export function RuixenGradientFooter({ children, gradientHeight = "65vh", minRev
         <svg style={{ height: "100%", width: "100%", display: "block" }} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id={`grad-${uid}`} x1="0" y1="1" x2="0" y2="0">
-              {stops.map((s, i) => <stop key={i} offset={s.offset} stopColor={s.color} />)}
+              {stops.map((s, i) => <stop key={i} offset={s.offset} stopColor={s.color} stopOpacity={s.opacity ?? 1} />)}
             </linearGradient>
             <filter id={`blur-${uid}`} x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation={blur} /></filter>
           </defs>

@@ -43,11 +43,12 @@ describe("original Home artwork preview", () => {
     ]) {
       const link = within(grid).getByRole("link", { name });
       expect(link).toHaveAttribute("href", `/build?class=${key}`);
-      expect(link.querySelector("img")).toHaveAttribute("src", `/brand/classes/${key}-640.webp`);
+        expect(link.querySelector("img")).toHaveAttribute("src", `/brand/classes/${key}-cutout.png`);
+        expect(link.querySelector("img")).not.toHaveAttribute("srcset");
       expect(link.querySelector("img")).toHaveAttribute("alt", "");
       expect(link).toHaveTextContent(name);
     }
-    expect(container.querySelectorAll(".class-caption-shader")).toHaveLength(8);
+    expect(container.querySelectorAll(".class-portrait-shader")).toHaveLength(8);
     expect(grid.querySelectorAll(".logo-cloud-intersection").length).toBeGreaterThan(0);
     expect(screen.queryByText("Powerful Features")).not.toBeInTheDocument();
     expect(screen.queryByText("Learn more")).not.toBeInTheDocument();
