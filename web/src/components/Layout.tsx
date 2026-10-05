@@ -17,6 +17,7 @@ const NAV = [
   { to: "/codex", label: "Codex" },
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
+  { to: "/enhance", label: "Enhance" },
   { to: "/roadmap", label: "Road Map" },
   { to: "/timers", label: "Timers" },
 ];
@@ -93,7 +94,7 @@ function Shell() {
               <p className="site-footer-description">Your character. Your build. Your next step.</p>
             </div>
             <nav aria-label="Footer build tools"><h2>Build & plan</h2><NavLink to="/build">Build by hand</NavLink><NavLink to="/compare">Compare builds</NavLink><NavLink to="/daevanion">Daevanion</NavLink><NavLink to="/keybinds">Keybinds</NavLink></nav>
-            <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink></nav>
+            <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink><NavLink to="/enhance">Enhance calculator</NavLink></nav>
             <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink><NavLink to="/timers">Timers</NavLink></nav>
           </div>
           <div className="site-footer-bottom"><p>{DISCLAIMER}</p><ThemePicker /></div>

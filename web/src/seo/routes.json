@@ -62,6 +62,13 @@
    "intro": "Choose recipes and get a combined list of the materials you need."
   },
   {
+   "path": "/enhance",
+   "title": "Aion 2 enhancement cost calculator: odds and pity",
+   "h1": "Enhancement calculator",
+   "description": "Expected attempts, kinah and materials to enhance, amplify or soul-bind Aion 2 gear to any level, with pity, level drops and a luck chart.",
+   "intro": "Pick a piece of gear, a current and a target level, and see the average, median and unlucky cost."
+  },
+  {
    "path": "/roadmap",
    "title": "Aion 2 road map: what to do at each level",
    "h1": "Road map",
