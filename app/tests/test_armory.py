@@ -142,6 +142,23 @@ def test_to_build_maps_agi_crit_and_wisdom_double(gd, raw, base):
     assert not any("Double Chance" in n for n in notes)
 
 
+def test_gear_wisdom_and_armory_double_chance_are_the_same_unit(gd, raw, base):
+    """The armory prints the stat already converted ("Wisdom 1" -> "Double Chance +0.1%", Might 14 -> +1.4%): a
+    percent. Gear carries the raw stat points and gear.py converts them at the client's 0.1% per point, so a Wisdom
+    point on gear and the armory's own Double Chance line land on the same smite_pct (a gear HardHit line is a percent
+    too, item values 0.58-2.2)."""
+    from aion2c import gear
+    by_name = {s["name"].split(" [")[0]: s for s in raw["info"]["stat"]["statList"]}
+    for deity, label, field in (("Wisdom", "Double Chance", "smite_pct"), ("Death", "Critical Hit increase", "crit_chance_pct")):
+        pts = by_name[deity]["value"]
+        line = next(t for t in by_name[deity]["statSecondList"] if t.startswith(label))
+        assert float(line.split("+")[1].rstrip("%")) == pytest.approx(pts * gear.DEITY_PCT_PER_POINT)  # the armory converts at 0.1
+        assert getattr(gear.lines_to_delta({deity: float(pts)})[0], field) == pytest.approx(pts * gear.DEITY_PCT_PER_POINT)
+    armory_total, _ = armory.to_build(gd, raw, base)
+    assert armory_total.stats.smite_pct == pytest.approx(gear.lines_to_delta({"Wisdom": 1.0})[0].smite_pct)  # 1 point = 0.1
+    assert gear.lines_to_delta({"HardHit": 1.0})[0].smite_pct == pytest.approx(1.0)  # a percent line stays 1:1
+
+
 def test_summary(gd, raw):
     sm = armory.summary(gd, raw)
     assert sm["combat_power"] == 33721 and sm["server"] == "Triniel" and sm["item_level"] == 707

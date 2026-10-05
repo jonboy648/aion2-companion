@@ -474,6 +474,46 @@
   }
  },
  "statuses": {
+  "fire_spirit_out": {
+   "key": "fire_spirit_out",
+   "name": "Fire Spirit out",
+   "on": "self",
+   "duration_s": {"value": 0.0, "confidence": "estimated", "source": "stays until dismissed (duration 0 = permanent in the engine); no dismiss is modelled"},
+   "dmg_mult": {"value": 1.0, "confidence": "estimated", "source": "presence flag: lets the Spirit join a Jointstrike cast (SPIRIT_FOLLOWUPS triggers), no multiplier"},
+   "source_skill": "summon-fire-spirit"
+  },
+  "water_spirit_out": {
+   "key": "water_spirit_out",
+   "name": "Water Spirit out",
+   "on": "self",
+   "duration_s": {"value": 0.0, "confidence": "estimated", "source": "stays until dismissed (duration 0 = permanent in the engine); no dismiss is modelled"},
+   "dmg_mult": {"value": 1.0, "confidence": "estimated", "source": "presence flag: lets the Spirit join a Jointstrike cast, no multiplier"},
+   "source_skill": "summon-water-spirit"
+  },
+  "earth_spirit_out": {
+   "key": "earth_spirit_out",
+   "name": "Earth Spirit out",
+   "on": "self",
+   "duration_s": {"value": 0.0, "confidence": "estimated", "source": "stays until dismissed (duration 0 = permanent in the engine); no dismiss is modelled"},
+   "dmg_mult": {"value": 1.0, "confidence": "estimated", "source": "presence flag: lets the Spirit join a Jointstrike cast, no multiplier"},
+   "source_skill": "summon-earth-spirit"
+  },
+  "wind_spirit_out": {
+   "key": "wind_spirit_out",
+   "name": "Wind Spirit out",
+   "on": "self",
+   "duration_s": {"value": 0.0, "confidence": "estimated", "source": "stays until dismissed (duration 0 = permanent in the engine); no dismiss is modelled"},
+   "dmg_mult": {"value": 1.0, "confidence": "estimated", "source": "presence flag: lets the Spirit join a Jointstrike cast, no multiplier"},
+   "source_skill": "summon-wind-spirit"
+  },
+  "ancient_spirit_out": {
+   "key": "ancient_spirit_out",
+   "name": "Ancient Spirit out",
+   "on": "self",
+   "duration_s": {"value": 30.0, "confidence": "confirmed", "source": "Summon: Ancient Spirit text, 30 s"},
+   "dmg_mult": {"value": 1.0, "confidence": "estimated", "source": "presence flag: lets the Spirit join a Jointstrike cast, no multiplier"},
+   "source_skill": "summon-ancient-spirit"
+  },
   "curse": {
    "key": "curse",
    "name": "Curse (Jointstrike: Curse)",
@@ -1457,7 +1497,17 @@
    ],
    "proc_skill": "dimensional-control",
    "note": "Dimensional Control 'is triggered briefly each time a Spirit uses its skill' (client text): a free proc per modelled Spirit skill use (summon casts), no longer a castable spam skill"
-  }
+  },
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-curse", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-curse"], "requires_status": "fire_spirit_out", "proc_skill": "fire-spirit-flame-explosion", "note": "Jointstrike: Curse 'the Spirit joins for a coordinated assault': each Spirit that is out adds its own damage rows on top of the 1-hit base (research/hitcount_check_2026-10-04.md). The proc plays at the Jointstrike's rank; AoE of the assault is not in any source (1 target)"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-curse", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-curse"], "requires_status": "water_spirit_out", "proc_skill": "water-spirit-water-bomb", "note": "Water Spirit assault on Curse: 5 hits x (ratio + flat) per hit (likely per hit, same unknown as the Assassin multi-hits)"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-curse", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-curse"], "requires_status": "earth_spirit_out", "proc_skill": "earth-spirit-headbutt", "note": "Earth Spirit assault on Curse: 2 hits"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-curse", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-curse"], "requires_status": "wind_spirit_out", "proc_skill": "wind-spirit-malicious-whirlwind", "note": "Wind Spirit assault on Curse: 5 hits"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-curse", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-curse"], "requires_status": "ancient_spirit_out", "proc_skill": "ancient-spirit-destruction", "note": "Ancient Spirit assault on Curse: 1 hit"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-corrode", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-corrode"], "requires_status": "fire_spirit_out", "proc_skill": "fire-spirit-rage-burst", "note": "Jointstrike: Corrode Spirit assault (see the Curse triggers); the plain rows, not the _corrosion variants"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-corrode", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-corrode"], "requires_status": "water_spirit_out", "proc_skill": "water-spirit-ice-chain", "note": "Water Spirit assault on Corrode: 1 hit"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-corrode", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-corrode"], "requires_status": "earth_spirit_out", "proc_skill": "earth-spirit-taunt", "note": "Earth Spirit assault on Corrode: 1 hit (its Taunt effect has no DPS)"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-corrode", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-corrode"], "requires_status": "wind_spirit_out", "proc_skill": "wind-spirit-gale", "note": "Wind Spirit assault on Corrode: 1 hit"},
+  {"status_key": "", "on_element": "none", "chance": 1.0, "source_skill": "jointstrike-corrode", "confidence": "confirmed", "event": "cast", "on_skills": ["jointstrike-corrode"], "requires_status": "ancient_spirit_out", "proc_skill": "ancient-spirit-break", "note": "Ancient Spirit assault on Corrode: 2 hits"}
  ],
  "rules": {
   "cold-shock": {
@@ -1694,7 +1744,8 @@
   "summon-fire-spirit": {
    "skill_key": "summon-fire-spirit",
    "applies": [
-    "spirit_summoned"
+    "spirit_summoned",
+    "fire_spirit_out"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -1709,7 +1760,8 @@
   "summon-water-spirit": {
    "skill_key": "summon-water-spirit",
    "applies": [
-    "spirit_summoned"
+    "spirit_summoned",
+    "water_spirit_out"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -1724,7 +1776,8 @@
   "summon-wind-spirit": {
    "skill_key": "summon-wind-spirit",
    "applies": [
-    "spirit_summoned"
+    "spirit_summoned",
+    "wind_spirit_out"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -1739,7 +1792,8 @@
   "summon-earth-spirit": {
    "skill_key": "summon-earth-spirit",
    "applies": [
-    "spirit_summoned"
+    "spirit_summoned",
+    "earth_spirit_out"
    ],
    "apply_chance": 1.0,
    "requires": [],
@@ -1755,6 +1809,7 @@
    "skill_key": "summon-ancient-spirit",
    "applies": [
     "spirit_summoned",
+    "ancient_spirit_out",
     "four_elements"
    ],
    "apply_chance": 1.0,

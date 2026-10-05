@@ -19,6 +19,7 @@ KEY = "spiritmaster"
 BOSS = next(s for s in SCENARIOS if s.key == "boss_180")
 S15 = Scenario("t15", "15 s", 15, 1, True)
 AURA = 1.15  # spirit_strike_aura: +15% PvE damage boost (rank 10 value, see its source string)
+CORRODE = 1.1  # corrode_debuff: +10% damage taken, on from the Corrode cast (the follow-up lands after it)
 SUMMONS4 = ("summon-fire-spirit", "summon-water-spirit", "summon-earth-spirit", "summon-wind-spirit")
 
 # options with no value in any source: kind "unknown", or Multi-Hit (chance known, damage per proc not)
@@ -222,6 +223,55 @@ def test_remaining_unknown_dot_ticks_are_flagged(gd):
         assert gd.statuses[k].tick_ratio_pct.confidence == "unknown"
     r = simulate(gd, build(stigmas=("jointstrike-corrode",)), P("jointstrike-curse", "jointstrike-corrode"), S15)
     assert any("tick damage" in w for w in r.warnings)
+
+
+# ---- Jointstrike: the Spirit that is out joins the cast (research/hitcount_check_2026-10-04.md) -------------
+def _follow(gd, spirit_pri, joint, proc, stigmas=(), ranks=None):
+    """(Jointstrike casts, follow-up casts, follow-up damage per cast) with `spirit_pri` summoned first."""
+    r = simulate(gd, build(stigmas=stigmas, skill_ranks=ranks or {}), P(*spirit_pri, joint), BOSS)
+    c, d = tally(r, joint)
+    fc, fd = tally(r, proc) if proc in r.per_skill else (0, 0.0)
+    return c, fc, (fd / fc if fc else 0.0)
+
+
+def test_jointstrike_curse_follow_up_numbers_come_from_the_client(gd):
+    """Base hit stays 1; the Water and Wind Spirit rows are separate 5-hit damage, Earth 2 hits, Fire and Ancient 1."""
+    got = {k: (gd.skills[k].hits, gd.skills[k].atk_ratio_pct.value, gd.skills[k].ranks[0].flat_min.value,
+               len(gd.skills[k].ranks))
+           for k in ("fire-spirit-flame-explosion", "water-spirit-water-bomb", "earth-spirit-headbutt",
+                     "wind-spirit-malicious-whirlwind", "ancient-spirit-destruction")}
+    assert got == {"fire-spirit-flame-explosion": (1, 101.0, 99.0, 40), "water-spirit-water-bomb": (5, 121.0, 119.0, 40),
+                   "earth-spirit-headbutt": (2, 93.0, 92.0, 40), "wind-spirit-malicious-whirlwind": (5, 30.0, 29.0, 40),
+                   "ancient-spirit-destruction": (1, 172.5, 170.0, 40)}
+    assert gd.skills["jointstrike-curse"].hits == 1 and gd.skills["jointstrike-corrode"].hits == 1
+    assert gd.skills["ancient-spirit-break"].hits == 2 and gd.skills["earth-spirit-taunt"].hits == 1
+
+
+def test_water_and_wind_spirit_add_five_hits_to_curse(gd):
+    c, fc, per = _follow(gd, ("summon-water-spirit",), "jointstrike-curse", "water-spirit-water-bomb")
+    assert fc == c > 0
+    assert per == pytest.approx(5 * (1.21 * 1000 + 119) * AURA, rel=1e-6)  # 5 x (121% ATK + 119), rank 1
+    c, fc, per = _follow(gd, ("summon-wind-spirit",), "jointstrike-curse", "wind-spirit-malicious-whirlwind")
+    assert fc == c > 0
+    assert per == pytest.approx(5 * (0.30 * 1000 + 29) * AURA, rel=1e-6)
+
+
+def test_no_spirit_out_means_no_follow_up(gd):
+    r = simulate(gd, build(), P("jointstrike-curse"), BOSS)
+    assert set(r.per_skill) == {"jointstrike-curse"}
+
+
+def test_ancient_spirit_adds_two_hits_to_corrode_and_follow_up_uses_the_jointstrike_rank(gd):
+    st = ("summon-ancient-spirit", "jointstrike-corrode")
+    c, fc, per = _follow(gd, ("summon-ancient-spirit",), "jointstrike-corrode", "ancient-spirit-break", stigmas=st)
+    assert 0 < fc <= c  # the Ancient Spirit stays out 30 s, Corrode recasts every 45 s: only casts inside the window
+    assert per == pytest.approx(2 * (1.615 * 1000 + 925) * AURA * CORRODE, rel=1e-6)
+    # the Spirit's skill plays at the Jointstrike's rank, not at its own (never bought) rank 1
+    c, fc, per = _follow(gd, ("summon-ancient-spirit",), "jointstrike-corrode", "ancient-spirit-break", stigmas=st,
+                         ranks={"jointstrike-corrode": 10})
+    assert per == pytest.approx(2 * (1.615 * 1000 + gd.skills["ancient-spirit-break"].ranks[9].flat_min.value) * AURA * CORRODE,
+                                rel=1e-6)
+    assert per > 2 * (1.615 * 1000 + 925) * AURA * CORRODE
 
 
 # ---- optimizer -----------------------------------------------------------------------------------------------

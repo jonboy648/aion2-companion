@@ -9,18 +9,18 @@
   "spiritmaster",
   "templar"
  ],
- "data_version": "2026-10-04+aion2app-2026-09-18",
+ "data_version": "2026-10-05+aion2app-2026-09-18",
  "data_versions": {
-  "assassin": "2026-10-04+aion2app-2026-09-18",
-  "chanter": "2026-10-04+aion2app-2026-09-18",
-  "cleric": "2026-10-04+aion2app-2026-09-18",
-  "gladiator": "2026-10-04+aion2app-2026-09-18",
-  "ranger": "2026-10-04+aion2app-2026-09-18",
-  "sorcerer": "2026-10-04+aion2app-2026-09-18",
-  "spiritmaster": "2026-10-04+aion2app-2026-09-18",
-  "templar": "2026-10-04+aion2app-2026-09-18"
+  "assassin": "2026-10-05+aion2app-2026-09-18",
+  "chanter": "2026-10-05+aion2app-2026-09-18",
+  "cleric": "2026-10-05+aion2app-2026-09-18",
+  "gladiator": "2026-10-05+aion2app-2026-09-18",
+  "ranger": "2026-10-05+aion2app-2026-09-18",
+  "sorcerer": "2026-10-05+aion2app-2026-09-18",
+  "spiritmaster": "2026-10-05+aion2app-2026-09-18",
+  "templar": "2026-10-05+aion2app-2026-09-18"
  },
- "built_at": "2026-10-05T05:07:16+00:00",
+ "built_at": "2026-10-05T13:52:49+00:00",
  "modules": 34,
  "items": true
 }

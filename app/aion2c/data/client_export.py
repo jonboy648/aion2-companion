@@ -69,6 +69,19 @@ SHORT_GROUP_OVERRIDES = {
     ("spiritmaster", "extract-vitality"): "Elementalist_Skill031_LvUp",
     ("spiritmaster", "soul-decimation"): "Elementalist_Skill035_LvUp",
 }
+# The Spirit's own assault that joins a Jointstrike cast (client: one damage group per element under the Jointstrike's skill
+# number, `<Skill>_<Element>`; the base row [0]/[2]/[4] is rank 1, the level group has ranks 2+). Our proc skill -> (group,
+# base `SkillEffect` row). The Curse placeholders carry no numbers of their own; Corrode's Earth assault had none either
+# (its Fire/Water/Wind/Ancient siblings are matched by the flat-sequence rule). The `_corrosion` variants (stronger rows
+# used while the target has Corrode) are not taken.
+SPIRIT_FOLLOWUPS = {
+    ("spiritmaster", "fire-spirit-flame-explosion"): ("Elementalist_Skill014_LvUp_Fire", 1600110111),
+    ("spiritmaster", "water-spirit-water-bomb"): ("Elementalist_Skill014_LvUp_Water", 1600110511),
+    ("spiritmaster", "wind-spirit-malicious-whirlwind"): ("Elementalist_Skill014_LvUp_Wind", 1600110911),
+    ("spiritmaster", "earth-spirit-headbutt"): ("Elementalist_Skill014_LvUp_Earth", 1600111311),
+    ("spiritmaster", "ancient-spirit-destruction"): ("Elementalist_Skill014_LvUp_Ancient", 1600111711),
+    ("spiritmaster", "earth-spirit-taunt"): ("Elementalist_Skill015_LvUp_Earth", 1615310011),
+}
 # Damage `SkillEffect` rows that have no level group: one fixed value at every rank (ours equals it; this pins it).
 EFFECT_ROW_OVERRIDES = {
     ("ranger", "explosive-arrow"): 1423000011,
@@ -137,7 +150,7 @@ class Tables:
                 self.short[r["SkillEffectLvGroupId"]][r["SkillEffectLv"]] = r["EffectValueList"]
         # The base SkillEffect damage row carries the real hit count: for 6 level-group rows (Chanter Bursting Blow among
         # them) the group's own hits column says 1 while the base row says 2 (and our dump's text agrees with the base row).
-        rows = set(EFFECT_ROW_OVERRIDES.values())
+        rows = set(EFFECT_ROW_OVERRIDES.values()) | {r for _, r in SPIRIT_FOLLOWUPS.values()}
         self.effect_row: dict[int, list[str]] = {}
         self.base_hits: dict[str, int] = {}
         for r in _rows(table_dir, "SkillEffect"):
@@ -285,6 +298,15 @@ def override_entry(t: Tables, ck: str, key: str, sid: int | None) -> dict | None
             entry["charge"] = ch
             if "tiers" in ch:
                 entry["hits"] = max(x["hits"] for x in ch["tiers"])
+        return entry
+    if k in SPIRIT_FOLLOWUPS:
+        g, row = SPIRIT_FOLLOWUPS[k]
+        v = t.effect_row[row]
+        entry = _group_numbers(t.eff[g], t.base_hits.get(g))
+        assert float(v[2]) / 100 == entry["ratio_pct"] and int(float(v[4])) == entry["hits"], k
+        # rank 1 comes from the base row, ranks 2+ from the group
+        entry.update(from_rank=1, flat_min=[int(float(v[0]))] + entry["flat_min"],
+                     flat_max=[int(float(v[1]))] + entry["flat_max"], how="spirit-followup")
         return entry
     if k in EFFECT_ROW_OVERRIDES:
         v = t.effect_row[EFFECT_ROW_OVERRIDES[k]]
