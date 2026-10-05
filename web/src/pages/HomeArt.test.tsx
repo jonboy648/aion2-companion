@@ -15,7 +15,7 @@ describe("original Home artwork preview", () => {
     expect(within(screen.getByRole("navigation", { name: "Quick actions" })).getByRole("link", { name: "Start here" })).toHaveAttribute("href", "/guide");
     expect(screen.getByRole("search", { name: "Character search" })).toBeVisible();
     expect(screen.queryByText("Tools", { exact: true })).not.toBeInTheDocument();
-    expect(container.querySelector(".original-home-scene img")).toHaveAttribute("src", "/brand/sky-citadel.png");
+    expect(container.querySelector(".home-rotating-scene")).toHaveAttribute("src", "/brand/scenes/moonlit-city.png");
     expect(container.querySelector(".original-home-scene img")).toHaveAttribute("alt", "");
   });
 
@@ -43,11 +43,12 @@ describe("original Home artwork preview", () => {
     ]) {
       const link = within(grid).getByRole("link", { name });
       expect(link).toHaveAttribute("href", `/build?class=${key}`);
-      expect(link.querySelector("img")).toHaveAttribute("src", `/brand/classes/${key}-640.webp`);
+        expect(link.querySelector("img")).toHaveAttribute("src", `/brand/classes/${key}-cutout.png`);
+        expect(link.querySelector("img")).not.toHaveAttribute("srcset");
       expect(link.querySelector("img")).toHaveAttribute("alt", "");
       expect(link).toHaveTextContent(name);
     }
-    expect(container.querySelector(".feature-shader-card, .logo-cloud-cell.ornate")).not.toBeInTheDocument();
+    expect(container.querySelectorAll(".class-portrait-shader")).toHaveLength(8);
     expect(grid.querySelectorAll(".logo-cloud-intersection").length).toBeGreaterThan(0);
     expect(screen.queryByText("Powerful Features")).not.toBeInTheDocument();
     expect(screen.queryByText("Learn more")).not.toBeInTheDocument();
@@ -58,7 +59,7 @@ describe("original Home artwork preview", () => {
     const hero = container.querySelector('[aria-label="Character lookup"]')!;
     const firstAction = hero.querySelector('a, input, select, button');
     expect(firstAction).toHaveAttribute("aria-label", "Character name");
-    expect(screen.getByRole("link", { name: "Start here" })).toHaveAttribute("href", "/guide");
+    expect(within(screen.getByRole("navigation", { name: "Quick actions" })).getByRole("link", { name: "Start here" })).toHaveAttribute("href", "/guide");
   });
 
   it("uses real app destinations for every Home quick action", () => {
