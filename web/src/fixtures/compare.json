@@ -60,19 +60,21 @@
      1,
      3
     ],
-    "flame-arrow": [
-     3,
-     0
-    ],
     "blaze": [
      1
     ],
-    "wish-of-concentration": [
-     1,
-     3
-    ],
     "winters-shackles": [
      2
+    ],
+    "hellfire": [
+     0
+    ],
+    "wish-of-concentration": [
+     1
+    ],
+    "flame-arrow": [
+     3,
+     0
     ],
     "element-enhancement": [
      0
@@ -487,11 +489,11 @@
   "stigma_picks": [
    [
     "fire-wall",
-    7.895239853592284
+    8.041440368064645
    ],
    [
     "element-enhancement",
-    2.5400838496533407
+    2.633074815890968
    ],
    [
     "glacial-smite",
@@ -515,20 +517,19 @@
    27434,
    27427,
    4928,
+   27537,
+   27529,
+   5022,
+   5021,
+   27520,
+   5028,
+   5027,
    5062,
    27569,
    27577,
-   5043,
-   5042,
-   5041,
-   5036,
-   5027,
-   27537,
-   27529,
    4860,
    4876,
    27391,
-   27540,
    5146,
    5147,
    5148,
@@ -570,13 +571,13 @@
    5118,
    5108,
    5143,
-   5168,
    4972,
    4979,
    4980,
    4981,
    4973,
    4990,
+   5168,
    27435,
    4945,
    27474,
@@ -587,8 +588,6 @@
    27460,
    27454,
    27462,
-   5028,
-   27520,
    5100,
    27599,
    27670,
@@ -601,6 +600,10 @@
    4998,
    4999,
    5000,
+   4938,
+   4937,
+   4936,
+   27431,
    5063,
    5064,
    27576,
@@ -609,12 +612,14 @@
    27691,
    27692,
    5193,
+   5036,
+   5041,
+   27540,
    5200,
    27709,
-   4938,
-   4937,
-   4936,
-   27431,
+   5186,
+   5194,
+   5204,
    27530,
    5031,
    5023,
@@ -632,6 +637,7 @@
    5134,
    27633,
    27622,
+   5185,
    27511,
    5092,
    5091,
@@ -641,10 +647,6 @@
    5070,
    5079,
    5080,
-   5186,
-   5194,
-   5204,
-   5185,
    5051,
    5010,
    5009,
@@ -686,12 +688,11 @@
    4989,
    4991,
    4995,
-   5021,
-   5022,
    5012,
    5024,
    5016,
    5026,
+   5042,
    5052,
    5057,
    5067,
@@ -755,6 +756,7 @@
    27507,
    5015,
    5038,
+   5043,
    5068,
    5071,
    27581,
@@ -801,16 +803,16 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 28.434704374210252,
+  "daevanion_gain_pct": 28.234885413390877,
   "priority": {
    "entries": [
     {
-     "skill_key": "firestorm",
+     "skill_key": "element-enhancement",
      "charge_level": 0,
      "require_status": null
     },
     {
-     "skill_key": "blaze",
+     "skill_key": "winters-shackles",
      "charge_level": 0,
      "require_status": null
     },
@@ -830,19 +832,19 @@
      "require_status": null
     },
     {
+     "skill_key": "blaze",
+     "charge_level": 0,
+     "require_status": null
+    },
+    {
+     "skill_key": "firestorm",
+     "charge_level": 0,
+     "require_status": null
+    },
+    {
      "skill_key": "wish-of-concentration",
      "charge_level": 0,
      "require_status": null
-    },
-    {
-     "skill_key": "winters-shackles",
-     "charge_level": 0,
-     "require_status": null
-    },
-    {
-     "skill_key": "element-enhancement",
-     "charge_level": 0,
-     "require_status": "wish_of_concentration"
     },
     {
      "skill_key": "flame-arrow",
@@ -853,458 +855,433 @@
    "label": "Option 1"
   },
   "result": {
-   "total_damage": 2867469.9868261865,
-   "dps": 15930.388815701037,
+   "total_damage": 2963661.135903162,
+   "dps": 16464.784088350898,
    "duration_s": 180,
    "casts": [
     {
      "t_s": 0.0,
-     "skill_key": "firestorm",
-     "charge_level": 0,
-     "damage": 24274.34341480021,
-     "mp_after": 728.061,
-     "active_statuses": [
-      "grace_of_enhancement",
-      "robe_of_earth",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 1.169,
-     "skill_key": "blaze",
-     "charge_level": 0,
-     "damage": 5043.408728778776,
-     "mp_after": 851.441,
-     "active_statuses": [
-      "fire_mark",
-      "grace_of_enhancement",
-      "robe_of_earth",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 2.104,
-     "skill_key": "bittercold-wind",
-     "charge_level": 0,
-     "damage": 58529.98369011615,
-     "mp_after": 770.1410000000001,
-     "active_statuses": [
-      "fire_mark",
-      "grace_of_enhancement",
-      "robe_of_earth",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 3.039,
-     "skill_key": "fire-wall",
-     "charge_level": 0,
-     "damage": 23467.72840295116,
-     "mp_after": 588.8410000000001,
-     "active_statuses": [
-      "fire_mark",
-      "grace_of_enhancement",
-      "robe_of_earth",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 4.441,
-     "skill_key": "hellfire",
-     "charge_level": 4,
-     "damage": 50494.04796316401,
-     "mp_after": 416.8810000000001,
-     "active_statuses": [
-      "fire_mark",
-      "grace_of_enhancement",
-      "fire_wall_dot",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 6.876,
-     "skill_key": "firestorm",
-     "charge_level": 0,
-     "damage": 19836.390842385816,
-     "mp_after": 215.58100000000007,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "fire_wall_dot",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 8.045,
-     "skill_key": "blaze",
-     "charge_level": 0,
-     "damage": 4791.486366944089,
-     "mp_after": 338.96100000000007,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "grace_of_enhancement",
-      "fire_wall_dot",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 8.98,
-     "skill_key": "wish-of-concentration",
-     "charge_level": 0,
-     "damage": 0.0,
-     "mp_after": 307.66100000000006,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "grace_of_enhancement",
-      "fire_wall_dot",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 9.915,
-     "skill_key": "winters-shackles",
-     "charge_level": 0,
-     "damage": 3536.3730766886824,
-     "mp_after": 126.36100000000005,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "fire_wall_dot",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 10.77,
      "skill_key": "element-enhancement",
      "charge_level": 0,
      "damage": 0.0,
-     "mp_after": 143.46100000000004,
+     "mp_after": 978.061,
      "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "fire_wall_dot",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "ws_boost",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 11.625,
-     "skill_key": "flame-arrow",
-     "charge_level": 0,
-     "damage": 2364.954006118138,
-     "mp_after": 260.56100000000004,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "element_enhancement",
       "grace_of_enhancement",
-      "fire_wall_dot",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "ws_boost",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 12.48,
-     "skill_key": "firestorm",
-     "charge_level": 0,
-     "damage": 30080.41515999635,
-     "mp_after": 47.66100000000006,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "element_enhancement",
-      "fire_wall_dot",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "ws_boost",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 13.549,
-     "skill_key": "blaze",
-     "charge_level": 0,
-     "damage": 6232.779798977792,
-     "mp_after": 169.04100000000005,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "element_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "ws_boost",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 14.404,
-     "skill_key": "flame-arrow",
-     "charge_level": 0,
-     "damage": 2364.954006118138,
-     "mp_after": 336.1410000000001,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "element_enhancement",
-      "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "ws_boost",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 15.259,
-     "skill_key": "burst",
-     "charge_level": 0,
-     "damage": 1182.4532634363798,
-     "mp_after": 473.2410000000001,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "fire_mark",
-      "element_enhancement",
-      "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 16.114,
-     "skill_key": "pyroclasm",
-     "charge_level": 0,
-     "damage": 1445.436957682228,
-     "mp_after": 610.3410000000001,
-     "active_statuses": [
-      "fire_mark",
-      "element_enhancement",
-      "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
       "robe_of_earth",
       "robe_of_flame"
      ]
     },
     {
-     "t_s": 16.969,
+     "t_s": 0.935,
+     "skill_key": "winters-shackles",
+     "charge_level": 0,
+     "damage": 4811.513601916907,
+     "mp_after": 778.061,
+     "active_statuses": [
+      "element_enhancement",
+      "grace_of_enhancement",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 1.87,
      "skill_key": "bittercold-wind",
      "charge_level": 0,
-     "damage": 72824.1501793307,
-     "mp_after": 477.44100000000014,
+     "damage": 80059.19447403296,
+     "mp_after": 646.7610000000001,
      "active_statuses": [
-      "spec_flame-arrow_3_elem",
-      "fire_mark",
       "element_enhancement",
       "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
+      "ws_boost",
+      "robe_of_earth",
       "robe_of_flame"
      ]
     },
     {
-     "t_s": 17.824,
-     "skill_key": "firestorm",
+     "t_s": 2.805,
+     "skill_key": "fire-wall",
      "charge_level": 0,
-     "damage": 31584.435917996172,
-     "mp_after": 244.54100000000017,
+     "damage": 30496.497051571812,
+     "mp_after": 465.4610000000001,
      "active_statuses": [
-      "spec_flame-arrow_3_elem",
-      "fire_mark",
       "element_enhancement",
       "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
+      "ws_boost",
       "robe_of_flame"
      ]
     },
     {
-     "t_s": 18.893,
-     "skill_key": "blaze",
-     "charge_level": 0,
-     "damage": 6544.418788926682,
-     "mp_after": 365.92100000000016,
-     "active_statuses": [
-      "spec_flame-arrow_3_elem",
-      "fire_mark",
-      "element_enhancement",
-      "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 19.748,
+     "t_s": 4.207,
      "skill_key": "hellfire",
      "charge_level": 4,
-     "damage": 68965.64543859569,
-     "mp_after": 233.02100000000019,
+     "damage": 69067.38308807608,
+     "mp_after": 293.50100000000015,
      "active_statuses": [
-      "spec_flame-arrow_3_elem",
       "fire_mark",
       "element_enhancement",
       "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
+      "fire_wall_dot",
+      "ws_boost",
       "robe_of_flame"
      ]
     },
     {
-     "t_s": 22.103,
-     "skill_key": "flame-arrow",
-     "charge_level": 0,
-     "damage": 2178.5143804824447,
-     "mp_after": 380.1210000000002,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "spec_flame-arrow_3_elem",
-      "fire_mark",
-      "element_enhancement",
-      "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 22.958,
-     "skill_key": "firestorm",
-     "charge_level": 0,
-     "damage": 27167.0322931016,
-     "mp_after": 167.22100000000023,
-     "active_statuses": [
-      "spec_hellfire_1_dot",
-      "spec_flame-arrow_3_elem",
-      "fire_mark",
-      "element_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
-      "robe_of_flame"
-     ]
-    },
-    {
-     "t_s": 24.027,
+     "t_s": 6.08,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 5453.682324105568,
-     "mp_after": 288.6010000000002,
+     "damage": 5749.7836403329065,
+     "mp_after": 430.9610000000001,
      "active_statuses": [
-      "spec_hellfire_1_dot",
-      "spec_flame-arrow_3_elem",
       "fire_mark",
+      "element_enhancement",
       "grace_of_enhancement",
-      "wish_of_concentration",
-      "wish_atk_plus",
-      "wish_combat_speed",
+      "fire_wall_dot",
       "robe_of_flame"
      ]
     },
     {
-     "t_s": 24.882,
+     "t_s": 7.015,
+     "skill_key": "firestorm",
+     "charge_level": 0,
+     "damage": 27674.184297182164,
+     "mp_after": 249.66100000000012,
+     "active_statuses": [
+      "fire_mark",
+      "element_enhancement",
+      "grace_of_enhancement",
+      "fire_wall_dot",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 8.184,
+     "skill_key": "wish-of-concentration",
+     "charge_level": 0,
+     "damage": 0.0,
+     "mp_after": 173.0410000000001,
+     "active_statuses": [
+      "fire_mark",
+      "element_enhancement",
+      "fire_wall_dot",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 9.119,
      "skill_key": "flame-arrow",
      "charge_level": 0,
-     "damage": 1815.4286504020372,
-     "mp_after": 455.70100000000025,
+     "damage": 2074.7756004594708,
+     "mp_after": 291.7410000000001,
      "active_statuses": [
-      "spec_hellfire_1_dot",
+      "fire_mark",
+      "element_enhancement",
+      "grace_of_enhancement",
+      "fire_wall_dot",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 10.054,
+     "skill_key": "burst",
+     "charge_level": 0,
+     "damage": 2309.6847250729847,
+     "mp_after": 430.4410000000001,
+     "active_statuses": [
+      "fire_mark",
+      "element_enhancement",
+      "grace_of_enhancement",
+      "fire_wall_dot",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 10.989,
+     "skill_key": "blaze",
+     "charge_level": 0,
+     "damage": 6560.481160832116,
+     "mp_after": 549.1410000000001,
+     "active_statuses": [
+      "fire_mark",
+      "element_enhancement",
+      "grace_of_enhancement",
+      "fire_wall_dot",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 11.924,
+     "skill_key": "firestorm",
+     "charge_level": 0,
+     "damage": 30080.41515999635,
+     "mp_after": 367.8410000000001,
+     "active_statuses": [
+      "fire_mark",
+      "element_enhancement",
+      "grace_of_enhancement",
+      "fire_wall_dot",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 13.093,
+     "skill_key": "flame-arrow",
+     "charge_level": 0,
+     "damage": 1819.884369250574,
+     "mp_after": 491.2210000000001,
+     "active_statuses": [
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 14.028,
+     "skill_key": "burst",
+     "charge_level": 0,
+     "damage": 2025.934336284983,
+     "mp_after": 629.9210000000002,
+     "active_statuses": [
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 14.963,
+     "skill_key": "pyroclasm",
+     "charge_level": 0,
+     "damage": 2358.8299279307107,
+     "mp_after": 768.6210000000002,
+     "active_statuses": [
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 15.898,
+     "skill_key": "blaze",
+     "charge_level": 0,
+     "damage": 5740.421015728102,
+     "mp_after": 887.3210000000003,
+     "active_statuses": [
       "spec_flame-arrow_3_elem",
       "fire_mark",
       "grace_of_enhancement",
       "wish_of_concentration",
       "wish_atk_plus",
-      "wish_combat_speed",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 16.833,
+     "skill_key": "bittercold-wind",
+     "charge_level": 0,
+     "damage": 63877.52612184686,
+     "mp_after": 806.0210000000003,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 17.768,
+     "skill_key": "firestorm",
+     "charge_level": 0,
+     "damage": 27704.211108916243,
+     "mp_after": 574.7210000000003,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 18.937,
+     "skill_key": "hellfire",
+     "charge_level": 4,
+     "damage": 57471.37119882974,
+     "mp_after": 398.10100000000034,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 20.81,
+     "skill_key": "blaze",
+     "charge_level": 0,
+     "damage": 5740.421015728102,
+     "mp_after": 535.5610000000004,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 21.745,
+     "skill_key": "flame-arrow",
+     "charge_level": 0,
+     "damage": 1910.878587713103,
+     "mp_after": 704.2610000000004,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 22.68,
+     "skill_key": "firestorm",
+     "charge_level": 0,
+     "damage": 27704.211108916243,
+     "mp_after": 492.96100000000047,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 23.849,
+     "skill_key": "flame-arrow",
+     "charge_level": 0,
+     "damage": 1910.878587713103,
+     "mp_after": 616.3410000000005,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "robe_of_earth",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 24.784,
+     "skill_key": "burst",
+     "charge_level": 0,
+     "damage": 1965.4808460684108,
+     "mp_after": 755.0410000000005,
+     "active_statuses": [
+      "spec_flame-arrow_3_elem",
+      "fire_mark",
+      "grace_of_enhancement",
+      "robe_of_earth",
       "robe_of_flame"
      ]
     }
    ],
    "per_skill": {
-    "firestorm": {
-     "casts": 35,
-     "damage": 917223.6871893818
+    "element-enhancement": {
+     "casts": 4,
+     "damage": 0.0
     },
-    "blaze": {
-     "casts": 34,
-     "damage": 187372.3483680526
+    "winters-shackles": {
+     "casts": 5,
+     "damage": 21969.77467270972
     },
     "bittercold-wind": {
-     "casts": 12,
-     "damage": 752900.0660828084
+     "casts": 13,
+     "damage": 861739.264454632
     },
     "fire-wall": {
-     "casts": 4,
-     "damage": 164988.28001119025
+     "casts": 3,
+     "damage": 165441.21116611786
     },
     "hellfire": {
      "casts": 12,
-     "damage": 700466.419063873
+     "damage": 679063.0795598694
     },
-    "fire-mark": {
-     "casts": 29,
-     "damage": 37349.16403478025
+    "blaze": {
+     "casts": 34,
+     "damage": 188127.3982590524
+    },
+    "firestorm": {
+     "casts": 34,
+     "damage": 891319.1612484698
     },
     "wish-of-concentration": {
      "casts": 3,
      "damage": 0.0
     },
-    "winters-shackles": {
-     "casts": 4,
-     "damage": 15883.120545564587
-    },
-    "element-enhancement": {
-     "casts": 3,
-     "damage": 0.0
-    },
     "flame-arrow": {
-     "casts": 32,
-     "damage": 59801.711232495545
+     "casts": 39,
+     "damage": 70378.89610502418
+    },
+    "fire-mark": {
+     "casts": 29,
+     "damage": 36576.291548833324
     },
     "burst": {
      "casts": 17,
-     "damage": 17568.888281729665
+     "damage": 33253.50467720943
     },
     "pyroclasm": {
-     "casts": 11,
-     "damage": 13916.302016309364
+     "casts": 7,
+     "damage": 15792.554211243027
     }
    },
    "status_uptime": {
-    "fire_mark": 1.0,
-    "grace_of_enhancement": 0.9582460416669445,
-    "robe_of_earth": 0.8255034722236114,
-    "fire_wall_dot": 0.17993333333333333,
-    "spec_hellfire_1_dot": 0.6295722222222222,
+    "element_enhancement": 0.24117222222222223,
+    "grace_of_enhancement": 0.9780031944450001,
+    "robe_of_earth": 0.7835841666683337,
+    "ws_boost": 0.11873333333333333,
+    "fire_wall_dot": 0.16666666666666666,
+    "fire_mark": 0.9844166666666667,
     "wish_of_concentration": 0.26666666666666666,
     "wish_atk_plus": 0.26666666666666666,
-    "wish_combat_speed": 0.26666666666666666,
-    "ws_boost": 0.1111111111111111,
-    "element_enhancement": 0.21666666666666667,
-    "spec_flame-arrow_3_elem": 0.5589666666666666,
+    "spec_flame-arrow_3_elem": 0.3888888888888889,
     "robe_of_flame": 1.0
    },
    "warnings": [
-    "unknown value: hellfire tick damage (spec_hellfire_1_dot)",
     "ranking assumed, unverified at rank > 1"
    ],
    "confidence": "estimated"
@@ -1313,36 +1290,35 @@
    {
     "stat": "smite_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6992985336409241,
+    "dps_gain_pct": 0.6992985336410129,
     "confidence": "estimated"
    },
    {
     "stat": "dmg_boost_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6979846322328509,
+    "dps_gain_pct": 0.6857191567797072,
     "confidence": "estimated"
    },
    {
     "stat": "attack",
     "delta": 10.0,
-    "dps_gain_pct": 0.677497627564172,
+    "dps_gain_pct": 0.6686753583687643,
     "confidence": "estimated"
    },
    {
     "stat": "weapon_dmg_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.44361234824146223,
+    "dps_gain_pct": 0.4378356969363617,
     "confidence": "estimated"
    },
    {
     "stat": "attack_increase_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.4349653228894912,
+    "dps_gain_pct": 0.4318411871546912,
     "confidence": "estimated"
    }
   ],
   "warnings": [
-   "unknown value: hellfire tick damage (spec_hellfire_1_dot)",
    "ranking assumed, unverified at rank > 1",
    "Skill points not set: ranks as entered.",
    "assumes all Daevanion points",
@@ -1403,22 +1379,21 @@
        1,
        3
       ],
-      "flame-arrow": [
-       3,
-       0
-      ],
       "blaze": [
        1
-      ],
-      "wish-of-concentration": [
-       1,
-       3
       ],
       "winters-shackles": [
        2
       ],
       "hellfire": [
+       0
+      ],
+      "wish-of-concentration": [
        1
+      ],
+      "flame-arrow": [
+       3,
+       0
       ],
       "element-enhancement": [
        0
@@ -1833,11 +1808,11 @@
     "stigma_picks": [
      [
       "fire-wall",
-      7.895239853592284
+      8.041440368064645
      ],
      [
       "element-enhancement",
-      2.5400838496533407
+      2.633074815890968
      ],
      [
       "glacial-smite",
@@ -1848,7 +1823,7 @@
       0.0
      ]
     ],
-    "dps": 15930.388815701037,
+    "dps": 16464.784088350898,
     "dps_delta_pct": 0.0
    },
    {
@@ -1903,22 +1878,21 @@
        1,
        3
       ],
-      "flame-arrow": [
-       3,
-       0
-      ],
       "blaze": [
        1
-      ],
-      "wish-of-concentration": [
-       1,
-       3
       ],
       "winters-shackles": [
        2
       ],
       "hellfire": [
+       0
+      ],
+      "wish-of-concentration": [
        1
+      ],
+      "flame-arrow": [
+       3,
+       0
       ],
       "element-enhancement": [
        0
@@ -2333,11 +2307,11 @@
     "stigma_picks": [
      [
       "fire-wall",
-      7.895239853592284
+      8.041440368064645
      ],
      [
       "element-enhancement",
-      2.5400838496533407
+      2.633074815890968
      ],
      [
       "glacial-smite",
@@ -2348,7 +2322,7 @@
       0.0
      ]
     ],
-    "dps": 15930.388815701037,
+    "dps": 16464.784088350898,
     "dps_delta_pct": 0.0
    },
    {
@@ -2403,22 +2377,21 @@
        1,
        3
       ],
-      "flame-arrow": [
-       3,
-       0
-      ],
       "blaze": [
        1
-      ],
-      "wish-of-concentration": [
-       1,
-       3
       ],
       "winters-shackles": [
        2
       ],
       "hellfire": [
+       0
+      ],
+      "wish-of-concentration": [
        1
+      ],
+      "flame-arrow": [
+       3,
+       0
       ],
       "element-enhancement": [
        0
@@ -2833,11 +2806,11 @@
     "stigma_picks": [
      [
       "fire-wall",
-      7.895239853592284
+      8.041440368064645
      ],
      [
       "element-enhancement",
-      2.5400838496533407
+      2.633074815890968
      ],
      [
       "glacial-smite",
@@ -2848,7 +2821,7 @@
       0.0
      ]
     ],
-    "dps": 15930.388815701037,
+    "dps": 16464.784088350898,
     "dps_delta_pct": 0.0
    }
   ],
@@ -2857,63 +2830,63 @@
     "skill_key": "firestorm",
     "option": 3,
     "text": "-2s [Hellfire] cooldown per fireball",
-    "dps_gain_pct": 18.319646036039238,
+    "dps_gain_pct": 17.670379216762623,
     "confidence": "estimated"
    },
    {
     "skill_key": "bittercold-wind",
     "option": 0,
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 9.591682489888331,
+    "dps_gain_pct": 10.732507930756551,
     "confidence": "estimated"
    },
    {
     "skill_key": "firestorm",
     "option": 1,
     "text": "+20% Skill Speed",
-    "dps_gain_pct": 4.1788298603850915,
+    "dps_gain_pct": 5.359136507475015,
     "confidence": "estimated"
    },
    {
     "skill_key": "blaze",
     "option": 1,
     "text": "+50% MP restored",
-    "dps_gain_pct": 3.8816598244625133,
+    "dps_gain_pct": 3.497192132620075,
     "confidence": "confirmed"
    },
    {
-    "skill_key": "wish-of-concentration",
-    "option": 3,
-    "text": "+10% Combat Speed",
-    "dps_gain_pct": 3.392932417795791,
-    "confidence": "estimated"
-   },
-   {
-    "skill_key": "flame-arrow",
-    "option": 3,
-    "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
-    "dps_gain_pct": 2.072780603406943,
-    "confidence": "confirmed"
-   },
-   {
-    "skill_key": "wish-of-concentration",
-    "option": 1,
-    "text": "+10% additional Attack",
-    "dps_gain_pct": 1.198179237528163,
+    "skill_key": "hellfire",
+    "option": 0,
+    "text": "+30% Skill Speed",
+    "dps_gain_pct": 3.343843627870946,
     "confidence": "estimated"
    },
    {
     "skill_key": "winters-shackles",
     "option": 2,
     "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]",
-    "dps_gain_pct": 0.8540754538699069,
+    "dps_gain_pct": 2.470322261602109,
     "confidence": "confirmed"
+   },
+   {
+    "skill_key": "flame-arrow",
+    "option": 3,
+    "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
+    "dps_gain_pct": 1.3421929384175524,
+    "confidence": "confirmed"
+   },
+   {
+    "skill_key": "wish-of-concentration",
+    "option": 1,
+    "text": "+10% additional Attack",
+    "dps_gain_pct": 1.0504113665342762,
+    "confidence": "estimated"
    },
    {
     "skill_key": "flame-arrow",
     "option": 0,
     "text": "+20% MP restored",
-    "dps_gain_pct": 0.7619542540575841,
+    "dps_gain_pct": 0.5891471688284966,
     "confidence": "confirmed"
    }
   ],
@@ -2921,60 +2894,15 @@
    "scenario": "boss_180",
    "scenario_name": "Single-target boss",
    "duration_s": 180,
-   "dps": 15930.388815701037,
+   "dps": 16464.784088350898,
    "priority": [
     {
-     "skill_key": "firestorm",
-     "name": "Firestorm",
-     "icon_key": "firestorm",
-     "charge_level": 0,
-     "require_status": null,
-     "casts": 35,
-     "damage_share_pct": 32.0
-    },
-    {
-     "skill_key": "blaze",
-     "name": "Blaze",
-     "icon_key": "blaze",
-     "charge_level": 0,
-     "require_status": null,
-     "casts": 34,
-     "damage_share_pct": 6.5
-    },
-    {
-     "skill_key": "bittercold-wind",
-     "name": "Bittercold Wind",
-     "icon_key": "bittercold-wind",
-     "charge_level": 0,
-     "require_status": null,
-     "casts": 12,
-     "damage_share_pct": 26.3
-    },
-    {
-     "skill_key": "fire-wall",
-     "name": "Fire Wall",
-     "icon_key": "fire-wall",
+     "skill_key": "element-enhancement",
+     "name": "Element Enhancement",
+     "icon_key": "element-enhancement",
      "charge_level": 0,
      "require_status": null,
      "casts": 4,
-     "damage_share_pct": 5.8
-    },
-    {
-     "skill_key": "hellfire",
-     "name": "Hellfire",
-     "icon_key": "hellfire",
-     "charge_level": 4,
-     "require_status": null,
-     "casts": 12,
-     "damage_share_pct": 24.4
-    },
-    {
-     "skill_key": "wish-of-concentration",
-     "name": "Wish of Concentration",
-     "icon_key": "wish-of-concentration",
-     "charge_level": 0,
-     "require_status": null,
-     "casts": 3,
      "damage_share_pct": 0.0
     },
     {
@@ -2983,15 +2911,60 @@
      "icon_key": "winters-shackles",
      "charge_level": 0,
      "require_status": null,
-     "casts": 4,
-     "damage_share_pct": 0.6
+     "casts": 5,
+     "damage_share_pct": 0.7
     },
     {
-     "skill_key": "element-enhancement",
-     "name": "Element Enhancement",
-     "icon_key": "element-enhancement",
+     "skill_key": "bittercold-wind",
+     "name": "Bittercold Wind",
+     "icon_key": "bittercold-wind",
      "charge_level": 0,
-     "require_status": "wish_of_concentration",
+     "require_status": null,
+     "casts": 13,
+     "damage_share_pct": 29.1
+    },
+    {
+     "skill_key": "fire-wall",
+     "name": "Fire Wall",
+     "icon_key": "fire-wall",
+     "charge_level": 0,
+     "require_status": null,
+     "casts": 3,
+     "damage_share_pct": 5.6
+    },
+    {
+     "skill_key": "hellfire",
+     "name": "Hellfire",
+     "icon_key": "hellfire",
+     "charge_level": 4,
+     "require_status": null,
+     "casts": 12,
+     "damage_share_pct": 22.9
+    },
+    {
+     "skill_key": "blaze",
+     "name": "Blaze",
+     "icon_key": "blaze",
+     "charge_level": 0,
+     "require_status": null,
+     "casts": 34,
+     "damage_share_pct": 6.3
+    },
+    {
+     "skill_key": "firestorm",
+     "name": "Firestorm",
+     "icon_key": "firestorm",
+     "charge_level": 0,
+     "require_status": null,
+     "casts": 34,
+     "damage_share_pct": 30.1
+    },
+    {
+     "skill_key": "wish-of-concentration",
+     "name": "Wish of Concentration",
+     "icon_key": "wish-of-concentration",
+     "charge_level": 0,
+     "require_status": null,
      "casts": 3,
      "damage_share_pct": 0.0
     },
@@ -3001,108 +2974,94 @@
      "icon_key": "flame-arrow",
      "charge_level": 0,
      "require_status": null,
-     "casts": 32,
-     "damage_share_pct": 2.1
+     "casts": 39,
+     "damage_share_pct": 2.4
     }
    ],
    "opener": [
     {
-     "skill_key": "firestorm",
-     "name": "Firestorm",
-     "icon_key": "firestorm",
+     "skill_key": "element-enhancement",
+     "name": "Element Enhancement",
+     "icon_key": "element-enhancement",
      "charge_level": 0,
      "t_s": 0.0
-    },
-    {
-     "skill_key": "blaze",
-     "name": "Blaze",
-     "icon_key": "blaze",
-     "charge_level": 0,
-     "t_s": 1.2
-    },
-    {
-     "skill_key": "bittercold-wind",
-     "name": "Bittercold Wind",
-     "icon_key": "bittercold-wind",
-     "charge_level": 0,
-     "t_s": 2.1
-    },
-    {
-     "skill_key": "fire-wall",
-     "name": "Fire Wall",
-     "icon_key": "fire-wall",
-     "charge_level": 0,
-     "t_s": 3.0
-    },
-    {
-     "skill_key": "hellfire",
-     "name": "Hellfire",
-     "icon_key": "hellfire",
-     "charge_level": 4,
-     "t_s": 4.4
-    },
-    {
-     "skill_key": "firestorm",
-     "name": "Firestorm",
-     "icon_key": "firestorm",
-     "charge_level": 0,
-     "t_s": 6.9
-    },
-    {
-     "skill_key": "blaze",
-     "name": "Blaze",
-     "icon_key": "blaze",
-     "charge_level": 0,
-     "t_s": 8.0
-    },
-    {
-     "skill_key": "wish-of-concentration",
-     "name": "Wish of Concentration",
-     "icon_key": "wish-of-concentration",
-     "charge_level": 0,
-     "t_s": 9.0
     },
     {
      "skill_key": "winters-shackles",
      "name": "Winter's Shackles",
      "icon_key": "winters-shackles",
      "charge_level": 0,
-     "t_s": 9.9
+     "t_s": 0.9
     },
     {
-     "skill_key": "element-enhancement",
-     "name": "Element Enhancement",
-     "icon_key": "element-enhancement",
+     "skill_key": "bittercold-wind",
+     "name": "Bittercold Wind",
+     "icon_key": "bittercold-wind",
      "charge_level": 0,
-     "t_s": 10.8
-    }
-   ],
-   "core": [
+     "t_s": 1.9
+    },
     {
-     "skill_key": "firestorm",
-     "name": "Firestorm",
-     "icon_key": "firestorm",
+     "skill_key": "fire-wall",
+     "name": "Fire Wall",
+     "icon_key": "fire-wall",
      "charge_level": 0,
-     "cooldown_s": 5.0,
-     "casts": 35,
-     "cast_every_s": 5.3,
-     "damage_share_pct": 32.0,
-     "rule": "on_cooldown",
-     "status": null,
-     "text": "Use on cooldown (every 5 s)."
+     "t_s": 2.8
+    },
+    {
+     "skill_key": "hellfire",
+     "name": "Hellfire",
+     "icon_key": "hellfire",
+     "charge_level": 4,
+     "t_s": 4.2
     },
     {
      "skill_key": "blaze",
      "name": "Blaze",
      "icon_key": "blaze",
      "charge_level": 0,
-     "cooldown_s": 5.0,
-     "casts": 34,
-     "cast_every_s": 5.3,
-     "damage_share_pct": 6.5,
-     "rule": "when_status",
-     "status": "fire_mark",
-     "text": "Use when Fire Mark is up (cooldown 5 s)."
+     "t_s": 6.1
+    },
+    {
+     "skill_key": "firestorm",
+     "name": "Firestorm",
+     "icon_key": "firestorm",
+     "charge_level": 0,
+     "t_s": 7.0
+    },
+    {
+     "skill_key": "wish-of-concentration",
+     "name": "Wish of Concentration",
+     "icon_key": "wish-of-concentration",
+     "charge_level": 0,
+     "t_s": 8.2
+    }
+   ],
+   "core": [
+    {
+     "skill_key": "element-enhancement",
+     "name": "Element Enhancement",
+     "icon_key": "element-enhancement",
+     "charge_level": 0,
+     "cooldown_s": 60.0,
+     "casts": 4,
+     "cast_every_s": 58.2,
+     "damage_share_pct": 0.0,
+     "rule": "on_cooldown",
+     "status": null,
+     "text": "Use on cooldown to keep Element Enhancement up (every 60 s, no damage of its own)."
+    },
+    {
+     "skill_key": "winters-shackles",
+     "name": "Winter's Shackles",
+     "icon_key": "winters-shackles",
+     "charge_level": 0,
+     "cooldown_s": 45.0,
+     "casts": 5,
+     "cast_every_s": 44.4,
+     "damage_share_pct": 0.7,
+     "rule": "on_cooldown",
+     "status": null,
+     "text": "Use on cooldown (every 45 s)."
     },
     {
      "skill_key": "bittercold-wind",
@@ -3110,9 +3069,9 @@
      "icon_key": "bittercold-wind",
      "charge_level": 0,
      "cooldown_s": 15.0,
-     "casts": 12,
-     "cast_every_s": 15.3,
-     "damage_share_pct": 26.3,
+     "casts": 13,
+     "cast_every_s": 14.7,
+     "damage_share_pct": 29.1,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 15 s)."
@@ -3123,12 +3082,12 @@
      "icon_key": "fire-wall",
      "charge_level": 0,
      "cooldown_s": 60.0,
-     "casts": 4,
-     "cast_every_s": 58.2,
-     "damage_share_pct": 5.8,
-     "rule": "on_cooldown",
-     "status": null,
-     "text": "Use on cooldown (every 60 s)."
+     "casts": 3,
+     "cast_every_s": 59.3,
+     "damage_share_pct": 5.6,
+     "rule": "hold_for_buff",
+     "status": "element_enhancement",
+     "text": "Hold for Element Enhancement: press it while that buff is running (cooldown 60 s)."
     },
     {
      "skill_key": "hellfire",
@@ -3137,11 +3096,37 @@
      "charge_level": 4,
      "cooldown_s": 45.0,
      "casts": 12,
-     "cast_every_s": 15.3,
-     "damage_share_pct": 24.4,
+     "cast_every_s": 14.7,
+     "damage_share_pct": 22.9,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 45 s, fully charged (level 4))."
+    },
+    {
+     "skill_key": "blaze",
+     "name": "Blaze",
+     "icon_key": "blaze",
+     "charge_level": 0,
+     "cooldown_s": 5.0,
+     "casts": 34,
+     "cast_every_s": 4.9,
+     "damage_share_pct": 6.3,
+     "rule": "when_status",
+     "status": "fire_mark",
+     "text": "Use when Fire Mark is up (cooldown 5 s)."
+    },
+    {
+     "skill_key": "firestorm",
+     "name": "Firestorm",
+     "icon_key": "firestorm",
+     "charge_level": 0,
+     "cooldown_s": 5.0,
+     "casts": 34,
+     "cast_every_s": 4.9,
+     "damage_share_pct": 30.1,
+     "rule": "on_cooldown",
+     "status": null,
+     "text": "Use on cooldown (every 5 s)."
     },
     {
      "skill_key": "wish-of-concentration",
@@ -3150,37 +3135,11 @@
      "charge_level": 0,
      "cooldown_s": 60.0,
      "casts": 3,
-     "cast_every_s": 61.1,
+     "cast_every_s": 59.7,
      "damage_share_pct": 0.0,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 60 s, no damage of its own)."
-    },
-    {
-     "skill_key": "winters-shackles",
-     "name": "Winter's Shackles",
-     "icon_key": "winters-shackles",
-     "charge_level": 0,
-     "cooldown_s": 45.0,
-     "casts": 4,
-     "cast_every_s": 46.4,
-     "damage_share_pct": 0.6,
-     "rule": "on_cooldown",
-     "status": null,
-     "text": "Use on cooldown (every 45 s)."
-    },
-    {
-     "skill_key": "element-enhancement",
-     "name": "Element Enhancement",
-     "icon_key": "element-enhancement",
-     "charge_level": 0,
-     "cooldown_s": 60.0,
-     "casts": 3,
-     "cast_every_s": 61.6,
-     "damage_share_pct": 0.0,
-     "rule": "when_status",
-     "status": "wish_of_concentration",
-     "text": "Use when Wish of Concentration is up (cooldown 60 s)."
     }
    ],
    "chains": [
@@ -3200,8 +3159,8 @@
       "burst",
       "pyroclasm"
      ],
-     "completed": 11,
-     "text": "Flame Arrow → Burst → Pyroclasm: keep pressing (followed through 11 times in this fight)."
+     "completed": 7,
+     "text": "Flame Arrow → Burst → Pyroclasm: keep pressing (followed through 7 times in this fight)."
     }
    ],
    "filler": {
@@ -3211,8 +3170,8 @@
       "name": "Flame Arrow",
       "icon_key": "flame-arrow",
       "charge_level": 0,
-      "casts": 32,
-      "damage_share_pct": 2.1,
+      "casts": 39,
+      "damage_share_pct": 2.4,
       "role": "main"
      }
     ],
@@ -3220,7 +3179,7 @@
    },
    "skip": []
   },
-  "current_dps": 9388.732000900365
+  "current_dps": 9428.944358027466
  },
  "aoe": {
   "playstyle": {
@@ -3709,15 +3668,15 @@
   "stigma_picks": [
    [
     "fire-wall",
-    24.97571860346921
+    24.578572206377803
    ],
    [
     "element-enhancement",
-    13.868734091450952
+    13.780551503504256
    ],
    [
     "cold-storm",
-    9.13485648324366
+    8.953480385966884
    ],
    [
     "assault-bombardment",
@@ -4023,7 +3982,7 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 24.064600602177364,
+  "daevanion_gain_pct": 24.050403399205855,
   "priority": {
    "entries": [
     {
@@ -4100,8 +4059,8 @@
    "label": "Option 1"
   },
   "result": {
-   "total_damage": 1818882.8709886223,
-   "dps": 60629.429032954075,
+   "total_damage": 1823336.2751960524,
+   "dps": 60777.875839868415,
    "duration_s": 30,
    "casts": [
     {
@@ -4319,7 +4278,7 @@
      "t_s": 14.059,
      "skill_key": "burst",
      "charge_level": 0,
-     "damage": 1269.0364718404485,
+     "damage": 2478.807615661927,
      "mp_after": 554.2410000000002,
      "active_statuses": [
       "fire_mark",
@@ -4399,7 +4358,7 @@
      "t_s": 18.922,
      "skill_key": "burst",
      "charge_level": 0,
-     "damage": 900.4609309845588,
+     "damage": 1908.6035508357909,
      "mp_after": 746.5010000000003,
      "active_statuses": [
       "fire_mark",
@@ -4412,7 +4371,7 @@
      "t_s": 19.857,
      "skill_key": "pyroclasm",
      "charge_level": 0,
-     "damage": 1044.8167877382166,
+     "damage": 2221.7574806520975,
      "mp_after": 885.2010000000004,
      "active_statuses": [
       "fire_mark",
@@ -4537,11 +4496,11 @@
     },
     "burst": {
      "casts": 3,
-     "damage": 3114.981380358794
+     "damage": 6391.444894875298
     },
     "pyroclasm": {
      "casts": 1,
-     "damage": 1044.8167877382166
+     "damage": 2221.7574806520975
     }
    },
    "status_uptime": {
@@ -4574,25 +4533,25 @@
    {
     "stat": "attack",
     "delta": 10.0,
-    "dps_gain_pct": 0.7058168586405955,
+    "dps_gain_pct": 0.7040929376005423,
     "confidence": "estimated"
    },
    {
     "stat": "dmg_boost_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6886797305942993,
+    "dps_gain_pct": 0.6887056717590712,
     "confidence": "estimated"
    },
    {
     "stat": "crit_chance_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.5087066063774071,
+    "dps_gain_pct": 0.5086611830786625,
     "confidence": "estimated"
    },
    {
     "stat": "weapon_dmg_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.4621552332453094,
+    "dps_gain_pct": 0.4610264430773947,
     "confidence": "estimated"
    }
   ],
@@ -5087,22 +5046,22 @@
     "stigma_picks": [
      [
       "fire-wall",
-      24.97571860346921
+      24.578572206377803
      ],
      [
       "element-enhancement",
-      13.868734091450952
+      13.780551503504256
      ],
      [
       "cold-storm",
-      9.13485648324366
+      8.953480385966884
      ],
      [
       "assault-bombardment",
       0.0
      ]
     ],
-    "dps": 60629.429032954075,
+    "dps": 60777.875839868415,
     "dps_delta_pct": 0.0
    },
    {
@@ -5588,22 +5547,22 @@
     "stigma_picks": [
      [
       "fire-wall",
-      24.97571860346921
+      24.578572206377803
      ],
      [
       "element-enhancement",
-      13.868734091450952
+      13.780551503504256
      ],
      [
       "cold-storm",
-      9.13485648324366
+      8.953480385966884
      ],
      [
       "steel-barrier",
       0.0
      ]
     ],
-    "dps": 60773.040790627754,
+    "dps": 60880.57600341189,
     "dps_delta_pct": 0.0
    },
    {
@@ -6089,22 +6048,22 @@
     "stigma_picks": [
      [
       "fire-wall",
-      24.97571860346921
+      24.578572206377803
      ],
      [
       "element-enhancement",
-      13.868734091450952
+      13.780551503504256
      ],
      [
       "cold-storm",
-      9.13485648324366
+      8.953480385966884
      ],
      [
       "hibernation",
       0.0
      ]
     ],
-    "dps": 60773.040790627754,
+    "dps": 60880.57600341189,
     "dps_delta_pct": 0.0
    }
   ],
@@ -6113,56 +6072,56 @@
     "skill_key": "firestorm",
     "option": 3,
     "text": "-2s [Hellfire] cooldown per fireball",
-    "dps_gain_pct": 33.78328293050998,
+    "dps_gain_pct": 33.44923113328977,
     "confidence": "estimated"
    },
    {
     "skill_key": "bittercold-wind",
     "option": 0,
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 16.49092210052192,
+    "dps_gain_pct": 16.444681021757688,
     "confidence": "estimated"
    },
    {
     "skill_key": "wish-of-concentration",
     "option": 3,
     "text": "+10% Combat Speed",
-    "dps_gain_pct": 16.009568840357158,
+    "dps_gain_pct": 16.04862883147291,
     "confidence": "estimated"
    },
    {
     "skill_key": "firestorm",
     "option": 0,
     "text": "-50% MP Cost",
-    "dps_gain_pct": 7.251158582996453,
+    "dps_gain_pct": 7.37830911804902,
     "confidence": "confirmed"
    },
    {
     "skill_key": "frost",
     "option": 0,
     "text": "Restores 200 MP",
-    "dps_gain_pct": 4.003177162230864,
+    "dps_gain_pct": 3.997074623931973,
     "confidence": "confirmed"
    },
    {
     "skill_key": "winters-shackles",
     "option": 2,
     "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]",
-    "dps_gain_pct": 3.5808258141809546,
+    "dps_gain_pct": 3.5718950529214366,
     "confidence": "confirmed"
    },
    {
     "skill_key": "wish-of-concentration",
     "option": 1,
     "text": "+10% additional Attack",
-    "dps_gain_pct": 2.427096113534266,
+    "dps_gain_pct": 2.421110070773258,
     "confidence": "estimated"
    },
    {
     "skill_key": "flame-arrow",
     "option": 3,
     "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
-    "dps_gain_pct": 0.769974513240701,
+    "dps_gain_pct": 0.7709238797369178,
     "confidence": "confirmed"
    }
   ],
@@ -6170,7 +6129,7 @@
    "scenario": "aoe_pack",
    "scenario_name": "AoE pack (4)",
    "duration_s": 30,
-   "dps": 60629.429032954075,
+   "dps": 60777.875839868415,
    "priority": [
     {
      "skill_key": "bittercold-wind",
@@ -6179,7 +6138,7 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 3,
-     "damage_share_pct": 42.3
+     "damage_share_pct": 42.2
     },
     {
      "skill_key": "wish-of-concentration",
@@ -6206,7 +6165,7 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 0.8
+     "damage_share_pct": 0.7
     },
     {
      "skill_key": "element-enhancement",
@@ -6251,7 +6210,7 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 12.1
+     "damage_share_pct": 12.0
     },
     {
      "skill_key": "firestorm",
@@ -6385,7 +6344,7 @@
      "cooldown_s": 15.0,
      "casts": 3,
      "cast_every_s": 14.9,
-     "damage_share_pct": 42.3,
+     "damage_share_pct": 42.2,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 15 s)."
@@ -6424,7 +6383,7 @@
      "cooldown_s": 120.0,
      "casts": 1,
      "cast_every_s": null,
-     "damage_share_pct": 0.8,
+     "damage_share_pct": 0.7,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 120 s)."
@@ -6489,7 +6448,7 @@
      "cooldown_s": 60.0,
      "casts": 1,
      "cast_every_s": null,
-     "damage_share_pct": 12.1,
+     "damage_share_pct": 12.0,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 60 s)."
@@ -6588,7 +6547,7 @@
     }
    ]
   },
-  "current_dps": 30065.69350333581
+  "current_dps": 29807.589325943634
  },
  "leveling": {
   "playstyle": {
@@ -7070,19 +7029,19 @@
   "stigma_picks": [
    [
     "fire-wall",
-    62.34572563951857
+    61.06085859284038
    ],
    [
     "element-enhancement",
-    12.984861139156113
+    13.074624223906216
    ],
    [
     "cold-storm",
-    52.5494339768656
+    51.114847195998856
    ],
    [
     "assault-bombardment",
-    1.4839380502779997
+    1.2505939584686043
    ]
   ],
   "rank_log": [],
@@ -7208,14 +7167,14 @@
    5070,
    5079,
    5080,
-   5092,
-   5091,
-   5090,
-   5082,
    4938,
    4937,
    4936,
    27431,
+   5092,
+   5091,
+   5090,
+   5082,
    4989,
    4995,
    5004,
@@ -7232,11 +7191,11 @@
    5026,
    27519,
    5009,
-   27511,
    5186,
    5194,
    5204,
    5185,
+   27511,
    4840,
    4842,
    4846,
@@ -7384,7 +7343,7 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 22.35486183224682,
+  "daevanion_gain_pct": 22.34609712776141,
   "priority": {
    "entries": [
     {
@@ -8246,19 +8205,19 @@
     "stigma_picks": [
      [
       "fire-wall",
-      62.34572563951857
+      61.06085859284038
      ],
      [
       "element-enhancement",
-      12.984861139156113
+      13.074624223906216
      ],
      [
       "cold-storm",
-      52.5494339768656
+      51.114847195998856
      ],
      [
       "assault-bombardment",
-      1.4839380502779997
+      1.2505939584686043
      ]
     ],
     "dps": 63331.14586458088,
@@ -8735,15 +8694,15 @@
     "stigma_picks": [
      [
       "fire-wall",
-      62.34572563951857
+      61.06085859284038
      ],
      [
       "element-enhancement",
-      12.984861139156113
+      13.074624223906216
      ],
      [
       "cold-storm",
-      52.5494339768656
+      51.114847195998856
      ],
      [
       "steel-barrier",
@@ -9224,15 +9183,15 @@
     "stigma_picks": [
      [
       "fire-wall",
-      62.34572563951857
+      61.06085859284038
      ],
      [
       "element-enhancement",
-      12.984861139156113
+      13.074624223906216
      ],
      [
       "cold-storm",
-      52.5494339768656
+      51.114847195998856
      ],
      [
       "hibernation",
@@ -9677,25 +9636,28 @@
     "delayed-explosion"
    ],
    "specs": {
+    "blaze": [
+     1
+    ],
+    "hellfire": [
+     0
+    ],
     "firestorm": [
      0,
      1
     ],
-    "bittercold-wind": [
+    "frost": [
      0
     ],
     "wish-of-concentration": [
      1,
      3
     ],
+    "bittercold-wind": [
+     0
+    ],
     "winters-shackles": [
      2
-    ],
-    "blaze": [
-     1
-    ],
-    "frost": [
-     0
     ],
     "element-enhancement": [
      0
@@ -10110,19 +10072,19 @@
   "stigma_picks": [
    [
     "fire-wall",
-    0.0
+    9.903640246846424
    ],
    [
     "element-enhancement",
-    18.329880706560076
+    14.932972759945763
    ],
    [
     "assault-bombardment",
-    15.74371304818376
+    2.7120261917767285
    ],
    [
     "delayed-explosion",
-    26.089324877566078
+    1.6111882465452254
    ]
   ],
   "rank_log": [],
@@ -10424,26 +10386,26 @@
    27706,
    27714
   ],
-  "daevanion_gain_pct": 25.61905267015685,
+  "daevanion_gain_pct": 25.0330602825666,
   "priority": {
    "entries": [
+    {
+     "skill_key": "element-enhancement",
+     "charge_level": 0,
+     "require_status": "wish_of_concentration"
+    },
     {
      "skill_key": "wish-of-concentration",
      "charge_level": 0,
      "require_status": null
     },
     {
-     "skill_key": "element-enhancement",
+     "skill_key": "blaze",
      "charge_level": 0,
      "require_status": null
     },
     {
      "skill_key": "firestorm",
-     "charge_level": 0,
-     "require_status": null
-    },
-    {
-     "skill_key": "blaze",
      "charge_level": 0,
      "require_status": null
     },
@@ -10458,12 +10420,12 @@
      "require_status": null
     },
     {
-     "skill_key": "fire-wall",
+     "skill_key": "frost-burst",
      "charge_level": 0,
      "require_status": null
     },
     {
-     "skill_key": "winters-shackles",
+     "skill_key": "fire-wall",
      "charge_level": 0,
      "require_status": null
     },
@@ -10473,18 +10435,13 @@
      "require_status": null
     },
     {
+     "skill_key": "winters-shackles",
+     "charge_level": 0,
+     "require_status": null
+    },
+    {
      "skill_key": "hellfire",
      "charge_level": 4,
-     "require_status": null
-    },
-    {
-     "skill_key": "frost-burst",
-     "charge_level": 0,
-     "require_status": null
-    },
-    {
-     "skill_key": "assault-bombardment",
-     "charge_level": 0,
      "require_status": null
     },
     {
@@ -10501,8 +10458,8 @@
    "label": "Option 1"
   },
   "result": {
-   "total_damage": 359510.13025671826,
-   "dps": 23967.34201711455,
+   "total_damage": 368136.0077328938,
+   "dps": 24542.400515526253,
    "duration_s": 15,
    "casts": [
     {
@@ -10654,10 +10611,10 @@
     },
     {
      "t_s": 8.631,
-     "skill_key": "winters-shackles",
+     "skill_key": "frost",
      "charge_level": 0,
-     "damage": 4933.671706990064,
-     "mp_after": 350.68100000000015,
+     "damage": 3032.701913648008,
+     "mp_after": 450.68100000000015,
      "active_statuses": [
       "fire_mark",
       "element_enhancement",
@@ -10671,10 +10628,10 @@
     },
     {
      "t_s": 9.486,
-     "skill_key": "frost",
+     "skill_key": "frost-burst",
      "charge_level": 0,
-     "damage": 3456.856027444933,
-     "mp_after": 267.7810000000002,
+     "damage": 4376.215593441502,
+     "mp_after": 667.7810000000002,
      "active_statuses": [
       "fire_mark",
       "element_enhancement",
@@ -10683,16 +10640,17 @@
       "wish_of_concentration",
       "wish_atk_plus",
       "wish_combat_speed",
-      "ws_boost",
+      "frost",
+      "robe_of_earth",
       "robe_of_flame"
      ]
     },
     {
      "t_s": 10.341,
-     "skill_key": "hellfire",
-     "charge_level": 4,
-     "damage": 74867.80024303093,
-     "mp_after": 284.8810000000002,
+     "skill_key": "winters-shackles",
+     "charge_level": 0,
+     "damage": 4933.671706990064,
+     "mp_after": 484.8810000000002,
      "active_statuses": [
       "fire_mark",
       "element_enhancement",
@@ -10701,20 +10659,20 @@
       "wish_of_concentration",
       "wish_atk_plus",
       "wish_combat_speed",
-      "ws_boost",
       "frost",
       "robe_of_flame"
      ]
     },
     {
-     "t_s": 12.696,
-     "skill_key": "firestorm",
-     "charge_level": 0,
-     "damage": 30080.41515999635,
-     "mp_after": 206.98100000000022,
+     "t_s": 11.196,
+     "skill_key": "hellfire",
+     "charge_level": 4,
+     "damage": 74867.80024303093,
+     "mp_after": 301.9810000000002,
      "active_statuses": [
       "fire_mark",
       "element_enhancement",
+      "grace_of_enhancement",
       "fire_wall_dot",
       "wish_of_concentration",
       "wish_atk_plus",
@@ -10724,11 +10682,11 @@
      ]
     },
     {
-     "t_s": 13.765,
+     "t_s": 13.008,
      "skill_key": "blaze",
      "charge_level": 0,
-     "damage": 6232.779798977792,
-     "mp_after": 328.3610000000002,
+     "damage": 7104.497253380278,
+     "mp_after": 438.22100000000023,
      "active_statuses": [
       "fire_mark",
       "element_enhancement",
@@ -10737,15 +10695,34 @@
       "wish_of_concentration",
       "wish_atk_plus",
       "wish_combat_speed",
+      "ws_boost",
       "robe_of_flame"
      ]
     },
     {
-     "t_s": 14.62,
-     "skill_key": "assault-bombardment",
+     "t_s": 13.863,
+     "skill_key": "firestorm",
      "charge_level": 0,
-     "damage": 3179.113923169845,
-     "mp_after": 395.46100000000024,
+     "damage": 34287.466231324506,
+     "mp_after": 380.32100000000025,
+     "active_statuses": [
+      "fire_mark",
+      "element_enhancement",
+      "grace_of_enhancement",
+      "fire_wall_dot",
+      "wish_of_concentration",
+      "wish_atk_plus",
+      "wish_combat_speed",
+      "ws_boost",
+      "robe_of_flame"
+     ]
+    },
+    {
+     "t_s": 14.932,
+     "skill_key": "ice-chain",
+     "charge_level": 0,
+     "damage": 2275.1588105339406,
+     "mp_after": 281.70100000000025,
      "active_statuses": [
       "fire_mark",
       "grace_of_enhancement",
@@ -10753,6 +10730,7 @@
       "wish_of_concentration",
       "wish_atk_plus",
       "wish_combat_speed",
+      "ws_boost",
       "robe_of_flame"
      ]
     }
@@ -10768,11 +10746,11 @@
     },
     "firestorm": {
      "casts": 3,
-     "damage": 96334.84814703929
+     "damage": 100541.89921836744
     },
     "blaze": {
      "casts": 3,
-     "damage": 19026.040758787698
+     "damage": 19897.758213190187
     },
     "delayed-explosion": {
      "casts": 1,
@@ -10784,46 +10762,49 @@
     },
     "fire-wall": {
      "casts": 1,
-     "damage": 62528.375926454544
+     "damage": 63027.37850989084
     },
     "fire-mark": {
      "casts": 1,
      "damage": 1696.512987852456
     },
+    "frost": {
+     "casts": 1,
+     "damage": 3032.701913648008
+    },
+    "frost-burst": {
+     "casts": 1,
+     "damage": 4376.215593441502
+    },
     "winters-shackles": {
      "casts": 1,
      "damage": 4933.671706990064
-    },
-    "frost": {
-     "casts": 1,
-     "damage": 3456.856027444933
     },
     "hellfire": {
      "casts": 1,
      "damage": 74867.80024303093
     },
-    "assault-bombardment": {
+    "ice-chain": {
      "casts": 1,
-     "damage": 3179.113923169845
+     "damage": 2275.1588105339406
     }
    },
    "status_uptime": {
     "wish_of_concentration": 1.0,
     "wish_atk_plus": 1.0,
     "wish_combat_speed": 1.0,
-    "grace_of_enhancement": 0.9287333333333333,
-    "robe_of_earth": 0.4186,
+    "grace_of_enhancement": 1.0,
+    "robe_of_earth": 0.630070000006668,
     "element_enhancement": 0.8666666666666667,
     "fire_mark": 0.8806666666666667,
     "delayed_explosion": 0.26666666666666666,
     "fire_wall_dot": 0.6384,
-    "ws_boost": 0.3333333333333333,
-    "frost": 0.22533333333333333,
+    "frost": 0.2,
+    "ws_boost": 0.3106,
     "robe_of_flame": 1.0
    },
    "warnings": [
-    "ranking assumed, unverified at rank > 1",
-    "201 distinct priorities simulated"
+    "ranking assumed, unverified at rank > 1"
    ],
    "confidence": "estimated"
   },
@@ -10831,41 +10812,41 @@
    {
     "stat": "attack",
     "delta": 10.0,
-    "dps_gain_pct": 0.732970183937609,
+    "dps_gain_pct": 0.7334045133120082,
     "confidence": "estimated"
    },
    {
     "stat": "smite_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6992985336409241,
+    "dps_gain_pct": 0.6992985336409463,
     "confidence": "estimated"
    },
    {
     "stat": "dmg_boost_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.6773963926537396,
+    "dps_gain_pct": 0.6678843612231589,
     "confidence": "estimated"
    },
    {
     "stat": "weapon_dmg_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.4799347056854586,
+    "dps_gain_pct": 0.4802190961628039,
     "confidence": "estimated"
    },
    {
     "stat": "attack_increase_pct",
     "delta": 1.0,
-    "dps_gain_pct": 0.4142697879535584,
+    "dps_gain_pct": 0.4145152679769115,
     "confidence": "estimated"
    }
   ],
   "warnings": [
    "ranking assumed, unverified at rank > 1",
-   "201 distinct priorities simulated",
    "Skill points not set: ranks as entered.",
    "assumes all Daevanion points",
    "PvP is not modeled.",
-   "Utility value (defense, crowd control) is not simulated; variants only show the DPS cost."
+   "Utility value (defense, crowd control) is not simulated; variants only show the DPS cost.",
+   "Assault Bombardment: equipped but the best rotation never casts it, so that slot is free for a utility stigma (see Trade-offs)."
   ],
   "variants": [
    {
@@ -10913,25 +10894,28 @@
       "delayed-explosion"
      ],
      "specs": {
+      "blaze": [
+       1
+      ],
+      "hellfire": [
+       0
+      ],
       "firestorm": [
        0,
        1
       ],
-      "bittercold-wind": [
+      "frost": [
        0
       ],
       "wish-of-concentration": [
        1,
        3
       ],
+      "bittercold-wind": [
+       0
+      ],
       "winters-shackles": [
        2
-      ],
-      "blaze": [
-       1
-      ],
-      "frost": [
-       0
       ],
       "element-enhancement": [
        0
@@ -11346,28 +11330,28 @@
     "stigma_picks": [
      [
       "fire-wall",
-      0.0
+      9.903640246846424
      ],
      [
       "element-enhancement",
-      18.329880706560076
+      14.932972759945763
      ],
      [
       "assault-bombardment",
-      15.74371304818376
+      2.7120261917767285
      ],
      [
       "delayed-explosion",
-      26.089324877566078
+      1.6111882465452254
      ]
     ],
-    "dps": 23967.34201711455,
+    "dps": 24542.400515526253,
     "dps_delta_pct": 0.0
    },
    {
     "key": "defense",
     "label": "Survivable (Steel Barrier)",
-    "gives": "Adds Steel Barrier: damage protection for safer solo play, costs 0.2% DPS",
+    "gives": "Adds Steel Barrier: damage protection for safer solo play, costs no DPS",
     "build": {
      "name": "DarthThot",
      "region": "global",
@@ -11409,25 +11393,28 @@
       "delayed-explosion"
      ],
      "specs": {
+      "blaze": [
+       1
+      ],
+      "hellfire": [
+       0
+      ],
       "firestorm": [
        0,
        1
       ],
-      "bittercold-wind": [
+      "frost": [
        0
       ],
       "wish-of-concentration": [
        1,
        3
       ],
+      "bittercold-wind": [
+       0
+      ],
       "winters-shackles": [
        2
-      ],
-      "blaze": [
-       1
-      ],
-      "frost": [
-       0
       ],
       "element-enhancement": [
        0
@@ -11842,28 +11829,28 @@
     "stigma_picks": [
      [
       "fire-wall",
-      0.0
+      9.903640246846424
      ],
      [
       "element-enhancement",
-      18.329880706560076
+      14.932972759945763
      ],
      [
       "delayed-explosion",
-      26.089324877566078
+      1.6111882465452254
      ],
      [
       "steel-barrier",
       0.0
      ]
     ],
-    "dps": 23921.19586372695,
-    "dps_delta_pct": -0.19253763456394957
+    "dps": 24542.400515526253,
+    "dps_delta_pct": 0.0
    },
    {
     "key": "cc",
     "label": "Crowd control (Cold Storm)",
-    "gives": "Adds Cold Storm: crowd control to hold enemies down, costs 0.2% DPS",
+    "gives": "Adds Cold Storm: crowd control to hold enemies down, costs 0.7% DPS",
     "build": {
      "name": "DarthThot",
      "region": "global",
@@ -11905,25 +11892,28 @@
       "cold-storm"
      ],
      "specs": {
+      "blaze": [
+       1
+      ],
+      "hellfire": [
+       0
+      ],
       "firestorm": [
        0,
        1
       ],
-      "bittercold-wind": [
+      "frost": [
        0
       ],
       "wish-of-concentration": [
        1,
        3
       ],
+      "bittercold-wind": [
+       0
+      ],
       "winters-shackles": [
        2
-      ],
-      "blaze": [
-       1
-      ],
-      "frost": [
-       0
       ],
       "element-enhancement": [
        0
@@ -12338,28 +12328,28 @@
     "stigma_picks": [
      [
       "fire-wall",
-      0.0
+      9.903640246846424
      ],
      [
       "element-enhancement",
-      18.329880706560076
+      14.932972759945763
      ],
      [
       "assault-bombardment",
-      15.74371304818376
+      2.7120261917767285
      ],
      [
       "cold-storm",
       0.0
      ]
     ],
-    "dps": 23921.19586372695,
-    "dps_delta_pct": -0.19253763456394957
+    "dps": 24358.681389684858,
+    "dps_delta_pct": -0.7485784682112473
    },
    {
     "key": "sustain",
     "label": "Sustain (Hibernation)",
-    "gives": "Adds Hibernation: healing or resource sustain, costs 0.2% DPS",
+    "gives": "Adds Hibernation: healing or resource sustain, costs no DPS",
     "build": {
      "name": "DarthThot",
      "region": "global",
@@ -12401,25 +12391,28 @@
       "delayed-explosion"
      ],
      "specs": {
+      "blaze": [
+       1
+      ],
+      "hellfire": [
+       0
+      ],
       "firestorm": [
        0,
        1
       ],
-      "bittercold-wind": [
+      "frost": [
        0
       ],
       "wish-of-concentration": [
        1,
        3
       ],
+      "bittercold-wind": [
+       0
+      ],
       "winters-shackles": [
        2
-      ],
-      "blaze": [
-       1
-      ],
-      "frost": [
-       0
       ],
       "element-enhancement": [
        0
@@ -12834,23 +12827,23 @@
     "stigma_picks": [
      [
       "fire-wall",
-      0.0
+      9.903640246846424
      ],
      [
       "element-enhancement",
-      18.329880706560076
+      14.932972759945763
      ],
      [
       "delayed-explosion",
-      26.089324877566078
+      1.6111882465452254
      ],
      [
       "hibernation",
       0.0
      ]
     ],
-    "dps": 23921.19586372695,
-    "dps_delta_pct": -0.19253763456394957
+    "dps": 24542.400515526253,
+    "dps_delta_pct": 0.0
    }
   ],
   "spec_picks": [
@@ -12858,56 +12851,63 @@
     "skill_key": "bittercold-wind",
     "option": 0,
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 8.900728915388957,
+    "dps_gain_pct": 8.67408370379541,
     "confidence": "estimated"
    },
    {
     "skill_key": "firestorm",
     "option": 0,
     "text": "-50% MP Cost",
-    "dps_gain_pct": 7.971005928979302,
-    "confidence": "confirmed"
-   },
-   {
-    "skill_key": "winters-shackles",
-    "option": 2,
-    "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]",
-    "dps_gain_pct": 4.621459522379512,
-    "confidence": "confirmed"
-   },
-   {
-    "skill_key": "wish-of-concentration",
-    "option": 1,
-    "text": "+10% additional Attack",
-    "dps_gain_pct": 4.321734273649436,
-    "confidence": "estimated"
-   },
-   {
-    "skill_key": "blaze",
-    "option": 1,
-    "text": "+50% MP restored",
-    "dps_gain_pct": 3.4926594389321775,
+    "dps_gain_pct": 7.090076310990101,
     "confidence": "confirmed"
    },
    {
     "skill_key": "frost",
     "option": 0,
     "text": "Restores 200 MP",
-    "dps_gain_pct": 3.478272216307987,
+    "dps_gain_pct": 4.815269784974574,
     "confidence": "confirmed"
    },
    {
-    "skill_key": "firestorm",
+    "skill_key": "winters-shackles",
+    "option": 2,
+    "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]",
+    "dps_gain_pct": 4.703858916542858,
+    "confidence": "confirmed"
+   },
+   {
+    "skill_key": "wish-of-concentration",
     "option": 1,
-    "text": "+20% Skill Speed",
-    "dps_gain_pct": 1.1871665976501689,
+    "text": "+10% additional Attack",
+    "dps_gain_pct": 4.324405907111428,
     "confidence": "estimated"
+   },
+   {
+    "skill_key": "blaze",
+    "option": 1,
+    "text": "+50% MP restored",
+    "dps_gain_pct": 4.322772674753561,
+    "confidence": "confirmed"
    },
    {
     "skill_key": "wish-of-concentration",
     "option": 3,
     "text": "+10% Combat Speed",
-    "dps_gain_pct": 1.0432353456251597,
+    "dps_gain_pct": 3.863771812435446,
+    "confidence": "estimated"
+   },
+   {
+    "skill_key": "hellfire",
+    "option": 0,
+    "text": "+30% Skill Speed",
+    "dps_gain_pct": 2.218469870242634,
+    "confidence": "estimated"
+   },
+   {
+    "skill_key": "firestorm",
+    "option": 1,
+    "text": "+20% Skill Speed",
+    "dps_gain_pct": 2.2179382393744618,
     "confidence": "estimated"
    }
   ],
@@ -12915,8 +12915,17 @@
    "scenario": "burst_15",
    "scenario_name": "Burst opener (15 s)",
    "duration_s": 15,
-   "dps": 23967.34201711455,
+   "dps": 24542.400515526253,
    "priority": [
+    {
+     "skill_key": "element-enhancement",
+     "name": "Element Enhancement",
+     "icon_key": "element-enhancement",
+     "charge_level": 0,
+     "require_status": "wish_of_concentration",
+     "casts": 1,
+     "damage_share_pct": 0.0
+    },
     {
      "skill_key": "wish-of-concentration",
      "name": "Wish of Concentration",
@@ -12927,13 +12936,13 @@
      "damage_share_pct": 0.0
     },
     {
-     "skill_key": "element-enhancement",
-     "name": "Element Enhancement",
-     "icon_key": "element-enhancement",
+     "skill_key": "blaze",
+     "name": "Blaze",
+     "icon_key": "blaze",
      "charge_level": 0,
      "require_status": null,
-     "casts": 1,
-     "damage_share_pct": 0.0
+     "casts": 3,
+     "damage_share_pct": 5.4
     },
     {
      "skill_key": "firestorm",
@@ -12942,16 +12951,7 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 3,
-     "damage_share_pct": 26.8
-    },
-    {
-     "skill_key": "blaze",
-     "name": "Blaze",
-     "icon_key": "blaze",
-     "charge_level": 0,
-     "require_status": null,
-     "casts": 3,
-     "damage_share_pct": 5.3
+     "damage_share_pct": 27.3
     },
     {
      "skill_key": "delayed-explosion",
@@ -12960,7 +12960,7 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 1.5
+     "damage_share_pct": 1.4
     },
     {
      "skill_key": "bittercold-wind",
@@ -12969,7 +12969,16 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 24.5
+     "damage_share_pct": 23.9
+    },
+    {
+     "skill_key": "frost-burst",
+     "name": "Frost Burst",
+     "icon_key": "frost-burst",
+     "charge_level": 0,
+     "require_status": null,
+     "casts": 1,
+     "damage_share_pct": 1.2
     },
     {
      "skill_key": "fire-wall",
@@ -12978,16 +12987,7 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 17.4
-    },
-    {
-     "skill_key": "winters-shackles",
-     "name": "Winter's Shackles",
-     "icon_key": "winters-shackles",
-     "charge_level": 0,
-     "require_status": null,
-     "casts": 1,
-     "damage_share_pct": 1.4
+     "damage_share_pct": 17.1
     },
     {
      "skill_key": "frost",
@@ -12996,7 +12996,16 @@
      "charge_level": 0,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 1.0
+     "damage_share_pct": 0.8
+    },
+    {
+     "skill_key": "winters-shackles",
+     "name": "Winter's Shackles",
+     "icon_key": "winters-shackles",
+     "charge_level": 0,
+     "require_status": null,
+     "casts": 1,
+     "damage_share_pct": 1.3
     },
     {
      "skill_key": "hellfire",
@@ -13005,16 +13014,16 @@
      "charge_level": 4,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 20.8
+     "damage_share_pct": 20.3
     },
     {
-     "skill_key": "assault-bombardment",
-     "name": "Assault Bombardment",
-     "icon_key": "assault-bombardment",
+     "skill_key": "ice-chain",
+     "name": "Ice Chain",
+     "icon_key": "ice-chain",
      "charge_level": 0,
      "require_status": null,
      "casts": 1,
-     "damage_share_pct": 0.9
+     "damage_share_pct": 0.6
     }
    ],
    "opener": [
@@ -13082,42 +13091,48 @@
      "t_s": 7.8
     },
     {
-     "skill_key": "winters-shackles",
-     "name": "Winter's Shackles",
-     "icon_key": "winters-shackles",
-     "charge_level": 0,
-     "t_s": 8.6
-    },
-    {
      "skill_key": "frost",
      "name": "Frost",
      "icon_key": "frost",
      "charge_level": 0,
+     "t_s": 8.6
+    },
+    {
+     "skill_key": "frost-burst",
+     "name": "Frost Burst",
+     "icon_key": "frost-burst",
+     "charge_level": 0,
      "t_s": 9.5
+    },
+    {
+     "skill_key": "winters-shackles",
+     "name": "Winter's Shackles",
+     "icon_key": "winters-shackles",
+     "charge_level": 0,
+     "t_s": 10.3
     },
     {
      "skill_key": "hellfire",
      "name": "Hellfire",
      "icon_key": "hellfire",
      "charge_level": 4,
-     "t_s": 10.3
-    },
-    {
-     "skill_key": "firestorm",
-     "name": "Firestorm",
-     "icon_key": "firestorm",
-     "charge_level": 0,
-     "t_s": 12.7
-    },
-    {
-     "skill_key": "blaze",
-     "name": "Blaze",
-     "icon_key": "blaze",
-     "charge_level": 0,
-     "t_s": 13.8
+     "t_s": 11.2
     }
    ],
    "core": [
+    {
+     "skill_key": "element-enhancement",
+     "name": "Element Enhancement",
+     "icon_key": "element-enhancement",
+     "charge_level": 0,
+     "cooldown_s": 60.0,
+     "casts": 1,
+     "cast_every_s": null,
+     "damage_share_pct": 0.0,
+     "rule": "when_status",
+     "status": "wish_of_concentration",
+     "text": "Use when Wish of Concentration is up (cooldown 60 s)."
+    },
     {
      "skill_key": "wish-of-concentration",
      "name": "Wish of Concentration",
@@ -13132,17 +13147,17 @@
      "text": "Use on cooldown (every 60 s, no damage of its own)."
     },
     {
-     "skill_key": "element-enhancement",
-     "name": "Element Enhancement",
-     "icon_key": "element-enhancement",
+     "skill_key": "blaze",
+     "name": "Blaze",
+     "icon_key": "blaze",
      "charge_level": 0,
-     "cooldown_s": 60.0,
-     "casts": 1,
-     "cast_every_s": null,
-     "damage_share_pct": 0.0,
-     "rule": "on_cooldown",
-     "status": null,
-     "text": "Use on cooldown to keep Element Enhancement up (every 60 s, no damage of its own)."
+     "cooldown_s": 5.0,
+     "casts": 3,
+     "cast_every_s": 5.1,
+     "damage_share_pct": 5.4,
+     "rule": "when_status",
+     "status": "fire_mark",
+     "text": "Use when Fire Mark is up (cooldown 5 s)."
     },
     {
      "skill_key": "firestorm",
@@ -13151,24 +13166,11 @@
      "charge_level": 0,
      "cooldown_s": 5.0,
      "casts": 3,
-     "cast_every_s": 5.5,
-     "damage_share_pct": 26.8,
+     "cast_every_s": 6.0,
+     "damage_share_pct": 27.3,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 5 s)."
-    },
-    {
-     "skill_key": "blaze",
-     "name": "Blaze",
-     "icon_key": "blaze",
-     "charge_level": 0,
-     "cooldown_s": 5.0,
-     "casts": 3,
-     "cast_every_s": 5.5,
-     "damage_share_pct": 5.3,
-     "rule": "when_status",
-     "status": "fire_mark",
-     "text": "Use when Fire Mark is up (cooldown 5 s)."
     },
     {
      "skill_key": "delayed-explosion",
@@ -13178,7 +13180,7 @@
      "cooldown_s": 30.0,
      "casts": 1,
      "cast_every_s": null,
-     "damage_share_pct": 1.5,
+     "damage_share_pct": 1.4,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 30 s)."
@@ -13191,10 +13193,23 @@
      "cooldown_s": 15.0,
      "casts": 1,
      "cast_every_s": null,
-     "damage_share_pct": 24.5,
+     "damage_share_pct": 23.9,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 15 s)."
+    },
+    {
+     "skill_key": "frost-burst",
+     "name": "Frost Burst",
+     "icon_key": "frost-burst",
+     "charge_level": 0,
+     "cooldown_s": 10.0,
+     "casts": 1,
+     "cast_every_s": null,
+     "damage_share_pct": 1.2,
+     "rule": "when_status",
+     "status": "frost",
+     "text": "Use when Frost is up (cooldown 10 s)."
     },
     {
      "skill_key": "fire-wall",
@@ -13204,23 +13219,10 @@
      "cooldown_s": 60.0,
      "casts": 1,
      "cast_every_s": null,
-     "damage_share_pct": 17.4,
+     "damage_share_pct": 17.1,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 60 s)."
-    },
-    {
-     "skill_key": "winters-shackles",
-     "name": "Winter's Shackles",
-     "icon_key": "winters-shackles",
-     "charge_level": 0,
-     "cooldown_s": 45.0,
-     "casts": 1,
-     "cast_every_s": null,
-     "damage_share_pct": 1.4,
-     "rule": "on_cooldown",
-     "status": null,
-     "text": "Use on cooldown (every 45 s)."
     },
     {
      "skill_key": "frost",
@@ -13230,10 +13232,23 @@
      "cooldown_s": 30.0,
      "casts": 1,
      "cast_every_s": null,
-     "damage_share_pct": 1.0,
+     "damage_share_pct": 0.8,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 30 s)."
+    },
+    {
+     "skill_key": "winters-shackles",
+     "name": "Winter's Shackles",
+     "icon_key": "winters-shackles",
+     "charge_level": 0,
+     "cooldown_s": 45.0,
+     "casts": 1,
+     "cast_every_s": null,
+     "damage_share_pct": 1.3,
+     "rule": "on_cooldown",
+     "status": null,
+     "text": "Use on cooldown (every 45 s)."
     },
     {
      "skill_key": "hellfire",
@@ -13243,57 +13258,38 @@
      "cooldown_s": 45.0,
      "casts": 1,
      "cast_every_s": null,
-     "damage_share_pct": 20.8,
+     "damage_share_pct": 20.3,
      "rule": "on_cooldown",
      "status": null,
      "text": "Use on cooldown (every 45 s, fully charged (level 4))."
-    },
-    {
-     "skill_key": "assault-bombardment",
-     "name": "Assault Bombardment",
-     "icon_key": "assault-bombardment",
-     "charge_level": 0,
-     "cooldown_s": 120.0,
-     "casts": 1,
-     "cast_every_s": null,
-     "damage_share_pct": 0.9,
-     "rule": "on_cooldown",
-     "status": null,
-     "text": "Use on cooldown (every 120 s)."
     }
    ],
    "chains": [],
    "filler": {
-    "skills": [],
-    "text": "Nothing: every cast above is on cooldown-driven timing."
+    "skills": [
+     {
+      "skill_key": "ice-chain",
+      "name": "Ice Chain",
+      "icon_key": "ice-chain",
+      "charge_level": 0,
+      "casts": 1,
+      "damage_share_pct": 0.6,
+      "role": "main"
+     }
+    ],
+    "text": "When nothing else is ready, press Ice Chain."
    },
    "skip": [
-    {
-     "skill_key": "frost-burst",
-     "name": "Frost Burst",
-     "icon_key": "frost-burst",
-     "charge_level": 0,
-     "casts": 0,
-     "reason": "never cast: needs Frost, which was up 23% of the fight"
-    },
-    {
-     "skill_key": "ice-chain",
-     "name": "Ice Chain",
-     "icon_key": "ice-chain",
-     "charge_level": 0,
-     "casts": 0,
-     "reason": "never cast: higher skills and animation time always took its turn"
-    },
     {
      "skill_key": "flame-arrow",
      "name": "Flame Arrow",
      "icon_key": "flame-arrow",
      "charge_level": 0,
      "casts": 0,
-     "reason": "never cast: higher skills and animation time always took its turn"
+     "reason": "never cast: Ice Chain has no cooldown and always goes first"
     }
    ]
   },
-  "current_dps": 14383.703288727831
+  "current_dps": 14277.758578222063
  }
 }

@@ -11,7 +11,7 @@ from aion2c.data.loader import allowed_skills
 from aion2c.engine.advisor import marginal_stats
 from aion2c.engine.budget import allocate_points
 from aion2c.engine.search import _seeds, candidate_skills, optimize
-from aion2c.progression import legality_issues, level_budget, stigma_unlock
+from aion2c.progression import legality_issues, stigma_slots_at, stigma_unlock
 from aion2c.engine.specialties import SpecPick, _matters, choose_specs, spec_picks
 from aion2c.engine.simulator import simulate
 from aion2c.models import (
@@ -57,24 +57,13 @@ PLAYSTYLES: tuple[Playstyle, ...] = (
 TOP_STAT_GAINS = 5
 
 
-def stigma_slots_at(gd: GameData, region: Region, level: int) -> int:
-    """Stigma slots open at `level`: roadmap stigma items for the region (else the client Exp table, 22/27/32/37 in
-    Global), capped by gd.stigma_slots[region]."""
-    items = [r for r in gd.roadmap if r.kind == "stigma" and region in r.regions]
-    if items:
-        n = sum(1 for lv in sorted(r.level for r in items) if lv <= level)
-    else:
-        n = level_budget(level).stigma_slots  # client Exp.StigmaSkillContextSlotMax
-    return min(n, gd.stigma_slots.get(region, 4))
-
-
 @dataclass(frozen=True)
 class FullBuild:
     playstyle: Playstyle
     build: CharacterBuild
     stigma_picks: tuple[tuple[str, float], ...]
     rank_log: tuple[tuple[str, int, float], ...]
-    daevanion_path: tuple[int, ...]
+    daevanion_path: tuple[int, ...]  # the full max-DPS opening order; the nodes the budget pays for are build.daevanion_nodes
     daevanion_gain_pct: float
     priority: Priority
     result: SimResult

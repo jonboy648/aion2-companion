@@ -17,6 +17,7 @@ from aion2c.models import (
     Skill,
     SkillKind,
     effective_rank,
+    rank_owner,
 )
 
 BASE_RANK_CAP = 10  # skill-point ranks stop at 10 (Daevanion adds more on top, not bought here)
@@ -40,6 +41,8 @@ def _castable(gd: GameData, build: CharacterBuild, priority: Priority) -> list[S
             continue
         if s.unlock_level is not None and s.unlock_level > build.level:
             continue
+        if rank_owner(gd, s) is not None:
+            continue  # a chain follow-up plays at its owner's rank: never a separate purchase (models.rank_owner)
         out.append(s)
     return out
 
