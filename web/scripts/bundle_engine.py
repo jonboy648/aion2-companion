@@ -23,7 +23,7 @@ OUT = ROOT / "web" / "public" / "engine"
 # Explicit allowlist: adding a module here is a decision (test_engine_qt_free.py checks each one imports without Qt).
 MODULES = (
     "aion2c", "aion2c.models", "aion2c.serde", "aion2c.interfaces", "aion2c.classes", "aion2c.armory",
-    "aion2c.daevanion", "aion2c.crafting", "aion2c.roadmap", "aion2c.gear", "aion2c.statsheet", "aion2c.webapi",
+    "aion2c.daevanion", "aion2c.progression", "aion2c.crafting", "aion2c.roadmap", "aion2c.gear", "aion2c.statsheet", "aion2c.webapi",
     "aion2c.data", "aion2c.data.loader",
     "aion2c.engine", "aion2c.engine.advisor", "aion2c.engine.budget", "aion2c.engine.build_optimizer",
     "aion2c.engine.community", "aion2c.engine.damage", "aion2c.engine.explain", "aion2c.engine.facade",
@@ -34,7 +34,7 @@ MODULES = (
 )
 
 
-PY_DATA = ("stat_sheet.json",)  # data files packed into aion2c.zip next to the modules
+PY_DATA = ("stat_sheet.json", "client_progression.json")  # data files packed into aion2c.zip next to the modules
 
 
 def bundled_modules() -> list[str]:

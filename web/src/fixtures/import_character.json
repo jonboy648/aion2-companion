@@ -147,7 +147,8 @@
   "skill_points": null,
   "stigma_points": null,
   "class_key": "sorcerer",
-  "bonus_ranks": {}
+  "bonus_ranks": {},
+  "stigma_unlocked": null
  },
  "notes": [
   "Stats not used by the simulator: Evasion increase +0.1%; Block increase +0.1%; Critical Hit Resist increase +0.1%; Defense increase +3.7%; Perfect Chance +3.7%; Accuracy increase +2%; Evasion increase +2%; Endurance Penetration +0.1%; HP increase +0.3%; Regeneration +0.3%; Double Resist +3.8%; Perfect Resist +0.2%; Regeneration Penetration +2.8%; MP Cost -0.1%; MP increase +0.3%; Endurance +0.3%; Move Speed +1.1%; Block increase +1.1%.",

@@ -503,7 +503,8 @@ class MaxPotential:
 def max_potential(gd: GameData, class_key: str, playstyle: str, build: CharacterBuild | None = None,
                   equipped: list[dict] | None = None, reachable_only: bool = True,
                   items: dict[int, dict] | None = None, cfg=SimConfig(),
-                  budget: SearchBudget = SearchBudget(max_candidates=200), progress=None) -> MaxPotential:
+                  budget: SearchBudget = SearchBudget(max_candidates=200), progress=None,
+                  battle_points: int | None = None) -> MaxPotential:
     """BIS gear at max enchant and max Exceed + the engine's full build (every Daevanion point, max ranks, best stigmas/specs).
     With a `build` it also returns `current_full`: the best that character's CURRENT gear and already-opened Daevanion
     nodes allow (daevanion_points=0: nothing new is opened; stigmas, ranks and specialties are still optimised)."""
@@ -519,7 +520,7 @@ def max_potential(gd: GameData, class_key: str, playstyle: str, build: Character
     for r in gear.values():
         delta = add_stats(delta, item_delta(r.item, r.enchant, "best", w, r.exceed))
     geared = replace(build, stats=add_stats(base, delta))
-    full = optimize_full_build(gd, geared, playstyle, None, cfg, budget, progress)
+    full = optimize_full_build(gd, geared, playstyle, None, cfg, budget, progress, battle_points)
     current_full = optimize_full_build(gd, build, playstyle, 0, cfg, budget, progress) if given else None
     notes = ["upper bound: best sub-stat lines on every item, all at max enchant and max Exceed "
              "(success odds are in the item data, not priced in; costs not modelled)",

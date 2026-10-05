@@ -368,7 +368,16 @@ def apply_client_dots(statuses: dict[str, Status], mech: dict, numbers: dict | N
     return out
 
 
-def build_daevanion(path: Path, skills: dict[str, Skill]) -> dict[str, DaevanionBoard]:
+def board_currencies(class_key: str) -> dict[str, str]:
+    """{board unlock level: "daevanion" | "battle"} for the class, from the derived client_progression.json."""
+    from aion2c.data.client_export import CLIENT_CLASS
+    f = SRC_DIR.parent / "client_progression.json"
+    if not f.is_file():
+        return {}
+    return json.loads(f.read_text(encoding="utf-8")).get("board_currency", {}).get(class_key, {})
+
+
+def build_daevanion(path: Path, skills: dict[str, Skill], currency_by_level: dict[str, str] | None = None) -> dict[str, DaevanionBoard]:
     id_key = {s.skill_id: k for k, s in skills.items() if s.skill_id is not None}
     boards: dict[str, DaevanionBoard] = {}
     for b in json.loads(path.read_text(encoding="utf-8"))["boards"]:
@@ -384,7 +393,8 @@ def build_daevanion(path: Path, skills: dict[str, Skill]) -> dict[str, Daevanion
                 node_type=n["node_type"],
                 effects=tuple(DaevanionEffect(e["stat"], float(e["value"]), e["unit"]) for e in n["effects"]),
                 skill_key=sk, adjacent=tuple(n["adjacent"]), x=n["x"], y=n["y"])
-        boards[b["key"]] = DaevanionBoard(b["key"], b["name"], b["unlock_level"], nodes, b["start_node_id"])
+        boards[b["key"]] = DaevanionBoard(b["key"], b["name"], b["unlock_level"], nodes, b["start_node_id"],
+                                          (currency_by_level or {}).get(str(b["unlock_level"]), "daevanion"))
     return boards
 
 
@@ -471,7 +481,7 @@ def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: 
         links=links,
         community=tuple(from_dict(CommunityRotation, c) for c in _src("community_rotations.json", srcs.src)),
         roadmap=tuple(from_dict(RoadmapItem, r) for r in _src("roadmap.json", srcs.src)),
-        daevanion=build_daevanion(srcs.daevanion, skills),
+        daevanion=build_daevanion(srcs.daevanion, skills, board_currencies(class_key)),
         recipes=build_recipes(srcs.crafting),
         class_key=class_key)
     mods, _skipped = stat_effects_to_mods(mech)

@@ -73,6 +73,9 @@
     ],
     "winters-shackles": [
      2
+    ],
+    "element-enhancement": [
+     0
     ]
    },
    "stats": {
@@ -478,7 +481,8 @@
    "skill_points": null,
    "stigma_points": null,
    "class_key": "sorcerer",
-   "bonus_ranks": {}
+   "bonus_ranks": {},
+   "stigma_unlocked": null
   },
   "stigma_picks": [
    [
@@ -1415,6 +1419,9 @@
       ],
       "hellfire": [
        1
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -1820,7 +1827,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -1911,6 +1919,9 @@
       ],
       "hellfire": [
        1
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -2316,7 +2327,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -2407,6 +2419,9 @@
       ],
       "hellfire": [
        1
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -2812,7 +2827,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -3279,6 +3295,9 @@
     ],
     "flame-arrow": [
      3
+    ],
+    "element-enhancement": [
+     0
     ]
    },
    "stats": {
@@ -3684,7 +3703,8 @@
    "skill_points": null,
    "stigma_points": null,
    "class_key": "sorcerer",
-   "bonus_ranks": {}
+   "bonus_ranks": {},
+   "stigma_unlocked": null
   },
   "stigma_picks": [
    [
@@ -4653,6 +4673,9 @@
       "flame-arrow": [
        0,
        3
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -5058,7 +5081,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -5150,6 +5174,9 @@
       "flame-arrow": [
        0,
        3
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -5555,7 +5582,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -5647,6 +5675,9 @@
       "flame-arrow": [
        0,
        3
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -6052,7 +6083,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -6624,6 +6656,9 @@
     "wish-of-concentration": [
      1,
      0
+    ],
+    "element-enhancement": [
+     0
     ]
    },
    "stats": {
@@ -7029,7 +7064,8 @@
    "skill_points": null,
    "stigma_points": null,
    "class_key": "sorcerer",
-   "bonus_ranks": {}
+   "bonus_ranks": {},
+   "stigma_unlocked": null
   },
   "stigma_picks": [
    [
@@ -7796,6 +7832,9 @@
       "wish-of-concentration": [
        1,
        0
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -8201,7 +8240,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -8281,6 +8321,9 @@
       "wish-of-concentration": [
        1,
        0
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -8686,7 +8729,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -8766,6 +8810,9 @@
       "wish-of-concentration": [
        1,
        0
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -9171,7 +9218,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -9648,6 +9696,9 @@
     ],
     "frost": [
      0
+    ],
+    "element-enhancement": [
+     0
     ]
    },
    "stats": {
@@ -10053,7 +10104,8 @@
    "skill_points": null,
    "stigma_points": null,
    "class_key": "sorcerer",
-   "bonus_ranks": {}
+   "bonus_ranks": {},
+   "stigma_unlocked": null
   },
   "stigma_picks": [
    [
@@ -10880,6 +10932,9 @@
       ],
       "frost": [
        0
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -11285,7 +11340,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -11372,6 +11428,9 @@
       ],
       "frost": [
        0
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -11777,7 +11836,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -11864,6 +11924,9 @@
       ],
       "frost": [
        0
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -12269,7 +12332,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [
@@ -12356,6 +12420,9 @@
       ],
       "frost": [
        0
+      ],
+      "element-enhancement": [
+       0
       ]
      },
      "stats": {
@@ -12761,7 +12828,8 @@
      "skill_points": null,
      "stigma_points": null,
      "class_key": "sorcerer",
-     "bonus_ranks": {}
+     "bonus_ranks": {},
+     "stigma_unlocked": null
     },
     "stigma_picks": [
      [

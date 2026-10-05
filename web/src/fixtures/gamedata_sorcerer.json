@@ -12589,7 +12589,8 @@
      "y": 13
     }
    },
-   "start_id": 4875
+   "start_id": 4875,
+   "currency": "daevanion"
   },
   "zikel": {
    "key": "zikel",
@@ -14494,7 +14495,8 @@
      "y": 13
     }
    },
-   "start_id": 4964
+   "start_id": 4964,
+   "currency": "daevanion"
   }
  },
  "recipes": [
@@ -15269,18 +15271,18 @@
  "spec_slot_ranks": [
   {
    "value": 8.0,
-   "confidence": "estimated",
-   "source": "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; allthings.how says 8/12/16 (research/mastery_stigma.md)"
+   "confidence": "confirmed",
+   "source": "client SpecializedSkillSlot UnlockSkillLv 8/12/20 (Mastery, bUserEditSlot); docs/adr/0003"
   },
   {
    "value": 12.0,
-   "confidence": "estimated",
-   "source": "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; allthings.how says 8/12/16 (research/mastery_stigma.md)"
+   "confidence": "confirmed",
+   "source": "client SpecializedSkillSlot UnlockSkillLv 8/12/20 (Mastery, bUserEditSlot); docs/adr/0003"
   },
   {
    "value": 20.0,
-   "confidence": "estimated",
-   "source": "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; allthings.how says 8/12/16 (research/mastery_stigma.md)"
+   "confidence": "confirmed",
+   "source": "client SpecializedSkillSlot UnlockSkillLv 8/12/20 (Mastery, bUserEditSlot); docs/adr/0003"
   }
  ],
  "specs_parsed": true

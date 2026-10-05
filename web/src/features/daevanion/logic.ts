@@ -149,6 +149,7 @@ export function plannerBuild(gd: GameData, level: number, nodes: Iterable<number
     stigmas: [],
     specs: {},
     bonus_ranks: {},
+    stigma_unlocked: null,
     stats: {
       attack: 550,
       attack_increase_pct: 0,

@@ -8,8 +8,8 @@ double counted). Options that cannot change damage (mobility, crowd control, unk
 from dataclasses import dataclass, replace
 
 from aion2c.engine.simulator import simulate
-from aion2c.models import CharacterBuild, GameData, Priority, Scenario, SimConfig, Skill, total_rank
-from aion2c.specs import available_options, slots_at
+from aion2c.models import CharacterBuild, GameData, Priority, Scenario, SimConfig, Skill, SkillKind, total_rank
+from aion2c.specs import available_options, slot_room, slots_at
 
 _INERT = ("mobile", "ignore_block", "no_dps", "unknown")
 MIN_GAIN = 1e-9  # relative DPS gain an option must beat to be worth a slot
@@ -106,7 +106,7 @@ def choose_specs(gd: GameData, build: CharacterBuild, priority: Priority, scenar
             continue
         if progress:
             progress(f"Choosing specialties ({n + 1} of {len(keys)})")
-        room = max(slots_at(gd, r), 1)
+        room = max(slot_room(gd, gd.skills[k], r), 1)
         chosen: tuple[int, ...] = ()
         for _ in range(room):
             best = None
@@ -132,7 +132,7 @@ def choose_specs(gd: GameData, build: CharacterBuild, priority: Priority, scenar
         have = trial.get(k, ())
         if i in have:
             return trial
-        room = max(slots_at(gd, rank_of[k]), 1)
+        room = max(slot_room(gd, gd.skills[k], rank_of[k]), 1)
         if len(have) >= room:
             weakest = max(have, key=lambda o: dps({**trial, k: tuple(x for x in have if x != o)}))  # cheapest to lose
             have = tuple(x for x in have if x != weakest)
@@ -167,8 +167,8 @@ def spec_picks(gd: GameData, build: CharacterBuild, priority: Priority, scenario
     out = []
     for k, opts in build.specs.items():
         sk = gd.skills.get(k)
-        if sk is None:
-            continue
+        if sk is None or sk.kind == SkillKind.STIGMA:
+            continue  # stigma tiers are automatic, not a choice: nothing to leave out, so no per-option gain
         for i in opts:
             rest = tuple(o for o in opts if o != i)
             trial = {**build.specs, k: rest} if rest else {kk: v for kk, v in build.specs.items() if kk != k}

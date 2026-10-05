@@ -173,6 +173,8 @@ export interface DaevanionBoard {
   /** node id (as a string) -> node */
   nodes: Record<string, DaevanionNode>;
   start_id: number;
+  /** Point type the board is paid in: DaevanionCrystal ("daevanion") or BattleCrystal ("battle", the Azphel board). */
+  currency: "daevanion" | "battle";
 }
 
 export interface RecipeMaterial {
@@ -251,6 +253,8 @@ export interface CharacterBuild {
   class_key: string;
   /** Arcana / Soul Binding rank bonuses entered by the user (skill key -> +ranks); Daevanion nodes are separate. */
   bonus_ranks: Record<string, number>;
+  /** Stigma unlock (Ascension grade 3 + faction quest): true = unlocked, false = none bought, null = infer (held ranks, else level 22; reported as inferred). */
+  stigma_unlocked: boolean | null;
 }
 
 export interface Scenario {
@@ -528,6 +532,8 @@ export interface DaevanionSuggestion {
   /** node ids, best first, cut at the point budget */
   path: number[];
   spent: number;
+  /** BattleCrystal spent on Azphel nodes (0 unless a battle budget was given). */
+  battle_spent: number;
   gain_pct: number;
   nodes: { id: number; board: string; name: string; cost: number }[];
 }

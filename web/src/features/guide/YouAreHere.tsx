@@ -8,7 +8,7 @@ import { capFor, nextMilestones, nextSteps } from "./personal";
 import type { GuideData } from "./useGuideData";
 
 const levelOnly = (level: number): CharacterBuild =>
-  ({ name: "", region: "global", level, skill_ranks: {}, stigmas: [], specs: {}, stats: {} as CharacterBuild["stats"], show_kr: false, daevanion_nodes: [], skill_points: null, stigma_points: null, class_key: "", bonus_ranks: {} });
+  ({ name: "", region: "global", level, skill_ranks: {}, stigmas: [], specs: {}, stats: {} as CharacterBuild["stats"], show_kr: false, daevanion_nodes: [], skill_points: null, stigma_points: null, class_key: "", bonus_ranks: {}, stigma_unlocked: null });
 
 /** Personal panel at the top of the guide: where you are, what opens next, the 3 best next steps. */
 export function YouAreHere({ data }: { data: GuideData }) {

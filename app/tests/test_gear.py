@@ -226,7 +226,7 @@ def test_upgrade_path_stops_when_nothing_helps(items, patched):
 def test_max_potential_uses_bis_and_optimizer(items, patched, monkeypatch):
     calls = []
 
-    def fake_full(gd, b, style, dp, cfg, budget, progress):
+    def fake_full(gd, b, style, dp, cfg, budget, progress, battle_points=None):
         calls.append({"build": b, "style": style, "points": dp})
         return "FULL" if dp is None else "NOW"
 
@@ -247,7 +247,7 @@ def test_max_potential_uses_bis_and_optimizer(items, patched, monkeypatch):
 
 def test_max_potential_without_a_build_has_no_current_tier(items, patched, monkeypatch):
     calls = []
-    monkeypatch.setattr(gear, "optimize_full_build", lambda gd, b, style, dp, cfg, budget, progress: calls.append(dp) or "FULL")
+    monkeypatch.setattr(gear, "optimize_full_build", lambda gd, b, style, dp, cfg, budget, progress, battle_points=None: calls.append(dp) or "FULL")
     mp = gear.max_potential(None, "sorcerer", "boss", None, items=items)
     assert mp.current_full is None and calls == [None]  # a class with no character: only the ceiling
 

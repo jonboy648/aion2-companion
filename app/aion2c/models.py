@@ -30,14 +30,12 @@ class Num:
     source: str = ""
 
 
-# Specialty slots open at these skill ranks (mastery_stigma.md: skycoach.gg 2026-09-29 via aion2guide.org: "lvl 8 =
-# first three specialties + first slot; 12 = fourth specialty + second slot; 16 = fifth specialty; 20 = third
-# slot"). Options unlock per Specialization.rank_required (datamine unlock_level 8/8/8/12/16 on Sorcerer).
-# allthings.how reads the slots as 8/12/16 instead: unresolved, so this is `estimated` data, overridable per
-# class with mechanics.json "spec_slot_ranks".
+# Mastery specialty slots open at these skill ranks: client SpecializedSkillSlot UnlockSkillLv 8/12/20 (the three
+# user-editable Mastery slots; docs/adr/0003). Options unlock per Specialization.rank_required (8/8/8/12/16 on
+# Sorcerer), a different table (SpecializedSkillParts). Overridable per class with mechanics.json "spec_slot_ranks".
 SPEC_SLOT_RANKS = tuple(
-    Num(float(r), "estimated", "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; "
-        "allthings.how says 8/12/16 (research/mastery_stigma.md)")
+    Num(float(r), "confirmed", "client SpecializedSkillSlot UnlockSkillLv 8/12/20 (Mastery, bUserEditSlot); "
+        "docs/adr/0003")
     for r in (8, 12, 20)
 )
 
@@ -280,6 +278,9 @@ class DaevanionBoard:
     unlock_level: int
     nodes: dict[int, DaevanionNode]
     start_id: int
+    # Point type the board is paid in (client DaevanionBoard.CostPointType): "daevanion" (DaevanionCrystal) or
+    # "battle" (BattleCrystal, the Azphel board). daevanion_points never pays for a "battle" board.
+    currency: str = "daevanion"
 
 
 @dataclass(frozen=True)
@@ -390,6 +391,9 @@ class CharacterBuild:
     # Rank bonuses entered by the user for sources the data cannot compute (Arcana / Soul Binding), skill key -> +ranks.
     # Added on top of skill-point ranks and Daevanion skill nodes, then clamped to the region cap (see total_rank).
     bonus_ranks: dict[str, int] = field(default_factory=dict)
+    # Stigma unlock (Ascension grade 3 + faction quest): True = unlocked, False = no stigma ranks bought, None = infer
+    # (progression.stigma_unlock: a held stigma rank proves it, otherwise the level gate, reported as inferred).
+    stigma_unlocked: bool | None = None
 
 
 @dataclass(frozen=True)

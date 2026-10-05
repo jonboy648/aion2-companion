@@ -89,6 +89,7 @@ export function buildFromForm(form: ManualForm, levelCap: number): { build: Char
       stigma_points: null,
       class_key: form.classKey,
       bonus_ranks: {},
+      stigma_unlocked: null,
     },
   };
 }
