@@ -139,17 +139,104 @@ def _best_stigma_dps(gd, build, scenario, cfg, budget, guide=None) -> float:
     return best
 
 
-def _optimize_stigmas(gd, build, scenario, cfg, budget, slots, progress, guide=None, start=()):
+def _planned_stigma_rank(gd, build, slots) -> int:
+    """The rank each equipped stigma reaches if the unspent stigma points are shared equally over all `slots`
+    (0 when there are none to spend). The stigma search values candidates at this rank."""
+    pts = build.stigma_points or 0
+    if pts <= 0 or slots <= 0:
+        return 0
+    share, rank, spent = pts / slots, 1, 0
+    cap = min(gd.rank_caps[build.region]["stigma"], len(STIGMA_POINT_COST) + 1)
+    for cost in STIGMA_POINT_COST[:cap - 1]:
+        if spent + cost > share:
+            break
+        spent += cost
+        rank += 1
+    return rank
+
+
+def _community_sets(gd, scenario, pool, slots) -> list[tuple[str, ...]]:
+    """Stigma sets the community rotations for this scenario name (their stigmas that can be equipped here)."""
+    out = []
+    for cr in gd.community:
+        if cr.scenario_key == scenario.key:
+            ks = tuple(dict.fromkeys(k for k in cr.priority if k in pool))[:slots]
+            if len(ks) == slots:
+                out.append(ks)
+    return out
+
+
+JUDGE_CANDIDATES = 30  # rotation-search candidates in a set comparison (the final search uses 200)
+
+
+def _judge_sets(gd, build, scenario, cfg, budget, guide, sets, daevanion_points) -> tuple[str, ...]:
+    """The best of `sets` by a short version of the whole plan (ranks bought, Daevanion planned, specialties chosen,
+    a short rotation search): the quick score behind the stigma search cannot see what ranks, the Daevanion path and
+    specialties add to a set, and a set can win the quick score and lose the plan. The first set wins ties."""
+    jb = replace(budget, max_candidates=JUDGE_CANDIDATES, max_len=max(budget.max_len, 15))
+
+    def plan(key: tuple[str, ...]):
+        b = replace(build, stigmas=key)
+        heur = _heuristic_priority(gd, b, scenario, budget, guide)
+        if b.skill_points or b.stigma_points:
+            b = replace(b, skill_ranks=allocate_points(gd, b, heur, scenario, cfg, skip_core=True)[0])  # core ranks do not differ by set
+        cost = {n.id: n.cost for br in gd.daevanion.values() for n in br.nodes.values()}
+        take, spent = [], 0
+        for nid in plan_daevanion(gd, b, heur, scenario, cfg):
+            if daevanion_points is not None and spent + cost[nid] > daevanion_points:
+                break
+            take.append(nid)
+            spent += cost[nid]
+        b = replace(b, daevanion_nodes=frozenset(b.daevanion_nodes) | frozenset(take))
+        b = replace(b, specs=choose_specs(gd, b, heur, scenario, cfg))
+        return b, _fast_eval(gd, b, scenario, cfg, jb, (heur,))
+
+    planned = [plan(key) for key in sets]
+    # The short search is noisy (a few %), so each set is also scored under every other set's rotation (what is
+    # castable of it): the better of its own and borrowed rotations removes most of the search luck.
+    pris = [p for _b, (_d, p, _r) in planned if p is not None]
+    best = []
+    for b, (d, _p, _r) in planned:
+        castable = {e.skill_key for e in candidate_skills(gd, b)}
+        for p in pris:
+            q = Priority(tuple(e for e in p.entries if e.skill_key in castable), p.label)
+            if q.entries:
+                d = max(d, simulate(gd, b, q, scenario, cfg).dps)
+        best.append(d)
+    return sets[max(range(len(sets)), key=lambda i: (best[i], -i))]
+
+
+def _optimize_stigmas(gd, build, scenario, cfg, budget, slots, progress, guide=None, start=(), rank_aware=True):
     """Greedy forward selection plus swap passes. Returns [(key, gain_pct)] in pick order. With `start` (the picks of an
-    earlier pass) the forward selection is skipped and only the swaps run, scored against the `guide` rotation."""
+    earlier pass) the forward selection is skipped and only the swaps run, scored against the `guide` rotation.
+    A community set that scores better than the search's result replaces it. `rank_aware=False` is the plain search:
+    candidates are scored at the build's own ranks with no specialty options, and no community set is tried."""
     pool = _stigma_pool(gd, build)
     cache: dict[tuple[str, ...], float] = {}
+    plan_rank = _planned_stigma_rank(gd, build, slots) if rank_aware else 0
+
+    option_memo: dict[tuple[str, int], tuple[int, ...]] = {}
+
+    def tier_options(k: str, rank: int) -> tuple[int, ...]:
+        """Best specialty options of stigma `k` at `rank`, chosen once with the stigma alone equipped (it is the
+        stigma's own options that matter here, and choosing them per candidate set cost 4x the whole search)."""
+        if (k, rank) not in option_memo:
+            b1 = replace(build, stigmas=(k,), skill_ranks={**build.skill_ranks, k: rank})
+            heur = _heuristic_priority(gd, b1, scenario, budget, guide)
+            option_memo[(k, rank)] = choose_specs(gd, b1, heur, scenario, cfg, only={k}).get(k, ())
+        return option_memo[(k, rank)]
 
     def score(picks: tuple[str, ...]) -> float:
         key = tuple(sorted(picks))
         if key not in cache:
-            b = replace(build, stigmas=key)
-            cache[key] = _best_stigma_dps(gd, b, scenario, cfg, budget, guide)
+            # Each candidate is valued at the rank its share of the stigma points would buy: a buff stigma left at
+            # rank 1 is worth little, so scoring at the build's own ranks hid every stigma whose value is its rank.
+            ranks = {**build.skill_ranks, **{k: max(plan_rank, build.skill_ranks.get(k, 1)) for k in key if plan_rank > 1}}
+            b = replace(build, stigmas=key, skill_ranks=ranks)
+            # ... with the specialty options its tiers open: a stigma's value is often a tier option (Corrode r20's
+            # +15% damage taken), invisible to a score that equips none.
+            specs = {k: o for k in key for o in [tier_options(k, ranks.get(k, 1))] if o} if rank_aware else {}
+            cache[key] = _best_stigma_dps(gd, replace(b, specs={**b.specs, **specs}), scenario, cfg, budget, guide)
         return cache[key]
 
     picks: list[str] = list(start)
@@ -177,6 +264,9 @@ def _optimize_stigmas(gd, build, scenario, cfg, budget, slots, progress, guide=N
                 s = score(trial)
                 if s > cur * (1 + 1e-9):
                     picks[i], cur, improved = k, s, True
+    for ks in _community_sets(gd, scenario, pool, slots) if rank_aware and len(picks) == slots else []:
+        if score(ks) > cur * (1 + 1e-9):
+            picks, cur = list(ks), score(ks)
     # recompute gains in final pick order
     out, prev = [], score(())
     for n in range(1, len(picks) + 1):
@@ -441,6 +531,18 @@ def _plan_and_search(gd, build, sc, cfg, budget, slots, daevanion_points, progre
     # 1. stigmas
     start = prev["b"].stigmas if prev else ()
     picks = _optimize_stigmas(gd, build, sc, cfg, budget, slots, progress, guide, start) if slots else []
+    if picks and build.stigma_points and prev is None:  # first pass only: a repeat pass just swaps from these picks
+        # The rank-aware search can lose a set the plain one finds (its planned ranks are an equal share, the real
+        # purchase is not); when the two disagree the better of them by a short plan is used.
+        plain = _optimize_stigmas(gd, build, sc, cfg, budget, slots, None, guide, start, rank_aware=False)
+        mine, theirs = (tuple(sorted(k for k, _ in x)) for x in (picks, plain))
+        if mine == theirs:
+            picks = plain  # same set: keep the plain search's pick order, which breaks ties between equal ranks
+        else:
+            if progress:
+                progress("Comparing stigma sets")
+            if _judge_sets(gd, build, sc, cfg, budget, guide, [mine, theirs], daevanion_points) == theirs:
+                picks = plain
     b = replace(build, stigmas=tuple(k for k, _ in picks))
     heur = _heuristic_priority(gd, b, sc, budget, guide)
 

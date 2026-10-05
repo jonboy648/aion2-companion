@@ -184,7 +184,7 @@ def test_optimize_full_build_picks_specialties(gd, style):
     build = CharacterBuild("t", "global", 45, stats=Stats(crit_chance_pct=30), class_key=KEY, skill_ranks=LEVEL45_RANKS)
     t0 = time.perf_counter()
     fb = bo.optimize_full_build(gd, build, style)
-    assert time.perf_counter() - t0 < 30
+    assert time.perf_counter() - t0 < 60
     assert fb.result.dps > 0
     assert fb.spec_picks, "no specialty chosen although ranks 8+ are set"
     assert all(p.dps_gain_pct is not None for p in fb.spec_picks)

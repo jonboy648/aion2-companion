@@ -66,15 +66,18 @@ def _kinds(sk: Skill, i: int) -> set[str]:
 
 
 def choose_specs(gd: GameData, build: CharacterBuild, priority: Priority, scenario: Scenario,
-                 cfg: SimConfig = SimConfig(), progress=None) -> dict[str, tuple[int, ...]]:
+                 cfg: SimConfig = SimConfig(), progress=None, only=None) -> dict[str, tuple[int, ...]]:
     """Best specialty options per skill (skill key -> 0-based option indices). Only options that raise DPS.
 
     Pass 1 fills every skill's open slots greedily (a skill is visited when its best single option beats the DPS
     the loop started from, not the running DPS: every skill after the first used to fail that test and went bare).
     Pass 2 tries enabler + consumer pairs that pay only together (Cleric Earth Punishment tier 5 + Condemnation reset).
+    With `only` (a set of skill keys) just those skills are considered.
     """
     keys = []
     for k in _castable_keys(gd, build, priority):
+        if only is not None and k not in only:
+            continue
         sk = gd.skills[k]
         r = skill_rank(gd, build, k)
         if slots_at(gd, r) or available_options(gd, sk, r):

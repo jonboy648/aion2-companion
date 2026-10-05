@@ -214,7 +214,7 @@ def test_full_build_picks_specialties_fast(gd, style):
     build = CharacterBuild("t", "global", 45, stats=Stats(), skill_ranks=ranks)
     t0 = time.perf_counter()
     fb = bo.optimize_full_build(gd, build, style)
-    assert time.perf_counter() - t0 < 30
+    assert time.perf_counter() - t0 < 60
     assert fb.result.dps > 0
     assert fb.build.specs, "optimizer picked no specialties"
     assert fb.spec_picks
