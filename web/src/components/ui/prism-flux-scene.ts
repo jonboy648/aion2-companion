@@ -19,6 +19,9 @@ export interface PrismFluxSceneOptions {
 }
 
 export function createPrismFluxScene(host: HTMLElement, options: PrismFluxSceneOptions): PrismFluxScene {
+  const canvas = host.ownerDocument.createElement("canvas");
+  const context = canvas.getContext("webgl2", { alpha: true, antialias: true, powerPreference: "low-power" });
+  if (!context) throw new Error("WebGL is unavailable");
   const { side, size, speed, color, faceColor, onFailure } = options;
   const scene = new Scene();
   const cube = new Group();
@@ -119,7 +122,7 @@ export function createPrismFluxScene(host: HTMLElement, options: PrismFluxSceneO
     cube.rotation.set(0.45, 0.6, 0.08);
     scene.add(cube);
 
-    renderer = new WebGLRenderer({ alpha: true, antialias: true, powerPreference: "low-power" });
+    renderer = new WebGLRenderer({ canvas, context, alpha: true, antialias: true, powerPreference: "low-power" });
     renderer.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
     renderer.setSize(side, side);
     renderer.setClearColor(0x000000, 0);
