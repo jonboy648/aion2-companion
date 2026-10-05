@@ -189,7 +189,10 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant, source = "imp
           <SkillPoints fb={fb} data={data} rankedSkills={rankedSkills} manual={source === "manual"} />
         </Section>
         <Section title="Daevanion">
-          <p className="text-sm text-dim">Max-DPS path: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated DPS gain.</p>
+          {source === "manual" ? <div className="space-y-1 text-sm text-dim">
+            <p>{fb.build.daevanion_nodes.length} nodes included in this build.</p>
+            <p>Future opening order: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated path gain.</p>
+          </div> : <p className="text-sm text-dim">Max-DPS path: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated DPS gain.</p>}
         </Section>
       </div>} main={<Tabs defaultValue="overview">
       <TabsList aria-label="Build details">

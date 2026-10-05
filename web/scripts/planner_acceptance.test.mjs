@@ -111,6 +111,51 @@ describe("planner cross-runtime acceptance harness", () => {
     assert.ok(checked.issues.some(issue => /Daevanion path: BattleCrystal/.test(issue)));
   });
 
+  it("accepts full guidance with locked gates and no purchased nodes, regardless of guidance level or cost", () => {
+    const request = cases.find(row => row.id === "sorcerer-22-locked");
+    const response = responseFor(request);
+    const gd = gdByClass.sorcerer;
+    const board = Object.values(gd.daevanion).find(board => board.currency === "daevanion");
+    const node = Object.values(board.nodes).find(node => node.cost > 0);
+    const futureGd = { ...gd, daevanion: { ...gd.daevanion, [board.key]: { ...board, unlock_level: 45 } } };
+    response.result.daevanion_path = [node.id];
+    assert.equal(request.budget.daevanion, 0);
+    assert.deepEqual(response.result.build.daevanion_nodes, []);
+    assert.deepEqual(checkCase(request, response, futureGd, helpers), { issues: [], plansChecked: 2 });
+  });
+
+  it("still rejects purchased nodes with a locked quest gate in main and variant builds", () => {
+    const request = cases.find(row => row.id === "sorcerer-22-locked");
+    const response = responseFor(request);
+    const board = Object.values(gdByClass.sorcerer.daevanion).find(board => board.currency === "daevanion" && board.unlock_level <= 22);
+    const node = Object.values(board.nodes).find(node => node.cost > 0);
+    response.result.daevanion_path = [node.id];
+    response.result.build.daevanion_nodes = [node.id];
+    response.result.variants[0].build.daevanion_nodes = [node.id];
+    const checked = checkCase(request, response, gdByClass.sorcerer, helpers);
+    assert.ok(checked.issues.some(issue => /main: nodes: Daevanion quest gate is locked/.test(issue)));
+    assert.ok(checked.issues.some(issue => /variant max: nodes: Daevanion quest gate is locked/.test(issue)));
+    assert.ok(checked.issues.some(issue => /main: Daevanion plan costs/.test(issue)));
+    assert.ok(checked.issues.some(issue => /variant max: Daevanion plan costs/.test(issue)));
+    assert.ok(!checked.issues.some(issue => issue.startsWith("Daevanion path:")));
+  });
+
+  it("rejects unrecognized guidance nodes even when no nodes are purchased", () => {
+    const request = cases.find(row => row.id === "sorcerer-22-locked");
+    const response = responseFor(request);
+    response.result.daevanion_path = [-1];
+    assert.deepEqual(checkCase(request, response, gdByClass.sorcerer, helpers).issues, ["Daevanion path: unknown node -1"]);
+  });
+
+  it("rejects BattleCrystal guidance with a zero battle budget independently of purchases", () => {
+    const request = cases.find(row => row.id === "sorcerer-22-locked");
+    const response = responseFor(request);
+    const board = Object.values(gdByClass.sorcerer.daevanion).find(board => board.currency === "battle");
+    response.result.daevanion_path = [board.start_id];
+    assert.deepEqual(checkCase(request, response, gdByClass.sorcerer, helpers).issues,
+      [`Daevanion path: BattleCrystal node ${board.start_id} with zero battle budget`]);
+  });
+
   it("reports missing/duplicate responses and engine exceptions", () => {
     const request = cases[0];
     assert.equal(checkResponses([request], [], gdByClass, helpers).passed, false);

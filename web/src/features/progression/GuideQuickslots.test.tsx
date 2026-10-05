@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import cmpFx from "@/fixtures/compare.json";
@@ -5,6 +6,7 @@ import gdFx from "@/fixtures/gamedata_sorcerer.json";
 import kbFx from "@/fixtures/keybinds.json";
 import type { ClassData } from "@/features/build/useClassData";
 import { hashBuild } from "@/features/keybinds/activeBuild";
+import { KEY_ROWS } from "@/features/keybinds/Hotbar";
 import { useKeybindPlan } from "@/features/keybinds/useKeybindPlan";
 import type { CompareResult, GameData, KeybindsResult } from "@/lib/types";
 import { GuideQuickslots } from "./GuideQuickslots";
@@ -122,6 +124,110 @@ describe("GuideQuickslots", () => {
     expect(kb.setHotkey).toHaveBeenCalledWith("leveling", "F12");
   });
 
+  it("shows one twelve-key strip with four stack cells and keeps extra engine keys separate", () => {
+    kb.result = { ...result, plan: { ...result.plan, stacks: [
+      ...result.plan.stacks,
+      { key_label: "A", stack: [skillKeys[1]] },
+    ] } };
+    render(<GuideQuickslots fb={builds.leveling} data={data} />);
+    const strip = screen.getByRole("region", { name: "Quickslot keys" });
+    const keys = within(strip).getAllByRole("button");
+    expect(keys.map((key) => key.textContent?.slice(0, 1))).toEqual(KEY_ROWS[0]);
+    for (const key of keys) {
+      const cells = [...key.querySelectorAll<HTMLElement>("[data-priority]")];
+      expect(cells.map((cell) => cell.dataset.priority)).toEqual(["3", "2", "1", "0"]);
+      expect(cells[0].parentElement).toHaveStyle({ gridTemplateRows: "repeat(4, 41px)" });
+    }
+    const stylesheet = document.createElement("style");
+    stylesheet.textContent = readFileSync("src/features/progression/guide-quickslots.css", "utf8");
+    document.head.append(stylesheet);
+    try {
+      const cell = keys[0].querySelector<HTMLElement>("[data-priority]")!;
+      expect(getComputedStyle(cell).width).toBe("41px");
+      expect(getComputedStyle(cell).height).toBe("41px");
+      expect(getComputedStyle(cell).borderRadius).toBe("4px");
+      expect(getComputedStyle(cell.parentElement!).gap).toBe("4px");
+      expect(getComputedStyle(strip.firstElementChild!).gap).toBe("4px");
+    } finally {
+      stylesheet.remove();
+    }
+    const extra = screen.getByRole("group", { name: "Other assigned keys" });
+    fireEvent.click(within(extra).getByRole("button", { name: `Key A: ${names[1]}` }));
+    expect(within(screen.getByRole("list", { name: "Key A skills" })).getByText(names[1])).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Show letter keys/ })).not.toBeInTheDocument();
+    expect(screen.queryByText(/QuickUse/)).not.toBeInTheDocument();
+  });
+
+  it("keeps macro entry order, real key mappings, efficiency and separate hand presses visible", () => {
+    kb.result = { ...result, plan: {
+      ...result.plan,
+      stacks: [
+        { key_label: "1", stack: [skillKeys[0]] },
+        { key_label: "2", stack: [skillKeys[0]] },
+        { key_label: "=", stack: [skillKeys[1]] },
+      ],
+      macros: [
+        ...result.plan.macros.filter((macro) => macro.name !== "Leveling loop"),
+        { name: "Leveling loop", hotkey: "F11", entries: [
+          { index: 1, key_label: "2", delay_ms: 15 },
+          { index: 2, key_label: "1", delay_ms: 25 },
+        ] },
+      ],
+      macro_dps: { "Leveling loop": 1000 },
+      ideal_dps: { level_pull: 2000 },
+      hybrid_dps: { "Leveling loop": 1500 },
+      manual_every_s: { [skillKeys[1]]: 47 },
+      macro_advice: { "Leveling loop": "Use a hybrid: hold the macro and press the charge skill by hand." },
+    } };
+    render(<GuideQuickslots fb={builds.leveling} data={data} />);
+    const macro = screen.getByRole("region", { name: "Leveling loop" });
+    const entries = within(macro).getByRole("list", { name: "Leveling loop entries" });
+    const rows = within(entries).getAllByRole("listitem");
+    expect(rows).toHaveLength(2);
+    expect(rows[0]).toHaveAttribute("title", `1. press key 2 (${names[0]}), delay 15 ms`);
+    expect(rows[1]).toHaveAttribute("title", `2. press key 1 (${names[0]}), delay 25 ms`);
+    for (const row of rows) expect(within(row).getByText(names[0])).toBeInTheDocument();
+    expect(within(macro).getByText("~50% of ideal")).toBeInTheDocument();
+    expect(within(macro).getByTestId("hybrid-line")).toHaveTextContent("75% of ideal");
+    expect(within(macro).getByTestId("macro-advice")).toHaveTextContent("press the charge skill by hand");
+    expect(screen.getByText(/only while its key is held/)).toBeInTheDocument();
+    const manual = screen.getByRole("region", { name: "Press by hand" });
+    expect(within(manual).getByText(names[1])).toBeInTheDocument();
+    expect(within(manual).getByText("key =")).toBeInTheDocument();
+    expect(within(manual).getByText("~every 47 s")).toBeInTheDocument();
+    expect(macro).not.toContainElement(manual);
+    expect(macro).not.toHaveClass("frame");
+    for (const row of within(manual).getAllByRole("listitem")) expect(row).not.toHaveClass("frame");
+  });
+
+  it("marks only real filled manual and selected-macro cells with manual taking precedence", () => {
+    kb.result = { ...result, plan: {
+      ...result.plan,
+      stacks: [
+        { key_label: "1", stack: [skillKeys[0], skillKeys[1]] },
+        { key_label: "2", stack: [skillKeys[0]] },
+        { key_label: "3", stack: [skillKeys[1]] },
+      ],
+      macros: [
+        { name: "Leveling loop", hotkey: "F11", entries: [{ index: 1, key_label: "1", delay_ms: 10 }] },
+        { name: "Boss loop", hotkey: "F9", entries: [{ index: 1, key_label: "2", delay_ms: 10 }] },
+      ],
+      manual_every_s: { [skillKeys[1]]: 47 },
+    } };
+    render(<GuideQuickslots fb={builds.leveling} data={data} />);
+    const strip = screen.getByRole("region", { name: "Quickslot keys" });
+    const cells = (label: string) => [...within(strip).getByRole("button", { name: new RegExp(`^Key ${label}:`) }).querySelectorAll<HTMLElement>("[data-priority]")];
+    const key1 = cells("1");
+    expect(key1[2]).toHaveClass("guide-quickslots-cell-manual");
+    expect(key1[2]).not.toHaveClass("guide-quickslots-cell-macro");
+    expect(key1[3]).toHaveClass("guide-quickslots-cell-macro");
+    for (const cell of key1.slice(0, 2)) expect(cell).not.toHaveClass("guide-quickslots-cell-manual", "guide-quickslots-cell-macro");
+    expect(cells("2")[3]).not.toHaveClass("guide-quickslots-cell-macro");
+    expect(cells("3")[3]).toHaveClass("guide-quickslots-cell-manual");
+    expect(screen.getByText("By hand")).toHaveClass("text-gold");
+    expect(screen.getByText("In macro")).toHaveClass("text-cyan");
+  });
+
   it("makes every stale control inert and disabled and blocks preference callbacks", () => {
     render(<GuideQuickslots fb={builds.leveling} data={data} disabled />);
     const section = screen.getByRole("region", { name: "Quickslots and macro" });
@@ -134,6 +240,8 @@ describe("GuideQuickslots", () => {
     for (const button of within(section).getAllByRole("button")) expect(button).toBeDisabled();
     fireEvent.change(delay, { target: { value: "25" } });
     fireEvent.change(hotkey, { target: { value: "F12" } });
+    fireEvent.click(within(section).getByRole("button", { name: `Key 2: ${names.join(", then ")}` }));
+    expect(screen.getByRole("list", { name: "Key 1 skills" })).toBeInTheDocument();
     expect(kb.setDelayMs).not.toHaveBeenCalled();
     expect(kb.setHotkey).not.toHaveBeenCalled();
   });
@@ -178,5 +286,7 @@ describe("GuideQuickslots", () => {
     expect(planned?.scenario).toBe("aoe_pack");
     expect(planned?.priority).toBe(builds.aoe.priority);
     expect(planned?.buildHash).toBe(hashBuild(build));
+    expect(screen.getByRole("region", { name: "AoE loop" })).toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Boss loop" })).not.toBeInTheDocument();
   });
 });

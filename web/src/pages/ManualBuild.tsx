@@ -43,7 +43,6 @@ function planIssues(fb: FullBuild, input: CharacterBuild, selected: PlaystyleKey
     issues.push(...validateLevelPlan(plan, budget, stigmaUnlocked, gd));
     if (!daevanionUnlocked && plan.daevanion_nodes.length) issues.push("Daevanion requires its unlock quest.");
   }
-  if (!daevanionUnlocked && fb.daevanion_path.length) issues.push("Daevanion requires its unlock quest.");
   return [...new Set(issues)];
 }
 
@@ -123,6 +122,7 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
     navigate("/keybinds");
   };
   const info = classes.data?.find((c) => c.key === classKey);
+  const IdentityHeading = guideClass ? "h1" : "h2";
   const previewLevel = levelBudget(Number(form.level))?.level;
   const settings = { level: form.level, levelCap,
     onLevel: (level: string) => { invalidate(); setForm((f) => ({ ...f, level })); },
@@ -152,7 +152,7 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
       </div>
       <header className="planner-identity">
         {info && <img src={import.meta.env.BASE_URL + "brand/classes/" + info.key + "-320.webp"} alt="" width={88} height={88} />}
-        <div><h2>{info?.name ?? classKey} {guideClass ? "class guide" : "build"}</h2>
+        <div><IdentityHeading>{info?.name ?? classKey} {guideClass ? "class guide" : "build"}</IdentityHeading>
           <p>{info?.role && ROLE_LABEL[info.role]}<span className="mx-2 text-faint">/</span>Global</p></div>
         <span className="planner-level-label">Level {previewLevel ?? "-"}</span>
       </header>
@@ -166,42 +166,50 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
       </div>
       {data.error && <p role="alert" className="my-4 text-sm text-error">Could not load class data: {data.error}</p>}
       {!ready && !data.error && <p role="status" className="my-4 text-sm text-dim">Loading class data...</p>}
-      <AdvancedStats className="planner-layout" main={<div className="planner-main">
-        {ready && previewLevel && data.gd && <GuideSkills gd={data.gd} icons={data.icons} level={previewLevel} />}
-        {busy && <div>
+      <form id={formId} onSubmit={onSubmit} noValidate className="planner-settings">
+        <div className="planner-settings-section"><h2><SlidersHorizontal size={16} aria-hidden />Unlocked systems</h2><ProgressionSettings {...settings} /></div>
+        <div className="planner-settings-section"><h2>Combat stats</h2>
+          <div className="grid grid-cols-2 gap-3">{STAT_FIELDS.filter((f) => ["attack", "max_mp"].includes(f.key)).map(statField)}</div>
+          <details className="mt-3"><summary>More combat stats</summary>
+            <div className="mt-3 grid grid-cols-2 gap-3">{STAT_FIELDS.filter((f) => !["attack", "max_mp"].includes(f.key)).map(statField)}</div></details>
+        </div>
+        {!guideClass && <div className="planner-settings-section" role="group" aria-label="Race"><h2>Faction</h2>
+          <div className="flex flex-wrap gap-2">{(["elyos", "asmodian"] as const).map((r) => <Button key={r} type="button" size="sm" className="gap-1.5 capitalize"
+            variant={race === r ? "default" : "secondary"} aria-pressed={race === r} onClick={() => { invalidate(); setRace(race === r ? "" : r); }}>
+            <FactionEmblem faction={r} size={18} />{r}</Button>)}</div>
+        </div>}
+      </form>
+      {busy && <div className="planner-progress">
           <ProgressPanel title={running?.key !== inputKey ? "Finishing previous calculation" : "Calculating " + running.label + " plan"} message={message} />
           {running?.key !== inputKey && <p className="mt-2 text-xs text-dim">Inputs changed. Calculate again once this search finishes.</p>}
-        </div>}
-        {errors.length > 0 && <div role="alert" className="planner-errors">
+      </div>}
+      {errors.length > 0 && <div role="alert" className="planner-errors">
           <p>{errors[0]}</p>
           {errors.length > 1 && <details><summary>Validation details ({errors.length - 1})</summary>
             <ul className="mt-2 list-disc space-y-1 pl-5">{errors.slice(1).map((error) => <li key={error}>{error}</li>)}</ul></details>}
-        </div>}
-        {plan && sameClass && <section aria-label="Calculated build plan" className="planner-result">
+      </div>}
+      <section aria-label="Skills and quickslots">
+        <AdvancedStats className="planner-layout" main={<div className="planner-main">
+          {ready && previewLevel && data.gd && <GuideSkills gd={data.gd} icons={data.icons} level={previewLevel}
+            plannedBuild={plan && sameClass && !stale && !busy && dpsVariant ? plan.fb.build : undefined} />}
+        </div>} supporting={plan && sameClass ? <div className="planner-slot-column">
           <div className="planner-plan-heading"><h2>{plan.fb.playstyle.name} / Level {plan.fb.build.level}</h2>
             {(stale || busy) && <span role="status">Out of date</span>}</div>
           {(stale || busy) && <p className="mb-4 text-sm text-dim">Previous plan. Recalculate for the current inputs before using it.</p>}
           {!dpsVariant && <p className="mb-4 text-sm text-dim">Select the DPS arrangement to use its quickslots and macro.</p>}
           <GuideQuickslots fb={plan.fb} data={data} disabled={stale || busy || !dpsVariant} />
-          <div className="planner-analysis">
+        </div> : <section aria-label="Quickslots and macro" className="planner-empty-plan">
+          <h2>Quickslots &amp; Macro</h2>
+          <p>No calculated plan</p>
+        </section>} />
+      </section>
+      {plan && sameClass && <section aria-label="Calculated build plan" className="planner-analysis">
+          <h2 className="planner-analysis-title">Build analysis <span>{plan.fb.playstyle.name} / Level {plan.fb.build.level}</span></h2>
+          <div>
             <SingleBuildResults key={plan.id} fb={plan.fb} data={data} onUsePlan={usePlan} disabled={stale || busy}
               onVariantChange={(value) => setVariant({ id: plan.id, value })} />
           </div>
-        </section>}
-      </div>} supporting={<form id={formId} onSubmit={onSubmit} noValidate className="planner-settings">
-        <h2><SlidersHorizontal size={17} aria-hidden />Build settings</h2>
-        <div className="planner-settings-section"><h3>Unlocked systems</h3><ProgressionSettings {...settings} /></div>
-        <div className="planner-settings-section"><h3>Combat stats</h3>
-          <div className="grid grid-cols-2 gap-3">{STAT_FIELDS.filter((f) => ["attack", "max_mp"].includes(f.key)).map(statField)}</div>
-          <details className="mt-4"><summary>More combat stats</summary>
-            <div className="mt-3 grid grid-cols-2 gap-3">{STAT_FIELDS.filter((f) => !["attack", "max_mp"].includes(f.key)).map(statField)}</div></details>
-        </div>
-        {!guideClass && <div className="planner-settings-section" role="group" aria-label="Race"><h3>Faction</h3>
-          <div className="flex flex-wrap gap-2">{(["elyos", "asmodian"] as const).map((r) => <Button key={r} type="button" size="sm" className="gap-1.5 capitalize"
-            variant={race === r ? "default" : "secondary"} aria-pressed={race === r} onClick={() => { invalidate(); setRace(race === r ? "" : r); }}>
-            <FactionEmblem faction={r} size={18} />{r}</Button>)}</div>
-        </div>}
-      </form>} />
+      </section>}
     </div>
   );
 }

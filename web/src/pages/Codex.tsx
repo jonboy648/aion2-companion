@@ -15,7 +15,7 @@ export function CodexPage() {
   }, [params]);
   return (
     <>
-      <PageHeader title="Codex" caption="Class guides, skills, stigmas and rank tables." />
+      {view === "skills" && <PageHeader title="Codex" caption="Class guides, skills, stigmas and rank tables." />}
       <Tabs value={view} onValueChange={setView}>
         <TabsList aria-label="Codex sections" className="mb-5">
           <TabsTrigger value="guide" className="inline-flex items-center gap-2"><Compass size={17} aria-hidden /> Class guide</TabsTrigger>

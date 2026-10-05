@@ -23,6 +23,9 @@ function KeyCap({
   icons,
   gd,
   onClick,
+  compact = false,
+  manualSkills = [],
+  macroKeys = [],
 }: {
   label: string;
   stack: string[];
@@ -31,6 +34,9 @@ function KeyCap({
   icons: IconUrls;
   gd: GameData | null;
   onClick: () => void;
+  compact?: boolean;
+  manualSkills?: string[];
+  macroKeys?: string[];
 }) {
   const filled = stack.length > 0;
   return (
@@ -40,7 +46,8 @@ function KeyCap({
       aria-pressed={selected}
       aria-label={`Key ${label}: ${filled ? stack.map((s) => nameOf(gd, s)).join(", then ") : "empty"}`}
       className={cn(
-        "flex h-[164px] w-[46px] shrink-0 flex-col items-center gap-1 rounded-md border p-1 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan",
+        "flex shrink-0 flex-col items-center text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan",
+        compact ? "guide-quickslots-key" : "h-[164px] w-[46px] gap-1 rounded-md border p-1",
         selected ? "border-gold bg-surface3 shadow-[0_0_0_1px_var(--gold)]" : "border-border bg-surface2 hover:border-gold-lo hover:bg-surface3",
         !filled && !selected && "border-dashed bg-surface/60",
       )}
@@ -49,7 +56,7 @@ function KeyCap({
         {label}
         {pinned && <Pin aria-hidden className="size-3 text-cyan" />}
       </span>
-      <span className="grid w-full gap-0.5" style={{ gridTemplateRows: "repeat(4, 32px)" }}>
+      <span className={compact ? "guide-quickslots-stack" : "grid w-full gap-0.5"} style={{ gridTemplateRows: `repeat(4, ${compact ? 41 : 32}px)` }}>
         {[3, 2, 1, 0].map((priority) => {
           const skill = stack[priority];
           return (
@@ -59,12 +66,14 @@ function KeyCap({
               data-skill={skill ?? ""}
               title={`Priority ${priority}: ${skill ? nameOf(gd, skill) : "empty"}`}
               className={cn(
-                "relative grid h-8 w-full place-items-center rounded-sm border",
+                "relative grid place-items-center border",
+                compact ? "guide-quickslots-cell" : "h-8 w-full rounded-sm",
+                compact && skill && (manualSkills.includes(skill) ? "guide-quickslots-cell-manual" : macroKeys.includes(label) && "guide-quickslots-cell-macro"),
                 skill ? "border-border-soft bg-surface" : "border-dashed border-border-soft/60 bg-surface/40",
                 priority === 0 && skill && "border-gold-lo",
               )}
             >
-              {skill && <SkillIcon url={icons[skill]} name={nameOf(gd, skill)} size={28} rarity="common" />}
+              {skill && <SkillIcon url={icons[skill]} name={nameOf(gd, skill)} size={compact ? 37 : 28} rarity="common" />}
               <span aria-hidden className={cn("absolute bottom-0 right-0 bg-surface/90 px-0.5 text-[8px] leading-tight", priority === 0 ? "text-gold" : "text-faint")}>
                 {priority}
               </span>
@@ -83,6 +92,9 @@ export function Hotbar({
   pins,
   selected,
   onSelect,
+  compact = false,
+  manualSkills = [],
+  macroKeys = [],
 }: {
   gd: GameData | null;
   icons: IconUrls;
@@ -90,11 +102,61 @@ export function Hotbar({
   pins: Record<string, string>;
   selected: string;
   onSelect: (label: string) => void;
+  compact?: boolean;
+  manualSkills?: string[];
+  macroKeys?: string[];
 }) {
   const byLabel = useMemo(() => Object.fromEntries(stacks.map((s) => [s.key_label, s.stack])), [stacks]);
   const letterUsed = [...stacks.map((s) => s.key_label), ...Object.keys(pins)].some((l) => /^[A-Z]$/.test(l));
   const [showLetters, setShowLetters] = useState(false);
   const rows = showLetters || letterUsed ? KEY_ROWS : KEY_ROWS.slice(0, 1);
+  if (compact) {
+    const extraLabels = [...new Set([...stacks.map((s) => s.key_label), ...Object.keys(pins)])]
+      .filter((label) => !KEY_ROWS[0].includes(label));
+    return (
+      <div className="min-w-0 max-w-full">
+        <div role="region" aria-label="Quickslot keys" tabIndex={0} className="guide-quickslots-scroll max-w-full overflow-x-auto overscroll-x-contain focus-visible:outline-2 focus-visible:outline-cyan">
+          <div className="guide-quickslots-strip">
+            {KEY_ROWS[0].map((label) => (
+              <KeyCap
+                key={label}
+                label={label}
+                stack={byLabel[label] ?? (pins[label] ? [pins[label]] : [])}
+                pinned={label in pins}
+                selected={selected === label}
+                icons={icons}
+                gd={gd}
+                onClick={() => onSelect(label)}
+                compact
+                manualSkills={manualSkills}
+                macroKeys={macroKeys}
+              />
+            ))}
+          </div>
+        </div>
+        {extraLabels.length > 0 && (
+          <div className="guide-quickslots-extra" role="group" aria-label="Other assigned keys">
+            {extraLabels.map((label) => {
+              const stack = byLabel[label] ?? (pins[label] ? [pins[label]] : []);
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  aria-pressed={selected === label}
+                  aria-label={`Key ${label}: ${stack.map((skill) => nameOf(gd, skill)).join(", then ") || "empty"}`}
+                  onClick={() => onSelect(label)}
+                  className="flex min-w-0 items-center gap-2 text-left text-xs focus-visible:outline-2 focus-visible:outline-cyan"
+                >
+                  <kbd className="shrink-0 text-gold">{label}</kbd>
+                  <span className="min-w-0 break-words">{stack.map((skill) => nameOf(gd, skill)).join(", then ") || "No skills assigned"}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  }
   return (
     <div className="min-w-0 max-w-full">
       <div role="region" aria-label="Quickslot keys" tabIndex={0} className="max-w-full overflow-x-auto overscroll-x-contain pb-2 focus-visible:outline-2 focus-visible:outline-cyan">

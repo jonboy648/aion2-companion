@@ -8,6 +8,7 @@ import { MACRO_META, MacroPanel } from "@/features/keybinds/MacroPanel";
 import { SkillIcon } from "@/features/keybinds/SkillIcon";
 import { useKeybindPlan } from "@/features/keybinds/useKeybindPlan";
 import type { FullBuild } from "@/lib/types";
+import "./guide-quickslots.css";
 
 type Props = { fb: FullBuild; data: ClassData; disabled?: boolean };
 
@@ -15,7 +16,7 @@ export function GuideQuickslots(props: Props) {
   const scenario = props.fb.playstyle.scenario.key;
   if (!MACRO_SCENARIOS.includes(scenario as MacroScenario)) {
     return (
-      <section aria-label="Quickslots" className="min-w-0 space-y-3">
+      <section aria-label="Quickslots" className="guide-quickslots min-w-0 space-y-3">
         <h2 className="text-base font-semibold">Quickslots</h2>
         <p className="text-sm text-dim">Macros are not modeled for this playstyle yet.</p>
       </section>
@@ -49,8 +50,8 @@ function SupportedQuickslots({ fb, data, disabled = false }: Props) {
   } : null;
 
   return (
-    <section aria-label="Quickslots and macro" aria-disabled={disabled} inert={disabled} className="min-w-0 space-y-5">
-      <fieldset disabled={disabled} className="min-w-0 space-y-5 border-0 p-0">
+    <section aria-label="Quickslots and macro" aria-disabled={disabled} inert={disabled} className="guide-quickslots min-w-0">
+      <fieldset disabled={disabled} className="guide-quickslots-sections min-w-0 border-0 p-0">
         <section aria-label="Quickslots" className="min-w-0 space-y-3">
           <h2 className="text-base font-semibold">Quickslots</h2>
           <p className="text-xs text-faint">Suggested key stacks. Fixed and contextual in-game slot restrictions are not yet verified.</p>
@@ -72,7 +73,14 @@ function SupportedQuickslots({ fb, data, disabled = false }: Props) {
             </div>
           ) : (
             <>
+              <div className="guide-quickslots-legend" aria-label="Quickslot legend">
+                <span className="text-gold"><span aria-hidden className="bg-gold" />By hand</span>
+                <span className="text-cyan"><span aria-hidden className="bg-cyan" />In macro</span>
+              </div>
               <Hotbar
+                compact
+                manualSkills={Object.keys(plan.manual_every_s)}
+                macroKeys={macroPlan?.macros.flatMap((macro) => macro.entries.map((entry) => entry.key_label)) ?? []}
                 gd={gd}
                 icons={icons}
                 stacks={plan.stacks}
@@ -80,14 +88,14 @@ function SupportedQuickslots({ fb, data, disabled = false }: Props) {
                 selected={selected}
                 onSelect={(label) => { if (!disabled) setSelected(label); }}
               />
-              <div className="space-y-2">
+              <div className="guide-quickslots-detail space-y-2">
                 <h3 className="text-sm font-semibold">Key {selected}</h3>
                 {stack.length ? (
-                  <ol aria-label={`Key ${selected} skills`} className="space-y-1.5">
+                  <ol aria-label={`Key ${selected} skills`} className="guide-quickslots-skills">
                     {stack.map((skill) => (
                       <li key={skill} className="flex items-center gap-2 text-sm">
                         <SkillIcon url={icons[skill]} name={gd?.skills[skill]?.name ?? skill} size={28} />
-                        <span>{gd?.skills[skill]?.name ?? skill}</span>
+                        <span className="min-w-0 break-words">{gd?.skills[skill]?.name ?? skill}</span>
                       </li>
                     ))}
                   </ol>
@@ -101,6 +109,7 @@ function SupportedQuickslots({ fb, data, disabled = false }: Props) {
           <h2 className="text-base font-semibold">Macro</h2>
           {macroPlan && (
             <MacroPanel
+              compact
               plan={macroPlan}
               gd={gd}
               icons={icons}

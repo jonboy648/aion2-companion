@@ -1,0 +1,26 @@
+.guide-skills { min-width: 0; }
+.guide-skills-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.guide-skills-row {
+  display: flex;
+  box-sizing: border-box;
+  height: 50px;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--metal) 20%, transparent);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 150ms, color 150ms;
+}
+.guide-skills-row:hover { border-color: color-mix(in srgb, var(--cyan) 50%, transparent); color: var(--cyan); }
+.guide-skills-row:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.guide-skills-row > .icon-frame { flex-shrink: 0; }
+.guide-skills-copy { flex: 1; min-width: 0; }
+.guide-skills-name, .guide-skills-metadata { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.guide-skills-name { font-size: 14px; font-weight: 500; line-height: 18px; }
+.guide-skills-metadata { font-size: 12px; line-height: 14px; color: var(--text-dim); }
+.guide-skills-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; max-width: 40%; }
+.guide-skills-badge { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-radius: 3px; padding: 0 4px; background: color-mix(in srgb, var(--gold) 10%, var(--surface)); color: var(--gold-hi); font-size: 10px; line-height: 14px; }
+.guide-skills-specialties { background: color-mix(in srgb, var(--cyan) 10%, var(--surface)); color: var(--cyan); }

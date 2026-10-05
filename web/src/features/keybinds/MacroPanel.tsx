@@ -53,6 +53,7 @@ export function MacroPanel({
   onHotkey,
   delayMs,
   onDelay,
+  compact = false,
 }: {
   plan: KeybindPlan;
   gd: GameData | null;
@@ -60,14 +61,15 @@ export function MacroPanel({
   onHotkey: (which: MacroHotkey, key: string) => void;
   delayMs: number;
   onDelay: (n: number) => void;
+  compact?: boolean;
 }) {
   const topSkill = (label: string) => plan.stacks.find((s) => s.key_label === label)?.stack[0];
   const nameOf = (k?: string) => (k ? gd?.skills[k]?.name ?? k : "");
   const slotOf = (skill: string) => plan.stacks.find((s) => s.stack.includes(skill))?.key_label;
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
+    <div className={compact ? "guide-macro-panel" : "space-y-5"}>
+      <div className={compact ? "guide-macro-controls" : "flex flex-wrap items-end gap-x-6 gap-y-3"}>
         <label className="text-xs text-dim">
           <span className="mb-1 block">Delay between presses (ms)</span>
           <input
@@ -90,7 +92,7 @@ export function MacroPanel({
         const meta = MACRO_META[m.name as keyof typeof MACRO_META];
         const eff = macroEfficiency(plan, m);
         return (
-          <section key={m.name} aria-label={m.name} className="frame p-3.5">
+          <section key={m.name} aria-label={m.name} className={compact ? "guide-macro" : "frame p-3.5"}>
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-[15px] font-semibold">{m.name}</h3>
               {meta && <span className="text-xs text-faint">{meta.label}</span>}
@@ -117,19 +119,20 @@ export function MacroPanel({
             {m.entries.length === 0 ? (
               <p className="mt-3 text-sm text-faint">No entries: nothing in this rotation can run from a macro.</p>
             ) : (
-              <ol className="mt-3 flex flex-wrap gap-1.5" aria-label={`${m.name} entries`}>
+              <ol className={compact ? "guide-macro-entries" : "mt-3 flex flex-wrap gap-1.5"} aria-label={`${m.name} entries`}>
                 {m.entries.map((e) => {
                   const sk = topSkill(e.key_label);
                   return (
                     <li
                       key={e.index}
-                      title={`${e.index}. press slot ${e.key_label}${sk ? ` (${nameOf(sk)})` : ""}, delay ${e.delay_ms} ms`}
-                      className="flex items-center gap-1.5 rounded-md border border-border bg-surface px-1.5 py-1"
+                      title={`${e.index}. press ${compact ? "key" : "slot"} ${e.key_label}${sk ? ` (${nameOf(sk)})` : ""}, delay ${e.delay_ms} ms`}
+                      className={compact ? "guide-macro-entry" : "flex items-center gap-1.5 rounded-md border border-border bg-surface px-1.5 py-1"}
                     >
                       <span className="w-4 text-center text-[10px] text-faint">{e.index}</span>
-                      <SkillIcon url={sk ? icons[sk] : null} name={nameOf(sk) || e.key_label} size={22} />
+                      <SkillIcon url={sk ? icons[sk] : null} name={nameOf(sk) || e.key_label} size={compact ? 28 : 22} />
+                      {compact && <span className="min-w-0 break-words text-sm">{nameOf(sk) || `Key ${e.key_label}`}</span>}
                       <span className="text-xs font-semibold text-gold">{e.key_label}</span>
-                      <span className="text-[10px] text-faint">{e.delay_ms}ms</span>
+                      <span className="whitespace-nowrap text-[10px] text-faint">{e.delay_ms}ms</span>
                     </li>
                   );
                 })}
@@ -145,7 +148,7 @@ export function MacroPanel({
                 </p>
               )}
               {plan.macro_advice?.[m.name] && (
-                <p className="mt-2 rounded-md border border-[var(--metal-lo)] bg-gold/10 px-3 py-2 text-xs text-foreground" data-testid="macro-advice">
+                <p className={compact ? "mt-2 text-xs text-dim" : "mt-2 rounded-md border border-[var(--metal-lo)] bg-gold/10 px-3 py-2 text-xs text-foreground"} data-testid="macro-advice">
                   {plan.macro_advice[m.name]}
                 </p>
               )}
@@ -157,12 +160,12 @@ export function MacroPanel({
       {Object.keys(plan.manual_every_s).length > 0 && (
         <section aria-label="Press by hand">
           <h3 className="mb-2 text-sm font-semibold">Press by hand (not in any macro)</h3>
-          <ul className="grid gap-1.5 sm:grid-cols-2">
+          <ul className={compact ? "guide-macro-manual" : "grid gap-1.5 sm:grid-cols-2"}>
             {Object.entries(plan.manual_every_s).map(([sk, s]) => (
-              <li key={sk} className="flex items-center gap-2.5 frame px-2.5 py-1.5 text-sm">
+              <li key={sk} className={compact ? "guide-macro-manual-entry" : "flex items-center gap-2.5 frame px-2.5 py-1.5 text-sm"}>
                 <SkillIcon url={icons[sk]} name={nameOf(sk)} size={28} />
-                <span className="min-w-0 flex-1 truncate">{nameOf(sk)}</span>
-                <Badge tone="neutral">key {slotOf(sk) ?? "?"}</Badge>
+                <span className={compact ? "min-w-0 break-words" : "min-w-0 flex-1 truncate"}>{nameOf(sk)}</span>
+                {compact ? <span className="text-xs text-gold">{slotOf(sk) ? `key ${slotOf(sk)}` : "unassigned"}</span> : <Badge tone="neutral">key {slotOf(sk) ?? "?"}</Badge>}
                 <span className="whitespace-nowrap text-xs text-estimated">~every {Math.round(s)} s</span>
               </li>
             ))}

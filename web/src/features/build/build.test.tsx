@@ -92,6 +92,12 @@ describe("BuildResults", () => {
     expect(screen.getByTestId("plan-dps")).toHaveTextContent("Best build with your gear");
   });
 
+  it("distinguishes future Daevanion guidance from nodes included in a manual plan", () => {
+    render(<SingleBuildResults fb={{ ...cmp.boss, build: { ...cmp.boss.build, daevanion_nodes: [] }, daevanion_path: [6101] }} data={{ gd: null, icons: {} }} onUsePlan={() => {}} />);
+    expect(screen.getByText("0 nodes included in this build.")).toBeInTheDocument();
+    expect(screen.getByText(/Future opening order: 1 nodes/)).toBeInTheDocument();
+  });
+
   it("switches playstyle and applies a trade-off variant", async () => {
     render(<BuildResults cmp={cmp} data={{ gd: null, icons: {} }} />);
     expect(screen.getByRole("tab", { name: /Boss DPS/ })).toHaveAttribute("aria-selected", "true");

@@ -24,8 +24,8 @@ describe("app shell", () => {
   it.each([
     ["/build", "Manual build"],
     ["/daevanion", "Daevanion"],
-    ["/codex", "Codex"],
-    ["/codex/assassin", "Codex"],
+    ["/codex", /sorcerer class guide/i],
+    ["/codex/assassin", /assassin class guide/i],
     ["/keybinds", "Keybinds and macros"],
     ["/crafting", "Crafting"],
     ["/roadmap", "Road map"],

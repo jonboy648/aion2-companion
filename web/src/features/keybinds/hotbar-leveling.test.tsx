@@ -30,6 +30,18 @@ describe("vertical quickslots", () => {
     expect(skills("3")).toEqual(["", "", "", ""]);
   });
 
+  it("preserves the default Keybinds hotbar when compact is omitted or false", () => {
+    const props = { gd: null, icons: {}, stacks: [{ key_label: "1", stack: ["first"] }], pins: {}, selected: "1", onSelect: vi.fn() };
+    const { rerender, asFragment } = render(<Hotbar {...props} />);
+    const defaultView = asFragment();
+    expect(screen.getByRole("button", { name: "Key 1: first" })).toHaveClass("h-[164px]", "w-[46px]");
+    expect(screen.getByRole("button", { name: /Show letter keys/ })).toBeInTheDocument();
+    rerender(<Hotbar {...props} compact={false} />);
+    expect(asFragment()).toEqual(defaultView);
+    rerender(<Hotbar {...props} manualSkills={["first"]} macroKeys={["1"]} />);
+    expect(asFragment()).toEqual(defaultView);
+  });
+
   it("keeps the keyboard in its own horizontal scroll surface and reveals selectable letter keys", () => {
     const onSelect = vi.fn();
     const { rerender } = render(<Hotbar gd={null} icons={{}} stacks={[]} pins={{}} selected="1" onSelect={onSelect} />);
@@ -103,5 +115,17 @@ describe("Leveling loop metadata", () => {
     expect(screen.queryByText(/Boss/)).not.toBeInTheDocument();
     fireEvent.change(within(region).getByRole("combobox"), { target: { value: "F12" } });
     expect(onHotkey).toHaveBeenCalledWith("leveling", "F12");
+  });
+
+  it("preserves the default Keybinds macro layout when compact is omitted or false", () => {
+    const props = { plan, gd: null, icons: {}, onHotkey: vi.fn(), delayMs: 10, onDelay: vi.fn() };
+    const { rerender, asFragment } = render(<MacroPanel {...props} />);
+    const defaultView = asFragment();
+    const region = screen.getByRole("region", { name: "Leveling loop" });
+    expect(region).toHaveClass("frame", "p-3.5");
+    expect(within(region).getByRole("list", { name: "Leveling loop entries" })).toHaveClass("flex", "flex-wrap");
+    expect(within(region).getByRole("listitem")).toHaveAttribute("title", "1. press slot 1 (first), delay 10 ms");
+    rerender(<MacroPanel {...props} compact={false} />);
+    expect(asFragment()).toEqual(defaultView);
   });
 });

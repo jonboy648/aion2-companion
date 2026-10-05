@@ -42,9 +42,24 @@ priority is not reused for variants that swap stigmas.
 Additional checks cover request identity, class/level/region, returned budgets
 and quest flags, bonus ranks, finite nonnegative DPS, variant keys, regional
 skill availability, and agreement between shipped board currencies, Python
-board currencies, and the derived frontend map. No selected node or projected
-path may contain a BattleCrystal node. Locked Daevanion cases also require an
-empty path, matching the current `ManualBuild` acceptance guard.
+board currencies, and the derived frontend map.
+
+`FullBuild.daevanion_path` is the full future opening order, not a purchase list.
+Guidance checks cover known node IDs and currency only; they do not apply the
+request's current level, quest gate, or spendable budget. A locked request with
+empty `build.daevanion_nodes` can therefore carry a nonempty guidance path.
+This follows `app/tests/test_build_optimizer.py::test_daevanion_int_selects_prefix`,
+which verifies that actual purchases are only a budget-limited prefix of the
+full path. Purchase checks on the main build and every variant's
+`build.daevanion_nodes` still enforce level gates, quest flags, spending,
+and connectivity through the actual frontend validator.
+
+Both purchases and guidance reject BattleCrystal nodes in this zero-battle-budget
+matrix. The engine's `plan_daevanion(..., battle=False)` excludes BattleCrystal
+boards; `webapi.optimize` passes `bool(battle_points)`, which is false for these
+requests. All 33 recorded outputs contain zero BattleCrystal guidance nodes.
+Unknown guidance nodes remain an error, independently of whether anything is
+purchased.
 
 All generated artifacts stay in ignored `web/.planner-acceptance`:
 

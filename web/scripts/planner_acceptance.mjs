@@ -83,14 +83,14 @@ export function checkCase(request, response, gd, helpers) {
     if (nodeIndex.has(node.id)) fail(`Ambiguous Daevanion node ${node.id}`);
     nodeIndex.set(node.id, board);
   }
-  function checkNodes(nodes, label) {
+  function checkNodes(nodes, label, guidance = false) {
     if (!Array.isArray(nodes)) { fail(`${label}: missing node list`); return; }
-    if (!request.daevanionUnlocked && nodes.length) fail(`${label}: Daevanion quest gate is locked`);
+    if (!guidance && !request.daevanionUnlocked && nodes.length) fail(`${label}: Daevanion quest gate is locked`);
     for (const id of nodes) {
       const board = nodeIndex.get(id);
       if (!board) fail(`${label}: unknown node ${id}`);
       else if (board.currency === "battle" || derivedCurrencies?.[board.key] === "battle") fail(`${label}: BattleCrystal node ${id} with zero battle budget`);
-      else if (board.unlock_level > request.args.build.level) fail(`${label}: node ${id} needs level ${board.unlock_level}`);
+      else if (!guidance && board.unlock_level > request.args.build.level) fail(`${label}: node ${id} needs level ${board.unlock_level}`);
     }
   }
   function checkPlan(plan, label) {
@@ -117,7 +117,8 @@ export function checkCase(request, response, gd, helpers) {
   try {
     issues.push(...helpers.validateLevelPriority(result.build, result.priority, gd).map(issue => `main priority: ${issue}`));
   } catch (error) { fail(`main priority: validator threw ${error.message}`); }
-  checkNodes(result.daevanion_path, "Daevanion path");
+  // Full opening order is guidance, not the nodes purchased from this request's budget.
+  checkNodes(result.daevanion_path, "Daevanion path", true);
   if (!Array.isArray(result.variants) || !result.variants.length) fail("Missing build variants");
   else {
     const keys = new Set();

@@ -137,6 +137,30 @@ describe("level-aware manual and class planner", () => {
     await idle();
     expect(mocks.compare.mock.calls.length + mocks.optimize.mock.calls.length).toBe(1);
   });
+  it("keeps skills beside the selected quickslots and retains the complete analysis below", async () => {
+    await at("sorcerer");
+    expect(screen.getByRole("region", { name: "Skills and quickslots" })).toBeInTheDocument();
+    expect(screen.getByText("No calculated plan")).toBeInTheDocument();
+    await submit();
+    const workspace = screen.getByRole("region", { name: "Skills and quickslots" });
+    expect(within(workspace).getByRole("region", { name: "Core skills" })).toBeInTheDocument();
+    expect(within(workspace).getByTestId("quickslots")).toBeInTheDocument();
+    expect(within(workspace).queryByTestId("results")).toBeNull();
+    expect(within(screen.getByRole("region", { name: "Calculated build plan" })).getByTestId("results")).toBeInTheDocument();
+  });
+
+  it("accepts future Daevanion guidance when the locked build purchases no nodes", async () => {
+    mocks.optimize.mockImplementation(async (input: CharacterBuild, key: PlaystyleKey) => {
+      const result = resultFor(input)[key];
+      result.daevanion_path = [6101];
+      return result;
+    });
+    await at();
+    fireEvent.change(screen.getByRole("slider"), { target: { value: "12" } });
+    await submit();
+    expect(screen.queryByRole("alert")).toBeNull();
+    expect(screen.getByTestId("results")).toBeInTheDocument();
+  });
   it("starts at Global 45 with cumulative totals, zero extras and both quests unchecked", async () => {
     await at();
     expect(screen.getByRole("slider")).toHaveAttribute("min", "1");
@@ -420,7 +444,7 @@ describe("level-aware manual and class planner", () => {
       if (fault === "variant") result.variants[0].build.skill_ranks["flame-arrow"] = 10;
       if (fault === "specialty") result.variants[0].build.specs["flame-arrow"] = [0];
       if (fault === "stigma") result.build.stigmas = ["steel-barrier"];
-      if (fault === "daevanion") result.daevanion_path = [6101];
+      if (fault === "daevanion") result.build.daevanion_nodes = [6101];
       if (fault === "bonus") result.variants[0].build.bonus_ranks["flame-arrow"] = 1;
       if (fault === "fixed45") result.build.level = 45;
       return result;
