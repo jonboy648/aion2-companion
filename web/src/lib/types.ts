@@ -248,6 +248,8 @@ export interface CharacterBuild {
   daevanion_nodes: number[];
   skill_points: number | null;
   stigma_points: number | null;
+  /** Explicit quest/ascension completion for fresh plans; absent preserves armory inference. */
+  stigma_unlocked?: boolean | null;
   class_key: string;
   /** Arcana / Soul Binding rank bonuses entered by the user (skill key -> +ranks); Daevanion nodes are separate. */
   bonus_ranks: Record<string, number>;

@@ -16,7 +16,7 @@ const keysOf = <X,>(k: Keys<X>) => Object.keys(k).sort();
 const same = (obj: object, k: string[]) => expect(Object.keys(obj).sort()).toEqual(k);
 
 const K = {
-  build: keysOf<T.CharacterBuild>({
+  build: keysOf<Omit<T.CharacterBuild, "stigma_unlocked">>({
     name: true, region: true, level: true, skill_ranks: true, stigmas: true, specs: true, stats: true,
     show_kr: true, daevanion_nodes: true, skill_points: true, stigma_points: true, class_key: true,
     bonus_ranks: true,
