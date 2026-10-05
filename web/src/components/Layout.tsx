@@ -15,6 +15,7 @@ const NAV = [
   { to: "/daevanion", label: "Daevanion" },
   { to: "/compare", label: "Compare" },
   { to: "/codex", label: "Codex" },
+  { to: "/items", label: "Items" },
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
   { to: "/roadmap", label: "Road Map" },

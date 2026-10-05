@@ -30,6 +30,11 @@ describe("app shell", () => {
     ["/crafting", "Crafting"],
     ["/roadmap", "Road map"],
     ["/timers", "Timers"],
+    ["/items", "Items"],
+    ["/items/weapons", "Weapons"],
+    ["/items/sword", "Sword"],
+    ["/items/nope", "Page not found"],
+    ["/gear-viewer", "Gear viewer"],
     ["/nope", "Page not found"],
   ])("route %s", (path, heading) => {
     at(path);

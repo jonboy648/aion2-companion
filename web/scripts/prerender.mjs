@@ -34,7 +34,9 @@ export function renderPage(template, route, site, allRoutes, { noindex = false }
   h = replaceOnce(h, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${esc(route.description)}" />`);
   if (noindex) h = replaceOnce(h, /<meta name="viewport"[^>]*\/>/, (m) => `${m}\n    <meta name="robots" content="noindex" />`);
   const links = allRoutes.filter((r) => !r.path.startsWith("/codex/")).map((r) => `<li><a href="${r.path === "/" ? "/" : `${r.path}/`}">${esc(r.h1)}</a></li>`).join("");
-  const text = `<main><h1>${esc(route.h1)}</h1><p>${esc(route.intro)}</p><nav aria-label="Pages"><ul>${links}</ul></nav></main>`;
+  // item database pages carry their own text (`extra`, already escaped HTML) and skip the site nav to stay small
+  const nav = route.extra === undefined ? `<nav aria-label="Pages"><ul>${links}</ul></nav>` : "";
+  const text = `<main><h1>${esc(route.h1)}</h1><p>${esc(route.intro)}</p>${route.extra ?? ""}${nav}</main>`;
   h = replaceOnce(h, /<div id="root"><\/div>/, `<div id="root">${text}</div>`);
   return h;
 }
@@ -50,6 +52,66 @@ export function robotsWithSitemap(robots, site) {
   return robots.includes(line) ? robots : `${robots.trimEnd()}\n${line}\n`;
 }
 
+const num = (n) => (Number.isInteger(n) ? n.toLocaleString("en-US") : String(Math.round(n * 100) / 100));
+const rng = (lo, hi) => (lo !== undefined && lo !== hi ? `${num(lo)} - ${num(hi)}` : num(hi));
+const readJson = (file) => JSON.parse(readFileSync(file, "utf8"));
+
+/**
+ * Item database pages for a built dist (public/items copied in by vite): five group pages, one page per category and one
+ * per item, each with plain-text stats so search engines see them without running JavaScript. Empty when dist has no items/.
+ */
+export function itemRoutes(distDir, site = SEO.site) {
+  const indexFile = join(distDir, "items/index.json");
+  if (!existsSync(indexFile)) return [];
+  const index = readJson(indexFile);
+  const labels = readJson(join(here, "../src/features/items/statLabels.json"));
+  const label = (id) => labels[id] ?? id.replace(/([a-z])([A-Z])/g, "$1 $2");
+  const li = (href, text) => `<li><a href="${href}/">${esc(text)}</a></li>`;
+  const routes = [];
+  for (const g of index.groups) {
+    const total = g.cats.reduce((n, c) => n + c.count, 0);
+    routes.push({
+      path: `/items/${g.key}`,
+      title: `Aion 2 ${g.label.toLowerCase()}: ${total} items | ${site.name}`,
+      h1: g.label,
+      description: `All ${total} Aion 2 ${g.label.toLowerCase()} by category (${g.cats.map((c) => c.label).join(", ")}) with grade, level and stats.`.slice(0, 160),
+      intro: `${total} Aion 2 items in ${g.label.toLowerCase()}.`,
+      extra: `<ul>${g.cats.map((c) => li(`/items/${c.key}`, `${c.label} (${c.count})`)).join("")}</ul><p><a href="/items/">All item categories</a></p>`,
+    });
+    for (const c of g.cats) {
+      const { items } = readJson(join(distDir, `items/detail/${c.key}.json`));
+      const list = Object.values(items);
+      routes.push({
+        path: `/items/${c.key}`,
+        title: `Aion 2 ${c.label} items: stats and grades | ${site.name}`,
+        h1: c.label,
+        description: `All ${c.count} Aion 2 ${c.label.toLowerCase()} items with grade, item level, required level and base stats. Open one for random stat ranges.`.slice(0, 160),
+        intro: `${c.count} ${c.label.toLowerCase()} items in ${g.label.toLowerCase()}.`,
+        extra: `<ul>${list.map((i) => li(`/items/${i.id}`, `${i.name} (${i.grade}, item level ${i.il})`)).join("")}</ul><p><a href="/items/${g.key}/">${esc(g.label)}</a></p>`,
+      });
+      for (const i of list) {
+        const main = i.main.map((s) => `${label(s.id)} ${rng(s.min, s.v)}`);
+        const subs = i.subs.map((s) => `<li>${esc(label(s.id))}: ${rng(s.min, s.v)}</li>`).join("");
+        const facts = `${i.grade} ${c.label.toLowerCase()}, item level ${i.il}, needs level ${i.equip_level}${i.class_lock.length ? `, ${i.class_lock.join(", ")} only` : ""}.`;
+        routes.push({
+          path: `/items/${i.id}`,
+          title: `${i.name} (${i.grade} ${c.label}) | ${site.name}`,
+          h1: i.name,
+          description: `${i.name}: ${facts} ${main.join(", ")}.`.slice(0, 160),
+          intro: facts,
+          extra:
+            `<h2>Stats</h2><ul>${i.main.map((s) => `<li>${esc(label(s.id))}: ${rng(s.min, s.v)}</li>`).join("")}</ul>` +
+            (i.max_enchant ? `<p>Max enchant +${i.max_enchant}.</p>` : "") +
+            (subs ? `<h2>${i.sub_random ? "Random stats" : "Extra stats"}</h2><ul>${subs}</ul>` : "") +
+            (i.sources.length ? `<h2>Where to get it</h2><p>${esc(i.sources.join(", "))}</p>` : "") +
+            `<p><a href="/items/${c.key}/">${esc(c.label)}</a> - <a href="/items/">Items</a></p>`,
+        });
+      }
+    }
+  }
+  return routes;
+}
+
 /** Write everything into distDir. Returns the files written (relative to distDir). */
 export function prerender(distDir, { seo = SEO, day = new Date().toISOString().slice(0, 10) } = {}) {
   const template = readFileSync(join(distDir, "index.html"), "utf8");
@@ -63,10 +125,12 @@ export function prerender(distDir, { seo = SEO, day = new Date().toISOString().s
   for (const route of seo.routes) {
     write(route.path === "/" ? "index.html" : `${route.path.slice(1)}/index.html`, renderPage(template, route, seo.site, seo.routes));
   }
+  const items = itemRoutes(distDir, seo.site);
+  for (const route of items) write(`${route.path.slice(1)}/index.html`, renderPage(template, route, seo.site, seo.routes));
   // Any other URL (a character, an old bookmark) is answered by GitHub Pages with 404.html, which just boots the app.
   const generic = { path: "/", title: `Aion 2 character build | ${seo.site.name}`, h1: seo.site.name, description: seo.routes[0].description, intro: seo.routes[0].intro };
   write("404.html", renderPage(template, generic, seo.site, seo.routes, { noindex: true }));
-  write("sitemap.xml", sitemap(seo.site, seo.routes, day));
+  write("sitemap.xml", sitemap(seo.site, [...seo.routes, ...items], day));
   const robotsPath = join(distDir, "robots.txt");
   write("robots.txt", robotsWithSitemap(existsSync(robotsPath) ? readFileSync(robotsPath, "utf8") : "User-agent: *\nAllow: /\n", seo.site));
   return written;

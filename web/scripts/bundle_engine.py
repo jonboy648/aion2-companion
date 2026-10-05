@@ -101,6 +101,10 @@ def main() -> int:
         items = json.loads(items_src.read_text(encoding="utf-8"))
         (OUT / "items.json").write_text(json.dumps(items, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
         items_size = (OUT / "items.json").stat().st_size
+    if items_size:  # per-category files for the item database pages (web/public/items/), from the same items.json
+        sys.path.insert(0, str(APP))
+        from aion2c.data import build_itemdb
+        build_itemdb.main()
     manifest = {
         "classes": classes,
         "data_version": max(versions.values(), default=""),

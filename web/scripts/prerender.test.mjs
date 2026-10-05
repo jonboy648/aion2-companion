@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, writeFileSync, existsSync } from "node:fs";
+import { cpSync, mkdtempSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -58,4 +58,32 @@ describe("prerender", () => {
   it("fails loudly if the template no longer has a tag it rewrites", () => {
     expect(() => renderPage("<html></html>", seo.routes[0], seo.site, seo.routes)).toThrow(/missing/);
   });
+});
+
+describe("prerender item database", () => {
+  it("writes a page for every group, category and item with its own title and stats, and lists them in the sitemap", () => {
+    const dist = mkdtempSync(join(tmpdir(), "prerender-items-"));
+    writeFileSync(join(dist, "index.html"), template);
+    cpSync(join(here, "../public/items"), join(dist, "items"), { recursive: true });
+    const index = JSON.parse(readFileSync(join(dist, "items/index.json"), "utf8"));
+    const cats = index.groups.flatMap((g) => g.cats);
+    const total = cats.reduce((n, c) => n + c.count, 0);
+    const t0 = Date.now();
+    const files = prerender(dist, { day: "2026-10-05" });
+    const ms = Date.now() - t0;
+    expect(files.filter((f) => /^items\/[^/]+\/index\.html$/.test(f)).length).toBe(index.groups.length + cats.length + total);
+    const html = readFileSync(join(dist, "items/110120003/index.html"), "utf8");
+    expect(html).toContain("<title>Ludra's Blade of Extinction (Unique Greatsword) | Become Cube</title>");
+    expect(html).toContain("<li>Attack: 446 - 604</li>");
+    expect(html).toContain("<h2>Random stats</h2>");
+    expect(html).toContain('<link rel="canonical" href="https://becomecube.com/items/110120003/" />');
+    expect(html).not.toContain('aria-label="Pages"');
+    expect(readFileSync(join(dist, "items/greatsword/index.html"), "utf8")).toContain('href="/items/110120003/"');
+    expect(readFileSync(join(dist, "items/weapons/index.html"), "utf8")).toContain('href="/items/greatsword/"');
+    const sm = readFileSync(join(dist, "sitemap.xml"), "utf8");
+    expect(sm.match(/<loc>/g).length).toBe(seo.routes.length + index.groups.length + cats.length + total);
+    expect(sm).toContain("<loc>https://becomecube.com/items/110120003/</loc>");
+    expect(sm).toContain("<loc>https://becomecube.com/gear-viewer/</loc>");
+    expect(ms).toBeLessThan(30000);
+  }, 60000);
 });

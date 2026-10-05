@@ -356,7 +356,7 @@ def write_items(doc: dict, out: Path = OUT) -> None:
 
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["fetch", "build", "all", "export"])
+    ap.add_argument("cmd", choices=["fetch", "build", "all", "export", "itemdb"])
     ap.add_argument("--no-seed-scan", action="store_true")
     a = ap.parse_args(argv)
     if a.cmd == "export":
@@ -364,6 +364,12 @@ def main(argv=None) -> None:
         doc = build_from_export(export_dir(), prev)
         write_items(doc)
         print("items:", len(doc["items"]))
+        from aion2c.data import build_itemdb
+        build_itemdb.main()  # keep web/public/items/ in step with items.json
+        return
+    if a.cmd == "itemdb":
+        from aion2c.data import build_itemdb
+        build_itemdb.main()
         return
     if a.cmd in ("fetch", "all"):
         fetch_all(candidate_ids(), seed_scan=not a.no_seed_scan)
