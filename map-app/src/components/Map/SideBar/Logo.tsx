@@ -1,11 +1,10 @@
 // src/components/LeftSidebar/Logo.tsx
 import React from "react";
-import { getStaticUrl } from "@/utils/url";
 import { useTranslation } from "react-i18next";
 
 const Logo: React.FC = () => {
   const { t } = useTranslation();
-  const logoUrl = getStaticUrl("images/Logo.webp");
+  const logoUrl = "/brand/cube-crest-prismatic.png";
   const titleWithLineBreak = t("common:siteTitle", "AION2\nInteractive Map").replace(
     /\n/g,
     "<br />"
@@ -15,7 +14,7 @@ const Logo: React.FC = () => {
       {/* Image */}
       <img
         src={logoUrl}
-        alt="AION2 Logo"
+        alt="Become Cube"
         className="w-[100px] h-[100px] object-contain" // Adjust logo size and margin
       />
 

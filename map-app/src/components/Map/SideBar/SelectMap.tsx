@@ -19,9 +19,9 @@ const SelectMap: React.FC = () => {
           rounded-none
         "
         style={{
-          background: "linear-gradient(90deg, rgba(190,211,222,0) 0%, rgba(190,211,222,0.5) 54%, rgba(190,211,222,0) 100%)",
+          background: "rgba(255,255,255,0.025)",
           borderImage:
-            "linear-gradient(90deg, rgba(165,187,200,0), rgba(165,187,200,1), rgba(165,187,200,0)) 1",
+            "linear-gradient(90deg, rgba(217,168,64,0), rgba(217,168,64,0.35), rgba(217,168,64,0)) 1",
         }}
       >
         {/* HeroUI Select */}
@@ -50,7 +50,7 @@ const SelectMap: React.FC = () => {
               "active:bg-transparent",
               "focus:bg-transparent",
             ].join(" "),
-            value: "text-sm font-medium text-center text-lg leading-[18px] ",
+            value: "!text-[#eaeefa] text-sm font-medium text-center text-lg leading-[18px] ",
             innerWrapper: "static flex items-center justify-center",
             selectorIcon: [
               // "!relative !static order-2 ml-1",

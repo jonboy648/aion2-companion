@@ -34,7 +34,7 @@ const MarkerTypes: React.FC = () => {
     const props = {
       radius: "sm" as const,
       fullWidth: true,
-      className: "text-sm leading-[14px] font-normal h-[30px] gap-2 px-2",
+      className: `cube-marker-toggle text-sm leading-[14px] font-normal h-[30px] gap-2 px-2 ${isActive ? "cube-marker-active" : ""}`,
       variant: variant,
       color: color,
     }

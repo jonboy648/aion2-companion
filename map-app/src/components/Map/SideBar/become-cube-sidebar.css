@@ -1,0 +1,47 @@
+.cube-map-sidebar {
+  --heroui-background: 220 46% 7%;
+  --heroui-foreground: 224 48% 94%;
+  --heroui-content1: 222 39% 12%;
+  --heroui-default-100: 222 35% 16%;
+  --heroui-default-200: 222 26% 25%;
+  --heroui-default-300: 222 24% 34%;
+  --heroui-default-400: 223 24% 62%;
+  --heroui-default-500: 223 26% 70%;
+  --heroui-default-600: 223 30% 76%;
+  --heroui-default-700: 223 32% 80%;
+  --heroui-default-800: 223 38% 87%;
+  --heroui-default-900: 224 48% 94%;
+  --heroui-primary: 43 65% 68%;
+  --heroui-focus: 43 65% 68%;
+  --color-sidebar-button: #ffffff08;
+  --color-sidebar-collapse: #152036;
+  --color-input: #ffffff08;
+  --color-input-2: #111a2c;
+  --color-search: #111a2c;
+  --color-search-item: #ffffff08;
+  color: #eaeefa;
+  background: rgba(10, 18, 36, .96);
+  background-image: none;
+  border-right: 1px solid #d9a84040;
+  backdrop-filter: blur(16px);
+  color-scheme: dark;
+}
+.cube-map-sidebar .cube-marker-toggle {
+  color: #aeb8d6;
+  border: 1px solid #aeb8d621;
+  background: #ffffff06;
+  transition: background-color .15s, border-color .15s;
+}
+.cube-map-sidebar .cube-marker-toggle:hover {
+  background: #ffffff0d;
+  border-color: #d9a84066;
+}
+.cube-map-sidebar .cube-marker-active {
+  color: #eaeefa;
+  background: #59c4cd1c;
+  border-color: #59c4cd66;
+}
+.cube-map-sidebar .cube-marker-active .text-background { color: #eaeefa; }
+.cube-map-sidebar button:focus-visible { outline: 2px solid #d9b769; outline-offset: 2px; }
+.cube-map-sidebar input::placeholder { color: #8f9bbc; }
+.cube-map-sidebar .sidebar-scroll { scrollbar-color: #38455c transparent; }

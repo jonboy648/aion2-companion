@@ -2,8 +2,7 @@
 import React, {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
-import {getStaticUrl} from "@/utils/url.ts";
-import {useTheme} from "@/context/ThemeContext";
+import "./become-cube-sidebar.css";
 import {useTranslation} from "react-i18next";
 
 type SidebarWrapperProps = {
@@ -28,9 +27,6 @@ const SidebarWrapper: React.FC<SidebarWrapperProps> = ({
                                                        }) => {
   const { t } = useTranslation("common");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(collapsed);
-  const {theme} = useTheme();
-  const isDark = theme === "dark";
-  const bgUrl = getStaticUrl(isDark ? "images/Sidebar_Dark.webp" : "images/Sidebar_Light.webp");
   const isLeft = side === "left";
 
   const toggle = () => {
@@ -47,21 +43,13 @@ const SidebarWrapper: React.FC<SidebarWrapperProps> = ({
   return (
     <aside
       className={`
-        relative h-full flex flex-col bg-sidebar transition-all duration-300 
+        cube-map-sidebar relative h-full flex flex-col bg-sidebar transition-all duration-300 
       `}
       style={{
         width: sidebarCollapsed ? collapsedWidth : width,
         maxWidth: width,
       }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none opacity-70 bg-no-repeat bg-top-left"
-        style={{
-          backgroundImage: `url(${bgUrl})`,
-          backgroundSize: "370px auto",
-        }}
-      />
-
       {/* CONTENT */}
       <div className="flex-1 overflow-y-scroll sidebar-scroll">{children}</div>
 

@@ -19,7 +19,7 @@ export default function PartyLinkButton() {
     } catch { setFallback(url.href); }
   };
   return <div className="px-5 mt-3">
-    <Button fullWidth size="sm" variant="bordered" isDisabled={!selectedMap} onPress={copy} onBlur={() => setCopied(false)}>
+    <Button className="border border-[#d9a84055] text-[#f2cf7e]" fullWidth size="sm" variant="bordered" isDisabled={!selectedMap} onPress={copy} onBlur={() => setCopied(false)}>
       {copied ? "Party link copied" : "Copy party link"}
     </Button>
     {fallback && <input aria-label="Party share link" className="mt-2 w-full bg-transparent text-sm" readOnly value={fallback} onFocus={e => e.currentTarget.select()} />}
