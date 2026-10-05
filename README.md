@@ -5,9 +5,9 @@ A free, fan-made web companion for **Aion 2**. Import your character by name, co
 and plan crafting and your road map. The optimizer is the Python `aion2c` engine running in your
 browser (Pyodide); nothing is computed on a server.
 
-Not affiliated with, endorsed by, or sponsored by NCSOFT. Aion is a trademark of NCSOFT. This project
-hosts none of NCSOFT's art: skill and item icons are loaded straight from NCSOFT's public CDN
-(`assets.playnccdn.com`) in your browser. It never touches the game client and never sends input to the game.
+Not affiliated with, endorsed by, or sponsored by NCSOFT. Aion is a trademark of NCSOFT. Skill and
+item icons are loaded straight from NCSOFT's public CDN (`assets.playnccdn.com`) in your browser; the
+Daevanion board art under `web/public/daevanion/` is game art hosted with the owner's stated permission. It never touches the game client and never sends input to the game.
 
 ## Privacy
 

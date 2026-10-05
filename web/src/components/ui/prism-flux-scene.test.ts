@@ -11,7 +11,8 @@ const gpu = vi.hoisted(() => ({
 vi.mock("three", async importOriginal => ({
   ...await importOriginal<typeof import("three")>(),
   WebGLRenderer: class {
-    domElement = document.createElement("canvas");
+    domElement: HTMLCanvasElement;
+    constructor(opts: { canvas?: HTMLCanvasElement } = {}) { this.domElement = opts.canvas ?? document.createElement("canvas"); }
     render = gpu.draw;
     dispose = gpu.dispose;
     forceContextLoss = gpu.lose;
@@ -28,6 +29,8 @@ let host: HTMLDivElement;
 
 beforeEach(() => {
   vi.clearAllMocks();
+  // jsdom has no WebGL: the scene asks for a webgl2 context before creating the renderer
+  vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({} as RenderingContext);
   gpu.draw.mockReset();
   gpu.contextLost = false;
   frames = new Map();

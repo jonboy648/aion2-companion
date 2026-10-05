@@ -1,4 +1,4 @@
-# NCSOFT art: never published (site hotlinks the official CDN)
+# NCSOFT art: not published by default (site hotlinks the official CDN); shipped exceptions are added with git add -f
 assets/
 app/aion2c/data/classes/*/icons/
 app/aion2c/data/icons/
