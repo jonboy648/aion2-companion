@@ -6,7 +6,7 @@ import type { CompareResult } from "@/lib/types";
 import { Character } from "@/pages/Character";
 import { Home } from "@/pages/Home";
 import { ManualBuild } from "@/pages/ManualBuild";
-import { BuildResults } from "./BuildResults";
+import { BuildResults, SingleBuildResults } from "./BuildResults";
 import { buildFromForm, initialForm } from "./manualBuild";
 import { clearRecent, gradeColor, loadRecent, rotationRows, roleNote, saveRecent, slotLabel, statDelta } from "./helpers";
 import { pickHit } from "./useCharacter";
@@ -79,6 +79,19 @@ describe("helpers", () => {
 });
 
 describe("BuildResults", () => {
+  it("labels manually entered DPS without describing it as an imported character", () => {
+    render(<SingleBuildResults fb={{ ...cmp.boss, current_dps: 100 }} data={{ gd: null, icons: {} }} onUsePlan={() => {}} />);
+    expect(screen.getByTestId("current-dps")).toHaveTextContent("Starting build");
+    expect(screen.getByTestId("plan-dps")).toHaveTextContent("Planned build DPS");
+    expect(screen.queryByText(/as imported/i)).toBeNull();
+  });
+
+  it("keeps imported character DPS labels in the comparison view", () => {
+    render(<BuildResults cmp={{ ...cmp, boss: { ...cmp.boss, current_dps: 100 } }} data={{ gd: null, icons: {} }} />);
+    expect(screen.getByTestId("current-dps")).toHaveTextContent("as imported");
+    expect(screen.getByTestId("plan-dps")).toHaveTextContent("Best build with your gear");
+  });
+
   it("switches playstyle and applies a trade-off variant", async () => {
     render(<BuildResults cmp={cmp} data={{ gd: null, icons: {} }} />);
     expect(screen.getByRole("tab", { name: /Boss DPS/ })).toHaveAttribute("aria-selected", "true");

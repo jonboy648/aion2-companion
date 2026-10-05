@@ -255,8 +255,6 @@ export interface CharacterBuild {
   class_key: string;
   /** Arcana / Soul Binding rank bonuses entered by the user (skill key -> +ranks); Daevanion nodes are separate. */
   bonus_ranks: Record<string, number>;
-  /** Stigma unlock (Ascension grade 3 + faction quest): true = unlocked, false = none bought, null = infer (held ranks, else level 22; reported as inferred). */
-  stigma_unlocked: boolean | null;
 }
 
 export interface Scenario {

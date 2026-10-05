@@ -219,3 +219,44 @@ layout containment was checked through DOM bounds, not inferred from that image.
 Preview: http://127.0.0.1:5197/codex/templar and /build. No push. The matching
 progression, real-stats and cache-fingerprint integration remains pending; the
 levels 22/30/45 engine acceptance above is still required before release.
+
+### Combined Engine Acceptance Checkpoint
+
+Local branch `codex/level-planner-acceptance` merges planner `9282ef2` with
+Claude's `legal-progression-pr` at `557f4e5` (including stat sheet and real stats).
+The combined engine archive and fingerprint were regenerated, not hand-resolved.
+Duplicate `stigma_unlocked` TypeScript declarations from the merge were removed;
+the field remains optional. Manual planner DPS wording now distinguishes the
+starting build from the planned allocation; imported-character labels retain
+their default behavior.
+
+Fresh checks: 486 tests in 61 web files pass with `--maxWorkers=2`; strict
+`npm run build` passes, with 23 prerenders. An initial concurrent full-suite
+run timed out one manual-page flow; that file passed separately and the full
+reduced-worker suite passed without extending its timeout. Main JS is 664.62 KB
+(205.95 KB gzip), CSS 117.66 KB (22.14 KB gzip). Existing bundle warnings remain.
+Focused Python progression/keybind/engine tests passed 123, with one skip.
+
+Real browser: Sorcerer unlocked Leveling plans complete at 22 and 30, and at 45
+with +5 skill/+3 stigma/+4 Daevanion earned rewards. Matching quickslots and one
+F11 macro render. Input changes retain but disable the stale result. At effective
+390px, document width/scroll width are both 378px; the quickslot strip contains
+626px of content in its own 347px region. No broken images were found.
+
+The new cross-runtime harness (`web/scripts/planner_acceptance.md`) generates
+requests with the actual TypeScript form/preparation helpers and runs CPython
+against the shipped class JSON. All 33 cases ran; only 11 passed the complete
+acceptance checks, across 104 main/variant builds. This is NOT release-ready:
+
+- Fourteen cases return child rank entries without frontend acquisition mappings
+  (Assassin, Chanter, Cleric, Gladiator 22, Ranger 45, Templar). These are contract
+  mismatches, not proof that those child skills are illegal in game.
+- Gladiator/Ranger level 30 return four/three stigmas respectively against the
+  derived frontend's two-slot limit. Slot-source interpretation needs alignment.
+- Six locked Sorcerer cases return nonempty projected Daevanion paths despite
+  zero spendable points and no selected nodes, violating the UI's locked guard.
+
+Returned priorities, finite DPS, board currency parity and zero BattleCrystal
+checks pass. Failures are preserved in ignored `web/.planner-acceptance/report.json`;
+no engine rules or validators were relaxed to make the report green.
+Jon requires preview and agreement before any push, PR publication or deployment.

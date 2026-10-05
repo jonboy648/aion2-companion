@@ -35,3 +35,4 @@ research/items_cache/
 research/gear_samples/
 research/community_builds/
 web/dist_*/
+web/.planner-acceptance/

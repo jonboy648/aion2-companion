@@ -92,7 +92,7 @@ export function SingleBuildResults({ fb, data, onUsePlan, onVariantChange, disab
         {!macroSupported && <span className="text-xs text-dim">Burst macros are not modeled yet.</span>}
       </div>
       <div inert={disabled} aria-disabled={disabled || undefined}>
-        <PlaystyleDetail fb={fb} data={data} variantKey={variant} onVariant={(key) => { setVariant(key); onVariantChange?.(key); }} />
+        <PlaystyleDetail fb={fb} data={data} source="manual" variantKey={variant} onVariant={(key) => { setVariant(key); onVariantChange?.(key); }} />
       </div>
     </div>
   );
