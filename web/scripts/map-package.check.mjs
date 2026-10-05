@@ -39,7 +39,7 @@ test("map uses local static data and base-relative routing", () => {
   assert.match(read("../../map-app/src/utils/dataMode.ts"), /DEFAULT_DATA_MODE: DataMode = "static"/);
   assert.match(read("../../map-app/src/main.tsx"), /basepath: import.meta.env.BASE_URL/);
   assert.match(read("build-map.mjs"), /VITE_PUBLIC_BASE: "\/map\/"/);
-  assert.match(read("build-map.mjs"), /\["about", "crafting"\]/);
+  assert.match(read("build-map.mjs"), /\["about"\]/);
 });
 test("approved map zones and reproducible dependency lock exist", () => {
   for (const path of ["package-lock.json", "public/data/markers/World_L_B.yaml", "public/data/markers/World_D_B.yaml", "public/data/markers/Abyss_Reshanta_D.yaml"]) {
