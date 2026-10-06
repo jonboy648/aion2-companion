@@ -141,9 +141,9 @@ case's end-to-end command latency.
 
 ## Read-only QuickUse evidence
 
-Direct table evidence exists in the private export already referenced by
-[the progression generator](build_progression.mjs):
-`D:/Aion2-tools/export-test/out/AION2/Content/Data/Table`.
+Direct table evidence exists in the private export used by
+[the progression generator](build_progression.mjs). Configure `AION2_EXPORT_DIR`
+with the exported `Table` directory; no machine-specific export path is stored here.
 The following existing files were parsed read-only: `QuickSlotData.json`
 (20 rows), `PCContextSkillSlot.json` (110), `PCLevelQuickSlot.json` (54),
 `InputAction.json` (200), `InputKeyMapping.json` (166), and `Skill.json` (16,279).

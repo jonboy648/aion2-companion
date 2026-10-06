@@ -21,13 +21,16 @@ No optimizer, model or webapi source changes relative to `84a8aec`.
 
 ## Verification
 
-- Web: `npx vitest run --maxWorkers=2`: 674 tests in 71 files passed.
+- Web: final `npx vitest run --maxWorkers=2`: 675 tests in 71 files passed.
 - Production: `npm run build`: strict TypeScript, Vite and 9,318 prerendered files passed.
 - Planner: 33 real CPython cases, 107 main/variant builds validated across eight classes at levels 22/30/45, including locked and earned-point cases.
 - Fresh browser checks: checklist add/tick/reload persistence and test-task cleanup; enhancement target-level recalculation; material search to item detail; same-class skill search closes and opens its encyclopedia details; gear comparison pin.
 - Mobile: guide, items, gear viewer, enhancement and checklist have matching document client/scroll widths (378 CSS px at the browser's 390 px mobile viewport); tables scroll within their containers. All six level-30 Templar quickslot icons loaded.
 - Fresh real-browser Templar level-30 calculation completed; slot details open and close; no captured warning/error logs.
-- Python full-suite result: pending final completion. Missing local, git-ignored desktop icon folders were connected to existing `D:\Aion2` assets via local-only junctions; 17 icon tests then passed. No art was added to git.
+- Python full run: 982 passed, 10 failed, 8 skipped, 1 xfailed and 1 xpassed. Nine failures were missing local, git-ignored class icons or desktop theme assets; one was the repository guard rejecting a hardcoded private-export path in two planner files.
+- Corrected local asset setup with junctions to existing `D:\Aion2` assets; removed the hardcoded export path in favor of required `AION2_EXPORT_DIR` configuration. No art or raw export was added to git, and the privacy guard was not weakened.
+- Complete failed-case rerun: `python -m pytest -q --lf`: all 10 passed. Additional fresh checks: all 17 icon tests passed; all 16 client-number/privacy and desktop-theme tests passed. The entire Python suite was not rerun after these corrections.
+- Progression-generator regression: the missing-configuration test failed before the fix; all 16 generator tests passed afterward and are included in the final web suite.
 
 The first web run overlapped CPU-heavy acceptance work and timed out during a character switch; the unchanged character tests passed in isolation and the complete rerun passed. Keep character remount and duplicate-key guards intact.
 

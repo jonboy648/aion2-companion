@@ -4,7 +4,6 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const defaultDestination = join(repoRoot, "web/src/features/progression/data.json");
-const defaultExportDir = "D:/Aion2-tools/export-test/out/AION2/Content/Data/Table";
 const clientClasses = {
   assassin: "Assassin", chanter: "Chanter", cleric: "Cleric", gladiator: "Gladiator",
   ranger: "Ranger", sorcerer: "Sorcerer", spiritmaster: "Elementalist", templar: "Templar",
@@ -313,10 +312,13 @@ export function formatCompactProgression(data) {
 }
 
 export async function generateProgression({
-  exportDir = process.env.AION2_EXPORT_DIR || defaultExportDir,
+  exportDir = process.env.AION2_EXPORT_DIR,
   classesDir = join(repoRoot, "app/aion2c/data/classes"),
   destination = defaultDestination,
 } = {}) {
+  if (!exportDir) {
+    throw new Error("Set AION2_EXPORT_DIR to the private client export's Table directory before generating progression.");
+  }
   const readTable = async (name) => parseTable(await readFile(join(exportDir, `${name}.json`), "utf8"));
   const classData = {};
   for (const entry of (await readdir(classesDir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {

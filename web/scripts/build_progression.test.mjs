@@ -3,9 +3,13 @@ import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "vitest";
-import { buildProgression, compactProgression, formatCompactProgression,
+import { buildProgression, compactProgression, formatCompactProgression, generateProgression,
   normalizePrerequisites, parseTable } from "./build_progression.mjs";
 import { decodeProgression } from "../src/features/progression/decodeProgression.ts";
+
+test("generation requires a configured private Table directory before reading files", async () => {
+  await assert.rejects(generateProgression({ exportDir: "" }), /AION2_EXPORT_DIR.*Table directory/);
+});
 
 function acquisition(overrides = {}) {
   return {
