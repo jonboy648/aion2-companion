@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { SkillIcon } from "@/features/build/SkillIcon";
 import type { CharacterBuild, GameData, IconUrls } from "@/lib/types";
+import { guideRanks } from "./guideRanks";
 import { levelBudget, progression } from "./progression";
 import "./GuideSkills.css";
 
@@ -29,60 +30,80 @@ export function GuideSkills({ gd, icons, level, plannedBuild }: Props) {
   const upcoming = skills.filter((skill) => skill.unlockLevel === nextLevel);
   const currentPlan = validLevel && plannedBuild?.class_key === gd.class_key
     && plannedBuild.region === "global" && plannedBuild.level === level ? plannedBuild : undefined;
+  const stigmas = [...new Set(currentPlan?.stigmas ?? [])].flatMap((key) => {
+    const skill = gd.skills[key];
+    if (!skill || skill.kind !== "stigma" || !skill.regions.includes("global")
+      || (skill.unlock_level ?? 0) > level) return [];
+    return [{ key, skill, unlockLevel: skill.unlock_level ?? 0 }];
+  });
+  const effectiveRanks = currentPlan ? guideRanks({ ...gd,
+    daevanion: Object.fromEntries(Object.entries(gd.daevanion).filter(([, board]) => board.unlock_level <= level)),
+  }, { ...currentPlan,
+    bonus_ranks: Object.fromEntries(Object.entries(currentPlan.bonus_ranks)
+      .filter(([, bonus]) => Number.isFinite(bonus) && bonus >= 0)),
+  }) : {};
 
   function rows(entries: typeof skills, future = false) {
     return entries.map(({ key, skill, unlockLevel }) => {
       const rank = future ? undefined : currentPlan?.skill_ranks[key];
+      const cap = Math.min(gd.rank_caps.global[skill.kind === "stigma" ? "stigma" : "core"], skill.max_rank);
       const hasRank = rank !== undefined && Number.isInteger(rank) && rank > 0
-        && rank <= Math.min(gd.rank_caps.global.core, skill.max_rank);
+        && rank <= cap;
+      const effectiveRank = hasRank ? effectiveRanks[key] : undefined;
+      const bonus = hasRank ? effectiveRanks[key] - rank : 0;
       const specialties = hasRank ? [...new Set(currentPlan?.specs[key] ?? [])]
-        .filter((option) => Number.isInteger(option) && option >= 0 && skill.specializations[option]) : [];
-      const metadata = `${skill.kind === "passive" ? "Passive" : "Active"} / ${future ? "Unlocks" : "Unlocked"} at level ${unlockLevel}`;
+        .filter((option) => Number.isInteger(option) && option >= 0 && skill.specializations[option]?.text.trim()) : [];
+      const metadata = `${skill.kind === "stigma" ? "Stigma" : skill.kind === "passive" ? "Passive" : "Active"} / ${future ? "Unlocks" : "Unlocked"} at level ${unlockLevel}`;
       return (
-        <li key={key} className="min-w-0">
+        <li key={key} className="guide-skills-row">
           <Link to={`/codex/${encodeURIComponent(gd.class_key)}?skill=${encodeURIComponent(key)}`}
-            className="guide-skills-row">
-            <SkillIcon name={skill.name} url={icons[key]} size={32} rarity={future ? "common" : "rare"} />
+            className="guide-skills-head">
+            <SkillIcon name={skill.name} url={icons[key]} size={36} rarity="common" className="guide-skills-icon" />
             <span className="guide-skills-copy">
-              <span className="guide-skills-name" title={skill.name}>{skill.name}</span>
-              <span className="guide-skills-metadata" title={metadata}>{metadata}</span>
+              <span className="guide-skills-name">{skill.name}</span>
+              {!hasRank && <span className="guide-skills-metadata">{metadata}</span>}
             </span>
-            {hasRank && (
-              <span className="guide-skills-badges">
-                <span className="guide-skills-badge" title={`Calculated rank ${rank}`}>Rank {rank}</span>
-                {specialties.length > 0 && (
-                  <span className="guide-skills-badge guide-skills-specialties"
-                    aria-label={`Specialties ${specialties.map((option) => option + 1).join(", ")}`}
-                    title={specialties.map((option) => `Specialty ${option + 1}: ${skill.specializations[option].text}`).join("\n")}>
-                    Specs {specialties.map((option) => option + 1).join(", ")}
-                  </span>
-                )}
-              </span>
-            )}
+            {hasRank && <span className="guide-skills-level">Lv {effectiveRank}</span>}
           </Link>
+          {(bonus > 0 || specialties.length > 0) && (
+            <div className="guide-skills-details">
+              {bonus > 0 && <p className="guide-skills-ranks">Paid {rank} + Bonus {bonus}</p>}
+              {specialties.length > 0 && (
+                <ul className="guide-skills-specialties" aria-label={`Selected specialties for ${skill.name}`}>
+                  {specialties.map((option) => <li key={option}>{skill.specializations[option].text}</li>)}
+                </ul>
+              )}
+            </div>
+          )}
         </li>
       );
     });
   }
 
   return (
-    <section aria-label="Core skills" className="guide-skills mb-5">
-      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h2 className="text-base font-semibold leading-6 text-foreground">Core skills</h2>
-        <span className="text-xs text-gold">Available at level {level} ({available.length})</span>
+    <section aria-label="Core skills" className="reference-panel guide-skills">
+      <h2 className="reference-panel-heading guide-skills-heading">Skills</h2>
+      <div className="reference-panel-body guide-skills-body">
+        <p className="guide-skills-availability">Available at level {level} ({available.length})</p>
+        <ul aria-label={`Core skills at level ${level}`} className="guide-skills-list">
+          {rows(available)}
+        </ul>
+        {available.length === 0 && <p className="text-sm text-dim">No core skills available at this level.</p>}
+        {stigmas.length > 0 && (
+          <section aria-label="Equipped stigmas" className="guide-skills-group">
+            <h3 className="guide-skills-group-heading">Stigmas</h3>
+            <ul aria-label="Equipped stigma skills" className="guide-skills-list">{rows(stigmas)}</ul>
+          </section>
+        )}
+        {upcoming.length > 0 && (
+          <div className="guide-skills-group">
+            <h3 className="guide-skills-group-heading">Next unlock / Level {nextLevel}</h3>
+            <ul aria-label={`Core skills unlocking at level ${nextLevel}`} className="guide-skills-list">
+              {rows(upcoming, true)}
+            </ul>
+          </div>
+        )}
       </div>
-      <ul aria-label={`Core skills at level ${level}`} className="guide-skills-list">
-        {rows(available)}
-      </ul>
-      {available.length === 0 && <p className="text-sm text-dim">No core skills available at this level.</p>}
-      {upcoming.length > 0 && (
-        <div className="mt-4">
-          <h3 className="mb-2 text-sm font-medium leading-5 text-dim">Next unlock / Level {nextLevel}</h3>
-          <ul aria-label={`Core skills unlocking at level ${nextLevel}`} className="guide-skills-list">
-            {rows(upcoming, true)}
-          </ul>
-        </div>
-      )}
     </section>
   );
 }

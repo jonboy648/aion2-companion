@@ -1,0 +1,129 @@
+.compact-macro-panel {
+  display: grid;
+  min-width: 0;
+  gap: 20px;
+  background: transparent;
+  color: var(--text);
+}
+
+.compact-macro,
+.compact-macro-step-content {
+  min-width: 0;
+}
+
+.compact-macro-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.compact-macro-step {
+  display: grid;
+  grid-template-columns: 16px 36px minmax(0, 1fr) 68px;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 64px;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.compact-macro-step-index {
+  color: var(--text-faint);
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.compact-macro-step-name {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.compact-macro-step-key,
+.compact-macro-step-fallbacks,
+.compact-macro-step-delay {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.compact-macro-step-key,
+.compact-macro-step-fallbacks {
+  overflow-wrap: anywhere;
+}
+
+.compact-macro-step-key > span {
+  color: var(--gold-hi);
+}
+
+.compact-macro-step-delay {
+  text-align: right;
+}
+
+.compact-macro-step-delay > span {
+  white-space: nowrap;
+}
+
+.compact-macro-details {
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.compact-macro-details > summary {
+  padding: 12px 0;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.compact-macro-details > summary:focus-visible {
+  outline: 2px solid var(--gold-hi);
+  outline-offset: 2px;
+}
+
+.compact-macro-settings {
+  display: grid;
+  gap: 12px;
+  padding-bottom: 16px;
+}
+
+.compact-macro-delay-controls {
+  display: grid;
+  gap: 12px;
+}
+
+.compact-macro-hotkey {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.compact-macro-estimates {
+  padding-bottom: 16px;
+}
+
+.compact-macro-estimates .text-xs {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.compact-macro-manual {
+  display: grid;
+  gap: 8px;
+}
+
+.compact-macro-manual-entry {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 12px;
+  font-size: 14px;
+}
+
+.compact-macro-manual-entry > :nth-child(n + 3) {
+  grid-column: 2;
+}

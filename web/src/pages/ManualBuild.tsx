@@ -7,7 +7,6 @@ import { useCharacterFaction, type Faction } from "@/components/game/faction";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import AdvancedStats from "@/components/ui/advanced-stats";
 import { SingleBuildResults, ProgressPanel } from "@/features/build/BuildResults";
 import { ROLE_LABEL } from "@/features/build/helpers";
 import { STAT_FIELDS, buildFromForm, initialForm, type ManualForm } from "@/features/build/manualBuild";
@@ -15,6 +14,7 @@ import { useClassData } from "@/features/build/useClassData";
 import { ProgressionControls, ProgressionSettings } from "@/features/progression/ProgressionControls";
 import { GuideSkills } from "@/features/progression/GuideSkills";
 import { GuideQuickslots } from "@/features/progression/GuideQuickslots";
+import { GuideDaevanion } from "@/features/progression/GuideDaevanion";
 import { NO_EARNED_POINTS, levelBudget, prepareLevelBuild, validateLevelPlan, validateLevelPriority, type EarnedPoints } from "@/features/progression/progression";
 import { optimize, listClasses } from "@/engine/api";
 import { storePlannedBuild } from "@/features/keybinds/activeBuild";
@@ -138,7 +138,7 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
     </label>
   );
   return (
-    <div className="level-planner">
+    <div className="level-planner reference-guide">
       {!guideClass && <PageHeader title="Manual build" caption="Your class, level and build plan" />}
       <div className="planner-class-picker" role="group" aria-label="Class">
         {classes.data?.map((c) => <button type="button" key={c.key} aria-pressed={c.key === classKey}
@@ -188,11 +188,16 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
           {errors.length > 1 && <details><summary>Validation details ({errors.length - 1})</summary>
             <ul className="mt-2 list-disc space-y-1 pl-5">{errors.slice(1).map((error) => <li key={error}>{error}</li>)}</ul></details>}
       </div>}
-      <section aria-label="Skills and quickslots">
-        <AdvancedStats className="planner-layout" main={<div className="planner-main">
+      <section aria-label="Progression plan" className="guide-reference-grid">
+        {ready && previewLevel && data.gd && <GuideDaevanion gd={data.gd} icons={data.icons} level={previewLevel}
+          unlocked={daevanionUnlocked} build={plan && sameClass && !stale && !busy && dpsVariant ? plan.fb.build : undefined}
+          path={plan && sameClass && !stale && !busy && dpsVariant ? plan.fb.daevanion_path : undefined} />}
+        <div className="planner-main">
           {ready && previewLevel && data.gd && <GuideSkills gd={data.gd} icons={data.icons} level={previewLevel}
             plannedBuild={plan && sameClass && !stale && !busy && dpsVariant ? plan.fb.build : undefined} />}
-        </div>} supporting={plan && sameClass ? <div className="planner-slot-column">
+        </div>
+      </section>
+      {plan && sameClass ? <div className="planner-slot-column">
           <div className="planner-plan-heading"><h2>{plan.fb.playstyle.name} / Level {plan.fb.build.level}</h2>
             {(stale || busy) && <span role="status">Out of date</span>}</div>
           {(stale || busy) && <p className="mb-4 text-sm text-dim">Previous plan. Recalculate for the current inputs before using it.</p>}
@@ -201,8 +206,7 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
         </div> : <section aria-label="Quickslots and macro" className="planner-empty-plan">
           <h2>Quickslots &amp; Macro</h2>
           <p>No calculated plan</p>
-        </section>} />
-      </section>
+        </section>}
       {plan && sameClass && <section aria-label="Calculated build plan" className="planner-analysis">
           <h2 className="planner-analysis-title">Build analysis <span>{plan.fb.playstyle.name} / Level {plan.fb.build.level}</span></h2>
           <div>

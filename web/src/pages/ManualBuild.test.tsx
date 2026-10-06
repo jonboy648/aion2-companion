@@ -137,14 +137,15 @@ describe("level-aware manual and class planner", () => {
     await idle();
     expect(mocks.compare.mock.calls.length + mocks.optimize.mock.calls.length).toBe(1);
   });
-  it("keeps skills beside the selected quickslots and retains the complete analysis below", async () => {
+  it("keeps Daevanion beside skills and puts quickslots below with the complete analysis", async () => {
     await at("sorcerer");
-    expect(screen.getByRole("region", { name: "Skills and quickslots" })).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Progression plan" })).toBeInTheDocument();
     expect(screen.getByText("No calculated plan")).toBeInTheDocument();
     await submit();
-    const workspace = screen.getByRole("region", { name: "Skills and quickslots" });
+    const workspace = screen.getByRole("region", { name: "Progression plan" });
     expect(within(workspace).getByRole("region", { name: "Core skills" })).toBeInTheDocument();
-    expect(within(workspace).getByTestId("quickslots")).toBeInTheDocument();
+    expect(within(workspace).queryByTestId("quickslots")).not.toBeInTheDocument();
+    expect(screen.getByTestId("quickslots")).toBeInTheDocument();
     expect(within(workspace).queryByTestId("results")).toBeNull();
     expect(within(screen.getByRole("region", { name: "Calculated build plan" })).getByTestId("results")).toBeInTheDocument();
   });

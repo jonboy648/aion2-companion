@@ -23,6 +23,11 @@ const planAt = (level: number) => {
   return prepareLevelBuild(result.build, gd, { skill: 0, stigma: 0, daevanion: 0 }, false);
 };
 const linksAt = (level: number) => within(screen.getByRole("list", { name: `Core skills at level ${level}` })).getAllByRole("link");
+const skillRow = (name: string) => {
+  const row = screen.getByRole("link", { name: new RegExp(name) }).closest("li");
+  if (!row) throw new Error(`Missing row for ${name}`);
+  return within(row);
+};
 const expectSkillsAt = (level: number, keys: string[]) => {
   expect(linksAt(level).map((link) => link.getAttribute("href")).sort())
     .toEqual(keys.map((key) => `/codex/sorcerer?skill=${encodeURIComponent(key)}`).sort());
@@ -46,6 +51,10 @@ describe("GuideSkills", () => {
     expect(within(screen.getByRole("list", { name: "Core skills at level 1" })).queryByText("Bittercold Wind")).not.toBeInTheDocument();
     expect(screen.queryByText("Blaze")).not.toBeInTheDocument();
     expect(container.querySelector("details")).toBeNull();
+    const panel = screen.getByRole("region", { name: "Core skills" });
+    expect(panel).toHaveClass("reference-panel");
+    expect(within(panel).getByRole("heading", { name: "Skills", level: 2 })).toHaveClass("reference-panel-heading");
+    expect(panel.querySelector(".reference-panel-body")).not.toBeNull();
   });
 
   it("shows all available active and passive skills at level 22, with real codex links", () => {
@@ -138,11 +147,13 @@ describe("GuideSkills", () => {
     expectSkillsAt(3, [...levelOneKeys, "bittercold-wind"]);
   });
 
-  it("uses the supplied icon at 32px and removes the upcoming group once exhausted", () => {
+  it("uses a plain supplied icon at 36px and removes the upcoming group once exhausted", () => {
     render(<MemoryRouter><GuideSkills gd={gd} icons={{ "flame-arrow": "/flame-arrow.png" }} level={45} /></MemoryRouter>);
     const image = screen.getByRole("img", { name: "Flame Arrow" });
     expect(image).toHaveAttribute("src", "/flame-arrow.png");
-    expect(image.parentElement).toHaveStyle({ width: "32px", height: "32px" });
+    expect(image.parentElement).toHaveStyle({ width: "36px", height: "36px" });
+    expect(image.parentElement).toHaveClass("guide-skills-icon");
+    expect(image.parentElement).toHaveAttribute("data-rarity", "common");
     expectSkillsAt(45, [...levelTwentyTwoKeys, "revitalization-contract", "vitality-evaporation"]);
     expect(screen.queryByRole("list", { name: /unlocking/ })).not.toBeInTheDocument();
   });
@@ -173,7 +184,8 @@ describe("GuideSkills", () => {
       const rows = within(list).getAllByRole("listitem");
       expect(list.children).toHaveLength(rows.length);
       for (const row of rows) {
-        expect(within(row).getByRole("link")).toHaveClass("guide-skills-row");
+        expect(row).toHaveClass("guide-skills-row");
+        expect(within(row).getByRole("link")).toHaveClass("guide-skills-head");
       }
     }
   });
@@ -181,34 +193,45 @@ describe("GuideSkills", () => {
   it("does not infer ranks or specialties from the unlocked list", () => {
     render(view(22));
     expectSkillsAt(22, levelTwentyTwoKeys);
-    expect(screen.queryByText(/^Rank /)).not.toBeInTheDocument();
-    expect(screen.queryByLabelText(/^Specialties /)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Lv /)).not.toBeInTheDocument();
+    expect(screen.queryByRole("list", { name: /^Selected specialties/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Equipped stigmas" })).not.toBeInTheDocument();
   });
 
-  it("shows supplied calculated ranks and selected specialty numbers without changing available skills", () => {
+  it("shows effective levels, actual bonus ranks and full selected specialty text without changing available skills", () => {
     const prepared = planAt(30);
     const arrowData = gd.skills["flame-arrow"];
     const fullData = { ...gd, skills: { ...gd.skills, "flame-arrow": { ...arrowData,
       ranks: Array.from({ length: 10 }, (_, i) => ({ ...arrowData.ranks[0], rank: i + 1 })) } } };
-    const build = { ...prepared.build, skill_ranks: { ...prepared.build.skill_ranks, "flame-arrow": 8 }, specs: { "flame-arrow": [2] } };
-    expect(validateLevelPlan(build, prepared.budget, false, fullData)).toEqual([]);
+    const paidBuild = { ...prepared.build, skill_ranks: { ...prepared.build.skill_ranks, "flame-arrow": 8 }, specs: { "flame-arrow": [2] } };
+    expect(validateLevelPlan(paidBuild, prepared.budget, false, fullData)).toEqual([]);
+    const build = { ...paidBuild, bonus_ranks: { "flame-arrow": 2 }, daevanion_nodes: [4886, 4936] };
     const snapshot = structuredClone(build);
     render(view(30, fullData, build));
     expectSkillsAt(30, [...levelTwentyTwoKeys, "revitalization-contract", "vitality-evaporation"]);
     const arrow = screen.getByRole("link", { name: /Flame Arrow/ });
-    expect(within(arrow).getByText("Rank 8")).toHaveAttribute("title", "Calculated rank 8");
-    const specialties = within(arrow).getByLabelText("Specialties 3");
-    expect(specialties).toHaveTextContent("Specs 3");
-    expect(specialties).toHaveAttribute("title", `Specialty 3: ${arrowData.specializations[2].text}`);
+    expect(within(arrow).getByText("Lv 12")).toBeVisible();
+    expect(skillRow("Flame Arrow").getByText("Paid 8 + Bonus 4")).toBeVisible();
+    const specialties = skillRow("Flame Arrow").getByRole("list", { name: "Selected specialties for Flame Arrow" });
+    expect(within(specialties).getByText(arrowData.specializations[2].text)).toBeVisible();
+    expect(within(specialties).getAllByRole("listitem")).toHaveLength(1);
+    expect(within(arrow).queryByText(arrowData.specializations[2].text)).not.toBeInTheDocument();
+    expect(within(specialties).queryByRole("link")).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Specs /)).not.toBeInTheDocument();
     expect(build).toEqual(snapshot);
   });
 
-  it("removes badges when the parent withdraws the calculated build", () => {
-    const build = planAt(22).build;
+  it("removes ranks, specialties and stigmas when the parent withdraws the calculated build", () => {
+    const build = { ...planAt(22).build, stigmas: ["steel-barrier"], skill_ranks: {
+      ...planAt(22).build.skill_ranks, "steel-barrier": 5,
+    }, specs: { "steel-barrier": [0] } };
     const { rerender } = render(view(22, gd, build));
-    expect(screen.getAllByText("Rank 1")).toHaveLength(levelTwentyTwoKeys.length);
+    expect(screen.getAllByText("Lv 1")).toHaveLength(levelTwentyTwoKeys.length);
+    expect(screen.getByText(gd.skills["steel-barrier"].specializations[0].text)).toBeVisible();
     rerender(view(22));
-    expect(screen.queryByText(/^Rank /)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Lv /)).not.toBeInTheDocument();
+    expect(screen.queryByRole("list", { name: /^Selected specialties/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Equipped stigmas" })).not.toBeInTheDocument();
     expectSkillsAt(22, levelTwentyTwoKeys);
   });
 
@@ -217,10 +240,13 @@ describe("GuideSkills", () => {
     { level: 30 },
     { region: "korea" },
   ])("ignores a calculated build from different display inputs: %j", (mismatch) => {
-    render(view(22, gd, { ...planAt(22).build, ...mismatch }));
+    render(view(22, gd, { ...planAt(22).build, bonus_ranks: { "flame-arrow": 7 },
+      daevanion_nodes: [4886, 4936], specs: { "flame-arrow": [0] }, stigmas: ["steel-barrier"], ...mismatch }));
     expectSkillsAt(22, levelTwentyTwoKeys);
-    expect(screen.queryByText(/^Rank /)).not.toBeInTheDocument();
-    expect(screen.queryByLabelText(/^Specialties /)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Lv /)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Paid /)).not.toBeInTheDocument();
+    expect(screen.queryByRole("list", { name: /^Selected specialties/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Equipped stigmas" })).not.toBeInTheDocument();
   });
 
   it("does not add paid, unresolved or upcoming rows from a supplied build", () => {
@@ -230,25 +256,87 @@ describe("GuideSkills", () => {
     render(view(1, gd, build));
     expectSkillsAt(1, levelOneKeys);
     const available = screen.getByRole("list", { name: "Core skills at level 1" });
-    expect(within(available).getAllByText("Rank 1")).toHaveLength(1);
+    expect(within(available).getAllByText("Lv 1")).toHaveLength(1);
     expect(screen.queryByText("Cold Storm")).not.toBeInTheDocument();
     expect(screen.queryByText("Fire Mark")).not.toBeInTheDocument();
     const upcoming = screen.getByRole("list", { name: "Core skills unlocking at level 3" });
     expect(within(upcoming).getByText("Bittercold Wind")).toBeVisible();
-    expect(within(upcoming).queryByText(/^Rank /)).not.toBeInTheDocument();
+    expect(within(upcoming).queryByText(/^Lv /)).not.toBeInTheDocument();
   });
 
   it.each([0, -1, 1.5, 21, Number.NaN, Number.POSITIVE_INFINITY])("omits an invalid supplied rank %s", (rank) => {
-    const build = { ...planAt(22).build, skill_ranks: { "flame-arrow": rank }, specs: { "flame-arrow": [0] } };
+    const build = { ...planAt(22).build, skill_ranks: { "flame-arrow": rank },
+      bonus_ranks: { "flame-arrow": 8 }, specs: { "flame-arrow": [0] } };
     render(view(22, gd, build));
     expectSkillsAt(22, levelTwentyTwoKeys);
-    expect(screen.queryByText(/^Rank /)).not.toBeInTheDocument();
-    expect(screen.queryByLabelText(/^Specialties /)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Lv /)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^Paid /)).not.toBeInTheDocument();
+    expect(screen.queryByRole("list", { name: /^Selected specialties/ })).not.toBeInTheDocument();
   });
 
   it("omits invalid specialty references and shows each selected option once", () => {
     const build = { ...planAt(22).build, skill_ranks: { "flame-arrow": 8 }, specs: { "flame-arrow": [0, -1, 999, 0.5, 0] } };
     render(view(22, gd, build));
-    expect(screen.getByLabelText("Specialties 1")).toHaveTextContent("Specs 1");
+    const specialties = screen.getByRole("list", { name: "Selected specialties for Flame Arrow" });
+    expect(within(specialties).getAllByRole("listitem")).toHaveLength(1);
+    expect(within(specialties).getByText(gd.skills["flame-arrow"].specializations[0].text)).toBeVisible();
+    expect(screen.queryByText(/^Paid /)).not.toBeInTheDocument();
+  });
+
+  it.each([0, -1, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])("ignores a nonpositive or invalid input bonus %s", (bonus) => {
+    const build = { ...planAt(22).build, skill_ranks: { "flame-arrow": 8 }, bonus_ranks: { "flame-arrow": bonus } };
+    render(view(22, gd, build));
+    expect(skillRow("Flame Arrow").getByText("Lv 8")).toBeVisible();
+    expect(screen.queryByText(/^Paid /)).not.toBeInTheDocument();
+  });
+
+  it.each([[20, 20], [12, 12]])("caps the displayed total at the regional and skill limit (skill max %s)", (maxRank, expected) => {
+    const data: GameData = { ...gd, skills: { ...gd.skills,
+      "flame-arrow": { ...gd.skills["flame-arrow"], max_rank: maxRank },
+    } };
+    const build = { ...planAt(22).build, skill_ranks: { "flame-arrow": 8 }, bonus_ranks: { "flame-arrow": 50 } };
+    render(view(22, data, build));
+    expect(skillRow("Flame Arrow").getByText(`Lv ${expected}`)).toBeVisible();
+    expect(skillRow("Flame Arrow").getByText(`Paid 8 + Bonus ${expected - 8}`)).toBeVisible();
+  });
+
+  it("counts selected skill nodes once, caps them at four and ignores locked boards", () => {
+    const board = gd.daevanion.nezekan;
+    const extraNodes = Array.from({ length: 5 }, (_, i) => ({ ...board.nodes["4886"], id: 70000 + i }));
+    const data: GameData = { ...gd, daevanion: { ...gd.daevanion,
+      nezekan: { ...board, nodes: { ...board.nodes, ...Object.fromEntries(extraNodes.map((node) => [String(node.id), node])) } },
+    } };
+    const build = { ...planAt(12).build, skill_ranks: { "flame-arrow": 8 },
+      daevanion_nodes: [4886, 4886, 4936, ...extraNodes.map((node) => node.id)], bonus_ranks: { "flame-arrow": 2 } };
+    const snapshot = structuredClone(build);
+    const { rerender } = render(view(12, data, build));
+    expect(skillRow("Flame Arrow").getByText("Lv 14")).toBeVisible();
+    expect(skillRow("Flame Arrow").getByText("Paid 8 + Bonus 6")).toBeVisible();
+    rerender(view(12, data, { ...build, daevanion_nodes: [4886, 4886, 4936] }));
+    expect(skillRow("Flame Arrow").getByText("Lv 11")).toBeVisible();
+    expect(build).toEqual(snapshot);
+  });
+
+  it("shows only equipped, unlocked Global stigmas with effective levels and full selected effects", () => {
+    const data: GameData = { ...gd, skills: { ...gd.skills,
+      "soul-freeze": { ...gd.skills["soul-freeze"], regions: ["korea"] },
+      "glacial-smite": { ...gd.skills["glacial-smite"], unlock_level: 40 },
+    } };
+    const build = { ...planAt(30).build, stigmas: ["cold-storm", "cold-storm", "steel-barrier", "soul-freeze", "glacial-smite", "flame-arrow", "unknown"],
+      skill_ranks: { "cold-storm": 8, "steel-barrier": 5, "divine-burst": 5 },
+      bonus_ranks: { "cold-storm": 2 }, specs: { "cold-storm": [0, 1], "steel-barrier": [0] } };
+    render(view(30, data, build));
+    const stigmas = screen.getByRole("region", { name: "Equipped stigmas" });
+    expect(within(stigmas).getAllByRole("link")).toHaveLength(2);
+    expect(within(stigmas).getByRole("link", { name: /Cold Storm/ })).toHaveAttribute("href", "/codex/sorcerer?skill=cold-storm");
+    expect(skillRow("Cold Storm").getByText("Lv 10")).toBeVisible();
+    expect(skillRow("Cold Storm").getByText("Paid 8 + Bonus 2")).toBeVisible();
+    for (const option of [0, 1]) expect(skillRow("Cold Storm").getByText(gd.skills["cold-storm"].specializations[option].text)).toBeVisible();
+    expect(skillRow("Steel Barrier").getByText("Lv 5")).toBeVisible();
+    expect(skillRow("Steel Barrier").getByText(gd.skills["steel-barrier"].specializations[0].text)).toBeVisible();
+    for (const name of ["Soul Freeze", "Glacial Smite", "Divine Burst", "Flame Arrow", "unknown"]) {
+      expect(within(stigmas).queryByText(name)).not.toBeInTheDocument();
+    }
+    expect(stigmas.querySelector("a a, a ul")).toBeNull();
   });
 });

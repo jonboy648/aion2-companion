@@ -1,4 +1,45 @@
 .level-planner { min-width: 0; letter-spacing: 0; }
+.reference-guide {
+  --surface: #0f172a;
+  --surface2: #1e293b;
+  --surface3: #283548;
+  --border-soft: #334155;
+  --text: #e2e8f0;
+  --text-dim: #b7c4d6;
+  --text-faint: #94a3b8;
+  --gold: #fbbf24;
+  --gold-hi: #fcd34d;
+  --cyan: #38bdf8;
+  padding: 24px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+}
+.reference-guide h1, .reference-guide h2, .reference-guide h3 { font-family: var(--font-sans); letter-spacing: 0; }
+.reference-guide .planner-identity { margin-top: 20px; }
+.reference-guide .planner-identity img { display: none; }
+.reference-guide .planner-identity h1, .reference-guide .planner-identity h2 { font-size: 24px; line-height: 32px; }
+.reference-guide .planner-class-picker { background: #0f172a; }
+.reference-guide .planner-class-picker button { background: transparent; box-shadow: none; }
+.reference-guide .planner-class-picker button[aria-pressed="true"] { background: #334155; }
+.reference-guide .planner-budgets { padding: 16px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; }
+.reference-guide .planner-budgets dd { font-size: 16px; }
+.reference-guide .planner-settings { padding: 16px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; margin-bottom: 12px; }
+.reference-guide .planner-toolbar { margin-block: 12px; }
+.reference-guide .planner-playstyles { background: #0f172a; }
+.reference-guide .planner-playstyles button[aria-pressed="true"] { color: white; background: #334155; box-shadow: none; }
+.guide-reference-grid { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 12px; margin-bottom: 12px; }
+.reference-panel { min-width: 0; overflow: hidden; border: 1px solid #334155; border-radius: 6px; background: #0f172a; }
+.reference-panel-heading { margin: 0; padding: 12px 16px; border-bottom: 1px solid #334155; background: #020617; font-size: 16px; line-height: 24px; font-weight: 600; }
+.reference-panel-body { min-width: 0; padding: 16px; }
+.reference-guide .planner-plan-heading { margin: 16px 0 12px; border: 0; padding: 0; }
+.reference-guide .planner-analysis { border-color: #334155; }
+@media (min-width: 900px) { .guide-reference-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) {
+  .reference-guide { padding: 12px; }
+  .reference-panel-body { padding: 12px; }
+  .reference-guide .planner-identity h1, .reference-guide .planner-identity h2 { font-size: 20px; line-height: 28px; }
+}
 .planner-class-picker { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--border-soft); border-radius: 6px; overflow: hidden; }
 .planner-class-picker button { display: flex; gap: 8px; align-items: center; justify-content: center; min-height: 52px; padding: 8px; font-size: 13px; color: var(--text-dim); background: color-mix(in srgb, var(--surface) 66%, transparent); border-right: 1px solid var(--border-soft); }
 .planner-class-picker button:nth-child(-n+4) { border-bottom: 1px solid var(--border-soft); }

@@ -1,155 +1,17 @@
-.guide-quickslots {
-  width: 100%;
-  max-width: 585px;
-  min-width: 0;
-}
-
-.guide-quickslots-sections,
-.guide-macro-panel {
-  display: grid;
-  min-width: 0;
-  gap: 16px;
-}
-
-.guide-quickslots-scroll {
-  padding: 2px 2px 6px;
-}
-
-.guide-quickslots-strip {
-  display: flex;
-  width: max-content;
-  gap: 4px;
-}
-
-.guide-quickslots-key {
-  width: 41px;
-  padding: 0;
-  gap: 4px;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.guide-quickslots-stack {
-  display: grid;
-  width: 41px;
-  gap: 4px;
-}
-
-.guide-quickslots-cell {
-  width: 41px;
-  height: 41px;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.guide-quickslots-key[aria-pressed="true"] > span:first-child {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.guide-quickslots-key[aria-pressed="true"] .guide-quickslots-cell:not(.guide-quickslots-cell-manual):not(.guide-quickslots-cell-macro) {
-  border-color: var(--gold);
-}
-
-.guide-quickslots-key:hover .guide-quickslots-cell:not(.guide-quickslots-cell-manual):not(.guide-quickslots-cell-macro) {
-  border-color: var(--gold-lo);
-}
-
-.guide-quickslots-cell-manual {
-  border-color: var(--gold);
-}
-
-.guide-quickslots-cell-macro {
-  border-color: var(--cyan);
-}
-
-.guide-quickslots-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 12px;
-}
-
-.guide-quickslots-legend > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.guide-quickslots-legend > span > span {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-}
-
-.guide-quickslots-extra,
-.guide-quickslots-skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-}
-
-.guide-quickslots-extra {
-  margin-top: 6px;
-}
-
-.guide-quickslots-extra button[aria-pressed="true"] {
-  color: var(--gold);
-}
-
-.guide-quickslots-detail {
-  border-bottom: 1px solid var(--border-soft);
-  padding-bottom: 12px;
-}
-
-.guide-macro-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 8px 16px;
-}
-
-.guide-macro-controls p {
-  flex: 1 1 200px;
-}
-
-.guide-macro-entries,
-.guide-macro-manual {
-  display: grid;
-  gap: 4px;
-}
-
-.guide-macro-entries {
-  margin-top: 8px;
-}
-
-.guide-macro-entry {
-  display: grid;
-  grid-template-columns: 16px 28px minmax(0, 1fr) 28px 48px;
-  align-items: center;
-  min-height: 41px;
-  gap: 8px;
-  padding: 4px 0;
-  border-bottom: 1px solid var(--border-soft);
-}
-
-.guide-macro-entry > :nth-last-child(-n + 2) {
-  text-align: right;
-}
-
-.guide-macro-manual-entry {
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr) auto auto;
-  align-items: center;
-  min-height: 41px;
-  gap: 8px;
-  padding: 4px 0;
-}
-
-@media (max-width: 400px) {
-  .guide-macro-entry,
-  .guide-macro-manual-entry {
-    gap: 6px;
-  }
+.guide-quickslots { width: 100%; min-width: 0; }
+.guide-quickslots-sections { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 12px; min-width: 0; }
+.guide-slot-panel { position: relative; }
+.guide-quickslots-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; font-size: 12px; }
+.guide-quickslots-legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.guide-quickslots-legend > span > span { width: 9px; height: 9px; border-radius: 3px; }
+.guide-slot-basis { margin-top: 12px; font-size: 12px; color: var(--text-faint); }
+.guide-quickslots-detail { position: relative; margin-top: 16px; border-top: 1px solid var(--border-soft); padding-top: 12px; }
+.guide-quickslots-skills { display: grid; gap: 8px; }
+.guide-how-to-play { grid-column: 1 / -1; }
+.guide-play-instructions { display: grid; gap: 12px; font-size: 14px; }
+.guide-play-instructions li { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.guide-play-instructions li::before { content: ""; width: 5px; height: 5px; flex-shrink: 0; border-radius: 50%; background: var(--gold); }
+.guide-play-instructions li > span:not(.icon-frame) { color: var(--text-dim); }
+@media (min-width: 900px) {
+  .guide-quickslots-sections { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
