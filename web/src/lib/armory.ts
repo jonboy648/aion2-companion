@@ -115,6 +115,8 @@ export interface ArmoryIcon {
   icon: string | null;
   name: string;
   grade: string;
+  level?: number;
+  enchantLevel?: number;
 }
 export interface ArmoryExtras {
   /** equipped slot name ("MainHand") -> official icon URL (hotlinked from NCSoft's CDN) */
@@ -122,22 +124,83 @@ export interface ArmoryExtras {
   pet: ArmoryIcon | null;
   wing: ArmoryIcon | null;
   wingSkin: ArmoryIcon | null;
+  skills?: ArmorySkill[];
+  titles?: ArmoryTitle[];
+  attributes?: ArmoryAttribute[];
 }
+
+export interface ArmoryAttribute {
+  key: string;
+  name: string;
+  value: number;
+  effects: string[];
+}
+
+export interface ArmoryTitle {
+  id: number;
+  name: string;
+  grade: string;
+  category: string;
+  equippedEffects: string[];
+  collectionEffects: string[];
+}
+
+export interface ArmorySkill {
+  id: number;
+  name: string;
+  icon: string | null;
+  category: string;
+  rank: number;
+  acquired: boolean;
+  equipped: boolean;
+}
+
+const object = (value: unknown): Record<string, unknown> =>
+  value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
+const rows = (value: unknown): Record<string, unknown>[] =>
+  Array.isArray(value) ? value.map(object) : [];
+const descriptions = (value: unknown): string[] => rows(value).flatMap((row) =>
+  typeof row.desc === "string" ? [strip(row.desc)] : []);
 
 const asIcon = (o: unknown, fallbackGrade = ""): ArmoryIcon | null => {
   if (!o || typeof o !== "object") return null;
   const r = o as Record<string, unknown>;
   if (typeof r.name !== "string" || !r.name) return null;
-  return { icon: typeof r.icon === "string" ? r.icon : null, name: r.name, grade: typeof r.grade === "string" ? r.grade : fallbackGrade };
+  return {
+    icon: typeof r.icon === "string" ? r.icon : null,
+    name: r.name,
+    grade: typeof r.grade === "string" ? r.grade : fallbackGrade,
+    ...(typeof r.level === "number" && Number.isFinite(r.level) && r.level >= 0 ? { level: r.level } : {}),
+    ...(typeof r.enchantLevel === "number" && Number.isFinite(r.enchantLevel) && r.enchantLevel >= 0 ? { enchantLevel: r.enchantLevel } : {}),
+  };
 };
 
 /** What the engine summary drops: per-slot gear icon URLs and the pet / wings, read straight from the raw armory payload. */
 export function armoryExtras(raw: ArmoryRaw): ArmoryExtras {
-  const eq = (raw.equipment ?? {}) as { equipment?: { equipmentList?: Record<string, unknown>[] }; petwing?: Record<string, unknown> };
+  const eq = object(raw.equipment);
   const gearIcons: Record<string, string> = {};
-  for (const e of eq.equipment?.equipmentList ?? []) {
+  for (const e of rows(object(eq.equipment).equipmentList)) {
     if (typeof e.slotPosName === "string" && typeof e.icon === "string") gearIcons[e.slotPosName] = e.icon;
   }
-  const pw = eq.petwing ?? {};
-  return { gearIcons, pet: asIcon(pw.pet, "Epic"), wing: asIcon(pw.wing), wingSkin: asIcon(pw.wingSkin) };
+  const pw = object(eq.petwing);
+  const skills = rows(object(object(raw.equipment).skill).skillList).flatMap((s): ArmorySkill[] => {
+    if (typeof s.id !== "number" || !Number.isFinite(s.id) || typeof s.name !== "string"
+      || typeof s.skillLevel !== "number" || !Number.isFinite(s.skillLevel) || s.skillLevel < 0) return [];
+    return [{ id: s.id, name: strip(s.name), icon: typeof s.icon === "string" ? s.icon : null,
+      category: typeof s.category === "string" ? s.category : "Other", rank: s.skillLevel,
+      acquired: s.acquired === 1 || s.acquired === true, equipped: s.equip === 1 || s.equip === true }];
+  });
+  const titles = rows(object(object(raw.info).title).titleList).flatMap((t): ArmoryTitle[] => {
+    if (typeof t.id !== "number" || !Number.isFinite(t.id) || typeof t.name !== "string") return [];
+    return [{ id: t.id, name: strip(t.name), grade: typeof t.grade === "string" ? t.grade : "",
+      category: typeof t.equipCategory === "string" ? t.equipCategory : "Other",
+      equippedEffects: descriptions(t.equipStatList), collectionEffects: descriptions(t.statList) }];
+  });
+  const attributes = rows(object(object(raw.info).stat).statList).flatMap((a): ArmoryAttribute[] => {
+    if (typeof a.type !== "string" || typeof a.name !== "string" || typeof a.value !== "number" || !Number.isFinite(a.value)) return [];
+    return [{ key: a.type, name: strip(a.name), value: a.value,
+      effects: Array.isArray(a.statSecondList) ? a.statSecondList.filter((e): e is string => typeof e === "string").map(strip) : [] }];
+  });
+  return { gearIcons, pet: asIcon(pw.pet, "Epic"), wing: asIcon(pw.wing), wingSkin: asIcon(pw.wingSkin),
+    ...(skills.length ? { skills } : {}), ...(titles.length ? { titles } : {}), ...(attributes.length ? { attributes } : {}) };
 }
