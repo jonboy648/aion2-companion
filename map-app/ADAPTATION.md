@@ -20,6 +20,13 @@ Build from the repository root after `npm ci --prefix web` and
     npm run build --prefix web
     node web/scripts/build-map.mjs
 
+The committed lockfile resolves registry packages, never another worktree's
+node_modules. The map's .npmrc keeps legacy peer resolution enabled because its
+upstream React 19 setup includes libraries declaring React 18 type peers. Use
+the same configuration for lockfile generation and clean installs. Do not run
+npm install while node_modules is a junction to a different project: it can
+replace registry resolutions with machine-local links that break Pages builds.
+
 The second command adds the map to web/dist/map, including direct-entry HTML for
 About and Crafting, LICENSE, and a corresponding-source archive. It does not
 contact the original app's backend, analytics or CDN. Outside credit hyperlinks
