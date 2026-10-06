@@ -25,7 +25,7 @@ for (const route of ["about", "crafting"]) {
 }
 copyFileSync(join(app, "LICENSE"), join(output, "LICENSE"));
 const sourceFiles = ["src", "public", "LICENSE", "README.md", "ADAPTATION.md", "PERMISSION_NOTE.md",
-  "package.json", "package-lock.json", "env.d.ts", "index.html", "postcss.config.js",
+  "package.json", "package-lock.json", ".npmrc", "env.d.ts", "index.html", "postcss.config.js",
   "tailwind.config.ts", "tsconfig.app.json", "tsconfig.json", "tsconfig.node.json", "vite.config.ts"];
 const tar = process.platform === "win32" ? join(process.env.SystemRoot || "C:/Windows", "System32/tar.exe") : "tar";
 run(tar, ["-czf", join(output, "map-source.tar.gz"), ...sourceFiles], { cwd: app });

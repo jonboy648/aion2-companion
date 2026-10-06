@@ -41,8 +41,29 @@ test("map uses local static data and base-relative routing", () => {
   assert.match(read("build-map.mjs"), /VITE_PUBLIC_BASE: "\/map\/"/);
   assert.match(read("build-map.mjs"), /\["about", "crafting"\]/);
 });
-test("approved map zones and reproducible dependency lock exist", () => {
+test("approved map zones and dependency lock exist", () => {
   for (const path of ["package-lock.json", "public/data/markers/World_L_B.yaml", "public/data/markers/World_D_B.yaml", "public/data/markers/Abyss_Reshanta_D.yaml"]) {
     assert.ok(existsSync(fileURLToPath(new URL(`../../map-app/${path}`, import.meta.url))), path);
   }
+});
+test("map dependency lock installs without local filesystem links", () => {
+  const lock = JSON.parse(read("../../map-app/package-lock.json"));
+  for (const [path, entry] of Object.entries(lock.packages)) {
+    if (!path) continue;
+    assert.ok(path.startsWith("node_modules/"), `external package path: ${path}`);
+    assert.ok(!entry.link, `local dependency link: ${path}`);
+    assert.ok(!entry.extraneous, `extraneous dependency: ${path}`);
+    if (entry.inBundle) {
+      const parent = path.slice(0, path.lastIndexOf("/node_modules/"));
+      assert.ok(lock.packages[parent]?.integrity, `unverified bundled dependency: ${path}`);
+    } else {
+      assert.match(entry.resolved ?? "", /^https:\/\//, `non-registry dependency: ${path}`);
+      assert.ok(entry.integrity, `missing dependency integrity: ${path}`);
+    }
+  }
+  for (const name of ["typescript", "vite", "react", "leaflet"]) {
+    assert.ok(lock.packages[`node_modules/${name}`], `missing build dependency: ${name}`);
+  }
+  assert.match(read("../../map-app/.npmrc"), /^legacy-peer-deps=true\s*$/);
+  assert.match(read("build-map.mjs"), /"\.npmrc"/);
 });
