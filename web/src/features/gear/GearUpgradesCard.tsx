@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Link, useInRouterContext } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { IconFrame, OrnateCard, SectionTitle, rarityOf } from "@/components/game";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +11,18 @@ function Piece({ item, icon, size = 44 }: { item: GearPiece | null; icon?: strin
   return <IconFrame name={item.name} url={icon ?? item.icon} size={size} rarity={rarityOf(item.grade)} title={`${item.name} +${item.enchant} (IL ${item.il})`} alt="" />;
 }
 
+/** Deep link to the cost calculator for an enhance / amplify move (only inside the router). */
+export function costLink(u: GearUpgrade): string | null {
+  if (u.kind === "item") return null;
+  const exceed = u.kind === "exceed";
+  const a = exceed ? u.from?.exceed ?? 0 : u.from?.enchant ?? 0;
+  const b = exceed ? u.to.exceed : u.to.enchant;
+  return `/enhance?item=${u.to.id}&track=${exceed ? "exceed" : "enchant"}&from=${a}&to=${b}`;
+}
+
 export function UpgradeRow({ u, rank }: { u: GearUpgrade; rank: number }) {
+  const inRouter = useInRouterContext();
+  const cost = inRouter ? costLink(u) : null;
   return (
     <li className="frame flex flex-wrap items-center gap-x-3 gap-y-2 p-2.5" data-testid="gear-upgrade">
       <span className="w-5 shrink-0 text-center text-xs tabular-nums text-faint">{rank}</span>
@@ -30,6 +42,7 @@ export function UpgradeRow({ u, rank }: { u: GearUpgrade; rank: number }) {
             <Badge key={s}>{s}</Badge>
           ))}
           <Badge tone={u.reachable ? "ok" : "warn"}>{u.reachable ? "Reachable" : "Not yet obtainable"}</Badge>
+          {cost && <Link to={cost} className="text-[11px] text-gold underline-offset-2 hover:underline">Cost to reach {u.kind === "exceed" ? `Amp ${u.to.exceed}` : `+${u.to.enchant}`}</Link>}
         </span>
       </span>
       <span className="ml-auto text-right">

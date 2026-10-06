@@ -10,6 +10,7 @@ import { CodexPage } from "@/pages/CodexPage";
 import { Compare as ComparePage } from "@/pages/Compare";
 import { CraftingPage } from "@/pages/CraftingPage";
 import { DaevanionPage } from "@/pages/DaevanionPage";
+import { EnhancePage } from "@/pages/EnhancePage";
 import { GuidePage } from "@/pages/GuidePage";
 import { HomePage } from "@/pages/HomePage";
 import { KeybindsPage } from "@/pages/KeybindsPage";
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="codex/:classKey?" element={<CodexPage />} />
           <Route path="keybinds" element={<KeybindsPage />} />
           <Route path="crafting" element={<CraftingPage />} />
+          <Route path="enhance" element={<EnhancePage />} />
           <Route path="roadmap" element={<RoadmapPage />} />
           <Route path="admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
