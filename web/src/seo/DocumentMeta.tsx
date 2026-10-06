@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { resolveKey } from "@/features/items/logic";
 import seo from "./routes.json";
 
 export interface PageMeta {
@@ -21,6 +22,9 @@ export function metaFor(pathname: string): PageMeta {
   const path = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
   const known = BY_PATH.get(path);
   if (known) return { title: known.title, description: known.description, noindex: false, canonicalPath: known.path };
+  // /items/<group | category | id>: prerendered folder pages, indexable; the page sets the precise title once it knows the item
+  const items = BY_PATH.get("/items");
+  if (items && /^\/items\/[a-z0-9-]+$/.test(path) && resolveKey(path.slice(7)).kind !== "unknown") return { title: items.title, description: items.description, noindex: false, canonicalPath: path };
   if (/^\/c\/[^/]+\/[^/]+\/[^/]+$/.test(path)) {
     return { title: `Aion 2 character build | ${seo.site.name}`, description: HOME.description, noindex: true, canonicalPath: path };
   }
@@ -50,7 +54,8 @@ export function DocumentMeta() {
   useEffect(() => {
     const m = metaFor(pathname);
     // GitHub Pages serves each fixed page as a folder, at its trailing-slash URL; the canonical must be that URL
-    const url = `${seo.site.url}${m.canonicalPath === "/" || !BY_PATH.has(m.canonicalPath) ? m.canonicalPath : `${m.canonicalPath}/`}`;
+    const folder = BY_PATH.has(m.canonicalPath) || m.canonicalPath.startsWith("/items/");
+    const url = `${seo.site.url}${m.canonicalPath === "/" || !folder ? m.canonicalPath : `${m.canonicalPath}/`}`;
     document.title = m.title;
     setMeta('meta[name="description"]', meta("name", "description"), "content", m.description);
     setMeta('link[rel="canonical"]', () => Object.assign(document.createElement("link"), { rel: "canonical" }), "href", url);

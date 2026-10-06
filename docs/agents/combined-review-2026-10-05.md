@@ -1,0 +1,48 @@
+# Combined Review Build
+
+Branch: `codex/level-planner-acceptance`, worktree `D:\Aion2-level-planner`.
+Preview: http://127.0.0.1:5197/codex/templar (real browser engine).
+Review only: no push, merge to main, or deployment authorized for this checkpoint.
+
+## Included
+
+- Reference-layout manual builder and class guide: `a778723`.
+- Stat sheet: `cb5fa54`; real stats: `7d0f5e8`; legal progression: `84a8aec`.
+- Checklist: `30fa027`; global search: `e880b18`.
+- Enhancement calculator: `2ded2ab`; item database and gear viewer: `015a5d6`.
+- Union of all routes, navigation/footer links, SEO metadata and route tests.
+- Regenerated engine item table, manifest and fixtures, not hand-merged outputs.
+- Search indexes all 9,245 item IDs, including materials and consumables, once each.
+- Search closes on query-only skill navigation as well as page navigation.
+
+Server status remains excluded: its draft has no verified data source.
+This integration does not replace Home or redo the approved guide layout.
+No optimizer, model or webapi source changes relative to `84a8aec`.
+
+## Verification
+
+- Web: `npx vitest run --maxWorkers=2`: 674 tests in 71 files passed.
+- Production: `npm run build`: strict TypeScript, Vite and 9,318 prerendered files passed.
+- Planner: 33 real CPython cases, 107 main/variant builds validated across eight classes at levels 22/30/45, including locked and earned-point cases.
+- Fresh browser checks: checklist add/tick/reload persistence and test-task cleanup; enhancement target-level recalculation; material search to item detail; same-class skill search closes and opens its encyclopedia details; gear comparison pin.
+- Mobile: guide, items, gear viewer, enhancement and checklist have matching document client/scroll widths (378 CSS px at the browser's 390 px mobile viewport); tables scroll within their containers. All six level-30 Templar quickslot icons loaded.
+- Fresh real-browser Templar level-30 calculation completed; slot details open and close; no captured warning/error logs.
+- Python full-suite result: pending final completion. Missing local, git-ignored desktop icon folders were connected to existing `D:\Aion2` assets via local-only junctions; 17 icon tests then passed. No art was added to git.
+
+The first web run overlapped CPU-heavy acceptance work and timed out during a character switch; the unchanged character tests passed in isolation and the complete rerun passed. Keep character remount and duplicate-key guards intact.
+
+## Build Size
+
+Main JS: 777.39 kB (gzip 237.79); CSS: 135.56 kB (gzip 25.01).
+Against the approved guide checkpoint: main JS +96.78 kB, CSS +4.94 kB.
+The 880.3 KiB search index loads only when search opens. Enhancement chart chunks are lazy.
+Existing large-chunk and mixed fixture import warnings remain.
+Engine fingerprint: `8bc4b1c25c61`.
+
+## Still Separate
+
+- Header dropdown consolidation and item-table presentation from Claude's layout QA backlog are not included in this integration.
+- Distinct item IDs can currently share indistinguishable names/visible stats; the table does not yet explain those variants.
+- Desktop tables may require horizontal scrolling to see all selected columns.
+- Custom quickslot layout is not yet validation of physical in-game slot restrictions; the guide labels this limitation.
+- Draft server status and the separate map-review lane are not newly merged by this four-feature integration.

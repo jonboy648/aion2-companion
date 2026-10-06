@@ -24,7 +24,7 @@ function RowIcon({ row }: { row: Row }) {
 export function GlobalSearch() {
   const [open, setOpen] = useState(false);
   const opener = useRef<HTMLElement | null>(null);
-  const { pathname } = useLocation();
+  const { key: locationKey } = useLocation();
 
   const show = useCallback(() => {
     opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -50,7 +50,7 @@ export function GlobalSearch() {
   }, []);
 
   // navigating anywhere (links, back button) closes the palette
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => setOpen(false), [locationKey]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 // Build step (before `vite build`): writes public/search-index.json for the Ctrl+K palette from data already in the repo
-// (src/seo/routes.json, public/engine/*). Compact column format; src/features/search/index.ts expands it. Run: node scripts/build_search_index.mjs
+// (src/seo/routes.json, public/engine/*, public/items/*). Compact column format; src/features/search/index.ts expands it. Run: node scripts/build_search_index.mjs
 import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -50,9 +50,22 @@ export function buildIndex(rootDir = root) {
 
   // Items: [name, id, slot, grade, iconName]
   const itemsFile = join(engine, "items.json");
-  const items = existsSync(itemsFile)
+  let items = existsSync(itemsFile)
     ? readJson(itemsFile).items.map((i) => [i.name, i.id, i.slot ?? "", i.grade ?? "", i.icon ?? ""])
     : [];
+  const itemDb = join(rootDir, "public/items");
+  const itemIndex = join(itemDb, "index.json");
+  if (existsSync(itemIndex)) {
+    const byId = new Map();
+    for (const group of readJson(itemIndex).groups) {
+      for (const cat of group.cats) {
+        for (const i of readJson(join(itemDb, "cat", `${cat.key}.json`)).items) {
+          byId.set(i.id, [i.n, i.id, cat.key, i.g ?? "", i.i ?? ""]);
+        }
+      }
+    }
+    items = [...byId.values()];
+  }
 
   return { v: 1, itemRoute, pages, classes, skills, daevanion, items };
 }

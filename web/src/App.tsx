@@ -18,6 +18,8 @@ import { NotFoundPage } from "@/pages/NotFoundPage";
 import { RoadmapPage } from "@/pages/RoadmapPage";
 import { ChecklistPage } from "@/pages/ChecklistPage";
 import { TimersPage } from "@/pages/Timers";
+import { ItemsPage } from "@/pages/Items";
+import { GearViewer } from "@/features/items/GearViewer";
 
 /** Route table. Each page group is owned by one Wave 1 team; keep paths stable (they are shareable links). */
 export default function App() {
@@ -32,6 +34,8 @@ export default function App() {
           <Route path="maps" element={<Maps />} />
           <Route path="timers" element={<TimersPage />} />
           <Route path="checklist" element={<ChecklistPage />} />
+          <Route path="items/:key?" element={<ItemsPage />} />
+          <Route path="gear-viewer" element={<GearViewer />} />
           <Route path="compare/:a?/:b?" element={<ComparePage />} />
           <Route path="guide" element={<GuidePage />} />
           <Route path="build" element={<BuildPage />} />

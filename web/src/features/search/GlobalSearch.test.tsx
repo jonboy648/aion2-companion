@@ -21,9 +21,9 @@ function Where() {
   return <div data-testid="where">{l.pathname + l.search}</div>;
 }
 
-function setup() {
+function setup(path = "/start") {
   return render(
-    <MemoryRouter initialEntries={["/start"]}>
+    <MemoryRouter initialEntries={[path]}>
       <GlobalSearch />
       <Routes>
         <Route path="*" element={<Where />} />
@@ -87,6 +87,8 @@ describe("index", () => {
     expect(idx.classes.length).toBeGreaterThanOrEqual(8);
     expect(idx.skills.length).toBeGreaterThan(100);
     expect(idx.items.length).toBeGreaterThan(1000);
+    expect(idx.items.some((i: [string, number]) => i[1] === 930100023)).toBe(true);
+    expect(new Set(idx.items.map((i: [string, number]) => i[1])).size).toBe(idx.items.length);
     expect(idx.pages.some((p: string[]) => p[1] === "/daevanion")).toBe(true);
   });
 });
@@ -149,6 +151,16 @@ describe("GlobalSearch palette", () => {
     expect(screen.getAllByRole("group")).toHaveLength(3);
     expect(screen.getByText("Skills")).toBeInTheDocument();
     expect(screen.getByText("Items")).toBeInTheDocument();
+  });
+
+  it("closes when selecting a skill on the current class page", async () => {
+    setup("/codex/sorcerer");
+    fireEvent.click(screen.getByRole("button", { name: "Search the site" }));
+    const input = await screen.findByRole("combobox");
+    fireEvent.change(input, { target: { value: "Flame Arrow" } });
+    fireEvent.click(await screen.findByRole("option", { name: /^Flame Arrow/ }));
+    expect(screen.getByTestId("where")).toHaveTextContent("/codex/sorcerer?skill=flame-arrow");
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
   });
 
   it("offers a character lookup action and traps Tab inside the dialog", async () => {

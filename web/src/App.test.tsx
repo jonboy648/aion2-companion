@@ -28,9 +28,15 @@ describe("app shell", () => {
     ["/codex/assassin", /assassin class guide/i],
     ["/keybinds", "Keybinds and macros"],
     ["/crafting", "Crafting"],
+    ["/enhance", "Enhancement calculator"],
     ["/roadmap", "Road map"],
     ["/timers", "Timers"],
     ["/checklist", "Checklist"],
+    ["/items", "Items"],
+    ["/items/weapons", "Weapons"],
+    ["/items/sword", "Sword"],
+    ["/items/nope", "Page not found"],
+    ["/gear-viewer", "Gear viewer"],
     ["/nope", "Page not found"],
   ])("route %s", (path, heading) => {
     at(path);

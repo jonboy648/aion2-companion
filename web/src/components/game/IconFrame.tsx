@@ -13,6 +13,8 @@ export function rarityOf(grade: string | null | undefined): Rarity {
 interface Props {
   /** official icon URL (hotlinked from NCSoft's CDN, never hosted here) */
   url?: string | null;
+  /** tried when `url` fails to load (before the initials) */
+  fallbackUrl?: string | null;
   name: string;
   size?: number;
   rarity?: Rarity;
@@ -24,8 +26,9 @@ interface Props {
 }
 
 /** In-game inventory style item/skill icon: rarity gradient frame, inner bevel, soft glow; initials when the image is missing. */
-export function IconFrame({ url, name, size = 40, rarity = "epic", className, alt, eager, title }: Props) {
-  const [failed, setFailed] = useState(false);
+export function IconFrame({ url, fallbackUrl, name, size = 40, rarity = "epic", className, alt, eager, title }: Props) {
+  const [failures, setFailures] = useState(0);
+  const shown = [url, fallbackUrl].filter((u): u is string => !!u)[failures];
   const initials = name
     .split(/[\s-]+/)
     .filter(Boolean)
@@ -35,8 +38,8 @@ export function IconFrame({ url, name, size = 40, rarity = "epic", className, al
   const style: CSSProperties = { width: size, height: size };
   return (
     <span className={cn("icon-frame", className)} data-rarity={rarity} style={style} title={title ?? name}>
-      {url && !failed ? (
-        <img src={url} alt={alt ?? name} loading={eager ? "eager" : "lazy"} decoding="async" referrerPolicy="no-referrer" onError={() => setFailed(true)} />
+      {shown ? (
+        <img key={shown} src={shown} alt={alt ?? name} loading={eager ? "eager" : "lazy"} decoding="async" referrerPolicy="no-referrer" onError={() => setFailures((n) => n + 1)} />
       ) : (
         <span aria-label={alt ?? name} className="grid place-items-center font-semibold text-[#d9c27a]" style={{ fontSize: Math.max(9, size / 3.2) }}>
           {initials || "?"}
