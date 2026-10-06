@@ -41,6 +41,11 @@ test("map uses local static data and base-relative routing", () => {
   assert.match(read("build-map.mjs"), /VITE_PUBLIC_BASE: "\/map\/"/);
   assert.match(read("build-map.mjs"), /\["about", "crafting"\]/);
 });
+test("map sidebar controls stay above Leaflet layers", () => {
+  const css = read("../../map-app/src/components/Map/SideBar/become-cube-sidebar.css");
+  assert.match(css, /\.cube-map-sidebar\s*\{[^}]*z-index:\s*1000\s*;/);
+  assert.match(read("../../map-app/src/components/Map/SideBar/SidebarWrapper.tsx"), /maxWidth:\s*`min\(\$\{width\}px, calc\(100vw - 3rem\)\)`/);
+});
 test("approved map zones and dependency lock exist", () => {
   for (const path of ["package-lock.json", "public/data/markers/World_L_B.yaml", "public/data/markers/World_D_B.yaml", "public/data/markers/Abyss_Reshanta_D.yaml"]) {
     assert.ok(existsSync(fileURLToPath(new URL(`../../map-app/${path}`, import.meta.url))), path);
