@@ -70,14 +70,14 @@ function Shell() {
             <BrandCrest />
             <span className="font-display text-[18px] font-bold tracking-wider">Become Cube</span>
           </NavLink>
-          <nav aria-label="Main" className="flex flex-wrap gap-1.5">
+          <nav aria-label="Main" className="flex flex-wrap items-center gap-1.5">
+            <GlobalSearch />
             {NAV.map((n) => (
               <NavLink key={n.to} to={n.to} end={n.end} className={cn("game-tab px-3 py-1.5 text-sm font-medium no-underline")}>
                 {n.label}
               </NavLink>
             ))}
           </nav>
-          <GlobalSearch />
           {isMockEngine && (
             <span className="rounded border border-warn/50 bg-warn/10 px-2.5 py-0.5 text-xs text-warn" title="VITE_ENGINE=mock">
               mock data

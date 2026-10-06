@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import App from "./App";
@@ -13,6 +13,12 @@ function at(path: string) {
 }
 
 describe("app shell", () => {
+  it("keeps site search in the main navigation flow", () => {
+    at("/checklist");
+    const navigation = screen.getByRole("navigation", { name: "Main" });
+    expect(within(navigation).getByRole("button", { name: "Search the site" })).toBeInTheDocument();
+  });
+
   it("renders nav and the fan-project footer on every page", async () => {
     at("/");
     expect(screen.getByRole("navigation", { name: "Main" })).toBeInTheDocument();

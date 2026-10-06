@@ -58,13 +58,12 @@ export function GlobalSearch() {
         type="button"
         onClick={show}
         aria-label="Search the site"
+        title="Search the site (Ctrl+K)"
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="game-tab ml-auto flex items-center gap-2 px-3 py-1.5 text-sm font-medium"
+        className="game-tab flex h-11 w-11 shrink-0 items-center justify-center sm:h-9 sm:w-9"
       >
         <Search aria-hidden className="h-4 w-4" />
-        <span className="hidden sm:inline">Search</span>
-        <kbd className="hidden rounded border border-border-soft px-1.5 text-[11px] text-faint md:inline">Ctrl K</kbd>
       </button>
       {open && <Palette onClose={hide} />}
     </>
