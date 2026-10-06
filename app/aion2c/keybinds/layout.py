@@ -7,14 +7,13 @@ Rules (PLAN 3 P5 + section 5):
 - stacks are priority groups: burst cooldowns first, then conditional spenders (need a status),
   then rotational damage, and the zero-cooldown filler LAST (it is always usable, so anything
   below it would starve);
-- a 0-cooldown skill is only ever the LAST row of a stack;
-- MANUAL skills (data tag "manual": charge skills, CC breaks, defensives, plus dodge) get single-skill slots and never enter a macro;
+- an always-ready 0-cooldown skill is only ever the LAST row of a stack (chain-window children are conditional);
+- MANUAL skills (data tag "manual": charge skills, CC breaks, defensives, plus dodge) get dedicated slots and never enter a macro;
 - with auto_chain False the chain children go into the parent's stack, children first, root last.
 `design_groups` takes a `style` so the macro search can try several partitions of the same skills.
 """
 from __future__ import annotations
 
-from aion2c.data.loader import allowed_skills
 from aion2c.engine.rotation import cooldown_of
 from aion2c.models import (
     KEY_LABELS,
@@ -24,6 +23,7 @@ from aion2c.models import (
     SkillBar,
     SkillKind,
     SlotStack,
+    total_rank,
 )
 
 MAX_STACK = 4
@@ -46,7 +46,7 @@ def slot_why(gd: GameData, build: CharacterBuild, stack: tuple[str, ...], gated:
     """One sentence on why this stack is ordered the way it is, from the skills actually in it."""
     role = stack_role(gd, build, stack, gated)
     if role == "manual":
-        sk = gd.skills[stack[0]]
+        sk = next(gd.skills[key] for key in stack if is_manual(gd, key))
         why = ("a charge skill: you hold the key to charge it" if "charge skill" in sk.tags
                else "a defensive or crowd control skill: use it when the fight needs it" if any(
                    t in sk.tags for t in ("role:defense", "role:cc")) else "tagged manual in the game data")
@@ -57,7 +57,9 @@ def slot_why(gd: GameData, build: CharacterBuild, stack: tuple[str, ...], gated:
         rule = gd.rules.get(k)
         cd = _cooldown_s(gd, build, k)
         need = [gd.statuses[r].name if r in gd.statuses else r for r in (rule.requires if rule else ())]
-        if cd <= 0:
+        if gd.skills[k].kind in (SkillKind.CHAIN, SkillKind.PROC):
+            parts.append(f"{name} (only while its chain window is open)")
+        elif cd <= 0:
             parts.append(f"{name} (no cooldown, always ready, so last)")
         elif need or k in gated:
             parts.append(f"{name} (only while {' and '.join(need) or 'its status'} is up, {cd:.0f} s)")
@@ -84,12 +86,14 @@ def _cooldown_s(gd: GameData, build: CharacterBuild, key: str) -> float:
     return cooldown_of(gd, build, key)  # unknown treated as 0: keeps it last, never starves others
 
 
-def _chain_children(gd: GameData, key: str) -> list[str]:
+def _chain_children(gd: GameData, key: str, build: CharacterBuild | None = None) -> list[str]:
     out: list[str] = []
     seen = {key}
     rule = gd.rules.get(key)
     nxt = rule.chain_next if rule else None
     while nxt and nxt not in seen and nxt in gd.skills:
+        if build is not None and not _castable(gd, build, nxt, chain_child=True):
+            break  # Later descendants cannot be reached through an unavailable step.
         out.append(nxt)
         seen.add(nxt)
         rule = gd.rules.get(nxt)
@@ -97,13 +101,30 @@ def _chain_children(gd: GameData, key: str) -> list[str]:
     return out
 
 
-def _castable(gd: GameData, build: CharacterBuild, key: str) -> bool:
+def _castable(gd: GameData, build: CharacterBuild, key: str, chain_child: bool = False) -> bool:
     sk = gd.skills.get(key)
-    if sk is None or sk.kind not in _STACKABLE + (SkillKind.DODGE,):
+    kinds = _STACKABLE + (SkillKind.DODGE,) + ((SkillKind.CHAIN, SkillKind.PROC) if chain_child else ())
+    if sk is None or sk.kind not in kinds:
+        return False
+    if sk.kind == SkillKind.STIGMA and key not in build.stigmas:
         return False
     if sk.unlock_level is not None and sk.unlock_level > build.level:
         return False
-    return key in {s.key for s in allowed_skills(gd, build.region, build.show_kr)}
+    rule = gd.rules.get(key)
+    if rule is not None and rule.requires_spec:
+        owner, option = rule.requires_spec
+        owner_skill = gd.skills.get(owner)
+        if owner_skill is None or option not in build.specs.get(owner, ()) or not 0 <= option < len(owner_skill.specializations):
+            return False
+        required = owner_skill.specializations[option].rank_required
+        if required is None or total_rank(gd, build, owner_skill) < required:
+            return False
+    return build.region in sk.regions
+
+
+def _stack_unit(gd: GameData, build: CharacterBuild, key: str, auto_chain: bool) -> list[str]:
+    children = [] if auto_chain else _chain_children(gd, key, build)
+    return (list(reversed(children)) + [key])[-MAX_STACK:]
 
 
 def skill_role(gd: GameData, build: CharacterBuild, key: str, gated: frozenset[str] = frozenset()) -> str:
@@ -124,11 +145,20 @@ def skill_role(gd: GameData, build: CharacterBuild, key: str, gated: frozenset[s
     return "rotational"
 
 
-def _chunks(keys: list[str]) -> list[list[str]]:
-    return [keys[i:i + MAX_STACK] for i in range(0, len(keys), MAX_STACK)]
+def _chunks(keys: list[str], units: dict[str, list[str]]) -> list[list[str]]:
+    groups: list[list[str]] = []
+    for key in keys:
+        unit = units[key]
+        if groups and len(groups[-1]) + len(unit) <= MAX_STACK:
+            groups[-1].extend(unit)
+        else:
+            groups.append(list(unit))
+    return groups
 
 
 def stack_role(gd: GameData, build: CharacterBuild, stack: tuple[str, ...], gated: frozenset[str] = frozenset()) -> str:
+    if any(is_manual(gd, key) for key in stack):
+        return "manual"
     roles = [skill_role(gd, build, k, gated) for k in stack]
     if len(stack) == 1 and roles[0] == "filler":
         return "filler"
@@ -157,7 +187,8 @@ def design_groups(
         if not _castable(gd, build, k):
             if gd.skills[k].kind not in _STACKABLE + (SkillKind.DODGE,):
                 continue  # chain child / passive: not castable from its own slot
-            warnings.append(f"{k}: locked or not available in {build.region}, skipped")
+            reason = "not an equipped stigma" if gd.skills[k].kind == SkillKind.STIGMA and k not in build.stigmas else f"locked or not available in {build.region}"
+            warnings.append(f"{k}: {reason}, skipped")
             continue
         if k in child_keys:
             continue  # chain child: reached through its root (or placed in the root's stack)
@@ -166,30 +197,28 @@ def design_groups(
     gated = frozenset(e.skill_key for e in priority.entries if e.require_status)
     manual = [k for k in order if is_manual(gd, k)]
     body = [k for k in order if not is_manual(gd, k)]
+    units = {key: _stack_unit(gd, build, key, auto_chain) for key in body}
     cds = [k for k in body if _cooldown_s(gd, build, k) > 0]
     role = {k: skill_role(gd, build, k, gated) for k in cds}
     by_role = {r: [k for k in cds if role[k] == r] for r in ("cooldown", "conditional", "rotational")}
 
     if style == "priority":
-        groups = _chunks(cds)
+        groups = _chunks(cds, units)
     elif style == "single":
-        groups = [[k] for k in cds]
+        groups = [list(units[k]) for k in cds]
     elif style == "merged":
-        groups = _chunks(by_role["cooldown"]) + _chunks(by_role["conditional"] + by_role["rotational"])
+        groups = _chunks(by_role["cooldown"], units) + _chunks(by_role["conditional"] + by_role["rotational"], units)
     else:
         cool = by_role["cooldown"]
         if style == "long_first":
             cool = sorted(cool, key=lambda k: -_cooldown_s(gd, build, k))
-        groups = _chunks(cool) + _chunks(by_role["conditional"]) + _chunks(by_role["rotational"])
+        groups = _chunks(cool, units) + _chunks(by_role["conditional"], units) + _chunks(by_role["rotational"], units)
 
     # filler last: the first zero-cooldown skill rides the final stack, any others get their own slot
     fillers = []
     for k in body:
         if _cooldown_s(gd, build, k) <= 0:
-            unit = [k]
-            if not auto_chain:
-                unit = list(reversed(_chain_children(gd, k))) + [k]
-            fillers.append(unit[-MAX_STACK:])
+            fillers.append(units[k])
     for i, unit in enumerate(fillers):
         if i == 0 and groups and len(groups[-1]) + len(unit) <= MAX_STACK:
             groups[-1].extend(unit)
@@ -199,7 +228,8 @@ def design_groups(
 
 
 def assign_labels(
-    gd: GameData, groups: list[list[str]], manual: list[str], bar: SkillBar
+    gd: GameData, groups: list[list[str]], manual: list[str], bar: SkillBar,
+    dedicated_groups: dict[str, list[str]] | None = None,
 ) -> tuple[tuple[SlotStack, ...], list[str]]:
     """Give every group a key label: the user's own bar label when one of its skills sits there."""
     warnings: list[str] = []
@@ -243,16 +273,32 @@ def assign_labels(
     for g in groups:
         add(g)
     for k in manual:
-        add([k])
+        add((dedicated_groups or {}).get(k, [k]))
     placed = {m for s in stacks for m in s.stack}
-    for lab in KEY_LABELS:  # keep the rest of the user's bar intact as single slots
+    for lab in KEY_LABELS:  # Keep unused pins on dedicated keys, including their explicit chains.
         sk = bar.slots.get(lab)
         if sk and sk in gd.skills and sk not in placed and lab not in taken:
             if gd.skills[sk].kind in _STACKABLE + (SkillKind.DODGE,):
+                members = (dedicated_groups or {}).get(sk, [sk])
                 taken.add(lab)
-                placed.add(sk)
-                stacks.append(SlotStack(lab, (sk,)))
+                placed.update(members)
+                stacks.append(SlotStack(lab, tuple(members)))
     return tuple(stacks), warnings
+
+
+def castable_bar(gd: GameData, build: CharacterBuild, bar: SkillBar) -> tuple[SkillBar, list[str]]:
+    """Ignore stale pins without changing the saved bar."""
+    valid_pins = {}
+    warnings = []
+    for label, key in bar.slots.items():
+        skill = gd.skills.get(key)
+        if skill is not None and skill.kind == SkillKind.STIGMA and key not in build.stigmas:
+            warnings.append(f"pin {label}: {key} is not an equipped stigma, ignored")
+        elif not _castable(gd, build, key):
+            warnings.append(f"pin {label}: {key} is locked or unavailable, ignored")
+        else:
+            valid_pins[label] = key
+    return SkillBar(slots=valid_pins), warnings
 
 
 def layout(
@@ -265,8 +311,10 @@ def layout(
 ) -> tuple[tuple[SlotStack, ...], list[str]]:
     """Return (stacks, warnings). `recommend_stacks` is the contract wrapper."""
     groups, manual, w1 = design_groups(gd, build, priority, auto_chain, style)
-    stacks, w2 = assign_labels(gd, groups, manual, bar)
-    return stacks, w1 + w2
+    bar, pin_warnings = castable_bar(gd, build, bar)
+    dedicated_groups = {key: _stack_unit(gd, build, key, auto_chain) for key in (*manual, *bar.slots.values())}
+    stacks, w2 = assign_labels(gd, groups, manual, bar, dedicated_groups)
+    return stacks, w1 + pin_warnings + w2
 
 
 def recommend_stacks(

@@ -32,6 +32,7 @@ function modified(): ImportResult {
 const side = (imp: ImportResult, boss = 1000): SideData => {
   const c = structuredClone(cmp);
   c.boss.result.dps = boss;
+  c.boss.current_dps = boss; // the compare page ranks the CURRENT build (the fixture now carries current_dps)
   return { imp, extras: null, cmp: c, data: { gd: null, icons: {} } };
 };
 

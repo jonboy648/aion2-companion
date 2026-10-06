@@ -1,7 +1,10 @@
 import { useId, useMemo, useState } from "react";
 import { PrismFluxLoader } from "@/components/ui/prism-flux-loader";
 import "./build-dashboard.css";
-import type { CompareResult, PlaystyleKey } from "@/lib/types";
+import type { CompareResult, FullBuild, PlaystyleKey } from "@/lib/types";
+import { Keyboard } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MACRO_SCENARIOS, type MacroScenario } from "@/features/keybinds/activeBuild";
 import type { ClassData } from "./useClassData";
 import { PlaystyleStrip } from "./PlaystyleStrip";
 import { PlaystyleDetail } from "./PlaystyleDetail";
@@ -30,7 +33,7 @@ export function ProgressPanel({ title, message, steps }: { title: string; messag
 }
 
 /** Playstyle comparison strip + the selected playstyle's detail cards, with per-playstyle trade-off variants. */
-export function BuildResults({ cmp, data, selected: picked, onSelect }: { cmp: CompareResult; data: ClassData; selected?: PlaystyleKey; onSelect?: (k: PlaystyleKey) => void }) {
+export function BuildResults({ cmp, data, selected: picked, onSelect, onUsePlan }: { cmp: CompareResult; data: ClassData; selected?: PlaystyleKey; onSelect?: (k: PlaystyleKey) => void; onUsePlan?: (plan: FullBuild) => void }) {
   const panelId = useId();
   const first = PLAYSTYLE_ORDER.find((k) => cmp[k]) ?? "boss";
   const [own, setOwn] = useState<PlaystyleKey>(first);
@@ -57,8 +60,39 @@ export function BuildResults({ cmp, data, selected: picked, onSelect }: { cmp: C
   return (
     <div className="build-dashboard">
       <PlaystyleStrip cmp={cmp} data={data} selected={fb.playstyle.key} onSelect={setSelected} overrides={overrides} dpsOverrides={dpsOverrides} panelId={panelId} />
+      {onUsePlan && (
+        <div className="flex flex-wrap items-center gap-3 py-3">
+          <Button variant="secondary" onClick={() => onUsePlan(fb)} disabled={(variants[fb.playstyle.key] ?? "max") !== "max" || !MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario)}>
+            <Keyboard aria-hidden /> Send DPS plan to Keybinds
+          </Button>
+          {(variants[fb.playstyle.key] ?? "max") !== "max" && <span className="text-xs text-dim">Select the DPS arrangement to use its modeled rotation.</span>}
+          {!MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario) && <span className="text-xs text-dim">Burst macros are not modeled yet.</span>}
+        </div>
+      )}
       <div role="tabpanel" id={panelId} aria-labelledby={`${panelId}-${fb.playstyle.key}`}>
         <PlaystyleDetail fb={fb} data={data} variantKey={variants[fb.playstyle.key] ?? "max"} onVariant={(key) => setVariants((s) => ({ ...s, [fb.playstyle.key]: key }))} />
+      </div>
+    </div>
+  );
+}
+
+/** A single requested plan, without fabricating comparison results for other playstyles. */
+export function SingleBuildResults({ fb, data, onUsePlan, onVariantChange, disabled = false }: {
+  fb: FullBuild; data: ClassData; onUsePlan: (plan: FullBuild) => void; onVariantChange?: (key: string) => void; disabled?: boolean;
+}) {
+  const [variant, setVariant] = useState("max");
+  const macroSupported = MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario);
+  return (
+    <div className="build-dashboard">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <Button variant="secondary" onClick={() => onUsePlan(fb)} disabled={disabled || variant !== "max" || !macroSupported}>
+          <Keyboard aria-hidden /> Send DPS plan to Keybinds
+        </Button>
+        {variant !== "max" && <span className="text-xs text-dim">Select the DPS arrangement to use its modeled rotation.</span>}
+        {!macroSupported && <span className="text-xs text-dim">Burst macros are not modeled yet.</span>}
+      </div>
+      <div inert={disabled} aria-disabled={disabled || undefined}>
+        <PlaystyleDetail fb={fb} data={data} source="manual" variantKey={variant} onVariant={(key) => { setVariant(key); onVariantChange?.(key); }} />
       </div>
     </div>
   );

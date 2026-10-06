@@ -58,10 +58,17 @@ def test_import_character_sorcerer(imported):
     assert any("Imported level 44" in n for n in imported["notes"])
 
 
-def test_import_character_keeps_base_stats(raw):
-    base = {"name": "Me", "region": "global", "level": 10, "stats": {"attack": 1234, "crit_dmg_pct": 77}}
-    b = js(webapi.import_character(raw, base))["build"]
-    assert b["stats"]["attack"] == 1234 and b["stats"]["crit_dmg_pct"] == 77
+def test_import_character_stats_come_from_the_stat_sheet(raw):
+    # Changed from "keeps base attack / crit damage": an import now REPLACES the placeholder attack, crit damage and MP
+    # with the stat sheet's values (that is the fix for the inflated DPS); only fields the sheet does not set
+    # (MP regen, PvE / Boss damage, target defense) keep what the caller passed in.
+    base = {"name": "Me", "region": "global", "level": 10,
+            "stats": {"attack": 1234, "crit_dmg_pct": 77, "mp_regen_per_s": 33, "boss_dmg_pct": 4}}
+    b = js(webapi.import_character(raw, base))
+    s = b["build"]["stats"]
+    assert s["attack"] == pytest.approx(552.52, abs=0.01) and s["crit_dmg_pct"] == 50 and s["max_mp"] == pytest.approx(978.06, abs=0.01)
+    assert s["mp_regen_per_s"] == 33 and s["boss_dmg_pct"] == 4
+    assert any("stat sheet" in n for n in b["notes"]) and not any("keep your entered values" in n for n in b["notes"])
 
 
 def test_compare_and_follow_ups(imported):
@@ -70,6 +77,7 @@ def test_compare_and_follow_ups(imported):
     assert set(cmp_) == {"boss", "aoe", "leveling", "burst"}
     fb = cmp_["boss"]
     assert fb["result"]["dps"] > 0 and fb["variants"] and fb["priority"]["entries"]
+    assert fb["current_dps"] > 0  # the build as imported, next to the plan
     # optimize one playstyle agrees on shape
     one = js(webapi.optimize(build, "boss", None))
     assert set(one) == set(fb) and one["result"]["dps"] > 0

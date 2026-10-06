@@ -19,6 +19,7 @@ interface Props {
   /** variant key currently applied ("max" = none) */
   variantKey: string;
   onVariant: (key: string) => void;
+  source?: "imported" | "manual";
 }
 
 function Section({ title, hint, children, className }: { title: string; hint?: string; children: React.ReactNode; className?: string }) {
@@ -100,7 +101,7 @@ export function groupRankLog(log: [string, number, number][], isStigma: (key: st
   return [...out.values()].sort((a, b) => b.gain - a.gain);
 }
 
-function SkillPoints({ fb, data, rankedSkills }: { fb: FullBuild; data: ClassData; rankedSkills: number }) {
+function SkillPoints({ fb, data, rankedSkills, manual }: { fb: FullBuild; data: ClassData; rankedSkills: number; manual: boolean }) {
   const entered = fb.build.skill_points ?? 0;
   const stigEntered = fb.build.stigma_points ?? 0;
   if (fb.rank_log.length === 0) {
@@ -108,6 +109,8 @@ function SkillPoints({ fb, data, rankedSkills }: { fb: FullBuild; data: ClassDat
       <p className="text-sm text-dim">
         {entered > 0 || stigEntered > 0
           ? "Nothing is worth buying with your points: every skill is already at its best rank for this playstyle."
+          : manual || (fb.build.stigma_unlocked !== undefined && fb.build.stigma_unlocked !== null)
+          ? "No paid ranks available within this level's budget."
           : `Enter your unspent skill points above to see where to spend them. Until then your ${rankedSkills} ranked skills are used as imported.`}
       </p>
     );
@@ -139,7 +142,7 @@ function SkillPoints({ fb, data, rankedSkills }: { fb: FullBuild; data: ClassDat
 }
 
 /** One playstyle's full recommendation: stigmas, skill points, Daevanion, rotation, trade-offs, stat upgrades. */
-export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
+export function PlaystyleDetail({ fb, data, variantKey, onVariant, source = "imported" }: Props) {
   const [showWarnings, setShowWarnings] = useState(false);
   const variants = fb.variants ?? [];
   const applied = variants.find((v) => v.key === variantKey && v.key !== "max");
@@ -154,17 +157,26 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         <SectionTitle className="mb-0 min-w-0 flex-1 basis-64" caption={fb.playstyle.description}>
           {fb.playstyle.name} plan
         </SectionTitle>
-        <div className="text-right">
-          <div className="font-display text-3xl font-bold tabular-nums text-gold">~{fmtDps(dps)}</div>
-          <div className="flex items-center justify-end gap-2 text-xs text-dim">
-            estimated DPS
-            <Badge tone={CONF_TONE[fb.result.confidence]}>{fb.result.confidence}</Badge>
+        <div className="flex items-end gap-5 text-right">
+          {fb.current_dps != null && (
+            <div data-testid="current-dps">
+              <div className="font-display text-2xl font-bold tabular-nums">~{fmtDps(fb.current_dps)}</div>
+              <div className="text-xs text-dim">{source === "manual" ? <>Starting build<br />before allocation</> : <>Current build<br />as imported</>}</div>
+            </div>
+          )}
+          <div data-testid="plan-dps">
+            <div className="font-display text-3xl font-bold tabular-nums text-gold">~{fmtDps(dps)}</div>
+            <div className="flex items-center justify-end gap-2 text-xs text-dim">
+              {source === "manual" ? "Planned build DPS" : fb.current_dps != null ? "Best build with your gear" : "estimated DPS"}
+              <Badge tone={CONF_TONE[fb.result.confidence]}>{fb.result.confidence}</Badge>
+            </div>
           </div>
         </div>
       </div>
 
       <AdvancedStats metrics={[
-        { key: "dps", label: "Estimated DPS", value: fmtDps(dps), hint: applied?.label ?? "Max-DPS build" },
+        { key: "dps", label: "Estimated DPS", value: fmtDps(dps), hint: applied?.label ?? (source === "manual" ? "With entered stats" : "Best build with your gear") },
+        ...(fb.current_dps != null ? [{ key: "current", label: source === "manual" ? "Starting build DPS" : "Current build DPS", value: fmtDps(fb.current_dps), hint: source === "manual" ? "Before point allocation" : "As imported, no changes" }] : []),
         { key: "duration", label: "Duration", value: `${fb.playstyle.scenario.duration_s} s` },
         { key: "targets", label: "Targets", value: String(fb.playstyle.scenario.n_targets), hint: fb.playstyle.scenario.boss ? "Boss target" : "Non-boss targets" },
         { key: "confidence", label: "Model confidence", value: fb.result.confidence },
@@ -174,10 +186,13 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant }: Props) {
         </Section>
         {applied && <p className="text-xs text-dim">Detailed simulation is unavailable for this variant. Rotation, skill points, Daevanion and stat gains below describe the unchanged max-DPS build.</p>}
         <Section title="Skill points">
-          <SkillPoints fb={fb} data={data} rankedSkills={rankedSkills} />
+          <SkillPoints fb={fb} data={data} rankedSkills={rankedSkills} manual={source === "manual"} />
         </Section>
         <Section title="Daevanion">
-          <p className="text-sm text-dim">Max-DPS path: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated DPS gain.</p>
+          {source === "manual" ? <div className="space-y-1 text-sm text-dim">
+            <p>{fb.build.daevanion_nodes.length} nodes included in this build.</p>
+            <p>Future opening order: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated path gain.</p>
+          </div> : <p className="text-sm text-dim">Max-DPS path: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated DPS gain.</p>}
         </Section>
       </div>} main={<Tabs defaultValue="overview">
       <TabsList aria-label="Build details">

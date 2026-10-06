@@ -115,8 +115,8 @@ def test_stigma_pool_separate(gd10, scen10):
     prio = Priority((PriorityEntry("strike"), PriorityEntry("nuke")))
     b = CharacterBuild("t", "global", 45, skill_points=0, stigma_points=3, stigmas=("nuke",))
     ranks, log = allocate_points(gd, b, prio, scen10)
-    assert ranks == {"nuke": 4}
-    assert sum(STIGMA_POINT_COST[r] for r in range(1, 4)) == 3
+    assert ranks == {"nuke": 3}  # rank 1 is a paid point too: 1 + 1 + 1
+    assert sum(STIGMA_POINT_COST[:3]) == 3
     # stigma not in build.stigmas gets nothing
     b2 = CharacterBuild("t", "global", 45, stigma_points=10)
     assert allocate_points(gd, b2, prio, scen10)[0] == {}

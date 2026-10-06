@@ -62,6 +62,13 @@
    "intro": "Choose recipes and get a combined list of the materials you need."
   },
   {
+   "path": "/enhance",
+   "title": "Aion 2 enhancement cost calculator: odds and pity",
+   "h1": "Enhancement calculator",
+   "description": "Expected attempts, kinah and materials to enhance, amplify or soul-bind Aion 2 gear to any level, with pity, level drops and a luck chart.",
+   "intro": "Pick a piece of gear, a current and a target level, and see the average, median and unlucky cost."
+  },
+  {
    "path": "/roadmap",
    "title": "Aion 2 road map: what to do at each level",
    "h1": "Road map",
@@ -88,6 +95,27 @@
    "h1": "Timers",
    "description": "Live Aion 2 countdowns for Spacetime Rift, Shugo Festival, Watcher Kaira, siege bosses, Nahma and daily and weekly reset, in your local time.",
    "intro": "Live countdowns and upcoming times for Aion 2 events, in your own time zone, for Global, KR and TW."
+  },
+  {
+   "path": "/checklist",
+   "title": "Aion 2 daily and weekly checklist with reset timers",
+   "h1": "Checklist",
+   "description": "Free Aion 2 daily and weekly checklist for every character. Ticks clear on the game reset, with live countdowns, counters and a shareable template.",
+   "intro": "Track Aion 2 dailies, weeklies and custom-interval tasks for each character. No account: it is saved in your browser and clears itself at the daily and weekly reset."
+  },
+  {
+   "path": "/items",
+   "title": "Aion 2 item database: weapons, armor, accessories",
+   "h1": "Items",
+   "description": "Browse every Aion 2 weapon, armor piece and accessory by category with grade, level, base stats, random stat ranges and enchant tables.",
+   "intro": "Browse Aion 2 equipment by category, filter by grade, level and class, and open any item for its stats, random stat ranges and enchant odds."
+  },
+  {
+   "path": "/gear-viewer",
+   "title": "Aion 2 gear viewer: sort and compare all equipment",
+   "h1": "Gear viewer",
+   "description": "Sort and filter every Aion 2 weapon, armor and accessory by attack, defense, HP, critical and more, and pin four items to compare side by side.",
+   "intro": "One table of all Aion 2 equipment with the stat columns you choose, plus a side-by-side compare for up to four pinned items."
   },
   {
    "path": "/codex/gladiator",

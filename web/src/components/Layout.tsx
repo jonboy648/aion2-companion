@@ -5,6 +5,7 @@ import { isMockEngine } from "@/engine/api";
 import { BrandCrest } from "@/components/ui/brand-crest";
 import "./site-footer.css";
 import { FactionThemeProvider, useFaction, type Faction } from "@/components/game/faction";
+import { GlobalSearch } from "@/features/search/GlobalSearch";
 import { TimerStrip } from "@/features/timers/TimerStrip";
 import { cn } from "@/lib/utils";
 
@@ -15,10 +16,13 @@ const NAV = [
   { to: "/daevanion", label: "Daevanion" },
   { to: "/compare", label: "Compare" },
   { to: "/codex", label: "Codex" },
+  { to: "/items", label: "Items" },
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
+  { to: "/enhance", label: "Enhance" },
   { to: "/roadmap", label: "Road Map" },
   { to: "/timers", label: "Timers" },
+  { to: "/checklist", label: "Checklist" },
 ];
 
 export const DISCLAIMER = "Fan project, not affiliated with NCSOFT. Game data and icons © NCSOFT.";
@@ -66,7 +70,8 @@ function Shell() {
             <BrandCrest />
             <span className="font-display text-[18px] font-bold tracking-wider">Become Cube</span>
           </NavLink>
-          <nav aria-label="Main" className="flex flex-wrap gap-1.5">
+          <nav aria-label="Main" className="flex flex-wrap items-center gap-1.5">
+            <GlobalSearch />
             {NAV.map((n) => (
               <NavLink key={n.to} to={n.to} end={n.end} className={cn("game-tab px-3 py-1.5 text-sm font-medium no-underline")}>
                 {n.label}
@@ -74,7 +79,7 @@ function Shell() {
             ))}
           </nav>
           {isMockEngine && (
-            <span className="ml-auto rounded border border-warn/50 bg-warn/10 px-2.5 py-0.5 text-xs text-warn" title="VITE_ENGINE=mock">
+            <span className="rounded border border-warn/50 bg-warn/10 px-2.5 py-0.5 text-xs text-warn" title="VITE_ENGINE=mock">
               mock data
             </span>
           )}
@@ -92,9 +97,9 @@ function Shell() {
               <NavLink to="/" className="site-footer-brand"><BrandCrest /><span>Become Cube</span></NavLink>
               <p className="site-footer-description">Your character. Your build. Your next step.</p>
             </div>
-            <nav aria-label="Footer build tools"><h2>Build & plan</h2><NavLink to="/build">Build by hand</NavLink><NavLink to="/compare">Compare builds</NavLink><NavLink to="/daevanion">Daevanion</NavLink><NavLink to="/keybinds">Keybinds</NavLink></nav>
-            <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink></nav>
-            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink><NavLink to="/timers">Timers</NavLink></nav>
+            <nav aria-label="Footer build tools"><h2>Build & plan</h2><NavLink to="/build">Build by hand</NavLink><NavLink to="/compare">Compare builds</NavLink><NavLink to="/daevanion">Daevanion</NavLink><NavLink to="/keybinds">Keybinds</NavLink><NavLink to="/gear-viewer">Gear viewer</NavLink></nav>
+            <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/items">Items</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink><NavLink to="/enhance">Enhance calculator</NavLink></nav>
+            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink><NavLink to="/timers">Timers</NavLink><NavLink to="/checklist">Checklist</NavLink></nav>
           </div>
           <div className="site-footer-bottom"><p>{DISCLAIMER}</p><ThemePicker /></div>
           <details className="site-footer-privacy"><summary>Privacy</summary><p>{PRIVACY_NOTE}</p></details>

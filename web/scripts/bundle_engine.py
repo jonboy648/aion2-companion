@@ -1,13 +1,14 @@
 """Bundle the Qt-free aion2c engine for the browser (Pyodide).
 
 Writes into web/public/engine/:
-  aion2c.zip              Qt-free modules + webapi.py (python sources only)
+  aion2c.zip              Qt-free modules + webapi.py (python sources) and PY_DATA (data/stat_sheet.json)
   classes/<key>.json      app/aion2c/data/classes/<key>/gamedata.json
   icons/<key>.json        app/aion2c/data/classes/<key>/icon_names.json  ({skill_key: ICON_NAME}; names only)
   items.json              app/aion2c/data/items.json, minified; fetched lazily by the worker on the first gear call
-  manifest.json           {classes, data_version, built_at, modules}
+  manifest.json           {classes, data_version, engine_version, built_at, modules}
 No images are copied (icons are hotlinked from NCSoft's CDN). Run: python web/scripts/bundle_engine.py
 """
+import hashlib
 import json
 import sys
 import zipfile
@@ -22,7 +23,7 @@ OUT = ROOT / "web" / "public" / "engine"
 # Explicit allowlist: adding a module here is a decision (test_engine_qt_free.py checks each one imports without Qt).
 MODULES = (
     "aion2c", "aion2c.models", "aion2c.serde", "aion2c.interfaces", "aion2c.classes", "aion2c.armory",
-    "aion2c.daevanion", "aion2c.crafting", "aion2c.roadmap", "aion2c.gear", "aion2c.webapi",
+    "aion2c.daevanion", "aion2c.progression", "aion2c.crafting", "aion2c.roadmap", "aion2c.gear", "aion2c.statsheet", "aion2c.webapi",
     "aion2c.data", "aion2c.data.loader",
     "aion2c.engine", "aion2c.engine.advisor", "aion2c.engine.budget", "aion2c.engine.build_optimizer",
     "aion2c.engine.community", "aion2c.engine.damage", "aion2c.engine.explain", "aion2c.engine.facade",
@@ -31,6 +32,9 @@ MODULES = (
     "aion2c.keybinds", "aion2c.keybinds.export", "aion2c.keybinds.gkeys", "aion2c.keybinds.layout",
     "aion2c.keybinds.macro",
 )
+
+
+PY_DATA = ("stat_sheet.json", "client_progression.json")  # data files packed into aion2c.zip next to the modules
 
 
 def bundled_modules() -> list[str]:
@@ -66,11 +70,33 @@ def missing_imports() -> list[str]:
     return sorted(missing)
 
 
+def fingerprint(parts) -> str:
+    """Short content hash of [(name, bytes)]: names and bytes both count, order does not."""
+    h = hashlib.sha256()
+    for name, data in sorted(parts, key=lambda p: p[0]):
+        h.update(name.encode("utf-8") + b"\0" + hashlib.sha256(data).digest())
+    return h.hexdigest()[:12]
+
+
+def engine_fingerprint() -> str:
+    """Hash of everything the engine's results depend on besides the class data: the bundled python sources, the
+    packed data tables and the item table. The browser result cache keys on it (manifest.json `engine_version`), so a
+    deploy that changes engine code or items cannot serve results computed by the old code."""
+    parts = [(module_file(m).relative_to(APP).as_posix(), module_file(m).read_bytes()) for m in MODULES]
+    parts += [(f"data/{d}", (PKG / "data" / d).read_bytes()) for d in PY_DATA]
+    items = PKG / "data" / "items.json"
+    if items.is_file():
+        parts.append(("data/items.json", items.read_bytes()))
+    return fingerprint(parts)
+
+
 def build_zip(dest: Path) -> int:
     with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
         for m in MODULES:
             f = module_file(m)
             z.write(f, f.relative_to(APP).as_posix())
+        for d in PY_DATA:  # small derived tables the Python code reads with Path(__file__)
+            z.write(PKG / "data" / d, f"aion2c/data/{d}")
     return dest.stat().st_size
 
 
@@ -101,10 +127,15 @@ def main() -> int:
         items = json.loads(items_src.read_text(encoding="utf-8"))
         (OUT / "items.json").write_text(json.dumps(items, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
         items_size = (OUT / "items.json").stat().st_size
+    if items_size:  # per-category files for the item database pages (web/public/items/), from the same items.json
+        sys.path.insert(0, str(APP))
+        from aion2c.data import build_itemdb
+        build_itemdb.main()
     manifest = {
         "classes": classes,
         "data_version": max(versions.values(), default=""),
         "data_versions": versions,
+        "engine_version": engine_fingerprint(),
         "built_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "modules": len(MODULES),
         "items": bool(items_size),

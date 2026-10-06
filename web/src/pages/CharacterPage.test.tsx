@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import { CharacterPage } from "./CharacterPage";
@@ -40,6 +40,20 @@ describe("CharacterPage", () => {
     const dup = err.mock.calls.map((c) => String(c[0])).filter((m) => /same key|unique "key"/i.test(m));
     err.mockRestore();
     expect(dup).toEqual([]);
+  });
+
+  it("shows the Stat sheet with its categories once the character is loaded", async () => {
+    render(
+      <MemoryRouter initialEntries={["/c/nae/2103/DarthThot"]}>
+        <Routes>
+          <Route path="/c/:region/:serverId/:name" element={<CharacterPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    const sheet = await screen.findByTestId("stat-sheet", {}, { timeout: 5000 });
+    expect(within(sheet).getByRole("heading", { name: "Stat sheet" })).toBeTruthy();
+    await within(sheet).findByTestId("stat-cat-attack", {}, { timeout: 5000 });
+    expect(within(sheet).getByTestId("stat-cat-deity")).toBeTruthy();
   });
 
   it("has a Refresh button that is off while loading and reloads the character when pressed", async () => {

@@ -11,6 +11,7 @@ import { saveRecent } from "@/features/build/helpers";
 import { comparePath } from "@/features/compare/logic";
 import { GearSection } from "@/features/gear/GearSection";
 import { daevanionLink } from "@/features/daevanion/DaevanionView";
+import { StatSheetSection } from "@/features/statsheet/StatSheetSection";
 import { UnspentPoints } from "@/features/build/UnspentPointsInput";
 import { useCharacter } from "@/features/build/useCharacter";
 import { useClassData } from "@/features/build/useClassData";
@@ -118,6 +119,8 @@ export function Character() {
 
       {imp && st.phase !== "done" && <ProgressPanel title="Comparing playstyles" message={st.message} steps={st.steps} />}
       {st.cmp && <BuildResults cmp={st.cmp} data={data} selected={playstyle} onSelect={setPlaystyle} />}
+
+      {imp && st.raw && <StatSheetSection raw={st.raw} ready={st.phase === "done"} />}
 
       {imp && st.raw && <GearSection imp={imp} raw={st.raw} playstyle={playstyle} onPlaystyle={setPlaystyle} ready={st.phase === "done"} region={region} />}
 

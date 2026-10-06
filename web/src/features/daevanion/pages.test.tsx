@@ -56,6 +56,7 @@ describe("Daevanion page", () => {
 describe("Codex page", () => {
   it("lists skills, filters, searches and opens the detail drawer", async () => {
     at("/codex/sorcerer", <CodexPage />, "/codex/:classKey");
+    fireEvent.mouseDown(screen.getByRole("tab", { name: "Skill encyclopedia" }), { button: 0, ctrlKey: false });
     const list = await screen.findByRole("list", { name: "Skills" });
     const all = within(list).getAllByRole("listitem").length;
     expect(all).toBeGreaterThan(10);
@@ -74,6 +75,7 @@ describe("Codex page", () => {
 
   it("shows an empty state when nothing matches", async () => {
     at("/codex/sorcerer", <CodexPage />, "/codex/:classKey");
+    fireEvent.mouseDown(screen.getByRole("tab", { name: "Skill encyclopedia" }), { button: 0, ctrlKey: false });
     await screen.findByRole("list", { name: "Skills" });
     fireEvent.change(screen.getByLabelText("Search skills"), { target: { value: "qqqqqq" } });
     expect(await screen.findByText(/No skills match/)).toBeInTheDocument();

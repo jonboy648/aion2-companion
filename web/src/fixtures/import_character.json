@@ -41,21 +41,21 @@
   ],
   "specs": {},
   "stats": {
-   "attack": 1000,
-   "attack_increase_pct": 1.6,
-   "weapon_dmg_pct": 0,
+   "attack": 552.5197,
+   "attack_increase_pct": 1.6433,
+   "weapon_dmg_pct": 5.0,
    "dmg_boost_pct": 0,
    "pve_dmg_pct": 0,
    "boss_dmg_pct": 0,
-   "crit_chance_pct": 2.8,
-   "crit_dmg_pct": 50,
-   "smite_pct": 0.1,
-   "combat_speed_pct": 3.8,
+   "crit_chance_pct": 2.0236,
+   "crit_dmg_pct": 50.0,
+   "smite_pct": 0.1433,
+   "combat_speed_pct": 3.9527,
    "cdr_pct": 0.1,
-   "max_mp": 2000,
+   "max_mp": 978.061,
    "mp_regen_per_s": 20,
    "target_defense": 0,
-   "penetration": 0
+   "penetration": 420.0
   },
   "show_kr": false,
   "daevanion_nodes": [
@@ -147,12 +147,13 @@
   "skill_points": null,
   "stigma_points": null,
   "class_key": "sorcerer",
-  "bonus_ranks": {}
+  "bonus_ranks": {},
+  "stigma_unlocked": null
  },
  "notes": [
   "Stats not used by the simulator: Evasion increase +0.1%; Block increase +0.1%; Critical Hit Resist increase +0.1%; Defense increase +3.7%; Perfect Chance +3.7%; Accuracy increase +2%; Evasion increase +2%; Endurance Penetration +0.1%; HP increase +0.3%; Regeneration +0.3%; Double Resist +3.8%; Perfect Resist +0.2%; Regeneration Penetration +2.8%; MP Cost -0.1%; MP increase +0.3%; Endurance +0.3%; Move Speed +1.1%; Block increase +1.1%.",
-  "Attack, crit damage and other gear stats are not in the public armory; they keep your entered values.",
-  "Imported level 44, 28 skill ranks, 4 stigmas, 84/84 Daevanion nodes."
+  "Imported level 44, 28 skill ranks, 4 stigmas, 84/84 Daevanion nodes.",
+  "Stats come from the rebuilt stat sheet: weapon attack 552.52 (before Amp Ratio), MP 978.061, crit 2.0236%, combat speed 3.9527%. Random gear lines are scored at their expected value, so these are estimates."
  ],
  "profile": {
   "name": "DarthThot",

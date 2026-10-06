@@ -19,6 +19,7 @@ import keybindsFx from "@/fixtures/keybinds.json";
 import marginalFx from "@/fixtures/marginal.json";
 import roadmapFx from "@/fixtures/roadmap.json";
 import shoppingFx from "@/fixtures/shopping.json";
+import statSheetFx from "@/fixtures/stat_sheet.json";
 import type {
   ArmoryRaw,
   CharacterBuild,
@@ -40,6 +41,7 @@ import type {
   RoadmapItem,
   SkillBar,
   StatGain,
+  StatSheet,
 } from "@/lib/types";
 
 export interface EngineApi {
@@ -53,7 +55,7 @@ export interface EngineApi {
   compare(build: CharacterBuild, daevanionPoints?: number | null, onProgress?: ProgressFn): Promise<CompareResult>;
   optimize(build: CharacterBuild, playstyleKey: PlaystyleKey, daevanionPoints?: number | null, onProgress?: ProgressFn): Promise<FullBuild>;
   marginal(build: CharacterBuild, priority: Priority, scenarioKey: string): Promise<StatGain[]>;
-  /** priorities: {scenario_key: Priority} (boss_180, aoe_pack). hotkeys e.g. {boss: "F9", aoe: "F10"}. */
+  /** priorities: {scenario_key: Priority} (boss_180, aoe_pack, level_pull). hotkeys may include leveling. */
   keybinds(
     build: CharacterBuild,
     priorities: Record<string, Priority>,
@@ -70,6 +72,8 @@ export interface EngineApi {
   gearUpgrades(rawArmory: ArmoryRaw, build: CharacterBuild, playstyle: PlaystyleKey, steps?: number, reachableOnly?: boolean): Promise<GearUpgradesResult>;
   /** BIS gear + full build for the class; pass build (+rawArmory) to get the gap to you. Slow: full optimizer. */
   maxPotential(classKey: string, playstyle: PlaystyleKey, reachableOnly?: boolean, build?: CharacterBuild | null, rawArmory?: ArmoryRaw | null): Promise<MaxPotentialResult>;
+  /** Full stat sheet with a per-source breakdown, rebuilt from the armory download (items.json is fetched lazily). */
+  statSheet(rawArmory: ArmoryRaw, calibrate?: boolean): Promise<StatSheet>;
 }
 
 const wait = (ms = 150) => new Promise<void>((r) => setTimeout(r, ms));
@@ -141,6 +145,10 @@ const mockEngine: EngineApi = {
     }
     return r;
   },
+  async statSheet() {
+    await wait(200);
+    return clone<StatSheet>(statSheetFx);
+  },
 };
 
 /** Real engine: Pyodide in a Web Worker (see pyodide-client.ts). The worker is only spawned on the first call. */
@@ -171,4 +179,5 @@ export const {
   iconUrls,
   gearUpgrades,
   maxPotential,
+  statSheet,
 } = engine;

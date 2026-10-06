@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
-import { Pin, PinOff, Search } from "lucide-react";
+import { Fragment, useMemo, useState } from "react";
+import { ImageOff, Pin, PinOff, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { GameData, IconUrls, SlotStack } from "@/lib/types";
+import type { GameData, IconUrls, Region, SlotStack } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { SkillIcon } from "./SkillIcon";
+import "./compact-hotbar.css";
 
 export const KEY_ROWS: string[][] = [
   ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
@@ -40,27 +41,83 @@ function KeyCap({
       aria-pressed={selected}
       aria-label={`Key ${label}: ${filled ? stack.map((s) => nameOf(gd, s)).join(", then ") : "empty"}`}
       className={cn(
-        "relative flex min-h-[88px] flex-col items-center gap-1 rounded-lg border p-1.5 pt-5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan",
+        "flex shrink-0 flex-col items-center text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan",
+        "h-[164px] w-[46px] gap-1 rounded-md border p-1",
         selected ? "border-gold bg-surface3 shadow-[0_0_0_1px_var(--gold)]" : "border-border bg-surface2 hover:border-gold-lo hover:bg-surface3",
         !filled && !selected && "border-dashed bg-surface/60",
       )}
     >
-      <span className="absolute left-1.5 top-1 text-[11px] font-semibold tracking-wide text-gold">{label}</span>
-      {pinned && <Pin aria-hidden className="absolute right-1.5 top-1 size-3 text-cyan" />}
-      {filled ? (
-        <span className="grid grid-cols-2 gap-0.5">
-          {stack.slice(0, 4).map((s, i) => (
-            <span key={s} className="relative" title={`${i + 1}. ${nameOf(gd, s)}`}>
-              <SkillIcon url={icons[s]} name={nameOf(gd, s)} size={26} />
-              <span className="absolute -bottom-0.5 -right-0.5 grid size-3.5 place-items-center rounded-full bg-bg/90 text-[9px] leading-none text-dim">
-                {i + 1}
+      <span className="flex h-4 w-full items-center justify-between text-[11px] font-semibold text-gold">
+        {label}
+        {pinned && <Pin aria-hidden className="size-3 text-cyan" />}
+      </span>
+      <span className="grid w-full gap-0.5" style={{ gridTemplateRows: "repeat(4, 32px)" }}>
+        {[3, 2, 1, 0].map((priority) => {
+          const skill = stack[priority];
+          return (
+            <span
+              key={priority}
+              data-priority={priority}
+              data-skill={skill ?? ""}
+              title={`Priority ${priority}: ${skill ? nameOf(gd, skill) : "empty"}`}
+              className={cn(
+                "relative grid place-items-center border",
+                "h-8 w-full rounded-sm",
+                skill ? "border-border-soft bg-surface" : "border-dashed border-border-soft/60 bg-surface/40",
+                priority === 0 && skill && "border-gold-lo",
+              )}
+            >
+              {skill && <SkillIcon url={icons[skill]} name={nameOf(gd, skill)} size={28} rarity="common" />}
+              <span aria-hidden className={cn("absolute bottom-0 right-0 bg-surface/90 px-0.5 text-[8px] leading-tight", priority === 0 ? "text-gold" : "text-faint")}>
+                {priority}
               </span>
             </span>
-          ))}
-        </span>
+          );
+        })}
+      </span>
+    </button>
+  );
+}
+
+function CompactQuickslot({
+  skill,
+  name,
+  url,
+  rank,
+  label,
+  row,
+  selected,
+  onClick,
+}: {
+  skill: string;
+  name: string;
+  url: string | null | undefined;
+  rank: number | undefined;
+  label: string;
+  row: number;
+  selected: boolean;
+  onClick: () => void;
+}) {
+  const [failedUrl, setFailedUrl] = useState<string | null>(null);
+  const description = `${name}, rank ${rank ?? "unknown"}, key ${label}, row ${row}`;
+  return (
+    <button
+      type="button"
+      aria-label={description}
+      aria-pressed={selected}
+      title={description}
+      data-key={label}
+      data-row={row}
+      data-skill={skill}
+      onClick={onClick}
+      className="compact-hotbar-cell"
+    >
+      {url && failedUrl !== url ? (
+        <img src={url} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setFailedUrl(url)} />
       ) : (
-        <span className="mt-2 text-[11px] text-faint">empty</span>
+        <ImageOff aria-hidden className="compact-hotbar-icon-fallback" />
       )}
+      {rank !== undefined && <span aria-hidden className="compact-hotbar-rank">{rank}</span>}
     </button>
   );
 }
@@ -72,6 +129,10 @@ export function Hotbar({
   pins,
   selected,
   onSelect,
+  compact = false,
+  manualSkills = [],
+  macroKeys = [],
+  ranks = {},
 }: {
   gd: GameData | null;
   icons: IconUrls;
@@ -79,34 +140,116 @@ export function Hotbar({
   pins: Record<string, string>;
   selected: string;
   onSelect: (label: string) => void;
+  compact?: boolean;
+  manualSkills?: string[];
+  macroKeys?: string[];
+  /** Effective skill ranks (paid plus bonus), used only by the compact grid. */
+  ranks?: Record<string, number>;
 }) {
   const byLabel = useMemo(() => Object.fromEntries(stacks.map((s) => [s.key_label, s.stack])), [stacks]);
   const letterUsed = [...stacks.map((s) => s.key_label), ...Object.keys(pins)].some((l) => /^[A-Z]$/.test(l));
   const [showLetters, setShowLetters] = useState(false);
   const rows = showLetters || letterUsed ? KEY_ROWS : KEY_ROWS.slice(0, 1);
-  return (
-    <div>
-      <div className="space-y-2">
-        {rows.map((row, r) => (
-          <div
-            key={r}
-            style={{ "--n": row.length } as React.CSSProperties}
-            className="grid grid-cols-4 gap-2 sm:grid-cols-6 lg:[grid-template-columns:repeat(var(--n),minmax(0,1fr))]"
-          >
-            {row.map((label) => (
-              <KeyCap
-                key={label}
-                label={label}
-                stack={byLabel[label] ?? (pins[label] ? [pins[label]] : [])}
-                pinned={label in pins}
-                selected={selected === label}
-                icons={icons}
-                gd={gd}
-                onClick={() => onSelect(label)}
-              />
-            ))}
+  if (compact) {
+    const groups = [KEY_ROWS[0].slice(0, 4), KEY_ROWS[0].slice(4, 8), KEY_ROWS[0].slice(8, 12)];
+    const stackFor = (label: string) => byLabel[label] ?? (pins[label] ? [pins[label]] : []);
+    const keyName = (label: string) => `Key ${label}: ${stackFor(label).map((skill) => nameOf(gd, skill)).join(", then ") || "empty"}`;
+    const modeFor = (label: string) => {
+      const stack = stackFor(label);
+      return stack.some((skill) => manualSkills.includes(skill)) ? "manual" : stack.length > 0 && macroKeys.includes(label) ? "macro" : "unused";
+    };
+    const extraLabels = [...new Set([...stacks.map((s) => s.key_label), ...Object.keys(pins)])]
+      .filter((label) => !KEY_ROWS[0].includes(label));
+    return (
+      <div className="compact-hotbar">
+        <div role="region" aria-label="Quickslot keys" className="compact-hotbar-grid">
+          {groups.map((labels, group) => (
+            <Fragment key={group}>
+              <div role="group" aria-label={`Quickslot group ${group + 1}`} className="compact-hotbar-group">
+                {[3, 2, 1, 0].flatMap((row) => labels.map((label) => {
+                  const skill = stackFor(label)[row];
+                  return skill ? (
+                    <CompactQuickslot
+                      key={`${label}-${row}`}
+                      skill={skill}
+                      name={nameOf(gd, skill)}
+                      url={icons[skill]}
+                      rank={ranks[skill]}
+                      label={label}
+                      row={row}
+                      selected={selected === label}
+                      onClick={() => onSelect(label)}
+                    />
+                  ) : (
+                    <div key={`${label}-${row}`} aria-hidden data-key={label} data-row={row} data-skill="" className="compact-hotbar-cell compact-hotbar-cell-empty" />
+                  );
+                }))}
+                {labels.map((label) => (
+                  <button
+                    key={label}
+                    type="button"
+                    aria-pressed={selected === label}
+                    aria-label={keyName(label)}
+                    title={`${keyName(label)}${label in pins ? " (pinned)" : ""}`}
+                    data-mode={modeFor(label)}
+                    onClick={() => onSelect(label)}
+                    className="compact-hotbar-key-label"
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              {group < groups.length - 1 && <div aria-hidden className="compact-hotbar-spacer" />}
+            </Fragment>
+          ))}
+          <div role="group" aria-label="Quickslot rows" className="compact-hotbar-row-labels">
+            {[3, 2, 1, 0].map((row) => <span key={row}>{row}</span>)}
           </div>
-        ))}
+        </div>
+        {extraLabels.length > 0 && (
+          <div className="compact-hotbar-extra" role="group" aria-label="Other assigned keys">
+            {extraLabels.map((label) => {
+              const stack = byLabel[label] ?? (pins[label] ? [pins[label]] : []);
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  aria-pressed={selected === label}
+                  aria-label={keyName(label)}
+                  title={keyName(label)}
+                  onClick={() => onSelect(label)}
+                >
+                  <kbd className="compact-hotbar-key-label" data-mode={modeFor(label)}>{label}</kbd>
+                  <span>{stack.map((skill) => nameOf(gd, skill)).join(", then ") || "No skills assigned"}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  }
+  return (
+    <div className="min-w-0 max-w-full">
+      <div role="region" aria-label="Quickslot keys" tabIndex={0} className="max-w-full overflow-x-auto overscroll-x-contain pb-2 focus-visible:outline-2 focus-visible:outline-cyan">
+        <div className="flex w-max gap-3 p-1">
+          {rows.map((row, r) => (
+            <div key={r} className="flex shrink-0 gap-1.5">
+              {row.map((label) => (
+                <KeyCap
+                  key={label}
+                  label={label}
+                  stack={byLabel[label] ?? (pins[label] ? [pins[label]] : [])}
+                  pinned={label in pins}
+                  selected={selected === label}
+                  icons={icons}
+                  gd={gd}
+                  onClick={() => onSelect(label)}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       {!letterUsed && (
         <button
@@ -130,6 +273,8 @@ export function SlotEditor({
   pinnedSkill,
   pins,
   level,
+  region = "global",
+  stigmas,
   onPin,
   onUnpin,
   note,
@@ -141,6 +286,9 @@ export function SlotEditor({
   pinnedSkill: string | undefined;
   pins: Record<string, string>;
   level: number;
+  region?: Region;
+  /** Equipped stigmas, when the caller has the active build available. */
+  stigmas?: readonly string[];
   onPin: (skillKey: string) => void;
   onUnpin: () => void;
   /** engine slot_notes entry: why this stack is ordered this way */
@@ -152,9 +300,11 @@ export function SlotEditor({
     const needle = q.trim().toLowerCase();
     return Object.values(gd.skills)
       .filter((s) => (s.kind === "active" || s.kind === "stigma" || s.kind === "dodge") && (s.unlock_level ?? 0) <= level)
+      .filter((s) => s.regions.includes(region))
+      .filter((s) => s.kind !== "stigma" || stigmas === undefined || stigmas.includes(s.key))
       .filter((s) => !needle || s.name.toLowerCase().includes(needle))
       .sort((a, b) => a.name.localeCompare(b.name));
-  }, [gd, q, level]);
+  }, [gd, q, level, region, stigmas]);
   const pinnedElsewhere = (key: string) => Object.entries(pins).find(([l, s]) => s === key && l !== label)?.[0];
 
   return (

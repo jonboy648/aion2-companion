@@ -2,15 +2,16 @@
  "path": [
   4965,
   4957,
-  4958,
-  4959,
-  27460,
-  4961,
-  27560,
-  5068
+  4950,
+  4941,
+  5043,
+  5042,
+  5041,
+  5036
  ],
- "spent": 12,
- "gain_pct": 0.5728629236258831,
+ "spent": 11,
+ "battle_spent": 0,
+ "gain_pct": 2.2096076739806847,
  "nodes": [
   {
    "id": 4965,
@@ -25,40 +26,40 @@
    "cost": 1
   },
   {
-   "id": 4958,
+   "id": 4950,
    "board": "Zikel",
-   "name": "Skill Level Up - Robe of Cold",
-   "cost": 2
-  },
-  {
-   "id": 4959,
-   "board": "Zikel",
-   "name": "Max HP",
-   "cost": 1
-  },
-  {
-   "id": 27460,
-   "board": "Zikel",
-   "name": "Attack",
-   "cost": 1
-  },
-  {
-   "id": 4961,
-   "board": "Zikel",
-   "name": "Skill Level Up - Ice Chain",
-   "cost": 3
-  },
-  {
-   "id": 27560,
-   "board": "Vaizel",
    "name": "Critical Hit",
    "cost": 1
   },
   {
-   "id": 5068,
+   "id": 4941,
+   "board": "Zikel",
+   "name": "Skill Level Up - Firestorm",
+   "cost": 3
+  },
+  {
+   "id": 5043,
    "board": "Vaizel",
-   "name": "Skill Level Up - Grace of Resistance",
+   "name": "Skill Level Up - Revitalization Contract",
    "cost": 2
+  },
+  {
+   "id": 5042,
+   "board": "Vaizel",
+   "name": "Defense",
+   "cost": 1
+  },
+  {
+   "id": 5041,
+   "board": "Vaizel",
+   "name": "Max MP",
+   "cost": 1
+  },
+  {
+   "id": 5036,
+   "board": "Vaizel",
+   "name": "Critical Hit Resist",
+   "cost": 1
   }
  ]
 }

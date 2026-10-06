@@ -100,6 +100,27 @@ def _relevant(node: DaevanionNode) -> bool:
     return bool(node.skill_key) or any(STAT_MAP.get(e.stat, ("",))[0] for e in node.effects)
 
 
+def take_path(gd: GameData, path: list[int], points: int | None, battle_points: int | None = None) -> tuple[list[int], int, int]:
+    """The part of an ordered node `path` the budgets pay for -> (nodes, DaevanionCrystal spent, BattleCrystal spent).
+    `points` (None = unlimited) pays only DaevanionCrystal boards; BattleCrystal boards (Azphel) are paid from
+    `battle_points` alone and are skipped entirely when it is None. A currency that runs out stops its own nodes only."""
+    info = {n.id: (n.cost, b.currency) for b in gd.daevanion.values() for n in b.nodes.values()}
+    budget = {"daevanion": points, "battle": battle_points if battle_points is not None else 0}
+    spent = {"daevanion": 0, "battle": 0}
+    dead: set[str] = set()
+    take: list[int] = []
+    for nid in path:
+        cost, cur = info[nid]
+        if cur in dead:
+            continue
+        if budget[cur] is not None and spent[cur] + cost > budget[cur]:
+            dead.add(cur)
+            continue
+        take.append(nid)
+        spent[cur] += cost
+    return take, spent["daevanion"], spent["battle"]
+
+
 def suggest_path(
     gd: GameData,
     build: CharacterBuild,
@@ -108,17 +129,22 @@ def suggest_path(
     points: int,
     board_keys: list[str] | None = None,
     cfg: SimConfig = SimConfig(),
+    battle_points: int | None = None,
 ) -> tuple[list[int], float]:
     """Greedy: add the selectable node with best DPS gain per point; ties by lower id.
 
     When no directly selectable node helps (e.g. only HP/MP next to the start), fall back to the
     best valuable node reachable through bridge nodes and add the whole path.
+    `points` pays only for DaevanionCrystal boards; a BattleCrystal board (Azphel) is planned only when
+    `battle_points` is given, and then only from that budget.
     Returns (new node ids in pick order, total DPS gain %).
     """
     boards = [
         b for k, b in gd.daevanion.items()
         if b.unlock_level <= build.level and (board_keys is None or k in board_keys)
+        and (b.currency != "battle" or battle_points)
     ]
+    left = {"daevanion": points, "battle": battle_points or 0}
     idx = _node_index(gd)
     selected = set(build.daevanion_nodes)
 
@@ -139,38 +165,38 @@ def suggest_path(
         return True
 
     base = cur_dps = dps(selected)
-    remaining = points
     path: list[int] = []
-    while remaining > 0:
+    while max(left.values()) > 0:
         best = None  # (gain per point, -id, node ids to add, new dps)
         for b in boards:
             for nid in sorted(selectable(b, frozenset(selected))):
                 n = b.nodes[nid]
-                if n.cost > remaining or not _relevant(n) or not ok(n, selected):
+                if n.cost > left[b.currency] or not _relevant(n) or not ok(n, selected):
                     continue
                 d = dps(selected | {nid})
                 gain = d - cur_dps
                 if gain > 1e-12:
-                    cand = (gain / max(n.cost, 1), -nid, [nid], d)
+                    cand = (gain / max(n.cost, 1), -nid, [nid], d, b.currency)
                     if best is None or cand[:2] > best[:2]:
                         best = cand
         if best is None:
-            best = _bridge(boards, selected, remaining, cur_dps, dps, ok)
+            best = _bridge(boards, selected, left, cur_dps, dps, ok)
         if best is None:
             break
         for i in best[2]:
             selected.add(i)
             path.append(i)
-            remaining -= idx[i].cost
+            left[best[4]] -= idx[i].cost
         cur_dps = best[3]
     gain_pct = (cur_dps / base - 1.0) * 100.0 if base > 0 else 0.0
     return path, gain_pct
 
 
-def _bridge(boards, selected, remaining, cur_dps, dps, ok):
+def _bridge(boards, selected, left, cur_dps, dps, ok):
     """Best valuable target (gain per path point) reached through unselected nodes (Dijkstra)."""
     best = None
     for b in boards:
+        remaining = left[b.currency]
         dist: dict[int, int] = {}
         prev: dict[int, int | None] = {}
         heap: list[tuple[int, int]] = []
@@ -203,7 +229,7 @@ def _bridge(boards, selected, remaining, cur_dps, dps, ok):
             d_new = dps(selected | set(chain))
             gain = d_new - cur_dps
             if gain > 1e-12:
-                cand = (gain / max(cost, 1), -tid, chain, d_new)
+                cand = (gain / max(cost, 1), -tid, chain, d_new, b.currency)
                 if best is None or cand[:2] > best[:2]:
                     best = cand
     return best

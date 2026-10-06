@@ -12,7 +12,7 @@ from aion2c.models import (
 )
 from aion2c.serde import from_dict, to_dict
 from aion2c.specparse import finalize_gamedata, parse_spec_text, spec_coverage
-from aion2c.specs import active_options, slots_at
+from aion2c.specs import active_options, slot_room, slots_at
 
 C = lambda v: Num(v, "confirmed", "test")  # noqa: E731
 
@@ -39,7 +39,7 @@ def run(gd, specs, *keys, sc, **kw):
 # ---- slots -------------------------------------------------------------------------------------
 def test_default_slots_and_option_gating(sorc_gd):
     assert [n.value for n in sorc_gd.spec_slot_ranks] == [8, 12, 20]
-    assert all(n.confidence == "estimated" and n.source for n in sorc_gd.spec_slot_ranks)
+    assert all(n.confidence == "confirmed" and n.source for n in sorc_gd.spec_slot_ranks)
     assert [slots_at(sorc_gd, r) for r in (1, 7, 8, 11, 12, 19, 20)] == [0, 0, 1, 1, 2, 2, 3]
     hf = sorc_gd.skills["hellfire"]
     assert [sp.rank_required for sp in hf.specializations] == [8, 8, 8, 12, 16]
@@ -295,7 +295,7 @@ def test_real_sorcerer_full_build_picks_a_confirmed_cooldown_option():
     assert all(p.dps_gain_pct > 0 for p in fb.spec_picks)
     for k, opts in fb.build.specs.items():
         from aion2c.engine.specialties import skill_rank
-        assert len(opts) <= max(slots_at(gd, skill_rank(gd, fb.build, k)), 1)
+        assert len(opts) <= max(slot_room(gd, gd.skills[k], skill_rank(gd, fb.build, k)), 1)  # stigma tiers: all earned
 
 
 # ---- serde ---------------------------------------------------------------------------------------

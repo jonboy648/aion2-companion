@@ -30,14 +30,12 @@ class Num:
     source: str = ""
 
 
-# Specialty slots open at these skill ranks (mastery_stigma.md: skycoach.gg 2026-09-29 via aion2guide.org: "lvl 8 =
-# first three specialties + first slot; 12 = fourth specialty + second slot; 16 = fifth specialty; 20 = third
-# slot"). Options unlock per Specialization.rank_required (datamine unlock_level 8/8/8/12/16 on Sorcerer).
-# allthings.how reads the slots as 8/12/16 instead: unresolved, so this is `estimated` data, overridable per
-# class with mechanics.json "spec_slot_ranks".
+# Mastery specialty slots open at these skill ranks: client SpecializedSkillSlot UnlockSkillLv 8/12/20 (the three
+# user-editable Mastery slots; docs/adr/0003). Options unlock per Specialization.rank_required (8/8/8/12/16 on
+# Sorcerer), a different table (SpecializedSkillParts). Overridable per class with mechanics.json "spec_slot_ranks".
 SPEC_SLOT_RANKS = tuple(
-    Num(float(r), "estimated", "skycoach.gg (via aion2guide.org 2026-09-29): slots at skill rank 8/12/20; "
-        "allthings.how says 8/12/16 (research/mastery_stigma.md)")
+    Num(float(r), "confirmed", "client SpecializedSkillSlot UnlockSkillLv 8/12/20 (Mastery, bUserEditSlot); "
+        "docs/adr/0003")
     for r in (8, 12, 20)
 )
 
@@ -280,6 +278,9 @@ class DaevanionBoard:
     unlock_level: int
     nodes: dict[int, DaevanionNode]
     start_id: int
+    # Point type the board is paid in (client DaevanionBoard.CostPointType): "daevanion" (DaevanionCrystal) or
+    # "battle" (BattleCrystal, the Azphel board). daevanion_points never pays for a "battle" board.
+    currency: str = "daevanion"
 
 
 @dataclass(frozen=True)
@@ -330,6 +331,9 @@ class GameData:
 
 @dataclass(frozen=True)
 class Stats:
+    # `attack` = weapon attack BEFORE Amp Ratio: the midpoint of the sheet's Max/Min Attack (weapon range + flat Attack
+    # lines), without Attack Bonus (the engine adds opened Daevanion nodes' Attack Bonus itself) and without the
+    # `attack_increase_pct` / `weapon_dmg_pct` multipliers, which damage.py applies. The default 1000 is a placeholder.
     attack: float = 1000
     attack_increase_pct: float = 0
     weapon_dmg_pct: float = 0
@@ -363,7 +367,11 @@ def cooldown_scale(cdr_pct: float) -> float:
 # +3.8%, cooldown 0.1% come from the DarthThot armory sample (tests/fixtures/armory/info.json, level 44, attribute
 # bonuses only); crit chance 15% is an ESTIMATE (the same sample shows only +2.8% from attributes, gear adds the
 # rest; 10-20% is typical at 45), needed because crit-triggered procs (Heart Gore) never fire at 0% crit.
-BASELINE_L45_STATS = Stats(attack_increase_pct=1.6, combat_speed_pct=3.8, cdr_pct=0.1, crit_chance_pct=15.0)
+# Attack 550 and MP 1000 replace the Stats() placeholders (1000 / 2000) for manual builds: the three real level 44-45
+# stat sheets (tests/fixtures) have weapon attack 553 / 791 / 811 (midpoint of Max/Min Attack before Amp Ratio) and MP
+# 978 / 1861 / 1337, so 550 and 1000 are the low end of what a level-45 character has.
+BASELINE_L45_STATS = Stats(attack=550, attack_increase_pct=1.6, combat_speed_pct=3.8, cdr_pct=0.1, crit_chance_pct=15.0,
+                           max_mp=1000)
 
 
 @dataclass(frozen=True)
@@ -383,6 +391,9 @@ class CharacterBuild:
     # Rank bonuses entered by the user for sources the data cannot compute (Arcana / Soul Binding), skill key -> +ranks.
     # Added on top of skill-point ranks and Daevanion skill nodes, then clamped to the region cap (see total_rank).
     bonus_ranks: dict[str, int] = field(default_factory=dict)
+    # Stigma unlock (Ascension grade 3 + faction quest): True = unlocked, False = no stigma ranks bought, None = infer
+    # (progression.stigma_unlock: a held stigma rank proves it, otherwise the level gate, reported as inferred).
+    stigma_unlocked: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -591,8 +602,44 @@ SKILL_POINT_COST = (0, 1, 1, 1, 2, 2, 2, 4, 4, 4)  # index 0 = rank 1 (free)
 STIGMA_POINT_COST = tuple([1] * 5 + [2] * 5 + [4] * 5 + [8] * 5)
 
 
+_OWNER_CACHE: dict[int, tuple] = {}  # id(gd) -> (gd, {child key: owner skill key}); gd kept alive so ids stay unique
+
+
+def rank_owner(gd: "GameData", skill: Skill) -> Skill | None:
+    """The skill whose purchased rank `skill` plays at, or None when `skill` is bought (or modelled) on its own.
+
+    A chain follow-up (kind CHAIN, linked from a parent by a chain/upgrade link) with no SkillAcquireData rows is not a
+    separate purchase in the client: it has its own per-rank effect table but no acquisition row, so its rank is the
+    one of the skill that starts the chain (Quick Slice -> Breaking Slice -> Swift Slice all play at Quick Slice's
+    rank). Cancel links (Dismiss Spirit, Remove Hibernation) are purchased skills and have acquisition rows."""
+    hit = _OWNER_CACHE.get(id(gd))
+    if hit is None or hit[0] is not gd:
+        from aion2c.progression import rank_levels
+        parent = {ln.child_key: ln.parent_key for ln in gd.links if ln.kind in ("chain", "upgrade")}
+        owner: dict[str, str] = {}
+        for child in parent:
+            sk = gd.skills.get(child)
+            if sk is None or sk.kind != SkillKind.CHAIN or sk.skill_id is None or rank_levels(sk) is not None:
+                continue
+            k, seen = child, {child}
+            while k in parent and parent[k] not in seen:  # climb to the head of the chain
+                k = parent[k]
+                seen.add(k)
+                psk = gd.skills.get(k)
+                if psk is None or not (psk.kind == SkillKind.CHAIN and psk.skill_id is not None and rank_levels(psk) is None):
+                    break
+            if k != child and k in gd.skills:
+                owner[child] = k
+        hit = _OWNER_CACHE[id(gd)] = (gd, owner)
+    key = hit[1].get(skill.key)
+    return gd.skills[key] if key else None
+
+
 def effective_rank(gd: "GameData", build: "CharacterBuild", skill: Skill) -> int:
-    """clamp(build rank, 1, min(len(skill.ranks), region cap for core/stigma))."""
+    """clamp(build rank, 1, min(len(skill.ranks), region cap for core/stigma)). A chain follow-up that is not bought
+    on its own (see `rank_owner`) plays at its owner's rank unless the build names a rank for it."""
+    if skill.key not in build.skill_ranks and (own := rank_owner(gd, skill)) is not None:
+        return effective_rank(gd, build, own)
     cap_key = "stigma" if skill.kind == SkillKind.STIGMA else "core"
     cap = min(len(skill.ranks), gd.rank_caps[build.region][cap_key])
     return max(1, min(build.skill_ranks.get(skill.key, 1), cap))
@@ -634,6 +681,8 @@ def total_rank(gd: "GameData", build: "CharacterBuild", skill: Skill) -> int:
     """The rank a skill really plays at: skill-point rank (<= 10 bought) + Daevanion skill nodes (+1 each, <= +4)
     + the user's `bonus_ranks` entry (Arcana / Soul Binding), clamped to the region cap. Specialty slots and
     options (rank 8/12/16/20) unlock on this rank, not on the skill-point rank."""
+    if skill.key not in build.skill_ranks and (own := rank_owner(gd, skill)) is not None:
+        return total_rank(gd, build, own)
     cap_key = "stigma" if skill.kind == SkillKind.STIGMA else "core"
     cap = min(len(skill.ranks), gd.rank_caps[build.region][cap_key])
     bonus = daevanion_rank_bonus(gd, build, skill.key) + max(0, build.bonus_ranks.get(skill.key, 0))

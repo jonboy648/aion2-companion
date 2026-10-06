@@ -15,7 +15,7 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
-from aion2c import armory, crafting, daevanion as dae, serde
+from aion2c import armory, crafting, daevanion as dae, progression, serde, statsheet
 from aion2c import roadmap as roadmap_mod
 from aion2c.classes import CLASSES, DEFAULT_CLASS, class_info
 from aion2c.data.loader import CLASSES_DIR, default_path, load_gamedata
@@ -111,6 +111,7 @@ def import_character(raw: dict, base_build: dict | None = None) -> dict:
     gd = _gd(ckey)
     base = replace(base, class_key=ckey)
     build, notes = armory.to_build(gd, raw, base)
+    build, notes = statsheet.apply_to_build(build, raw, notes, _items())
     summ = armory.summary(gd, raw)
     prof = (raw.get("info") or {}).get("profile") or {}
     profile = {
@@ -134,26 +135,46 @@ def import_character(raw: dict, base_build: dict | None = None) -> dict:
     }
 
 
-def _full_dict(gd: GameData, fb) -> dict:
-    """FullBuild dict plus `rotation_explained` (engine.rotation.explain_rotation of its own sim)."""
+def _full_dict(gd: GameData, fb, current: CharacterBuild | None = None) -> dict:
+    """FullBuild dict plus `rotation_explained` (engine.rotation.explain_rotation of its own sim) and `current_dps`:
+    the build as given (`current`, before any re-planning) with its rotation searched, next to `result.dps`, the
+    plan. See bo.current_build_dps."""
     d = serde.to_dict(fb)
     d["rotation_explained"] = explain_rotation(gd, fb.build, fb.priority, fb.result, fb.playstyle.scenario)
+    d["current_dps"] = None if current is None else bo.current_build_dps(gd, current, fb.playstyle.scenario, SimConfig())
     return d
 
 
-def compare(build: dict, daevanion_points: int | None = None, progress=None) -> dict:
+def compare(build: dict, daevanion_points: int | None = None, progress=None, battle_points: int | None = None) -> dict:
     """All four playstyles -> {playstyle_key: FullBuild dict (incl. variants, rotation_explained)}."""
     b = _build(build)
     gd = _gd(b.class_key)
-    out = bo.compare_playstyles(gd, b, daevanion_points, SimConfig(), progress)
-    return {k: _full_dict(gd, fb) for k, fb in out.items()}
+    out = bo.compare_playstyles(gd, b, daevanion_points, SimConfig(), progress, battle_points)
+    return {k: _full_dict(gd, fb, b) for k, fb in out.items()}
 
 
-def optimize(build: dict, playstyle_key: str, daevanion_points: int | None = None, progress=None) -> dict:
+def optimize(build: dict, playstyle_key: str, daevanion_points: int | None = None, progress=None,
+             battle_points: int | None = None) -> dict:
     b = _build(build)
     gd = _gd(b.class_key)
-    fb = bo.optimize_full_build(gd, b, playstyle_key, daevanion_points, progress=progress)
-    return _full_dict(gd, fb)
+    fb = bo.optimize_full_build(gd, b, playstyle_key, daevanion_points, progress=progress, battle_points=battle_points)
+    return _full_dict(gd, fb, b)
+
+
+def level_progression(build: dict) -> dict:
+    """What the game allows a character of this build's level: cumulative level budgets (a levelling baseline, quest
+    rewards not included), the stigma unlock and how it was decided, and every rank/slot the build holds that the game
+    would not allow (reported, never fixed)."""
+    b = _build(build)
+    gd = _gd(b.class_key)
+    u = progression.stigma_unlock(gd, b)
+    bud = progression.level_budget(b.level)
+    return {
+        "level": b.level,
+        "budget": {"skill": bud.skill, "stigma": bud.stigma, "stigma_slots": bud.stigma_slots, "daevanion": bud.daevanion},
+        "stigma_unlocked": u.unlocked, "stigma_unlock_basis": u.basis, "stigma_unlock_inferred": u.inferred,
+        "issues": progression.legality_issues(gd, b),
+    }
 
 
 def marginal(build: dict, priority: dict, scenario_key: str) -> list[dict]:
@@ -176,23 +197,17 @@ def keybinds(build: dict, priorities: dict, bar: dict | None = None, hotkeys: di
     return {"plan": serde.to_dict(plan), "instructions_markdown": kb_export.instructions_markdown(plan, gd)}
 
 
-def daevanion_suggest(build: dict, points: int | None = None) -> dict:
-    """Best-first Daevanion node order for the build, cut at `points` (None = every point)."""
+def daevanion_suggest(build: dict, points: int | None = None, battle_points: int | None = None) -> dict:
+    """Best-first Daevanion node order for the build, cut at `points` (None = every point). `points` pays only
+    DaevanionCrystal boards; the Azphel board (BattleCrystal) is planned only from `battle_points` (None = not planned)."""
     b = _build(build)
     gd = _gd(b.class_key)
     cfg = SimConfig()
     sc = _scenario("boss_180")
     heur = bo._heuristic_priority(gd, b, sc, bo.SearchBudget(max_candidates=200))
-    path = bo.plan_daevanion(gd, b, heur, sc, cfg)
+    path = bo.plan_daevanion(gd, b, heur, sc, cfg, bool(battle_points))
     info = {n.id: (br.name, n) for br in gd.daevanion.values() for n in br.nodes.values()}
-    take: list[int] = []
-    spent = 0
-    for nid in path:
-        c = info[nid][1].cost
-        if points is not None and spent + c > points:
-            break
-        take.append(nid)
-        spent += c
+    take, spent, battle_spent = dae.take_path(gd, path, points, battle_points)
     gain = 0.0
     if take:
         d0 = simulate(gd, b, heur, sc, cfg).dps
@@ -201,6 +216,7 @@ def daevanion_suggest(build: dict, points: int | None = None) -> dict:
     return {
         "path": take,
         "spent": spent,
+        "battle_spent": battle_spent,
         "gain_pct": gain,
         "nodes": [{"id": i, "board": info[i][0], "name": info[i][1].name, "cost": info[i][1].cost} for i in take],
     }
@@ -317,7 +333,7 @@ def gear_upgrades(raw_armory: dict, build: dict, playstyle: str, steps: int = 10
 
 
 def max_potential(class_key: str, playstyle: str, reachable_only: bool = True, build: dict | None = None,
-                  raw_armory: dict | None = None) -> dict:
+                  raw_armory: dict | None = None, battle_points: int | None = None) -> dict:
     """Best-in-slot gear (target enchant) + the engine's full build for the class, and the gap to `build` if given.
     -> {class_key, playstyle, gear: [per-slot BIS], build: {stigmas, specialties, daevanion_nodes, ranks},
         dps, dps_without_gear, gear_gain_pct, gain_vs_current_pct|None, current_dps|None,
@@ -329,7 +345,8 @@ def max_potential(class_key: str, playstyle: str, reachable_only: bool = True, b
     if raw_armory:
         eq = [{"id": e["id"], "enchant": e["enchant"], "slot": e["slot"]}
               for e in gear_mod.normalize_equipped(gear_mod.equipped_from_armory(raw_armory), items)]
-    mp = gear_mod.max_potential(gd, class_key, playstyle, b, eq or None, reachable_only, items)
+    mp = gear_mod.max_potential(gd, class_key, playstyle, b, eq or None, reachable_only, items,
+                                battle_points=battle_points)
     slots = {s: i for i, s in enumerate(gear_mod.SLOTS)}
     gear = []
     for s in sorted(mp.gear, key=slots.get):
@@ -369,3 +386,12 @@ def max_potential(class_key: str, playstyle: str, reachable_only: bool = True, b
         "current_dps": current, "gain_vs_current_pct": gain, "with_current_gear": with_current,
         "notes": list(mp.notes), "assumptions": list(GEAR_ASSUMPTIONS),
     }
+
+
+def stat_sheet(raw_armory: dict, calibrate: bool = True) -> dict:
+    """The character's full stat sheet with a per-source breakdown, rebuilt from the armory download.
+    -> {class_name, level, categories: [{key, name, stats: [{key, name, unit, value, sources: [{group, label, value,
+    est?}], armory?, applies_to?, capped?}]}], groups, armory_check, points, notes, unparsed, not_included}.
+    `calibrate` fills the gap between our known sources and the armory's own attribute totals with an estimated
+    "Not exposed" source, so the derived and ratio passes start from the real points."""
+    return statsheet.compute(raw_armory, _items(), calibrate=calibrate)

@@ -154,7 +154,7 @@ def test_bis_and_max_potential_assume_max_exceed(reachable_items, patched, monke
     r = gear.bis(None, "sorcerer", "boss", build(attack=100), items=reachable_items)
     pick = r["necklace"][0]
     assert pick.item["id"] == NECK94 and pick.exceed == 5 and pick.enchant == 15
-    monkeypatch.setattr(gear, "optimize_full_build", lambda gd, b, style, dp, cfg, budget, progress: "FULL")
+    monkeypatch.setattr(gear, "optimize_full_build", lambda gd, b, style, dp, cfg, budget, progress, battle_points=None: "FULL")
     mp = gear.max_potential(None, "sorcerer", "boss", build(attack=100), items=reachable_items)
     base = gear.item_delta(reachable_items[NECK94], 15, "best", None, 0)
     assert mp.gear["necklace"].exceed == 5

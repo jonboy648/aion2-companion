@@ -1,0 +1,204 @@
+.guide-daevanion {
+  min-width: 0;
+  width: 100%;
+}
+
+.guide-daevanion-heading,
+.guide-daevanion-board-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 8px;
+}
+
+.guide-daevanion-heading h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.guide-daevanion-readonly,
+.guide-daevanion-board-heading > span {
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.guide-daevanion-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--text-dim);
+}
+
+.guide-daevanion-legend > span,
+.guide-daevanion-quest {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.guide-daevanion-legend i {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--gold);
+  border-radius: 2px;
+}
+
+.guide-daevanion-legend .guide-daevanion-suggested-key {
+  border-color: var(--cyan);
+  border-style: dashed;
+}
+
+.guide-daevanion-quest,
+.guide-daevanion-empty {
+  margin: 0 0 12px;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+
+.guide-daevanion-quest svg {
+  flex-shrink: 0;
+}
+
+.guide-daevanion-boards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.guide-daevanion-board {
+  min-width: 0;
+}
+
+.guide-daevanion-board-heading h3 {
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.guide-daevanion-board-heading a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.guide-daevanion-board-heading a svg {
+  flex-shrink: 0;
+}
+
+.guide-daevanion-board-heading a:hover {
+  color: var(--cyan);
+}
+
+.guide-daevanion-board-heading a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.guide-daevanion-board-surface {
+  position: relative;
+  min-width: 0;
+}
+
+.guide-daevanion-grid {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  gap: 2px;
+  padding: 8px;
+  background-color: #0b1118;
+  background-position: center;
+  background-size: cover;
+}
+
+.guide-daevanion-node {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  cursor: help;
+}
+
+.guide-daevanion-node[data-state="selected"] {
+  outline: 2px solid var(--gold);
+  outline-offset: -1px;
+}
+
+.guide-daevanion-node[data-state="suggested"] {
+  outline: 2px dashed var(--cyan);
+  outline-offset: -1px;
+}
+
+.guide-daevanion-node:hover,
+.guide-daevanion-node:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--text);
+}
+
+.guide-daevanion-frame,
+.guide-daevanion-node-icon {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  object-fit: contain;
+}
+
+.guide-daevanion-frame {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.guide-daevanion-node-icon {
+  top: 26%;
+  left: 26%;
+  width: 48%;
+  height: 48%;
+}
+
+.guide-daevanion-detail {
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  left: 8px;
+  right: 8px;
+  width: calc(100% - 16px);
+  max-width: 320px;
+  margin-inline: auto;
+  padding: 10px 12px;
+  border: 1px solid var(--metal);
+  border-radius: 4px;
+  background: var(--surface, #101820);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+  box-shadow: 0 3px 12px #0008;
+}
+
+.guide-daevanion-detail[data-placement="top"] { top: 8px; }
+.guide-daevanion-detail[data-placement="bottom"] { bottom: 8px; }
+.guide-daevanion-detail strong { display: block; font-size: 13px; }
+.guide-daevanion-detail p { margin: 4px 0 0; }
+.guide-daevanion-detail ul { margin: 4px 0 0; padding: 0; list-style: none; }
+.guide-daevanion-detail li { display: flex; justify-content: space-between; gap: 12px; }
+.guide-daevanion-detail li > :last-child { flex-shrink: 0; color: var(--gold); }
+.guide-daevanion-detail-meta { display: flex; flex-wrap: wrap; gap: 0 8px; color: var(--text-dim); }

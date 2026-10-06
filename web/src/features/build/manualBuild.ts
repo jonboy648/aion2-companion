@@ -2,7 +2,7 @@ import type { CharacterBuild, Stats } from "@/lib/types";
 
 /** Mirrors aion2c.models.BASELINE_L45_STATS (typical level-45 profile; crit 15% is an estimate). */
 export const DEFAULT_STATS: Stats = {
-  attack: 1000,
+  attack: 550,
   attack_increase_pct: 1.6,
   weapon_dmg_pct: 0,
   dmg_boost_pct: 0,
@@ -13,7 +13,7 @@ export const DEFAULT_STATS: Stats = {
   smite_pct: 0,
   combat_speed_pct: 3.8,
   cdr_pct: 0.1,
-  max_mp: 2000,
+  max_mp: 1000,
   mp_regen_per_s: 20,
   target_defense: 0,
   penetration: 0,
@@ -28,7 +28,7 @@ export interface StatField {
 }
 
 export const STAT_FIELDS: StatField[] = [
-  { key: "attack", label: "Attack", hint: "Total attack on your character sheet", step: 10 },
+  { key: "attack", label: "Attack", hint: "Weapon attack: middle of the Max and Min Attack on your sheet, before Amp Ratio", step: 10 },
   { key: "attack_increase_pct", label: "Attack increase %", step: 0.1 },
   { key: "weapon_dmg_pct", label: "Weapon damage %", step: 0.1 },
   { key: "dmg_boost_pct", label: "Damage boost %", step: 0.1 },
@@ -89,6 +89,7 @@ export function buildFromForm(form: ManualForm, levelCap: number): { build: Char
       stigma_points: null,
       class_key: form.classKey,
       bonus_ranks: {},
+      stigma_unlocked: null,
     },
   };
 }

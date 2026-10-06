@@ -1,0 +1,45 @@
+.guide-skills { min-width: 0; }
+.guide-skills-heading { font-size: 16px; font-weight: 600; line-height: 24px; }
+.guide-skills-availability { margin: 0 0 12px; font-size: 12px; line-height: 18px; color: var(--text-dim); }
+.guide-skills-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.guide-skills-row {
+  box-sizing: border-box;
+  min-height: 50px;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--text);
+}
+.guide-skills-head {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: color 150ms;
+}
+.guide-skills-head:hover { color: var(--cyan); }
+.guide-skills-head:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.guide-skills-head > .guide-skills-icon {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.guide-skills-icon::before, .guide-skills-icon::after { display: none; }
+.guide-skills-copy { min-width: 0; }
+.guide-skills-name, .guide-skills-metadata { display: block; overflow-wrap: anywhere; }
+.guide-skills-name { font-size: 14px; font-weight: 700; line-height: 20px; }
+.guide-skills-metadata { font-size: 12px; line-height: 18px; color: var(--text-dim); }
+.guide-skills-level { font-size: 14px; font-weight: 700; line-height: 20px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.guide-skills-details { min-width: 0; margin: 4px 0 0 48px; font-size: 14px; line-height: 20px; overflow-wrap: anywhere; }
+.guide-skills-ranks { margin: 0 0 4px; color: var(--text-dim); font-size: 12px; line-height: 18px; }
+.guide-skills-specialties { margin: 0; padding-left: 18px; list-style: disc; }
+.guide-skills-specialties > li + li { margin-top: 4px; }
+.guide-skills-group { margin-top: 16px; }
+.guide-skills-group-heading { margin: 0 0 8px; font-size: 14px; font-weight: 600; line-height: 20px; color: var(--text-dim); }

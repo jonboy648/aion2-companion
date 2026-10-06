@@ -6,7 +6,7 @@ import type { CompareResult } from "@/lib/types";
 import { Character } from "@/pages/Character";
 import { Home } from "@/pages/Home";
 import { ManualBuild } from "@/pages/ManualBuild";
-import { BuildResults } from "./BuildResults";
+import { BuildResults, SingleBuildResults } from "./BuildResults";
 import { buildFromForm, initialForm } from "./manualBuild";
 import { clearRecent, gradeColor, loadRecent, rotationRows, roleNote, saveRecent, slotLabel, statDelta } from "./helpers";
 import { pickHit } from "./useCharacter";
@@ -79,6 +79,25 @@ describe("helpers", () => {
 });
 
 describe("BuildResults", () => {
+  it("labels manually entered DPS without describing it as an imported character", () => {
+    render(<SingleBuildResults fb={{ ...cmp.boss, current_dps: 100 }} data={{ gd: null, icons: {} }} onUsePlan={() => {}} />);
+    expect(screen.getByTestId("current-dps")).toHaveTextContent("Starting build");
+    expect(screen.getByTestId("plan-dps")).toHaveTextContent("Planned build DPS");
+    expect(screen.queryByText(/as imported/i)).toBeNull();
+  });
+
+  it("keeps imported character DPS labels in the comparison view", () => {
+    render(<BuildResults cmp={{ ...cmp, boss: { ...cmp.boss, current_dps: 100 } }} data={{ gd: null, icons: {} }} />);
+    expect(screen.getByTestId("current-dps")).toHaveTextContent("as imported");
+    expect(screen.getByTestId("plan-dps")).toHaveTextContent("Best build with your gear");
+  });
+
+  it("distinguishes future Daevanion guidance from nodes included in a manual plan", () => {
+    render(<SingleBuildResults fb={{ ...cmp.boss, build: { ...cmp.boss.build, daevanion_nodes: [] }, daevanion_path: [6101] }} data={{ gd: null, icons: {} }} onUsePlan={() => {}} />);
+    expect(screen.getByText("0 nodes included in this build.")).toBeInTheDocument();
+    expect(screen.getByText(/Future opening order: 1 nodes/)).toBeInTheDocument();
+  });
+
   it("switches playstyle and applies a trade-off variant", async () => {
     render(<BuildResults cmp={cmp} data={{ gd: null, icons: {} }} />);
     expect(screen.getByRole("tab", { name: /Boss DPS/ })).toHaveAttribute("aria-selected", "true");
@@ -135,17 +154,22 @@ describe("pages (mock engine)", () => {
     expect(screen.getByText("Next stat upgrades")).toBeInTheDocument();
   });
 
-  it("manual build runs the engine and shows results", async () => {
+  it("manual build blocks the fixed mock fixture when it violates the selected progression", async () => {
     at("/build?class=sorcerer");
     expect(screen.getByRole("heading", { level: 1, name: "Manual build" })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: /Find my best build/ }));
-    expect(await screen.findByTestId("playstyle-detail", undefined, { timeout: 5000 })).toBeInTheDocument();
+    const submit = screen.getByRole("button", { name: "Calculate plan" });
+    await waitFor(() => expect(submit).not.toBeDisabled());
+    fireEvent.click(submit);
+    expect(await screen.findByRole("alert", undefined, { timeout: 5000 })).toHaveTextContent("The returned plan is not valid");
+    expect(screen.queryByTestId("playstyle-detail")).toBeNull();
   });
 
   it("manual build rejects an invalid level", async () => {
     at("/build");
-    fireEvent.change(screen.getByLabelText(/Level/), { target: { value: "0" } });
-    fireEvent.click(screen.getByRole("button", { name: /Find my best build/ }));
+    fireEvent.change(screen.getByLabelText("Level (1 to 45)"), { target: { value: "0" } });
+    const submit = screen.getByRole("button", { name: "Calculate plan" });
+    await waitFor(() => expect(submit).not.toBeDisabled());
+    fireEvent.click(submit);
     expect(await screen.findByRole("alert")).toHaveTextContent(/Level must be/);
   });
 });

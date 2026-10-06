@@ -4,7 +4,7 @@ A skill has up to 5 specialty options (`Skill.specializations`, 0-based index = 
 once skill rank >= `rank_required`; the number of options equipped at once is the number of slots open at that
 rank (`GameData.spec_slot_ranks`). `CharacterBuild.specs[skill_key]` holds the chosen 0-based option indices.
 """
-from aion2c.models import CharacterBuild, GameData, Skill
+from aion2c.models import CharacterBuild, GameData, Skill, SkillKind
 
 
 def slots_at(gd: GameData, rank: int) -> int:
@@ -17,6 +17,16 @@ def available_options(gd: GameData, skill: Skill, rank: int) -> list[int]:
     return [i for i, sp in enumerate(skill.specializations) if sp.rank_required is None or sp.rank_required <= rank]
 
 
+def slot_room(gd: GameData, skill: Skill, rank: int) -> int:
+    """How many options of `skill` apply at once at `rank`. Mastery: the open selectable slots (8/12/20), and an option
+    the data lets you pick implies at least one. Stigma: its Parts tiers (options at 5/10/15/20) activate automatically
+    (SpecializedSkillParts InitEquipSlotType, slots bUserEditSlot=false), so every available option applies."""
+    avail = len(available_options(gd, skill, rank))
+    if skill.kind == SkillKind.STIGMA:
+        return avail
+    return max(slots_at(gd, rank), 1 if avail else 0)
+
+
 def active_options(gd: GameData, build: CharacterBuild, skill: Skill, rank: int) -> tuple[tuple[int, ...], list[str]]:
     """(options that actually apply, reasons the rest were ignored). Order = the build's order; extra picks
     beyond the open slots, unavailable ranks, bad indices and duplicates are dropped, never silently: the
@@ -25,8 +35,10 @@ def active_options(gd: GameData, build: CharacterBuild, skill: Skill, rank: int)
     ok: list[int] = []
     why: list[str] = []
     avail = set(available_options(gd, skill, rank))
-    # an option the data lets you pick implies at least one open slot (other classes unlock options at 5/10/15/20)
-    room = max(slots_at(gd, rank), 1 if avail else 0)
+    if skill.kind == SkillKind.STIGMA:
+        # Parts tiers activate on their own at ranks 5/10/15/20 whatever the build lists (docs/adr/0003)
+        return tuple(sorted(avail)), []
+    room = slot_room(gd, skill, rank)
     for i in chosen:
         if i in ok:
             continue

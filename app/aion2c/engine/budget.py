@@ -3,7 +3,8 @@ from dataclasses import replace
 
 from aion2c.data.loader import allowed_skills
 from aion2c.engine.simulator import simulate  # noqa: F401  (patch target)
-from aion2c.specs import available_options, slots_at
+from aion2c.progression import max_rank_at_level, stigma_unlock
+from aion2c.specs import available_options, slot_room
 from aion2c.engine.specialties import MIN_GAIN, _matters
 from aion2c.models import (
     SKILL_POINT_COST,
@@ -16,6 +17,7 @@ from aion2c.models import (
     Skill,
     SkillKind,
     effective_rank,
+    rank_owner,
 )
 
 BASE_RANK_CAP = 10  # skill-point ranks stop at 10 (Daevanion adds more on top, not bought here)
@@ -39,6 +41,8 @@ def _castable(gd: GameData, build: CharacterBuild, priority: Priority) -> list[S
             continue
         if s.unlock_level is not None and s.unlock_level > build.level:
             continue
+        if rank_owner(gd, s) is not None:
+            continue  # a chain follow-up plays at its owner's rank: never a separate purchase (models.rank_owner)
         out.append(s)
     return out
 
@@ -64,10 +68,12 @@ def _pool(gd, build, skills, costs, region_cap_key, points, ranks, base, priorit
         return
     # Skill-point ranks stop at BASE_RANK_CAP (Daevanion adds more on top); stigma ranks run to the region stigma cap.
     base_cap = BASE_RANK_CAP if region_cap_key == "core" else 10**6
-    cap_of = {
-        s.key: min(base_cap, s.max_rank, len(s.ranks), gd.rank_caps[build.region][region_cap_key])
-        for s in skills
-    }
+    cap_of = {}
+    for s in skills:
+        cap = min(base_cap, s.max_rank, len(s.ranks), gd.rank_caps[build.region][region_cap_key])
+        # a rank can only be bought once the character level meets its SkillAcquireData gate (ranks already held
+        # above the gate stay as they are: they are flagged by progression.legality_issues, not capped here)
+        cap_of[s.key] = max_rank_at_level(s, build.level, cap)
     cur = {s.key: effective_rank(gd, replace(build, skill_ranks=ranks), s) for s in skills}
     cur_dps = base
 
@@ -88,7 +94,7 @@ def _pool(gd, build, skills, costs, region_cap_key, points, ranks, base, priorit
         sk = by_key[key]
         best = simulate(gd, b, priority, scenario, cfg).dps
         opts = [i for i in available_options(gd, sk, rank) if _matters(sk, i)]
-        slots = max(slots_at(gd, rank), 1 if opts else 0)
+        slots = slot_room(gd, sk, rank)
         if opts:
             # price each option alone, then fill the open slots best-first, keeping an option only if it still adds
             # DPS next to the ones already taken (n + slots simulations instead of n x slots)
@@ -182,5 +188,15 @@ def allocate_points(
     if not skip_core:
         _pool(gd, build, plain, SKILL_POINT_COST, "core", build.skill_points, ranks, base, priority, scenario, cfg, log)
     base2 = simulate(gd, replace(build, skill_ranks=ranks), priority, scenario, cfg).dps if log else base
-    _pool(gd, build, stig, STIGMA_POINT_COST, "stigma", build.stigma_points, ranks, base2, priority, scenario, cfg, log)
+    points = build.stigma_points
+    if points and not stigma_unlock(gd, build).unlocked:
+        points = 0  # stigmas cannot be bought before the unlock (Ascension grade 3 + faction quest)
+    if points:
+        # Rank 1 of a stigma is a paid purchase (1 point), not a free default: every equipped stigma without a bought
+        # rank takes its point first, in equip order; the rest is spent on ranks.
+        for s in (gd.skills[k] for k in build.stigmas if k in gd.skills):
+            if points > 0 and ranks.get(s.key, 0) < 1 and max_rank_at_level(s, build.level, 1) >= 1:
+                ranks[s.key] = 1
+                points -= STIGMA_POINT_COST[0]
+    _pool(gd, build, stig, STIGMA_POINT_COST, "stigma", max(points or 0, 0), ranks, base2, priority, scenario, cfg, log)
     return ranks, log

@@ -91,7 +91,7 @@ def _tier_sim(spec_rank):
 def test_stigma_tier_behind_flat_ranks_is_reached_and_ranks_pass_ten(mini_gd, scen10, monkeypatch):
     monkeypatch.setattr(budget_mod, "simulate", _tier_sim(15))
     gd = _stigma_gd(mini_gd)
-    need = sum(STIGMA_POINT_COST[1:15])  # rank 1 -> 15
+    need = sum(STIGMA_POINT_COST[:15])  # nothing -> rank 15 (rank 1 is paid too)
     b = CharacterBuild("t", "global", 45, stigmas=("strike",), stigma_points=need)
     ranks, log = allocate_points(gd, b, P("strike"), scen10)
     assert ranks["strike"] == 15 and log[-1][0] == "strike" and log[-1][2] > 0
@@ -127,7 +127,7 @@ def test_block_that_does_not_fit_falls_back_to_a_shorter_one(mini_gd, scen10, mo
     gd = _stigma_gd(mini_gd)
     b = CharacterBuild("t", "global", 45, stigmas=("strike",), stigma_points=6)
     ranks, _ = allocate_points(gd, b, P("strike"), scen10)
-    assert ranks["strike"] == 1 + 4 + 1  # four 1-point ranks (4 points) then one 2-point rank
+    assert ranks["strike"] == 5  # five 1-point ranks (5 points; rank 1 is paid); the 2-point rank 6 no longer fits
 
 
 # ---- (4) a rank is valued by all its open slots ---------------------------------------------------
@@ -249,7 +249,7 @@ def _many_stigmas(mini_gd, keys, tier_on=()):
 def test_planned_stigma_rank(mini_gd):
     b = CharacterBuild("t", "global", 45)
     assert bo_mod._planned_stigma_rank(mini_gd, b, 4) == 0  # no points to spend: ranks as entered
-    to10 = 4 * sum(STIGMA_POINT_COST[:9])
+    to10 = 4 * sum(STIGMA_POINT_COST[:10])
     assert bo_mod._planned_stigma_rank(mini_gd, replace(b, stigma_points=to10), 4) == 10
     assert bo_mod._planned_stigma_rank(mini_gd, replace(b, stigma_points=to10 - 1), 4) == 9
     assert bo_mod._planned_stigma_rank(mini_gd, replace(b, stigma_points=10**6), 4) == 20  # the Global cap
@@ -273,7 +273,7 @@ def test_stigma_search_sees_a_tier_option_at_the_planned_rank(mini_gd, scen10, m
     for mod in (bo_mod, spec_mod):
         monkeypatch.setattr(mod, "simulate", _stigma_sim(bonus))
     rest = (scen10, bo_mod.SimConfig(), SearchBudget(max_candidates=10), 1, None)
-    with_points = CharacterBuild("t", "global", 45, stigma_points=sum(STIGMA_POINT_COST[:14]))
+    with_points = CharacterBuild("t", "global", 45, stigma_points=sum(STIGMA_POINT_COST[:15]))
     assert [k for k, _ in bo_mod._optimize_stigmas(gd, with_points, *rest)] == ["tier"]
     # nothing to spend: nothing is planned, so the stigma worth +10 right now stays the pick
     assert [k for k, _ in bo_mod._optimize_stigmas(gd, CharacterBuild("t", "global", 45), *rest)] == ["plain"]

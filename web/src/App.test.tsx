@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import App from "./App";
@@ -13,6 +13,12 @@ function at(path: string) {
 }
 
 describe("app shell", () => {
+  it("keeps site search in the main navigation flow", () => {
+    at("/checklist");
+    const navigation = screen.getByRole("navigation", { name: "Main" });
+    expect(within(navigation).getByRole("button", { name: "Search the site" })).toBeInTheDocument();
+  });
+
   it("renders nav and the fan-project footer on every page", async () => {
     at("/");
     expect(screen.getByRole("navigation", { name: "Main" })).toBeInTheDocument();
@@ -24,12 +30,19 @@ describe("app shell", () => {
   it.each([
     ["/build", "Manual build"],
     ["/daevanion", "Daevanion"],
-    ["/codex", "Codex"],
-    ["/codex/assassin", "Codex"],
+    ["/codex", /sorcerer class guide/i],
+    ["/codex/assassin", /assassin class guide/i],
     ["/keybinds", "Keybinds and macros"],
     ["/crafting", "Crafting"],
+    ["/enhance", "Enhancement calculator"],
     ["/roadmap", "Road map"],
     ["/timers", "Timers"],
+    ["/checklist", "Checklist"],
+    ["/items", "Items"],
+    ["/items/weapons", "Weapons"],
+    ["/items/sword", "Sword"],
+    ["/items/nope", "Page not found"],
+    ["/gear-viewer", "Gear viewer"],
     ["/nope", "Page not found"],
   ])("route %s", (path, heading) => {
     at(path);

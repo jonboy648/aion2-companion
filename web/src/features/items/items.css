@@ -1,0 +1,14 @@
+/* Item database: grade colours follow the icon frame rarity colours (game.css --rc-*). */
+.grade-text[data-rarity="common"] { color: var(--rc-common); }
+.grade-text[data-rarity="rare"] { color: var(--rc-rare); }
+.grade-text[data-rarity="epic"] { color: var(--rc-epic); }
+.grade-text[data-rarity="unique"],
+.grade-text[data-rarity="legend"] { color: var(--rc-unique); }
+.grade-text[data-rarity="heroic"] { color: var(--rc-heroic); }
+.grade-text[data-rarity="ultimate"] { color: var(--rc-ultimate); }
+
+.item-table th,
+.item-table td { white-space: nowrap; }
+.item-table thead th { position: sticky; top: 0; background: var(--surface2); z-index: 1; }
+.item-table tbody tr:hover { background: color-mix(in srgb, var(--surface3) 55%, transparent); }
+.item-table td.is-best { color: var(--ok); font-weight: 600; }

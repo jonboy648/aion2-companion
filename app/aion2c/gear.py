@@ -201,6 +201,36 @@ def item_lines(item: dict, enchant: int, rolls: str = "expected", weights: dict 
     return out
 
 
+def item_parts(item: dict, enchant: int, exceed: int = 0) -> dict[str, dict[str, float]]:
+    """The same totals as `item_lines(..., rolls="expected")` split by origin: `main`, `enchant`, `exceed`, `fixed`
+    (sub lines the item always has) and `rolled` (random sub lines at their expected value; the armory does not
+    publish the real rolls). A weapon's main attack stays a range here (`WeaponFixingDamage` = max,
+    `WeaponMinDamage` = min) because the stat sheet shows Max and Min Attack."""
+    main: dict[str, float] = {}
+    for st in item["main"]:
+        if st["id"] == "WeaponFixingDamage" and "min" in st:
+            main["WeaponDamage"], main["WeaponMinDamage"] = st["v"], st["min"]
+        else:
+            main[st["id"]] = main.get(st["id"], 0.0) + st["v"]
+    ranged = "WeaponDamage" in main
+    ench = enchant_bonus(item, enchant)
+    exc = exceed_lines(item, exceed)
+    out = {"main": main, "enchant": {}, "exceed": {}, "fixed": {}, "rolled": {}}
+    for part, lines in (("enchant", ench), ("exceed", exc)):
+        for sid, v in lines.items():
+            if ranged and sid == "WeaponFixingDamage":  # the weapon's own enchant raises both ends of the range
+                out[part]["WeaponDamage"] = out[part]["WeaponMinDamage"] = v
+            else:
+                out[part][sid] = out[part].get(sid, 0.0) + v
+    if not item["sub_random"]:
+        for s in item["subs"]:
+            out["fixed"][s["id"]] = out["fixed"].get(s["id"], 0.0) + s["v"]
+    elif item["subs"] and item["sub_count"]:
+        for s, p in zip(item["subs"], pool_inclusion(item["subs"], item["sub_count"])):
+            out["rolled"][s["id"]] = out["rolled"].get(s["id"], 0.0) + p * _mid(s)
+    return out
+
+
 def lines_to_delta(lines: dict[str, float]) -> tuple[Stats, dict[str, float]]:
     d = {n: 0.0 for n in _STAT_FIELDS}
     ignored: dict[str, float] = {}
@@ -473,7 +503,8 @@ class MaxPotential:
 def max_potential(gd: GameData, class_key: str, playstyle: str, build: CharacterBuild | None = None,
                   equipped: list[dict] | None = None, reachable_only: bool = True,
                   items: dict[int, dict] | None = None, cfg=SimConfig(),
-                  budget: SearchBudget = SearchBudget(max_candidates=200), progress=None) -> MaxPotential:
+                  budget: SearchBudget = SearchBudget(max_candidates=200), progress=None,
+                  battle_points: int | None = None) -> MaxPotential:
     """BIS gear at max enchant and max Exceed + the engine's full build (every Daevanion point, max ranks, best stigmas/specs).
     With a `build` it also returns `current_full`: the best that character's CURRENT gear and already-opened Daevanion
     nodes allow (daevanion_points=0: nothing new is opened; stigmas, ranks and specialties are still optimised)."""
@@ -489,7 +520,7 @@ def max_potential(gd: GameData, class_key: str, playstyle: str, build: Character
     for r in gear.values():
         delta = add_stats(delta, item_delta(r.item, r.enchant, "best", w, r.exceed))
     geared = replace(build, stats=add_stats(base, delta))
-    full = optimize_full_build(gd, geared, playstyle, None, cfg, budget, progress)
+    full = optimize_full_build(gd, geared, playstyle, None, cfg, budget, progress, battle_points)
     current_full = optimize_full_build(gd, build, playstyle, 0, cfg, budget, progress) if given else None
     notes = ["upper bound: best sub-stat lines on every item, all at max enchant and max Exceed "
              "(success odds are in the item data, not priced in; costs not modelled)",

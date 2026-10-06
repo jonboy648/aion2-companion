@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { gamedata, iconUrls, keybinds, optimize } from "@/engine/api";
 import type { CharacterBuild, GameData, IconUrls, KeybindsResult, Priority } from "@/lib/types";
-import { hashBuild, loadJson, saveJson } from "./activeBuild";
+import { hashBuild, loadJson, saveJson, type MacroScenario, type PlannedBuild } from "./activeBuild";
 
-export type Priorities = { boss_180: Priority; aoe_pack: Priority };
-export type Hotkeys = { boss: string; aoe: string };
+export type Priorities = Partial<Record<MacroScenario, Priority>>;
+export type Hotkeys = { boss: string; aoe: string; leveling: string };
 
-export const DEFAULT_HOTKEYS: Hotkeys = { boss: "F9", aoe: "F10" };
+export const DEFAULT_HOTKEYS: Hotkeys = { boss: "F9", aoe: "F10", leveling: "F11" };
 export const HOTKEY_CHOICES = ["F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"];
 export const DELAY_MIN = 0;
 export const DELAY_MAX = 500;
@@ -21,7 +21,7 @@ const prioKey = (hash: string) => `aion2c.kb.prio.v1:${hash}`;
 const pinKey = (classKey: string) => `aion2c.kb.pins.v1:${classKey}`;
 const prefsKey = "aion2c.kb.prefs.v1";
 
-export function useKeybindPlan(build: CharacterBuild | null) {
+export function useKeybindPlan(build: CharacterBuild | null, planned: PlannedBuild | null = null) {
   const classKey = build?.class_key ?? null;
   const buildHash = useMemo(() => (build ? hashBuild(build) : ""), [build]);
 
@@ -32,6 +32,12 @@ export function useKeybindPlan(build: CharacterBuild | null) {
   const [result, setResult] = useState<KeybindsResult | null>(null);
   const [planError, setPlanError] = useState<string | null>(null);
   const [pins, setPins] = useState<Pins>({});
+  const availablePins = useMemo(() => Object.fromEntries(Object.entries(pins).filter(([, key]) => {
+    const skill = gd?.skills[key];
+    return build && gd?.class_key === build.class_key && skill && (skill.unlock_level ?? 0) <= build.level
+      && skill.regions.includes(build.region)
+      && (skill.kind !== "stigma" || build.stigmas.includes(key));
+  })), [pins, gd, build]);
   const [delayMs, setDelayMs] = useState<number>(() => loadJson(prefsKey, { delay: 10, hotkeys: DEFAULT_HOTKEYS }).delay);
   const [hotkeys, setHotkeys] = useState<Hotkeys>(() => ({ ...DEFAULT_HOTKEYS, ...loadJson(prefsKey, { hotkeys: DEFAULT_HOTKEYS }).hotkeys }));
   const [runNonce, setRunNonce] = useState(0);
@@ -44,25 +50,30 @@ export function useKeybindPlan(build: CharacterBuild | null) {
     if (!classKey) return;
     let live = true;
     setGd(null);
-    Promise.all([gamedata(classKey), iconUrls(classKey)]).then(
-      ([g, i]) => {
-        if (live) {
-          setGd(g);
-          setIcons(i);
-        }
-      },
-      (e: unknown) => live && setPhase({ status: "error", message: errMsg(e) }),
-    );
+    setIcons({});
+    Promise.allSettled([gamedata(classKey), iconUrls(classKey)]).then(([g, i]) => {
+      if (!live) return;
+      if (g.status === "rejected") setPhase({ status: "error", message: errMsg(g.reason) });
+      else setGd(g.value);
+      if (i.status === "fulfilled") setIcons(i.value);
+    });
     setPins(loadJson<Pins>(pinKey(classKey), {}));
     return () => {
       live = false;
     };
-  }, [classKey]);
+  }, [classKey, runNonce]);
 
   // best rotations (boss + AoE), cached by build hash
   useEffect(() => {
-    if (!build) return;
+    setResult(null);
+    setPlanError(null);
+    if (!build) { setPrios(null); return; }
     let live = true;
+    if (planned && planned.buildHash === buildHash) {
+      setPrios({ [planned.scenario]: planned.priority });
+      setPhase({ status: "ready" });
+      return;
+    }
     const cached = forceRef.current ? null : loadJson<Priorities | null>(prioKey(buildHash), null);
     forceRef.current = false;
     if (cached) {
@@ -86,15 +97,16 @@ export function useKeybindPlan(build: CharacterBuild | null) {
     return () => {
       live = false;
     };
-  }, [build, buildHash, runNonce]);
+  }, [build, buildHash, runNonce, planned]);
 
   // plan (stacks, macros, G-keys, DPS) whenever an input changes; debounced so typing a delay stays smooth
   useEffect(() => {
-    if (!build || !prios) return;
+    setResult(null);
+    if (!build || !prios || !gd || gd.class_key !== build.class_key) return;
     let live = true;
     setPlanError(null);
     const t = setTimeout(() => {
-      keybinds(build, prios, pins, { boss: hotkeys.boss, aoe: hotkeys.aoe }, delayMs).then(
+      keybinds(build, prios, availablePins, hotkeys, delayMs).then(
         (r) => live && setResult(r),
         (e: unknown) => live && setPlanError(errMsg(e)),
       );
@@ -103,7 +115,7 @@ export function useKeybindPlan(build: CharacterBuild | null) {
       live = false;
       clearTimeout(t);
     };
-  }, [build, prios, pins, hotkeys, delayMs]);
+  }, [build, prios, availablePins, hotkeys, delayMs, gd]);
 
   const updatePins = useCallback(
     (fn: (p: Pins) => Pins) => {
@@ -140,7 +152,7 @@ export function useKeybindPlan(build: CharacterBuild | null) {
     phase,
     result,
     planError,
-    pins,
+    pins: availablePins,
     pin,
     unpin,
     clearPins,

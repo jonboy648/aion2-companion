@@ -2,55 +2,55 @@
  {
   "stat": "cdr_pct",
   "delta": 1.0,
-  "dps_gain_pct": 1.2418476779804166,
-  "confidence": "estimated"
- },
- {
-  "stat": "dmg_boost_pct",
-  "delta": 1.0,
-  "dps_gain_pct": 0.714285714285956,
-  "confidence": "estimated"
- },
- {
-  "stat": "smite_pct",
-  "delta": 1.0,
-  "dps_gain_pct": 0.6995103427601013,
-  "confidence": "estimated"
- },
- {
-  "stat": "weapon_dmg_pct",
-  "delta": 1.0,
-  "dps_gain_pct": 0.6189636168347779,
+  "dps_gain_pct": 1.1159076089368103,
   "confidence": "estimated"
  },
  {
   "stat": "attack",
   "delta": 10.0,
-  "dps_gain_pct": 0.6026909608908504,
+  "dps_gain_pct": 0.8171451732877477,
   "confidence": "estimated"
  },
  {
-  "stat": "attack_increase_pct",
+  "stat": "dmg_boost_pct",
   "delta": 1.0,
-  "dps_gain_pct": 0.5875600974427186,
+  "dps_gain_pct": 0.726310765495497,
   "confidence": "estimated"
  },
  {
-  "stat": "crit_chance_pct",
+  "stat": "smite_pct",
   "delta": 1.0,
-  "dps_gain_pct": 0.3542813041131243,
+  "dps_gain_pct": 0.6992985336409907,
   "confidence": "estimated"
  },
  {
   "stat": "combat_speed_pct",
   "delta": 1.0,
-  "dps_gain_pct": 0.22117694299374158,
+  "dps_gain_pct": 0.49754813997560987,
+  "confidence": "estimated"
+ },
+ {
+  "stat": "attack_increase_pct",
+  "delta": 1.0,
+  "dps_gain_pct": 0.4658956622622279,
+  "confidence": "estimated"
+ },
+ {
+  "stat": "weapon_dmg_pct",
+  "delta": 1.0,
+  "dps_gain_pct": 0.45100164350500016,
+  "confidence": "estimated"
+ },
+ {
+  "stat": "crit_chance_pct",
+  "delta": 1.0,
+  "dps_gain_pct": 0.3600907826198263,
   "confidence": "estimated"
  },
  {
   "stat": "crit_dmg_pct",
   "delta": 1.0,
-  "dps_gain_pct": 0.110499711396983,
+  "dps_gain_pct": 0.07951582602774288,
   "confidence": "estimated"
  }
 ]
