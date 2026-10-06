@@ -5,6 +5,7 @@ import { isMockEngine } from "@/engine/api";
 import { BrandCrest } from "@/components/ui/brand-crest";
 import "./site-footer.css";
 import { FactionThemeProvider, useFaction, type Faction } from "@/components/game/faction";
+import { GlobalSearch } from "@/features/search/GlobalSearch";
 import { TimerStrip } from "@/features/timers/TimerStrip";
 import { cn } from "@/lib/utils";
 
@@ -74,8 +75,9 @@ function Shell() {
               </NavLink>
             ))}
           </nav>
+          <GlobalSearch />
           {isMockEngine && (
-            <span className="ml-auto rounded border border-warn/50 bg-warn/10 px-2.5 py-0.5 text-xs text-warn" title="VITE_ENGINE=mock">
+            <span className="rounded border border-warn/50 bg-warn/10 px-2.5 py-0.5 text-xs text-warn" title="VITE_ENGINE=mock">
               mock data
             </span>
           )}
