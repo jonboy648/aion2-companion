@@ -140,8 +140,7 @@ describe("pages (mock engine)", () => {
     at("/c/nae/2103/DarthThot");
     expect(screen.getByTestId("progress")).toBeInTheDocument();
     const card = await screen.findByTestId("character-card", undefined, { timeout: 5000 });
-    fireEvent.click(screen.getByText("Character profile and equipment"));
-    fireEvent.click(within(card).getByText("Equipped gear, pet and wings"));
+    expect(within(card).getByText("Starturtle")).toBeVisible();
     expect(within(card).getByText("Combat power")).toBeInTheDocument();
     expect(within(card).getByText("Liberator Spellbook")).toBeInTheDocument();
     expect(within(card).getAllByText("+10")).toHaveLength(2); // weapon and amulet

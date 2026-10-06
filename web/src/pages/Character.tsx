@@ -113,7 +113,7 @@ export function Character() {
         </div>
       </PageHeader>
 
-      {imp ? <details className="mb-4"><summary className="mb-3 cursor-pointer text-sm text-cyan">Character profile and equipment</summary><CharacterCard imp={imp} data={data} extras={st.extras} /></details> : <ProgressPanel title="Importing character" message={st.message} steps={st.steps} />}
+      {imp ? <CharacterCard imp={imp} data={data} extras={st.extras} /> : <ProgressPanel title="Importing character" message={st.message} steps={st.steps} />}
 
       {imp && <UnspentPoints value={st.points} onChange={st.setPoints} />}
 
