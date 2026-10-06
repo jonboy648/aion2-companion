@@ -28,7 +28,9 @@ jobs:
         with:
           node-version: "24"
           cache: npm
-          cache-dependency-path: web/package-lock.json
+          cache-dependency-path: |
+            web/package-lock.json
+            map-app/package-lock.json
 
       # Engine tests (Qt-free webapi). conftest sets QT_QPA_PLATFORM=offscreen but the
       # webapi tests do not need PySide6 itself.
@@ -49,6 +51,14 @@ jobs:
         working-directory: web
         run: npx vitest run
 
+      - name: Install interactive map dependencies
+        working-directory: map-app
+        run: npm ci
+
+      - name: Check interactive map packaging
+        working-directory: web
+        run: node --test scripts/map-package.check.mjs
+
       - name: Warn if armory proxy URL is unset
         if: ${{ vars.ARMORY_PROXY_URL == '' }}
         run: echo "::warning::Repository variable ARMORY_PROXY_URL is not set; character search will not work."
@@ -60,6 +70,9 @@ jobs:
           # api.ts defaults to the mock engine; production must run the real Pyodide engine.
           VITE_ENGINE: ${{ vars.VITE_ENGINE || 'real' }}
         run: npm run build
+
+      - name: Build interactive map
+        run: node web/scripts/build-map.mjs
 
       # Link-preview image: Discord/Twitter/Facebook do not render SVG, and *.png is gitignored
       # (NCSOFT art guard), so rasterise the authored og.svg at build time. Non-fatal.

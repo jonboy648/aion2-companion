@@ -2,7 +2,7 @@
 
 Branch: `codex/level-planner-acceptance`, worktree `D:\Aion2-level-planner`.
 Preview: http://127.0.0.1:5197/codex/templar (real browser engine).
-Review only: no push, merge to main, or deployment authorized for this checkpoint.
+The original checkpoint was review-only. Jon subsequently approved deployment of the latest combined site with the approved map.
 
 ## Included
 
@@ -15,6 +15,7 @@ Review only: no push, merge to main, or deployment authorized for this checkpoin
 - Search indexes all 9,245 item IDs, including materials and consumables, once each.
 - Search closes on query-only skill navigation as well as page navigation.
 - Header search is a compact, labelled magnifier in the navigation flow, without a separate right-offset row; Home's character search is unchanged.
+- Approved interactive map: `695142e`, with local tiles/markers, themed sidebar/header, party-share links, Maps in the main navigation, retained credits and corresponding source. Map crafting remains separate from companion crafting.
 
 Server status remains excluded: its draft has no verified data source.
 This integration does not replace Home or redo the approved guide layout.
@@ -50,4 +51,14 @@ Engine fingerprint: `8bc4b1c25c61`.
 - Distinct item IDs can currently share indistinguishable names/visible stats; the table does not yet explain those variants.
 - Desktop tables may require horizontal scrolling to see all selected columns.
 - Custom quickslot layout is not yet validation of physical in-game slot restrictions; the guide labels this limitation.
-- Draft server status and the separate map-review lane are not newly merged by this four-feature integration.
+- Draft server status and the docs-only research PR remain separate.
+
+## Deployment Integration Checks
+
+- Fresh combined web suite: 676 tests in 71 files passed.
+- Fresh real-engine production build: strict TypeScript, Vite and 9,318 prerendered files passed. Main JS 777.52 kB (gzip 237.82); CSS 135.65 kB (gzip 25.02).
+- Fresh engine API suite: 12 tests passed.
+- Map packaging/party-share/attribution tests: all five passed.
+- Map TypeScript and production build passed; complete site artifact 483.1 MB including corresponding map source, within the 900 MB project safety budget.
+- Production browser preview loaded map tiles, marker layers and the themed header; a custom rally pin could be placed and saved, and the copy-party-link control reported success.
+- Merge retained both Items and Maps, the inline search, and all existing companion routes. No engine source changes or proxy deployment are needed.

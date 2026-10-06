@@ -84,10 +84,10 @@
   },
   {
    "path": "/maps",
-   "title": "Aion 2 maps: links to community interactive maps",
+    "title": "Aion 2 interactive map and party pins | Become Cube",
    "h1": "Maps",
-   "description": "Links to community Aion 2 maps with zones, bosses, portals and gathering nodes. Unofficial; we link to them and host no map art.",
-   "intro": "Unofficial community maps. We link to them and do not host or copy any map art."
+    "description": "Explore the Aion 2 interactive map with zones, bosses, portals and gathering nodes, or share a party pin board. Unofficial fan tool.",
+    "intro": "Explore zones, find locations, and share party pins."
   },
   {
    "path": "/timers",

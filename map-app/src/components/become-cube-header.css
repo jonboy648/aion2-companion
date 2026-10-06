@@ -1,0 +1,13 @@
+.cube-map-header { display: flex; align-items: center; gap: 24px; flex-shrink: 0; min-height: 60px; padding: 8px 20px; background: #0a1224; color: #eaeefa; border-bottom: 1px solid #d9a84066; font: 14px/1.4 system-ui, sans-serif; letter-spacing: 0; }
+.cube-map-brand { display: inline-flex; align-items: center; gap: 10px; color: #f2cf7e; text-decoration: none; white-space: nowrap; font: 600 20px/1.2 Georgia, serif; }
+.cube-map-brand img { flex-shrink: 0; object-fit: contain; }
+.cube-map-header nav { display: flex; flex: 1; flex-wrap: wrap; gap: 6px; }
+.cube-map-header nav a { padding: 7px 10px; border-radius: 6px; color: #aeb8d6; text-decoration: none; }
+.cube-map-header nav a:hover, .cube-map-header nav a[aria-current="page"] { color: #f2cf7e; background: #ffffff0d; }
+.cube-map-header a:focus-visible { outline: 2px solid #f2cf7e; outline-offset: 3px; }
+@media (max-width: 640px) {
+  .cube-map-header { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
+  .cube-map-brand { flex: 1; font-size: 18px; }
+  .cube-map-header nav { order: 3; flex-basis: 100%; gap: 2px; }
+  .cube-map-header nav a { padding: 6px 8px; font-size: 12px; }
+}
