@@ -30,11 +30,11 @@ MODULES = (
     "aion2c.engine.next_skills", "aion2c.engine.rotation", "aion2c.engine.search", "aion2c.engine.simulator",
     "aion2c.engine.specialties", "aion2c.engine.rank_values", "aion2c.specs", "aion2c.specparse",
     "aion2c.keybinds", "aion2c.keybinds.export", "aion2c.keybinds.gkeys", "aion2c.keybinds.layout",
-    "aion2c.keybinds.macro",
+    "aion2c.keybinds.macro", "aion2c.keybinds.quick_use",
 )
 
 
-PY_DATA = ("stat_sheet.json", "client_progression.json")  # data files packed into aion2c.zip next to the modules
+PY_DATA = ("stat_sheet.json", "client_progression.json", "client_quick_use.json")  # data files packed into aion2c.zip next to the modules
 
 
 def bundled_modules() -> list[str]:

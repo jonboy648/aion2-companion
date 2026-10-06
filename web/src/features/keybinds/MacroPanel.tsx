@@ -16,6 +16,7 @@ export const MACRO_META = {
 export type MacroHotkey = (typeof MACRO_META)[keyof typeof MACRO_META]["hotkey"];
 
 export function macroEfficiency(plan: KeybindPlan, m: MacroPlan): { macro: number; ideal: number; pct: number } | null {
+  if (plan.queue_status === "unverified") return null;
   const meta = MACRO_META[m.name as keyof typeof MACRO_META];
   const macro = plan.macro_dps[m.name];
   const ideal = meta ? plan.ideal_dps[meta.scenario] : undefined;
@@ -96,7 +97,7 @@ export function MacroPanel({
         />
       </label>
       <p className={compact ? "text-sm text-faint" : "max-w-md text-xs text-faint"}>
-        The in-game macro runs only while its key is held and walks the entries in order. Entries it cannot use are skipped, so it only approximates priority.
+        Hold the macro key to attempt its entries; order is not guaranteed. Manual inputs take priority. Check Skill Queue and control mode in game.
       </p>
     </div>
   );
@@ -126,9 +127,11 @@ export function MacroPanel({
   };
 
   const estimates = (m: MacroPlan) => {
+    if (plan.queue_status === "unverified") return <p className="text-xs text-dim">Queue behavior unverified; no reliable macro DPS prediction.</p>;
     const eff = macroEfficiency(plan, m);
     return (
       <>
+        <p className="text-xs text-estimated">Experimental sequential model, not validated game behavior.</p>
         {eff ? <DpsBar {...eff} /> : <p className="text-xs text-faint">No DPS estimate for this macro.</p>}
         {plan.hybrid_dps?.[m.name] != null && eff && (
           <p className="mt-1.5 text-xs text-dim" data-testid="hybrid-line">
@@ -161,13 +164,22 @@ export function MacroPanel({
     </section>
   );
 
+  const conflicts = plan.warnings.filter((warning) => warning.toLowerCase().includes("binding conflict"));
+  const emptyMessage = plan.queue_status === "unverified"
+    ? "No entries: assign an acquired skill to a Quick Use action first."
+    : "No entries: nothing in this rotation can run from a macro.";
+  const mouseNotice = plan.queue_status === "unverified" && plan.macros.some((macro) => macro.entries.some((entry) => /mouse/i.test(entry.key_label)))
+    && <p className="text-sm text-dim">Mouse entries require an in-game control-mode check; rebind to a keyboard key if unsupported.</p>;
+  const conflictNotice = conflicts.length > 0 && <div role="alert" className="text-sm text-error">{conflicts.map((warning) => <p key={warning}>{warning}</p>)}</div>;
   if (compact) {
     return (
       <div className="compact-macro-panel">
+        {conflictNotice}
+        {mouseNotice}
         {plan.macros.map((m) => (
           <section key={m.name} aria-label={m.name} className="compact-macro">
             {m.entries.length === 0 ? (
-              <p className="text-sm text-faint">No entries: nothing in this rotation can run from a macro.</p>
+              <p className="text-sm text-faint">{emptyMessage}</p>
             ) : (
               <ol className="compact-macro-steps" role="list" aria-label={`${m.name} entries`}>
                 {m.entries.map((e) => {
@@ -203,10 +215,10 @@ export function MacroPanel({
                 {hotkeyControl(m)}
               </div>
             </details>
-            <details className="compact-macro-details">
+            {plan.queue_status !== "unverified" && <details className="compact-macro-details">
               <summary>Damage estimate</summary>
               <div className="compact-macro-estimates">{estimates(m)}</div>
-            </details>
+            </details>}
           </section>
         ))}
         {manualSection}
@@ -216,6 +228,8 @@ export function MacroPanel({
 
   return (
     <div className="space-y-5">
+      {conflictNotice}
+      {mouseNotice}
       {delayControls}
 
       {plan.macros.map((m) => {
@@ -229,7 +243,7 @@ export function MacroPanel({
             </div>
 
             {m.entries.length === 0 ? (
-              <p className="mt-3 text-sm text-faint">No entries: nothing in this rotation can run from a macro.</p>
+              <p className="mt-3 text-sm text-faint">{emptyMessage}</p>
             ) : (
               <ol className="mt-3 flex flex-wrap gap-1.5" aria-label={`${m.name} entries`}>
                 {m.entries.map((e) => {

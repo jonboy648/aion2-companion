@@ -25,6 +25,17 @@ def test_bundle_lists_expected_modules():
     assert not any(m.startswith("aion2c.ui") or m in ("aion2c.state", "aion2c.app") for m in mods)
 
 
+def test_browser_archive_contains_quick_use_code_and_client_contract(tmp_path):
+    import zipfile
+    bundle = _bundle()
+    archive = tmp_path / "engine.zip"
+    bundle.build_zip(archive)
+    with zipfile.ZipFile(archive) as packed:
+        assert "aion2c/keybinds/quick_use.py" in packed.namelist()
+        assert "aion2c/data/client_quick_use.json" in packed.namelist()
+    assert bundle.missing_imports() == []
+
+
 def test_no_bundled_module_imports_pyside6():
     mods = _bundle().bundled_modules()
     code = textwrap.dedent(f"""
@@ -76,3 +87,7 @@ def test_engine_fingerprint_follows_engine_code(tmp_path, monkeypatch):
     damage = pkg / "engine" / "damage.py"
     damage.write_text(damage.read_text(encoding="utf-8") + "\n# changed\n", encoding="utf-8")
     assert be.engine_fingerprint() != before
+    code_changed = be.engine_fingerprint()
+    contract = pkg / "data" / "client_quick_use.json"
+    contract.write_text(contract.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+    assert be.engine_fingerprint() != code_changed

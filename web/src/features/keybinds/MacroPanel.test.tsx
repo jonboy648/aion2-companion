@@ -11,6 +11,7 @@ afterEach(cleanup);
 const gd = gamedataFx as unknown as GameData;
 const plan: KeybindPlan = {
   ...(keybindsFx.plan as unknown as KeybindPlan),
+  queue_status: undefined,
   macros: [{
     name: "Leveling loop",
     hotkey: "F11",
@@ -42,6 +43,27 @@ const props = () => ({
 });
 
 describe("compact MacroPanel", () => {
+  it.each([false, true])("explains empty native assignments and mouse uncertainty in compact=%s", (compact) => {
+    const native = { ...plan, queue_status: "unverified" as const, macros: [{ ...plan.macros[0], entries: [] }] };
+    const { rerender } = render(<MacroPanel {...props()} compact={compact} plan={native} />);
+    expect(screen.getByText("No entries: assign an acquired skill to a Quick Use action first.")).toBeVisible();
+    rerender(<MacroPanel {...props()} compact={compact} plan={{ ...native, macros: [{ ...native.macros[0], entries: [{ index: 1, key_label: "Left mouse", delay_ms: 10 }] }] }} />);
+    expect(screen.getByText(/Mouse entries require an in-game control-mode check/)).toBeVisible();
+  });
+  it.each([false, true])("shows binding conflicts in compact=%s", (compact) => {
+    render(<MacroPanel {...props()} compact={compact} plan={{ ...plan, warnings: ["Binding conflict: Q is assigned twice; excluded from macros"] }} />);
+    expect(screen.getByRole("alert")).toHaveTextContent("Binding conflict");
+  });
+  it("uses the client delay limits and withholds efficiency for an unverified queue", () => {
+    render(<MacroPanel {...props()} plan={{ ...plan, queue_status: "unverified" }} compact />);
+    fireEvent.click(screen.getByText("Macro settings"));
+    const delay = screen.getByRole("spinbutton", { name: "Delay between presses (ms)" });
+    expect(delay).toHaveAttribute("min", "10");
+    expect(delay).toHaveAttribute("max", "9900");
+    expect(screen.queryByText("Damage estimate")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("macro-advice")).not.toBeInTheDocument();
+    expect(screen.getByText(/order is not guaranteed/)).toBeInTheDocument();
+  });
   it("keeps every actual press, engine index, key mapping, delay and fallback in order", () => {
     render(<MacroPanel {...props()} compact showManual={false} />);
     const macro = screen.getByRole("region", { name: "Leveling loop" });
@@ -92,8 +114,8 @@ describe("compact MacroPanel", () => {
     fireEvent.click(summary);
     expect(settings).toHaveAttribute("open");
     const delay = within(settings).getByRole("spinbutton", { name: "Delay between presses (ms)" });
-    expect(delay).toHaveAttribute("min", "0");
-    expect(delay).toHaveAttribute("max", "500");
+    expect(delay).toHaveAttribute("min", "10");
+    expect(delay).toHaveAttribute("max", "9900");
     expect(delay).toHaveAttribute("step", "5");
     expect(delay).toHaveValue(10);
     fireEvent.change(delay, { target: { value: "25" } });

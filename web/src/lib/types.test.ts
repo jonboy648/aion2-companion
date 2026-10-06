@@ -44,7 +44,7 @@ const K = {
   variant: keysOf<T.BuildVariant>({ key: true, label: true, gives: true, build: true, stigma_picks: true, dps: true, dps_delta_pct: true }),
   plan: keysOf<T.KeybindPlan>({
     stacks: true, macros: true, gkeys: true, macro_dps: true, ideal_dps: true, manual_every_s: true, warnings: true,
-    hybrid_dps: true, slot_notes: true, macro_advice: true, rotation: true, thumbs: true,
+    hybrid_dps: true, slot_notes: true, macro_advice: true, rotation: true, thumbs: true, actions: true, queue_status: true,
   }),
   rotation: keysOf<T.RotationExplained>({
     scenario: true, scenario_name: true, duration_s: true, dps: true, priority: true, opener: true, core: true,
@@ -54,9 +54,9 @@ const K = {
     skill_key: true, name: true, icon_key: true, charge_level: true, cooldown_s: true, casts: true, cast_every_s: true,
     damage_share_pct: true, rule: true, status: true, text: true,
   }),
-  stack: keysOf<T.SlotStack>({ key_label: true, stack: true }),
+  stack: keysOf<T.SlotStack>({ key_label: true, stack: true, quick_use_id: true }),
   macro: keysOf<T.MacroPlan>({ name: true, hotkey: true, entries: true }),
-  macroEntry: keysOf<T.MacroEntry>({ index: true, key_label: true, delay_ms: true }),
+  macroEntry: keysOf<T.MacroEntry>({ index: true, key_label: true, delay_ms: true, quick_use_id: true }),
   gkey: keysOf<T.GKeyAssignment>({ gkey: true, mstate: true, sends: true, purpose: true, risk: true }),
   roadmap: keysOf<T.RoadmapItem>({ level: true, kind: true, text: true, regions: true }),
   material: keysOf<T.RecipeMaterial>({ item: true, qty: true, source: true }),
@@ -148,9 +148,10 @@ describe("types.ts matches real webapi output (fixtures)", () => {
     same(keybindsFx.plan.stacks[0], K.stack);
     same(keybindsFx.plan.macros[0], K.macro);
     same(keybindsFx.plan.macros[0].entries[0], K.macroEntry);
-    same(keybindsFx.plan.gkeys[0], K.gkey);
-    same(keybindsFx.plan.rotation.boss_180, K.rotation);
-    expect(Object.keys(keybindsFx.plan.slot_notes).sort()).toEqual(keybindsFx.plan.stacks.map((s) => s.key_label).sort());
+    expect(keybindsFx.plan.actions).toHaveLength(12);
+    expect(keybindsFx.plan.queue_status).toBe("unverified");
+    expect(keybindsFx.plan.gkeys).toEqual([]);
+    expect(keybindsFx.plan.rotation).toEqual({});
   });
 
   it("gamedata", () => {

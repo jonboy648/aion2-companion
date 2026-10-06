@@ -225,7 +225,7 @@ export function Planner({ gd, icons, imp, classes, hasCharacter, onClass }: Plan
         </Card>
         {hasCharacter && (
           <p className="text-xs text-faint">
-            Showing {imp?.profile.name}'s nodes. <Link to="/daevanion">Open the blank planner</Link>
+            Showing {imp?.profile.name}'s nodes. <Link to={`/daevanion?class=${encodeURIComponent(gd.class_key)}`}>Open the blank planner</Link>
           </p>
         )}
       </div>

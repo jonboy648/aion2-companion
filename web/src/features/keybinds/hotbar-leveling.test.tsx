@@ -283,6 +283,7 @@ describe("Leveling loop metadata", () => {
   const macro = { name: "Leveling loop", hotkey: "F11", entries: [{ index: 1, key_label: "1", delay_ms: 10 }] };
   const plan: KeybindPlan = {
     ...(keybindsFx.plan as unknown as KeybindPlan),
+    queue_status: undefined,
     macros: [macro], stacks: [{ key_label: "1", stack: ["first"] }],
     macro_dps: { "Leveling loop": 1000 }, ideal_dps: { level_pull: 2000, boss_180: 10000 },
     hybrid_dps: { "Leveling loop": 1500 }, manual_every_s: {}, macro_advice: {},

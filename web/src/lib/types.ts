@@ -424,12 +424,25 @@ export type CompareResult = Record<PlaystyleKey, FullBuild>;
 
 // ---- keybinds ----
 export interface SlotStack {
+  quick_use_id?: number;
   key_label: string;
   /** <= 4 skill keys, index 0 fires first */
   stack: string[];
 }
 
+export interface QuickUseAction {
+  id: number;
+  slot_id: number;
+  binding: string;
+  alternate_bindings: string[];
+  default_skill: string | null;
+  context_skills: string[];
+  slot_editable: boolean;
+  context_editable: boolean;
+}
+
 export interface MacroEntry {
+  quick_use_id?: number;
   index: number;
   key_label: string;
   delay_ms: number;
@@ -450,6 +463,8 @@ export interface GKeyAssignment {
 }
 
 export interface KeybindPlan {
+  actions?: QuickUseAction[];
+  queue_status?: "unverified";
   stacks: SlotStack[];
   macros: MacroPlan[];
   gkeys: GKeyAssignment[];

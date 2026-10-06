@@ -13,6 +13,13 @@ const extras = armoryExtras(rawFx as unknown as ArmoryRaw);
 const data = { gd: null, icons: {}, error: null };
 
 describe("character ownership", () => {
+  it("labels missing ownership data unavailable rather than inventing empty ownership", () => {
+    render(<CharacterCard imp={imp} data={data} />);
+    expect(within(screen.getByRole("region", { name: "Equipped titles" })).getByText("Title data unavailable.")).toBeVisible();
+    expect(within(screen.getByRole("region", { name: "Attributes" })).getByText("Attribute data unavailable.")).toBeVisible();
+    expect(screen.getByText("Pet and wing data unavailable.")).toBeVisible();
+    expect(screen.getByText("Acquired skill data unavailable.")).toBeVisible();
+  });
   it("shows pet level and equipped wings without opening disclosures", () => {
     render(<CharacterCard imp={imp} data={data} extras={extras} />);
     expect(screen.getByText("Starturtle")).toBeVisible();

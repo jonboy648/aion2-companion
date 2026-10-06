@@ -18,6 +18,15 @@ function workflow(target = "/daevanion") {
 }
 
 describe("imported Daevanion context", () => {
+  it("opens a genuinely blank planner from an imported board", { timeout: 10000 }, async () => {
+    workflow();
+    await screen.findByTestId("character-card", {}, { timeout: 5000 });
+    fireEvent.click(screen.getByRole("link", { name: "Planner navigation" }));
+    await screen.findAllByRole("tab", {}, { timeout: 5000 });
+    fireEvent.click(screen.getByRole("link", { name: "Open the blank planner" }));
+    await waitFor(() => expect(screen.getAllByRole("tab")[0]).toHaveTextContent("0/88"), { timeout: 5000 });
+    expect(screen.queryByText("DarthThot")).not.toBeInTheDocument();
+  });
   it("keeps imported owned nodes through ordinary planner navigation", async () => {
     workflow();
     await screen.findByTestId("character-card", {}, { timeout: 5000 });

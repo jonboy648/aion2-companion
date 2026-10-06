@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { compare, importCharacter, warmEngine } from "@/engine/api";
-import { storeActiveBuild, storeImportedCharacterContext } from "@/features/keybinds/activeBuild";
+import { clearImportedCharacterContext, storeActiveBuild, storeImportedCharacterContext } from "@/features/keybinds/activeBuild";
 import { applyPoints, pointsKey, POINTS_DEBOUNCE_MS, usePoints, type Points } from "./unspentPoints";
 import { ArmoryError, armoryExtras, fetchCharacter, search, type ArmoryExtras } from "@/lib/armory";
 import type { ArmoryRaw, ArmoryRegion, ArmorySearchHit, CompareResult, ImportResult } from "@/lib/types";
@@ -47,6 +47,7 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
     const step = (message: string) => live && setState((s) => ({ ...s, message, steps: [...s.steps, message] }));
 
     warmEngine(); // boot the engine while the armory request is in flight
+    clearImportedCharacterContext();
     setState({ ...INITIAL, steps: [INITIAL.message] });
     (async () => {
       try {

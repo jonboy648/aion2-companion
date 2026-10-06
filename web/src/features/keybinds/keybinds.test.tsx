@@ -12,19 +12,17 @@ describe("setup sheet markdown", () => {
   const blocks = parseMarkdown(keybindsFx.instructions_markdown);
   it("parses the engine sheet into headings, tables and lists", () => {
     expect(blocks.filter((b) => b.type === "h" && b.level === 2).length).toBeGreaterThanOrEqual(5);
-    const gkeys = blocks.find((b) => b.type === "table" && b.head[0] === "G-key");
-    expect(gkeys && gkeys.type === "table" && gkeys.rows.length).toBe(keybindsFx.plan.gkeys.length);
+    const actions = blocks.find((b) => b.type === "table" && b.head[0] === "Action");
+    expect(actions && actions.type === "table" && actions.rows.length).toBe(12);
     expect(blocks.some((b) => b.type === "ol")).toBe(true);
   });
 });
 
 describe("macro efficiency", () => {
-  it("matches macro DPS to the ideal of its scenario", () => {
+  it("withholds macro efficiency until game runtime behavior is validated", () => {
     const plan = keybindsFx.plan as unknown as KeybindPlan;
-    const e = macroEfficiency(plan, plan.macros[0])!;
-    const scen = plan.macros[0].name === "Boss loop" ? "boss_180" : "aoe_pack";
-    expect(e.pct).toBeCloseTo((plan.macro_dps[plan.macros[0].name] / plan.ideal_dps[scen]) * 100, 1);
-    expect(plan.hybrid_dps[plan.macros[0].name]).toBeGreaterThanOrEqual(plan.macro_dps[plan.macros[0].name]);
+    expect(macroEfficiency(plan, plan.macros[0])).toBeNull();
+    expect(plan.macro_dps).toEqual({});
   });
   it("flags the per-slot layout hints", () => {
     expect(isSlotHint("slot 1: not on your bar, assign x there")).toBe(true);
@@ -43,9 +41,8 @@ describe("KeybindsPage (mock engine)", () => {
     expect(await screen.findByText("Hotbar", {}, { timeout: 4000 })).toBeInTheDocument();
     expect(await screen.findByRole("region", { name: "Boss loop" }, { timeout: 4000 })).toBeInTheDocument();
     expect(await screen.findByRole("button", { name: /Download \.md/ })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /^Key 1:/ })).toBeInTheDocument();
-    expect((await screen.findAllByTestId("macro-advice")).length).toBeGreaterThan(0);
-    expect(screen.getAllByTestId("hybrid-line").length).toBeGreaterThan(0);
-    expect(screen.getByRole("region", { name: "Core priorities" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^Quick Use 1:/ })).toBeInTheDocument();
+    expect(screen.queryByTestId("macro-advice")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("hybrid-line")).not.toBeInTheDocument();
   });
 });

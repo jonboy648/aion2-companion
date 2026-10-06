@@ -139,6 +139,7 @@ export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: 
             </ul></section>;
           })}
           </div>
+          {!(extras?.pet || extras?.wing || extras?.wingSkin) && <p className="mt-4 text-sm text-faint">Pet and wing data unavailable.</p>}
           {extras && (extras.pet || extras.wing || extras.wingSkin) && (
             <>
               <h3 className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-faint">Pet and wings</h3>
@@ -164,26 +165,30 @@ export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: 
             </>
           )}
         </section>
-        {extras?.titles && <section aria-label="Equipped titles" className="border-t border-border pt-4 lg:col-span-2">
+        <section aria-label="Equipped titles" className="border-t border-border pt-4 lg:col-span-2">
           <h3 className="mb-3 text-sm font-semibold text-gold">Equipped titles</h3>
+          {!extras?.titles?.length && <p className="text-sm text-faint">Title data unavailable.</p>}
           <ul className="grid gap-4 sm:grid-cols-3">
-            {extras.titles.map((title) => <li key={`${title.category}-${title.id}`} className="min-w-0">
+            {extras?.titles?.map((title) => <li key={`${title.category}-${title.id}`} className="min-w-0">
               <span className="text-xs text-dim">{title.category}</span>
               <p className="text-sm font-semibold">{title.name}</p>
               <ul className="mt-1 text-xs text-dim">{title.equippedEffects.map((effect, i) => <li key={i}>{effect}</li>)}</ul>
               {title.collectionEffects.map((effect, i) => <p key={i} className="mt-1 text-xs text-faint">Collection: {effect}</p>)}
             </li>)}
           </ul>
-        </section>}
-        {extras?.attributes && <section aria-label="Attributes" className="border-t border-border pt-4 lg:col-span-2">
+        </section>
+        <section aria-label="Attributes" className="border-t border-border pt-4 lg:col-span-2">
           <h3 className="mb-3 text-sm font-semibold text-gold">Attributes</h3>
+          {!extras?.attributes?.length && <p className="text-sm text-faint">Attribute data unavailable.</p>}
           <dl className="grid gap-4 sm:grid-cols-3">
-            {extras.attributes.map((attribute) => <div key={attribute.key} className="min-w-0">
-              <dt className="flex items-baseline justify-between gap-2 text-sm"><span>{attribute.name}</span><span className="font-semibold tabular-nums text-gold">{attribute.value}</span></dt>
+            {extras?.attributes?.map((attribute) => <div key={attribute.key} className="min-w-0">
+              <dt className="text-sm">{attribute.name}</dt>
+              <dd className="font-semibold tabular-nums text-gold">{attribute.value}</dd>
               <dd className="mt-1 text-xs text-dim">{attribute.effects.map((effect, i) => <p key={i}>{effect}</p>)}</dd>
             </div>)}
           </dl>
-        </section>}
+        </section>
+        {!extras?.skills?.length && <p className="border-t border-border pt-4 text-sm text-faint lg:col-span-2">Acquired skill data unavailable.</p>}
         {extras?.skills && <div className="grid gap-5 border-t border-border pt-4 lg:col-span-2 md:grid-cols-2">
           {[{ category: "Active", label: "Active skills" }, { category: "Passive", label: "Passive skills" }].map(({ category, label }) => (
             <section key={category} aria-label={label}>

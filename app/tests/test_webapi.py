@@ -86,10 +86,10 @@ def test_compare_and_follow_ups(imported):
     assert gains and {"stat", "delta", "dps_gain_pct", "confidence"} <= set(gains[0])
     # keybinds
     kb = js(webapi.keybinds(build, {"boss_180": fb["priority"], "aoe_pack": cmp_["aoe"]["priority"]}, {}, None, 10))
-    assert kb["plan"]["stacks"] and "# Aion 2 keybind setup sheet" in kb["instructions_markdown"]
+    assert kb["plan"]["stacks"] and "# Aion 2 Quick Use setup" in kb["instructions_markdown"]
     plan = kb["plan"]
     assert {"hybrid_dps", "slot_notes", "macro_advice", "rotation", "thumbs"} <= set(plan)
-    assert set(plan["slot_notes"]) == {s["key_label"] for s in plan["stacks"]}
+    assert len(plan["actions"]) == 12 and plan["queue_status"] == "unverified"
     # rotation_explained rides on every FullBuild and matches that build's own sim
     for f in (fb, one):
         rx = f["rotation_explained"]

@@ -525,6 +525,7 @@ class SkillBar:
 class SlotStack:
     key_label: str
     stack: tuple[str, ...]  # <= 4, index 0 fires first = the BOTTOM cell in game (priority 0)
+    quick_use_id: int | None = None
 
 
 @dataclass(frozen=True)
@@ -532,6 +533,7 @@ class MacroEntry:
     index: int
     key_label: str
     delay_ms: int = 10
+    quick_use_id: int | None = None
 
 
 @dataclass(frozen=True)
