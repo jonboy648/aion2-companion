@@ -1,0 +1,56 @@
+This repository contains two separately licensed components:
+
+-----------------------------------------
+1. SOFTWARE SOURCE CODE (GPL-3.0)
+-----------------------------------------
+
+All code located under:
+
+/src
+
+is licensed under the GNU General Public License v3.0.
+
+You are allowed to:
+- Use, modify, and redistribute the code
+- Create derivative works
+- Use it for commercial or non-commercial purposes
+
+Only if you:
+- Preserve this license notice
+- Release derivative works under GPL-3.0
+- Include proper copyright attribution
+
+Full text of GPL-3.0:
+https://www.gnu.org/licenses/gpl-3.0.html
+
+-----------------------------------------
+2. DATA FILES (CC BY-NC 4.0)
+-----------------------------------------
+
+All files located under:
+
+/public/data
+
+are licensed under Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0).
+
+You are allowed to:
+- Use, share, adapt, and redistribute the data
+- Create derivative works
+Only for non-commercial use.
+
+You must:
+- Provide attribution to the author
+- Indicate if changes were made
+- Not use the data commercially without permission
+
+Full text of CC BY-NC 4.0:
+https://creativecommons.org/licenses/by-nc/4.0/
+
+-----------------------------------------
+
+For commercial licensing of the dataset,
+please contact the author directly.
+
+------------------------------------------------------------
+End of License
+------------------------------------------------------------

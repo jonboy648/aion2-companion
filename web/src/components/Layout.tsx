@@ -17,6 +17,7 @@ const NAV = [
   { to: "/compare", label: "Compare" },
   { to: "/codex", label: "Codex" },
   { to: "/items", label: "Items" },
+  { to: "/map/", label: "Maps" },
   { to: "/keybinds", label: "Keybinds" },
   { to: "/crafting", label: "Crafting" },
   { to: "/enhance", label: "Enhance" },
@@ -73,7 +74,7 @@ function Shell() {
           <nav aria-label="Main" className="flex flex-wrap items-center gap-1.5">
             <GlobalSearch />
             {NAV.map((n) => (
-              <NavLink key={n.to} to={n.to} end={n.end} className={cn("game-tab px-3 py-1.5 text-sm font-medium no-underline")}>
+              <NavLink key={n.to} to={n.to} end={n.end} reloadDocument={n.to === "/map/"} className={cn("game-tab px-3 py-1.5 text-sm font-medium no-underline")}>
                 {n.label}
               </NavLink>
             ))}

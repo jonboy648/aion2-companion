@@ -1,0 +1,217 @@
+/* src/index.css */
+
+@import 'tailwindcss';
+
+@plugin "@tailwindcss/typography";
+@plugin './hero.ts';
+
+/* Make Tailwind scan HeroUI theme files for class names */
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+/* Dark mode variant so `.dark` on <html> or <body> works */
+@custom-variant dark (&:is(.dark *));
+@custom-variant abyss (&:is(.abyss *));
+
+@theme {
+    --color-topnavbar: #E3EDF2;
+    --background-image-sidebar: linear-gradient(180deg, rgba(243, 251, 255, 1) 0%, rgba(243, 251, 255, 1) 100%);;
+    --color-sidebar-collapse: #D3E2EA;
+    --color-sidebar-button: rgba(122, 192, 225, 0.20);
+    --color-input: rgba(185, 185, 185, 0.2);
+    --color-input-2: #F6F6F6;
+    --color-character-input: rgba(255, 255, 255, 0.10);
+    --color-character-card: #E5F0FF;
+    --color-character-equipment: #F3FBFF;
+    --color-search: rgba(247, 252, 255, 1);
+    --color-search-item: rgba(82, 82, 82, 0.04);
+    --color-crafting-item: rgba(243, 251, 255, 1);
+    --color-crafting-sum: rgba(255, 255, 255, 0.2);
+    --color-map-alert: rgba(255, 255, 255, 0.7);
+    --background-image-crafting-page: linear-gradient(180deg, #F0F6FF 0%, #E6F0FF 37%, #BED8FF 64%, #A6CAFD 81%, #8DBCFF 90%, #C1DAFF 100%);
+    --background-image-crafting-equipment-view: linear-gradient(180deg, rgba(205, 231, 255, 0) 0%, rgba(21, 110, 194, 0.3) 66%, rgba(201, 229, 255, 0) 100%);
+    --background-image-crafting-tab: linear-gradient(180deg, rgba(244, 244, 244, 0) 0%, rgba(255, 255, 255, 0.2) 100%);
+    --background-image-character-page: linear-gradient( 180deg, #B7D4FF 0%, #DFECFF 100%);
+    --color-crafting-border: rgba(137, 137, 137, 0.30);
+    --color-leaderboard-page: #E7F1FF;
+    --background-image-page: linear-gradient(180deg, #F3FBFF 0%, #F3FBFF 100%);
+    --color-star: #EAC120;
+    --color-artifact-contributor-bg: rgba(82, 82, 82, 0.04);
+    --background-image-artifact-server-1: linear-gradient(135deg, #DBEDFF 0%, #F3FBFF 100%);
+    --background-image-artifact-server-2: linear-gradient(225deg, #EFE5FF 0%, #F3FBFF 100%);
+
+    --color-grade-common: rgba(0, 0, 0, .68);
+    --color-grade-rare: #00870b;
+    --color-grade-legend: #006fc6;
+    --color-grade-unique: #fb9800;
+    --color-grade-epic: #ee6c2a;
+    --color-grade-mythic: #c60000;
+    --color-grade-special: #09ce9f;
+}
+
+.dark {
+    --color-topnavbar: #393047;
+    --background-image-sidebar: linear-gradient(180deg, #2C293A 0%, #2C293A 100%);
+    --color-sidebar-collapse: #4C4A52;
+    /*--color-sidebar-button: rgba(122, 192, 225, 0.20);*/
+    --color-crafting-item: rgba(255, 255, 255, 0.1);
+    --color-crafting-sum: rgba(255, 255, 255, 0.2);
+    --color-map-alert: rgba(0, 0, 0, 0.7);
+    --background-image-crafting-page: linear-gradient(180deg, #2C2249 0%, #7561B2 100%, #413661 100%);
+    --background-image-crafting-equipment-view: linear-gradient(180deg, rgba(205, 231, 255, 0) 0%, rgba(21, 110, 194, 0.3) 66%, rgba(201, 229, 255, 0) 100%);
+    --background-image-crafting-tab: linear-gradient(180deg, rgba(244, 244, 244, 0) 0%, rgba(255, 255, 255, 0.2) 100%);
+    --color-crafting-border: rgba(255, 255, 255, 0.30);
+    --background-image-page: linear-gradient( 180deg, #2C2249 0%, #7561B2 100%, #413661 100%);
+    --color-character-card: rgba(255, 255, 255, 0.1);
+    --color-character-equipment: rgba(0, 0, 0, 0.2);
+    --color-grade-common: rgba(255, 255, 255, .93);
+    --color-grade-rare: #52b35c;
+    --color-grade-legend: #3d94d8;
+    --color-grade-unique: #e9a43a;
+    --color-grade-epic: #ee6c2a;
+    --color-grade-mythic: #d33939;
+    --color-grade-special: #34b798;
+
+    --background-image-artifact-server-1: linear-gradient( 90deg, rgba(32,76,152,0) 0%, #204C98 100%);
+    --background-image-artifact-server-2: linear-gradient( 90deg, rgba(154,39,255,0.3) 0%, rgba(154,39,255,0) 100%);
+    --color-artifact-contributor-bg: rgba(0, 0, 0, 0.2);
+}
+
+.abyss {
+    --color-topnavbar: #A33535;
+    --background-image-sidebar: linear-gradient(180deg, #564B4B 0%, #190202 100%);
+    --color-sidebar-collapse: #4C4A52;
+}
+
+.text-grade-common { color: var(--color-grade-common); }
+.text-grade-rare { color: var(--color-grade-rare); }
+.text-grade-legend { color: var(--color-grade-legend); }
+.text-grade-unique { color: var(--color-grade-unique); }
+.text-grade-epic { color: var(--color-grade-epic); }
+.text-grade-mythic { color: var(--color-grade-mythic); }
+.text-grade-special { color: var(--color-grade-special); }
+
+.border-grade-common { border-color: var(--color-grade-common); }
+.border-grade-rare { border-color: var(--color-grade-rare); }
+.border-grade-legend { border-color: var(--color-grade-legend); }
+.border-grade-unique { border-color: var(--color-grade-unique); }
+.border-grade-epic { border-color: var(--color-grade-epic); }
+.border-grade-mythic { border-color: var(--color-grade-mythic); }
+.border-grade-special { border-color: var(--color-grade-special); }
+
+.text-stroke {
+    text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000;
+}
+
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* OPTIONAL: some base background and font */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+}
+
+
+/* Leaflet container needs explicit size, we’ll also set via className */
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    /*cursor: inherit !important;*/
+}
+
+.leaflet-container .leaflet-interactive {
+    cursor: inherit !important;
+}
+
+.dark .leaflet-container {
+    background: hsl(var(--heroui-content1)); /* slate-950 / very dark */
+}
+
+.leaflet-tooltip {
+    border-radius: 4px !important;
+}
+
+.leaflet-tooltip::before {
+    border-top-color: hsl(var(--heroui-content1)) !important;
+}
+
+/* Remove the white frame and padding around popup */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Theme-aware tooltip for markers */
+.leaflet-tooltip.game-marker-tooltip {
+    background: hsl(var(--heroui-content1));
+    color: hsl(var(--heroui-foreground));
+    border: 1px solid hsl(var(--heroui-default-200));
+    padding: 2px 6px;
+    font-size: 11px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* Match tip (arrow) color to the tooltip background */
+.leaflet-tooltip.game-marker-tooltip .leaflet-tooltip-tip {
+    background: hsl(var(--heroui-content1));
+    border: 1px solid hsl(var(--heroui-default-200));
+}
+
+.no-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome / Safari / Edge */
+}
+
+/* ===== Scoped scrollbar (recommended) ===== */
+
+/*.sidebar-scroll {*/
+/*    scrollbar-width: thin; !* Firefox *!*/
+/*    scrollbar-color: rgba(0, 0, 0, 0.10) transparent;*/
+/*}*/
+
+/* WebKit browsers */
+.sidebar-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.10);
+    border-radius: 9999px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.20);
+}
+
+/* Remove arrows */
+.sidebar-scroll::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.artifact-ratio-card-header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(221, 245, 255, 0.372) 58.57%, rgba(238, 204, 255, 0) 100%);
+    border-image: linear-gradient(178deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) 1 1;
+}
