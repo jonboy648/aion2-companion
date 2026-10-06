@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { compare, importCharacter, warmEngine } from "@/engine/api";
-import { storeActiveBuild } from "@/features/keybinds/activeBuild";
+import { storeActiveBuild, storeImportedCharacterContext } from "@/features/keybinds/activeBuild";
 import { applyPoints, pointsKey, POINTS_DEBOUNCE_MS, usePoints, type Points } from "./unspentPoints";
 import { ArmoryError, armoryExtras, fetchCharacter, search, type ArmoryExtras } from "@/lib/armory";
 import type { ArmoryRaw, ArmoryRegion, ArmorySearchHit, CompareResult, ImportResult } from "@/lib/types";
@@ -59,6 +59,7 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
         patch({ phase: "import", extras: armoryExtras(raw), raw });
         step("Reading the build...");
         const imp = await importCharacter(raw);
+        if (live) storeImportedCharacterContext({ region: region as ArmoryRegion, serverId: String(hit.serverId ?? serverId), name: hit.name });
         patch({ imp }); // the compare effect below picks it up
       } catch (e) {
         patch({ phase: "error", error: e instanceof Error ? e.message : String(e) });

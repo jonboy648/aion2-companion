@@ -6,10 +6,23 @@
  */
 import { useEffect, useState } from "react";
 import { isMockEngine } from "@/engine/api";
-import type { CharacterBuild, FullBuild, PlaystyleKey, Priority } from "@/lib/types";
+import type { ArmoryRegion, CharacterBuild, FullBuild, PlaystyleKey, Priority } from "@/lib/types";
 
 export const ACTIVE_BUILD_KEY = "aion2c.activeBuild.v1";
 const PLAN_KEY = "aion2c.activeKeybindPlan.v1";
+const CHARACTER_CONTEXT_KEY = "aion2c.importedCharacter.v1";
+export interface ImportedCharacterContext { region: ArmoryRegion; serverId: string; name: string }
+
+export function readImportedCharacterContext(): ImportedCharacterContext | null {
+  const context = loadJson<ImportedCharacterContext | null>(CHARACTER_CONTEXT_KEY, null);
+  return context && ["nae", "naw", "eu", "la", "as"].includes(context.region)
+    && typeof context.serverId === "string" && /^\d+$/.test(context.serverId)
+    && typeof context.name === "string" && context.name.trim() ? context : null;
+}
+
+export function storeImportedCharacterContext(context: ImportedCharacterContext): void {
+  saveJson(CHARACTER_CONTEXT_KEY, context);
+}
 export const MACRO_SCENARIOS = ["boss_180", "aoe_pack", "level_pull"] as const;
 export type MacroScenario = typeof MACRO_SCENARIOS[number];
 export interface PlannedBuild {

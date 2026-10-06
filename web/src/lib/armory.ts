@@ -127,6 +127,7 @@ export interface ArmoryExtras {
   skills?: ArmorySkill[];
   titles?: ArmoryTitle[];
   attributes?: ArmoryAttribute[];
+  boards?: { name: string; open: number; total: number }[];
 }
 
 export interface ArmoryAttribute {
@@ -201,6 +202,11 @@ export function armoryExtras(raw: ArmoryRaw): ArmoryExtras {
     return [{ key: a.type, name: strip(a.name), value: a.value,
       effects: Array.isArray(a.statSecondList) ? a.statSecondList.filter((e): e is string => typeof e === "string").map(strip) : [] }];
   });
+  const boards = rows(object(object(raw.info).daevanion).boardList).flatMap((b) => {
+    if (typeof b.name !== "string" || typeof b.openNodeCount !== "number" || !Number.isFinite(b.openNodeCount)
+      || b.openNodeCount < 0 || typeof b.totalNodeCount !== "number" || !Number.isFinite(b.totalNodeCount) || b.totalNodeCount < b.openNodeCount) return [];
+    return [{ name: strip(b.name), open: b.openNodeCount, total: b.totalNodeCount }];
+  });
   return { gearIcons, pet: asIcon(pw.pet, "Epic"), wing: asIcon(pw.wing), wingSkin: asIcon(pw.wingSkin),
-    ...(skills.length ? { skills } : {}), ...(titles.length ? { titles } : {}), ...(attributes.length ? { attributes } : {}) };
+    ...(skills.length ? { skills } : {}), ...(titles.length ? { titles } : {}), ...(attributes.length ? { attributes } : {}), ...(boards.length ? { boards } : {}) };
 }

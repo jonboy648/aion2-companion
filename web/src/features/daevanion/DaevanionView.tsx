@@ -4,6 +4,7 @@ import { gamedata, iconUrls, importCharacter, listClasses } from "@/engine/api";
 import { fetchCharacter, search } from "@/lib/armory";
 import type { ArmoryRegion, GameData, IconUrls, ImportResult } from "@/lib/types";
 import { Planner } from "./Planner";
+import { readImportedCharacterContext } from "@/features/keybinds/activeBuild";
 
 /** Link other pages use to open the planner on an imported character. */
 export const daevanionLink = (region: string, serverId: string | number, name: string) =>
@@ -18,14 +19,16 @@ interface Loaded {
 
 export function parseChar(c: string | null): { region: ArmoryRegion; serverId: string; name: string } | null {
   const m = c?.split("/");
-  if (!m || m.length < 3 || !m[2]) return null;
+  if (!m || m.length < 3 || !m.slice(2).join("/").trim()
+    || !["nae", "naw", "eu", "la", "as"].includes(m[0]) || !/^\d+$/.test(m[1])) return null;
   return { region: m[0] as ArmoryRegion, serverId: m[1], name: m.slice(2).join("/") };
 }
 
 /** Loads class data (and the imported character, if ?c=region/serverId/name is present), then hands over to the planner. */
 export function DaevanionView() {
   const [params, setParams] = useSearchParams();
-  const charParam = params.get("c");
+  const stored = !params.has("c") && !params.has("class") ? readImportedCharacterContext() : null;
+  const charParam = params.get("c") ?? (stored ? `${stored.region}/${stored.serverId}/${stored.name}` : null);
   const classParam = params.get("class") ?? "sorcerer";
   const [data, setData] = useState<Loaded | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -36,11 +39,13 @@ export function DaevanionView() {
     setError(null);
     (async () => {
       const ch = parseChar(charParam);
+      if (charParam !== null && !ch) throw new Error("Invalid character context.");
       let imp: ImportResult | null = null;
       if (ch) {
         const hits = await search(ch.name, ch.region);
-        const hit = hits.find((h) => String(h.serverId) === ch.serverId) ?? hits[0];
-        const raw = await fetchCharacter(hit?.characterId ?? "", ch.serverId, ch.region);
+        const hit = hits.find((h) => String(h.serverId) === ch.serverId && h.name.toLowerCase() === ch.name.toLowerCase());
+        if (!hit) throw new Error("Character not found on the requested server.");
+        const raw = await fetchCharacter(hit.characterId, ch.serverId, ch.region);
         imp = await importCharacter(raw);
       }
       const classKey = imp?.build.class_key ?? classParam;

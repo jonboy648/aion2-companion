@@ -11,6 +11,7 @@ import type { ClassData } from "./useClassData";
 import { SkillIcon } from "./SkillIcon";
 import { fmtDps, slotLabel } from "./helpers";
 import { useState } from "react";
+import { boardTotal } from "@/features/daevanion/logic";
 
 function Portrait({ url, name }: { url: string | null; name: string }) {
   const [failed, setFailed] = useState(false);
@@ -37,6 +38,11 @@ function Stat({ label, value }: { label: string; value: string }) {
 /** Profile, gear, stigmas and Daevanion progress for an imported armory character. */
 export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: ClassData; extras?: ArmoryExtras | null }) {
   const { profile, gear, stigmas, daevanion_summary: dv } = imp;
+  const boards = extras?.boards ? extras.boards.map((b) => ({ board: b.name, open: b.open, total: b.total }))
+    : dv.boards.map((b) => {
+      const board = Object.values(data.gd?.daevanion ?? {}).find((board) => board.name.toLowerCase() === b.board.toLowerCase());
+      return { board: b.board, open: b.open, total: board ? boardTotal(board) : null };
+    });
   const groupOf = (slot: string) => {
     if (["MainHand", "SubHand"].includes(slot)) return "Weapons";
     if (["Torso", "Pants", "Helmet", "Shoulder", "Gloves", "Boots", "Cape"].includes(slot)) return "Armor";
@@ -93,12 +99,12 @@ export function CharacterCard({ imp, data, extras }: { imp: ImportResult; data: 
             <span className="font-semibold text-gold">{dv.matched}</span> of {dv.open} open nodes matched
           </p>
           <ul className="space-y-1.5">
-            {dv.boards.map((b) => (
+            {boards.map((b) => (
               <li key={b.board} className="flex items-center gap-3 text-[13px]">
                 <span className="w-20 shrink-0 text-dim">{b.board}</span>
-                <XpBar className="flex-1" small value={b.matched} max={b.open} label={`${b.board} nodes`} />
+                {b.total !== null && <XpBar className="flex-1" small value={b.open} max={b.total} label={`${b.board} owned nodes`} />}
                 <span className="w-14 shrink-0 text-right tabular-nums text-dim">
-                  {b.matched}/{b.open}
+                  {b.open}/{b.total ?? "?"}
                 </span>
               </li>
             ))}

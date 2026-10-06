@@ -2,8 +2,9 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import rawFx from "@/fixtures/armory_raw.json";
 import importFx from "@/fixtures/import_character.json";
+import gameFx from "@/fixtures/gamedata_sorcerer.json";
 import { armoryExtras } from "@/lib/armory";
-import type { ArmoryRaw, ImportResult } from "@/lib/types";
+import type { ArmoryRaw, GameData, ImportResult } from "@/lib/types";
 import { CharacterCard } from "./CharacterCard";
 
 afterEach(cleanup);
@@ -56,5 +57,12 @@ describe("character ownership", () => {
     for (const oldFact of ["Starturtle", "Celebrity", "Flame Arrow", "Liberator Spellbook", "Attack increase +1.4%"]) {
       expect(screen.queryByText(oldFact)).not.toBeInTheDocument();
     }
+  });
+  it("distinguishes owned board completion from import matching coverage", () => {
+    render(<CharacterCard imp={imp} data={{ ...data, gd: gameFx as unknown as GameData }} extras={extras} />);
+    const boards = screen.getByRole("region", { name: "Stigmas and Daevanion" });
+    expect(within(boards).getByText("68/88")).toBeVisible();
+    expect(within(boards).getByText("0/152")).toBeVisible();
+    expect(within(boards).getByText(/of .*open nodes matched/)).toBeVisible();
   });
 });
