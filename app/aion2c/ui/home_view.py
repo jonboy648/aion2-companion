@@ -24,6 +24,7 @@ from PySide6.QtWidgets import (
 
 import aion2c.armory as armory
 import aion2c.settings as user_settings
+from aion2c.progression import stigma_slots_at
 import aion2c.statsheet as statsheet
 from aion2c.classes import class_info, class_name
 from aion2c.data.loader import available_classes
@@ -1019,10 +1020,7 @@ class HomeView(LiveBound, QWidget):
     def _stigma_card(self, full, b) -> Card:
         gd = self.gd
         slots = gd.stigma_slots.get(b.region, 0)
-        unlocked = sum(
-            1 for r in gd.roadmap
-            if r.kind == "stigma" and r.level <= b.level and b.region in r.regions and "slot" in r.text.lower()
-        )
+        unlocked = stigma_slots_at(gd, b.region, b.level)
         c = Card("Stigmas", f"{min(unlocked, slots)} of {slots} slots unlocked at level {b.level}.")
         if not full.stigma_picks:
             c.add(text_label("No stigma changes suggested.", "dim", wrap=True))

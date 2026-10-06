@@ -602,8 +602,44 @@ SKILL_POINT_COST = (0, 1, 1, 1, 2, 2, 2, 4, 4, 4)  # index 0 = rank 1 (free)
 STIGMA_POINT_COST = tuple([1] * 5 + [2] * 5 + [4] * 5 + [8] * 5)
 
 
+_OWNER_CACHE: dict[int, tuple] = {}  # id(gd) -> (gd, {child key: owner skill key}); gd kept alive so ids stay unique
+
+
+def rank_owner(gd: "GameData", skill: Skill) -> Skill | None:
+    """The skill whose purchased rank `skill` plays at, or None when `skill` is bought (or modelled) on its own.
+
+    A chain follow-up (kind CHAIN, linked from a parent by a chain/upgrade link) with no SkillAcquireData rows is not a
+    separate purchase in the client: it has its own per-rank effect table but no acquisition row, so its rank is the
+    one of the skill that starts the chain (Quick Slice -> Breaking Slice -> Swift Slice all play at Quick Slice's
+    rank). Cancel links (Dismiss Spirit, Remove Hibernation) are purchased skills and have acquisition rows."""
+    hit = _OWNER_CACHE.get(id(gd))
+    if hit is None or hit[0] is not gd:
+        from aion2c.progression import rank_levels
+        parent = {ln.child_key: ln.parent_key for ln in gd.links if ln.kind in ("chain", "upgrade")}
+        owner: dict[str, str] = {}
+        for child in parent:
+            sk = gd.skills.get(child)
+            if sk is None or sk.kind != SkillKind.CHAIN or sk.skill_id is None or rank_levels(sk) is not None:
+                continue
+            k, seen = child, {child}
+            while k in parent and parent[k] not in seen:  # climb to the head of the chain
+                k = parent[k]
+                seen.add(k)
+                psk = gd.skills.get(k)
+                if psk is None or not (psk.kind == SkillKind.CHAIN and psk.skill_id is not None and rank_levels(psk) is None):
+                    break
+            if k != child and k in gd.skills:
+                owner[child] = k
+        hit = _OWNER_CACHE[id(gd)] = (gd, owner)
+    key = hit[1].get(skill.key)
+    return gd.skills[key] if key else None
+
+
 def effective_rank(gd: "GameData", build: "CharacterBuild", skill: Skill) -> int:
-    """clamp(build rank, 1, min(len(skill.ranks), region cap for core/stigma))."""
+    """clamp(build rank, 1, min(len(skill.ranks), region cap for core/stigma)). A chain follow-up that is not bought
+    on its own (see `rank_owner`) plays at its owner's rank unless the build names a rank for it."""
+    if skill.key not in build.skill_ranks and (own := rank_owner(gd, skill)) is not None:
+        return effective_rank(gd, build, own)
     cap_key = "stigma" if skill.kind == SkillKind.STIGMA else "core"
     cap = min(len(skill.ranks), gd.rank_caps[build.region][cap_key])
     return max(1, min(build.skill_ranks.get(skill.key, 1), cap))
@@ -645,6 +681,8 @@ def total_rank(gd: "GameData", build: "CharacterBuild", skill: Skill) -> int:
     """The rank a skill really plays at: skill-point rank (<= 10 bought) + Daevanion skill nodes (+1 each, <= +4)
     + the user's `bonus_ranks` entry (Arcana / Soul Binding), clamped to the region cap. Specialty slots and
     options (rank 8/12/16/20) unlock on this rank, not on the skill-point rank."""
+    if skill.key not in build.skill_ranks and (own := rank_owner(gd, skill)) is not None:
+        return total_rank(gd, build, own)
     cap_key = "stigma" if skill.kind == SkillKind.STIGMA else "core"
     cap = min(len(skill.ranks), gd.rank_caps[build.region][cap_key])
     bonus = daevanion_rank_bonus(gd, build, skill.key) + max(0, build.bonus_ranks.get(skill.key, 0))

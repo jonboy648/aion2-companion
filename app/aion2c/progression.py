@@ -8,6 +8,7 @@ acquisition row (procs, charge children) have no gate here: callers get None, ne
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
@@ -37,6 +38,19 @@ def level_budget(level: int) -> LevelBudget:
     levelling alone (quest and dungeon rewards come on top and are not included)."""
     rows = _data()["levels"]
     return LevelBudget(*rows[max(1, min(level, len(rows))) - 1])
+
+
+def stigma_slots_at(gd: "GameData", region: str, level: int) -> int:
+    """Stigma slots open at `level`, the one source every path uses. Global: the client Exp table
+    (StigmaSkillContextSlotMax: 1/2/3/4 at 22/27/32/37). Other regions have no client export here, so they count the
+    roadmap's "Stigma slot N" lines (only those: a class's stigma-list line or a region note is not a slot). Capped by
+    gd.stigma_slots[region]."""
+    if region == "global":
+        n = level_budget(level).stigma_slots
+    else:
+        n = sum(1 for r in gd.roadmap if r.kind == "stigma" and region in r.regions and r.level <= level
+                and re.search(r"stigma slot \d", r.text, re.I))
+    return min(n, gd.stigma_slots.get(region, 4))
 
 
 def stigma_unlock_level() -> int:
@@ -111,7 +125,7 @@ def legality_issues(gd: "GameData", build: "CharacterBuild") -> list[str]:
         gate = rank_gate(s, r)
         if gate is not None and gate > build.level:
             out.append(f"{s.name}: rank {r} needs character level {gate} (level {build.level}).")
-    slots = level_budget(build.level).stigma_slots
+    slots = stigma_slots_at(gd, build.region, build.level)
     if len(build.stigmas) > slots:
         out.append(f"{len(build.stigmas)} stigmas equipped but level {build.level} has {slots} slot(s).")
     for k in build.stigmas:
