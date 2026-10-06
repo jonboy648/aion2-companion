@@ -47,7 +47,7 @@ const SidebarWrapper: React.FC<SidebarWrapperProps> = ({
       `}
       style={{
         width: sidebarCollapsed ? collapsedWidth : width,
-        maxWidth: width,
+        maxWidth: `min(${width}px, calc(100vw - 3rem))`,
       }}
     >
       {/* CONTENT */}

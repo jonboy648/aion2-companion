@@ -1,4 +1,6 @@
 .cube-map-sidebar {
+  /* Backdrop blur creates a stacking context; keep edge controls above Leaflet. */
+  z-index: 1000;
   --heroui-background: 220 46% 7%;
   --heroui-foreground: 224 48% 94%;
   --heroui-content1: 222 39% 12%;
