@@ -2,7 +2,7 @@ import { Fragment, useMemo, useState } from "react";
 import { ImageOff, Pin, PinOff, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { GameData, IconUrls, Region, SlotStack } from "@/lib/types";
+import type { GameData, IconUrls, QuickUseAction, Region, SlotStack } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { SkillIcon } from "./SkillIcon";
 import "./compact-hotbar.css";
@@ -133,6 +133,8 @@ export function Hotbar({
   manualSkills = [],
   macroKeys = [],
   ranks = {},
+  actions,
+  onBinding,
 }: {
   gd: GameData | null;
   icons: IconUrls;
@@ -145,11 +147,49 @@ export function Hotbar({
   macroKeys?: string[];
   /** Effective skill ranks (paid plus bonus), used only by the compact grid. */
   ranks?: Record<string, number>;
+  actions?: QuickUseAction[];
+  onBinding?: (id: number, binding: string) => void;
 }) {
   const byLabel = useMemo(() => Object.fromEntries(stacks.map((s) => [s.key_label, s.stack])), [stacks]);
   const letterUsed = [...stacks.map((s) => s.key_label), ...Object.keys(pins)].some((l) => /^[A-Z]$/.test(l));
   const [showLetters, setShowLetters] = useState(false);
   const rows = showLetters || letterUsed ? KEY_ROWS : KEY_ROWS.slice(0, 1);
+  if (actions) {
+    return (
+      <div role="region" aria-label="Quickslot keys" tabIndex={0} className="max-w-full overflow-x-auto pb-2 focus-visible:outline-2 focus-visible:outline-cyan">
+        <div className="flex w-max gap-4">
+          {[0, 1, 2].map((group) => (
+            <div key={group} role="group" aria-label={`Quickslot group ${group + 1}`} className="flex gap-2">
+              {actions.slice(group * 4, group * 4 + 4).map((action) => {
+                const id = String(action.id);
+                const stack = stacks.find((item) => item.quick_use_id === action.id)?.stack ?? [];
+                return (
+                  <div key={action.id} className="flex w-20 shrink-0 flex-col gap-1">
+                    <button type="button" aria-pressed={selected === id}
+                      aria-label={`Quick Use ${action.id}: ${stack.map((skill) => nameOf(gd, skill)).join(", ") || "empty"}`}
+                      onClick={() => onSelect(id)}
+                      className={cn("flex flex-col items-center gap-1 rounded-md border p-1", selected === id ? "border-gold bg-surface3" : "border-border bg-surface2")}
+                    >
+                      <span className="text-[11px] text-dim">Quick Use {action.id}</span>
+                      {[3, 2, 1, 0].map((row) => (
+                        <span key={row} data-row={row} data-skill={stack[row] ?? ""} className="grid h-8 w-8 place-items-center rounded-sm border border-border-soft bg-surface">
+                          {stack[row] && <SkillIcon url={icons[stack[row]]} name={nameOf(gd, stack[row])} size={28} />}
+                        </span>
+                      ))}
+                      <span className="text-[10px] text-faint">Slot {action.slot_id}</span>
+                    </button>
+                    <input aria-label={`Binding for Quick Use ${action.id}`} value={action.binding}
+                      readOnly={!onBinding} maxLength={24} onChange={(event) => onBinding?.(action.id, event.target.value)}
+                      className="h-7 w-full rounded border border-border-soft bg-surface text-center text-xs text-gold" />
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
   if (compact) {
     const groups = [KEY_ROWS[0].slice(0, 4), KEY_ROWS[0].slice(4, 8), KEY_ROWS[0].slice(8, 12)];
     const stackFor = (label: string) => byLabel[label] ?? (pins[label] ? [pins[label]] : []);
@@ -278,6 +318,7 @@ export function SlotEditor({
   onPin,
   onUnpin,
   note,
+  action,
 }: {
   gd: GameData | null;
   icons: IconUrls;
@@ -293,6 +334,7 @@ export function SlotEditor({
   onUnpin: () => void;
   /** engine slot_notes entry: why this stack is ordered this way */
   note?: string;
+  action?: QuickUseAction;
 }) {
   const [q, setQ] = useState("");
   const pickable = useMemo(() => {
@@ -311,7 +353,7 @@ export function SlotEditor({
     <div className="ornate p-4">
       <div className="flex flex-wrap items-center gap-2">
         <span className="grid size-8 place-items-center rounded-md border border-gold-lo bg-gold/10 text-sm font-semibold text-gold">{label}</span>
-        <h3 className="text-[15px] font-semibold">Key {label}</h3>
+        <h3 className="text-[15px] font-semibold">{action ? `Quick Use ${action.id}` : `Key ${label}`}</h3>
         {pinnedSkill ? <Badge tone="info">pinned: {nameOf(gd, pinnedSkill)}</Badge> : <Badge>planner's choice</Badge>}
         {pinnedSkill && (
           <Button variant="ghost" size="sm" onClick={onUnpin} className="ml-auto">
@@ -329,11 +371,18 @@ export function SlotEditor({
             <SkillIcon url={icons[s]} name={nameOf(gd, s)} size={32} />
             <span className="font-medium">{nameOf(gd, s)}</span>
             <span className="text-xs text-faint">
-              {i === 0 ? "bottom cell: fires first when usable" : i === stack.length - 1 && stack.length > 1 ? "top cell: last resort" : ""}
+              {action ? "Assigned skill" : i === 0 ? "bottom cell: fires first when usable" : i === stack.length - 1 && stack.length > 1 ? "top cell: last resort" : ""}
             </span>
           </li>
         ))}
       </ol>
+      {action && <div className="mt-3 space-y-2 text-xs text-dim">
+        <p>Physical slot {action.slot_id}; binding {action.binding}{action.alternate_bindings.length ? `; alternate ${action.alternate_bindings.join(", ")}` : ""}.</p>
+        <p>{action.context_editable ? "Custom placement needs an in-game check." : "Fixed class action; skill replacement unavailable."}</p>
+        {action.context_skills.length > 0 && <div><h4 className="font-semibold">Contextual alternatives</h4>
+          <ul>{action.context_skills.map((skill) => <li key={skill}>{nameOf(gd, skill)}</li>)}</ul>
+        </div>}
+      </div>}
 
       {note && (
         <p className="mt-3 text-xs text-dim" data-testid="slot-note">
@@ -341,7 +390,7 @@ export function SlotEditor({
         </p>
       )}
 
-      <div className="mt-4 border-t border-border-soft pt-3">
+      {(!action || action.context_editable) && <div className="mt-4 border-t border-border-soft pt-3">
         <label className="flex items-center gap-2 game-input px-2.5 text-sm focus-within:border-gold">
           <Search aria-hidden className="size-4 text-faint" />
           <input
@@ -373,7 +422,7 @@ export function SlotEditor({
           })}
           {pickable.length === 0 && <p className="col-span-full py-2 text-sm text-faint">No unlocked skill matches "{q}".</p>}
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

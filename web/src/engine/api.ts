@@ -62,6 +62,7 @@ export interface EngineApi {
     bar: SkillBar | Record<string, string | null>,
     hotkeys?: Record<string, string> | null,
     delayMs?: number,
+    bindings?: Record<string, string>,
   ): Promise<KeybindsResult>;
   daevanionSuggest(build: CharacterBuild, points?: number | null): Promise<DaevanionSuggestion>;
   shopping(classKey: string, recipeQty: Record<string, number>, expand?: boolean): Promise<RecipeMaterial[]>;

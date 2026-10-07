@@ -29,7 +29,7 @@ export function KeybindsPage() {
   const [selected, setSelected] = useState("1");
 
   const header = (
-    <PageHeader title="Keybinds and macros" caption="Your best rotation as hotbar stacks, in-game macros and a one-key-remap sheet for Logitech G915 / G900.">
+    <PageHeader title="Keybinds and macros" caption="Quick Use bindings and macro setup for your character.">
       {build && (
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone="gold">{build.name || "Unnamed"}</Badge>
@@ -54,7 +54,7 @@ export function KeybindsPage() {
               <>
                 <p className="text-[15px] font-medium">No character loaded yet.</p>
                 <p className="mx-auto mt-1 max-w-md text-sm text-dim">
-                  The keybind plan is built from your character's best rotation. Search your character on the home page first.
+                  Search your character on the home page first.
                 </p>
                 <Button asChild className="mt-4">
                   <Link to="/">Find my character</Link>
@@ -71,7 +71,7 @@ export function KeybindsPage() {
   const plan = result?.plan;
   const rotation = plan?.rotation?.[planned?.scenario ?? "boss_180"];
   const stacks = plan?.stacks ?? [];
-  const stackOf = (label: string) => stacks.find((s) => s.key_label === label)?.stack ?? (kb.pins[label] ? [kb.pins[label]] : []);
+  const stackOf = (label: string) => stacks.find((s) => s.quick_use_id !== undefined ? String(s.quick_use_id) === label : s.key_label === label)?.stack ?? (kb.pins[label] ? [kb.pins[label]] : []);
   const hasSlotHints = (plan?.warnings ?? []).some(isSlotHint);
 
   return (
@@ -83,7 +83,7 @@ export function KeybindsPage() {
             <Loader2 aria-hidden className="mt-0.5 size-4 shrink-0 animate-spin text-cyan" />
             <div>
               <p className="font-medium">{kb.phase.message}...</p>
-              <p className="text-xs text-dim">The result is cached for this character, so the next visit is instant.</p>
+              <p className="text-xs text-dim">Loading client-table skill mappings.</p>
             </div>
           </Banner>
         )}
@@ -119,11 +119,14 @@ export function KeybindsPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Hotbar gd={kb.gd} icons={kb.icons} stacks={stacks} pins={kb.pins} selected={selected} onSelect={setSelected} />
+                <Hotbar gd={kb.gd} icons={kb.icons} stacks={stacks} actions={plan.actions?.map((action) => ({ ...action, binding: kb.bindings[String(action.id)] ?? action.binding }))} onBinding={kb.setBinding} pins={kb.pins} selected={selected} onSelect={setSelected} />
+                {kb.updating && <p role="status" className="text-xs text-dim">Updating setup...</p>}
+                {kb.migrationNotice && <p role="status" className="text-xs text-estimated">{kb.migrationNotice}</p>}
                 <SlotEditor
                   gd={kb.gd}
                   icons={kb.icons}
                   label={selected}
+                  action={plan.actions?.find((action) => String(action.id) === selected)}
                   stack={stackOf(selected)}
                   pinnedSkill={kb.pins[selected]}
                   pins={kb.pins}
@@ -162,7 +165,7 @@ export function KeybindsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Macros</CardTitle>
-                <CardDescription>In-game macros for {planned ? `your selected ${planned.playstyle} plan` : "boss and AoE"}, compared with the modeled hand rotation.</CardDescription>
+                <CardDescription>Configuration candidates for {planned ? `your selected ${planned.playstyle} plan` : "your assigned skills"}. Entry numbering is not runtime execution order.</CardDescription>
               </CardHeader>
               <CardContent>
                 <MacroPanel
@@ -181,8 +184,8 @@ export function KeybindsPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Setup sheet: hotbar, macros, G915 / G900</CardTitle>
-                <CardDescription>Everything above as step-by-step instructions, including the Logitech G HUB one-key-remap layout.</CardDescription>
+                <CardTitle>Setup sheet</CardTitle>
+                <CardDescription>Quick Use identities, bindings, macro entries and validation limits.</CardDescription>
               </CardHeader>
               <CardContent>
                 <SetupSheet markdown={result.instructions_markdown} filename={`aion2-keybinds-${build.class_key}.md`} />

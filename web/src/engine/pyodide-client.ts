@@ -198,7 +198,8 @@ export function createPyodideClient(opts: ClientOptions = {}) {
       bar: SkillBar | Record<string, string | null>,
       hotkeys?: Record<string, string> | null,
       delayMs?: number,
-    ) => call<KeybindsResult>("keybinds", [build, priorities, bar, hotkeys, delayMs]),
+      bindings?: Record<string, string>,
+    ) => call<KeybindsResult>("keybinds", [build, priorities, bar, hotkeys, delayMs, bindings]),
     daevanionSuggest: (build: CharacterBuild, points?: number | null) =>
       call<DaevanionSuggestion>("daevanionSuggest", [build, points]),
     shopping: (classKey: string, recipeQty: Record<string, number>, expand?: boolean) =>

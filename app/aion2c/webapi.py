@@ -184,7 +184,7 @@ def marginal(build: dict, priority: dict, scenario_key: str) -> list[dict]:
 
 
 def keybinds(build: dict, priorities: dict, bar: dict | None = None, hotkeys: dict | None = None,
-             delay_ms: int = 10) -> dict:
+             delay_ms: int = 10, bindings: dict | None = None) -> dict:
     """priorities = {scenario_key: Priority dict}; bar = SkillBar dict ({"slots": {...}}) or a bare
     {label: skill_key} map. Returns {plan: KeybindPlan dict, instructions_markdown}.
     The plan carries the macro-redesign fields too (hybrid_dps, slot_notes, macro_advice, rotation, thumbs)."""
@@ -193,8 +193,12 @@ def keybinds(build: dict, priorities: dict, bar: dict | None = None, hotkeys: di
     bar = bar or {}
     slots = bar.get("slots", bar) if isinstance(bar.get("slots", {}), dict) else bar
     pr = {k: _priority(v) for k, v in priorities.items()}
-    plan = kb_export.plan(gd, b, pr, SkillBar(slots=dict(slots)), hotkeys, int(delay_ms))
-    return {"plan": serde.to_dict(plan), "instructions_markdown": kb_export.instructions_markdown(plan, gd)}
+    from aion2c.keybinds.quick_use import native_plan, quick_use_actions, instructions_markdown
+    plan = native_plan(gd, b, bindings, slots, pr, hotkeys, delay_ms)
+    result = serde.to_dict(plan)
+    result["actions"] = serde.to_dict(quick_use_actions(gd, bindings))
+    result["queue_status"] = "unverified"
+    return {"plan": result, "instructions_markdown": instructions_markdown(plan, gd, bindings)}
 
 
 def daevanion_suggest(build: dict, points: int | None = None, battle_points: int | None = None) -> dict:

@@ -1,0 +1,646 @@
+{
+  "schema": 1,
+  "client_version": null,
+  "sources": [
+    "InputKeyMapping",
+    "QuickSlotData",
+    "PCContextSkillSlot"
+  ],
+  "actions": [
+    {
+      "id": 1,
+      "slot_id": 1,
+      "bindings": [
+        "Left mouse",
+        "W"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 2,
+      "slot_id": 2,
+      "bindings": [
+        "Right mouse",
+        "Q"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 3,
+      "slot_id": 3,
+      "bindings": [
+        "1"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 4,
+      "slot_id": 4,
+      "bindings": [
+        "2"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 5,
+      "slot_id": 5,
+      "bindings": [
+        "3"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 6,
+      "slot_id": 6,
+      "bindings": [
+        "4"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 7,
+      "slot_id": 7,
+      "bindings": [
+        "T"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 8,
+      "slot_id": 8,
+      "bindings": [
+        "`"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 9,
+      "slot_id": 21,
+      "bindings": [
+        "5"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 10,
+      "slot_id": 22,
+      "bindings": [
+        "6"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 11,
+      "slot_id": 23,
+      "bindings": [
+        "7"
+      ],
+      "slot_editable": false
+    },
+    {
+      "id": 12,
+      "slot_id": 24,
+      "bindings": [
+        "8"
+      ],
+      "slot_editable": false
+    }
+  ],
+  "classes": {
+    "gladiator": {
+      "1": {
+        "default_skill_id": 11020000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 11010000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 11190000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 11290000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 11050000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 11100000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 11360000,
+        "context_skill_ids": [
+          11300000
+        ],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 11280000,
+        "context_skill_ids": [
+          11200000,
+          11170000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    },
+    "templar": {
+      "1": {
+        "default_skill_id": 12010000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 12040000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 12130000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 12100000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 12350000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 12090000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 12430000,
+        "context_skill_ids": [
+          12300000
+        ],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 12340000,
+        "context_skill_ids": [
+          12270000,
+          12240000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    },
+    "assassin": {
+      "1": {
+        "default_skill_id": 13010000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 13100000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 13070000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 13060000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 13050000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 13130000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 13360000,
+        "context_skill_ids": [
+          13220000
+        ],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 13340000,
+        "context_skill_ids": [
+          13210000,
+          13350000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    },
+    "ranger": {
+      "1": {
+        "default_skill_id": 14020000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 14340000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 14130000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 14110000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 14170000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 14010000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 14080000,
+        "context_skill_ids": [
+          14050000
+        ],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 14330000,
+        "context_skill_ids": [
+          14070000,
+          14090000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    },
+    "sorcerer": {
+      "1": {
+        "default_skill_id": 15210000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 15090000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 15040000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 15280000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 15110000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 15060000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 15220000,
+        "context_skill_ids": [
+          15150000
+        ],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 15010000,
+        "context_skill_ids": [
+          15050000,
+          15310000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    },
+    "spiritmaster": {
+      "1": {
+        "default_skill_id": 16010000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 16040000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 16100000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 16110000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 16130000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 16120000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 16070000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 16340000,
+        "context_skill_ids": [
+          16330000,
+          16300000,
+          16140000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    },
+    "cleric": {
+      "1": {
+        "default_skill_id": 17010000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 17040000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 17080000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 17150000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 17120000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 17060000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 17090000,
+        "context_skill_ids": [
+          17100000
+        ],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 17370000,
+        "context_skill_ids": [
+          17350000,
+          17070000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    },
+    "chanter": {
+      "1": {
+        "default_skill_id": 18010000,
+        "context_skill_ids": [],
+        "context_editable": false
+      },
+      "2": {
+        "default_skill_id": 18040000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "3": {
+        "default_skill_id": 18090000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "4": {
+        "default_skill_id": 18060000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "5": {
+        "default_skill_id": 18120000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "6": {
+        "default_skill_id": 18290000,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "7": {
+        "default_skill_id": 18210000,
+        "context_skill_ids": [
+          18080000
+        ],
+        "context_editable": true
+      },
+      "8": {
+        "default_skill_id": 18300000,
+        "context_skill_ids": [
+          18150000,
+          18100000
+        ],
+        "context_editable": true
+      },
+      "21": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "22": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "23": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      },
+      "24": {
+        "default_skill_id": 0,
+        "context_skill_ids": [],
+        "context_editable": true
+      }
+    }
+  }
+}

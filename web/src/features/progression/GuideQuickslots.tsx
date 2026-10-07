@@ -44,13 +44,14 @@ function SupportedQuickslots({ fb, data, disabled = false }: Props) {
   const plan = kb.phase.status === "ready" && !error ? kb.result?.plan : undefined;
   const gd = kb.gd ?? data.gd;
   const icons = { ...data.icons, ...kb.icons };
-  const stack = plan?.stacks.find((s) => s.key_label === selected)?.stack
+  const stack = plan?.stacks.find((s) => s.quick_use_id !== undefined ? String(s.quick_use_id) === selected : s.key_label === selected)?.stack
     ?? (kb.pins[selected] ? [kb.pins[selected]] : []);
   const macroPlan = plan ? {
     ...plan,
     macros: plan.macros.filter((m) => MACRO_META[m.name as keyof typeof MACRO_META]?.scenario === planned.scenario),
   } : null;
   const ranks = gd ? guideRanks(gd, fb.build) : {};
+  const selectedName = `${plan?.actions ? "Quick Use" : "Key"} ${selected}`;
 
   return (
     <section aria-label="Quickslots and macro" aria-disabled={disabled} inert={disabled} className="guide-quickslots min-w-0">
@@ -84,21 +85,25 @@ function SupportedQuickslots({ fb, data, disabled = false }: Props) {
                 gd={gd}
                 icons={icons}
                 stacks={plan.stacks}
+                actions={plan.actions?.map((action) => ({ ...action, binding: kb.bindings[String(action.id)] ?? action.binding }))}
+                onBinding={(id, binding) => { if (!disabled) kb.setBinding(id, binding); }}
                 pins={kb.pins}
                 selected={selected}
                 onSelect={(label) => { if (!disabled) { setSelected(label); setInspecting(true); } }}
               />
+              {kb.updating && <p role="status" className="text-xs text-dim">Updating setup...</p>}
+              {kb.migrationNotice && <p role="status" className="text-xs text-estimated">{kb.migrationNotice}</p>}
               <div className="guide-quickslots-legend" aria-label="Quickslot legend">
                 <span className="text-gold"><span aria-hidden className="bg-gold" />By hand</span>
                 <span className="text-cyan"><span aria-hidden className="bg-cyan" />In macro</span>
               </div>
-              <p className="guide-slot-basis">Custom key layout; physical in-game slot restrictions are not yet verified.</p>
-              {inspecting && <div className="guide-quickslots-detail space-y-2" role="region" aria-label={`Key ${selected} details`}
+              <p className="guide-slot-basis">Client action mappings; custom placement and queue behavior require an in-game check.</p>
+              {inspecting && <div className="guide-quickslots-detail space-y-2" role="region" aria-label={`${selectedName} details`}
                 onKeyDown={(event) => { if (event.key === "Escape") setInspecting(false); }}>
-                <div className="flex items-center justify-between gap-2"><h3 className="text-sm font-semibold">Key {selected}</h3>
+                <div className="flex items-center justify-between gap-2"><h3 className="text-sm font-semibold">{selectedName}</h3>
                   <button type="button" aria-label="Close slot details" onClick={() => setInspecting(false)} className="grid size-7 place-items-center" title="Close slot details"><X size={16} /></button></div>
                 {stack.length ? (
-                  <ol aria-label={`Key ${selected} skills`} className="guide-quickslots-skills">
+                  <ol aria-label={`${selectedName} skills`} className="guide-quickslots-skills">
                     {stack.map((skill) => (
                       <li key={skill} className="flex items-center gap-2 text-sm">
                         <SkillIcon url={icons[skill]} name={gd?.skills[skill]?.name ?? skill} size={28} />
@@ -134,7 +139,7 @@ function SupportedQuickslots({ fb, data, disabled = false }: Props) {
           <h2 className="reference-panel-heading">How to Play</h2>
           <div className="reference-panel-body">
             <ul className="guide-play-instructions">
-              <li>Hold the macro key while fighting. Use the gold keys by hand.</li>
+              <li>{plan.queue_status === "unverified" ? "Macro entries are configuration candidates, not a guaranteed execution sequence. Manual inputs take priority; confirm Skill Queue and your control mode in game." : "Hold the macro key while fighting. Use the gold keys by hand."}</li>
               {Object.entries(plan.manual_every_s).map(([skill, seconds]) => {
                 const key = plan.stacks.find((slot) => slot.stack.includes(skill))?.key_label;
                 return <li key={skill}><SkillIcon url={icons[skill]} name={gd?.skills[skill]?.name ?? skill} size={24} />

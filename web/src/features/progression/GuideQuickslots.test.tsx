@@ -24,6 +24,8 @@ const result: KeybindsResult = {
   ...kbFx as unknown as KeybindsResult,
   plan: {
     ...kbFx.plan as unknown as KeybindsResult["plan"],
+    actions: undefined,
+    queue_status: undefined,
     stacks: [{ key_label: "1", stack: [skillKeys[0]] }, { key_label: "2", stack: skillKeys }],
     macros: [
       { name: "Boss loop", hotkey: "F9", entries: [{ index: 1, key_label: "1", delay_ms: 10 }] },
@@ -43,11 +45,15 @@ beforeEach(() => {
     icons: {},
     phase: { status: "ready" },
     result,
+    bindings: {},
+    updating: false,
+    migrationNotice: null,
     planError: null,
     pins: {},
     pin: vi.fn(),
     unpin: vi.fn(),
     clearPins: vi.fn(),
+    setBinding: vi.fn(),
     delayMs: 10,
     setDelayMs: vi.fn(),
     hotkeys: { boss: "F9", aoe: "F10", leveling: "F11" },
@@ -58,6 +64,18 @@ beforeEach(() => {
 });
 
 describe("GuideQuickslots", () => {
+  it("shows client action bindings and inspects the same action after rebinding", () => {
+    kb.result = { ...result, plan: { ...result.plan,
+      actions: [{ id: 7, slot_id: 7, binding: "Q", alternate_bindings: [], default_skill: skillKeys[0], context_skills: [], slot_editable: false, context_editable: true }],
+      stacks: [{ quick_use_id: 7, key_label: "Q", stack: [skillKeys[0]] }],
+    } };
+    render(<GuideQuickslots fb={builds.leveling} data={data} />);
+    const binding = screen.getByRole("textbox", { name: "Binding for Quick Use 7" });
+    fireEvent.change(binding, { target: { value: "E" } });
+    expect(kb.setBinding).toHaveBeenCalledWith(7, "E");
+    fireEvent.click(screen.getByRole("button", { name: `Quick Use 7: ${names[0]}` }));
+    expect(within(screen.getByRole("list", { name: "Quick Use 7 skills" })).getByText(names[0])).toBeInTheDocument();
+  });
   it.each([
     ["boss", "boss_180", "Boss loop"],
     ["aoe", "aoe_pack", "AoE loop"],
@@ -193,7 +211,7 @@ describe("GuideQuickslots", () => {
     expect(within(macro).getByTestId("hybrid-line")).toHaveTextContent("75% of ideal");
     expect(within(macro).getByTestId("macro-advice")).toHaveTextContent("press the charge skill by hand");
     fireEvent.click(screen.getByText("Macro settings"));
-    expect(screen.getByText(/only while its key is held/)).toBeInTheDocument();
+    expect(screen.getByText(/order is not guaranteed/)).toBeInTheDocument();
     const manual = screen.getByRole("region", { name: "How to play" });
     expect(within(manual).getByText(names[1])).toBeInTheDocument();
     expect(within(manual).getByText("key =")).toBeInTheDocument();
