@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Become Cube | Native macro preview</title>
+  <style>
+    :root{color-scheme:dark;--page:#14161c;--surface:#1e212a;--line:#3f444f;--text:#f0ede7;--muted:#acafb8;--gold:#ddc592;--cyan:#87c7cc;--ready:#86b8a2;--cell:58px}
+    *{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--text);font:14px/1.5 "Segoe UI",Arial,sans-serif;letter-spacing:0}button,input,select{font:inherit;color:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.35}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}button,input,select{border-radius:4px}input,select{min-height:36px;border:1px solid var(--line);background:#191c23;padding:6px 10px;max-width:100%}input[type=checkbox]{min-height:0;accent-color:var(--ready)}button{background:none;border:1px solid var(--line);padding:7px 12px}button:hover:not(:disabled){border-color:var(--gold)}h1,h2,h3,p{margin:0}h1{font-size:25px;font-weight:600}h2{font-size:19px;font-weight:600}h3{font-size:15px;font-weight:600}a{color:inherit;text-decoration:none}.muted{color:var(--muted)}.small{font-size:12px}.icon{width:18px;height:18px;flex:none;vertical-align:middle}.icon-button{width:34px;height:34px;padding:7px;display:inline-flex;align-items:center;justify-content:center;flex:none}.text-button{display:inline-flex;gap:8px;align-items:center;justify-content:center}.gold-button{background:#bd9442;border-color:#dab873;color:#171816;font-weight:600}.gold-button:hover:not(:disabled){background:#cca752}.notice{color:var(--gold);font-size:12px}.site-header{border-bottom:1px solid var(--line);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}.brand img{width:36px;height:36px;object-fit:contain}.local-badge{font-size:12px;color:var(--muted)}main{max-width:1136px;margin:auto;padding:30px 28px 44px}.page-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.character{display:flex;align-items:center;gap:12px}.character img{width:44px;height:44px;object-fit:cover;object-position:50% 22%;border:1px solid var(--line);border-radius:4px}.character .muted{margin-top:2px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.section-title .muted{font-size:12px}.grid-region{position:relative;overflow-x:auto;padding:6px 4px 15px;scrollbar-color:#6b7280 #20232d;scrollbar-width:thin}.grid-region:focus-visible{outline-offset:0}.scroll-controls{display:flex;gap:4px}.scroll-controls button{border-color:transparent;width:28px;height:28px;padding:4px}.skill-grid{display:grid;grid-template-columns:repeat(8,var(--cell)) 18px repeat(4,var(--cell)) 28px;gap:4px;width:max-content;margin:auto}.skill-cell{width:var(--cell);height:var(--cell);padding:0;position:relative;display:block;overflow:hidden;border:1px solid #4e5563;border-radius:2px;background:#30343f}.skill-cell img{display:block;width:100%;height:100%;object-fit:cover}.skill-cell.empty{border-color:#383e4a;background:#242832}.skill-cell.empty::before,.skill-cell.empty::after{content:"";position:absolute;background:#727887;opacity:.4;left:50%;top:50%;transform:translate(-50%,-50%)}.skill-cell.empty::before{width:17px;height:1px}.skill-cell.empty::after{width:1px;height:17px}.skill-cell.row-zero{border-color:#899394}.skill-cell.highlight{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}.skill-cell.unavailable img{opacity:.28;filter:grayscale(.8)}.rank{position:absolute;bottom:1px;left:0;right:0;text-align:center;font-size:11px;font-weight:600;line-height:17px;color:#fff;background:#06080bc4;text-shadow:0 1px 2px black;pointer-events:none}.key-badge{position:absolute;top:2px;left:2px;min-width:13px;max-width:100%;background:#0c181bed;border:1px solid #9fbbb9;color:#f2f3f1;padding:0 3px;border-radius:2px;font-size:10px;line-height:14px;font-weight:650;white-space:nowrap;pointer-events:none}.row-label{align-self:center;justify-self:center;font:22px/1 Georgia,serif;color:#dedbd2}.group-gap{pointer-events:none}.hotbar-wrap{padding-top:9px;border-top:1px solid var(--line);margin-top:6px;width:max-content;margin-inline:auto}.hotbar .skill-cell{background:#202a2c;border-color:#5d7675}.hotbar .skill-cell.highlight{border-color:var(--gold)}.hotbar .skill-cell img{filter:brightness(.83)}.hotbar .skill-cell .rank{color:#dce6e1}.bar-label{grid-column:14;align-self:center;justify-self:center;color:var(--cyan)}.grid-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 4px 22px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}.recipe-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:24px 0 18px}.segmented{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:5px;padding:3px;gap:3px}.segmented button{border:0;font-size:12px;color:var(--muted);min-height:32px}.segmented button[aria-pressed=true]{background:#33323a;color:var(--gold)}.work-area{display:grid;grid-template-columns:minmax(0,1fr) 314px;gap:34px;align-items:start}.macro-panel{border:1px solid #61626a;border-radius:4px;background:var(--surface);overflow:hidden;min-width:0}.native-title{border-bottom:1px solid #60616a;background:#242732;display:flex;align-items:center;justify-content:center;gap:10px;height:57px}.native-title h2{font:26px/1 Georgia,serif;font-weight:400}.native-title .icon{color:#b1b4bd}.macro-entry{position:relative;padding:20px 50px 8px;min-height:157px}.entry-number{position:absolute;top:33px;left:24px;color:#d6cbb3;font:italic 37px/1 Georgia,serif}.macro-content{display:flex;flex-direction:column;align-items:center;gap:8px}.macro-skill{width:64px;height:64px;border-color:#848688;padding:0;position:relative;background:#151821;border-radius:2px;overflow:hidden}.macro-skill img{height:100%;width:100%;object-fit:cover;display:block}.macro-skill .rank{font-size:12px}.macro-name{font-size:15px;font-weight:600;text-align:center;line-height:1.35;overflow-wrap:anywhere}.entry-tools{position:absolute;right:15px;top:25px;display:flex;flex-direction:column;gap:1px}.entry-tools button{border:0;color:#b7bbc5;width:28px;height:28px;padding:5px}.entry-tools button:hover:not(:disabled){color:var(--gold);background:#34333a}.delay-line{display:flex;align-items:center;justify-content:center;gap:9px;margin:12px -30px 0}.delay-line::before,.delay-line::after{content:"";height:1px;flex:1;background:#454851;min-width:8px}.delay-line label{display:flex;align-items:center;gap:9px;white-space:nowrap}.delay-line input{width:64px;min-height:28px;height:28px;padding:2px 4px;text-align:center;background:#181c24;border-color:#454851;border-radius:0;font-weight:600;font-variant-numeric:tabular-nums}.delay-line input::-webkit-inner-spin-button{appearance:none}.macro-footer{padding:20px;border-top:1px solid #454851;margin-top:14px;background:#21242d;text-align:center}.macro-footer .gold-button{min-width:196px;min-height:40px}.empty-macro{text-align:center;padding:52px 20px;color:var(--muted)}.sidebar{display:grid;gap:24px}.settings{display:grid;gap:14px}.settings label.field{display:grid;gap:5px;font-size:12px;color:var(--muted)}.settings input,.settings select{width:100%;color:var(--text);font-size:14px}.side-section{border-bottom:1px solid var(--line);padding-bottom:22px}.side-section h3{margin-bottom:12px}.selected-heading{display:flex;align-items:center;justify-content:space-between}.selected-heading kbd{font:13px/1 "Segoe UI",sans-serif;min-width:28px;text-align:center;border:1px solid #6a7c7c;border-radius:3px;padding:5px 8px;color:#e7eeeb;background:#213033}.availability-row{display:grid;grid-template-columns:20px 36px minmax(0,1fr) 34px;align-items:center;gap:8px;min-height:50px;border-bottom:1px solid #32353f}.availability-row:last-child{border-bottom:0}.availability-row img{width:36px;height:36px;object-fit:cover;border:1px solid #686d76}.availability-row .row{font-family:Georgia,serif;color:var(--muted);text-align:center}.availability-row .skill-name{font-size:12px;line-height:1.3}.availability-row label{display:flex;align-items:center;justify-content:center;min-height:36px}.availability-row .empty-text{font-size:12px;color:#7e8490}.selected-now{display:flex;align-items:center;gap:9px;padding-top:12px;font-size:12px;color:var(--cyan)}.selected-now img{width:28px;height:28px;object-fit:cover;border-radius:2px}.state-line{margin-top:8px;font-size:12px;color:var(--muted)}.preview-controls{display:flex;gap:6px;margin-bottom:8px}.preview-controls button{font-size:12px;padding:5px 9px}.side-action{display:flex;width:100%;min-height:38px;gap:8px;align-items:center;justify-content:center;color:var(--gold)}.help{font-size:12px;color:var(--muted);margin-top:10px}.help summary{cursor:pointer}.help p{margin-top:10px;line-height:1.6}.handoff{border-top:1px solid var(--line);margin-top:28px;padding-top:18px;font-size:12px;color:var(--muted)}.handoff summary{cursor:pointer}.handoff pre{font:12px/1.7 "Segoe UI",Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;color:#c4c8d0;margin-top:12px}.page-footer{display:flex;justify-content:space-between;gap:16px;margin-top:26px;font-size:11px;color:#838a95}.status{min-height:20px;font-size:12px;color:var(--gold)}dialog{color:var(--text);background:#20232c;border:1px solid #686d77;border-radius:6px;max-width:calc(100% - 28px);padding:0;width:660px}dialog::backdrop{background:#070b12b8;backdrop-filter:blur(4px)}.dialog-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 20px;border-bottom:1px solid var(--line)}.dialog-header h2{font:23px/1.4 Georgia,serif;font-weight:400}.dialog-header button{border:0}.picker-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;padding:22px}.picker-option{min-width:0;border:0;padding:0;background:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:7px}.picker-option .skill-cell{pointer-events:none;width:62px;height:62px}.picker-option .picker-name{font-size:11px;text-align:center;line-height:1.25;overflow-wrap:anywhere}.picker-option:hover:not(:disabled) .skill-cell{border-color:var(--gold)}.dialog-footer{border-top:1px solid var(--line);padding:12px 20px;font-size:12px;color:var(--muted)}.skill-picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:20px}.skill-picker .picker-option .skill-cell{width:54px;height:54px}.dialog-status{padding:0 20px 14px;font-size:12px;color:var(--gold);min-height:20px}.sprite{position:absolute;width:0;height:0;overflow:hidden}
+    @media(min-width:1100px){:root{--cell:63px}.skill-grid{gap:5px}.macro-entry{min-height:165px}}
+    @media(max-width:800px){main{padding:24px 18px}.work-area{grid-template-columns:minmax(0,1fr) 250px;gap:20px}.macro-entry{padding-inline:44px}.entry-number{left:16px}.site-header{padding-inline:18px}.sidebar{gap:18px}}
+    @media(max-width:640px){:root{--cell:52px}main{padding:20px 14px}.site-header{padding:10px 14px}.brand{font-size:14px;gap:7px}.brand img{width:29px;height:29px}.local-badge{font-size:11px}.page-heading{margin-bottom:20px;gap:10px;align-items:flex-start}.character img{width:38px;height:38px}h1{font-size:21px}.character .muted{font-size:12px}.work-area{grid-template-columns:minmax(0,1fr);gap:24px}.sidebar{gap:20px}.recipe-bar{margin-top:20px}.segmented{width:100%}.segmented button{flex:1;padding-inline:8px}.macro-entry{padding-inline:50px;min-height:165px}.entry-tools{right:14px}.grid-foot{gap:10px;font-size:11px}.section-title h2{font-size:17px}.section-title .muted{font-size:11px}.picker-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:18px}.skill-picker{grid-template-columns:repeat(3,minmax(0,1fr));padding:16px}.page-footer{flex-direction:column;gap:5px}.selected-now{min-height:34px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <!-- Lucide icon paths rendered from the repository's installed lucide-react. -->
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M10 11v6M14 11v6M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 19V5"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14m7-7-7 7-7-7"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8M3 3v5h5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M16 4h2a2 2 0 0 1 2 2v4M21 14H11m4-4-4 4 4 4"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  </defs></svg>
+  <header class="site-header"><a class="brand" href="https://becomecube.com/"><img src="../../web/public/brand/cube-crest.webp" alt="">Become Cube</a><span class="local-badge">Local prototype / not connected to the game</span></header>
+  <main>
+    <div class="page-heading"><div class="character"><img src="../../web/public/brand/classes/sorcerer-320.webp" alt="Sorcerer"><div><h1>Quickslots &amp; macros</h1><p class="muted">Sorcerer / your screenshot setup</p></div></div><button class="icon-button" id="reset" title="Reset screenshot setup" aria-label="Reset screenshot setup"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-reset"/></svg></button></div>
+    <section aria-labelledby="grid-heading">
+      <div class="section-title"><h2 id="grid-heading">Skill placement</h2><div class="scroll-controls"><button id="scroll-left" title="Previous columns" aria-label="Previous columns"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-left"/></svg></button><button id="scroll-right" title="Next columns" aria-label="Next columns"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-right"/></svg></button></div></div>
+      <div class="grid-region" id="grid-region" role="region" aria-label="Skill placement and separate current hotbar" tabindex="0"><div class="skill-grid" id="context-grid" aria-label="Four-row skill placement"></div><div class="hotbar-wrap"><div class="skill-grid hotbar" id="hotbar" aria-label="Current Quick Use hotbar"></div></div></div>
+      <div class="grid-foot"><span>Priority 3 / 2 / 1 / <strong>0</strong></span><span>Selected column: <strong id="selected-key">2</strong></span><span>12 columns</span></div>
+    </section>
+    <div class="recipe-bar"><div class="segmented" role="group" aria-label="Screenshot macro configurations"><button data-recipe="three" aria-pressed="true">3-entry screenshot</button><button data-recipe="four" aria-pressed="false">4-entry screenshot</button><button data-recipe="empty" aria-pressed="false">New macro</button></div><span class="muted small" id="entry-count"></span></div>
+    <div class="work-area">
+      <section class="macro-panel" aria-labelledby="macro-heading"><div class="native-title"><h2 id="macro-heading">Macro</h2><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-info"/></svg></div><div id="macro-entries"></div><div class="macro-footer"><button class="gold-button text-button" id="add-macro"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg>Add Macro</button></div></section>
+      <aside class="sidebar">
+        <section class="side-section settings" aria-labelledby="activation-heading"><h3 id="activation-heading">Macro activation</h3><label class="field">Binding<input id="activation-binding" type="text" maxlength="24" placeholder="Unassigned" autocomplete="off"></label><label class="field">Control mode<select id="control-mode"><option value="unknown">Not specified</option><option value="aion2">AION 2</option><option value="aion1">AION 1</option></select></label><p class="notice" id="binding-warning" hidden></p></section>
+        <section class="side-section" aria-labelledby="column-heading"><div class="selected-heading"><h3 id="column-heading">Selected column</h3><kbd id="column-key">2</kbd></div><div id="column-stack"></div><div class="selected-now" id="current-skill" aria-live="polite"></div></section>
+        <section class="side-section" aria-labelledby="availability-heading"><h3 id="availability-heading">Availability preview</h3><div class="preview-controls"><button id="all-ready">All ready</button><button id="all-unavailable">None ready</button></div><div class="state-line" id="column-state"></div><details class="help"><summary>Evidence boundary</summary><p>Availability is set by you in this local preview, not read from the game. It changes the displayed hotbar skill. Macro entries stay linked to their selected column; this preview does not simulate the game's retry timing, queue or DPS.</p></details></section>
+        <div><button class="side-action" id="copy-setup"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-copy"/></svg>Copy configuration</button><div class="status" id="status" role="status" aria-live="polite"></div></div>
+      </aside>
+    </div>
+    <details class="handoff" id="handoff"><summary>Configuration details</summary><pre id="configuration-output"></pre></details>
+    <footer class="page-footer"><span>Local prototype / screenshot fixture, not a recommended build.</span><span>Game icons: NCSOFT / no game input or persistent changes.</span></footer>
+  </main>
+  <dialog id="macro-picker" aria-labelledby="macro-picker-heading"><div class="dialog-header"><h2 id="macro-picker-heading">Add Macro</h2><button class="icon-button" data-close="macro-picker" aria-label="Close Add Macro"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-close"/></svg></button></div><div class="picker-grid" id="macro-picker-options"></div><div class="dialog-footer">Quick Use hotbar</div></dialog>
+  <dialog id="skill-picker" aria-labelledby="skill-picker-heading"><div class="dialog-header"><h2 id="skill-picker-heading">Skill placement</h2><button class="icon-button" data-close="skill-picker" aria-label="Close skill picker"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-close"/></svg></button></div><div class="skill-picker" id="skill-picker-options"></div><div class="dialog-status" id="skill-picker-status" role="status"></div><div class="dialog-footer"><button class="text-button" id="clear-cell"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-trash"/></svg>Clear cell</button></div></dialog>
+  <script>
+    // Screenshot ranks/placement are a local fixture, not an imported character hotbar.
+    const skills = [
+      ["flame-scattershot", "Flame Scattershot", 13, "ICON_SO_SKILL_001"],
+      ["element-enhancement", "Element Enhancement", 13, "ICON_SO_SKILL_040"],
+      ["blaze", "Blaze", 14, "ICON_SO_SKILL_005"],
+      ["hellfire", "Hellfire", 13, "ICON_SO_SKILL_006"],
+      ["winters-shackles", "Winter's Shackles", 12, "ICON_SO_SKILL_011"],
+      ["firestorm", "Firestorm", 14, "ICON_SO_SKILL_004"],
+      ["flame-arrow", "Flame Arrow", 12, "ICON_SO_SKILL_020"],
+      ["ice-chain", "Ice Chain", 8, "ICON_SO_SKILL_009"],
+      ["frost-burst", "Frost Burst", 6, "ICON_SO_SKILL_022"],
+      ["steel-barrier", "Steel Barrier", 5, "ICON_SO_SKILL_016"],
+      ["wish-of-concentration", "Wish of Concentration", 5, "ICON_SO_SKILL_028"],
+      ["cold-storm", "Cold Storm", 10, "ICON_SO_SKILL_019"],
+      ["cold-wave", "Cold Wave", 11, "ICON_SO_SKILL_010"],
+      ["hibernation", "Hibernation", 12, "ICON_SO_SKILL_041"],
+      ["summon-flame", "Summon Flame", 12, "ICON_SO_SKILL_024"]
+    ].map(([id, name, rank, icon]) => ({ id, name, rank, icon }));
+    const skillById = new Map(skills.map(s => [s.id, s]));
+    const columnIds = [1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23, 24];
+    const bindings = ["1", "2", "3", "4", "5", "6", "7", "8", "Q", "E", "M1", "M2"];
+    const initialRows = [
+      ["flame-scattershot", null, null, null],
+      ["element-enhancement", "frost-burst", "steel-barrier", "wish-of-concentration"],
+      ["blaze", "cold-storm", null, null], ["hellfire", null, null, null],
+      [null, null, null, null], [null, null, null, null], [null, null, null, null], [null, null, null, null],
+      ["winters-shackles", "cold-wave", "hibernation", "summon-flame"],
+      ["firestorm", null, null, null], ["flame-arrow", null, null, null], ["ice-chain", null, null, null]
+    ];
+    let nextStepId = 1;
+    const newSteps = entries => entries.map(([slotId, delayMs]) => ({ id: nextStepId++, slotId, delayMs }));
+    function initialState() {
+      return {
+        recipe: "three", selectedSlot: 2, selectedRow: 0, activationBinding: "", controlMode: "unknown",
+        columns: columnIds.map((id, i) => ({ id, binding: bindings[i], rows: [...initialRows[i]] })), availability: {},
+        recipes: { three: newSteps([[2, 10], [21, 10], [3, 10]]), four: newSteps([[24, 11], [3, 11], [21, 11], [2, 10]]), empty: [] }
+      };
+    }
+    let state = initialState();
+    const $ = id => document.getElementById(id);
+    const column = id => state.columns.find(c => c.id === id);
+    const steps = () => state.recipes[state.recipe];
+    const available = (slotId, row) => state.availability[slotId + ":" + row] !== false;
+    const imageUrl = skill => "https://assets.playnccdn.com/static-aion2-gamedata/resources/" + skill.icon + ".png";
+    const icon = name => '<svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-' + name + '"/></svg>';
+    function element(tag, className, text) { const el = document.createElement(tag); if (className) el.className = className; if (text !== undefined) el.textContent = text; return el; }
+    function skillFace(skillId, binding) {
+      const face = element("span", "skill-cell" + (skillId ? "" : " empty")), skill = skillById.get(skillId);
+      if (skill) { const img = element("img"); img.src = imageUrl(skill); img.alt = ""; face.append(img, element("span", "rank", "Lv. " + skill.rank)); }
+      if (binding) face.append(element("span", "key-badge", binding));
+      return face;
+    }
+    function resolveColumn(slotId) { const c = column(slotId); if (!c) return null; for (let row = 0; row < 4; row++) if (c.rows[row] && available(slotId, row)) return { skillId: c.rows[row], row }; return null; }
+    function getState() { return JSON.parse(JSON.stringify({ ...state, steps: steps() })); }
+    function keepFocus(draw) {
+      const focused = document.activeElement;
+      const attr = ["data-hotbar-slot", "data-availability"].find(name => focused?.hasAttribute(name));
+      const value = attr ? focused.getAttribute(attr) : null;
+      draw();
+      if (attr) document.querySelector("[" + attr + "='" + value + "']")?.focus({ preventScroll: true });
+    }
+    function selectColumn(slotId) { if (!column(slotId)) return; state.selectedSlot = slotId; keepFocus(() => { renderGrid(); renderColumn(); }); }
+    function selectRecipe(recipe) { if (!Object.hasOwn(state.recipes, recipe)) return; state.recipe = recipe; if (steps()[0]) state.selectedSlot = steps()[0].slotId; render(); }
+    function addStep(slotId) { const c = column(slotId); if (!c?.rows[0]) return false; steps().push({ id: nextStepId++, slotId, delayMs: 10 }); state.selectedSlot = slotId; render(); return true; }
+    function setDelay(id, value) {
+      const step = steps().find(s => s.id === id); if (!step) return; const n = Number(value);
+      step.delayMs = Math.max(10, Math.min(9900, Number.isFinite(n) ? Math.round(n) : 10)); renderOutput();
+      const input = document.querySelector('[data-delay-id="' + id + '"]'); if (input) input.value = step.delayMs;
+    }
+    function setAvailability(slotId, row, ready) { if (!column(slotId) || !Number.isInteger(row) || row < 0 || row > 3) return; state.availability[slotId + ":" + row] = Boolean(ready); keepFocus(() => { renderGrid(); renderColumn(); renderOutput(); }); }
+    function setCell(slotId, row, skillId) {
+      const c = column(slotId);
+      if (!c || !Number.isInteger(row) || row < 0 || row > 3 || (skillId !== null && !skillById.has(skillId))) return { ok: false, issue: "Invalid cell or skill." };
+      if (row > 0 && skillId && !c.rows[0]) return { ok: false, issue: "Row 0 must contain a skill first." };
+      if (row === 0 && skillId === null && c.rows.slice(1).some(Boolean)) return { ok: false, issue: "Clear rows 1-3 before clearing row 0." };
+      c.rows[row] = skillId; state.availability[slotId + ":" + row] = true; render(); return { ok: true };
+    }
+    function setBinding(value) { state.activationBinding = String(value).trim().slice(0, 24); renderWarning(); renderOutput(); }
+    function moveStep(id, direction) { const index = steps().findIndex(s => s.id === id), next = index + direction; if (![-1, 1].includes(direction) || index < 0 || next < 0 || next >= steps().length) return; [steps()[index], steps()[next]] = [steps()[next], steps()[index]]; renderEntries(); renderOutput(); }
+    function removeStep(id) { const index = steps().findIndex(s => s.id === id); if (index < 0) return; steps().splice(index, 1); renderEntries(); renderOutput(); }
+    function openDialog(id) { const el = $(id); if (typeof el.showModal === "function") el.showModal(); else el.setAttribute("open", ""); }
+    function closeDialog(id) { const el = $(id); if (typeof el.close === "function") el.close(); else el.removeAttribute("open", ""); }
+    function openSkillPicker(slotId, row) {
+      state.selectedSlot = slotId; state.selectedRow = row; renderGrid(); renderColumn();
+      $("skill-picker-heading").textContent = "Key " + column(slotId).binding + " / row " + row; $("skill-picker-status").textContent = "";
+      const container = $("skill-picker-options"); container.replaceChildren();
+      for (const skill of skills) {
+        const b = element("button", "picker-option"); b.type = "button"; b.setAttribute("aria-label", "Assign " + skill.name + " to row " + row);
+        b.append(skillFace(skill.id), element("span", "picker-name", skill.name));
+        b.onclick = () => { const result = setCell(slotId, row, skill.id); if (result.ok) closeDialog("skill-picker"); else $("skill-picker-status").textContent = result.issue; };
+        container.append(b);
+      }
+      openDialog("skill-picker");
+    }
+    function renderGrid() {
+      const grid = $("context-grid"), bar = $("hotbar"); grid.replaceChildren(); bar.replaceChildren();
+      for (const row of [3, 2, 1, 0]) {
+        state.columns.forEach((c, i) => {
+          if (i === 8) grid.append(element("span", "group-gap"));
+          const id = c.rows[row], name = skillById.get(id)?.name || "Empty", b = element("button"); b.type = "button";
+          b.className = "skill-cell" + (!id ? " empty" : "") + (row === 0 ? " row-zero" : "") + (c.id === state.selectedSlot ? " highlight" : "") + (id && !available(c.id, row) ? " unavailable" : "");
+          b.dataset.cell = c.id + ":" + row; b.dataset.row = row; b.dataset.slot = c.id;
+          b.setAttribute("aria-label", "Key " + c.binding + ", row " + row + ": " + name); b.title = name + " / row " + row + " / key " + c.binding;
+          const face = skillFace(id); b.append(...face.childNodes); b.onclick = () => openSkillPicker(c.id, row); grid.append(b);
+        });
+        const label = element("span", "row-label", String(row)); label.dataset.rowLabel = row; grid.append(label);
+      }
+      state.columns.forEach((c, i) => {
+        if (i === 8) bar.append(element("span", "group-gap"));
+        const winner = resolveColumn(c.id), id = winner?.skillId || null, b = element("button", "skill-cell" + (!id ? " empty" : "") + (c.id === state.selectedSlot ? " highlight" : "")); b.type = "button";
+        b.dataset.hotbarSlot = c.id; b.dataset.skill = id || ""; b.setAttribute("aria-label", "Quick Use key " + c.binding + ": " + (skillById.get(id)?.name || "No eligible skill")); b.title = "Key " + c.binding + " / " + (skillById.get(id)?.name || "No eligible skill");
+        const face = skillFace(id, c.binding); b.append(...face.childNodes); b.onclick = () => selectColumn(c.id); bar.append(b);
+      });
+      const marker = element("span", "bar-label"); marker.innerHTML = icon("check"); bar.append(marker); $("selected-key").textContent = column(state.selectedSlot).binding;
+    }
+    function toolButton(name, label, disabled, fn) { const b = element("button", "icon-button"); b.type = "button"; b.title = label; b.setAttribute("aria-label", label); b.disabled = disabled; b.innerHTML = icon(name); b.onclick = fn; return b; }
+    function renderEntries() {
+      const container = $("macro-entries"); container.replaceChildren();
+      if (!steps().length) container.append(element("p", "empty-macro", "No macro entries"));
+      steps().forEach((step, index) => {
+        const c = column(step.slotId), skill = skillById.get(c.rows[0]), entry = element("div", "macro-entry"); entry.dataset.stepId = step.id; entry.append(element("span", "entry-number", String(index + 1)));
+        const content = element("div", "macro-content"), b = element("button", "macro-skill"); b.type = "button"; b.setAttribute("aria-label", "Select linked column " + c.binding + " for " + (skill?.name || "Empty column")); b.title = "Linked to key " + c.binding;
+        const face = skillFace(skill?.id, c.binding); b.append(...face.childNodes); b.onclick = () => selectColumn(c.id); content.append(b, element("div", "macro-name", skill?.name || "Empty column")); entry.append(content);
+        const tools = element("div", "entry-tools"); tools.append(toolButton("trash", "Remove entry " + (index + 1), false, () => removeStep(step.id)), toolButton("up", "Move entry " + (index + 1) + " up", index === 0, () => moveStep(step.id, -1)), toolButton("down", "Move entry " + (index + 1) + " down", index === steps().length - 1, () => moveStep(step.id, 1))); entry.append(tools);
+        const line = element("div", "delay-line"), label = element("label", "", "Delay"), input = element("input"); input.type = "number"; input.min = 10; input.max = 9900; input.step = 1; input.value = step.delayMs; input.dataset.delayId = step.id; input.setAttribute("aria-label", "Entry " + (index + 1) + " delay milliseconds"); input.onchange = () => setDelay(step.id, input.value);
+        label.append(input, document.createTextNode("ms")); line.append(label); entry.append(line); container.append(entry);
+      });
+      $("entry-count").textContent = steps().length + " configured " + (steps().length === 1 ? "entry" : "entries");
+    }
+    function renderColumn() {
+      const c = column(state.selectedSlot), container = $("column-stack"); container.replaceChildren(); $("column-key").textContent = c.binding;
+      for (const row of [3, 2, 1, 0]) {
+        const id = c.rows[row], skill = skillById.get(id), line = element("div", "availability-row"); line.append(element("span", "row", String(row)));
+        if (skill) {
+          const img = element("img"); img.src = imageUrl(skill); img.alt = "";
+          const label = element("label"), checkbox = element("input"); checkbox.type = "checkbox"; checkbox.checked = available(c.id, row); checkbox.dataset.availability = c.id + ":" + row; checkbox.setAttribute("aria-label", skill.name + " ready in row " + row); checkbox.title = "Preview availability"; checkbox.onchange = () => setAvailability(c.id, row, checkbox.checked); label.append(checkbox); line.append(img, element("span", "skill-name", skill.name), label);
+        } else line.append(element("span"), element("span", "empty-text", "Empty"));
+        container.append(line);
+      }
+      const winner = resolveColumn(c.id), result = $("current-skill"); result.replaceChildren();
+      if (winner) { const skill = skillById.get(winner.skillId), img = element("img"); img.src = imageUrl(skill); img.alt = ""; result.append(img, document.createTextNode(skill.name)); } else result.textContent = "No eligible skill";
+      const ready = c.rows.reduce((n, id, row) => n + Number(Boolean(id) && available(c.id, row)), 0); $("column-state").textContent = ready + " eligible / " + c.rows.filter(Boolean).length + " assigned";
+    }
+    function renderWarning() { let warning = ""; if (/mouse|^m[1-5]$/i.test(state.activationBinding) && state.controlMode === "aion1") warning = "Mouse-operation Macro activation is unavailable in AION 1 Control Mode."; $("binding-warning").hidden = !warning; $("binding-warning").textContent = warning; }
+    function renderOutput() {
+      const lines = ["LOCAL PROTOTYPE CONFIGURATION", "Macro activation: " + (state.activationBinding || "Unassigned"), "Control mode: " + (state.controlMode === "unknown" ? "Not specified" : state.controlMode.toUpperCase()), "", "Skill placement (rows 0 / 1 / 2 / 3):"];
+      for (const c of state.columns) lines.push("Key " + c.binding + ": " + c.rows.map(id => skillById.get(id)?.name || "Empty").join(" / "));
+      lines.push("", "Configured macro entries:"); steps().forEach((s, i) => lines.push((i + 1) + ". Key " + column(s.slotId).binding + " / " + (skillById.get(column(s.slotId).rows[0])?.name || "Empty column") + " / " + s.delayMs + " ms"));
+      lines.push("", "One native Macro binding. Hold to activate; manual input takes precedence; a preset change stops it.", "Entry numbering does not guarantee runtime order. No queue, timing or DPS simulation.", "Draft screenshot configuration: placement legality, repeated-entry acceptance and native capacity are not validated by this preview."); $("configuration-output").textContent = lines.join("\n");
+    }
+    function render() { renderGrid(); renderEntries(); renderColumn(); renderWarning(); renderOutput(); document.querySelectorAll("[data-recipe]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.recipe === state.recipe))); $("activation-binding").value = state.activationBinding; }
+    $("add-macro").onclick = () => {
+      const container = $("macro-picker-options"); container.replaceChildren();
+      for (const c of state.columns) { const b = element("button", "picker-option"); b.type = "button"; b.dataset.pickerSlot = c.id; b.disabled = !c.rows[0]; const skill = skillById.get(c.rows[0]); b.setAttribute("aria-label", "Add key " + c.binding + ": " + (skill?.name || "Empty column")); b.append(skillFace(skill?.id, c.binding), element("span", "picker-name", skill?.name || "Empty")); b.onclick = () => { if (addStep(c.id)) closeDialog("macro-picker"); }; container.append(b); }
+      openDialog("macro-picker");
+    };
+    $("clear-cell").onclick = () => { const result = setCell(state.selectedSlot, state.selectedRow, null); if (result.ok) closeDialog("skill-picker"); else $("skill-picker-status").textContent = result.issue; };
+    document.querySelectorAll("[data-close]").forEach(b => b.onclick = () => closeDialog(b.dataset.close));
+    document.querySelectorAll("dialog").forEach(d => d.onclick = event => { if (event.target !== d) return; const bounds = d.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeDialog(d.id); });
+    document.querySelectorAll("[data-recipe]").forEach(b => b.onclick = () => selectRecipe(b.dataset.recipe));
+    $("activation-binding").oninput = event => setBinding(event.target.value);
+    $("control-mode").onchange = event => { state.controlMode = event.target.value; renderWarning(); renderOutput(); };
+    $("reset").onclick = () => { state = initialState(); $("control-mode").value = "unknown"; $("status").textContent = ""; render(); };
+    $("all-ready").onclick = () => { for (let row = 0; row < 4; row++) state.availability[state.selectedSlot + ":" + row] = true; renderGrid(); renderColumn(); renderOutput(); };
+    $("all-unavailable").onclick = () => { for (let row = 0; row < 4; row++) state.availability[state.selectedSlot + ":" + row] = false; renderGrid(); renderColumn(); renderOutput(); };
+    $("copy-setup").onclick = async () => { try { await navigator.clipboard.writeText($("configuration-output").textContent); $("status").textContent = "Configuration copied."; } catch { $("handoff").open = true; $("status").textContent = "Clipboard unavailable. Configuration shown below."; } };
+    function scrollGrid(direction) { $("grid-region").scrollBy({ left: direction * 300, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" }); }
+    $("scroll-left").onclick = () => scrollGrid(-1); $("scroll-right").onclick = () => scrollGrid(1);
+    $("grid-region").onkeydown = event => { if (event.target !== $("grid-region")) return; if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); scrollGrid(event.key === "ArrowLeft" ? -1 : 1); } };
+    window.nativePreview = { getState, resolveColumn, setCell, setAvailability, addStep, setDelay, setBinding, selectRecipe, moveStep, removeStep };
+    render();
+  </script>
+</body>
+</html>
