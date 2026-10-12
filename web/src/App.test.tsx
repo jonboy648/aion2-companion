@@ -32,7 +32,7 @@ describe("app shell", () => {
     ["/daevanion", "Daevanion"],
     ["/codex", /sorcerer class guide/i],
     ["/codex/assassin", /assassin class guide/i],
-    ["/keybinds", "Keybinds and macros"],
+    ["/keybinds", "Quickslots and macros"],
     ["/crafting", "Crafting"],
     ["/enhance", "Enhancement calculator"],
     ["/roadmap", "Road map"],

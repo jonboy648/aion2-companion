@@ -49,10 +49,10 @@
   },
   {
    "path": "/keybinds",
-   "title": "Aion 2 keybinds and macro setup for your rotation",
-   "h1": "Keybinds and macros",
-   "description": "Turn your Aion 2 rotation into a key layout and an in-game macro you set up yourself. Nothing is sent to the game.",
-   "intro": "Lay out your skills on the hotbar and build the in-game macro for your rotation."
+   "title": "Aion 2 Quickslots and native macro setup",
+   "h1": "Quickslots and macros",
+   "description": "Plan Quick Use columns and native macro configurations with individual delays and your own bindings. Nothing is sent to the game.",
+   "intro": "Arrange Quick Use skills and record the native macro configuration you enter in game."
   },
   {
    "path": "/crafting",
