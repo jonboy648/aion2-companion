@@ -24,7 +24,10 @@ node --test docs/prototypes/native-macro.preview.test.cjs
 adding a multi-skill column, linked availability changes, and both presets.
 At 390 px: no page overflow or clipped inspected labels; the picker stays in
 the viewport, Escape closes it and returns focus, and the grid scrolls with
-arrow keys. All initially visible image assets loaded on desktop. Browser
-screenshot capture timed out; appearance still needs Jon's visual review.
+arrow keys. All image assets loaded on desktop. Initial screenshot capture
+failed while the browser window was minimized; restoring the authorized
+preview window resolved it. Desktop and full-page 390 px screenshots were
+then inspected for readable controls and overlapping content. The preview
+is left open at desktop size for Jon's review.
 
 Decision pending that review. Production plan/release approval is separate.
