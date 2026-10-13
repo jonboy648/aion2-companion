@@ -30,6 +30,18 @@ describe("seo route table", () => {
     for (const p of ["/c/nae/1101/Luna", "/compare/nae~1~A/-", "/admin", "/nonsense"]) expect(metaFor(p).noindex, p).toBe(true);
     expect(metaFor("/compare/nae~1~A/-").canonicalPath).toBe("/compare");
   });
+
+  it("gives overlapping tools distinct page identities", () => {
+    for (const [path, heading] of [
+      ["/build", "Build planner"],
+      ["/codex", "Class guides"],
+      ["/gear-viewer", "Compare equipment"],
+      ["/roadmap", "Progression road map"],
+      ["/maps", "Map resources"],
+    ]) {
+      expect(seo.routes.find((route) => route.path === path)?.h1).toBe(heading);
+    }
+  });
 });
 
 describe("DocumentMeta", () => {

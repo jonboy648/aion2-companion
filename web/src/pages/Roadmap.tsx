@@ -69,7 +69,7 @@ export function RoadmapPage() {
 
   return (
     <>
-      <PageHeader title="Road map" caption="What unlocks at each level, with your current stretch highlighted.">
+      <PageHeader title="Progression road map" caption="What unlocks at each level, with your current stretch highlighted.">
         <div className="flex flex-wrap items-center gap-3">
           <ClassSelect classes={tc.classes} value={tc.classKey} onChange={tc.setClassKey} />
           <label className="flex items-center gap-2 text-xs text-dim">

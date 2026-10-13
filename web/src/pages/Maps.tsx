@@ -28,7 +28,7 @@ export const MAP_SITES: MapSite[] = [
 export function Maps() {
   return (
     <>
-      <PageHeader title="Maps" caption="Explore zones, find locations, and share party pins." />
+      <PageHeader title="Map resources" caption="Community maps and saved legacy party pins." />
       <a href="/map/" className="inline-flex items-center gap-2 rounded-md border border-gold/40 bg-surface px-4 py-3 mb-6 text-gold hover:bg-surface2">Open interactive map & party pins <span aria-hidden="true">↗</span></a>
       <PartyMap />
       <ul className="space-y-3">

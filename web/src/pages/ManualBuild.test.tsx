@@ -654,7 +654,7 @@ describe("level-aware manual and class planner", () => {
 
   it("reuses the guide planner, defaults to Leveling, and hands the exact recalculated selection to Keybinds", async () => {
     await at("sorcerer");
-    expect(screen.queryByRole("heading", { name: "Manual build" })).toBeNull();
+    expect(screen.queryByRole("heading", { name: "Build planner" })).toBeNull();
     expect(screen.getByText("More combat stats").closest("details")).not.toHaveAttribute("open");
     expect(within(screen.getByRole("group", { name: "Playstyle" })).getByRole("button", { name: "Leveling" }))
       .toHaveAttribute("aria-pressed", "true");

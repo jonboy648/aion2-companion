@@ -155,7 +155,7 @@ describe("pages (mock engine)", () => {
 
   it("manual build blocks the fixed mock fixture when it violates the selected progression", async () => {
     at("/build?class=sorcerer");
-    expect(screen.getByRole("heading", { level: 1, name: "Manual build" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "Build planner" })).toBeInTheDocument();
     const submit = screen.getByRole("button", { name: "Calculate plan" });
     await waitFor(() => expect(submit).not.toBeDisabled());
     fireEvent.click(submit);

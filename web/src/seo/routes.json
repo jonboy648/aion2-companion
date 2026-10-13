@@ -22,7 +22,7 @@
   {
    "path": "/build",
    "title": "Aion 2 build planner: make a build by hand",
-   "h1": "Build one by hand",
+   "h1": "Build planner",
    "description": "Pick an Aion 2 class, enter your level and stats, and get the same stigma, rotation and Daevanion analysis without importing a character.",
    "intro": "No character yet? Pick a class, enter level and stats, and get the same analysis as an imported character."
   },
@@ -42,10 +42,10 @@
   },
   {
    "path": "/codex",
-   "title": "Aion 2 skill codex: skills, stigmas and specialties by class",
-   "h1": "Skill codex",
-   "description": "Browse Aion 2 skills, stigmas and specialties for every class with ranks, cooldowns and what each option changes.",
-   "intro": "A reference for every class's skills, stigmas and specialty options."
+   "title": "Aion 2 class guides and skill encyclopedia",
+   "h1": "Class guides",
+   "description": "Plan a level-aware Aion 2 build for your class, or browse the skill encyclopedia for skills, stigmas, specialties, ranks and cooldowns.",
+   "intro": "Class guides provide a starting build plan. The skill encyclopedia covers individual skills, stigmas and specialties."
   },
   {
    "path": "/keybinds",
@@ -70,8 +70,8 @@
   },
   {
    "path": "/roadmap",
-   "title": "Aion 2 road map: what to do at each level",
-   "h1": "Road map",
+   "title": "Aion 2 progression road map: unlocks at each level",
+   "h1": "Progression road map",
    "description": "A level-by-level checklist for Aion 2: what to unlock, upgrade and farm next as your character grows.",
    "intro": "A level-by-level list of what to do next for your class."
   },
@@ -84,10 +84,10 @@
   },
   {
    "path": "/maps",
-    "title": "Aion 2 interactive map and party pins | Become Cube",
-   "h1": "Maps",
-    "description": "Explore the Aion 2 interactive map with zones, bosses, portals and gathering nodes, or share a party pin board. Unofficial fan tool.",
-    "intro": "Explore zones, find locations, and share party pins."
+    "title": "Aion 2 community map resources and legacy pins",
+   "h1": "Map resources",
+    "description": "Find additional Aion 2 community maps and saved legacy party boards, or open Become Cube's interactive map for real-zone locations and party pins.",
+    "intro": "Additional community maps and legacy party boards, separate from the real-zone interactive map."
   },
   {
    "path": "/timers",
@@ -112,8 +112,8 @@
   },
   {
    "path": "/gear-viewer",
-   "title": "Aion 2 gear viewer: sort and compare all equipment",
-   "h1": "Gear viewer",
+   "title": "Aion 2 equipment comparison: stats side by side",
+   "h1": "Compare equipment",
    "description": "Sort and filter every Aion 2 weapon, armor and accessory by attack, defense, HP, critical and more, and pin four items to compare side by side.",
    "intro": "One table of all Aion 2 equipment with the stat columns you choose, plus a side-by-side compare for up to four pinned items."
   },

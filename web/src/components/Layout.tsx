@@ -1,30 +1,14 @@
-import { useEffect } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { NavLink, Outlet, useLocation, useNavigationType } from "react-router-dom";
 import { trackHit } from "@/lib/analytics";
 import { isMockEngine } from "@/engine/api";
 import { BrandCrest } from "@/components/ui/brand-crest";
 import "./site-footer.css";
 import { FactionThemeProvider, useFaction, type Faction } from "@/components/game/faction";
-import { GlobalSearch } from "@/features/search/GlobalSearch";
+import { SiteNavigation } from "./SiteNavigation";
+import { NAVIGATION_GROUPS } from "./navigation";
+import { NavigationLink } from "./NavigationLink";
 import { TimerStrip } from "@/features/timers/TimerStrip";
-import { cn } from "@/lib/utils";
-
-const NAV = [
-  { to: "/", label: "Home", end: true },
-  { to: "/guide", label: "Start here" },
-  { to: "/build", label: "Build" },
-  { to: "/daevanion", label: "Daevanion" },
-  { to: "/compare", label: "Compare" },
-  { to: "/codex", label: "Codex" },
-  { to: "/items", label: "Items" },
-  { to: "/map/", label: "Maps" },
-  { to: "/keybinds", label: "Keybinds" },
-  { to: "/crafting", label: "Crafting" },
-  { to: "/enhance", label: "Enhance" },
-  { to: "/roadmap", label: "Road Map" },
-  { to: "/timers", label: "Timers" },
-  { to: "/checklist", label: "Checklist" },
-];
 
 export const DISCLAIMER = "Fan project, not affiliated with NCSOFT. Game data and icons © NCSOFT.";
 
@@ -62,23 +46,24 @@ export const PRIVACY_NOTE =
 
 function Shell() {
   const { pathname } = useLocation();
+  const navigationType = useNavigationType();
+  const previousPath = useRef(pathname);
   useEffect(() => trackHit(pathname), [pathname]);
+  useEffect(() => {
+    if (previousPath.current !== pathname && navigationType !== "POP") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+    previousPath.current = pathname;
+  }, [pathname, navigationType]);
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--metal)_40%,var(--border-soft))] bg-bg/90 shadow-[0_6px_18px_-10px_rgb(0_0_0/0.6)] backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2.5">
+        <div className="site-header-bar">
           <NavLink to="/" className="brand-home flex items-center gap-2 text-gold no-underline" aria-label="Become Cube home">
             <BrandCrest />
             <span className="font-display text-[18px] font-bold tracking-wider">Become Cube</span>
           </NavLink>
-          <nav aria-label="Main" className="flex flex-wrap items-center gap-1.5">
-            <GlobalSearch />
-            {NAV.map((n) => (
-              <NavLink key={n.to} to={n.to} end={n.end} reloadDocument={n.to === "/map/"} className={cn("game-tab px-3 py-1.5 text-sm font-medium no-underline")}>
-                {n.label}
-              </NavLink>
-            ))}
-          </nav>
+          <SiteNavigation />
           {isMockEngine && (
             <span className="rounded border border-warn/50 bg-warn/10 px-2.5 py-0.5 text-xs text-warn" title="VITE_ENGINE=mock">
               mock data
@@ -98,9 +83,19 @@ function Shell() {
               <NavLink to="/" className="site-footer-brand"><BrandCrest /><span>Become Cube</span></NavLink>
               <p className="site-footer-description">Your character. Your build. Your next step.</p>
             </div>
-            <nav aria-label="Footer build tools"><h2>Build & plan</h2><NavLink to="/build">Build by hand</NavLink><NavLink to="/compare">Compare builds</NavLink><NavLink to="/daevanion">Daevanion</NavLink><NavLink to="/keybinds">Keybinds</NavLink><NavLink to="/gear-viewer">Gear viewer</NavLink></nav>
-            <nav aria-label="Footer guides"><h2>Learn & explore</h2><NavLink to="/guide">Start here</NavLink><NavLink to="/codex">Class Codex</NavLink><NavLink to="/items">Items</NavLink><NavLink to="/roadmap">Road Map</NavLink><NavLink to="/crafting">Crafting</NavLink><NavLink to="/enhance">Enhance calculator</NavLink></nav>
-            <nav aria-label="Footer community"><h2>Community</h2><NavLink to="/board">Board</NavLink><NavLink to="/maps">Maps</NavLink><NavLink to="/timers">Timers</NavLink><NavLink to="/checklist">Checklist</NavLink></nav>
+            {NAVIGATION_GROUPS.map((group, index) => (
+              <nav key={group.label} aria-label={["Footer build tools", "Footer guides", "Footer community"][index]}>
+                <h2>{group.label}</h2>
+                {group.label === "Plan" && <NavLink to="/guide">Start here</NavLink>}
+                {group.items.map((item) => (
+                  <NavigationLink key={item.to} item={item} />
+                ))}
+                {group.label === "World" && <>
+                  <NavLink to="/board">Board</NavLink>
+                  <NavLink to="/maps">Map resources and legacy pins</NavLink>
+                </>}
+              </nav>
+            ))}
           </div>
           <div className="site-footer-bottom"><p>{DISCLAIMER}</p><ThemePicker /></div>
           <details className="site-footer-privacy"><summary>Privacy</summary><p>{PRIVACY_NOTE}</p></details>

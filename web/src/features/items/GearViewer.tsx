@@ -92,7 +92,7 @@ export function GearViewer() {
 
   return (
     <>
-      <PageHeader title="Gear viewer" caption="Every piece of equipment in one table. Pick the stat columns, filter, sort, and pin up to four items to compare them side by side.">
+      <PageHeader title="Compare equipment" caption="Every piece of equipment in one table. Pick the stat columns, filter, sort, and pin up to four items to compare them side by side.">
         <Link to="/items" className="game-tab px-3 py-1.5 text-sm no-underline">
           Item database
         </Link>

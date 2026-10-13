@@ -52,6 +52,7 @@ export function CodexView({ classKey }: { classKey: string }) {
       setParams(
         (p) => {
           const next = new URLSearchParams(p);
+          next.set("view", "skills");
           if (key) next.set("skill", key);
           else next.delete("skill");
           return next;
@@ -67,7 +68,7 @@ export function CodexView({ classKey }: { classKey: string }) {
         {classes.map((c) => (
           <Link
             key={c.key}
-            to={`/codex/${c.key}`}
+            to={`/codex/${c.key}?view=skills`}
             aria-current={c.key === classKey ? "page" : undefined}
             title={ROLE_LABEL[c.role] ?? c.role}
             className={cn(
