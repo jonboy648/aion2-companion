@@ -4,7 +4,7 @@ import { beforeEach, expect, it, vi } from "vitest";
 import gd from "@/fixtures/gamedata_sorcerer.json";
 import compare from "@/fixtures/compare.json";
 import setup from "@/fixtures/keybinds.json";
-import { ACTIVE_BUILD_KEY } from "@/features/keybinds/activeBuild";
+import { ACTIVE_BUILD_KEY, readActiveBuild } from "@/features/keybinds/activeBuild";
 import { KeybindsPage } from "./Keybinds";
 
 const engine = vi.hoisted(() => ({ keybinds: vi.fn(), gamedata: vi.fn(), iconUrls: vi.fn() }));
@@ -16,6 +16,16 @@ beforeEach(() => {
   engine.gamedata.mockReset().mockResolvedValue(gd);
   engine.iconUrls.mockReset().mockResolvedValue({});
   engine.keybinds.mockReset().mockResolvedValue(setup);
+});
+
+it("opens an older saved character without explicit bonus ranks and preserves its stored record", async () => {
+  const { bonus_ranks: _bonusRanks, ...legacy } = compare.leveling.build;
+  const stored = JSON.stringify(legacy);
+  localStorage.setItem(ACTIVE_BUILD_KEY, stored);
+  render(<MemoryRouter><KeybindsPage /></MemoryRouter>);
+  expect(await screen.findByRole("heading", { name: "Macro activation" })).toBeInTheDocument();
+  expect(readActiveBuild()?.bonus_ranks).toEqual({});
+  expect(localStorage.getItem(ACTIVE_BUILD_KEY)).toBe(stored);
 });
 
 it("starts with client bindings without migrating a former character's global overrides", async () => {
