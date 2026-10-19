@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import App from "@/App";
@@ -7,6 +7,7 @@ import { Maps, MAP_SITES } from "./Maps";
 describe("Maps page", () => {
   it("links out to each community map safely, in a new tab", () => {
     render(<MemoryRouter><Maps /></MemoryRouter>);
+    expect(screen.getByRole("heading", { name: "Map resources" })).toBeInTheDocument();
     for (const s of MAP_SITES) {
       const a = screen.getByRole("link", { name: new RegExp(s.name) });
       expect(a.getAttribute("href")).toBe(s.url);
@@ -16,16 +17,17 @@ describe("Maps page", () => {
     expect(screen.getByRole("link", { name: /Open interactive map/ })).toHaveAttribute("href", "/map/");
   });
 
-  it("links directly to the interactive map from the top nav and keeps the footer directory", () => {
+  it("links to the same real map from the menu and footer and retains the resource directory", () => {
     render(
       <MemoryRouter initialEntries={["/maps"]}>
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByRole("heading", { name: "Maps" })).toBeTruthy();
-    expect(within(screen.getByRole("navigation", { name: "Main" })).getByRole("link", { name: "Maps" })).toHaveAttribute("href", "/map/");
-    const footerLink = within(screen.getByRole("navigation", { name: "Footer community" })).getByRole("link", { name: "Maps" });
-    expect(footerLink).toBeTruthy();
-    expect(footerLink!.closest('nav[aria-label="Main"]')).toBeNull(); // not in the main nav
+    const navigation = within(screen.getByRole("navigation", { name: "Main" }));
+    fireEvent.click(navigation.getByRole("button", { name: "World" }));
+    expect(navigation.getByRole("link", { name: "Map" })).toHaveAttribute("href", "/map/");
+    const footer = within(screen.getByRole("navigation", { name: "Footer community" }));
+    expect(footer.getByRole("link", { name: "Map" })).toHaveAttribute("href", "/map/");
+    expect(footer.getByRole("link", { name: "Map resources and legacy pins" })).toHaveAttribute("href", "/maps");
   });
 });

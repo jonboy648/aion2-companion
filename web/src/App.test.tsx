@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import App from "./App";
@@ -28,21 +28,21 @@ describe("app shell", () => {
   });
 
   it.each([
-    ["/build", "Manual build"],
+    ["/build", "Build planner"],
     ["/daevanion", "Daevanion"],
     ["/codex", /sorcerer class guide/i],
     ["/codex/assassin", /assassin class guide/i],
-    ["/keybinds", "Keybinds and macros"],
+    ["/keybinds", "Quickslots and macros"],
     ["/crafting", "Crafting"],
     ["/enhance", "Enhancement calculator"],
-    ["/roadmap", "Road map"],
+    ["/roadmap", "Progression road map"],
     ["/timers", "Timers"],
     ["/checklist", "Checklist"],
     ["/items", "Items"],
     ["/items/weapons", "Weapons"],
     ["/items/sword", "Sword"],
     ["/items/nope", "Page not found"],
-    ["/gear-viewer", "Gear viewer"],
+    ["/gear-viewer", "Compare equipment"],
     ["/nope", "Page not found"],
   ])("route %s", (path, heading) => {
     at(path);
@@ -53,5 +53,27 @@ describe("app shell", () => {
     at("/c/nae/2103/DarthThot");
     expect(await screen.findByRole("heading", { level: 1, name: "DarthThot" }, { timeout: 5000 })).toBeInTheDocument();
     expect(await screen.findByText("Boss DPS", {}, { timeout: 8000 })).toBeInTheDocument();
+  });
+
+  it("keeps the encyclopedia open when choosing another class", async () => {
+    at("/codex/sorcerer?view=skills");
+    const classes = within(await screen.findByRole("navigation", { name: "Classes" }));
+    const assassin = await classes.findByRole("link", { name: "Assassin" });
+    fireEvent.click(assassin);
+    expect(screen.getByRole("heading", { name: "Skill encyclopedia" })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Skill encyclopedia" })).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("keeps the encyclopedia open after closing details from a legacy skill link", async () => {
+    at("/codex/sorcerer?skill=flame-arrow");
+    fireEvent.click(await screen.findByRole("button", { name: "Close details" }));
+    expect(screen.getByRole("heading", { name: "Skill encyclopedia" })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Skill encyclopedia" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.queryByRole("dialog", { name: /details/ })).toBeNull();
+  });
+
+  it("sends the Start here map shortcut to the real map", () => {
+    at("/guide");
+    expect(screen.getByRole("link", { name: "Explore maps" })).toHaveAttribute("href", "/map/");
   });
 });

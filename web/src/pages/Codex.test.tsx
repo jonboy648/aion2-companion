@@ -42,6 +42,13 @@ describe("Codex guide and encyclopedia", () => {
     expect(screen.queryByRole("tabpanel", { name: "Class guide" })).toBeNull();
   });
 
+  it("opens the encyclopedia destination without requiring a selected skill", () => {
+    at("/codex/templar?view=skills");
+    expect(screen.getByRole("tab", { name: "Skill encyclopedia" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByTestId("encyclopedia")).toHaveTextContent("Skills for templar");
+    expect(screen.getByRole("heading", { name: "Skill encyclopedia" })).toBeInTheDocument();
+  });
+
   it("defaults to the Sorcerer guide without a class route parameter", () => {
     at("/codex");
     expect(screen.getByTestId("class-guide")).toHaveTextContent("Guide for sorcerer");

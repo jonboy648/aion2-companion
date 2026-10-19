@@ -75,7 +75,7 @@ export function GuidePage() {
           <PageHeader title="New player guide" caption="Your next step, from your first class to endgame." />
           <div className="guide-shortcuts">
             <Link to="/build"><Sparkles size={16} aria-hidden /> Build my character <ArrowRight size={14} aria-hidden /></Link>
-            <Link to="/maps"><Map size={16} aria-hidden /> Explore maps <ArrowRight size={14} aria-hidden /></Link>
+            <Link to="/map/" reloadDocument><Map size={16} aria-hidden /> Explore maps <ArrowRight size={14} aria-hidden /></Link>
           </div>
         </div>
       </header>

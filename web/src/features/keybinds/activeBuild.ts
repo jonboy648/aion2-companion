@@ -45,7 +45,8 @@ export function readActiveBuild(): CharacterBuild | null {
     const raw = localStorage.getItem(ACTIVE_BUILD_KEY);
     if (!raw) return null;
     const b = JSON.parse(raw) as CharacterBuild;
-    return b && typeof b.class_key === "string" && typeof b.level === "number" ? b : null;
+    return b && typeof b.class_key === "string" && typeof b.level === "number"
+      ? { ...b, bonus_ranks: b.bonus_ranks ?? {} } : null;
   } catch {
     return null;
   }

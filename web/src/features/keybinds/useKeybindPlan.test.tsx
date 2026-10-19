@@ -27,6 +27,13 @@ beforeEach(() => {
 });
 
 describe("planned quickslots", () => {
+  it("does not rewrite legacy macro preferences merely by loading native mappings", async () => {
+    const raw = JSON.stringify({ delay: 11, hotkeys: { boss: "F8", aoe: "F7", leveling: "F6" }, savedNote: "keep this record" });
+    localStorage.setItem("aion2c.kb.prefs.v1", raw);
+    const { result } = renderHook(() => useKeybindPlan(build, plan));
+    await waitFor(() => expect(result.current.result).not.toBeNull());
+    expect(localStorage.getItem("aion2c.kb.prefs.v1")).toBe(raw);
+  });
   it("trims persisted bindings without changing action identity", async () => {
     const { result } = renderHook(() => useKeybindPlan(build, plan));
     await waitFor(() => expect(result.current.result).not.toBeNull());

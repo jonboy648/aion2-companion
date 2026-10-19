@@ -1,5 +1,5 @@
 import { MemoryRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import keybindsFx from "@/fixtures/keybinds.json";
 import { KeybindsPage } from "@/pages/Keybinds";
@@ -31,15 +31,17 @@ describe("macro efficiency", () => {
 });
 
 describe("KeybindsPage (mock engine)", () => {
-  it("renders hotbar, macros and the sheet from the best rotation", async () => {
+  it("renders native client mappings and an empty user-authored configuration without a rotation search", async () => {
     localStorage.clear();
     render(
       <MemoryRouter>
         <KeybindsPage />
       </MemoryRouter>,
     );
-    expect(await screen.findByText("Hotbar", {}, { timeout: 4000 })).toBeInTheDocument();
-    expect(await screen.findByRole("region", { name: "Boss loop" }, { timeout: 4000 })).toBeInTheDocument();
+    expect(await screen.findByRole("group", { name: "Four-row skill placement" }, { timeout: 4000 })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Macro activation binding" })).toHaveValue("");
+    expect(screen.queryByRole("region", { name: "Boss loop" })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("Setup sheet"));
     expect(await screen.findByRole("button", { name: /Download \.md/ })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /^Quick Use 1:/ })).toBeInTheDocument();
     expect(screen.queryByTestId("macro-advice")).not.toBeInTheDocument();

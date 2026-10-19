@@ -36,7 +36,7 @@ function savedPins(classKey: string): Pins {
     && typeof skill === "string" && skill.length > 0 && skill.length <= 100));
 }
 
-export function useKeybindPlan(build: CharacterBuild | null, planned: PlannedBuild | null = null) {
+export function useKeybindPlan(build: CharacterBuild | null, planned: PlannedBuild | null = null, nativeDefaults = false) {
   const classKey = build?.class_key ?? null;
   const buildHash = useMemo(() => (build ? hashBuild(build) : ""), [build]);
 
@@ -59,8 +59,6 @@ export function useKeybindPlan(build: CharacterBuild | null, planned: PlannedBui
   const [delayMs, setDelayMs] = useState<number>(() => normalizeDelay(loadJson(prefsKey, { delay: 10, hotkeys: DEFAULT_HOTKEYS })?.delay));
   const [hotkeys, setHotkeys] = useState<Hotkeys>(() => ({ ...DEFAULT_HOTKEYS, ...loadJson(prefsKey, { hotkeys: DEFAULT_HOTKEYS })?.hotkeys }));
   const [runNonce, setRunNonce] = useState(0);
-
-  useEffect(() => saveJson(prefsKey, { delay: delayMs, hotkeys }), [delayMs, hotkeys]);
 
   // class data + icon URLs
   useEffect(() => {
@@ -104,7 +102,7 @@ export function useKeybindPlan(build: CharacterBuild | null, planned: PlannedBui
     let live = true;
     setPlanError(null);
     const t = setTimeout(() => {
-      keybinds(build, prios, availablePins, hotkeys, delayMs, bindings).then(
+      keybinds(build, nativeDefaults ? {} : prios, nativeDefaults ? {} : availablePins, hotkeys, delayMs, nativeDefaults ? {} : bindings).then(
         (r) => { if (live) { setResult(r); setUpdating(false); } },
         (e: unknown) => { if (live) { setPlanError(errMsg(e)); setUpdating(false); } },
       );
@@ -113,7 +111,7 @@ export function useKeybindPlan(build: CharacterBuild | null, planned: PlannedBui
       live = false;
       clearTimeout(t);
     };
-  }, [build, prios, availablePins, hotkeys, delayMs, gd, bindings]);
+  }, [build, prios, availablePins, hotkeys, delayMs, gd, bindings, nativeDefaults]);
 
   const updatePins = useCallback(
     (fn: (p: Pins) => Pins) => {
@@ -165,9 +163,19 @@ export function useKeybindPlan(build: CharacterBuild | null, planned: PlannedBui
       });
     },
     delayMs,
-    setDelayMs: (n: number) => setDelayMs(normalizeDelay(n)),
+    setDelayMs: (n: number) => {
+      const next = normalizeDelay(n);
+      setDelayMs(next);
+      const saved = loadJson<unknown>(prefsKey, {});
+      saveJson(prefsKey, { ...(saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {}), delay: next, hotkeys });
+    },
     hotkeys,
-    setHotkey: (which: keyof Hotkeys, key: string) => setHotkeys((h) => ({ ...h, [which]: key })),
+    setHotkey: (which: keyof Hotkeys, key: string) => {
+      const next = { ...hotkeys, [which]: key };
+      setHotkeys(next);
+      const saved = loadJson<unknown>(prefsKey, {});
+      saveJson(prefsKey, { ...(saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {}), delay: delayMs, hotkeys: next });
+    },
     rerun,
   };
 }

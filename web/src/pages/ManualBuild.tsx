@@ -139,7 +139,7 @@ export function ManualBuild({ guideClass }: { guideClass?: string }) {
   );
   return (
     <div className="level-planner reference-guide">
-      {!guideClass && <PageHeader title="Manual build" caption="Your class, level and build plan" />}
+      {!guideClass && <PageHeader title="Build planner" caption="Your class, level and build plan" />}
       <div className="planner-class-picker" role="group" aria-label="Class">
         {classes.data?.map((c) => <button type="button" key={c.key} aria-pressed={c.key === classKey}
           onClick={() => {
