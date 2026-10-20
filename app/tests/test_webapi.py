@@ -1,5 +1,6 @@
 """webapi round trips on real game data. Every output must survive json.dumps (the Pyodide boundary)."""
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -56,6 +57,32 @@ def test_import_character_sorcerer(imported):
     assert ds["open"] == 84 and ds["matched"] == 84
     assert imported["gear"] and all("slot" in g for g in imported["gear"])
     assert any("Imported level 44" in n for n in imported["notes"])
+
+
+@pytest.mark.parametrize("missing", ["profile", "equipment", "skills", "boards", "board detail", "board effects"])
+def test_import_rejects_missing_required_character_data(raw, missing):
+    broken = deepcopy(raw)
+    if missing == "profile":
+        del broken["info"]["profile"]
+    elif missing == "equipment":
+        del broken["equipment"]["equipment"]
+    elif missing == "skills":
+        del broken["equipment"]["skill"]
+    elif missing == "boards":
+        del broken["info"]["daevanion"]
+    elif missing == "board detail":
+        del broken["daevanion"]["61"]
+    else:
+        del broken["daevanion"]["61"]["openStatEffectList"]
+    with pytest.raises(ValueError, match="unavailable|incomplete"):
+        webapi.import_character(broken)
+
+
+def test_import_does_not_guess_a_class_when_the_profile_is_unsupported(raw):
+    broken = deepcopy(raw)
+    broken["info"]["profile"].update(className="Future class", pcId=9999)
+    with pytest.raises(ValueError, match="class.*supported"):
+        webapi.import_character(broken)
 
 
 def test_import_character_stats_come_from_the_stat_sheet(raw):

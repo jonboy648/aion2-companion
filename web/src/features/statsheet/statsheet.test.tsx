@@ -4,7 +4,7 @@ import rawFx from "@/fixtures/armory_raw.json";
 import sheetFx from "@/fixtures/stat_sheet.json";
 import { GEAR_METHODS, PY_NAME } from "@/engine/protocol";
 import type { ArmoryRaw, StatRow, StatSheet } from "@/lib/types";
-import { StatSheetSection } from "./StatSheetSection";
+import { ArmoryCheck, StatSheetSection } from "./StatSheetSection";
 import { armoryNote, filterCategories, flagCount, fmtSigned, fmtStat, groupSources, isFlagged } from "./logic";
 
 const sheet = sheetFx as unknown as StatSheet;
@@ -78,6 +78,15 @@ describe("stat sheet helpers", () => {
 });
 
 describe("StatSheetSection", () => {
+  it("does not label absent armory totals and effects as successfully matched", () => {
+    render(<ArmoryCheck sheet={{ ...sheet, armory_check: { attributes: [], derived: [], summary: {
+      attributes: 0, attributes_ok: 0, attributes_nonzero: 0, attributes_nonzero_ok: 0, derived: 0, derived_ok: 0,
+    } } }} />);
+    expect(screen.getByText("Armory attribute totals unavailable.")).toBeVisible();
+    expect(screen.getByText("Armory attribute-effect data unavailable.")).toBeVisible();
+    expect(screen.queryByText(/reproduced: 0\/0|matched.*0\/0/i)).not.toBeInTheDocument();
+  });
+
   async function shown() {
     render(<StatSheetSection raw={raw} />);
     return screen.findByTestId("stat-cat-attack", {}, { timeout: 3000 });

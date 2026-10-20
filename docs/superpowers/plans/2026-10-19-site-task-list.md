@@ -37,8 +37,12 @@ The local preview is illustrative; it must not manufacture calculated gains.
   separately; the older export's original patch remains explicitly unknown.
   Cache identity now includes class contents, with source/browser/ZIP parity,
   ID/unit witnesses, regional caveats, and privacy/size regression gates.
-- [ ] #28: Verify armory import through grouped gear, effective ranks and the
-  stat sheet, including missing-data and failed-import cases.
+- [x] #28: Verify armory import through grouped gear, effective ranks and the
+  stat sheet, including missing-data and failed-import cases (implemented and
+  verified locally, not pushed/deployed). See
+  `../../data/2026-10-20-character-import-audit.md`: 1,060 Python tests and 767
+  web tests passed; build passed; real proxy/Pyodide desktop/mobile checks and
+  exact 206/206 current-node coverage observed. Hidden sources remain estimates.
 - [ ] #29: Verify legal level-aware plans across all eight classes and resource
   boundaries, including chain owners and earned-point overrides.
 - [ ] #30: Verify Daevanion imported nodes, adjacency, effects, refundable costs

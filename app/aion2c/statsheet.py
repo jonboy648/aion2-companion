@@ -167,18 +167,25 @@ def _gear(book: _Book, raw: dict, items: dict[int, dict], notes: list[str]) -> N
         notes.append(f"{len(missing)} equipped item(s) are not in our item table and add nothing: {', '.join(missing)}.")
 
 
-def _daevanion(book: _Book, raw: dict) -> None:
-    names = {b.get("id"): b.get("name") for b in ((raw.get("info") or {}).get("daevanion") or {}).get("boardList") or []}
+def _daevanion(book: _Book, raw: dict, notes: list[str]) -> None:
+    boards = ((raw.get("info") or {}).get("daevanion") or {}).get("boardList") or []
+    names = {b.get("id"): b.get("name") for b in boards}
+    details = {str(k): v for k, v in (raw.get("daevanion") or {}).items()}
+    for board in boards:
+        if board.get("openNodeCount") and not isinstance((details.get(str(board.get("id"))) or {}).get("openStatEffectList"), list):
+            notes.append(f"Daevanion effects unavailable for {board.get('name', board.get('id'))}; this source is excluded from the reconstruction.")
     for bid, detail in sorted((raw.get("daevanion") or {}).items(), key=lambda kv: int(kv[0])):
         label = f"Daevanion: {names.get(int(bid), bid)}"
         for eff in (detail or {}).get("openStatEffectList") or []:
             book.text(eff.get("desc", ""), "daevanion", label)
 
 
-def _wings(book: _Book, raw: dict, data: dict) -> None:
+def _wings(book: _Book, raw: dict, data: dict, notes: list[str]) -> None:
     wing = ((raw.get("equipment") or {}).get("petwing") or {}).get("wing") or {}
     row = data["wings"].get(str(wing.get("id")))
     if not row:
+        if wing:
+            notes.append(f"Wing stats unavailable for {wing.get('name', wing.get('id'))}; this source is excluded from the reconstruction.")
         return
     lv = int(wing.get("enchantLevel") or 0)
     label = f"Wings: {wing.get('name', 'wings')}" + (f" +{lv}" if lv else "")
@@ -245,14 +252,22 @@ def _row(key: str, name: str, unit: str, value: float, entries: list[dict], lo=N
     return row
 
 
+def _armory_attributes(raw: dict) -> dict[str, dict]:
+    """An unavailable total is not zero and must never calibrate away known sources."""
+    out = {}
+    for row in ((raw.get("info") or {}).get("stat") or {}).get("statList") or []:
+        value = row.get("value")
+        if row.get("type") in _PRIMARY_SET and type(value) in (int, float) and math.isfinite(value) and value >= 0:
+            out[row["type"]] = row
+    return out
+
+
 def _calibrate(book: _Book, raw: dict) -> None:
     """The armory prints the true total of every attribute and deity stat, hidden sources included (pantheon, real
     rolls, collections). Add the gap as its own estimated source so the derived pass starts from the real points."""
-    for s in ((raw.get("info") or {}).get("stat") or {}).get("statList") or []:
-        p = s.get("type")
-        if p in _PRIMARY_SET:
-            book.add(p, float(s.get("value") or 0) - book.total(p), "armory",
-                     "Armory total minus the sources above (hidden sources and roll error)", est=True)
+    for p, s in _armory_attributes(raw).items():
+        book.add(p, float(s["value"]) - book.total(p), "armory",
+                 "Armory total minus the sources above (hidden sources and roll error)", est=True)
 
 
 def compare_armory(raw: dict, book: _Book, data: dict) -> dict:
@@ -260,22 +275,28 @@ def compare_armory(raw: dict, book: _Book, data: dict) -> dict:
     attributes: our summed primary stat vs the armory value (gear rolls and hidden sources make these differ);
     derived: the armory's own points pushed through our PcStatSecond vs the percent lines it prints (should be exact)."""
     arm = {s.get("type"): s for s in ((raw.get("info") or {}).get("stat") or {}).get("statList") or []}
+    valid = _armory_attributes(raw)
     attrs, lines = [], []
+    reported_lines = 0
     for p in PRIMARY:
         a = arm.get(p)
         if a is None:
             continue
-        theirs, ours = float(a.get("value") or 0), book.total(p)
-        d = ours - theirs
-        attrs.append({"key": p, "name": data["stats"][p][0], "armory": theirs, "ours": round(ours, 4),
-                      "diff": round(d, 4), "ok": abs(d) < 0.5})
+        theirs = float(valid[p]["value"]) if p in valid else None
+        if theirs is not None:
+            ours = book.total(p)
+            d = ours - theirs
+            attrs.append({"key": p, "name": data["stats"][p][0], "armory": theirs, "ours": round(ours, 4),
+                          "diff": round(d, 4), "ok": abs(d) < 0.5})
         for text in a.get("statSecondList") or []:
+            reported_lines += 1
             got = parse_line(text)
             if got is None:
+                book.unparsed.append(f"Attribute ({p}): {text}")
                 continue
             key, val = got
             per = dict(data["second"][p]).get(key)
-            mine = None if per is None else round(min(int(theirs), data["second_max"]) * per, 6)
+            mine = None if per is None or theirs is None else round(min(int(theirs), data["second_max"]) * per, 6)
             lines.append({"primary": p, "key": key, "name": data["stats"][key][0], "text": text, "armory": val,
                           "from_armory_points": mine, "ok": mine is not None and abs(mine - val) < 1e-6})
     return {"attributes": attrs, "derived": lines,
@@ -283,7 +304,7 @@ def compare_armory(raw: dict, book: _Book, data: dict) -> dict:
                 "attributes": len(attrs), "attributes_ok": sum(a["ok"] for a in attrs),
                 "attributes_nonzero": sum(1 for a in attrs if a["armory"] or a["ours"]),
                 "attributes_nonzero_ok": sum(a["ok"] for a in attrs if a["armory"] or a["ours"]),
-                "derived": len(lines), "derived_ok": sum(x["ok"] for x in lines)}}
+                "derived": reported_lines, "derived_ok": sum(x["ok"] for x in lines)}}
 
 
 def engine_stats(book: _Book, pre_ratio: dict[str, float]) -> dict[str, float]:
@@ -329,11 +350,15 @@ def compute(raw: dict, items: dict[int, dict] | None = None, data: dict | None =
     levels = sorted(int(k) for k in data["level_base"])
     level = max(levels[0], min(int(prof.get("characterLevel") or levels[0]), 45 if 45 in levels else levels[-1]))
     book, notes = _Book(), []
+    attributes = _armory_attributes(raw)
+    for key in PRIMARY:
+        if key not in attributes and key not in ("Light", "Dark"):
+            notes.append(f"Armory {key} total unavailable; using known sources only, not assuming zero.")
     for stat, v in zip(("FixingDamage", "Defense", "HPMax"), data["level_base"][str(level)]):
         book.add(stat, v, "base", f"Base stats, level {level}")
     _gear(book, raw, items, notes)
-    _daevanion(book, raw)
-    _wings(book, raw, data)
+    _daevanion(book, raw, notes)
+    _wings(book, raw, data, notes)
     _titles(book, raw)
     # A weapon range is Max/Min Attack; every flat Attack line (accessory attack, exceed on rings, sub lines) adds to
     # both ends. Assumed fold: the client does not say whether the sheet's Max/Min include the flat lines.
@@ -370,6 +395,8 @@ def compute(raw: dict, items: dict[int, dict] | None = None, data: dict | None =
             # `known` = what our sources add up to before the armory total is used to fill the gap
             r["armory"] = {"value": arm_attr[key]["armory"], "known": arm_attr[key]["ours"],
                            "diff": arm_attr[key]["diff"], "ok": arm_attr[key]["ok"], "basis": "attribute total"}
+        elif key in _PRIMARY_SET:
+            r["armory_unavailable"] = True
         elif key in derived_by_key:
             ours = sum(e["value"] for e in book.by.get(key, ()) if e["group"] == "derived")
             theirs = sum(x["armory"] for x in derived_by_key[key])

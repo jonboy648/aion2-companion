@@ -674,6 +674,8 @@ export interface StatRow {
   value: number;
   sources: StatSource[];
   armory?: StatArmoryCheck;
+  /** Primary total missing/invalid in the armory; numeric value contains known sources only. */
+  armory_unavailable?: boolean;
   /** Amp Ratio lines: which base stats they scale and by how much */
   applies_to?: { key: string; name: string; base: number; add: number }[];
   capped?: boolean;

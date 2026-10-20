@@ -11,6 +11,22 @@ HashRouter (GitHub Pages friendly), base `/`, `public/CNAME` = `becomecube.com`.
 - `npm run audit:data` checks source/browser parity, fingerprints and reviewed ID/unit witnesses; run after `npm run engine`. See `../docs/data/2026-10-20-source-audit.md` for evidence limits.
 - `python scripts/make_fixtures.py` regenerates `src/fixtures/*.json` from real webapi output (then `npm test` checks `src/lib/types.ts`)
 
+## Real character preview
+
+Use the configured public armory Worker, not the NCSoft upstream or a Vite `/armory` route.
+Set `VITE_ARMORY_PROXY_URL` in `web/.env.local` or the launching shell. This is a public
+endpoint, not a token. Restart Vite after changing it; rebuild for `npm run preview`.
+`VITE_ENGINE=mock` serves the saved DarthThot sample, not a current character lookup.
+
+The Worker must allow the exact browser origin, including hostname and port. The
+documented development origin is `http://localhost:4173`; `127.0.0.1` is a different
+origin. Start with `npm run dev -- --host localhost --port 4173 --strictPort`, or use
+another explicitly permitted origin. Do not broaden CORS to arbitrary origins.
+An unreachable proxy can be a network or CORS failure; the browser cannot reliably
+distinguish them. See `../proxy/CONTRACT.md` for endpoint and origin rules.
+
+Character import audit and evidence limits: `../docs/data/2026-10-20-character-import-audit.md`.
+
 ## Layout
 - `src/engine/api.ts` typed async API (real Pyodide client by default; fixtures when `VITE_ENGINE=mock`)
 - `src/lib/armory.ts` proxy client (`../proxy/CONTRACT.md`), `src/lib/types.ts` wire types
