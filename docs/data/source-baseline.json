@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "source": {
+    "region": "global",
+    "export_label": "client export 2026-10-04",
+    "export_client_build": null,
+    "korea_validation": "not established by the Global export",
+    "installed_client_observation": {"steam_build": "25926599", "observed_on": "2026-10-19", "identifies_export": false}
+  },
+  "limitations": [
+    "These witnesses audit the reviewed derived baseline, not a fresh client extraction or server behavior.",
+    "The source export patch is unknown; do not assign the current installation's build to the older export.",
+    "Unmatched skills retain community values. Rank-one fallbacks, target combat stats and animation timing need separate validation.",
+    "Global progression and the Global invasion schedule do not validate Korea or Taiwan.",
+    "Quick Use action data does not establish macro scheduler behavior."
+  ],
+  "witnesses": [
+    {
+      "id": "skill.quick-slice",
+      "unit": "ratio in percentage points; damage as flat points",
+      "join": "Skill 13010000 -> explicit Assassin_Skill001_LvUp mapping -> quick-slice; SkillEffectLv rank 2, not the community rank-one fallback",
+      "checks": [
+        {"file": "app/aion2c/data/src/client_skill_numbers.json", "pointer": "/classes/assassin/skills/quick-slice/ratio_pct", "expected": 70},
+        {"file": "app/aion2c/data/src/client_skill_numbers.json", "pointer": "/classes/assassin/skills/quick-slice/from_rank", "expected": 2},
+        {"file": "app/aion2c/data/classes/assassin/gamedata.json", "pointer": "/skills/quick-slice/skill_id", "expected": 13010000},
+        {"file": "app/aion2c/data/classes/assassin/gamedata.json", "pointer": "/skills/quick-slice/atk_ratio_pct/value", "expected": 70},
+        {"file": "app/aion2c/data/classes/assassin/gamedata.json", "pointer": "/skills/quick-slice/ranks/1/flat_min/value", "expected": 89}
+      ]
+    },
+    {
+      "id": "skill.noble-armor-cooldown",
+      "unit": "seconds, converted from client milliseconds / 1000",
+      "join": "Templar noble-armor -> Skill.NeedCoolTime -> derived cooldown_s -> rank cooldown_s.value",
+      "checks": [
+        {"file": "app/aion2c/data/src/client_skill_details.json", "pointer": "/classes/templar/noble-armor/cooldown_s", "expected": 120},
+        {"file": "app/aion2c/data/classes/templar/gamedata.json", "pointer": "/skills/noble-armor/ranks/0/cooldown_s/value", "expected": 120}
+      ]
+    },
+    {
+      "id": "item.relic-collector-spellbook",
+      "unit": "flat weapon attack; exact enchant increment, not a linear slope",
+      "join": "Item.ID.Value 110540006 -> StatCorrectionNumber.StatName -> Weapon_Legend_23 enchant series -> EnchantEffect",
+      "checks": [
+        {"file": "app/aion2c/data/items.json", "collection": "/items", "key": "id", "value": 110540006, "pointer": "/enchant_group", "expected": "Weapon_Legend_23"},
+        {"file": "app/aion2c/data/items.json", "collection": "/items", "key": "id", "value": 110540006, "pointer": "/main/0/id", "expected": "WeaponFixingDamage"},
+        {"file": "app/aion2c/data/items.json", "collection": "/items", "key": "id", "value": 110540006, "pointer": "/main/0/min", "expected": 103},
+        {"file": "app/aion2c/data/items.json", "collection": "/items", "key": "id", "value": 110540006, "pointer": "/main/0/v", "expected": 114},
+        {"file": "app/aion2c/data/items.json", "pointer": "/enchant_series/Weapon_Legend_23/WeaponFixingDamage/4", "expected": 11}
+      ]
+    },
+    {
+      "id": "progression.global-level-22",
+      "unit": "cumulative [skill, stigma, slots, DaevanionCrystal]; not per-level awards or a character wallet",
+      "join": "Exp.Level 22 -> client_progression level index 21 -> frontend level row with explicit level",
+      "checks": [
+        {"file": "app/aion2c/data/client_progression.json", "pointer": "/levels/21", "expected": [71, 0, 1, 44]},
+        {"file": "web/src/features/progression/data.json", "pointer": "/levels/21", "expected": [22, 71, 0, 1, 44]},
+        {"file": "web/src/features/progression/data.json", "pointer": "/source/region", "expected": "global"},
+        {"file": "web/src/features/progression/data.json", "pointer": "/source/clientVersion", "expected": null}
+      ]
+    },
+    {
+      "id": "board.sorcerer-nezekan",
+      "unit": "Combat Speed in percentage points; bonus skill ranks as counts",
+      "join": "Class + board identity + unlock level; research skill ID 15210000 -> flame-arrow. Runtime node ID is not client node code. Layout is community-derived with a historical client cross-check.",
+      "checks": [
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/daevanion/nezekan/start_id", "expected": 4875},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/daevanion/nezekan/nodes/4831/effects/0/value", "expected": 1.5},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/daevanion/nezekan/nodes/4831/effects/0/unit", "expected": "%"},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/daevanion/nezekan/nodes/4886/skill_key", "expected": "flame-arrow"},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/skills/flame-arrow/skill_id", "expected": 15210000},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/daevanion/azphel/currency", "expected": "battle"},
+        {"file": "app/aion2c/data/client_progression.json", "pointer": "/board_currency/sorcerer/45", "expected": "battle"}
+      ]
+    }
+  ],
+  "schedule": {
+    "event": "invasion",
+    "region": "global",
+    "source_groups": ["Group_Light_Invasion", "Group_Dark_Invasion"],
+    "source_kind": "historical client-export research, manually encoded",
+    "time_zone": "UTC",
+    "unit": "minutes after region-local midnight; public occurrences are epoch milliseconds",
+    "every_minutes": 60,
+    "offset_minutes": 30,
+    "duration_minutes": null,
+    "in_game_verified": false,
+    "korea_taiwan_verified": false
+  }
+}

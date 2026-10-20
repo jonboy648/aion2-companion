@@ -79,14 +79,14 @@ def fingerprint(parts) -> str:
 
 
 def engine_fingerprint() -> str:
-    """Hash of everything the engine's results depend on besides the class data: the bundled python sources, the
-    packed data tables and the item table. The browser result cache keys on it (manifest.json `engine_version`), so a
-    deploy that changes engine code or items cannot serve results computed by the old code."""
+    """Hash result inputs, including class contents even when their date-based version labels are unchanged."""
     parts = [(module_file(m).relative_to(APP).as_posix(), module_file(m).read_bytes()) for m in MODULES]
     parts += [(f"data/{d}", (PKG / "data" / d).read_bytes()) for d in PY_DATA]
     items = PKG / "data" / "items.json"
     if items.is_file():
         parts.append(("data/items.json", items.read_bytes()))
+    parts += [(f"classes/{p.parent.name}.json", p.read_bytes())
+              for p in sorted((PKG / "data" / "classes").glob("*/gamedata.json"))]
     return fingerprint(parts)
 
 

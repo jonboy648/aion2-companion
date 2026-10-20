@@ -34,11 +34,12 @@ def test_unlock_constants():
     assert pg._data()["stigma_unlock"]["quests"] == ["AQ1602010", "AQ2602010"]
 
 
-def test_flame_arrow_rank_gates(gd):
+def test_flame_scattershot_rank_gates(gd):
     fa = gd.skills["flame-scattershot"]
     assert pg.rank_gate(fa, 8) == 23 and pg.rank_gate(fa, 10) == 29
     assert pg.rank_gate(fa, 11) is None  # paid acquisition stops at 10
-    assert [pg.max_rank_at_level(fa, lv, 10) for lv in (4, 5, 22, 23, 28, 29)] == [0, 2, 7, 8, 9, 10]  # the note's "Flame Arrow 15010000"
+    assert fa.skill_id == 15010000
+    assert [pg.max_rank_at_level(fa, lv, 10) for lv in (4, 5, 22, 23, 28, 29)] == [0, 2, 7, 8, 9, 10]
 
 
 def test_no_rows_means_no_gate(gd):
@@ -54,10 +55,8 @@ def test_stigma_acquisition_shape(gd):
 
 
 def test_codex_dataset_agrees():
-    """Cross-check against the level planner's independently derived dataset when it is on this machine."""
-    p = Path(r"D:\Aion2-level-planner\web\src\features\progression\data.json")
-    if not p.is_file():
-        pytest.skip("level planner dataset not present")
+    """Every shipped frontend rank join must agree with the engine, on developer machines and CI alike."""
+    p = Path(__file__).resolve().parents[2] / "web/src/features/progression/data.json"
     cx = json.loads(p.read_text(encoding="utf-8"))
     # packed format: levels rows [level, skill, stigma, stigmaSlots, daevanion]; a skill is
     # [unlockLevel, autoLearn, profileIndex, ...] and rankProfiles[i] rows are [rank, characterLevel, skillCost, stigmaCost, ...]
@@ -67,11 +66,11 @@ def test_codex_dataset_agrees():
     for ck, c in cx["classes"].items():
         g = load_gamedata(class_key=ck)
         for key, ent in c["skills"].items():
-            ours = pg.rank_levels(g.skills[key]) if key in g.skills else None
-            if ours is None:
-                continue
+            assert key in g.skills, (ck, key)
+            ours = pg.rank_levels(g.skills[key])
+            assert ours is not None, (ck, key)
             theirs = tuple(r[1] for r in cx["rankProfiles"][ent[2]])
-            assert ours[:len(theirs)] == theirs[:len(ours)], (ck, key)
+            assert ours == theirs, (ck, key)
             checked += 1
     assert checked > 200
 

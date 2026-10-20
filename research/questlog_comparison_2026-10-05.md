@@ -101,7 +101,7 @@ To calibrate, Jon's ~7k in game against our ~20k is a factor of 2.9. Stacking it
 
 ## 5. Ranked additions
 
-Data availability: "export" = private client export at `D:\Aion2-tools\export-test\out` (items 9,245, skills, NPCs 13,493, quests, recipes, maps).
+Data availability: "export" = private client export (Table directory configured by `AION2_EXPORT_DIR`; items 9,245, skills, NPCs 13,493, quests, recipes, maps).
 
 | # | Feature | Player value | Effort | Data |
 |---|---|---|---|---|
@@ -129,7 +129,7 @@ Not recommended: a desktop DPS meter (conflicts with our no-automation line, and
 
 ## 6. Full feature inventory from their front-end code (2026-10-05)
 
-Source: the 334 Nuxt/Vite chunks (5.4 MB) already downloaded to `.firecrawl/ql-js/` (entry `IQJ3RDA4.js`). Read offline only, by grep and small scripts; no request was made to questlog.gg or cdn.questlog.gg. Nothing is copied: this section describes behaviour in our own words and quotes only short identifiers. Limits of this method: the code holds the client side only. Item/skill/node/stat data, display names (i18n), gear score, combat power, tier inputs and all database content are served by their API, so numbers that live there (stat curves, caps, enhancement odds) are not in the JS. Where our private client export (`D:\Aion2-tools\export-test\out\AION2\Content\Data\Table`) has the same table, I checked it by table name or by reading a row (marked "export").
+Source: the 334 Nuxt/Vite chunks (5.4 MB) already downloaded to `.firecrawl/ql-js/` (entry `IQJ3RDA4.js`). Read offline only, by grep and small scripts; no request was made to questlog.gg or cdn.questlog.gg. Nothing is copied: this section describes behaviour in our own words and quotes only short identifiers. Limits of this method: the code holds the client side only. Item/skill/node/stat data, display names (i18n), gear score, combat power, tier inputs and all database content are served by their API, so numbers that live there (stat curves, caps, enhancement odds) are not in the JS. Where our private client export (configured by `AION2_EXPORT_DIR`) has the same table, I checked it by table name or by reading a row (marked "export").
 
 ### 6.0 Corrections to sections 1-5 (what the code contradicts or settles)
 
@@ -337,7 +337,7 @@ What this says about their data: item, skill, NPC, quest, recipe, node, title, w
 
 ### 6.5 Updated ranked "features to add" (merges the section 5 list with what the code added)
 
-"Export" = private client export `D:\Aion2-tools\export-test\out` (checked by table name, a few by row). "New" marks items the code revealed that section 5 did not have.
+"Export" = private client export configured by `AION2_EXPORT_DIR` (checked by table name, a few by row). "New" marks items the code revealed that section 5 did not have.
 
 | # | Feature | Player value | Effort | Data already in export? |
 |---|---|---|---|---|

@@ -78,8 +78,10 @@ Use `ClassType`, `AcquireType`, `SkillLevel`, `NeedCharacterLevel`,
 - Stigma rank 1 costs ONE point, is not automatic, and requires
   `AscensionGrade_3`. `GlobalSetting` additionally names faction quests
   AQ1602010 / AQ2602010. A slot at level 22 does not grant a free stigma.
-- Example Flame Arrow (15010000): paid rank 8 requires character level 23;
+- Example Flame Scattershot (15010000): paid rank 8 requires character level 23;
   paid rank 10 requires level 29. Enforce every acquired rank's level gate.
+  Correction recorded 2026-10-20: Flame Arrow is 15210000, with paid ranks
+  8/10 gated at levels 19/25; these are different skills, not alternate names.
 - Global paid acquisition stops at Mastery 10 / Stigma 20. Skill representation
   maxima 40/25 are not proof of payable ranks or Korea effective-rank caps.
 - This snapshot has no nonempty predecessor or item-cost lists; preserve

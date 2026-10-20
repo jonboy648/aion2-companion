@@ -8,6 +8,7 @@ HashRouter (GitHub Pages friendly), base `/`, `public/CNAME` = `becomecube.com`.
 - `npm run dev` / `npm run build` / `npm test` (vitest)
 - `python scripts/build_icon_map.py` regenerates `app/aion2c/data/classes/<key>/icon_names.json` (names only) from `research/`
 - `python scripts/bundle_engine.py` writes `public/engine/` (aion2c.zip, classes/, icons/, manifest.json)
+- `npm run audit:data` checks source/browser parity, fingerprints and reviewed ID/unit witnesses; run after `npm run engine`. See `../docs/data/2026-10-20-source-audit.md` for evidence limits.
 - `python scripts/make_fixtures.py` regenerates `src/fixtures/*.json` from real webapi output (then `npm test` checks `src/lib/types.ts`)
 
 ## Layout
