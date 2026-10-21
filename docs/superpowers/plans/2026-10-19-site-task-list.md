@@ -1,7 +1,10 @@
 # Become Cube task list
 
-Updated: 2026-10-20. Last verified live release: `faf15ce` (PR 41).
+Updated: 2026-10-21. Last verified live release: `faf15ce` (PR 41).
 Prototype branch: `codex/character-workflow-prototype`; not a production release.
+Approved audits #27/#28 are isolated on `codex/source-import-audits`. Deployment
+is held by a fresh Chanter optimizer timing failure, not by missing approval.
+See `../../data/2026-10-21-audit-release.md`; do not report this branch as live.
 
 ## Now: make the character recommendation understandable
 
@@ -27,8 +30,8 @@ The local preview is illustrative; it must not manufacture calculated gains.
 
 ## Next: source and calculation audit
 
-- [x] #27: Establish a traceable source baseline (implemented locally; review
-  required before push): client build evidence,
+- [x] #27: Establish a traceable source baseline (implemented, reviewed and
+  approved; release preflight recorded above): client build evidence,
   derived data versions/hashes, fallback mechanics and source-to-consumer paths.
   First pass recorded in `research/game_data_audit_baseline_2026-10-19.md`:
   8/8 class payloads and 3/3 packed data tables match; damage drift check has
@@ -39,7 +42,7 @@ The local preview is illustrative; it must not manufacture calculated gains.
   ID/unit witnesses, regional caveats, and privacy/size regression gates.
 - [x] #28: Verify armory import through grouped gear, effective ranks and the
   stat sheet, including missing-data and failed-import cases (implemented and
-  verified locally, not pushed/deployed). See
+  verified locally, approved; not deployed). See
   `../../data/2026-10-20-character-import-audit.md`: 1,060 Python tests and 767
   web tests passed; build passed; real proxy/Pyodide desktop/mobile checks and
   exact 206/206 current-node coverage observed. Hidden sources remain estimates.
