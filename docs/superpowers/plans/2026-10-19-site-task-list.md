@@ -1,12 +1,15 @@
 # Become Cube task list
 
-Updated: 2026-10-24. Release preceding the audit changes: `faf15ce` (PR 41).
+Updated: 2026-10-24. Verified live audit release: `30d126b` (PR 42).
 Prototype branch: `codex/character-workflow-prototype`; not a production release.
 Approved audits #27/#28 are isolated on `codex/source-import-audits`. Jon approved
 deployment on Oct 24 with the reproduced existing-main Chanter timing issue
 tracked separately. See `../../data/2026-10-21-audit-release.md` and
 https://github.com/jonboy648/aion2-companion/pull/42 for actual deployment status;
 approval or merging alone is not proof of a live release.
+Pages run 40109544544 and public checks confirmed deployment; see
+`../../data/2026-10-24-audit-live-verification.md`. Existing Chanter performance
+remains tracked in issue #43 rather than silently marked fixed.
 
 ## Now: make the character recommendation understandable
 
@@ -26,6 +29,13 @@ approval or merging alone is not proof of a live release.
   costs, fixed gear, the same baseline/scenario and complete legal output.
 - [ ] Implement the agreed workflow with test-first engine and frontend changes.
   Recalculate cumulative plan gains; never add independent experiments together.
+- [x] Trace Sorcerer damage, charge/stagger and conditional cooldown connections
+  from the existing game files; record what the simulator actually implements:
+  `../../../research/2026-10-24-sorcerer-combo-objectives.md`.
+- [ ] Correct the source-verified charge timing/horizon and missing conditional
+  routes with regression tests, then introduce Damage/Stagger objectives across
+  rotation and complete build selection. Reuse the current engine/native editor;
+  do not claim optimal native queue behavior from configuration data.
 
 Design decisions: `../specs/2026-10-19-character-plan-decisions.md`.
 The local preview is illustrative; it must not manufacture calculated gains.
