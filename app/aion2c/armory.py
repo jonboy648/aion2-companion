@@ -177,6 +177,33 @@ def class_key(raw: dict) -> str | None:
     return key_from_armory(prof.get("className"), prof.get("pcId"))
 
 
+def require_complete(raw: dict) -> None:
+    """Required lookup sections must be present, including every declared open board."""
+    info, eq = raw.get("info") or {}, raw.get("equipment") or {}
+    profile = info.get("profile") or {}
+    if not profile.get("characterName") or not profile.get("characterLevel"):
+        raise ValueError("Character profile unavailable or incomplete; refresh the lookup.")
+    if not isinstance((eq.get("equipment") or {}).get("equipmentList"), list):
+        raise ValueError("Equipment data unavailable; missing equipment is not an empty gear set.")
+    if not isinstance((eq.get("skill") or {}).get("skillList"), list):
+        raise ValueError("Skill data unavailable; missing skills are not an empty skill set.")
+    boards = (info.get("daevanion") or {}).get("boardList")
+    if not isinstance(boards, list):
+        raise ValueError("Daevanion board summary unavailable; refresh the lookup.")
+    details = {str(k): v for k, v in (raw.get("daevanion") or {}).items()}
+    for board in boards:
+        count = board.get("openNodeCount")
+        if type(count) is not int or count < 0:
+            raise ValueError("Daevanion board summary incomplete; refresh the lookup.")
+        if count:
+            detail = details.get(str(board.get("id"))) or {}
+            nodes = detail.get("nodeList")
+            if not isinstance(nodes, list) or sum(n.get("open") == 1 for n in nodes) != count:
+                raise ValueError("Daevanion board data incomplete or changed while loading; refresh the lookup.")
+            if not isinstance(detail.get("openStatEffectList"), list):
+                raise ValueError("Daevanion board effects unavailable; refresh before calculating stats.")
+
+
 def to_build(gd: GameData, raw: dict, base: CharacterBuild) -> tuple[CharacterBuild, list[str]]:
     """Apply an armory import to `base`. Returns the new build and plain-English notes.
     `gd` must be the imported class's data (the UI switches class first); the build's class_key

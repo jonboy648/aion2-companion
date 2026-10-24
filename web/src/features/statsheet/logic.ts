@@ -50,6 +50,7 @@ export function filterCategories(cats: StatCategory[], query: string): StatCateg
 
 /** Plain-English line for the armory comparison under a row. */
 export function armoryNote(r: StatRow): string | null {
+  if (r.armory_unavailable) return "Armory total unavailable; only known sources are shown, not a verified total.";
   const a = r.armory;
   if (!a) return null;
   if (a.basis === "attribute total") {
@@ -67,18 +68,18 @@ interface Async<T> {
 
 /** The stat sheet for an armory download. `enabled` holds the (serial) engine until the page's other work is done. */
 export function useStatSheet(raw: ArmoryRaw | null, calibrate: boolean, enabled = true): Async<StatSheet> {
-  const [s, setS] = useState<Async<StatSheet>>({ data: null, error: null, busy: false });
+  const [s, setS] = useState<Async<StatSheet> & { raw: ArmoryRaw | null }>({ raw: null, data: null, error: null, busy: false });
   useEffect(() => {
     if (!raw || !enabled) return;
     let live = true;
-    setS((p) => ({ ...p, busy: true, error: null }));
+    setS((p) => ({ raw, data: p.raw === raw ? p.data : null, busy: true, error: null }));
     statSheet(raw, calibrate).then(
-      (data) => live && setS({ data, error: null, busy: false }),
-      (e) => live && setS({ data: null, error: e instanceof Error ? e.message : String(e), busy: false }),
+      (data) => live && setS({ raw, data, error: null, busy: false }),
+      (e) => live && setS({ raw, data: null, error: e instanceof Error ? e.message : String(e), busy: false }),
     );
     return () => {
       live = false;
     };
   }, [raw, calibrate, enabled]);
-  return s;
+  return s.raw === raw ? s : { data: null, error: null, busy: !!raw && enabled };
 }

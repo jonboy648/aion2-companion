@@ -65,6 +65,9 @@ describe("helpers", () => {
     const hits = [mk("Bob", 1), mk("Bob", 2), mk("Bobby", 2)];
     expect(pickHit(hits, "bob", "2")?.characterId).toBe("Bob2");
     expect(pickHit([], "x", "1")).toBeNull();
+    expect(pickHit(hits, "Bob", "3")).toBeNull();
+    expect(pickHit(hits, "NotBob", "2")).toBeNull();
+    expect(pickHit([{ ...mk("Bob", 2), region: "eu" }], "Bob", "2", "nae")).toBeNull();
   });
 
   it("validates the manual form", () => {

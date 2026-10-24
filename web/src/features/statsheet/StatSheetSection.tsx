@@ -13,7 +13,7 @@ export function SourcePanel({ row, groups }: { row: StatRow; groups: StatSheet["
   const note = armoryNote(row);
   return (
     <div role="region" aria-label={`Sources of ${row.name}`} data-testid={`stat-sources-${row.key}`} className="frame mb-1 mt-1 space-y-2 p-2.5 text-xs">
-      {blocks.length === 0 && <p className="text-dim">No source adds to this stat.</p>}
+      {blocks.length === 0 && <p className="text-dim">{row.armory_unavailable ? "Known sources do not establish this total." : "No source adds to this stat."}</p>}
       {blocks.map((b) => (
         <div key={b.group}>
           <p className="flex justify-between gap-3 font-semibold text-gold">
@@ -71,6 +71,7 @@ function Row({ row, groups, shown, onPin, onHover }: { row: StatRow; groups: Sta
       >
         <span className="flex min-w-0 items-center gap-1.5">
           <span className="truncate">{row.name}</span>
+          {row.armory_unavailable && <Badge tone="warn">armory unavailable</Badge>}
           {flagged && (
             <Badge tone="warn" title={armoryNote(row) ?? ""}>
               <TriangleAlert className="mr-1 size-3" aria-hidden />
@@ -85,7 +86,7 @@ function Row({ row, groups, shown, onPin, onHover }: { row: StatRow; groups: Sta
         </span>
         <span className="shrink-0 tabular-nums">
           {est && <span className="mr-1 text-[11px] text-warn" aria-label="includes estimated sources">~</span>}
-          <span className={row.value === 0 ? "text-faint" : "text-text"}>{fmtStat(row.value, row.unit)}</span>
+          <span className={row.value === 0 ? "text-faint" : "text-text"}>{row.armory_unavailable && row.sources.length === 0 ? "Unavailable" : fmtStat(row.value, row.unit)}</span>
         </span>
       </button>
       {shown && <SourcePanel row={row} groups={groups} />}
@@ -139,12 +140,12 @@ export function ArmoryCheck({ sheet }: { sheet: StatSheet }) {
   const s = sheet.armory_check.summary;
   return (
     <p className="mb-3 flex flex-wrap items-center gap-2 text-xs text-dim" data-testid="stat-armory-check">
-      <Badge tone={s.derived === s.derived_ok ? "ok" : "warn"}>
+      {s.derived === 0 ? <span>Armory attribute-effect data unavailable.</span> : <Badge tone={s.derived === s.derived_ok ? "ok" : "warn"}>
         Armory lines reproduced: {s.derived_ok}/{s.derived}
-      </Badge>
-      <Badge tone={s.attributes_nonzero_ok === s.attributes_nonzero ? "ok" : "warn"}>
+      </Badge>}
+      {s.attributes === 0 ? <span>Armory attribute totals unavailable.</span> : <Badge tone={s.attributes_nonzero_ok === s.attributes_nonzero ? "ok" : "warn"}>
         Attribute totals matched from public sources: {s.attributes_nonzero_ok}/{s.attributes_nonzero}
-      </Badge>
+      </Badge>}
       <span>The armory only prints attributes and deity points; every other value is built from gear, Daevanion, wings and titles.</span>
     </p>
   );
@@ -199,6 +200,9 @@ export function StatSheetSection({ raw, ready = true }: Props) {
       {data && (
         <div className={busy ? "opacity-60 transition-opacity" : "transition-opacity"} aria-busy={busy}>
           <ArmoryCheck sheet={data} />
+          {data.unparsed.length > 0 && <p className="mb-3 text-xs text-warn" role="status">
+            {data.unparsed.length} armory {data.unparsed.length === 1 ? "effect" : "effects"} could not be interpreted and {data.unparsed.length === 1 ? "is" : "are"} not included.
+          </p>}
           <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-2 md:grid-cols-[repeat(2,minmax(0,1fr))]">
             {cats.map((c) => (
               <Category
@@ -224,6 +228,7 @@ export function StatSheetSection({ raw, ready = true }: Props) {
               {data.notes.map((n) => (
                 <li key={n}>{n}</li>
               ))}
+              {data.unparsed.map((line, i) => <li key={`unparsed-${i}`}>Not included: {line}</li>)}
             </ul>
           </details>
         </div>

@@ -91,3 +91,25 @@ def test_engine_fingerprint_follows_engine_code(tmp_path, monkeypatch):
     contract = pkg / "data" / "client_quick_use.json"
     contract.write_text(contract.read_text(encoding="utf-8") + "\n", encoding="utf-8")
     assert be.engine_fingerprint() != code_changed
+
+
+def test_engine_fingerprint_changes_when_class_numbers_change_without_a_version_bump(tmp_path, monkeypatch):
+    """A date label cannot keep browser results valid after the underlying skill numbers change."""
+    import json
+
+    be = _bundle()
+    pkg = tmp_path / "app" / "aion2c"
+    class_dir = pkg / "data" / "classes" / "sorcerer"
+    class_dir.mkdir(parents=True)
+    data = {"data_version": "same-date", "skills": {"flame": {"atk_ratio_pct": 100}}}
+    source = class_dir / "gamedata.json"
+    source.write_text(json.dumps(data), encoding="utf-8")
+    monkeypatch.setattr(be, "PKG", pkg)
+    monkeypatch.setattr(be, "MODULES", ())
+    monkeypatch.setattr(be, "PY_DATA", ())
+
+    before = be.engine_fingerprint()
+    data["skills"]["flame"]["atk_ratio_pct"] = 200
+    source.write_text(json.dumps(data), encoding="utf-8")
+
+    assert be.engine_fingerprint() != before

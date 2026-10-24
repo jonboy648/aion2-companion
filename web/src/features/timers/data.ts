@@ -17,7 +17,7 @@ export interface RegionInfo {
   schedule: ScheduleKey;
 }
 
-/** KR and TW run the same "nc" schedule on their own clocks. */
+/** KR/TW currently share the community "nc" schedule; this is not proof of regional client parity. */
 export const REGIONS: Record<RegionKey, RegionInfo> = {
   global: { label: "Global", tz: "UTC", schedule: "global" },
   kr: { label: "KR", tz: "Asia/Seoul", schedule: "nc" },

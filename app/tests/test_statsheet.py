@@ -118,6 +118,65 @@ def test_every_armory_text_line_is_understood(sheet):
     assert sh["unparsed"] == [], name
 
 
+@pytest.mark.parametrize("value", [None, "", True, float("nan"), float("inf"), -1])
+def test_unavailable_attribute_total_does_not_erase_known_gear(value):
+    raw = raw_with(stats=[("STR", value)], equipment=[
+        {"id": 110540035, "enchantLevel": 0, "exceedLevel": 0, "slotPosName": "MainHand"},
+    ])
+    sh = webapi.stat_sheet(raw)
+    assert rows(sh)["STR"]["value"] == 14
+    assert sh["armory_check"]["summary"]["attributes"] == 0
+    assert any("STR" in note and "unavailable" in note for note in sh["notes"])
+
+
+def test_explicit_zero_attribute_is_not_treated_as_unavailable():
+    sh = webapi.stat_sheet(raw_with(stats=[("STR", 0)]))
+    assert sh["armory_check"]["summary"]["attributes"] == 1
+    assert rows(sh)["STR"]["armory"]["value"] == 0
+
+
+def test_omitted_attribute_is_unavailable_not_an_observed_zero():
+    raw = _darth()
+    raw["info"]["stat"]["statList"] = [r for r in raw["info"]["stat"]["statList"] if r["type"] != "Justice"]
+    sh = webapi.stat_sheet(raw)
+    assert rows(sh)["Justice"].get("armory_unavailable") is True
+    assert any("Justice" in note and "unavailable" in note for note in sh["notes"])
+
+
+def test_unknown_attribute_effect_is_excluded_and_comparison_is_incomplete():
+    raw = _darth()
+    raw["info"]["stat"]["statList"][0]["statSecondList"].append("Future effect +25%")
+    sh = webapi.stat_sheet(raw)
+    assert any("Future effect +25%" in line for line in sh["unparsed"])
+    assert sh["armory_check"]["summary"]["derived"] == 25
+    assert sh["armory_check"]["summary"]["derived_ok"] == 24
+
+
+def test_effect_evidence_is_not_hidden_when_its_attribute_total_is_unavailable():
+    raw = _darth()
+    might = raw["info"]["stat"]["statList"][0]
+    might["value"] = None
+    might["statSecondList"].append("Future effect +25%")
+    sh = webapi.stat_sheet(raw)
+    assert any("Future effect +25%" in line for line in sh["unparsed"])
+    assert sh["armory_check"]["summary"]["derived"] == 25
+    assert sh["armory_check"]["summary"]["derived_ok"] == 23
+
+
+def test_unknown_wings_are_identified_as_an_excluded_source():
+    raw = raw_with(wing={"id": 99999999, "name": "Future Wings", "enchantLevel": 10})
+    sh = webapi.stat_sheet(raw)
+    assert any("Future Wings" in note and "unavailable" in note for note in sh["notes"])
+    assert not any(s["group"] == "wings" for r in rows(sh).values() for s in r["sources"])
+
+
+def test_partial_stat_sheet_discloses_unavailable_open_board_effects():
+    raw = _darth()
+    del raw["daevanion"]["61"]["openStatEffectList"]
+    sh = webapi.stat_sheet(raw)
+    assert any("Nezekan" in note and "unavailable" in note for note in sh["notes"])
+
+
 def test_parse_line():
     p = statsheet.parse_line
     assert p("Attack Bonus +18") == ("FixingDamage", 18)

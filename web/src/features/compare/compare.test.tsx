@@ -127,7 +127,8 @@ describe("Compare page (mock engine)", () => {
 
   it("loads both slots from the URL, estimates DPS and copies a build into the active-build store", async () => {
     const a = tripletParam({ region: "nae", serverId: "2103", name: "DarthThot" });
-    const b = tripletParam({ region: "eu", serverId: "1001", name: "DarthThot" });
+    // Both slots deliberately use the known sample, not an invented EU identity.
+    const b = tripletParam({ region: "nae", serverId: "2103", name: "DarthThot" });
     render(
       <MemoryRouter initialEntries={[`/compare/${a}/${b}`]}>
         <Routes>

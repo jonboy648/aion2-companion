@@ -19,6 +19,7 @@ export const ARMORY_REGIONS: { code: ArmoryRegion; name: string }[] = [
 export const PROXY_URL: string = (import.meta.env.VITE_ARMORY_PROXY_URL ?? "").replace(/\/+$/, "");
 
 export class ArmoryError extends Error {}
+const MISSING_PROXY = "Armory proxy is not configured. Set the public VITE_ARMORY_PROXY_URL in web/.env.local and restart Vite (or rebuild the preview).";
 
 const delay = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -30,7 +31,7 @@ async function getJson(path: string, params: Record<string, string | number>): P
   try {
     res = await fetch(`${PROXY_URL}${path}?${qs}`, { headers: { Accept: "application/json" } });
   } catch {
-    throw new ArmoryError("Could not reach the armory proxy. Check your connection and try again.");
+    throw new ArmoryError(`Could not reach the armory proxy: network failure or blocked by CORS. Check your connection. For a local preview, include ${window.location.origin} in the Worker's ALLOWED_ORIGINS and use the configured public proxy endpoint.`);
   }
   if (res.status === 429) throw new ArmoryError("Too many requests. Wait a minute and try again.");
   if (!res.ok) throw new ArmoryError(`The armory answered ${res.status}. It may be down; try again later.`);
@@ -50,7 +51,7 @@ export async function search(name: string, region?: ArmoryRegion): Promise<Armor
     // fixture rows are already in the post-processed shape (tags stripped, id decoded)
     return structuredClone(searchFx.list) as unknown as ArmorySearchHit[];
   }
-  if (!PROXY_URL) throw new ArmoryError("Armory proxy is not configured (VITE_ARMORY_PROXY_URL).");
+  if (!PROXY_URL) throw new ArmoryError(MISSING_PROXY);
   const regions = region ? [region] : ARMORY_REGIONS.map((r) => r.code);
   const settled = await Promise.allSettled(regions.map((r) => getJson("/search", { keyword: name, region: r, page: 1, size: 100 })));
   const out: ArmorySearchHit[] = [];
@@ -90,11 +91,14 @@ export async function fetchCharacter(characterId: string, serverId: number | str
     await delay(400);
     return structuredClone(rawFx) as unknown as ArmoryRaw;
   }
-  if (!PROXY_URL) throw new ArmoryError("Armory proxy is not configured (VITE_ARMORY_PROXY_URL).");
+  if (!PROXY_URL) throw new ArmoryError(MISSING_PROXY);
   const common = { characterId, serverId, region, ...(fresh ? { fresh: 1 } : {}) };
   const info = await getJson("/info", common);
   if (!info || typeof info !== "object" || !info.profile) {
     throw new ArmoryError("The armory has no profile for that character (wrong region or server?).");
+  }
+  if (!Array.isArray(info.daevanion?.boardList)) {
+    throw new ArmoryError("Daevanion board summary unavailable. Refresh before calculating; missing boards cannot be treated as zero opened nodes.");
   }
   // equipment and every Daevanion board are independent: ask for them all at once (the armory handles the burst, and the
   // old 400 ms pauses between requests added about three seconds to every character load)
@@ -104,8 +108,19 @@ export async function fetchCharacter(characterId: string, serverId: number | str
     ...boardIds.map((id) => getJson("/daevanion", { ...common, boardId: id })),
   ]);
   const equipment = equipmentRaw ?? {};
+  if (!Array.isArray(equipment.equipment?.equipmentList) || !Array.isArray(equipment.skill?.skillList)) {
+    throw new ArmoryError("Equipment or skill data unavailable. Refresh before calculating; missing data cannot be treated as empty ownership.");
+  }
   const daevanion: Record<string, Record<string, unknown>> = {};
   boardIds.forEach((id, i) => {
+    const expected = info.daevanion.boardList.find((b: { id: string | number }) => String(b.id) === String(id)).openNodeCount;
+    const nodes = boards[i]?.nodeList;
+    if (!Array.isArray(nodes) || nodes.filter((n) => n?.open === 1 || n?.open === true).length !== expected) {
+      throw new ArmoryError(`Daevanion board ${id} is incomplete or changed while loading. Refresh the character before calculating a build.`);
+    }
+    if (!Array.isArray(boards[i]?.openStatEffectList)) {
+      throw new ArmoryError(`Daevanion board ${id} effects unavailable. Refresh before calculating stats.`);
+    }
     daevanion[String(id)] = boards[i];
   });
   return { info, equipment, daevanion };

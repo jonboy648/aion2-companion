@@ -105,9 +105,12 @@ def gamedata(class_key: str) -> dict:
 
 def import_character(raw: dict, base_build: dict | None = None) -> dict:
     """raw = {"info", "equipment", "daevanion": {boardId: detail}} as fetched by the browser.
-    The class comes from the armory profile (falls back to base_build's, then Sorcerer)."""
+    The class must be recognised from the armory profile; never calculate a different class as a fallback."""
+    armory.require_complete(raw)
     base = _build(base_build) if base_build else CharacterBuild("Me", "global", 10, stats=Stats())
-    ckey = armory.class_key(raw) or base.class_key or DEFAULT_CLASS
+    ckey = armory.class_key(raw)
+    if ckey is None:
+        raise ValueError("This character's class is not supported by the shipped data; no build was calculated.")
     gd = _gd(ckey)
     base = replace(base, class_key=ckey)
     build, notes = armory.to_build(gd, raw, base)

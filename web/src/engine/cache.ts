@@ -26,8 +26,8 @@ export function hash53(str: string, seed = 0): string {
   return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
 }
 
-/** What a cached result depends on: the class data AND the engine code (manifest `engine_version`, a content hash of
- *  the bundled python). Manifests from before engine_version existed key on data_version alone. */
+/** Cache identity includes source contents (engine_version hashes code, class payloads, shared tables and items).
+ *  Legacy manifests without engine_version fall back to their date-based data_version. */
 export function cacheVersion(m: { data_version: string; engine_version?: string }): string {
   return m.engine_version ? `${m.data_version}+${m.engine_version}` : m.data_version;
 }

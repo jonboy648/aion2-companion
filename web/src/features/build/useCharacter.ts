@@ -23,11 +23,11 @@ export interface CharacterState {
 
 const INITIAL: CharacterState = { phase: "lookup", message: "Looking up character...", steps: [], hit: null, imp: null, extras: null, raw: null, cmp: null, error: null };
 
-/** Pick the hit for this server (exact name match preferred), else the first hit. */
-export function pickHit(hits: ArmorySearchHit[], name: string, serverId: string): ArmorySearchHit | null {
+/** A character URL identifies one name and server; never silently substitute a search suggestion. */
+export function pickHit(hits: ArmorySearchHit[], name: string, serverId: string, region?: string): ArmorySearchHit | null {
   const sid = String(serverId);
-  const exact = hits.find((h) => h.name.toLowerCase() === name.toLowerCase() && String(h.serverId) === sid);
-  return exact ?? hits.find((h) => h.name.toLowerCase() === name.toLowerCase()) ?? hits[0] ?? null;
+  const exact = hits.find((h) => h.name.toLowerCase() === name.toLowerCase() && String(h.serverId) === sid && (!region || h.region === region));
+  return exact ?? null;
 }
 
 /**
@@ -52,11 +52,18 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
     (async () => {
       try {
         const hits = await search(name, region as ArmoryRegion);
-        const hit = pickHit(hits, name, serverId);
-        if (!hit) throw new ArmoryError(`No character named "${name}" was found in that region.`);
+        if (!live) return;
+        const hit = pickHit(hits, name, serverId, region);
+        if (!hit) throw new ArmoryError(`No character named "${name}" was found on server ${serverId} in ${region}.`);
         patch({ hit });
         step("Fetching gear and Daevanion from the armory...");
         const raw = await fetchCharacter(hit.characterId, hit.serverId ?? serverId, region as ArmoryRegion, reloads > 0);
+        if (!live) return;
+        const profile = raw.info.profile as { characterName?: unknown; serverId?: unknown } | undefined;
+        if (typeof profile?.characterName !== "string" || profile.characterName.toLowerCase() !== name.toLowerCase()
+          || String(profile.serverId) !== String(serverId)) {
+          throw new ArmoryError("The armory profile does not match the requested name and server. Refresh or return to search; no build was calculated.");
+        }
         patch({ phase: "import", extras: armoryExtras(raw), raw });
         step("Reading the build...");
         const imp = await importCharacter(raw);
