@@ -40,9 +40,10 @@ describe("CharacterPage", () => {
         </Routes>
       </MemoryRouter>,
     );
-    await waitFor(() => expect(screen.getAllByText(/Boss DPS plan/).length).toBe(1), { timeout: 5000 });
+    // Poll without formatting the large character DOM on every loading update.
+    await waitFor(() => expect(screen.queryAllByText(/Boss DPS plan/)).toHaveLength(1), { timeout: 5000 });
     act(() => go("/c/nae/1101/Luna"));
-    await waitFor(() => expect(screen.getAllByText(/Boss DPS plan/).length).toBe(1), { timeout: 5000 });
+    await waitFor(() => expect(screen.queryAllByText(/Boss DPS plan/)).toHaveLength(1), { timeout: 5000 });
     expect(screen.getAllByText(/Boss DPS plan/).length).toBe(1);
     expect(screen.getByRole("heading", { level: 2, name: "Luna" })).toBeVisible();
     expect(screen.queryByRole("heading", { name: "DarthThot" })).not.toBeInTheDocument();

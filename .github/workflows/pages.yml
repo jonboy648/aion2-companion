@@ -52,7 +52,7 @@ jobs:
 
       - name: Web tests (vitest)
         working-directory: web
-        run: npx vitest run
+        run: npx vitest run --maxWorkers=2
 
       - name: Install interactive map dependencies
         working-directory: map-app

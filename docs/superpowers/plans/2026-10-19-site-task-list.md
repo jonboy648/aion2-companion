@@ -1,10 +1,12 @@
 # Become Cube task list
 
-Updated: 2026-10-21. Last verified live release: `faf15ce` (PR 41).
+Updated: 2026-10-24. Release preceding the audit changes: `faf15ce` (PR 41).
 Prototype branch: `codex/character-workflow-prototype`; not a production release.
-Approved audits #27/#28 are isolated on `codex/source-import-audits`. Deployment
-is held by a fresh Chanter optimizer timing failure, not by missing approval.
-See `../../data/2026-10-21-audit-release.md`; do not report this branch as live.
+Approved audits #27/#28 are isolated on `codex/source-import-audits`. Jon approved
+deployment on Oct 24 with the reproduced existing-main Chanter timing issue
+tracked separately. See `../../data/2026-10-21-audit-release.md` and
+https://github.com/jonboy648/aion2-companion/pull/42 for actual deployment status;
+approval or merging alone is not proof of a live release.
 
 ## Now: make the character recommendation understandable
 
@@ -42,7 +44,7 @@ The local preview is illustrative; it must not manufacture calculated gains.
   ID/unit witnesses, regional caveats, and privacy/size regression gates.
 - [x] #28: Verify armory import through grouped gear, effective ranks and the
   stat sheet, including missing-data and failed-import cases (implemented and
-  verified locally, approved; not deployed). See
+  verified and approved; release status recorded above). See
   `../../data/2026-10-20-character-import-audit.md`: 1,060 Python tests and 767
   web tests passed; build passed; real proxy/Pyodide desktop/mobile checks and
   exact 206/206 current-node coverage observed. Hidden sources remain estimates.

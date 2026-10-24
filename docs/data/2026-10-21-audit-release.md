@@ -34,7 +34,7 @@ are in this release. The held server-status PR 18 is also excluded.
   exit 0. This is the exact six-file Python command in the Pages workflow,
   not a substitute claim that the complete Python suite passed.
 
-## Deployment hold
+## Initial deployment hold (Oct 21)
 
 The fresh complete Python run is **not green**. Its serial rerun stopped after
 110 passed / 1 skipped at
@@ -50,7 +50,51 @@ reduced, game formula changed, or unrelated process stopped to obtain a pass.
 The Oct 20 complete run of 1,060 passing tests remains dated historical evidence,
 not a fresh passing result for this preflight.
 
-Keep this release out of main until the performance failure is investigated and
-the full release checks pass. A pushed branch/draft PR is not a deployment.
+The initial decision was to keep this release out of main until the performance
+failure was investigated and the release checks passed. A pushed branch/draft PR
+was not a deployment.
 The character-workspace implementation and macro runtime validation remain
 separate unfinished work.
+
+## Release decision (Oct 24)
+
+An untouched snapshot of `origin/main` `faf15ce` subsequently reproduced the same
+Chanter boss test failure: 49.85 seconds against the existing 30-second limit.
+This establishes that the timing failure also exists before these audit changes;
+it does not establish its underlying performance cause or make that test green.
+
+On Oct 24 Jon explicitly chose to deploy the approved audit-only fixes while
+tracking the existing Chanter slowdown separately. This is an accepted release
+exception for that known performance assertion, not an assertion that the full
+Python suite passes. No threshold, search budget, game formula, or test assertion
+is relaxed. The web CI command uses the same two-worker scheduling as local
+verification; it still runs the complete web suite.
+
+Release checks are rerun before merging; GitHub Pages must pass its expanded
+Python, data audit, web, map and production-build gates. Publication is confirmed
+only by a successful Pages deployment and live checks, not by merging alone.
+See [PR 42](https://github.com/jonboy648/aion2-companion/pull/42) for the actual
+merge/deployment state. The unfinished layout and proposed Damage/Stagger combo
+objectives remain outside this release.
+
+## Oct 24 pre-merge checks
+
+- Expanded Pages Python command: 115 passed / 1 skipped, 110.46 seconds.
+- Complete web suite with two workers: 82 files / 767 tests passed,
+  79.37 seconds. The first run hit the character-switching wait limit;
+  polling now uses `queryAllByText(...).toHaveLength(1)` instead of repeatedly
+  formatting the large DOM through a throwing `getAllByText` query. The exact
+  one-result check, five-second wait, identity assertions and duplicate-key guard
+  remain. No production component or timeout changed for this correction.
+- Production build with the real engine/public proxy: strict TypeScript, Vite
+  and 9,318 prerender files passed; CSS 142.23 kB, main JS 788.71 kB. Existing
+  large-chunk/dynamic-import warnings remain.
+- Source audit: 8 classes, 43 artifacts, 5 witnesses, zero errors. Map packaging
+  regression checks: 7 passed.
+- Full map TypeScript/build/package step passed; the combined site artifact is
+  483.1 MB, including the map's corresponding source, below the 900 MB safety cap.
+- The expected Linux engine fingerprint from the committed Git blobs is
+  `2f572d03c879`; Windows working-copy line endings yield `0a9482e9c2c6`.
+  These are byte-content cache identities, not different game patches.
+- The accepted existing Chanter speed issue is tracked independently as
+  [issue 43](https://github.com/jonboy648/aion2-companion/issues/43).
