@@ -66,7 +66,7 @@
    "icon": "https://assets.playnccdn.com/static-aion2-gamedata/resources/Icon_Weapon_Guarder_R_011.png",
    "source": "Looted from monsters",
    "reachable": true,
-   "gain_pct": 18.033244674826165
+   "gain_pct": 21.761679145571122
   },
   {
    "slot": "helmet",
@@ -610,42 +610,52 @@
    {
     "skill": "Firestorm",
     "text": "-2s [Hellfire] cooldown per fireball",
-    "dps_gain_pct": 14.778698151885905
+    "dps_gain_pct": 16.022667283386728
    },
    {
     "skill": "Bittercold Wind",
     "text": "+1s [Bittercold Wind] summon duration",
-    "dps_gain_pct": 10.159207798967685
+    "dps_gain_pct": 9.332262419591508
    },
    {
     "skill": "Firestorm",
     "text": "-50% MP Cost",
-    "dps_gain_pct": 3.241388414717461
+    "dps_gain_pct": 9.060079355687801
    },
    {
-    "skill": "Flame Arrow",
-    "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
-    "dps_gain_pct": 2.134546030172979
+    "skill": "Hellfire",
+    "text": "+30% Skill Speed",
+    "dps_gain_pct": 2.5108734500488117
    },
    {
     "skill": "Wish of Concentration",
     "text": "+10% additional Attack",
-    "dps_gain_pct": 1.8576889259885876
+    "dps_gain_pct": 2.23678527907587
    },
    {
     "skill": "Winter's Shackles",
     "text": "+20% PvE Damage Boost and +10% PvP Damage Boost for 5s on landing [Winter's Shackles]",
-    "dps_gain_pct": 1.5573850784976973
+    "dps_gain_pct": 2.158068979101757
+   },
+   {
+    "skill": "Flame Arrow",
+    "text": "+5% Fire Damage Boost for 10s on activating [Pyroclasm]",
+    "dps_gain_pct": 2.13828288997866
+   },
+   {
+    "skill": "Wish of Concentration",
+    "text": "+10% Combat Speed",
+    "dps_gain_pct": 1.8052245889158103
    },
    {
     "skill": "Blaze",
     "text": "+50% MP restored",
-    "dps_gain_pct": 0.5262622801314398
+    "dps_gain_pct": 0.3811636676538832
    },
    {
     "skill": "Flame Arrow",
     "text": "+20% MP restored",
-    "dps_gain_pct": 0.06262719657514904
+    "dps_gain_pct": 0.35570701437470653
    }
   ],
   "daevanion_nodes": 380,
@@ -712,13 +722,13 @@
    }
   ]
  },
- "dps": 38411.66515679538,
+ "dps": 39192.93967856031,
  "dps_without_gear": 4131.320508495039,
  "gear_gain_pct": 451.4954881133106,
  "current_dps": 7751.962174376853,
- "gain_vs_current_pct": 292.4257451311741,
+ "gain_vs_current_pct": 279.3052538874225,
  "with_current_gear": {
-  "dps": 11057.3261317511,
+  "dps": 11028.079090674159,
   "stigmas": [
    {
     "key": "fire-wall",
@@ -729,12 +739,12 @@
     "name": "Element Enhancement"
    },
    {
-    "key": "glacial-smite",
-    "name": "Glacial Smite"
+    "key": "cold-storm",
+    "name": "Cold Storm"
    },
    {
-    "key": "curse-tree",
-    "name": "Curse: Tree"
+    "key": "glacial-smite",
+    "name": "Glacial Smite"
    }
   ],
   "daevanion_nodes": 84

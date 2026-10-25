@@ -35,6 +35,8 @@ from aion2c.data import build_gamedata as bg
 ENV_VAR = "AION2_EXPORT_DIR"
 OUT_PATH = bg.SRC_DIR / "client_skill_numbers.json"
 SOURCE = "client export 2026-10-04"
+# Reviewed release-effect joins only; absence is unknown, never a scalar maximum or zero.
+CHARGE_GAUGE_SKILLS = frozenset({("sorcerer", "hellfire")})
 # our class key -> client class prefix / L10N class token
 CLIENT_CLASS = {
     "sorcerer": "Sorcerer", "gladiator": "Gladiator", "cleric": "Cleric", "chanter": "Chanter",
@@ -47,7 +49,7 @@ DOT_GROUP_OVERRIDES = {("sorcerer", "cold-storm"): "Sorcerer_Skill012_LvUp_AB01"
 
 # ---- explicit mappings (phase 2) ---------------------------------------------------------------------------------------
 # Skills the automatic rules cannot place, keyed by OUR (class, skill key). The client's numbers replace ours at every rank
-# the client group has: client build 5.3.2.0 is newer than our 2026-09-18 source, so where the flats differ the client wins
+# the client group has: the historical export's patch is unknown; where the flats differ its derived numbers win
 # (Assassin and Templar flats are 1.07-1.5x ours). Ranks the group lacks (our rank 1) keep our values.
 # Client group of the skill's damage effect (`SkillEffectLv`, 28-value rows):
 GROUP_OVERRIDES = {
@@ -134,7 +136,8 @@ def _rows(table_dir: Path, name: str) -> list[dict]:
 
 class Tables:
     """The few client tables this script reads, regrouped. `eff[group][level] -> EffectValueList` (damage-shaped
-    groups only), `abn[group][level] -> Values` (all), `charge[skill_id] -> (min_ms, [tier_ms])`."""
+    groups only), `abn[group][level] -> Values` (all), `charge[charge_id] -> (min_ms, [tier_ms])`.
+    Skill charge/effect references and specialty parent/rank joins remain in memory only."""
 
     def __init__(self, table_dir: Path):
         self.eff: dict[str, dict[int, list[str]]] = defaultdict(dict)
@@ -153,12 +156,29 @@ class Tables:
         rows = set(EFFECT_ROW_OVERRIDES.values()) | {r for _, r in SPIRIT_FOLLOWUPS.values()}
         self.effect_row: dict[int, list[str]] = {}
         self.base_hits: dict[str, int] = {}
+        self.gauge_groups: dict[int, list[float | None]] = defaultdict(list)
         for r in _rows(table_dir, "SkillEffect"):
             if r["ID"]["Value"] in rows:
                 self.effect_row[r["ID"]["Value"]] = r["EffectValueList"]
             g = r["SkillEffectLvGroupId"]
             if r["EffectType"] == "ESkillEffectType::Damage" and g != "None" and _f(r["EffectValueList"][4]) is not None:
                 self.base_hits[g] = max(self.base_hits.get(g, 0), int(float(r["EffectValueList"][4])))
+            if r["EffectType"] == "ESkillEffectType::GroggyGuardDecreaseEnergy":
+                values = r.get("EffectValueList") or []
+                value = _f(values[0]) if values and not r.get("SkillEffectConditionList") else None
+                self.gauge_groups[r["SkillEffectGroupId"]["Value"]].append(value)
+        self.skill = {r["ID"]["Value"]: {
+            "charge": r.get("ChargeId", {}).get("Value", 0),
+            "groups": [x["SkillEffectGroupId"]["Value"] for x in r.get("SkillEffectTimeDataList") or []
+                       if x["SkillEffectGroupId"]["Value"]]}
+            for r in _rows(table_dir, "Skill")}
+        self.parts: dict[int, dict[int, tuple[int, int]]] = defaultdict(dict)
+        for r in _rows(table_dir, "SpecializedSkillParts"):
+            parent, variant = r["ParentSkillId"]["Value"], r["ID"]["Value"]
+            # Parts 10/20/... correspond to our zero-based options; do not reindex if a part is absent.
+            delta = variant - parent
+            if delta > 0 and delta % 10 == 0:
+                self.parts[parent][delta // 10 - 1] = (variant, r["ParentSkillLv"])
         rows = set(DOT_ROW_SKILLS.values())
         self.abn_row = {r["ID"]["Value"]: r["Values"] for r in _rows(table_dir, "SkillAbnormalEffect")
                         if r["ID"]["Value"] in rows}
@@ -166,9 +186,11 @@ class Tables:
         for r in _rows(table_dir, "SkillAbnormalEffectLv"):
             self.abn[r["AbnormalEffectLevelGroupId"]][r["AbnormalEffectLevel"]] = r["Values"]
         self.charge: dict[int, tuple[int, list[int]]] = {}
+        self.charge_releases: dict[int, list[int]] = {}
         for r in _rows(table_dir, "SkillCharge"):
             self.charge[r["ID"]["Value"]] = (
                 r["ChargeMinTime"], [x["ChargeTime"] for x in r["SkillChargeDataList"]])
+            self.charge_releases[r["ID"]["Value"]] = [x["ChargeSkillId"]["Value"] for x in r["SkillChargeDataList"]]
         self.hud_ids = {i for r in _rows(table_dir, "SkillList") for i in r["SkillIdList"]}
         l10n = table_dir / "L10N" / "en-US" / "L10NString.json"
         entries = json.loads(l10n.read_text(encoding="utf-8"))["Entries"] if l10n.is_file() else {}
@@ -238,12 +260,13 @@ def _group_numbers(group: dict[int, list[str]], hits: int | None = None) -> dict
 def _charge(t: Tables, cp: str, sid: int, group: str) -> dict | None:
     """Charge timing (SkillCharge) and per-tier damage groups (`<base>`, `<base>_0`, `_1`, ... or Ranger-style
     `Charge01..` siblings) for a base skill that has a SkillCharge row."""
-    row = t.charge.get(sid)
+    row = t.charge.get(t.skill.get(sid, {}).get("charge"))
     if row is None:
         return None
     min_ms, tier_ms = row
     out: dict = {"min_ms": min_ms, "tier_ms": tier_ms}
-    fast = sorted({tuple(v[1]) for k, v in t.charge.items() if k // 10000 == sid // 10000 and k != sid and v[1]
+    fast = sorted({tuple(v[1]) for variant, _ in t.parts.get(sid, {}).values()
+                   if (v := t.charge.get(t.skill.get(variant, {}).get("charge")))
                    and v[1] != tier_ms and len(v[1]) == len(tier_ms)})
     if fast:
         out["alt_tier_ms"] = [list(f) for f in fast]
@@ -256,6 +279,36 @@ def _charge(t: Tables, cp: str, sid: int, group: str) -> dict | None:
         out["tiers"] = [{k: v for k, v in _group_numbers(t.eff[g], t.base_hits.get(g)).items() if k in ("ratio_pct", "hits", "flat_min")}
                         for g in names]
     return out
+
+
+def _charge_metadata(t: Tables, ck: str, skill: dict, charge: dict) -> None:
+    """Attach allowlisted gauge and a speed option joined to its actual variant's ChargeId."""
+    sid = skill["skill_id"]
+    base = t.skill[sid]
+    if (ck, skill["key"]) in CHARGE_GAUGE_SKILLS:
+        releases = [sid] + t.charge_releases[base["charge"]]
+        gauges = []
+        for release in releases:
+            values = [v for g in t.skill.get(release, {}).get("groups", []) for v in t.gauge_groups.get(g, [])]
+            gauges.append(values[0] if len(values) == 1 else None)
+        charge["stagger_gauge"] = gauges
+    candidates = []
+    normal = [charge["min_ms"]] + charge["tier_ms"]
+    for option, spec in enumerate(skill["specializations"]):
+        if not re.search(r"\bSkill Speed\b", spec.get("text", ""), re.I):
+            continue
+        part = t.parts.get(sid, {}).get(option)
+        if part is None or part[1] != spec.get("unlock_level"):
+            continue
+        row = t.charge.get(t.skill.get(part[0], {}).get("charge"))
+        if row is None:
+            continue
+        thresholds = [row[0]] + row[1]
+        if len(thresholds) != len(normal) or not all(0 < f < n for f, n in zip(thresholds, normal)):
+            continue
+        candidates.append({"min_ms": row[0], "tier_ms": row[1], "option": option, "unlock_rank": part[1]})
+    if len(candidates) == 1:
+        charge["fast"] = candidates[0]
 
 
 def _dot_shape(rows: dict[int, list[str]]) -> bool:
@@ -340,6 +393,7 @@ def class_skills(ck: str, research_dir: Path, icons_dir: Path) -> list[dict]:
             "key": k, "skill_id": r.get("skill_id"), "name": r["name"],
             "flats": [float(p["dmg_min"] or 0) for p in per],
             "ratio": float((r.get("coefficients") or {}).get("atk_ratio_pct_rank1") or 0.0),
+            "specializations": r.get("specializations") or [],
         })
     return out
 
@@ -378,6 +432,8 @@ def extract_class(t: Tables, ck: str, research_dir: Path, icons_dir: Path) -> di
                         entry["hits"] = max(x["hits"] for x in ch["tiers"])
                 if not entry["ratio_constant"]:
                     mismatch.append(s["key"])
+        if "charge" in entry:
+            _charge_metadata(t, ck, s, entry["charge"])
         dots = _dots(t, cp, sid, ck, s["key"]) if sid else {}
         if dots:
             entry["dots"] = dots
@@ -613,6 +669,30 @@ def check_class(gd, entries: dict, unmatched: dict) -> dict:
         if sk.hits != e["hits"]:
             problems.append(f"{key}: hits {sk.hits} != client {e['hits']}")
         tiers = (e.get("charge") or {}).get("tiers")
+        charge = e.get("charge")
+        rule = gd.rules.get(key)
+        if charge and "stagger_gauge" in charge and (not rule or not rule.charge_levels):
+            problems.append(f"{key}: charge releases missing from gamedata")
+        if charge and rule and rule.charge_levels:
+            normal = [charge["min_ms"]] + charge["tier_ms"]
+            # Do not claim an unreviewed mapping from four source releases to three authored damage tiers.
+            if len(rule.charge_levels) == len(normal):
+                gauges = charge.get("stagger_gauge", [None] * len(normal))
+                fast = charge.get("fast")
+                alternate = [fast["min_ms"]] + fast["tier_ms"] if fast else None
+                want_spec = (key, fast["option"]) if fast else None
+                if rule.fast_charge_spec != want_spec:
+                    problems.append(f"{key}: charge speed specialty {rule.fast_charge_spec} != client {want_spec}")
+                for i, level in enumerate(rule.charge_levels):
+                    if level.charge_s.value != normal[i] / 1000:
+                        problems.append(f"{key}: charge tier {i + 1} normal timing differs from client")
+                    if level.stagger_gauge != gauges[i]:
+                        problems.append(f"{key}: charge tier {i + 1} gauge differs from client")
+                    got_fast = level.fast_charge_s.value if level.fast_charge_s else None
+                    if got_fast != (alternate[i] / 1000 if alternate else None):
+                        problems.append(f"{key}: charge tier {i + 1} alternate timing differs from client")
+            elif "stagger_gauge" in charge:
+                problems.append(f"{key}: charge release count differs from client")
         for r in sk.ranks:
             i = r.rank - e["from_rank"]
             if not 0 <= i < len(e["flat_min"]):

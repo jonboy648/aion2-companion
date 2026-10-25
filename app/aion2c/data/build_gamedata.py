@@ -455,6 +455,48 @@ def apply_rank_scales(gd: GameData, mech: dict) -> GameData:
     return replace(gd, statuses=statuses)
 
 
+def apply_client_charge_metadata(gd: GameData, numbers: dict | None) -> GameData:
+    """Apply reviewed release metadata after rule finalization, without guessing missing tiers.
+
+    Some older rules have three approximate damage tiers while the source has four.
+    Those require a separate damage-tier correction before their timing can be joined.
+    """
+    if not numbers:
+        return gd
+    rules = dict(gd.rules)
+    entries = numbers["classes"].get(gd.class_key, {}).get("skills", {})
+    source = numbers["source"]
+    for key, entry in entries.items():
+        charge = entry.get("charge")
+        rule = rules.get(key)
+        if not charge or not rule or not rule.charge_levels:
+            continue
+        normal = [charge["min_ms"]] + charge["tier_ms"]
+        if len(normal) != len(rule.charge_levels):
+            continue
+        gauges = charge.get("stagger_gauge", [None] * len(normal))
+        if len(gauges) != len(normal):
+            raise ValueError(f"{key}: charge gauge tier count differs from timing")
+        fast = charge.get("fast")
+        alternate, selector = None, None
+        if fast:
+            option = fast["option"]
+            specs = gd.skills[key].specializations
+            if (0 <= option < len(specs) and specs[option].rank_required == fast["unlock_rank"]
+                    and re.search(r"\bSkill Speed\b", specs[option].text, re.I)):
+                thresholds = [fast["min_ms"]] + fast["tier_ms"]
+                if len(thresholds) != len(normal):
+                    raise ValueError(f"{key}: alternate charge tier count differs from timing")
+                if all(0 < f < n for f, n in zip(thresholds, normal)):
+                    alternate, selector = thresholds, (key, option)
+        confirmed = lambda ms: Num(ms / 1000, "confirmed", f"{source} (SkillCharge; client version unknown)")  # noqa: E731
+        levels = tuple(replace(tier, charge_s=confirmed(normal[i]), stagger_gauge=gauges[i],
+                               fast_charge_s=confirmed(alternate[i]) if alternate else None)
+                       for i, tier in enumerate(rule.charge_levels))
+        rules[key] = replace(rule, charge_levels=levels, fast_charge_spec=selector)
+    return replace(gd, rules=rules)
+
+
 def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: str,
              dump_date: str = DUMP_DATE, class_key: str = "sorcerer") -> GameData:
     """Pure in-memory build (no file writes). update.py passes freshly parsed skills here."""
@@ -490,6 +532,7 @@ def assemble(raw_skills: list[dict], research_dir: Path, index: dict, built_at: 
             st = gd.statuses[sk_key]
             gd.statuses[sk_key] = replace(st, stat_mods=st.stat_mods + tuple(ms))
     gd = finalize_gamedata(gd, mech.get("specialization_effects") or {}, mech.get("spec_slot_ranks"))
+    gd = apply_client_charge_metadata(gd, client)
     gd = apply_rank_scales(gd, mech)
     _validate(gd)
     return gd
@@ -529,7 +572,7 @@ def build(research_dir: Path, icons_dir: Path, out_path: Path, built_at: str | N
 
 def main() -> None:
     from aion2c.classes import CLASSES
-    from aion2c.data.loader import default_path
+    from aion2c.data.loader import default_path, load_gamedata
     ap = argparse.ArgumentParser(description="Build aion2c/data/classes/<class>/gamedata.json from research files")
     ap.add_argument("--research", type=Path, default=REPO / "research")
     ap.add_argument("--icons", type=Path, default=REPO / "assets" / "icons")
@@ -537,7 +580,21 @@ def main() -> None:
     ap.add_argument("--all", action="store_true", help="build every class whose research files exist")
     ap.add_argument("--out", type=Path, default=None, help="output file (single class only)")
     ap.add_argument("--built-at", default=None)
+    ap.add_argument("--charge-metadata-only", action="store_true",
+                    help="refresh reviewed charge metadata in existing payloads without original icons or research")
     a = ap.parse_args()
+    if a.charge_metadata_only:
+        numbers = load_client_numbers()
+        if not numbers:
+            ap.error("charge metadata refresh requires the committed client numbers")
+        if a.all and a.out:
+            ap.error("--out selects one existing payload; use it without --all")
+        for key in ([c.key for c in CLASSES] if a.all else [a.class_key]):
+            out = a.out or default_path(key)
+            gd = apply_client_charge_metadata(load_gamedata(out, key), numbers)
+            write_gamedata(gd, out)
+            print(f"[{key}] refreshed reviewed charge metadata; preserved data_version {gd.data_version}")
+        return
     if a.all:
         todo = []
         for c in CLASSES:

@@ -113,6 +113,8 @@ class _Sim:
         self.casts: list[CastEvent] = []
         self.tally: dict[str, list] = {}
         self.total = 0.0
+        self.total_stagger = 0.0
+        self.stagger_tally: dict[str, float] = {}
         self.rank_gt1 = False
         self.passives = [(k, s) for k, s in gd.statuses.items() if s.mp_min_pct is not None]
         self.modded = [(k, s) for k, s in gd.statuses.items() if s.stat_mods]
@@ -507,6 +509,22 @@ class _Sim:
         return hit
 
     # ---- damage, triggers, specialty effects -------------------------------------------------
+    def _stagger(self, key: str, inf: _Info, cl=None) -> float:
+        # An effect applies once per release/affected target. The HP hit count
+        # does not establish stagger multiplicity. A range's scalar maximum
+        # cannot supply the amount for an individual charge tier.
+        amount = inf.skill.stagger_gauge if cl is None else cl.stagger_gauge
+        if amount is None:
+            if self.sc.objective == "stagger":
+                self.warn[f"Stagger amount unavailable: {inf.skill.name}; omitted from gauge score."] = None
+                self._conf("unknown")
+            return 0.0
+        targets = min(self.sc.n_targets, inf.skill.aoe_targets + (inf.spec.aoe_add if inf.spec else 0))
+        gauge = max(0.0, amount) * targets
+        self.total_stagger += gauge
+        self.stagger_tally[key] = self.stagger_tally.get(key, 0.0) + gauge
+        return gauge
+
     def _spec_mult(self, sk, sp, key: str, ta: int, n_hit: int) -> float:
         m = 1.0 + sp.extra_hits / max(1, sk.hits)
         aoe = sk.aoe_targets + sp.aoe_add
@@ -596,6 +614,7 @@ class _Sim:
         tl[0] += 1
         tl[1] += dmg
         self.total += dmg
+        self._stagger(key, inf)
         if inf.rule is not None and inf.rule.mp_restore:
             self.mp = min(self.stats.max_mp, self.mp + inf.rule.mp_restore)
             self._conf(inf.rule.confidence)
@@ -652,18 +671,26 @@ class _Sim:
             self.rank_gt1 = True
 
         lvl, cl, charge_s = 0, None, 0.0
+        exact_charge_time = False
         if inf.levels:
             n = len(inf.levels)
             lvl = min(max(level_req if level_req > 0 else n, 1), n)
             cl = next((c for c in inf.levels if c.level == lvl), inf.levels[lvl - 1])
             charge_s = self.rd(cl.charge_s, f"{key} charge time L{lvl}", 0.0)
             self.rd(cl.dmg_mult, f"{key} charge multiplier L{lvl}", 1.0)
-            if sp is not None:
+            if rule.fast_charge_spec in self.spec_on and cl.fast_charge_s is not None:
+                charge_s = self.rd(cl.fast_charge_s, f"{key} alternate charge time L{lvl}", charge_s)
+                exact_charge_time = cl.fast_charge_s.value is not None
+            elif sp is not None:
                 charge_s *= sp.charge_mult
 
         st0 = self._stats_at(t)
         speed = 1 + (sp.speed / 100 if sp is not None else 0.0)
-        lock_ms = max(1, round((inf.anim_s / (1 + st0.combat_speed_pct / 100) + charge_s) / speed * 1000))
+        # The exact alternate threshold already includes its selecting specialty's
+        # charge speed. Retain animation speed without applying it to that threshold twice.
+        charge_speed = 1.0 if exact_charge_time else speed
+        lock_ms = max(1, round((inf.anim_s / (1 + st0.combat_speed_pct / 100) / speed
+                               + charge_s / charge_speed) * 1000))
         cd_s = inf.cd_s
         if sp is not None and any(self._req_ok(r, key, t) for r in sp.remove_cd):
             cd_s = 0.0
@@ -674,11 +701,18 @@ class _Sim:
             else:
                 self.acc[("uses", key)] = 0.0
         self.ready[key] = t + round(cd_s * cooldown_scale(st0.cdr_pct) * 1000)
-        ta = t + round(charge_s / speed * 1000)
+        ta = t + round(charge_s / charge_speed * 1000)
 
-        self._tick_until(ta)
+        self._tick_until(min(ta, self.D))
+        if ta >= self.D:
+            # A charge started before the cutoff is still paid for, but its hit,
+            # statuses and cooldown/proc effects have not landed in this fight.
+            self.casts.append(CastEvent(t / 1000, key, lvl, 0.0, self.mp, ()))
+            self.tally.setdefault(key, [0, 0.0])[0] += 1
+            return t + lock_ms + delay_ms
         dmg, act = self._dmg(key, inf, ta, cl, len(inf.levels) or 1)
-        self.casts.append(CastEvent(t / 1000, key, lvl, dmg, self.mp, act))
+        gauge = self._stagger(key, inf, cl)
+        self.casts.append(CastEvent(t / 1000, key, lvl, dmg, self.mp, act, gauge))
         tl = self.tally.setdefault(key, [0, 0.0])
         tl[0] += 1
         tl[1] += dmg
@@ -767,10 +801,12 @@ class _Sim:
             dps=self.total / dur if dur > 0 else 0.0,
             duration_s=dur,
             casts=tuple(self.casts),
-            per_skill={k: SkillTally(v[0], v[1]) for k, v in self.tally.items()},
+            per_skill={k: SkillTally(v[0], v[1], self.stagger_tally.get(k, 0.0)) for k, v in self.tally.items()},
             status_uptime=uptime,
             warnings=tuple(self.warn),
             confidence=_CONF_NAMES[self.min_conf],
+            total_stagger=self.total_stagger,
+            stagger_per_s=self.total_stagger / dur if dur > 0 else 0.0,
         )
 
 

@@ -204,6 +204,8 @@ class ChargeLevel:
     dmg_mult: Num
     hits: int | None = None  # hits of a cast released at this level; None = the skill's own `hits`
     flat_frac: float | None = None  # share of (flat_max - flat_min) this level deals; None = linear in the level
+    stagger_gauge: float | None = None  # one release's gauge effect per target; independent of HP hit count
+    fast_charge_s: Num | None = None  # exact alternate threshold, selected only by SkillRule.fast_charge_spec
 
 
 @dataclass(frozen=True)
@@ -222,6 +224,7 @@ class SkillRule:
     # (owner skill key, 0-based option index): this skill (a chain follow-up or proc) only exists while that
     # specialty option is chosen AND unlocked at the owner's rank. None = always available.
     requires_spec: tuple[str, int] | None = None
+    fast_charge_spec: tuple[str, int] | None = None  # owner and option selecting charge levels' alternate timings
 
 
 @dataclass(frozen=True)
@@ -403,6 +406,7 @@ class Scenario:
     duration_s: float
     n_targets: int
     boss: bool
+    objective: Literal["damage", "stagger"] = "damage"
 
 
 SCENARIOS = (
@@ -441,12 +445,14 @@ class CastEvent:
     damage: float
     mp_after: float
     active_statuses: tuple[str, ...]
+    stagger: float = 0.0
 
 
 @dataclass(frozen=True)
 class SkillTally:
     casts: int
     damage: float
+    stagger: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -459,6 +465,8 @@ class SimResult:
     status_uptime: dict[str, float]
     warnings: tuple[str, ...]
     confidence: Confidence
+    total_stagger: float = 0.0
+    stagger_per_s: float = 0.0
 
 
 @dataclass(frozen=True)

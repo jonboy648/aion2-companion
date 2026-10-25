@@ -69,7 +69,7 @@ def test_audit_reports_source_and_browser_parity_without_claiming_a_client_patch
 def test_audit_checks_reviewed_identity_unit_and_currency_witnesses(audited_repo):
     report = audit(audited_repo)
     assert report["ok"], report["errors"]
-    assert set(report["witnesses"]) == {"skill.quick-slice", "skill.noble-armor-cooldown",
+    assert set(report["witnesses"]) == {"skill.quick-slice", "skill.noble-armor-cooldown", "skill.hellfire-charge",
         "item.relic-collector-spellbook", "progression.global-level-22", "board.sorcerer-nezekan"}
 
 
@@ -81,6 +81,16 @@ def test_changed_ratio_units_fail_the_reviewed_witness(audited_repo):
     report = audit(audited_repo)
     assert not report["ok"]
     assert "Witness value/unit differs: skill.quick-slice" in report["errors"]
+
+
+def test_changed_charge_time_units_fail_the_reviewed_witness(audited_repo):
+    path = audited_repo / "app/aion2c/data/src/client_skill_numbers.json"
+    data = json.loads(path.read_bytes())
+    data["classes"]["sorcerer"]["skills"]["hellfire"]["charge"]["fast"]["min_ms"] = 2100
+    path.write_text(json.dumps(data), encoding="utf-8")
+    report = audit(audited_repo)
+
+    assert "Witness value/unit differs: skill.hellfire-charge" in report["errors"]
 
 
 def test_missing_board_skill_join_is_not_silently_skipped(audited_repo):
