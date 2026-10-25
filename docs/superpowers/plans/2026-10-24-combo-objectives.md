@@ -28,11 +28,11 @@ Files: `models.py`, `engine/simulator.py`, `data/client_export.py`,
 `data/build_gamedata.py`, derived source/class data; public simulator/data tests.
 Produces the additive Scenario/ChargeLevel/SkillRule/SimResult contracts in the spec.
 
-- [ ] Record baseline tests and write/run the horizon regression RED.
-- [ ] Implement minimal landing guard; verify GREEN.
-- [ ] Add per-release gauge and exact specialty timing with source witness tests,
+- [x] Record baseline tests and write/run the horizon regression RED.
+- [x] Implement minimal landing guard; verify GREEN.
+- [x] Add per-release gauge and exact specialty timing with source witness tests,
   one red/green slice at a time; check unknown/locked/multihit cases.
-- [ ] Regenerate derived payloads deterministically and run drift/privacy guards.
+- [x] Regenerate derived payloads deterministically and run drift/privacy guards.
 
 ### Task 2: Goal-aware full build and API
 
@@ -40,10 +40,10 @@ Files: new `engine/objectives.py`, `engine/search.py`, `engine/build_optimizer.p
 `engine/budget.py`, `engine/specialties.py`, relevant node selection and `webapi.py`;
 new public objective acceptance tests. Consumes Task1 additive results.
 
-- [ ] Prove different known Damage/Stagger winners RED; implement scorer/search GREEN.
-- [ ] Prove stigma/rank/specialty/node and legal-budget behavior through public
+- [x] Prove different known Damage/Stagger winners RED; implement scorer/search GREEN.
+- [x] Prove stigma/rank/specialty/node and legal-budget behavior through public
   optimizer APIs, then implement complete scorer propagation without global state.
-- [ ] Add objective metadata/current baseline at webapi; keep legacy damage units
+- [x] Add objective metadata/current baseline at webapi; keep legacy damage units
   correct and cover default/invalid goals and input immutability.
 
 ### Task 3: Worker and existing page goal selection
@@ -51,18 +51,18 @@ new public objective acceptance tests. Consumes Task1 additive results.
 Files: `web/src/lib/types.ts`, engine api/client tests, build UI/hook and tests,
 `Character.tsx` only where needed. Consumes Task2 additive API fields.
 
-- [ ] Add RED serial/parallel objective forwarding and cache separation tests;
+- [x] Add RED serial/parallel objective forwarding and cache separation tests;
   implement compatible trailing parameters GREEN.
-- [ ] Add RED rendered goal/Calculate/current-unit/stale-result tests; reuse the
+- [x] Add RED rendered goal/Calculate/current-unit/stale-result tests; reuse the
   current page, drop stale replies and retain editable native setup handoff.
-- [ ] Make Stagger panels use gauge units and avoid misleading DPS gain labels;
+- [x] Make Stagger panels use gauge units and avoid misleading DPS gain labels;
   verify keyboard and mobile layout.
 
 ### Task 4: Combined verification and review
 
-- [ ] Regenerate browser engine and required fixtures; run source/drift parity.
-- [ ] Run full web and relevant engine suites, strict production build and real
+- [x] Regenerate browser engine and required fixtures; run source/drift parity.
+- [x] Run full web and relevant engine suites, strict production build and real
   browser workflow with both goals, desktop/390px and zero stale-result substitution.
-- [ ] Independently review the complete branch; fix reproduced important issues
+- [x] Independently review the complete branch; fix reproduced important issues
   with red/green regressions. Record commands/results and remaining model caveats.
-- [ ] Show Jon the actual preview and results. Leave branch local pending push.
+- [x] Show Jon the actual preview and results. Leave branch local pending push.
