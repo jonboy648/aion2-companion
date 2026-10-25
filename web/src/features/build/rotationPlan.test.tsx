@@ -6,7 +6,11 @@ import { armoryExtras } from "@/lib/armory";
 import type { ArmoryRaw, CompareResult, IconUrls } from "@/lib/types";
 import { RotationPlan } from "./RotationPlan";
 
-const rot = (cmpFx as unknown as CompareResult).aoe.rotation_explained; // a playstyle whose fixture still has unused skills
+const actual = (cmpFx as unknown as CompareResult).aoe.rotation_explained;
+// A searched fixture can legitimately use every skill. Keep the not-used UI
+// case explicit so a better rotation doesn't silently remove this coverage.
+const rot = { ...actual, skip: [{ skill_key: "unused-example", name: "Unused example", icon_key: "unused-example",
+  charge_level: 0, casts: 0, reason: "Never cast: a higher priority skill stayed available." }, ...actual.skip] };
 const icons: IconUrls = { "element-enhancement": "https://assets.playnccdn.com/static-aion2-gamedata/resources/x.png" };
 
 describe("RotationPlan", () => {

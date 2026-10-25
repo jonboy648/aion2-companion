@@ -49,6 +49,12 @@ def _call(name, args_json, has_progress, progress):
     kw = {}
     if has_progress:
         kw["progress"] = progress
+    # The wire omits the Python progress slot, which is always supplied by keyword.
+    # Move the trailing battle budget and objective into keywords before calling Python.
+    progress_index = {"compare": 2, "optimize": 3}.get(name)
+    if progress_index is not None and len(args) > progress_index:
+        kw.update(zip(("battle_points", "objective"), args[progress_index:]))
+        args = args[:progress_index]
     return json.dumps(getattr(_w, name)(*args, **kw))
 `;
 

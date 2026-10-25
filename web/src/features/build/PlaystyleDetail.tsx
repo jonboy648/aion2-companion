@@ -10,6 +10,7 @@ import type { BuildVariant, Confidence, FullBuild } from "@/lib/types";
 import type { ClassData } from "./useClassData";
 import { SkillIcon } from "./SkillIcon";
 import { fmtDps, fmtPct, rotationRows, roleNote, skillName, statDelta, statLabel } from "./helpers";
+import { buildGoal, currentGoalScore, formatGoalScore, goalPlaystyleName, goalScore, goalUnit } from "./objective";
 
 const CONF_TONE: Record<Confidence, "ok" | "warn" | "neutral"> = { confirmed: "ok", estimated: "warn", unknown: "neutral" };
 
@@ -102,6 +103,7 @@ export function groupRankLog(log: [string, number, number][], isStigma: (key: st
 }
 
 function SkillPoints({ fb, data, rankedSkills, manual }: { fb: FullBuild; data: ClassData; rankedSkills: number; manual: boolean }) {
+  const stagger = buildGoal(fb) === "stagger";
   const entered = fb.build.skill_points ?? 0;
   const stigEntered = fb.build.stigma_points ?? 0;
   if (fb.rank_log.length === 0) {
@@ -128,7 +130,7 @@ function SkillPoints({ fb, data, rankedSkills, manual }: { fb: FullBuild; data: 
             <span className="tabular-nums text-dim">
               rank {b.from} → {b.to}
             </span>
-            <span className="w-24 text-right tabular-nums text-ok">{fmtPct(b.gain)} DPS</span>
+            {!stagger && <span className="w-24 text-right tabular-nums text-ok">{fmtPct(b.gain)} DPS</span>}
           </li>
         ))}
       </ul>
@@ -144,68 +146,79 @@ function SkillPoints({ fb, data, rankedSkills, manual }: { fb: FullBuild; data: 
 /** One playstyle's full recommendation: stigmas, skill points, Daevanion, rotation, trade-offs, stat upgrades. */
 export function PlaystyleDetail({ fb, data, variantKey, onVariant, source = "imported" }: Props) {
   const [showWarnings, setShowWarnings] = useState(false);
-  const variants = fb.variants ?? [];
+  const [detailTab, setDetailTab] = useState("overview");
+  const stagger = buildGoal(fb) === "stagger";
+  const selectedTab = stagger && (detailTab === "tradeoffs" || detailTab === "stats") ? "overview" : detailTab;
+  const variants = stagger ? [] : fb.variants ?? [];
   const applied = variants.find((v) => v.key === variantKey && v.key !== "max");
   const picks = applied ? applied.stigma_picks : fb.stigma_picks;
   const dps = applied ? applied.dps : fb.result.dps;
+  const score = stagger ? goalScore(fb) : dps;
+  const current = currentGoalScore(fb);
+  const unit = goalUnit(fb);
   const rows = rotationRows(fb);
   const rankedSkills = Object.keys(fb.build.skill_ranks ?? {}).length;
 
   return (
     <div className="space-y-4" data-testid="playstyle-detail">
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <SectionTitle className="mb-0 min-w-0 flex-1 basis-64" caption={fb.playstyle.description}>
-          {fb.playstyle.name} plan
+        <SectionTitle className="mb-0 min-w-0 flex-1 basis-64" caption={stagger ? `Stagger goal · ${fb.playstyle.scenario.duration_s} s modeled window` : fb.playstyle.description}>
+          {goalPlaystyleName(fb)} plan
         </SectionTitle>
         <div className="flex items-end gap-5 text-right">
-          {fb.current_dps != null && (
+          {(stagger || current != null) && (
             <div data-testid="current-dps">
-              <div className="font-display text-2xl font-bold tabular-nums">~{fmtDps(fb.current_dps)}</div>
+              <div className="font-display text-2xl font-bold tabular-nums">{formatGoalScore(current)}{stagger && <span className="ml-1 text-xs">{unit}</span>}</div>
               <div className="text-xs text-dim">{source === "manual" ? <>Starting build<br />before allocation</> : <>Current build<br />as imported</>}</div>
             </div>
           )}
           <div data-testid="plan-dps">
-            <div className="font-display text-3xl font-bold tabular-nums text-gold">~{fmtDps(dps)}</div>
+            <div className="font-display text-3xl font-bold tabular-nums text-gold">{formatGoalScore(score)}{stagger && <span className="ml-1 text-xs">{unit}</span>}</div>
             <div className="flex items-center justify-end gap-2 text-xs text-dim">
-              {source === "manual" ? "Planned build DPS" : fb.current_dps != null ? "Best build with your gear" : "estimated DPS"}
+              {stagger ? "Planned stagger contribution" : source === "manual" ? "Planned build DPS" : current != null ? "Best build with your gear" : "estimated DPS"}
               <Badge tone={CONF_TONE[fb.result.confidence]}>{fb.result.confidence}</Badge>
             </div>
           </div>
         </div>
       </div>
+      {stagger && <p className="text-sm text-dim">Modeled stagger gauge over this window, not predicted breaks or break time. Unknown gauge amounts and unmodeled conditions may reduce coverage.</p>}
 
       <AdvancedStats metrics={[
-        { key: "dps", label: "Estimated DPS", value: fmtDps(dps), hint: applied?.label ?? (source === "manual" ? "With entered stats" : "Best build with your gear") },
-        ...(fb.current_dps != null ? [{ key: "current", label: source === "manual" ? "Starting build DPS" : "Current build DPS", value: fmtDps(fb.current_dps), hint: source === "manual" ? "Before point allocation" : "As imported, no changes" }] : []),
+        { key: "dps", label: "Estimated DPS", value: fmtDps(dps), hint: stagger ? "Damage of this Stagger plan" : applied?.label ?? (source === "manual" ? "With entered stats" : "Best build with your gear") },
+        ...(stagger ? [
+          { key: "stagger", label: "Stagger rate", value: `${formatGoalScore(score)} gauge/s`, hint: "Modeled gauge contribution" },
+          { key: "total-stagger", label: "Total stagger gauge", value: fb.result.total_stagger == null ? "Unavailable" : fmtDps(fb.result.total_stagger) },
+        ] : []),
+        ...(stagger || current != null ? [{ key: "current", label: stagger ? (source === "manual" ? "Starting build stagger" : "Current build stagger") : source === "manual" ? "Starting build DPS" : "Current build DPS", value: `${current == null ? "Unavailable" : fmtDps(current)}${stagger ? " gauge/s" : ""}`, hint: source === "manual" ? "Before point allocation" : "As imported, no changes" }] : []),
         { key: "duration", label: "Duration", value: `${fb.playstyle.scenario.duration_s} s` },
         { key: "targets", label: "Targets", value: String(fb.playstyle.scenario.n_targets), hint: fb.playstyle.scenario.boss ? "Boss target" : "Non-boss targets" },
         { key: "confidence", label: "Model confidence", value: fb.result.confidence },
       ]} supporting={<div className="space-y-5">
-        <Section title={applied ? "Selected variant" : "Top stigma changes"} hint={applied ? `Variant applied: ${applied.label}` : "Individual stigma experiments; gains are not additive."}>
+        {!stagger && <Section title={applied ? "Selected variant" : "Top stigma changes"} hint={applied ? `Variant applied: ${applied.label}` : "Individual stigma experiments; gains are not additive."}>
           {applied ? <p className="text-sm text-dim">{applied.gives}</p> : <StigmaList picks={[...picks].filter(([, gain]) => gain > 0).sort((a, b) => b[1] - a[1]).slice(0, 3)} data={data} />}
-        </Section>
+        </Section>}
         {applied && <p className="text-xs text-dim">Detailed simulation is unavailable for this variant. Rotation, skill points, Daevanion and stat gains below describe the unchanged max-DPS build.</p>}
         <Section title="Skill points">
           <SkillPoints fb={fb} data={data} rankedSkills={rankedSkills} manual={source === "manual"} />
         </Section>
         <Section title="Daevanion">
-          {source === "manual" ? <div className="space-y-1 text-sm text-dim">
+          {stagger ? <p className="text-sm text-dim">{fb.build.daevanion_nodes.length} opened nodes included. Future opening guidance: {fb.daevanion_path.length} nodes.</p> : source === "manual" ? <div className="space-y-1 text-sm text-dim">
             <p>{fb.build.daevanion_nodes.length} nodes included in this build.</p>
             <p>Future opening order: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated path gain.</p>
           </div> : <p className="text-sm text-dim">Max-DPS path: {fb.daevanion_path.length} nodes, {fmtPct(fb.daevanion_gain_pct)} estimated DPS gain.</p>}
         </Section>
-      </div>} main={<Tabs defaultValue="overview">
+      </div>} main={<Tabs value={selectedTab} onValueChange={setDetailTab}>
       <TabsList aria-label="Build details">
         <TabsTrigger value="overview">Overview</TabsTrigger>
         <TabsTrigger value="rotation">Rotation</TabsTrigger>
-        <TabsTrigger value="tradeoffs">Trade-offs</TabsTrigger>
-        <TabsTrigger value="stats">Stat gains</TabsTrigger>
+        {!stagger && <TabsTrigger value="tradeoffs">Trade-offs</TabsTrigger>}
+        {!stagger && <TabsTrigger value="stats">Stat gains</TabsTrigger>}
       </TabsList>
       <TabsContent value="overview">
       {!applied && <BuildDamage fb={fb} data={data} />}
       <div className="mt-5">
-        <Section title="Stigmas" hint={applied ? `Variant applied: ${applied.label}` : "Best set for this playstyle, with each pick's DPS gain."}>
-          <StigmaList picks={picks} data={data} aggregateOnly={!!applied} />
+        <Section title="Stigmas" hint={stagger ? "Selected for the Stagger goal with your current gear and point budgets." : applied ? `Variant applied: ${applied.label}` : "Best set for this playstyle, with each pick's DPS gain."}>
+          <StigmaList picks={picks} data={data} aggregateOnly={stagger || !!applied} />
         </Section>
       </div>
       </TabsContent>
@@ -239,7 +252,7 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant, source = "imp
         )}
       </Section>
       </TabsContent>
-      <TabsContent value="tradeoffs">
+      {!stagger && <TabsContent value="tradeoffs">
       {variants.length > 0 && (
         <Section title="Trade-offs" hint="Swap a stigma for utility and see what it costs.">
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -249,8 +262,8 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant, source = "imp
           </ul>
         </Section>
       )}
-      </TabsContent>
-      <TabsContent value="stats">
+      </TabsContent>}
+      {!stagger && <TabsContent value="stats">
       {applied && <p className="mb-3 text-xs text-dim">Max-DPS build stat experiments</p>}
       {fb.stat_gains.length > 0 && (
         <Section title="Next stat upgrades" hint="DPS gained per small step, best first.">
@@ -267,7 +280,7 @@ export function PlaystyleDetail({ fb, data, variantKey, onVariant, source = "imp
         </Section>
       )}
       {fb.stat_gains.length === 0 && <p className="text-sm text-dim">Stat gains unavailable.</p>}
-      </TabsContent>
+      </TabsContent>}
       </Tabs>} />
       {fb.warnings.length > 0 && (
         <div className="text-xs text-dim">

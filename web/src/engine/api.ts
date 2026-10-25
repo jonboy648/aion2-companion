@@ -29,6 +29,7 @@ import type {
   FullBuild,
   GameData,
   GearUpgradesResult,
+  Goal,
   IconUrls,
   ImportResult,
   KeybindsResult,
@@ -52,8 +53,8 @@ export interface EngineApi {
   /** raw = what lib/armory.ts fetchCharacter returns. Class comes from the armory profile. */
   importCharacter(raw: ArmoryRaw, baseBuild?: CharacterBuild | null): Promise<ImportResult>;
   /** All four playstyles. Slow in the real engine: pass onProgress. */
-  compare(build: CharacterBuild, daevanionPoints?: number | null, onProgress?: ProgressFn): Promise<CompareResult>;
-  optimize(build: CharacterBuild, playstyleKey: PlaystyleKey, daevanionPoints?: number | null, onProgress?: ProgressFn): Promise<FullBuild>;
+  compare(build: CharacterBuild, daevanionPoints?: number | null, onProgress?: ProgressFn, objective?: Goal): Promise<CompareResult>;
+  optimize(build: CharacterBuild, playstyleKey: PlaystyleKey, daevanionPoints?: number | null, onProgress?: ProgressFn, objective?: Goal): Promise<FullBuild>;
   marginal(build: CharacterBuild, priority: Priority, scenarioKey: string): Promise<StatGain[]>;
   /** priorities: {scenario_key: Priority} (boss_180, aoe_pack, level_pull). hotkeys may include leveling. */
   keybinds(
@@ -97,14 +98,16 @@ const mockEngine: EngineApi = {
     await wait(300);
     return clone<ImportResult>(importFx);
   },
-  async compare(_build, _points, onProgress) {
+  async compare(_build, _points, onProgress, objective) {
+    if (objective === "stagger") throw new Error("Stagger fixtures are unavailable in mock mode. Use the real engine to calculate this goal.");
     for (const m of ["Boss DPS...", "AoE farming...", "Leveling...", "Burst opener..."]) {
       onProgress?.(m);
       await wait(120);
     }
     return clone<CompareResult>(compareFx);
   },
-  async optimize(_build, playstyleKey, _points, onProgress) {
+  async optimize(_build, playstyleKey, _points, onProgress, objective) {
+    if (objective === "stagger") throw new Error("Stagger fixtures are unavailable in mock mode. Use the real engine to calculate this goal.");
     onProgress?.("Searching rotation");
     await wait(200);
     return clone<FullBuild>((compareFx as unknown as CompareResult)[playstyleKey]);

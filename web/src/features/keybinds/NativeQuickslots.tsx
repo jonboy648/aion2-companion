@@ -1,14 +1,16 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Pencil, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { CharacterBuild, GameData, IconUrls, KeybindPlan } from "@/lib/types";
 import { guideRanks } from "@/features/progression/guideRanks";
-import { acquiredSkill, actionLocked, initialNativeConfig, nativeActivationWarning, nativeBindingIssues, nativeColumnNotes, nativePlacementIssues, resolveNativeColumn, selectedRecipe, type NativeConfig, type NativeEntry } from "./nativeConfig";
+import { acquiredSkill, actionLocked, initialNativeConfig, nativeActivationWarning, nativeBindingIssues, nativeColumnNotes, nativePlacementIssues, normalizeNativeConfig, resolveNativeColumn, selectedRecipe, type NativeConfig, type NativeEntry } from "./nativeConfig";
 import { SkillIcon } from "./SkillIcon";
 import { NativeDialog } from "./NativeDialog";
 import { NativeDelay } from "./NativeDelay";
 import { NativeAlternates } from "./NativeAlternates";
-import { nativeOwnerKey, readNativeConfig, writeNativeConfig } from "./nativeStorage";
+import { nativeOwnerKey, nativeStorageKey, readNativeConfig, writeNativeConfig } from "./nativeStorage";
+import type { PlannedBuild } from "./activeBuild";
+import { suggestNativeSetup } from "./nativeSuggestion";
 import { nativeSetup } from "./nativeSetup";
 import { SetupSheet } from "./SetupSheet";
 import "./native-quickslots.css";
@@ -18,6 +20,7 @@ export interface NativeQuickslotsProps {
   gd: GameData;
   icons: IconUrls;
   plan: KeybindPlan;
+  planned?: PlannedBuild | null;
   disabled?: boolean;
 }
 
@@ -30,7 +33,16 @@ export function NativeQuickslots(props: NativeQuickslotsProps) {
   return <NativeEditor key={owner} {...props} owner={owner} />;
 }
 
-function NativeEditor({ build, gd, icons, plan, disabled = false, owner }: NativeQuickslotsProps & { owner: string }) {
+function readSuggestionBackup(owner: string): NativeConfig | null {
+  try {
+    const raw = localStorage.getItem(`${nativeStorageKey(owner)}:before-suggestion`);
+    if (!raw || raw.length > 70000) return null;
+    const backup = JSON.parse(raw);
+    return backup.owner === owner ? normalizeNativeConfig(backup.config).config : null;
+  } catch { return null; }
+}
+
+function NativeEditor({ build, gd, icons, plan, planned, disabled = false, owner }: NativeQuickslotsProps & { owner: string }) {
   const actions = plan.actions ?? [];
   const [loaded] = useState(() => readNativeConfig(owner, initialNativeConfig(actions, gd, build)));
   const [config, setConfig] = useState(loaded.config);
@@ -40,6 +52,11 @@ function NativeEditor({ build, gd, icons, plan, disabled = false, owner }: Nativ
   useEffect(() => { if (disabled) setPicker(null); }, [disabled]);
   const [recipeName, setRecipeName] = useState("");
   const [issue, setIssue] = useState<string | null>(null);
+  const [previewSuggestion, setPreviewSuggestion] = useState(false);
+  const [previousSetup, setPreviousSetup] = useState(() => readSuggestionBackup(owner));
+  const suggestion = useMemo(() => planned ? suggestNativeSetup(config, actions, gd, build, planned) : null,
+    [config, actions, gd, build, planned]);
+  useEffect(() => { setPreviewSuggestion(false); }, [disabled, build, planned, plan]);
   const [availability, setAvailability] = useState<Record<string, boolean>>({});
   const scrollRef = useRef<HTMLDivElement>(null);
   const scroll = (direction: number) => { if (!disabled) scrollRef.current?.scrollBy({ left: direction * 280, behavior: "auto" }); };
@@ -61,6 +78,34 @@ function NativeEditor({ build, gd, icons, plan, disabled = false, owner }: Nativ
     const next = fn(config);
     setConfig(next);
     setStorageNotice(writeNativeConfig(owner, next));
+  };
+  const applySuggestion = () => {
+    if (disabled || !previewSuggestion || !suggestion?.config) return;
+    // Retain a complete, reload-safe copy before replacing shared columns.
+    try {
+      const backup = JSON.stringify({ owner, config });
+      if (backup.length > 70000) throw new Error("Backup too large");
+      localStorage.setItem(`${nativeStorageKey(owner)}:before-suggestion`, backup);
+    } catch {
+      setIssue("Could not retain the previous setup; suggestion was not applied.");
+      return;
+    }
+    setPreviousSetup(structuredClone(config));
+    edit(() => suggestion.config!);
+    setAvailability({});
+    setPreviewSuggestion(false);
+    setIssue(null);
+  };
+  const revertSuggestion = () => {
+    if (disabled || !previousSetup) return;
+    const notice = writeNativeConfig(owner, previousSetup);
+    setConfig(previousSetup);
+    setStorageNotice(notice);
+    setAvailability({});
+    if (!notice) {
+      setPreviousSetup(null);
+      try { localStorage.removeItem(`${nativeStorageKey(owner)}:before-suggestion`); } catch { /* The retained copy remains safe. */ }
+    }
   };
   const entries = selectedRecipe(config).entries;
   const saveRecipe = () => {
@@ -101,6 +146,40 @@ function NativeEditor({ build, gd, icons, plan, disabled = false, owner }: Nativ
       {storageNotice && <p className="nq-notice" role="status">{storageNotice}</p>}
       {validationIssues.length > 0 && <ul className="nq-notice" role="alert">{validationIssues.map(message => <li key={message}>{message}</li>)}</ul>}
       <p className="nq-source">Client defaults + local edits</p>
+      {planned && <section aria-label="Chosen Character plan" className="mb-5 space-y-3 rounded border border-border p-4 text-sm">
+        <p><strong>Source: chosen Character plan</strong> · {planned.playstyle} · Goal: {planned.objective === "stagger" ? "Stagger (modeled gauge contribution)" : "Damage"}</p>
+        <p>Suggests placements and macro membership from your selected priority. Preview the changes before applying.</p>
+        <Button variant="secondary" onClick={() => { if (!disabled) { setIssue(null); setPreviewSuggestion(true); } }}>Preview suggested setup</Button>
+      </section>}
+      {previousSetup && <div className="mb-5 space-y-2 text-sm">
+        <p>A copy of the setup before the last suggestion is retained. Revert restores that complete setup, including columns, recipes and bindings, replacing edits made since applying.</p>
+        <Button variant="secondary" onClick={revertSuggestion}>Revert suggested setup</Button>
+      </div>}
+      {previewSuggestion && suggestion && !disabled && <NativeDialog title="Suggested native setup" onClose={() => setPreviewSuggestion(false)}>
+        <div className="space-y-4 p-5 text-sm">
+          <p>Source: chosen Character plan · {planned?.playstyle} · Goal: {suggestion.objective === "stagger" ? "Stagger (modeled gauge contribution)" : "Damage"}.</p>
+          <p>One relevant root skill per column avoids an always-eligible filler hiding conditional or cooldown skills. Priority chooses placements and membership; entry numbering is not runtime execution order.</p>
+          <p>Columns are shared by all saved configurations. Applying changes their linked skills; all existing recipe names, entries, authored delays and bindings are retained. A complete previous setup is saved for Revert.</p>
+          {suggestion.errors.length > 0 && <ul role="alert" className="nq-notice">{suggestion.errors.map(error => <li key={error}>{error}</li>)}</ul>}
+          {suggestion.config && <>
+            <h3 className="font-semibold">Column changes</h3>
+            {suggestion.changedColumns.length ? <ul className="space-y-2">{suggestion.changedColumns.map(id => <li key={id}>
+              Quick Use {id}: {config.columns[String(id)].map(name).join(" / ")} → {suggestion.config!.columns[String(id)].map(name).join(" / ")}
+            </li>)}</ul> : <p>No column changes; a new recipe will be added.</p>}
+            <h3 className="font-semibold">Suggested membership</h3>
+            <ul className="space-y-2">{suggestion.placements.map(placement => <li key={placement.id}>
+              Quick Use {placement.id}: {name(placement.key)} · {selectedRecipe(suggestion.config!).entries.find(entry => entry.quickUseId === placement.id)?.delayMs} ms. {placement.reason}
+            </li>)}</ul>
+          </>}
+          {suggestion.manual.length > 0 && <div><h3 className="font-semibold">Manual charge skills</h3><ul>{suggestion.manual.map(item => <li key={item.key}>{name(item.key)}: {item.reason}</li>)}</ul></div>}
+          {suggestion.unplaced.length > 0 && <div><h3 className="font-semibold">Unplaced skills</h3><ul>{suggestion.unplaced.map(item => <li key={item.key}>{gd.skills[item.key]?.name ?? item.key}: {item.reason}</li>)}</ul></div>}
+          <p>Existing authored delays are reused by column. New entries use 10 ms only as a starter, user-editable setting, never an optimized delay.</p>
+          <p>This is a modeled configuration suggestion. Native eligibility, charge handling, retries, queue timing and set/entry capacity remain unverified. It does not predict native DPS or certify a scheduler. Frost immunity/proc routes and per-projectile Firestorm timing remain model limits; stagger contribution does not predict breaks.</p>
+          {issue && <p role="alert" className="nq-notice">{issue}</p>}
+          <div className="flex flex-wrap gap-3"><Button disabled={!suggestion.config} onClick={applySuggestion}>Apply suggested setup</Button>
+            <Button variant="secondary" onClick={() => setPreviewSuggestion(false)}>Cancel</Button></div>
+        </div>
+      </NativeDialog>}
       <div className="nq-section-heading"><h2 className="nq-section-title">Skill placement</h2><div className="nq-scroll-controls">
         <button type="button" aria-label="Scroll skill columns left" title="Scroll left" onClick={() => scroll(-1)}><ArrowLeft size={17} /></button>
         <button type="button" aria-label="Scroll skill columns right" title="Scroll right" onClick={() => scroll(1)}><ArrowRight size={17} /></button>

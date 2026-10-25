@@ -11,15 +11,16 @@ export function damageBreakdown(
   result: SimResult,
   names: Readonly<Record<string, string>>,
   limit?: number,
+  metric: "damage" | "stagger" = "damage",
 ): DamageDatum[] | null {
-  const total = result.total_damage;
-  if (!Number.isFinite(total) || total < 0) return null;
+  const total = metric === "stagger" ? result.total_stagger : result.total_damage;
+  if (typeof total !== "number" || !Number.isFinite(total) || total < 0) return null;
   if (limit !== undefined && (!Number.isSafeInteger(limit) || limit < 0)) return null;
   let sum = 0;
   const rows: DamageDatum[] = [];
   for (const [key, tally] of Object.entries(result.per_skill)) {
-    const damage = tally.damage;
-    if (!Number.isFinite(damage) || damage < 0) return null;
+    const damage = metric === "stagger" ? tally.stagger : tally.damage;
+    if (typeof damage !== "number" || !Number.isFinite(damage) || damage < 0) return null;
     sum += damage;
     if (damage === 0) continue;
     const readable = key.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/[_-]+/g, " ").trim();

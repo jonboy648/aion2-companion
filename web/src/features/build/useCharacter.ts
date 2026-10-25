@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { compare, importCharacter, warmEngine } from "@/engine/api";
 import { clearImportedCharacterContext, storeActiveBuild, storeImportedCharacterContext } from "@/features/keybinds/activeBuild";
-import { applyPoints, pointsKey, POINTS_DEBOUNCE_MS, usePoints, type Points } from "./unspentPoints";
+import { applyPoints, pointsKey, usePoints, type Points } from "./unspentPoints";
 import { ArmoryError, armoryExtras, fetchCharacter, search, type ArmoryExtras } from "@/lib/armory";
-import type { ArmoryRaw, ArmoryRegion, ArmorySearchHit, CompareResult, ImportResult } from "@/lib/types";
+import type { ArmoryRaw, ArmoryRegion, ArmorySearchHit, CompareResult, Goal, ImportResult } from "@/lib/types";
 
-export type Phase = "lookup" | "import" | "optimize" | "done" | "error";
+export type Phase = "lookup" | "import" | "ready" | "optimize" | "done" | "error";
 
 export interface CharacterState {
   phase: Phase;
@@ -34,12 +34,15 @@ export function pickHit(hits: ArmorySearchHit[], name: string, serverId: string,
  * Armory search -> fetch -> engine import -> compare, publishing each phase so the page can show the
  * character card as soon as the import lands while the (slow, in the real engine) optimizer still runs.
  */
-export function useCharacter(region: string, serverId: string, name: string): CharacterState & { points: Points; setPoints: (p: Points) => void; refresh: () => void } {
+export function useCharacter(region: string, serverId: string, name: string) {
   const [state, setState] = useState<CharacterState>(INITIAL);
   // bumped by refresh(): re-run the load, asking the proxy to skip its cache
   const [reloads, setReloads] = useState(0);
-  const [points, setPoints] = usePoints(pointsKey(region, serverId, name));
-  const comparedFor = useRef<ImportResult | null>(null);
+  const [points, savePoints] = usePoints(pointsKey(region, serverId, name));
+  const [goal, saveGoal] = useState<Goal>("damage");
+  const [calculation, setCalculation] = useState<{ imp: ImportResult; points: Points; goal: Goal } | null>(null);
+  const [pendingChanges, setPendingChanges] = useState(false);
+  const [calculationError, setCalculationError] = useState<string | null>(null);
 
   useEffect(() => {
     let live = true;
@@ -48,6 +51,9 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
 
     warmEngine(); // boot the engine while the armory request is in flight
     clearImportedCharacterContext();
+    setCalculation(null);
+    setCalculationError(null);
+    setPendingChanges(false);
     setState({ ...INITIAL, steps: [INITIAL.message] });
     (async () => {
       try {
@@ -79,33 +85,62 @@ export function useCharacter(region: string, serverId: string, name: string): Ch
     };
   }, [region, serverId, name, reloads]);
 
-  // compare = import + the typed unspent points. Immediate for a fresh import, debounced when the points change.
+  // A fresh import calculates automatically. Later edits only invalidate the submitted request.
   const imp = state.imp;
   useEffect(() => {
     if (!imp) return;
+    setCalculation({ imp, points: { ...points }, goal });
+  }, [imp]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!calculation || calculation.imp !== imp) return;
     let live = true;
-    const first = comparedFor.current !== imp;
-    comparedFor.current = imp;
     const timer = window.setTimeout(
       async () => {
-        const build = applyPoints(imp.build, points);
+        const build = applyPoints(calculation.imp.build, calculation.points);
         storeActiveBuild(build); // hand-off to Keybinds / Crafting / Road Map
         const step = (message: string) => live && setState((s) => ({ ...s, message, steps: [...s.steps, message] }));
         setState((s) => ({ ...s, phase: "optimize", message: "Comparing playstyles...", steps: [...s.steps, "Comparing playstyles..."] }));
         try {
-          const cmp = await compare(build, 0, step);
-          if (live) setState((s) => ({ ...s, phase: "done", cmp, message: "Done" }));
+          const cmp = await compare(build, 0, step, calculation.goal);
+          const mismatch = Object.values(cmp).find(fb =>
+            (fb.objective ?? fb.playstyle.scenario.objective ?? "damage") !== calculation.goal
+            || (fb.playstyle.scenario.objective !== undefined && fb.playstyle.scenario.objective !== calculation.goal));
+          if (mismatch) throw new Error(`The engine returned a ${mismatch.objective ?? mismatch.playstyle.scenario.objective ?? "damage"} result for the requested ${calculation.goal} goal. Calculate again with a matching engine.`);
+          if (live) {
+            setState((s) => ({ ...s, phase: "done", cmp, message: "Done" }));
+            setPendingChanges(false);
+          }
         } catch (e) {
-          if (live) setState((s) => ({ ...s, phase: "error", error: e instanceof Error ? e.message : String(e) }));
+          if (live) {
+            setCalculationError(e instanceof Error ? e.message : String(e));
+            setState((s) => ({ ...s, phase: s.cmp ? "done" : "ready" }));
+          }
         }
       },
-      first ? 0 : POINTS_DEBOUNCE_MS,
+      0,
     );
     return () => {
       live = false;
       window.clearTimeout(timer);
     };
-  }, [imp, points.skill, points.stigma]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [imp, calculation]);
 
-  return { ...state, points, setPoints, refresh: () => setReloads((n) => n + 1) };
+  const invalidate = () => {
+    setCalculation(null); // effect cleanup ignores late replies and progress; the worker keeps running
+    setPendingChanges(true);
+    setCalculationError(null);
+    setState((s) => ({ ...s, phase: s.cmp ? "done" : s.imp ? "ready" : s.phase }));
+  };
+  const calculate = () => {
+    if (!imp) return;
+    setPendingChanges(true);
+    setCalculationError(null);
+    setCalculation({ imp, points: { ...points }, goal });
+  };
+
+  return { ...state, points, goal, calculationError, stale: !!state.cmp && (pendingChanges || state.phase === "optimize"), calculate,
+    setPoints: (p: Points) => { invalidate(); savePoints(p); },
+    setGoal: (g: Goal) => { invalidate(); saveGoal(g); },
+    refresh: () => setReloads((n) => n + 1) };
 }

@@ -8,7 +8,7 @@ import type { FromWorker, InitConfig, Method, ToWorker } from "./protocol";
 import type {
   ArmoryRaw, CharacterBuild, ClassInfo, CompareResult, DaevanionSuggestion, FullBuild, GameData, IconUrls,
   GearUpgradesResult, ImportResult, KeybindsResult, MaxPotentialResult, PlaystyleKey, Priority, ProgressFn, RecipeMaterial, Region, RoadmapItem, StatSheet,
-  SkillBar, StatGain,
+  SkillBar, StatGain, Goal,
 } from "@/lib/types";
 
 /** Pinned Pyodide (Python 3.14.2). Bumping it is a deliberate change: re-measure compare() timing. */
@@ -143,7 +143,7 @@ export function createPyodideClient(opts: ClientOptions = {}) {
 
   /** compare() as one optimize() per playstyle across the pool; same cache entry and same result as the serial call. */
   async function compareParallel(args: unknown[], onProgress?: ProgressFn): Promise<CompareResult> {
-    const [build, points] = args as [CharacterBuild, number | null | undefined];
+    const [build, points, battlePoints, objective] = args;
     let key: string | null = null;
     if (store) {
       try {
@@ -158,7 +158,7 @@ export function createPyodideClient(opts: ClientOptions = {}) {
       }
     }
     const parts = await Promise.all(
-      PLAYSTYLES.map((k, i) => send("optimize", [build, k, points], onProgress, i % poolSize).then((j) => [k, JSON.parse(j) as FullBuild] as const)),
+      PLAYSTYLES.map((k, i) => send("optimize", [build, k, points, battlePoints, objective], onProgress, i % poolSize).then((j) => [k, JSON.parse(j) as FullBuild] as const)),
     );
     const out = Object.fromEntries(parts) as unknown as CompareResult;
     if (key) cacheSet(store, key, out);
@@ -186,10 +186,10 @@ export function createPyodideClient(opts: ClientOptions = {}) {
     gamedata: (classKey: string) => call<GameData>("gamedata", [classKey]),
     importCharacter: (raw: ArmoryRaw, baseBuild?: CharacterBuild | null) =>
       call<ImportResult>("importCharacter", [raw, baseBuild]),
-    compare: (build: CharacterBuild, daevanionPoints?: number | null, onProgress?: ProgressFn) =>
-      call<CompareResult>("compare", [build, daevanionPoints], onProgress),
-    optimize: (build: CharacterBuild, playstyleKey: PlaystyleKey, daevanionPoints?: number | null, onProgress?: ProgressFn) =>
-      call<FullBuild>("optimize", [build, playstyleKey, daevanionPoints], onProgress),
+    compare: (build: CharacterBuild, daevanionPoints?: number | null, onProgress?: ProgressFn, objective?: Goal) =>
+      call<CompareResult>("compare", objective === undefined ? [build, daevanionPoints] : [build, daevanionPoints ?? null, null, objective], onProgress),
+    optimize: (build: CharacterBuild, playstyleKey: PlaystyleKey, daevanionPoints?: number | null, onProgress?: ProgressFn, objective?: Goal) =>
+      call<FullBuild>("optimize", objective === undefined ? [build, playstyleKey, daevanionPoints] : [build, playstyleKey, daevanionPoints ?? null, null, objective], onProgress),
     marginal: (build: CharacterBuild, priority: Priority, scenarioKey: string) =>
       call<StatGain[]>("marginal", [build, priority, scenarioKey]),
     keybinds: (

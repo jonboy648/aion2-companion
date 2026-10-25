@@ -33,7 +33,7 @@ export function KeybindsPage() {
       <AlertTriangle aria-hidden className="mt-1 size-4 shrink-0 text-error" />
       <div className="min-w-0 flex-1"><p>Could not load Quick Use mappings.</p><p className="break-words text-sm text-dim">{error}</p></div>
       <Button variant="secondary" size="sm" onClick={kb.rerun}><RotateCcw />Retry</Button>
-    </div> : kb.result && kb.gd ? <NativeQuickslots build={build} gd={kb.gd} icons={kb.icons} plan={kb.result.plan} />
+    </div> : kb.result && kb.gd ? <NativeQuickslots build={build} gd={kb.gd} icons={kb.icons} plan={kb.result.plan} planned={planned} />
       : <div role="status" className="flex items-center gap-2 py-8 text-dim"><Loader2 className="size-4 animate-spin motion-reduce:animate-none" aria-hidden />Loading Quick Use mappings...</div>}
   </>;
 }
