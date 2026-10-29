@@ -1,0 +1,99 @@
+{
+ "fixtures": [
+  {
+   "path": "app/aion2c/data/classes/chanter/gamedata.json",
+   "sha256": "10489F9416205B9822A1ED18959B7434FA66C92C7D34FFAB9549E3064E33562E",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "app/aion2c/data/classes/gladiator/gamedata.json",
+   "sha256": "66CE744841127F7B01BAC3D15E2F0DA65EA8B94C8C8F69DD460B251126D37A8A",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "app/aion2c/data/classes/ranger/gamedata.json",
+   "sha256": "3BBD4AAADFCF561C7771B864CD670B86174D1B15EB4A3D2D88BF371376A79F62",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "app/aion2c/data/classes/sorcerer/gamedata.json",
+   "sha256": "68E06AD6E50CDCD63D3814ED813807E142F74C7714ADEA15A308C7EBB0D7CE93",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "app/aion2c/data/classes/spiritmaster/gamedata.json",
+   "sha256": "57045FA2B1C77ECAF23C0D90485FC5489BE4DB209B20304C492706644226F2A2",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "app/aion2c/data/classes/templar/gamedata.json",
+   "sha256": "A4C15EA7DE00326E271750D55915D64723C5BE0A72517E3195CEDD44FDF33D73",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "app/aion2c/engine/search.py",
+   "sha256": "4B93D160E2D1576ECB7C51A997DE473EEFC1976B7EAAF6D1D13382BBE9D789F6",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "app/aion2c/engine/simulator.py",
+   "sha256": "BB13CA7C880CC6ED026DBF7FDD11778AD614E0FDBFE8ECD12475A3FF66B18976",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/public/engine/aion2c.zip",
+   "sha256": "BECC7EE6E4E0C0897BC5A1126BED862D9B1E5B44469A869EE009EA12A5CA4DCD",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/public/engine/classes/chanter.json",
+   "sha256": "803504420CCD012EC37AA3CC280F14AAB159A76B1391FC07E1B007795AFC028B",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/public/engine/classes/gladiator.json",
+   "sha256": "A66440B6CFB26CC32C82661C8ADE5DF2435CB24222D8A04A4E6B9A4A1D0C9871",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/public/engine/classes/ranger.json",
+   "sha256": "3278A7386E024A8035C3F518D2EDC6FCFFC048553F8495E816FC0247A7543E7C",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/public/engine/classes/sorcerer.json",
+   "sha256": "CD51DAB321A2CEF9548D4025EC8AEBA6AF3EA110633DCB9A8A0856DE9B11E5EB",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/public/engine/classes/spiritmaster.json",
+   "sha256": "71E22670B12ACCB68CD33AB7CCB488742BD7554D9077816ECE78D04082D9BECA",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/public/engine/classes/templar.json",
+   "sha256": "BB2BEB30D97C4DE22EA69819AB687D030F8E53B2C3C84112739E2C97C38ACFB2",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/src/fixtures/compare.json",
+   "sha256": "1A100A0C6C9F5772D945F8D9ACF488574FB1220A82E8A087EA800CE6880092EC",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/src/fixtures/gear_upgrades.json",
+   "sha256": "B022057F8A4346F893982DB0754D75039E92A087E972144E56DB9DFB59F69C54",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/src/fixtures/marginal.json",
+   "sha256": "3B83B1352C58E33CC41C0A2DB519D752BAB3C4B79DEA121870EA6A69C494DFC5",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  },
+  {
+   "path": "web/src/fixtures/max_potential.json",
+   "sha256": "8E7A9D9B3D7186F9A7515323CCDDE4275884B8FFBA499C2AD51C526E7084AB02",
+   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+  }
+ ]
+}
