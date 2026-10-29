@@ -162,7 +162,9 @@ describe("pages (mock engine)", () => {
     const submit = screen.getByRole("button", { name: "Calculate plan" });
     await waitFor(() => expect(submit).not.toBeDisabled());
     fireEvent.click(submit);
-    expect(await screen.findByRole("alert", undefined, { timeout: 5000 })).toHaveTextContent("The returned plan is not valid");
+    // A missing alert is expected while the mock request is running. Avoid
+    // repeatedly formatting the large planner DOM on every unsuccessful poll.
+    await waitFor(() => expect(screen.queryByRole("alert")).toHaveTextContent("The returned plan is not valid"), { timeout: 5000 });
     expect(screen.queryByTestId("playstyle-detail")).toBeNull();
   });
 

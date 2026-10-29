@@ -111,12 +111,18 @@
      },
      {
       "index": 4,
+      "key_label": "5",
+      "delay_ms": 10,
+      "quick_use_id": 9
+     },
+     {
+      "index": 5,
       "key_label": "7",
       "delay_ms": 10,
       "quick_use_id": 11
      },
      {
-      "index": 5,
+      "index": 6,
       "key_label": "8",
       "delay_ms": 10,
       "quick_use_id": 12
@@ -141,30 +147,18 @@
      },
      {
       "index": 3,
-      "key_label": "3",
-      "delay_ms": 10,
-      "quick_use_id": 5
-     },
-     {
-      "index": 4,
-      "key_label": "T",
-      "delay_ms": 10,
-      "quick_use_id": 7
-     },
-     {
-      "index": 5,
       "key_label": "5",
       "delay_ms": 10,
       "quick_use_id": 9
      },
      {
-      "index": 6,
+      "index": 4,
       "key_label": "7",
       "delay_ms": 10,
       "quick_use_id": 11
      },
      {
-      "index": 7,
+      "index": 5,
       "key_label": "8",
       "delay_ms": 10,
       "quick_use_id": 12
@@ -315,5 +309,5 @@
   ],
   "queue_status": "unverified"
  },
- "instructions_markdown": "# Aion 2 Quick Use setup\n\nClient-table setup; queue runtime behavior is unverified. This site does not send input to the game.\n\n## Bindings\n\n| Action | Physical slot | Binding | Assigned skill |\n| --- | --- | --- | --- |\n| Quick Use 1 | 1 | Left mouse | Flame Arrow |\n| Quick Use 2 | 2 | Right mouse | Ice Chain |\n| Quick Use 3 | 3 | 1 | Firestorm |\n| Quick Use 4 | 4 | 2 | Bittercold Wind |\n| Quick Use 5 | 5 | 3 | Winter's Shackles |\n| Quick Use 6 | 6 | 4 | Hellfire |\n| Quick Use 7 | 7 | T | Frost Burst |\n| Quick Use 8 | 8 | ` | Flame Scattershot |\n| Quick Use 9 | 21 | 5 | Cold Storm |\n| Quick Use 10 | 22 | 6 | Delayed Explosion |\n| Quick Use 11 | 23 | 7 | Element Enhancement |\n| Quick Use 12 | 24 | 8 | Fire Wall |\n\n## Macro limits\n\n- Maximum 20 entries; delay 10-9900 ms.\n- Hold the macro key to attempt its entries; order is not guaranteed.\n- Your manual inputs take priority over macro attempts.\n- Check Skill Queue in the game's control settings. Queue capacity, retries and replacement behavior remain unverified.\n- Mouse bindings cannot be used in macros in AION 1 control mode; confirm your control mode in game.\n- Entries below are setup candidates, not a verified rotation or DPS prediction.\n- Numbering records configured entries, not runtime execution order; entries are listed by Quick Use identity.\n\n## Boss loop\n\nHold key: F9\n\n1. Quick Use 1 (Left mouse), delay 10 ms\n2. Quick Use 3 (1), delay 10 ms\n3. Quick Use 5 (3), delay 10 ms\n4. Quick Use 11 (7), delay 10 ms\n5. Quick Use 12 (8), delay 10 ms\n\n## AoE loop\n\nHold key: F10\n\n1. Quick Use 1 (Left mouse), delay 10 ms\n2. Quick Use 3 (1), delay 10 ms\n3. Quick Use 5 (3), delay 10 ms\n4. Quick Use 7 (T), delay 10 ms\n5. Quick Use 9 (5), delay 10 ms\n6. Quick Use 11 (7), delay 10 ms\n7. Quick Use 12 (8), delay 10 ms\n\n## Placement\n\nClass context skills are alternatives, not confirmed four-row stack assignments.\nCustom moves need an in-game check where the client tables' editability flags differ.\n"
+ "instructions_markdown": "# Aion 2 Quick Use setup\n\nClient-table setup; queue runtime behavior is unverified. This site does not send input to the game.\n\n## Bindings\n\n| Action | Physical slot | Binding | Assigned skill |\n| --- | --- | --- | --- |\n| Quick Use 1 | 1 | Left mouse | Flame Arrow |\n| Quick Use 2 | 2 | Right mouse | Ice Chain |\n| Quick Use 3 | 3 | 1 | Firestorm |\n| Quick Use 4 | 4 | 2 | Bittercold Wind |\n| Quick Use 5 | 5 | 3 | Winter's Shackles |\n| Quick Use 6 | 6 | 4 | Hellfire |\n| Quick Use 7 | 7 | T | Frost Burst |\n| Quick Use 8 | 8 | ` | Flame Scattershot |\n| Quick Use 9 | 21 | 5 | Cold Storm |\n| Quick Use 10 | 22 | 6 | Delayed Explosion |\n| Quick Use 11 | 23 | 7 | Element Enhancement |\n| Quick Use 12 | 24 | 8 | Fire Wall |\n\n## Macro limits\n\n- Maximum 20 entries; delay 10-9900 ms.\n- Hold the macro key to attempt its entries; order is not guaranteed.\n- Your manual inputs take priority over macro attempts.\n- Check Skill Queue in the game's control settings. Queue capacity, retries and replacement behavior remain unverified.\n- Mouse bindings cannot be used in macros in AION 1 control mode; confirm your control mode in game.\n- Entries below are setup candidates, not a verified rotation or DPS prediction.\n- Numbering records configured entries, not runtime execution order; entries are listed by Quick Use identity.\n\n## Boss loop\n\nHold key: F9\n\n1. Quick Use 1 (Left mouse), delay 10 ms\n2. Quick Use 3 (1), delay 10 ms\n3. Quick Use 5 (3), delay 10 ms\n4. Quick Use 9 (5), delay 10 ms\n5. Quick Use 11 (7), delay 10 ms\n6. Quick Use 12 (8), delay 10 ms\n\n## AoE loop\n\nHold key: F10\n\n1. Quick Use 1 (Left mouse), delay 10 ms\n2. Quick Use 3 (1), delay 10 ms\n3. Quick Use 9 (5), delay 10 ms\n4. Quick Use 11 (7), delay 10 ms\n5. Quick Use 12 (8), delay 10 ms\n\n## Placement\n\nClass context skills are alternatives, not confirmed four-row stack assignments.\nCustom moves need an in-game check where the client tables' editability flags differ.\n"
 }

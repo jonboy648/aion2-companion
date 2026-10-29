@@ -1,12 +1,13 @@
 """Specialty chooser: which option(s) of each skill to equip for this build's ranks and playstyle.
 
-Greedy by simulated DPS: skills are visited best-first, each fills its open slots one option at a time (every
+Greedy by the scenario's goal: skills are visited best-first, each fills its open slots one option at a time (every
 step re-simulated with the options already equipped, so overlapping effects such as two cooldown cuts are not
 double counted). Options that cannot change damage (mobility, crowd control, unknown text) are skipped.
 `simulate` is imported at module level so tests can monkeypatch it here.
 """
 from dataclasses import dataclass, replace
 
+from aion2c.engine.objectives import score
 from aion2c.engine.simulator import simulate
 from aion2c.models import CharacterBuild, GameData, Priority, Scenario, SimConfig, Skill, SkillKind, total_rank
 from aion2c.specs import available_options, slot_room, slots_at
@@ -22,6 +23,7 @@ class SpecPick:
     text: str
     dps_gain_pct: float  # DPS lost if this one option is removed from the final build (leave-one-out)
     confidence: str  # weakest confidence of the option's effects ("unknown" = value not in any source)
+    goal_gain_pct: float | None = 0.0  # selected goal gain; None when the positive gain has a zero baseline
 
 
 def skill_rank(gd: GameData, build: CharacterBuild, key: str) -> int:
@@ -67,7 +69,7 @@ def _kinds(sk: Skill, i: int) -> set[str]:
 
 def choose_specs(gd: GameData, build: CharacterBuild, priority: Priority, scenario: Scenario,
                  cfg: SimConfig = SimConfig(), progress=None, only=None) -> dict[str, tuple[int, ...]]:
-    """Best specialty options per skill (skill key -> 0-based option indices). Only options that raise DPS.
+    """Best specialty options per skill (skill key -> 0-based option indices). Only options that raise the goal.
 
     Pass 1 fills every skill's open slots greedily (a skill is visited when its best single option beats the DPS
     the loop started from, not the running DPS: every skill after the first used to fail that test and went bare).
@@ -85,8 +87,8 @@ def choose_specs(gd: GameData, build: CharacterBuild, priority: Priority, scenar
             if opts:
                 keys.append((k, r, opts))
     specs: dict[str, tuple[int, ...]] = {}
-    cur = simulate(gd, replace(build, specs={}), priority, scenario, cfg).dps
-    if not keys or cur <= 0:
+    cur = score(simulate(gd, replace(build, specs={}), priority, scenario, cfg), scenario)
+    if not keys:
         return specs
     cur0 = cur
     seen: dict[tuple, float] = {}
@@ -94,7 +96,7 @@ def choose_specs(gd: GameData, build: CharacterBuild, priority: Priority, scenar
     def dps(trial: dict[str, tuple[int, ...]]) -> float:
         ck = tuple(sorted((k, tuple(v)) for k, v in trial.items() if v))
         if ck not in seen:
-            seen[ck] = simulate(gd, replace(build, specs=trial), priority, scenario, cfg).dps
+            seen[ck] = score(simulate(gd, replace(build, specs=trial), priority, scenario, cfg), scenario)
         return seen[ck]
 
     # first pass: best single option per skill orders the skills
@@ -160,10 +162,10 @@ def choose_specs(gd: GameData, build: CharacterBuild, priority: Priority, scenar
 
 def spec_picks(gd: GameData, build: CharacterBuild, priority: Priority, scenario: Scenario,
                cfg: SimConfig = SimConfig()) -> tuple[SpecPick, ...]:
-    """The equipped options with the DPS each one adds (leave-one-out against the full equipped set)."""
+    """Equipped options with separate HP DPS and selected-goal gains (leave-one-out)."""
     if not build.specs:
         return ()
-    full = simulate(gd, build, priority, scenario, cfg).dps
+    full = simulate(gd, build, priority, scenario, cfg)
     out = []
     for k, opts in build.specs.items():
         sk = gd.skills.get(k)
@@ -172,9 +174,12 @@ def spec_picks(gd: GameData, build: CharacterBuild, priority: Priority, scenario
         for i in opts:
             rest = tuple(o for o in opts if o != i)
             trial = {**build.specs, k: rest} if rest else {kk: v for kk, v in build.specs.items() if kk != k}
-            without = simulate(gd, replace(build, specs=trial), priority, scenario, cfg).dps
-            gain = (full / without - 1) * 100 if without > 0 else 0.0
+            without = simulate(gd, replace(build, specs=trial), priority, scenario, cfg)
+            gain = (full.dps / without.dps - 1) * 100 if without.dps > 0 else 0.0
+            baseline = score(without, scenario)
+            goal_gain = ((score(full, scenario) / baseline - 1) * 100 if baseline > 0
+                         else None if score(full, scenario) > 0 else 0.0)
             out.append(SpecPick(k, i, sk.specializations[i].text if i < len(sk.specializations) else "", gain,
-                                _conf(sk, i) if i < len(sk.specializations) else "unknown"))
-    out.sort(key=lambda p: -p.dps_gain_pct)
+                                _conf(sk, i) if i < len(sk.specializations) else "unknown", goal_gain))
+    out.sort(key=lambda p: -p.goal_gain_pct if p.goal_gain_pct is not None else -float("inf"))
     return tuple(out)

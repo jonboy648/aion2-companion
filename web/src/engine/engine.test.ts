@@ -107,6 +107,25 @@ describe("pyodide client", () => {
     expect(sent.length).toBe(2);
   });
 
+  it("forwards serial goals past the battle budget and separates cached objectives", async () => {
+    const { client, sent } = mk((m, send) => {
+      send({ id: m.id, type: "progress", message: "Searching" });
+      send({ id: m.id, type: "result", json: JSON.stringify({ request: m.id }) });
+    });
+    const progress: string[] = [];
+    const damage = await client.compare(build, 7);
+    const stagger = await client.compare(build, 7, (m) => progress.push(m), "stagger");
+    expect(sent[1].args).toEqual([build, 7, null, "stagger"]);
+    expect(stagger).not.toEqual(damage);
+    expect(await client.compare(build, 7, undefined, "stagger")).toEqual(stagger);
+    expect(sent).toHaveLength(2);
+    expect(progress).toEqual(["Searching"]);
+    await client.optimize(build, "boss", undefined, undefined, "stagger");
+    expect(sent[2].args).toEqual([build, "boss", null, null, "stagger"]);
+    await client.optimize(build, "boss");
+    expect(sent[3].args).toEqual([build, "boss"]);
+  });
+
   describe("warm-up", () => {
     it("boots every worker of the pool once, ahead of any real call, and tolerates a failing boot", async () => {
       const ws = [0, 1, 2].map(() => fakeWorker((m, send) => send({ id: m.id, type: "result", json: "[]" })));
@@ -165,6 +184,18 @@ describe("pyodide client", () => {
       const { client, ws } = pool(2);
       await client.compare(build, null);
       expect(ws.map((w) => w.sent.length)).toEqual([2, 2]);
+    });
+
+    it("forwards stagger on every pool lane and shares only matching objective cache entries", async () => {
+      const store = new MemStore();
+      const { client, ws } = pool(2, store);
+      await client.compare(build, 7);
+      const stagger = await client.compare(build, 7, undefined, "stagger");
+      expect(ws.flatMap(w => w.sent).filter(m => m.args.at(-1) === "stagger").map(m => m.args))
+        .toEqual(expect.arrayContaining(["boss", "aoe", "leveling", "burst"].map(k => [build, k, 7, null, "stagger"])));
+      const serial = createPyodideClient({ workerFactory: () => { throw new Error("Expected cache hit"); }, store, dataVersion: async () => "dv1" });
+      expect(await serial.compare(build, 7, undefined, "stagger")).toEqual(stagger);
+      expect(ws.flatMap(w => w.sent)).toHaveLength(8);
     });
 
     it("keeps one worker (serial compare) when parallelism is 1", async () => {

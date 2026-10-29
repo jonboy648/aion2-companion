@@ -21,6 +21,7 @@ from aion2c.classes import CLASSES, DEFAULT_CLASS, class_info
 from aion2c.data.loader import CLASSES_DIR, default_path, load_gamedata
 from aion2c.engine import build_optimizer as bo
 from aion2c.engine.advisor import marginal_stats
+from aion2c.engine.objectives import score, validate_objective
 from aion2c.engine.rotation import explain_rotation
 from aion2c.engine.simulator import simulate
 from aion2c.keybinds import export as kb_export
@@ -144,23 +145,29 @@ def _full_dict(gd: GameData, fb, current: CharacterBuild | None = None) -> dict:
     plan. See bo.current_build_dps."""
     d = serde.to_dict(fb)
     d["rotation_explained"] = explain_rotation(gd, fb.build, fb.priority, fb.result, fb.playstyle.scenario)
-    d["current_dps"] = None if current is None else bo.current_build_dps(gd, current, fb.playstyle.scenario, SimConfig())
+    baseline = None if current is None else bo.current_build_result(gd, current, fb.playstyle.scenario, SimConfig())
+    d["current_dps"] = None if baseline is None else baseline.dps
+    d["current_objective_score"] = None if baseline is None else score(baseline, fb.playstyle.scenario)
     return d
 
 
-def compare(build: dict, daevanion_points: int | None = None, progress=None, battle_points: int | None = None) -> dict:
+def compare(build: dict, daevanion_points: int | None = None, progress=None, battle_points: int | None = None,
+            objective: str = "damage") -> dict:
     """All four playstyles -> {playstyle_key: FullBuild dict (incl. variants, rotation_explained)}."""
+    validate_objective(objective)
     b = _build(build)
     gd = _gd(b.class_key)
-    out = bo.compare_playstyles(gd, b, daevanion_points, SimConfig(), progress, battle_points)
+    out = bo.compare_playstyles(gd, b, daevanion_points, SimConfig(), progress, battle_points, objective)
     return {k: _full_dict(gd, fb, b) for k, fb in out.items()}
 
 
 def optimize(build: dict, playstyle_key: str, daevanion_points: int | None = None, progress=None,
-             battle_points: int | None = None) -> dict:
+             battle_points: int | None = None, objective: str = "damage") -> dict:
+    validate_objective(objective)
     b = _build(build)
     gd = _gd(b.class_key)
-    fb = bo.optimize_full_build(gd, b, playstyle_key, daevanion_points, progress=progress, battle_points=battle_points)
+    fb = bo.optimize_full_build(gd, b, playstyle_key, daevanion_points, progress=progress, battle_points=battle_points,
+                                objective=objective)
     return _full_dict(gd, fb, b)
 
 

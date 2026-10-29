@@ -11,6 +11,7 @@ from aion2c.data.loader import allowed_skills
 from aion2c.engine.community import compare
 from aion2c.engine.damage import hp_damage_coeff, per_hit_multiplier
 from aion2c.engine.explain import explain_ranked
+from aion2c.engine.objectives import score, validate_objective, with_stagger_coverage
 from aion2c.engine.simulator import simulate, stigma_gates, window_castable  # noqa: F401  (simulate is a patch target)
 from aion2c.models import (
     CharacterBuild,
@@ -31,8 +32,13 @@ from aion2c.models import (
 _CASTABLE_KINDS = (SkillKind.ACTIVE, SkillKind.STIGMA)
 
 
-def _deals_damage_or_applies(gd: GameData, s: Skill) -> bool:
+def _deals_damage_or_applies(gd: GameData, s: Skill, objective: str = "damage") -> bool:
     rule = gd.rules.get(s.key)
+    if objective == "stagger" and (
+        (s.stagger_gauge or 0) > 0
+        or (rule and any((lv.stagger_gauge or 0) > 0 for lv in rule.charge_levels))
+    ):
+        return True
     if hp_damage_coeff(s) > 0:  # stagger-only skills deal no HP damage
         if (s.atk_ratio_pct.value or 0) > 0:
             return True
@@ -59,7 +65,7 @@ def is_castable_here(gd: GameData, build: CharacterBuild, s: Skill, gates: dict[
     return s.kind in _CASTABLE_KINDS
 
 
-def candidate_skills(gd: GameData, build: CharacterBuild) -> list[PriorityEntry]:
+def candidate_skills(gd: GameData, build: CharacterBuild, objective: str = "damage") -> list[PriorityEntry]:
     """Castable skills for this build; charge skills get one entry per level."""
     out: list[PriorityEntry] = []
     gates = stigma_gates(gd)
@@ -68,7 +74,7 @@ def candidate_skills(gd: GameData, build: CharacterBuild) -> list[PriorityEntry]
             continue
         if s.unlock_level is not None and s.unlock_level > build.level:
             continue
-        if not _deals_damage_or_applies(gd, s):
+        if not _deals_damage_or_applies(gd, s, objective):
             continue
         rule = gd.rules.get(s.key)
         if rule and rule.charge_levels:
@@ -133,7 +139,7 @@ def _is_buff(gd: GameData, key: str) -> float:
 
 
 def _skill_numbers(gd: GameData, build: CharacterBuild, scenario: Scenario, e: PriorityEntry):
-    """(damage per cast estimate, lock_s incl. charge, cooldown_s) for a candidate entry."""
+    """(goal contribution per cast estimate, lock_s incl. charge, cooldown_s) for a candidate entry."""
     s = gd.skills[e.skill_key]
     rank = total_rank(gd, build, s)
     rd = s.ranks[rank - 1] if s.ranks else None
@@ -149,6 +155,9 @@ def _skill_numbers(gd: GameData, build: CharacterBuild, scenario: Scenario, e: P
     st = build.stats
     base = st.attack * (1 + st.attack_increase_pct / 100) * (1 + st.weapon_dmg_pct / 100)
     dmg = (base * _num(s.atk_ratio_pct) / 100 * cmult + flat) * per_hit_multiplier(s) * min(scenario.n_targets, s.aoe_targets)
+    if scenario.objective == "stagger":
+        gauge = lv.stagger_gauge if rule and rule.charge_levels else s.stagger_gauge
+        dmg = (gauge or 0.0) * min(scenario.n_targets, s.aoe_targets)
     lock = (_num(s.anim_lock_s) or 1.0) / (1 + st.combat_speed_pct / 100) + charge_s
     return dmg, max(lock, 0.05), cd
 
@@ -243,7 +252,8 @@ def optimize(
     budget: SearchBudget = SearchBudget(),
     top_k: int = 5,
 ) -> OptimizeResult:
-    cands = candidate_skills(gd, build)
+    validate_objective(scenario.objective)
+    cands = candidate_skills(gd, build, scenario.objective)
     if not cands:
         return OptimizeResult(scenario, (), ())
     rng = random.Random(budget.seed)
@@ -284,7 +294,7 @@ def optimize(
                     if sims >= limit:
                         break
                     continue
-                if r.dps > cur_res.dps * (1 + 1e-9):
+                if score(r, scenario) > score(cur_res, scenario) * (1 + 1e-9):
                     cur, cur_res, improved = nb, r, True
                     break
             if sims >= limit:
@@ -294,7 +304,7 @@ def optimize(
     # out of the winner. Try each buff at the front of the best priority (inserted, or moved there); keep what helps.
     buff_entries = [e for e in _highest_level_entries(cands) if _is_buff(gd, e.skill_key)]
     for _ in range(len(buff_entries)):
-        best_e = max(order, key=lambda e: cache[e].dps)
+        best_e = max(order, key=lambda e: score(cache[e], scenario))
         improved_any = False
         for be in buff_entries:
             if best_e and best_e[0].skill_key == be.skill_key:
@@ -305,13 +315,13 @@ def optimize(
             res = simulate(gd, build, Priority(trial), scenario, cfg)
             cache[trial] = res
             order.append(trial)
-            if res.dps > cache[best_e].dps * (1 + 1e-9):
+            if score(res, scenario) > score(cache[best_e], scenario) * (1 + 1e-9):
                 best_e, improved_any = trial, True
         if not improved_any:
             break
 
     pos = {e: i for i, e in enumerate(order)}
-    ranked = sorted(order, key=lambda e: (-cache[e].dps, len(e), pos[e]))
+    ranked = sorted(order, key=lambda e: (-score(cache[e], scenario), len(e), pos[e]))
     picked: list[tuple[PriorityEntry, ...]] = []
     sigs = set()
     for e in ranked:
@@ -323,15 +333,17 @@ def optimize(
         if len(picked) >= top_k:
             break
 
-    results = [cache[e] for e in picked]
+    results = [with_stagger_coverage(cache[e], gd, scenario, cands, build) for e in picked]
     note = f"{len(cache)} distinct priorities simulated"
     results[0] = dataclasses.replace(results[0], warnings=results[0].warnings + (note,))
     options = []
     for i, (e, res) in enumerate(zip(picked, results)):
-        if i + 1 < len(results):
+        if scenario.objective == "stagger":
+            text = f"Option {i + 1}: {res.stagger_per_s:.1f} modeled gauge/s (not predicted breaks)."
+        elif i + 1 < len(results):
             text = explain_ranked(res, results[i + 1], gd, f"Option {i + 1}", f"{i + 2}")
         else:
             text = f"Option {i + 1}: lowest of the {len(results)} kept, {res.dps:.1f} DPS."
         options.append(RankedOption(i + 1, Priority(e, label=f"Option {i + 1}"), res, text))
-    disagreements = compare(gd, build, scenario, options[0], cfg)
+    disagreements = compare(gd, build, scenario, options[0], cfg) if scenario.objective == "damage" else ()
     return OptimizeResult(scenario, tuple(options), disagreements)

@@ -96,7 +96,7 @@ describe("Character page unspent points", () => {
       </MemoryRouter>,
     );
 
-  it("re-runs compare with the typed points (debounced) and persists them", { timeout: 20000 }, async () => {
+  it("calculates with the typed points on request and persists them", { timeout: 20000 }, async () => {
     renderPage();
     const input = await screen.findByLabelText("Skill points", undefined, { timeout: 5000 });
     await waitFor(() => expect(compareSpy).toHaveBeenCalledTimes(1), { timeout: 5000 });
@@ -105,7 +105,8 @@ describe("Character page unspent points", () => {
 
     fireEvent.change(input, { target: { value: "3" } });
     fireEvent.change(input, { target: { value: "36" } });
-    expect(compareSpy).toHaveBeenCalledTimes(1); // debounced
+    expect(compareSpy).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole("button", { name: "Calculate" }));
     await waitFor(() => expect(compareSpy).toHaveBeenCalledTimes(2), { timeout: 3000 });
     expect(compareSpy.mock.calls[1][0]).toMatchObject({ skill_points: 36, stigma_points: null });
     expect(loadPoints(KEY).skill).toBe("36");

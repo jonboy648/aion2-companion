@@ -2,6 +2,7 @@
 from dataclasses import replace
 
 from aion2c.data.loader import allowed_skills
+from aion2c.engine.objectives import score
 from aion2c.engine.simulator import simulate  # noqa: F401  (patch target)
 from aion2c.progression import max_rank_at_level, stigma_unlock
 from aion2c.specs import available_options, slot_room
@@ -92,20 +93,20 @@ def _pool(gd, build, skills, costs, region_cap_key, points, ranks, base, priorit
             return hit
         b = replace(build, skill_ranks=rk)
         sk = by_key[key]
-        best = simulate(gd, b, priority, scenario, cfg).dps
+        best = score(simulate(gd, b, priority, scenario, cfg), scenario)
         opts = [i for i in available_options(gd, sk, rank) if _matters(sk, i)]
         slots = slot_room(gd, sk, rank)
         if opts:
             # price each option alone, then fill the open slots best-first, keeping an option only if it still adds
             # DPS next to the ones already taken (n + slots simulations instead of n x slots)
-            alone = {i: simulate(gd, replace(b, specs={**b.specs, key: (i,)}), priority, scenario, cfg).dps for i in opts}
+            alone = {i: score(simulate(gd, replace(b, specs={**b.specs, key: (i,)}), priority, scenario, cfg), scenario) for i in opts}
             chosen: tuple[int, ...] = ()
             bare = best
             for i in sorted(opts, key=lambda o: -alone[o]):
                 if len(chosen) >= slots or alone[i] <= bare * (1 + MIN_GAIN):
                     break
-                d = alone[i] if not chosen else simulate(
-                    gd, replace(b, specs={**b.specs, key: chosen + (i,)}), priority, scenario, cfg).dps
+                d = alone[i] if not chosen else score(simulate(
+                    gd, replace(b, specs={**b.specs, key: chosen + (i,)}), priority, scenario, cfg), scenario)
                 if d > best * (1 + MIN_GAIN):
                     best, chosen = d, chosen + (i,)
         memo[mk] = best
@@ -176,18 +177,18 @@ def allocate_points(
 
     Skill points go to castable non-stigma skills of `priority` (cap rank 10), stigma points to
     `build.stigmas` that the priority casts (cap = region stigma cap). Only upgrades with a positive
-    simulated DPS gain are bought, so unknown/flat-less skills get nothing. Returns the new
-    `skill_ranks` (copy) and a log of (skill, new rank, DPS gain %) in purchase order.
+    simulated goal gain are bought. Returns the new `skill_ranks` (copy) and a log of
+    (skill, new rank, selected goal gain %) in purchase order.
     """
     ranks = dict(build.skill_ranks)
     log: list[tuple[str, int, float]] = []
     castable = _castable(gd, build, priority)
-    base = simulate(gd, build, priority, scenario, cfg).dps
+    base = score(simulate(gd, build, priority, scenario, cfg), scenario)
     plain = [s for s in castable if s.kind != SkillKind.STIGMA]
     stig = [s for s in castable if s.kind == SkillKind.STIGMA and s.key in build.stigmas]
     if not skip_core:
         _pool(gd, build, plain, SKILL_POINT_COST, "core", build.skill_points, ranks, base, priority, scenario, cfg, log)
-    base2 = simulate(gd, replace(build, skill_ranks=ranks), priority, scenario, cfg).dps if log else base
+    base2 = score(simulate(gd, replace(build, skill_ranks=ranks), priority, scenario, cfg), scenario) if log else base
     points = build.stigma_points
     if points and not stigma_unlock(gd, build).unlocked:
         points = 0  # stigmas cannot be bought before the unlock (Ascension grade 3 + faction quest)

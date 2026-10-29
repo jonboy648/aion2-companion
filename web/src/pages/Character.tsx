@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Check, Share2 } from "lucide-react";
 import { useCharacterFaction } from "@/components/game/faction";
 import { PageHeader } from "@/components/PageHeader";
@@ -15,7 +15,8 @@ import { StatSheetSection } from "@/features/statsheet/StatSheetSection";
 import { UnspentPoints } from "@/features/build/UnspentPointsInput";
 import { useCharacter } from "@/features/build/useCharacter";
 import { useClassData } from "@/features/build/useClassData";
-import type { ArmoryRegion, PlaystyleKey } from "@/lib/types";
+import { storePlannedBuild } from "@/features/keybinds/activeBuild";
+import type { ArmoryRegion, Goal, PlaystyleKey } from "@/lib/types";
 
 function ShareButton() {
   const [copied, setCopied] = useState(false);
@@ -60,6 +61,7 @@ export function Character() {
   const { region = "nae", serverId = "", name: rawName = "" } = useParams();
   const name = safeDecode(rawName);
   const st = useCharacter(region, serverId, name);
+  const navigate = useNavigate();
   const data = useClassData(st.imp?.build.class_key);
   const [playstyle, setPlaystyle] = useState<PlaystyleKey>("boss"); // shared by the playstyle strip and the gear cards
   useCharacterFaction(st.imp?.profile.race);
@@ -116,13 +118,30 @@ export function Character() {
       {imp ? <CharacterCard imp={imp} data={data} extras={st.extras} /> : <ProgressPanel title="Importing character" message={st.message} steps={st.steps} />}
 
       {imp && <UnspentPoints value={st.points} onChange={st.setPoints} />}
+      {imp && <div className="mb-6 flex flex-wrap items-center gap-3 frame px-4 py-3">
+        <label className="flex items-center gap-2 text-sm">
+          <span className="text-dim">Goal</span>
+          <select className="h-9 rounded border border-edge bg-surface px-3" value={st.goal} onChange={e => st.setGoal(e.target.value as Goal)}>
+            <option value="damage">Damage</option>
+            <option value="stagger">Stagger</option>
+          </select>
+        </label>
+        <Button onClick={st.calculate} disabled={st.phase === "optimize"}>Calculate</Button>
+        <p className="basis-full text-xs text-dim">Goal and point edits apply when you calculate.</p>
+      </div>}
 
-      {imp && st.phase !== "done" && <ProgressPanel title="Comparing playstyles" message={st.message} steps={st.steps} />}
-      {st.cmp && <BuildResults cmp={st.cmp} data={data} selected={playstyle} onSelect={setPlaystyle} />}
+      {st.calculationError && <p role="alert" className="mb-4 text-sm text-error">{st.calculationError}</p>}
+      {imp && st.phase === "optimize" && <ProgressPanel title="Comparing playstyles" message={st.message} steps={st.steps} />}
+      {st.stale && <p role="status" aria-label="Result status" className="mb-4 frame p-3 text-sm text-gold">Out of date — showing the previous calculation. Calculate to apply your current goal and points.</p>}
+      {st.cmp && <BuildResults cmp={st.cmp} data={data} selected={playstyle} onSelect={setPlaystyle} disabled={st.stale} onUsePlan={fb => {
+        if (st.stale || st.phase !== "done") return;
+        storePlannedBuild(fb);
+        navigate("/keybinds");
+      }} />}
 
       {imp && st.raw && <StatSheetSection raw={st.raw} ready={st.phase === "done"} />}
 
-      {imp && st.raw && <GearSection imp={imp} raw={st.raw} playstyle={playstyle} onPlaystyle={setPlaystyle} ready={st.phase === "done"} region={region} />}
+      {imp && st.raw && st.goal === "damage" && <GearSection imp={imp} raw={st.raw} playstyle={playstyle} onPlaystyle={setPlaystyle} ready={st.phase === "done"} region={region} />}
 
       {imp && imp.notes.length > 0 && st.phase === "done" && (
         <details className="mt-6 text-xs text-dim">

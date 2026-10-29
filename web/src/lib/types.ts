@@ -100,6 +100,8 @@ export interface StatusTrigger {
 }
 
 export interface ChargeLevel {
+  stagger_gauge?: number | null;
+  fast_charge_s?: Num | null;
   level: number;
   charge_s: Num;
   dmg_mult: Num;
@@ -110,6 +112,7 @@ export interface ChargeLevel {
 }
 
 export interface SkillRule {
+  fast_charge_spec?: [string, number] | null;
   skill_key: string;
   applies: string[];
   apply_chance: number;
@@ -257,7 +260,11 @@ export interface CharacterBuild {
   bonus_ranks: Record<string, number>;
 }
 
+export type Goal = "damage" | "stagger";
+
 export interface Scenario {
+  /** Missing in historical results means damage. */
+  objective?: Goal;
   key: string;
   name: string;
   duration_s: number;
@@ -277,6 +284,7 @@ export interface Priority {
 }
 
 export interface CastEvent {
+  stagger?: number;
   t_s: number;
   skill_key: string;
   charge_level: number;
@@ -286,11 +294,14 @@ export interface CastEvent {
 }
 
 export interface SkillTally {
+  stagger?: number;
   casts: number;
   damage: number;
 }
 
 export interface SimResult {
+  total_stagger?: number;
+  stagger_per_s?: number;
   total_damage: number;
   dps: number;
   duration_s: number;
@@ -330,6 +341,11 @@ export interface BuildVariant {
 }
 
 export interface FullBuild {
+  /** Additive fields; historical results default to damage and HP DPS. */
+  objective?: Goal;
+  objective_score?: number;
+  objective_unit?: string;
+  current_objective_score?: number | null;
   playstyle: Playstyle;
   build: CharacterBuild;
   stigma_picks: [string, number][];
@@ -352,6 +368,7 @@ export interface FullBuild {
 }
 
 export interface SpecPick {
+  goal_gain_pct?: number;
   skill_key: string;
   option: number;
   text: string;

@@ -36,3 +36,12 @@ research/gear_samples/
 research/community_builds/
 web/dist_*/
 web/.planner-acceptance/
+
+# Local private keys and credential containers
+*.pem
+*.key
+*.pfx
+*.p12
+credentials*.json
+token*.json
+client_secret*.json

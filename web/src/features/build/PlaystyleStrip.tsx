@@ -2,6 +2,7 @@ import type { CompareResult, PlaystyleKey } from "@/lib/types";
 import type { ClassData } from "./useClassData";
 import { SkillIcon } from "./SkillIcon";
 import { PLAYSTYLE_ORDER, fmtDps, skillName } from "./helpers";
+import { buildGoal, currentGoalScore, formatGoalScore, goalPlaystyleName, goalScore, goalUnit } from "./objective";
 
 interface Props {
   cmp: CompareResult;
@@ -22,6 +23,8 @@ export function PlaystyleStrip({ cmp, data, selected, onSelect, overrides, dpsOv
     <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4" role="tablist" aria-label="Playstyles">
       {PLAYSTYLE_ORDER.filter((k) => cmp[k]).map((k) => {
         const fb = cmp[k];
+        const stagger = buildGoal(fb) === "stagger";
+        const current = currentGoalScore(fb);
         const active = k === selected;
         const stigmas = overrides?.[k] ?? fb.stigma_picks.map(([key]) => key);
         return (
@@ -44,13 +47,13 @@ export function PlaystyleStrip({ cmp, data, selected, onSelect, overrides, dpsOv
             onClick={() => onSelect(k)}
             className="game-tab flex min-w-0 flex-col gap-2 !rounded-lg p-3 text-left text-foreground sm:p-4"
           >
-            <span className="font-display text-[15px] font-bold">{fb.playstyle.name}</span>
+            <span className="font-display text-[15px] font-bold">{goalPlaystyleName(fb)}</span>
             <span>
-              <span className="text-2xl font-semibold tabular-nums text-gold">~{fmtDps(dpsOverrides?.[k] ?? fb.result.dps)}</span>
-              <span className="ml-1 text-xs text-dim">DPS best build</span>
-              {fb.current_dps != null && (
+              <span className="text-2xl font-semibold tabular-nums text-gold">{stagger ? formatGoalScore(goalScore(fb)) : `~${fmtDps(dpsOverrides?.[k] ?? goalScore(fb) ?? fb.result.dps)}`}</span>
+              <span className="ml-1 text-xs text-dim">{goalUnit(fb)} best build</span>
+              {current != null && (
                 <span className="mt-0.5 block text-xs text-dim">
-                  <span className="font-semibold tabular-nums text-foreground">~{fmtDps(fb.current_dps)}</span> current build
+                  <span className="font-semibold tabular-nums text-foreground">~{fmtDps(current)}</span> {goalUnit(fb)} current build
                 </span>
               )}
             </span>

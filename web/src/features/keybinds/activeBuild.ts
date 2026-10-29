@@ -38,6 +38,7 @@ export interface PlannedBuild {
   playstyle: PlaystyleKey;
   scenario: MacroScenario;
   priority: Priority;
+  objective?: "damage" | "stagger";
 }
 
 export function readActiveBuild(): CharacterBuild | null {
@@ -65,20 +66,23 @@ export function storeActiveBuild(b: CharacterBuild): void {
 export function storePlannedBuild(plan: FullBuild): void {
   const scenario = plan.playstyle.scenario.key;
   if (!MACRO_SCENARIOS.includes(scenario as MacroScenario)) throw new Error("This scenario has no supported macro model yet.");
+  const objective = plan.objective ?? "damage";
+  if (objective !== "damage" && objective !== "stagger") throw new Error("Unsupported plan goal.");
   const build = { ...plan.build, skill_points: 0, stigma_points: 0 };
   storeActiveBuild(build);
-  saveJson(PLAN_KEY, { buildHash: hashBuild(build), playstyle: plan.playstyle.key, scenario, priority: plan.priority });
+  saveJson(PLAN_KEY, { buildHash: hashBuild(build), playstyle: plan.playstyle.key, scenario, priority: plan.priority, objective });
 }
 
 export function readPlannedBuild(build: CharacterBuild | null): PlannedBuild | null {
   if (!build) return null;
   const plan = loadJson<PlannedBuild | null>(PLAN_KEY, null);
   if (!plan || plan.buildHash !== hashBuild(build) || !MACRO_SCENARIOS.includes(plan.scenario)
+    || (plan.objective !== undefined && plan.objective !== "damage" && plan.objective !== "stagger")
     || !["boss", "aoe", "leveling"].includes(plan.playstyle)
     || !Array.isArray(plan.priority?.entries) || typeof plan.priority.label !== "string"
     || plan.priority.entries.some((entry) => !entry || typeof entry.skill_key !== "string" || !Number.isInteger(entry.charge_level)
       || !(entry.require_status === null || typeof entry.require_status === "string"))) return null;
-  return plan;
+  return { ...plan, objective: plan.objective ?? "damage" };
 }
 
 export interface ActiveBuild {

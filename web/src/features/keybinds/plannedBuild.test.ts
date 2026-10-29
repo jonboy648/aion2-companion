@@ -7,6 +7,18 @@ const cmp = fixture as unknown as CompareResult;
 
 beforeEach(() => localStorage.clear());
 describe("selected plan handoff", () => {
+  it("carries the chosen goal and defaults older saved plans to damage", () => {
+    storePlannedBuild({ ...cmp.leveling!, objective: "stagger" });
+    const build = readActiveBuild()!;
+    expect(readPlannedBuild(build)?.objective).toBe("stagger");
+    const saved = JSON.parse(localStorage.getItem("aion2c.activeKeybindPlan.v1")!);
+    delete saved.objective;
+    localStorage.setItem("aion2c.activeKeybindPlan.v1", JSON.stringify(saved));
+    expect(readPlannedBuild(build)?.objective).toBe("damage");
+    localStorage.setItem("aion2c.activeKeybindPlan.v1", JSON.stringify({ ...saved, objective: "break-time" }));
+    expect(readPlannedBuild(build)).toBeNull();
+  });
+
   it("retains imported planner context for the current visit when storage is blocked", () => {
     const get = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => { throw new Error("Blocked"); });
     const set = vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => { throw new Error("Blocked"); });

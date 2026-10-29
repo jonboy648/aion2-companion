@@ -9878,7 +9878,8 @@
    "mp_restore": 100.0,
    "confidence": "estimated",
    "note": "chain 1/3, restores 100 MP (dump description); chain confirmed in client; every Fire attack inflicts Fire Mark for 5 s (description)",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "burst": {
    "skill_key": "burst",
@@ -9894,7 +9895,8 @@
    "mp_restore": 100.0,
    "confidence": "estimated",
    "note": "chain 2/3, restores 100 MP (dump description); every Fire attack inflicts Fire Mark for 5 s (description)",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "pyroclasm": {
    "skill_key": "pyroclasm",
@@ -9910,7 +9912,8 @@
    "mp_restore": 120.0,
    "confidence": "estimated",
    "note": "chain 3/3, restores 120 MP (dump description); every Fire attack inflicts Fire Mark for 5 s (description)",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "blaze": {
    "skill_key": "blaze",
@@ -9928,7 +9931,8 @@
    "mp_restore": 100.0,
    "confidence": "estimated",
    "note": "needs Fire Mark on target; restores 100 MP (dump description); Fire Mark not consumed (unknown); every Fire attack inflicts Fire Mark for 5 s (description)",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "element-enhancement": {
    "skill_key": "element-enhancement",
@@ -9944,7 +9948,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "delayed-explosion": {
    "skill_key": "delayed-explosion",
@@ -9961,7 +9966,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "every Fire attack inflicts Fire Mark for 5 s (description)",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "fire-wall": {
    "skill_key": "fire-wall",
@@ -9978,7 +9984,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "Embers DoT: 110% ATK + flat 738 (rank 2) to 2059 (rank 25) per 1 s tick (client tables; rank 1 flat 650 from the dump); every Fire attack inflicts Fire Mark for 5 s (description). The client says the amount rises when targets move: not modelled.",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "cold-storm": {
    "skill_key": "cold-storm",
@@ -9994,7 +10001,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "Frostbite DoT: 80% ATK + flat 537 (rank 2) to 1497 (rank 25) per 1 s tick (client tables; rank 1 flat 472 from the dump). The client says the amount rises when targets move: not modelled.",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "hellfire": {
    "skill_key": "hellfire",
@@ -10012,7 +10020,7 @@
      "charge_s": {
       "value": 0.3,
       "confidence": "confirmed",
-      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
      },
      "dmg_mult": {
       "value": 1.0,
@@ -10020,14 +10028,20 @@
       "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
      },
      "hits": 1,
-     "flat_frac": 0.0
+     "flat_frac": 0.0,
+     "stagger_gauge": 20.0,
+     "fast_charge_s": {
+      "value": 0.21,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
+     }
     },
     {
      "level": 2,
      "charge_s": {
       "value": 0.5,
       "confidence": "confirmed",
-      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
      },
      "dmg_mult": {
       "value": 1.4,
@@ -10035,14 +10049,20 @@
       "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
      },
      "hits": 1,
-     "flat_frac": 0.2
+     "flat_frac": 0.2,
+     "stagger_gauge": 25.0,
+     "fast_charge_s": {
+      "value": 0.35,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
+     }
     },
     {
      "level": 3,
      "charge_s": {
       "value": 1.0,
       "confidence": "confirmed",
-      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
      },
      "dmg_mult": {
       "value": 2.0,
@@ -10050,14 +10070,20 @@
       "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
      },
      "hits": 1,
-     "flat_frac": 0.5
+     "flat_frac": 0.5,
+     "stagger_gauge": 30.0,
+     "fast_charge_s": {
+      "value": 0.7,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
+     }
     },
     {
      "level": 4,
      "charge_s": {
       "value": 1.5,
       "confidence": "confirmed",
-      "source": "client export 2026-10-04 SkillCharge (min 300 ms, tiers at 500/1000/1500 ms)"
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
      },
      "dmg_mult": {
       "value": 3.0,
@@ -10065,13 +10091,23 @@
       "source": "client export 2026-10-04 SkillEffectLv Skill006 tiers: ratio 339.25/474.95/678.5/1017.75 %"
      },
      "hits": 2,
-     "flat_frac": 1.0
+     "flat_frac": 1.0,
+     "stagger_gauge": 35.0,
+     "fast_charge_s": {
+      "value": 1.05,
+      "confidence": "confirmed",
+      "source": "client export 2026-10-04 (SkillCharge; client version unknown)"
+     }
     }
    ],
    "mp_restore": 0.0,
    "confidence": "confirmed",
    "note": "4 charge tiers from the client tables: ratio and flat damage scale 1 / 1.4 / 2 / 3, only the top tier hits twice; every Fire attack inflicts Fire Mark for 5 s (description)",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": [
+    "hellfire",
+    0
+   ]
   },
   "wish-of-concentration": {
    "skill_key": "wish-of-concentration",
@@ -10087,7 +10123,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "Attack +10% for 10-30 s by rank (datamine); specialties add Attack/Combat Speed statuses",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "frost": {
    "skill_key": "frost",
@@ -10103,7 +10140,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "Frost lands 100% on NPC targets (description); a boss with Incapacitated Immunity would not take it",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "assault-bombardment": {
    "skill_key": "assault-bombardment",
@@ -10119,7 +10157,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "100% chance to land Frost on NPC targets (description)",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "frost-burst": {
    "skill_key": "frost-burst",
@@ -10135,7 +10174,8 @@
    "mp_restore": 0.0,
    "confidence": "confirmed",
    "note": "'Selects a target afflicted with Frost' (description). The 7% 'Incapacitated Immunity' proc (child 15220037) is not modelled: it replaces Frost on immune bosses",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "divine-burst": {
    "skill_key": "divine-burst",
@@ -10151,7 +10191,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "Fire attack applies Fire Mark",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   },
   "firestorm": {
    "skill_key": "firestorm",
@@ -10167,7 +10208,8 @@
    "mp_restore": 0.0,
    "confidence": "estimated",
    "note": "Fire attack applies Fire Mark; 5 fireballs per cast",
-   "requires_spec": null
+   "requires_spec": null,
+   "fast_charge_spec": null
   }
  },
  "triggers": [

@@ -10,10 +10,14 @@ import roadmapFx from "@/fixtures/roadmap.json";
 import shoppingFx from "@/fixtures/shopping.json";
 import type * as T from "./types";
 
-/** `Keys<X>` must list EVERY key of X (compile-time), and the runtime check compares it with the real CPython output. */
-type Keys<X> = { [K in keyof X]-?: true };
-const keysOf = <X,>(k: Keys<X>) => Object.keys(k).sort();
-const same = (obj: object, k: string[]) => expect(Object.keys(obj).sort()).toEqual(k);
+/** List every key at compile time, allowing additive optional fields in historical fixtures. */
+type Keys<X> = { [K in keyof X]-?: {} extends Pick<X, K> ? "optional" | true : true };
+const keysOf = <X,>(k: Keys<X>) => ({
+  required: Object.keys(k).filter(key => k[key as keyof X] === true).sort(),
+  optional: Object.keys(k).filter(key => k[key as keyof X] === "optional"),
+});
+const same = (obj: object, k: { required: string[]; optional: string[] }) =>
+  expect(Object.keys(obj).filter(key => !k.optional.includes(key)).sort()).toEqual(k.required);
 
 const K = {
   build: keysOf<T.CharacterBuild>({
@@ -27,17 +31,19 @@ const K = {
     cdr_pct: true, max_mp: true, mp_regen_per_s: true, target_defense: true, penetration: true,
   }),
   fullBuild: keysOf<T.FullBuild>({
+    objective: "optional", objective_score: "optional", objective_unit: "optional", current_objective_score: "optional",
     playstyle: true, build: true, stigma_picks: true, rank_log: true, daevanion_path: true,
     daevanion_gain_pct: true, priority: true, result: true, stat_gains: true, warnings: true, variants: true,
     rotation_explained: true, spec_picks: true, current_dps: true,
   }),
   playstyle: keysOf<T.Playstyle>({ key: true, name: true, description: true, scenario: true }),
-  scenario: keysOf<T.Scenario>({ key: true, name: true, duration_s: true, n_targets: true, boss: true }),
+  scenario: keysOf<T.Scenario>({ key: true, name: true, duration_s: true, n_targets: true, boss: true, objective: "optional" }),
   sim: keysOf<T.SimResult>({
+    total_stagger: "optional", stagger_per_s: "optional",
     total_damage: true, dps: true, duration_s: true, casts: true, per_skill: true, status_uptime: true,
     warnings: true, confidence: true,
   }),
-  cast: keysOf<T.CastEvent>({ t_s: true, skill_key: true, charge_level: true, damage: true, mp_after: true, active_statuses: true }),
+  cast: keysOf<T.CastEvent>({ t_s: true, skill_key: true, charge_level: true, damage: true, mp_after: true, active_statuses: true, stagger: "optional" }),
   priority: keysOf<T.Priority>({ entries: true, label: true }),
   entry: keysOf<T.PriorityEntry>({ skill_key: true, charge_level: true, require_status: true }),
   gain: keysOf<T.StatGain>({ stat: true, delta: true, dps_gain_pct: true, confidence: true }),
@@ -86,6 +92,7 @@ const K = {
     source_skill: true, tick_ratio_pct: true, tick_s: true, stat_mods: true, permanent: true, tick_flat_ranks: true, rank_scales: true,
   }),
   rule: keysOf<T.SkillRule>({
+    fast_charge_spec: "optional",
     skill_key: true, applies: true, apply_chance: true, requires: true, consumes: true, chain_next: true,
     chain_window_s: true, charge_levels: true, mp_restore: true, confidence: true, note: true, requires_spec: true,
   }),

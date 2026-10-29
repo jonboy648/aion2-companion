@@ -37,6 +37,20 @@
       ]
     },
     {
+      "id": "skill.hellfire-charge",
+      "unit": "charge thresholds in seconds after milliseconds / 1000; gauge per release/affected target, not per HP hit",
+      "join": "Skill 15060000 charge releases and speed specialty option 0 -> derived charge arrays -> charge-level rules; historical export patch unknown",
+      "checks": [
+        {"file": "app/aion2c/data/src/client_skill_numbers.json", "pointer": "/classes/sorcerer/skills/hellfire/charge/stagger_gauge", "expected": [20, 25, 30, 35]},
+        {"file": "app/aion2c/data/src/client_skill_numbers.json", "pointer": "/classes/sorcerer/skills/hellfire/charge/fast/min_ms", "expected": 210},
+        {"file": "app/aion2c/data/src/client_skill_numbers.json", "pointer": "/classes/sorcerer/skills/hellfire/charge/fast/tier_ms", "expected": [350, 700, 1050]},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/rules/hellfire/fast_charge_spec", "expected": ["hellfire", 0]},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/rules/hellfire/charge_levels/0/stagger_gauge", "expected": 20},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/rules/hellfire/charge_levels/3/stagger_gauge", "expected": 35},
+        {"file": "app/aion2c/data/classes/sorcerer/gamedata.json", "pointer": "/rules/hellfire/charge_levels/3/fast_charge_s/value", "expected": 1.05}
+      ]
+    },
+    {
       "id": "item.relic-collector-spellbook",
       "unit": "flat weapon attack; exact enchant increment, not a linear slope",
       "join": "Item.ID.Value 110540006 -> StatCorrectionNumber.StatName -> Weapon_Legend_23 enchant series -> EnchantEffect",

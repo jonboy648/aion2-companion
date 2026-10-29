@@ -9,6 +9,7 @@ import type { ClassData } from "./useClassData";
 import { PlaystyleStrip } from "./PlaystyleStrip";
 import { PlaystyleDetail } from "./PlaystyleDetail";
 import { PLAYSTYLE_ORDER } from "./helpers";
+import { buildGoal } from "./objective";
 
 /** Spinner + the engine's latest progress line. */
 export function ProgressPanel({ title, message, steps }: { title: string; message: string; steps?: string[] }) {
@@ -33,7 +34,7 @@ export function ProgressPanel({ title, message, steps }: { title: string; messag
 }
 
 /** Playstyle comparison strip + the selected playstyle's detail cards, with per-playstyle trade-off variants. */
-export function BuildResults({ cmp, data, selected: picked, onSelect, onUsePlan }: { cmp: CompareResult; data: ClassData; selected?: PlaystyleKey; onSelect?: (k: PlaystyleKey) => void; onUsePlan?: (plan: FullBuild) => void }) {
+export function BuildResults({ cmp, data, selected: picked, onSelect, onUsePlan, disabled = false }: { cmp: CompareResult; data: ClassData; selected?: PlaystyleKey; onSelect?: (k: PlaystyleKey) => void; onUsePlan?: (plan: FullBuild) => void; disabled?: boolean }) {
   const panelId = useId();
   const first = PLAYSTYLE_ORDER.find((k) => cmp[k]) ?? "boss";
   const [own, setOwn] = useState<PlaystyleKey>(first);
@@ -44,12 +45,14 @@ export function BuildResults({ cmp, data, selected: picked, onSelect, onUsePlan 
   };
   const [variants, setVariants] = useState<Partial<Record<PlaystyleKey, string>>>({});
   const fb = cmp[selected] ?? cmp[first];
+  const stagger = fb && buildGoal(fb) === "stagger";
+  const variantKey = stagger ? "max" : fb ? variants[fb.playstyle.key] ?? "max" : "max";
   const dpsOverrides = Object.fromEntries(PLAYSTYLE_ORDER.map(k => [k, cmp[k]?.variants.find(v => v.key === variants[k])?.dps ?? cmp[k]?.result.dps]));
 
   const overrides = useMemo(() => {
     const out: Partial<Record<PlaystyleKey, string[]>> = {};
     for (const k of PLAYSTYLE_ORDER) {
-      const vk = variants[k];
+      const vk = cmp[k] && buildGoal(cmp[k]) === "damage" ? variants[k] : undefined;
       const v = vk ? cmp[k]?.variants.find((x) => x.key === vk) : undefined;
       if (v && v.key !== "max") out[k] = v.stigma_picks.map(([key]) => key);
     }
@@ -62,15 +65,16 @@ export function BuildResults({ cmp, data, selected: picked, onSelect, onUsePlan 
       <PlaystyleStrip cmp={cmp} data={data} selected={fb.playstyle.key} onSelect={setSelected} overrides={overrides} dpsOverrides={dpsOverrides} panelId={panelId} />
       {onUsePlan && (
         <div className="flex flex-wrap items-center gap-3 py-3">
-          <Button variant="secondary" onClick={() => onUsePlan(fb)} disabled={(variants[fb.playstyle.key] ?? "max") !== "max" || !MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario)}>
-            <Keyboard aria-hidden /> Send DPS plan to Keybinds
+          <Button variant="secondary" onClick={() => onUsePlan(fb)} disabled={disabled || variantKey !== "max" || !MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario)}>
+            <Keyboard aria-hidden /> Send {stagger ? "Stagger" : "DPS"} plan to Keybinds
           </Button>
-          {(variants[fb.playstyle.key] ?? "max") !== "max" && <span className="text-xs text-dim">Select the DPS arrangement to use its modeled rotation.</span>}
+          {variantKey !== "max" && <span className="text-xs text-dim">Select the DPS arrangement to use its modeled rotation.</span>}
           {!MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario) && <span className="text-xs text-dim">Burst macros are not modeled yet.</span>}
+          <p className="basis-full text-xs text-dim">Simulator priorities only. Native macro timing and optimal delays are not modeled; charged skills may require manual input.</p>
         </div>
       )}
       <div role="tabpanel" id={panelId} aria-labelledby={`${panelId}-${fb.playstyle.key}`}>
-        <PlaystyleDetail fb={fb} data={data} variantKey={variants[fb.playstyle.key] ?? "max"} onVariant={(key) => setVariants((s) => ({ ...s, [fb.playstyle.key]: key }))} />
+        <PlaystyleDetail fb={fb} data={data} variantKey={variantKey} onVariant={(key) => setVariants((s) => ({ ...s, [fb.playstyle.key]: key }))} />
       </div>
     </div>
   );
@@ -81,18 +85,20 @@ export function SingleBuildResults({ fb, data, onUsePlan, onVariantChange, disab
   fb: FullBuild; data: ClassData; onUsePlan: (plan: FullBuild) => void; onVariantChange?: (key: string) => void; disabled?: boolean;
 }) {
   const [variant, setVariant] = useState("max");
+  const stagger = buildGoal(fb) === "stagger";
+  const variantKey = stagger ? "max" : variant;
   const macroSupported = MACRO_SCENARIOS.includes(fb.playstyle.scenario.key as MacroScenario);
   return (
     <div className="build-dashboard">
       <div className="mb-4 flex flex-wrap items-center gap-3">
-        <Button variant="secondary" onClick={() => onUsePlan(fb)} disabled={disabled || variant !== "max" || !macroSupported}>
-          <Keyboard aria-hidden /> Send DPS plan to Keybinds
+        <Button variant="secondary" onClick={() => onUsePlan(fb)} disabled={disabled || variantKey !== "max" || !macroSupported}>
+          <Keyboard aria-hidden /> Send {stagger ? "Stagger" : "DPS"} plan to Keybinds
         </Button>
-        {variant !== "max" && <span className="text-xs text-dim">Select the DPS arrangement to use its modeled rotation.</span>}
+        {variantKey !== "max" && <span className="text-xs text-dim">Select the DPS arrangement to use its modeled rotation.</span>}
         {!macroSupported && <span className="text-xs text-dim">Burst macros are not modeled yet.</span>}
       </div>
       <div inert={disabled} aria-disabled={disabled || undefined}>
-        <PlaystyleDetail fb={fb} data={data} source="manual" variantKey={variant} onVariant={(key) => { setVariant(key); onVariantChange?.(key); }} />
+        <PlaystyleDetail fb={fb} data={data} source="manual" variantKey={variantKey} onVariant={(key) => { setVariant(key); onVariantChange?.(key); }} />
       </div>
     </div>
   );
