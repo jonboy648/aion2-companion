@@ -22,7 +22,7 @@ OUT = ROOT / "web" / "public" / "engine"
 
 # Explicit allowlist: adding a module here is a decision (test_engine_qt_free.py checks each one imports without Qt).
 MODULES = (
-    "aion2c", "aion2c.models", "aion2c.serde", "aion2c.interfaces", "aion2c.classes", "aion2c.armory",
+    "aion2c", "aion2c.models", "aion2c.serde", "aion2c.interfaces", "aion2c.classes", "aion2c.armory", "aion2c.allocation_resources",
     "aion2c.daevanion", "aion2c.progression", "aion2c.crafting", "aion2c.roadmap", "aion2c.gear", "aion2c.statsheet", "aion2c.webapi",
     "aion2c.data", "aion2c.data.loader",
     "aion2c.engine", "aion2c.engine.advisor", "aion2c.engine.budget", "aion2c.engine.build_optimizer",
