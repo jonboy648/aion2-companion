@@ -15,7 +15,7 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
-from aion2c import armory, crafting, daevanion as dae, progression, serde, statsheet
+from aion2c import allocation_resources, armory, crafting, daevanion as dae, progression, serde, statsheet
 from aion2c import roadmap as roadmap_mod
 from aion2c.classes import CLASSES, DEFAULT_CLASS, class_info
 from aion2c.data.loader import CLASSES_DIR, default_path, load_gamedata
@@ -176,6 +176,8 @@ def level_progression(build: dict) -> dict:
     rewards not included), the stigma unlock and how it was decided, and every rank/slot the build holds that the game
     would not allow (reported, never fixed)."""
     b = _build(build)
+    if any(type(rank) is not int for rank in b.skill_ranks.values()):
+        raise ValueError("Skill ranks must be integer values; received invalid rank data.")
     gd = _gd(b.class_key)
     u = progression.stigma_unlock(gd, b)
     bud = progression.level_budget(b.level)
@@ -184,6 +186,7 @@ def level_progression(build: dict) -> dict:
         "budget": {"skill": bud.skill, "stigma": bud.stigma, "stigma_slots": bud.stigma_slots, "daevanion": bud.daevanion},
         "stigma_unlocked": u.unlocked, "stigma_unlock_basis": u.basis, "stigma_unlock_inferred": u.inferred,
         "issues": progression.legality_issues(gd, b),
+        "allocation_resources": allocation_resources.inspect_allocations(gd, b),
     }
 
 

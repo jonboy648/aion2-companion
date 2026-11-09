@@ -42,8 +42,8 @@
   },
   {
    "path": "web/public/engine/aion2c.zip",
-   "sha256": "BECC7EE6E4E0C0897BC5A1126BED862D9B1E5B44469A869EE009EA12A5CA4DCD",
-   "why": "Required reviewed RPG data, simulation fixtures/code or browser-engine archive; false-positive classification evidence docs/data/2026-10-29-guard-reviewed-artifacts.md sha256 688223cfea61d89a31baee1ca547d2673bad6838cc666a3d82938f706ce7fee3"
+   "sha256": "E14415460288A42A1C5DC54B2CBD9CBA8565A4C42F27F16577F0C4021D39EBD3",
+   "why": "Required browser-engine source archive;42 entries match app sources;review docs/data/2026-11-06-allocation-preflight-sync.md sha256 4f9b7be299af7e34f83a55b399c28705d10e8d9ca1d9c67248ee5ed0927707bf"
   },
   {
    "path": "web/public/engine/classes/chanter.json",

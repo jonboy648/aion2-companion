@@ -1,6 +1,6 @@
 # Become Cube task list
 
-Updated: 2026-10-24. Verified live audit release: `30d126b` (PR 42).
+Updated: 2026-10-29. Verified live audit release: `30d126b` (PR 42).
 Prototype branch: `codex/character-workflow-prototype`; not a production release.
 Approved audits #27/#28 are isolated on `codex/source-import-audits`. Jon approved
 deployment on Oct 24 with the reproduced existing-main Chanter timing issue
@@ -11,7 +11,21 @@ Pages run 40109544544 and public checks confirmed deployment; see
 `../../data/2026-10-24-audit-live-verification.md`. Existing Chanter performance
 remains tracked in issue #43 rather than silently marked fixed.
 
-## Weekly checkpoint: Oct 17-24
+## Current checkpoint: Oct 29
+
+- [x] Damage/Stagger and reversible native suggestions implemented/verified locally
+  at c62d41d; preview and screenshots shown. Publication decision remains pending.
+- [x] Resource-preflight prerequisite implemented on codex/same-gear-redistribution:
+  modeled allocation costs remain separate from spare points/refundable budgets.
+  28 new cases; 117 affected tests passed, 1 skipped; strict 9,318-page build and review pass.
+- [x] Record primary reset wording/exported fees and the remaining imported-rank
+  and node-stat provenance gaps. No raw data or keys added.
+- [ ] Complete actual same-gear redistribution and selected workspace workflow;
+  the preflight does not enable full resets or manufacture an owned wallet.
+- [ ] Obtain publication decision for the reviewed c62d41d increment, then run
+  release checks and deploy only on approval.
+
+## Historical weekly checkpoint: Oct 17-24
 
 Task tracking uses this Markdown checklist; no session plan/todo tool is exposed.
 
@@ -31,7 +45,7 @@ Completed this week:
 - [x] Trace Sorcerer charge, stagger and conditional cooldown connections from
   existing game files; commit the source findings and release verification locally.
 
-At now / next / left:
+At the pre-implementation checkpoint (superseded above):
 
 - [ ] Next: regression-test and correct charge timing, post-window damage and
   conditional reset modeling using the source findings. No code jobs are running
@@ -80,7 +94,8 @@ source-based corrections. The Oct 24 audit release approval has been fulfilled.
   Damage/Stagger objectives across rotation and complete build selection locally.
   Reuse the current page and reversible native suggestion/editor handoff. Review
   evidence: `../../data/2026-10-24-combo-objectives-verification.md`.
-- [ ] Show Jon the local goal/native-setup review before pushing this increment.
+- [x] Show Jon the local goal/native-setup review before pushing this increment
+  (preview Oct 25, screenshots Oct 28; publication decision still pending).
 - [ ] Model the missing immunity-trigger route and per-projectile timing after
   its exact event contract is established; keep present limitations visible.
   Do not claim optimal native queue behavior from configuration data.
